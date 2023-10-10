@@ -1,5 +1,5 @@
 // MediaUploader.tsx
-import { Upload } from "lucide-react";
+import { ImagePlus } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -44,7 +44,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({ onFileSelected, deleteFil
 
   return (
     <div
-      className="media-uploader relative border rounded-md bg-black-200 flex items-center justify-center cursor-pointer hover:bg-black-300"
+      className="media-uploader relative border rounded-md bg-background-layer-2 flex items-center justify-center cursor-pointer hover:bg-background-layer-1"
       onClick={() => document.getElementById("media-input")?.click()}
     >
       <div className={`aspect-square w-full flex items-center justify-center`}>
@@ -68,8 +68,8 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({ onFileSelected, deleteFil
             Your browser does not support the video tag.
           </video>
         )}
-        {!mediaSource && <div className="m-4 flex flex-col gap-4 text-black justify-center items-center">
-          <Upload />
+        {!mediaSource && <div className="m-4 flex flex-col gap-4 text-text-secondary justify-center items-center">
+          <ImagePlus size={64} className="text-text-secondary font-light" strokeWidth={1.5}/>
           Click to upload
           </div>}
         <input

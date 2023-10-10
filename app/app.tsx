@@ -1,7 +1,7 @@
 "use client";
 
-
 import { Toaster } from "@/components/ui/toaster";
+import Login from "@/components/user/login";
 import { polygonMumbai } from "@/helpers/mumbai";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
@@ -9,10 +9,9 @@ import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
 
-
 // Configure chains & providers with the Public provider.
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [ polygonMumbai],
+  [polygonMumbai],
   [publicProvider()]
 );
 
@@ -48,7 +47,7 @@ const config = createConfig({
       chains: chains as any,
       // @ts-ignore
       options: { web3AuthInstance, name: "Social Login" },
-      name: "Social Login"
+      name: "Social Login",
     }),
     //Web3AuthConnectorInstance(chains) as any,
   ],
@@ -56,14 +55,14 @@ const config = createConfig({
   webSocketPublicClient,
 });
 
-
 export default function App({ children }: { children: any }) {
-    
   return (
     <WagmiConfig config={config}>
-
-        {children}
-        <Toaster />
+      <header>
+        <Login />
+      </header>
+      {children}
+      <Toaster />
     </WagmiConfig>
   );
 }

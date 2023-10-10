@@ -1,36 +1,35 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useFieldArray, useForm } from "react-hook-form"
-import * as z from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useFieldArray, useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
+import MediaUploader from "@/components/extra/media-uploader";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 
-import MediaUploader from "@/components/extra/media-uploader"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ABI, MUMBAI } from "@/lib/constants";
+import { uploadContent } from "@/lib/upload";
+import { useState } from "react";
+import { useAccount, useContractWrite } from "wagmi";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { ABI, MUMBAI } from "@/lib/constants"
-import { uploadContent } from "@/lib/upload"
-import { useState } from "react"
-import { useAccount, useContractWrite } from "wagmi"
-
-const profileFormSchema = z.object({
-  groupName: z
+const projectFormSchema = z.object({
+  projectName: z
     .string()
     .min(2, {
       message: "Your groups name must be at least 2 characters.",
@@ -38,15 +37,32 @@ const profileFormSchema = z.object({
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
-    type: z.enum(["company", "community", "education", "hackathon_group"], {
-        required_error: "You need to select a notification type.",
-      }),
   email: z
     .string({
       required_error: "Please enter your email to display.",
     })
     .email(),
   introduction: z.string().max(160).min(4),
+  type: z.enum(["company", "community", "education", "hackathon_group"], {
+    required_error: "You need to select a notification type.",
+  }),
+
+  //list of jobs needed.
+  jobs: z
+    .array(
+      z.object({
+        type: z.string().min(2, {
+          message: "Your job must be at least 2 characters.",
+        }),
+        amount: z.string().min(2, {
+          message: "Your job must be at least 2 characters.",
+        }),
+      })
+    )
+    .optional(),
+    category: z.string().min(4).max(30),
+    requirementDeadline: z.date().min(new Date()).optional(),
+    projectDeadline: z.date().min(new Date()).optional(),
   urls: z
     .array(
       z.object({
@@ -54,33 +70,31 @@ const profileFormSchema = z.object({
       })
     )
     .optional(),
-})
+});
 
-type ProfileFormValues = z.infer<typeof profileFormSchema>
+type ProfileFormValues = z.infer<typeof projectFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
   introduction: "I am writing something unique about myself.",
-  urls: [
-    { value: "https://google.com" },
-  ],
-}
+  urls: [{ value: "https://google.com" }],
+};
 
-export function GroupForm() {
+export function ProjectForm() {
   const form = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileFormSchema),
+    resolver: zodResolver(projectFormSchema),
     defaultValues,
     mode: "onChange",
-  })
+  });
 
   const [file, setFile] = useState<File | null>(null);
   const { fields, append } = useFieldArray({
     name: "urls",
     control: form.control,
-  })
-  const {address} = useAccount();
-  const { write, isLoading, error } = useContractWrite({
-    address: MUMBAI.groupRegistry,
+  });
+  const { address } = useAccount();
+    const { write, isLoading, error, data } = useContractWrite({
+    address:MUMBAI.groupRegistry,
     abi: ABI.groupRegistry,
     functionName: "createGroup",
   }); 
@@ -90,79 +104,80 @@ export function GroupForm() {
       title: "You submitted the following values:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify({...data, image: file}, null, 2)}</code>
+          <code className="text-white">
+            {JSON.stringify({ ...data, image: file }, null, 2)}
+          </code>
         </pre>
       ),
-    })
-    
-    
-    
-    if(!file){  
-        toast({
-            title: "Error",
-            description: "Make sure your have valid image file",
-        });
-        return;
+    });
+
+    if (!file) {
+      toast({
+        title: "Error",
+        description: "Make sure your have valid image file",
+      });
+      return;
     }
 
-    
-    const image = await uploadContent(file);
-    console.log(image);
-   
-    
-    if(!image){
-        toast({
-            title: "Error",
-            description: "Make sure your have valid image file",
-        });
-        return;
-    }
-    
-    const form = await uploadContent(JSON.stringify({
-        ...data, image: image
-    }));
-    
-    
+    const result = await uploadContent(file);
+    console.log(result);
 
-    if(image.length < 30 || form.length < 30){
-        toast({
-            title: "Error",
-            description: "Make sure you have all the right credentails",
-        });
-        return;
+    if (!result) {
+      toast({
+        title: "Error",
+        description: "Make sure your have valid image file",
+      });
+      return;
     }
 
-    //name, image and details
-     write({
+    const form = await uploadContent(
+      JSON.stringify({
+        ...data,
+        image: result,
+      })
+    );
+
+    console.log(form);
+
+    //testing if they are valid string lenghts
+    if (result.length < 30 || form.length < 30) {
+      toast({
+        title: "Error",
+        description: "Make sure you have all the right credentails",
+      });
+      return;
+    }
+    //name, image, details
+
+/*          write({
       args: [
-        data.groupName,
-        image,
+        data.,
+        result,
         form,
-      ],
-    }); 
+      ], 
+    }); */
   }
-  
+
   const selectFile = (file: File) => {
     setFile(file);
   };
 
   return (
     <Form {...form}>
-        <Alert>
-            <AlertTitle>Clubs image, type and name can not be changed after group is created</AlertTitle>
-            <AlertDescription>
-            Please enter correct information of group. The image, type and name of group are storing on NFT and cannot be changed after group is created
-            </AlertDescription>
-        </Alert>
+      <Alert>
+        <AlertTitle>
+          Club’s image, type and name can’t be changed after group is created
+        </AlertTitle>
+        <AlertDescription>
+          Please enter correct information of group. The image, type and name of
+          group are storing on NFT and cannot be changed after group is created
+        </AlertDescription>
+      </Alert>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-      <div className="w-[200px]">
-              <MediaUploader
-                onFileSelected={selectFile}
-                width={50}
-                height={50}
-              />
-            </div>
-            <FormField
+        <div className="w-[200px]">
+          <MediaUploader onFileSelected={selectFile} width={50} height={50} />
+        </div>
+        <FormField
           control={form.control}
           name="type"
           render={({ field }) => (
@@ -178,9 +193,7 @@ export function GroupForm() {
                     <FormControl>
                       <RadioGroupItem value="company" />
                     </FormControl>
-                    <FormLabel className="font-normal">
-                      Company
-                    </FormLabel>
+                    <FormLabel className="font-normal">Company</FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
@@ -200,7 +213,9 @@ export function GroupForm() {
                     <FormControl>
                       <RadioGroupItem value="hackathon_group" />
                     </FormControl>
-                    <FormLabel className="font-normal">Hackathon Group</FormLabel>
+                    <FormLabel className="font-normal">
+                      Hackathon Group
+                    </FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>
@@ -210,7 +225,7 @@ export function GroupForm() {
         />
         <FormField
           control={form.control}
-          name="groupName"
+          name="projectName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Group Name</FormLabel>
@@ -221,7 +236,20 @@ export function GroupForm() {
             </FormItem>
           )}
         />
-        
+            <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="introduction"
@@ -239,21 +267,9 @@ export function GroupForm() {
             </FormItem>
           )}
         />
-  
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-                <FormControl>
-                    <Input placeholder="Enter your email" {...field} />
-                </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-       
+
+    
+
         <div>
           {fields.map((field, index) => (
             <FormField
@@ -286,15 +302,16 @@ export function GroupForm() {
             Add URL
           </Button>
         </div>
-        
+
         <div className="flex items-center justify-end gap-8">
           <Button type="button" variant="secondary" size="sm">
             Cancel
           </Button>
-          <Button type="submit" size="sm">Update profile</Button>
+          <Button type="submit" size="sm">
+            Update profile
+          </Button>
         </div>
-        
       </form>
     </Form>
-  )
+  );
 }
