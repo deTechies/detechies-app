@@ -1,13 +1,13 @@
 "use client";
 
 import { Toaster } from "@/components/ui/toaster";
-import Login from "@/components/user/login";
 import { polygonMumbai } from "@/helpers/mumbai";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
 import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
+import Navbar from "./nav-bar";
 
 // Configure chains & providers with the Public provider.
 const { chains, publicClient, webSocketPublicClient } = configureChains(
@@ -58,9 +58,7 @@ const config = createConfig({
 export default function App({ children }: { children: any }) {
   return (
     <WagmiConfig config={config}>
-      <header>
-        <Login />
-      </header>
+      <Navbar />
       {children}
       <Toaster />
     </WagmiConfig>

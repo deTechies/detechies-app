@@ -1,8 +1,8 @@
+import { Skeleton } from "../ui/skeleton";
 
 export default function Loading() {
   return (
-    <div>
-        Currently loading... 
-    </div>
+    
+    <Skeleton className="w-full h-[50px]"/>
   )
 }

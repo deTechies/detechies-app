@@ -136,7 +136,7 @@ const ConnectModal = ({
         {connectors.map((connector) => (
           <div
             key={connector.id}
-            className="text-lg font-semibold border border-gray-300 rounded-sm px-6 py-4 flex gap-6 hover:bg-gray-200 items-center cursor-pointer"
+            className="text-lg font-semibold border border-border-div bg-background-layer-2 rounded-sm px-6 py-4 flex gap-6 hover:bg-gray-200 items-center cursor-pointer"
             onClick={() => connect({ connector })}
           >
             <Image

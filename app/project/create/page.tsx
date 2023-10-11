@@ -23,6 +23,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Card } from "@/components/ui/card";
 import { ABI, MUMBAI } from "@/lib/constants";
 import { uploadContent } from "@/lib/upload";
 import { useState } from "react";
@@ -80,7 +81,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   urls: [{ value: "https://google.com" }],
 };
 
-export function ProjectForm() {
+export default function ProjectForm() {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues,
@@ -163,6 +164,8 @@ export function ProjectForm() {
   };
 
   return (
+    
+    <Card className="max-w-4xl mx-auto">
     <Form {...form}>
       <Alert>
         <AlertTitle>
@@ -313,5 +316,6 @@ export function ProjectForm() {
         </div>
       </form>
     </Form>
+    </Card>
   );
 }

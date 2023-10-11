@@ -27,7 +27,7 @@ export default function MyGroups() {
   return (
     <div className="overflow-x-scroll  flex flex-col gap-4 max-h-[80vh]">
         {
-            data.map((group:GroupItem, index:number) => (
+             data.length > 0 && data.map((group:GroupItem, index:number) => (
                 <GroupItem key={index} group={group} />
             ))
         }

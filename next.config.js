@@ -1,4 +1,22 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'careerzen.org',
+            port: '',
+            pathname: '/images/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'ipfs.io',
+            port: '',
+            pathname: '/ipfs/**',
+          }
+        ],
+      },
+}
 
 module.exports = nextConfig
