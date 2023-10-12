@@ -5,12 +5,12 @@ import { GroupForm } from "./group-form";
 
 export default function CreateGroup() {
   return (
-    <Card>   
+    <Card className="m-20 max-w-4xl">   
         <CardHeader className="flex gap-4 items-center">
             <Link href="/groups">
                 <ArrowLeft />
             </Link>
-            <h3>    Create New Group</h3>
+            <h3> Create New Group</h3>
         </CardHeader>
         <CardContent>
             <GroupForm />                

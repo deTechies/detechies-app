@@ -6,28 +6,27 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 import MediaUploader from "@/components/extra/media-uploader";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ABI, MUMBAI } from "@/lib/constants";
 import { uploadContent } from "@/lib/upload";
 import { useState } from "react";
-import { useAccount, useContractWrite } from "wagmi";
+import { useContractWrite } from "wagmi";
 
 const projectFormSchema = z.object({
   projectName: z
@@ -38,30 +37,14 @@ const projectFormSchema = z.object({
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
-  email: z
-    .string({
-      required_error: "Please enter your email to display.",
-    })
-    .email(),
   introduction: z.string().max(160).min(4),
-  type: z.enum(["company", "community", "education", "hackathon_group"], {
-    required_error: "You need to select a notification type.",
+  type: z.enum(["hackathon", "side_project", "project"], {
+    required_error: "You need to select a  type.",
+  }),
+  location: z.enum(["everywhere", "europe", "asia", "north-america", "africa", "south-america"], {
+    required_error: "You need to select a region type.",
   }),
 
-  //list of jobs needed.
-  jobs: z
-    .array(
-      z.object({
-        type: z.string().min(2, {
-          message: "Your job must be at least 2 characters.",
-        }),
-        amount: z.string().min(2, {
-          message: "Your job must be at least 2 characters.",
-        }),
-      })
-    )
-    .optional(),
-    category: z.string().min(4).max(30),
     requirementDeadline: z.date().min(new Date()).optional(),
     projectDeadline: z.date().min(new Date()).optional(),
   urls: z
@@ -93,24 +76,17 @@ export default function ProjectForm() {
     name: "urls",
     control: form.control,
   });
-  const { address } = useAccount();
     const { write, isLoading, error, data } = useContractWrite({
-    address:MUMBAI.groupRegistry,
-    abi: ABI.groupRegistry,
-    functionName: "createGroup",
+    address:MUMBAI.projectRegistry,
+    abi: ABI.projectRegsitry,
+    functionName: "createProject",
   }); 
+  
+  const [loading, setLoading] = useState(false);
 
   async function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify({ ...data, image: file }, null, 2)}
-          </code>
-        </pre>
-      ),
-    });
+    
+    setLoading(true);
 
     if (!file) {
       toast({
@@ -120,10 +96,10 @@ export default function ProjectForm() {
       return;
     }
 
-    const result = await uploadContent(file);
-    console.log(result);
+    const image = await uploadContent(file);
+    console.log(image);
 
-    if (!result) {
+    if (!image) {
       toast({
         title: "Error",
         description: "Make sure your have valid image file",
@@ -134,14 +110,14 @@ export default function ProjectForm() {
     const form = await uploadContent(
       JSON.stringify({
         ...data,
-        image: result,
+        image: image,
       })
     );
 
     console.log(form);
 
     //testing if they are valid string lenghts
-    if (result.length < 30 || form.length < 30) {
+    if (image.length < 30 || form.length < 30) {
       toast({
         title: "Error",
         description: "Make sure you have all the right credentails",
@@ -150,13 +126,17 @@ export default function ProjectForm() {
     }
     //name, image, details
 
-/*          write({
+     const transactionData = await write({
       args: [
-        data.,
-        result,
+        data.projectName,
+        image,
         form,
       ], 
-    }); */
+    }); 
+    
+    console.log(transactionData);
+    
+    setLoading(false);  
   }
 
   const selectFile = (file: File) => {
@@ -165,88 +145,25 @@ export default function ProjectForm() {
 
   return (
     
-    <Card className="max-w-4xl mx-auto">
+    <Card className="max-w-4xl m-[60px] mx-auto">
+      <CardHeader className="flex items-center gap-4 text-4xl ">
+        Create Project
+      </CardHeader>
+      <CardContent className="my-4">
     <Form {...form}>
-      <Alert>
-        <AlertTitle>
-          Club’s image, type and name can’t be changed after group is created
-        </AlertTitle>
-        <AlertDescription>
-          Please enter correct information of group. The image, type and name of
-          group are storing on NFT and cannot be changed after group is created
-        </AlertDescription>
-      </Alert>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="w-[200px]">
+     
+      <div className="w-[200px]">
           <MediaUploader onFileSelected={selectFile} width={50} height={50} />
         </div>
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>Group Type</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex items-center gap-5"
-                >
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="company" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Company</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="education" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Educational Institution
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="community" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Community</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="hackathon_group" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Hackathon Group
-                    </FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="projectName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Group Name</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input placeholder="Enter your groupname" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-            <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -258,10 +175,10 @@ export default function ProjectForm() {
           name="introduction"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Introduction of your Group</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us a little bit about your group here"
+                  placeholder="Tell more about your project"
                   className="resize-none"
                   {...field}
                 />
@@ -270,6 +187,56 @@ export default function ProjectForm() {
             </FormItem>
           )}
         />
+        <div className="grid grid-cols-2 gap-4">
+        <FormField
+          control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Type</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a type" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="hackathon">Hackathon</SelectItem>
+                  <SelectItem value="side_project">Side Project</SelectItem>
+                  <SelectItem value="contract">Contract</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         <FormField
+          control={form.control}
+          name="location"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Location</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a specific location" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="europe">Europe</SelectItem>
+                  <SelectItem value="north-america">North America</SelectItem>
+                  <SelectItem value="south-america">South America</SelectItem>
+                  <SelectItem value="asia">Asia</SelectItem>
+                  <SelectItem value="africa">Africa</SelectItem>
+                  <SelectItem value="everywhere">Everywhere</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        </div>
 
     
 
@@ -282,10 +249,10 @@ export default function ProjectForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={cn(index !== 0 && "sr-only")}>
-                    Offical Channels
+                    Links
                   </FormLabel>
                   <FormDescription className={cn(index !== 0 && "sr-only")}>
-                    Add links to your website, blog, or social media profiles.
+                   You can add links to share more details about your project. 
                   </FormDescription>
                   <FormControl>
                     <Input {...field} />
@@ -305,17 +272,22 @@ export default function ProjectForm() {
             Add URL
           </Button>
         </div>
+       
 
         <div className="flex items-center justify-end gap-8">
-          <Button type="button" variant="secondary" size="sm">
+          <Button type="button" variant="secondary" >
             Cancel
           </Button>
-          <Button type="submit" size="sm">
-            Update profile
+          <Button type="submit" 
+            disabled={isLoading || !form.formState.isValid}
+            loading={isLoading || loading}
+          >
+            Create Project
           </Button>
         </div>
       </form>
     </Form>
+    </CardContent>
     </Card>
   );
 }

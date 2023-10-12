@@ -19,9 +19,9 @@ export default function Search({ placeholder}: {placeholder: string}) {
     } , [pathname, query, router])
   return (
     <div className="relative rounded-sm border">
-        <div className='pointer-events-none absolute inset-y-2 inset-x-2'>
+        <div className='pointer-events-none absolute inset-y-4 inset-x-4'>
             <SearchIcon 
-                className="h-5 w-5 text-gray-400"
+                className="h-6 w-6 text-text-placeholder"
                 aria-hidden="true"
             />
         </div>
@@ -29,7 +29,7 @@ export default function Search({ placeholder}: {placeholder: string}) {
             value={text}
             placeholder={placeholder}
             onChange={(e) => setText(e.target.value)}
-            className="block w-full text-muted-foreground rounded-sm tracking-wide border-0 py-2 pl-10"
+            className="block w-full text-text-primary bg-background-layer-1  rounded-sm tracking-wide border-0 py-4 px-12"
         />
     </div>
   )

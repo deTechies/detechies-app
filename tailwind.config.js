@@ -36,11 +36,18 @@ module.exports = {
             },
             h5: {
               color: "var(--text-primary)",
-              fontWeight: "700",
-              fontSize: "20px",
+              fontWeight: "400",
+              fontSize: "18px",
               lineHeight: "28px",
               letterSpacing: "-0.5px",
             },
+            p: {
+              color: "var(--text-secondary)",
+              fontWeight: "400",
+              fontSize: "14px",
+              lineHeight: "14px",
+              letterSpacing: "0.4px",
+            }
           }
         }
       }),

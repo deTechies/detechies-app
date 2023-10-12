@@ -19,11 +19,11 @@ import { cn } from "@/lib/utils"
 
 
 import MediaUploader from "@/components/extra/media-uploader"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ABI, MUMBAI } from "@/lib/constants"
 import { uploadContent } from "@/lib/upload"
 import { useState } from "react"
@@ -148,13 +148,14 @@ export function GroupForm() {
 
   return (
     <Form {...form}>
-        <Alert>
+        
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <Alert variant={"warning"}>
             <AlertTitle>Clubs image, type and name can not be changed after group is created</AlertTitle>
             <AlertDescription>
             Please enter correct information of group. The image, type and name of group are storing on NFT and cannot be changed after group is created
             </AlertDescription>
         </Alert>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       <div className="w-[200px]">
               <MediaUploader
                 onFileSelected={selectFile}
@@ -162,48 +163,27 @@ export function GroupForm() {
                 height={50}
               />
             </div>
-            <FormField
+         <FormField
           control={form.control}
           name="type"
           render={({ field }) => (
-            <FormItem className="space-y-3">
-              <FormLabel>Group Type</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex items-center gap-5"
-                >
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="company" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Company
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="education" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Educational Institution
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="community" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Community</FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="hackathon_group" />
-                    </FormControl>
-                    <FormLabel className="font-normal">Hackathon Group</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
+            <FormItem>
+              <FormLabel>Type</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your group type" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="company">Company</SelectItem>
+                  <SelectItem value="community">Community</SelectItem>
+                  <SelectItem value="public-good">Public Good</SelectItem>
+                  <SelectItem value="education">Education</SelectItem>
+                  <SelectItem value="hackathon_group">Other</SelectItem>
+                </SelectContent>
+              </Select>
+
               <FormMessage />
             </FormItem>
           )}
@@ -288,10 +268,10 @@ export function GroupForm() {
         </div>
         
         <div className="flex items-center justify-end gap-8">
-          <Button type="button" variant="secondary" size="sm">
+          <Button type="button" variant="secondary">
             Cancel
           </Button>
-          <Button type="submit" size="sm">Update profile</Button>
+          <Button type="submit" >Update profile</Button>
         </div>
         
       </form>

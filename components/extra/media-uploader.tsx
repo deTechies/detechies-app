@@ -44,7 +44,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({ onFileSelected, deleteFil
 
   return (
     <div
-      className="media-uploader relative border rounded-md bg-background-layer-2 flex items-center justify-center cursor-pointer hover:bg-background-layer-1"
+      className="media-uploader relative rounded-sm bg-background-layer-2 flex items-center justify-center border border-dashed cursor-pointer hover:bg-background-layer-1"
       onClick={() => document.getElementById("media-input")?.click()}
     >
       <div className={`aspect-square w-full flex items-center justify-center`}>
@@ -68,7 +68,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({ onFileSelected, deleteFil
             Your browser does not support the video tag.
           </video>
         )}
-        {!mediaSource && <div className="m-4 flex flex-col gap-4 text-text-secondary justify-center items-center">
+        {!mediaSource && <div className="m-4 flex flex-col gap-4 text-text-secondary justify-center  items-center ">
           <ImagePlus size={64} className="text-text-secondary font-light" strokeWidth={1.5}/>
           Click to upload
           </div>}

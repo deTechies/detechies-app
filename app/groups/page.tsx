@@ -1,19 +1,14 @@
-import { PlusIcon } from "lucide-react";
-import Link from "next/link";
+"use client"
+import Search from "@/components/extra/search";
 import GroupList from "./group-list";
-import MyGroups from "./my-groups";
 
 
 export default function GroupPage() {
   return (
-    <main className="m-12 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 max-w-[1600px]">
-    <section className="flex flex-col gap-4">
-        <h1>My Groups</h1>
-        <MyGroups />
-        <Link href="/groups/create" className="bg-accent-secondary text-accent-on-secondary rounded-md py-4 justify-center flex gap-4">
-            <PlusIcon /> Create Group
-        </Link>
-    </section>
+    <main className="flex flex-col gap-8 max-w-[1600px] m-12">
+
+        <Search placeholder="Search for groups"/>
+
     <section className="sm:col-span-1 md:col-span-2 xl:col-span-3 flex items-stretch flex-grow flex-col gap-4">
     <div>
         <GroupList />

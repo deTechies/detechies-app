@@ -33,7 +33,7 @@ export default function Navbar() {
     <Disclosure as="nav" className="bg-background-layer-1 z-10">
       {({ open }) => (
         <>
-          <div className="px-6 lg:px-8 bg-background-layer-1 mb-4">
+          <div className="px-6 lg:px-8 bg-background-layer-1">
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap">
