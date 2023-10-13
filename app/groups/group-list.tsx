@@ -4,6 +4,7 @@ import Loading from "@/components/screens/loading";
 import { Card } from "@/components/ui/card";
 import useFetchData from "@/lib/useFetchData";
 import Link from "next/link";
+import GroupListItem from "./group-list-item";
 
 export default function GroupList() {
   const { data, loading, error } = useFetchData<any[]>(`/group/all`);
@@ -13,7 +14,7 @@ export default function GroupList() {
   return <div className="grid grid-cols-2 gap-2">
     {
       data && data.map((group: any, key:number) => {
-        return <GroupItem key={key} group={group} />
+        return <GroupListItem key={key} details={group} />
       })
     }
   </div>;

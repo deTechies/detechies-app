@@ -4,7 +4,6 @@ import { LocateFixedIcon, UserCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 interface ProjectItemProps {
-    id: string;
     name: string;
     image: string;
     description: string;
@@ -12,19 +11,19 @@ interface ProjectItemProps {
     location: string;
     members: string[];
 }
-export default function ProjectItem(
+export default function GroupListItem(
     {details }: { details: ProjectItemProps}
 ) {
     console.log(details);
   return (
-    <Link href={`/project/${details.id}`}>
+    <Link href={`/project/${details.name}`}>
     <Card className="flex flex-row gap-4">
         <Image
             src={`https://ipfs.io/ipfs/${details.image}`}
             alt={details.name}
             width={100}
             height={100}
-            className="rounded-full bg-accent-secondary"
+            className="rounded-full"
         />
         <section className="flex flex-col gap-2 w-full prose">
             <header className="flex justify-between items-center prose">

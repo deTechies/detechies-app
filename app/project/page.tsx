@@ -1,6 +1,5 @@
 "use client"
 import Search from "@/components/extra/search";
-import { Card } from "@/components/ui/card";
 import useFetchData from "@/lib/useFetchData";
 import ProjectItem from "./project-item";
 
@@ -10,23 +9,20 @@ interface ProjectItemProps {
   image: string;
   description: string;
   status: string;
-
-      location: string;
+  location: string;
   members: string[];
 }
 
 export default function ProjectListPage() {
   
-  const {data, loading, error} = useFetchData<ProjectItemProps[]>("/group/all");
+  const {data, loading, error} = useFetchData<ProjectItemProps[]>("/project/all");
   
   if(loading) return <div>Loading...</div>
   if(error) return <div>{JSON.stringify(error)}</div>
   
   return (
     <main className="m-6 flex flex-col gap-8">
-    <Card>
-      <Search placeholder="search"/>
-    </Card>
+    <Search placeholder="search"/>
     
     <section className="grid grid-cols-2 gap-4">
     {

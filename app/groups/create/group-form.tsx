@@ -151,7 +151,7 @@ export function GroupForm() {
         
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       <Alert variant={"warning"}>
-            <AlertTitle>Clubs image, type and name can not be changed after group is created</AlertTitle>
+            <AlertTitle className="text-state-warning mb-2">Clubs image, type and name can not be changed after group is created</AlertTitle>
             <AlertDescription>
             Please enter correct information of group. The image, type and name of group are storing on NFT and cannot be changed after group is created
             </AlertDescription>

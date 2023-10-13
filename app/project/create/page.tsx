@@ -145,8 +145,8 @@ export default function ProjectForm() {
 
   return (
     
-    <Card className="max-w-4xl m-[60px] mx-auto">
-      <CardHeader className="flex items-center gap-4 text-4xl ">
+    <Card className="max-w-4xl w-full m-8">
+      <CardHeader className="flex items-center gap-4">
         Create Project
       </CardHeader>
       <CardContent className="my-4">

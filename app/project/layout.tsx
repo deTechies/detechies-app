@@ -17,13 +17,13 @@ export default function GroupLayout({
           <Link
             href="/groups"
             className={`px-3 py-2 m-1 ${
-              pathname.includes("/groups?filter=me") ||
-              pathname.includes("/groups/create")
+              pathname.includes("/project?filter=me") ||
+              pathname.includes("/project/create")
                 ? ""
                 : "bg-accent-secondary text-accent-primary rounded-[6px] m-1"
             }`}
           >
-            Groups
+            Projects
           </Link>
 
           <Link
@@ -34,18 +34,18 @@ export default function GroupLayout({
                 : ""
             }`}
           >
-            My Groups
+            My Projects
           </Link>
 
           <Link
-            href="/groups/create"
+            href="/project/create"
             className={`px-3 py-2 m-1 ${
-              pathname.includes("/groups/create")
+              pathname.includes("/project/create")
                 ? "bg-accent-secondary text-accent-primary rounded-sm"
                 : ""
             }`}
           >
-            Create Group
+            Create Project
           </Link>
         </nav>
       </header>

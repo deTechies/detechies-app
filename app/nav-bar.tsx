@@ -39,8 +39,8 @@ export default function Navbar() {
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap">
 
                   <Image
-                    className="block h-12 object-contain dark:filter dark:invert"
-                    src="/images/careerzen-logo.png"
+                    className="block h-12 object-contain "
+                    src="/images/careerzen.png"
                     alt="Careerzen"
                     fill={true}
                     onClick={() => {window.location.href = "/"}}

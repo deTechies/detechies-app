@@ -29,9 +29,9 @@ module.exports = {
             },
             h3: {
               color: "var(--text-primary)",
-              fontWeight: "700",
-              fontSize: "28px",
-              lineHeight: "36px",
+              fontWeight: "500",
+              fontSize: "23px",
+              lineHeight: "24px",
               letterSpacing: "-0.5px",
             },
             h5: {
@@ -41,12 +41,23 @@ module.exports = {
               lineHeight: "28px",
               letterSpacing: "-0.5px",
             },
+            h6: {
+              color: "var(--text-primary)",
+              fontWeight: "400",
+              fontSize: "16px",
+              lineHeight: "16px",
+              letterSpacing: "0.4px",
+            },
             p: {
               color: "var(--text-secondary)",
               fontWeight: "400",
               fontSize: "14px",
               lineHeight: "14px",
               letterSpacing: "0.4px",
+            },
+            a: {
+              color: "var(--text-secondary)", 
+              fontWeight: "400", 
             }
           }
         }
