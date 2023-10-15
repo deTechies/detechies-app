@@ -106,3 +106,7 @@ export async function getEthersSigner({ chainId }: { chainId?: number } = {}) {
   return walletClientToSigner(walletClient)
 }
 
+
+export function didToAddress(did: string) {
+  return did.split(":")[2]
+}

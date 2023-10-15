@@ -19,7 +19,7 @@ export default  function GroupAchievements() {
         const result = await fetch(`${url}/chain/all`).then((res) =>
             res.json()
         );
-        console.log(result);
+
         setData(result);
         }
         fetchNFTs();

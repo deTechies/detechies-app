@@ -11,24 +11,19 @@ import { useContext, useEffect, useState } from "react";
 import { Address } from "wagmi";
 import MessageItem from "./message-item";
 
-export default function PushChat({
+export default function PushGroupChat({
+  chatId,
   contract,
-  chatTo,
-  groupId,
   members,
 }: {
   contract?: Address;
-  chatTo?: Address;
-  groupId?: Address;
+  chatId?: string;
   members?: string[];
 }) {
   const [chats, setChats] = useState<any>(null);
   const [inputValue, setInputValue] = useState("");
   const [sendingMessage, setSendingMessage] = useState(false);
   const chatter = useContext(PushContext);
-  const [chatId, setChatId] = useState<string>(
-    "cce4a93b06a91ce0f53310f51b5397584b87f81e09c1ea9d1ae2f94f0bfa4260"
-  );
 
   useEffect(() => {
     const fetchChat = async (newChat: string) => {
@@ -39,15 +34,29 @@ export default function PushChat({
       });
     };
 
-    //1 - on 1 chat
-    if (chatTo) {
-      setChatId(chatTo);
-      fetchChat(chatTo);
-    }
-    
-    //groupChat
+    const fetchGroupInfo = async () => {
+      if (!chatId) {
+        return;
+      }
 
-  }, [contract, chatter]);
+      await chatter?.chat.group
+        .info(chatId)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    if (!chatId) {
+      toast({
+        title: "Group not found... ",
+      });
+    }
+
+    fetchGroupInfo();
+  }, [contract, chatId]);
 
   const handleInputChange = (event: any) => {
     if (event.key === "Enter") {

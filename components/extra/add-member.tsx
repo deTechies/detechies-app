@@ -33,7 +33,7 @@ export default function AddMemberModal({type}:{type?: string}) {
     fetch(`${url}/polybase/profiles/all?search=${search}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+
         setMembers(data);
       });
   }, [search]);

@@ -30,4 +30,5 @@ const IPFSImageLayer: React.FC<IPFSImageLayerProps> = ({ hashes, className }) =>
     );
 }
 
+
 export default IPFSImageLayer;
