@@ -49,7 +49,7 @@ export default function GroupLayout({
           </Link>
         </nav>
       </header>
-      <main className="flex  justify-center items-center">{children}</main>
+      <main className="flex  justify-center items-center ">{children}</main>
     </div>
   );
 }

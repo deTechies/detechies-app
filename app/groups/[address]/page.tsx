@@ -23,7 +23,7 @@ export default function GroupProfile() {
     if(loading) return <div>Loading...</div>
     
   return (
-    <main className="grid md:grid-cols-3 gap-md">
+    <main className="grid md:grid-cols-3 gap-md m-8 w-full ">
         <div className="col-span-1">
             {data && <GroupProfileCard profile={data} image={data.details?.image} /> }
         </div>

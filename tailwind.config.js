@@ -11,7 +11,7 @@ module.exports = {
     
     container: {
       center: true,
-      padding: "2rem",
+      padding: "",
       screens: {
         "2xl": "1400px",
       },
@@ -49,6 +49,13 @@ module.exports = {
               letterSpacing: "0.4px",
             },
             p: {
+              color: "var(--text-secondary)",
+              fontWeight: "400",
+              fontSize: "14px",
+              lineHeight: "14px",
+              letterSpacing: "0.4px",
+            },
+            body: {
               color: "var(--text-secondary)",
               fontWeight: "400",
               fontSize: "14px",

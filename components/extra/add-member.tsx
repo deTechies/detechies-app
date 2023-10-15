@@ -12,7 +12,7 @@ import { ABI } from "@/lib/constants";
 import PersonItem from "./add-member-item";
 import Search from "./search";
 
-export default function AddMemberModal() {
+export default function AddMemberModal({type}:{type?: string}) {
   const searchParams = useSearchParams();
   const [members, setMembers] = useState([]);
   const { address } = useParams();
@@ -24,8 +24,8 @@ export default function AddMemberModal() {
   
   const {write, isLoading, data} = useContractWrite({
       address: address as Address, 
-      abi: ABI.groupRegistry, 
-      functionName: "safeMint"
+      abi: type === 'project' ? ABI.project : ABI.groupRegistry, 
+      functionName: type == 'project' ? "addMember" : "safeMint"
   })
 
   useEffect(() => {

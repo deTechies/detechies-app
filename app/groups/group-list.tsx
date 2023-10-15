@@ -1,9 +1,7 @@
 "use client";
 import Error from "@/components/screens/error";
 import Loading from "@/components/screens/loading";
-import { Card } from "@/components/ui/card";
 import useFetchData from "@/lib/useFetchData";
-import Link from "next/link";
 import GroupListItem from "./group-list-item";
 
 export default function GroupList() {
@@ -11,7 +9,7 @@ export default function GroupList() {
 
   if (loading) return <Loading />;
   if (error) return <Error message="error" />;
-  return <div className="grid grid-cols-2 gap-2">
+  return <div className="w-full grid grid-cols-2 gap-8">
     {
       data && data.map((group: any, key:number) => {
         return <GroupListItem key={key} details={group} />
@@ -20,16 +18,3 @@ export default function GroupList() {
   </div>;
 }
 
-
-export const GroupItem = ({ group }: { group: any }) => {
-  return (
-    <Link href={`/groups/${group.addr}`}>
-    <Card>
-      <h1>{group.name}</h1>
-      <div>{group.description}</div>
-      <div>{group.image}</div>
-      <span>{group.creator}</span>
-    </Card>
-    </Link>
-  );
-}

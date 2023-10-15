@@ -19,7 +19,7 @@ export default function PendingProfileCard({
 }: ProfileProps) {
   const { write, isLoading, error, data } = useContractWrite({
     address: contract as Address,
-    abi: ABI.groupRegistry,
+    abi: ABI.group,
     functionName: "safeMint",
   });
 
@@ -41,7 +41,8 @@ export default function PendingProfileCard({
       {}
     ).then((res) => res.json());
 
-    await write({ args: [profile.profile.TBA] });
+    
+    await write({ args: [profile.profile.TBA, 1] });
 
     //await write();
   };

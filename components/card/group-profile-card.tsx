@@ -11,6 +11,7 @@ import { useAccount } from "wagmi";
 import AddMemberModal from "../extra/add-member";
 
 import useFetchData from "@/lib/useFetchData";
+import { truncateMiddle } from "@/lib/utils";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
@@ -83,13 +84,13 @@ export default function GroupProfileCard({ profile, image }: ProfileProps) {
 
   return (
     <Card className="w-full sticky top-10">
-      <CardHeader className="flex justify-between ">
+      <CardHeader className="flex justify-between items-center ">
         <h3 className="leading-3">{profile.details ? profile.details?.name : "Name not found"}</h3>
         <Badge>
-          {profile.address && profile.address} 
+          {profile.address && truncateMiddle(profile.address, 12)} 
         </Badge>
       </CardHeader>
-      <CardContent className="flex flex-col items-center">
+      <CardContent className="flex flex-col items-center w-full">
           <Image
             src={
               image
@@ -97,14 +98,14 @@ export default function GroupProfileCard({ profile, image }: ProfileProps) {
                 : "https://careerzen.org/images/careerzen-logo.png"
             }
             alt={`Layer company image`}
-            className="rounded-md"
+            className="rounded-sm aspect-square bg-accent-secondary w-full"
             width={200}
             style={{
-              objectFit: 'contain', // cover, contain, none
+              objectFit: 'scale-down', // cover, contain, none
             }}
             height={200}
           />
-        <div className="my-4">
+        <div className="my-4 w-full">
           <div className="grid grid-cols-2 border rounded-md">
             <ProfileStat name="projects" value={projects.length} />
             <ProfileStat name="employees" value={profile?.owners?.length} />

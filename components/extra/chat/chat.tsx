@@ -84,8 +84,7 @@ function Chat({
   return (
     <Card className="shadow">
         <CardHeader className="flex gap-4 items-center ">
-       
-            Group Chat 
+        
             <div className="flex -space-x-2 overflow-hidden">
                 {selectedUsers.map((user) => (
                   <Avatar

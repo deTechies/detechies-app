@@ -5,12 +5,13 @@ import ProjectItem from "./project-item";
 
 
 interface ProjectItemProps {
+  id: string;
   name: string;
   image: string;
   description: string;
   status: string;
   location: string;
-  members: string[];
+  workers: string[];
 }
 
 export default function ProjectListPage() {

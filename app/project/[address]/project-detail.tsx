@@ -9,7 +9,7 @@ export default function ProjectDetail({
   details: ProjectDetailProps;
 }) {
   return (
-    <Card>
+    <Card className="w-full">
       <header className="flex gap-8 items-center">
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}

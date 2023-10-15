@@ -9,6 +9,7 @@ interface ProjectItemProps {
     description: string;
     status: string;
     location: string;
+    addr: string;
     members: string[];
 }
 export default function GroupListItem(
@@ -16,7 +17,7 @@ export default function GroupListItem(
 ) {
     console.log(details);
   return (
-    <Link href={`/project/${details.name}`}>
+    <Link href={`/groups/${details.addr}`}>
     <Card className="flex flex-row gap-4">
         <Image
             src={`https://ipfs.io/ipfs/${details.image}`}

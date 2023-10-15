@@ -2,9 +2,9 @@
 
 import { Toaster } from "@/components/ui/toaster";
 import { polygonMumbai } from "@/helpers/mumbai";
+import PushProvider from "@/lib/usePushProtocol";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
-import { XMTPProvider } from "@xmtp/react-sdk";
 import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
@@ -59,11 +59,11 @@ const config = createConfig({
 export default function App({ children }: { children: any }) {
   return (
     <WagmiConfig config={config}>
-      <XMTPProvider>
+      <PushProvider>
       <Navbar />
-      {children}
+        {children}
       <Toaster />
-      </XMTPProvider>
+      </PushProvider>
     </WagmiConfig>
   );
 }

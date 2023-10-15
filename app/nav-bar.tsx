@@ -14,7 +14,7 @@ export default function Navbar() {
   
   const links = [
     {
-      name: "Home",
+      name: "Dashboard",
       href: "/",
     },
     {
@@ -33,7 +33,7 @@ export default function Navbar() {
     <Disclosure as="nav" className="bg-background-layer-1 z-10">
       {({ open }) => (
         <>
-          <div className="px-6 lg:px-8 bg-background-layer-1">
+          <div className="px-6 lg:px-8 bg-background-layer-1 shadow-sm">
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap">
@@ -49,7 +49,7 @@ export default function Navbar() {
 
                 </div>
 
-                <div className="hidden sm:ml-6 md:ml-24 sm:flex sm:space-x-8">
+                <div className="hidden sm:ml-6 md:ml-24 sm:flex sm:space-x-8 ">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   {links.map((link: any, index: number) => (
                     <Link
@@ -58,11 +58,11 @@ export default function Navbar() {
                       aria-disabled={link?.disabled}
                       className={`inline-flex items-center border-b-2 capitalize 
                       ${
-                        pathname.includes(link.href)
-                          ? "border-accent-secondary text-accent-primary"
-                          : "border-transparent text-text-secondary hover:border-green-400 hover:text-accent-secondary"
+                        pathname.endsWith(link.href)
+                          ? "border-accent-primary text-accent-primary"
+                          : "border-transparent text-text-secondary hover:border-accent-secondary hover:text-accent-secondary"
                       }  
-                      px-1 pt-1 text-md font-medium text-primary`}
+                      px-1 pt-1 text-md  text-primary`}
                     >
                       {link.name}
                     </Link>
@@ -100,7 +100,7 @@ export default function Navbar() {
                   key={index}
                   as="a"
                   href={link.href}
-                  className={`block border-l-4  bg-background-layer-2 text-primary py-2 pl-3 pr-4 text-base font-medium 
+                  className={`block border-l-4  bg-background-layer-2 text-primary py-2 pl-3 pr-4 text-base font 
                 ${
                   pathname.includes(link.href)
                     ? "border-accent-primary text-accent-primary"

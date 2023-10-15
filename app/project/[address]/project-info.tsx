@@ -3,13 +3,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import Links from "./links";
 
 export interface InfoProps {
-  category: string;
+  type: string;
   owner: string;
-  members: string[];
+  workers: string[];
+  urls: string[];
   location: string;
 }
 export default function ProjectInfo({ info }: { info: InfoProps }) {
   const links = ["https://github.com/tse-lao", "https://www.figma.com/file/HRDJ9JdplVUOoY1v01u7pY/Careerzen_UI?node-id=364%3A4798&mode=dev"];
+  
+  
   return (
     <Card>
       <CardContent className="flex flex-col gap-8">
@@ -17,7 +20,7 @@ export default function ProjectInfo({ info }: { info: InfoProps }) {
           <dd>
             <h6 className="mb-2 font-medium">Category</h6>
             <span className="text-text-secondary">
-              {info.category ? info.category : "Side Project "}
+              {info.type ? info.type : "Side Project "}
             </span>
           </dd>
           <dd>
@@ -29,7 +32,7 @@ export default function ProjectInfo({ info }: { info: InfoProps }) {
           <dd>
             <h6 className="mb-2 font-medium">Members</h6>
             <span className="text-text-secondary">
-              {info.members ? info.members.length : 0}
+              {info.workers ? info.workers.length : 0}
             </span>
           </dd>
           <dd>
@@ -40,7 +43,7 @@ export default function ProjectInfo({ info }: { info: InfoProps }) {
           </dd>
         </section>
 
-        <Links links={links} />
+        <Links links={info.urls} />
 
         <Button className="col-span-2 w-full">Join Project</Button>
       </CardContent>

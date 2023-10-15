@@ -16,12 +16,16 @@ interface Message {
 }
 
 interface MessageItemProps {
-  message: Message;
+  message: any;
   clientAddress: string;
+  timestamp?: number
+  push? : any
 }
 
 const MessageItem: React.FC<MessageItemProps> = ({
   message,
+  timestamp,
+  push,
   clientAddress,
 }) => {
   const isSentByClient = message.senderAddress === clientAddress;
@@ -57,10 +61,15 @@ const MessageItem: React.FC<MessageItemProps> = ({
           <PopoverTrigger className="ml-4 cursor-pointer absolute  leading-3 tracking-wider  text-xs italic font-light text-text-secondary left-0 bottom-2">
             {message.sent.toLocaleTimeString()}
           </PopoverTrigger>
-          <PopoverContent className="w-content flex flex-col gap-2">
-            {message.sent.toLocaleString()}
-            {message.senderAddress}
-            {message.sent.toLocaleDateString()}
+          <PopoverContent className="w-content flex flex-col gap-2 overflow-auto">
+            {JSON.stringify(push)}
+             <ul>
+             {push && Object.entries(push).map(([key, value], subIndex) => (
+               <li key={subIndex}>
+                 <strong>{key}:</strong> {value?.toString()}
+               </li>
+             ))}
+           </ul>
           </PopoverContent>
         </Popover>
       </span>

@@ -1,4 +1,6 @@
-import Image from 'next/image';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -9,11 +11,16 @@ type Props = {
 const Links: React.FC<Props> = ({ links }) => {
   return (
     <div className="flex space-x-4">
-      {links.map((link, index) => {
+      {links && links.map((link, index) => {
         const site = getSiteFromLink(link);
         return (
-          <Link key={index} href={link} target="_blank" rel="noopener noreferrer">
-            <Image src={`/icons/${site}.png`} alt={site} className="w-6 h-6 opacity-75 hover:opacity-100" width={16} height={16} />
+          <Link key={index} href={link} target="_blank" rel="noopener noreferrer" className="rounded-full bg-background-layer-2 h-8 w-8 items-center">
+            <Avatar>
+              <AvatarImage src={`/icons/${site}.png`} />
+              <AvatarFallback>
+                <ExternalLink size="16"/>
+              </AvatarFallback>
+              </Avatar>
           </Link>
         );
       })}

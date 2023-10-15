@@ -17,12 +17,10 @@ export default function ChatModal({user}: {user: any}) {
   const signer = useEthersSigner();
   const {address} = useAccount();
   
-  //const {client, error, isLoading} = useClient();
-  
+
 
   const [isConnected, setIsConnected] = useState(false);
   const [isOnNetwork, setIsOnNetwork] = useState(false);
-  
 
   // Function to load the existing messages in a conversation
   const newConversation = async function (xmtp_client: any, addressTo: any) {

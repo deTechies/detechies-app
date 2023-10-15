@@ -10,7 +10,7 @@ interface ProjectItemProps {
     description: string;
     status: string;
     location: string;
-    members: string[];
+    workers: string[];
 }
 export default function ProjectItem(
     {details }: { details: ProjectItemProps}
@@ -38,7 +38,7 @@ export default function ProjectItem(
                 </address>
                 <div className="flex gap-2 text-text-secondary text-sm items-center">
                     <UserCheck />
-                    {details.members?.length} Members
+                    {details.workers?.length} Members
                 </div>
             </div>
             <p >

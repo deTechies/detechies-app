@@ -1,17 +1,37 @@
+"use client"
+import PushChat from "@/components/extra/chat/push-chat";
+import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 import Onboarding from "./onboard/page";
 
 export default function Home() {
+  
+  const {address} = useAccount();
+  //make sure that we return the full list if ther eis an acount
+  
+  const [profile, setProfile] = useState<any>(null);
+  
+  
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      const res = await fetch(`https://api.web3.bio/profile/${address}`);
+      const data = await res.json();
+      console.log(data);
+
+      setProfile(data);
+    }
+    
+    if(address){
+      fetchProfiles();
+      
+    }
+  }, [address])
+  
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-6xl font-bold text-center">
-          Welcome to the career launchpad,
-        </h1>
-        <p className="text-2xl text-center">
-          We help you launch your career towards your most ideal profile. 
-          We help you build your digital identity, according to your personal preferences.
-          Share what you like to share, discover by the people you want to be connected with.
-        </p>
+        <PushChat />
         <section>
         <Onboarding />
       </section>
