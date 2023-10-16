@@ -47,7 +47,7 @@ export default function PushChat({
     
     //groupChat
 
-  }, [contract, chatter]);
+  }, [contract, chatter, chatTo]);
 
   const handleInputChange = (event: any) => {
     if (event.key === "Enter") {

@@ -111,14 +111,14 @@ export default function ProfileModal() {
       <div className="flex flex-col space-y-4 my-4">
         <div className="grid md:grid-cols-2 gap-4">
           <Input
-            label="Full Name"
+
             placeholder="First Name"
             name="firstname"
             value={formData.firstname}
             onChange={handleChange}
           />
           <Input
-            label="Last name"
+
             placeholder="Last Name"
             name="lastname"
             value={formData.lastname}
@@ -126,14 +126,14 @@ export default function ProfileModal() {
           />
         </div>
         <Input
-          label="Display Name"
+
           placeholder="First Name"
           name="username"
           value={formData.username}
           onChange={handleChange}
         />
         <Input
-          label="email"
+
           placeholder="Email"
           name="email"
           value={formData.email}
@@ -161,7 +161,7 @@ export default function ProfileModal() {
         </div>
 
         <Textarea
-          label="Description"
+
           placeholder="Description"
           name="description"
           value={formData.description}

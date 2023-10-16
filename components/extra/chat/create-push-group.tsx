@@ -77,7 +77,7 @@ export default function CreatePushGroup({
         description:
           "This group is created by one of the members of this contract group at careerzen.org. ",
         members: members,
-        image: null,
+        image: "https://ipfs.io/",
         admins: [],
         private: true,
         rules: rules,
