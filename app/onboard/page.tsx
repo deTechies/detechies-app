@@ -1,32 +1,12 @@
 "use client";
+import Link from "next/link";
 
-import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import { useAccount, useConnect } from "wagmi";
+import { useConnect } from "wagmi";
 
-export default function Onboarding() {
+export default function OnboardPage() {
+
   const { connect, connectors } = useConnect();
-  const {address, isConnecting} = useAccount();
-  
-  if(address) {
-    return (
-      <Card className="max-w-lg">
-        <CardContent>
-          {address}
-          
-        </CardContent>
-      </Card>  
-    )
-  } 
-  
-  if(isConnecting) {
-    return (
-      <div>
-        Connecting...
-      </div>  
-    )
-  }
-    
   return (
     <div className="flex flex-col space-y-4 gap-4">
       {connectors.map((connector) => (
@@ -47,3 +27,13 @@ export default function Onboarding() {
     </div>
   );
 };
+
+
+const FinishedCard = () => (
+  <div className="flex flex-col space-y-4">
+    <span>Please continue and enjoy your career NFT.</span>
+    <Link href="/dashboard" className="text-blue-500">
+      Go to Dashboard
+    </Link>
+  </div>
+);

@@ -2,7 +2,7 @@
 import PushChat from "@/components/extra/chat/push-chat";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
-import Onboarding from "./onboard/page";
+
 
 export default function Home() {
   
@@ -31,9 +31,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col items-center justify-center">
-        <PushChat />
+        <PushChat members={[]} />
         <section>
-        <Onboarding />
+
       </section>
       </div>
     

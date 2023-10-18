@@ -1,51 +1,63 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { LocateFixedIcon, UserCheck } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import Image from "next/image";
 import Link from "next/link";
+
 interface ProjectItemProps {
-    name: string;
-    image: string;
-    description: string;
-    status: string;
-    location: string;
-    addr: string;
-    members: string[];
+  name: string;
+  image: string;
+  description: string;
+  status: string;
+  achievements: any[];
+  location: string;
+  addr: string;
+  members: any[];
 }
-export default function GroupListItem(
-    {details }: { details: ProjectItemProps}
-) {
-    console.log(details);
+export default function GroupListItem({
+  details,
+}: {
+  details: ProjectItemProps;
+}) {
+  console.log(details);
   return (
-    <Link href={`/groups/${details.addr}`}>
-    <Card className="flex flex-row gap-4">
-        <Image
+    <Link href={`/group/${details.addr}`}>
+      <Card className="flex flex-row gap-4">
+        <Avatar className="w-50 h-50">
+          <AvatarImage
             src={`https://ipfs.io/ipfs/${details.image}`}
             alt={details.name}
             width={100}
             height={100}
             className="rounded-full"
-        />
+          />
+          <AvatarFallback className="relative">
+            <Image 
+                src="/images/careerzen.png"
+                alt="no-item"
+                fill={true}
+
+                
+            />
+        </AvatarFallback>
+        </Avatar>
         <section className="flex flex-col gap-2 w-full prose">
-            <header className="flex justify-between items-center prose">
-                <h5>{details.name}</h5>
-                 <Badge variant={"info"} className="ml-2">{details.status ? details.status : "Promoted"}</Badge>
-            </header>
-            <div className="flex gap-8">
-                <address className="flex gap-2 text-text-secondary text-sm items-center">
-                    <LocateFixedIcon />
-                    {details.location ? details.location : "Unknown"}
-                </address>
-                <div className="flex gap-2 text-text-secondary text-sm items-center">
-                    <UserCheck />
-                    {details.members?.length} Members
-                </div>
-            </div>
-            <p >
-                {details.description ? details.description : "Random descripotion"}
-            </p>
+          <header className="flex justify-between items-center prose">
+            <h5>{details.name}</h5>
+            <Badge variant={"info"} className="ml-2">
+              {details.status ? details.status : "Promoted"}
+            </Badge>
+          </header>
+          <div className="flex gap-2">
+            <Badge className="bg-accent-secondary text-accent-primary">
+              {details.members?.length} Members
+            </Badge>
+            <Badge className="bg-state-info-secondary text-state-info">
+              {details.achievements?.length} NFTS
+            </Badge>
+          </div>
         </section>
-    </Card>
+      </Card>
     </Link>
-  )
+  );
 }

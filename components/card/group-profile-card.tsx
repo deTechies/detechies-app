@@ -1,5 +1,5 @@
 "use client";
-import { Loader2, RefreshCcw } from "lucide-react";
+import { ExternalLink, Loader2, RefreshCcw } from "lucide-react";
 import { useParams } from "next/navigation";
 
 import { useState } from "react";
@@ -10,9 +10,8 @@ import Image from "next/image";
 import { useAccount } from "wagmi";
 import AddMemberModal from "../extra/add-member";
 
-import useFetchData from "@/lib/useFetchData";
 import { truncateMiddle } from "@/lib/utils";
-import { Badge } from "../ui/badge";
+import Link from "next/link";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { useToast } from "../ui/use-toast";
@@ -21,22 +20,19 @@ import { useToast } from "../ui/use-toast";
 interface ProfileProps {
   profile: any;
   image: string;
+  isMember: boolean;
 }
 
-export default function GroupProfileCard({ profile, image }: ProfileProps) {
+export default function GroupProfileCard({ profile, image, isMember }: ProfileProps) {
   const { id } = useParams();
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [joined, setJoined] = useState<boolean>(false);
+  const [joined, setJoined] = useState<boolean>(isMember);
   const { address } = useAccount();
 
   const { toast } = useToast();
 
-  const {
-    data,
-    loading: fetching,
-    error,
-  } = useFetchData(`/company/details/${id}`);
+
 
   const join = async () => {
     //@ts-ignore
@@ -68,7 +64,6 @@ export default function GroupProfileCard({ profile, image }: ProfileProps) {
           });
           setJoined(true);
         } else {
-          console.error("Error creating profile:", data.message);
           toast({
             title: "Already joined the company",
             description: data.message,
@@ -85,10 +80,18 @@ export default function GroupProfileCard({ profile, image }: ProfileProps) {
   return (
     <Card className="w-full sticky top-10">
       <CardHeader className="flex justify-between items-center ">
-        <h3 className="leading-3">{profile.details ? profile.details?.name : "Name not found"}</h3>
-        <Badge>
+        <div>
+          <h3 className="">{profile?.name ? profile?.name : "Name not found"}</h3>
+
+        </div>
+        <Link 
+          href={`https://mumbai.polygonscan.com/address/${profile.address}`} 
+          className="flex items-center gap-4 rounded-md font-normal bg-background-layer-2 hover:bg-gray-200 text-sm px-4 py-3"
+          target="_blank"
+          >
           {profile.address && truncateMiddle(profile.address, 12)} 
-        </Badge>
+          <ExternalLink className="text-text-secondary" size={16}/>
+        </Link>
       </CardHeader>
       <CardContent className="flex flex-col items-center w-full">
           <Image
@@ -106,9 +109,9 @@ export default function GroupProfileCard({ profile, image }: ProfileProps) {
             height={200}
           />
         <div className="my-4 w-full">
-          <div className="grid grid-cols-2 border rounded-md">
-            <ProfileStat name="projects" value={projects.length} />
-            <ProfileStat name="employees" value={profile?.owners?.length} />
+          <div className="grid grid-cols-2 border rounded-sm">
+            <ProfileStat name="achievements" value={profile.achievements.length} />
+            <ProfileStat name="members" value={profile?.members?.length} />
           </div>
 
           {profile?.owners?.includes(address) ? (
@@ -130,7 +133,7 @@ export default function GroupProfileCard({ profile, image }: ProfileProps) {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-2 my-4 items-center">
+            <div className="grid md:grid-cols-2 gap-2 my-4 items-center">
               <Button variant={"secondary"}>Contact Owner</Button>
               <Button onClick={() => join()} disabled={loading || joined}>
                 {loading ? (
@@ -153,9 +156,9 @@ export default function GroupProfileCard({ profile, image }: ProfileProps) {
 
 export function ProfileStat({ name, value }: { name: string; value: number }) {
   return (
-    <div className="flex flex-col p-4 px-6 justify-center item-center text-center">
-      <h3 className="text-black-normal font-bold text-xl">{value}</h3>
-      <span className="text-text-secondary capitalize">{name}</span>
+    <div className="flex flex-col p-4 px-6 justify-center item-center">
+      <h3 className="text-black-normal font-medium text-lg">{value}</h3>
+      <span className="text-text-secondary capitalize ">{name}</span>
     </div>
   );
 }

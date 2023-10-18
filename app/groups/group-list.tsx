@@ -9,7 +9,7 @@ export default function GroupList() {
 
   if (loading) return <Loading />;
   if (error) return <Error message="error" />;
-  return <div className="w-full grid grid-cols-2 gap-8">
+  return <div className="w-full grid grid-cols-2 gap-8 items-stretch">
     {
       data && data.map((group: any, key:number) => {
         return <GroupListItem key={key} details={group} />

@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { API_URL } from "@/lib/constants";
 import { PushContext } from "@/lib/usePushProtocol";
+import { truncateMiddle } from "@/lib/utils";
 import { ConditionType, Rules } from "@pushprotocol/restapi";
 import { useParams } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 export default function CreatePushGroup({
   image,
@@ -18,11 +19,12 @@ export default function CreatePushGroup({
 }) {
   const { address } = useParams();
   const chatter = useContext(PushContext);
+  const [loading, setLoading] = useState(false);
+
   const createGroup = async function () {
+    setLoading(true)
     if (!chatter) return;
 
-    const contract = "0x";
-    window.alert("creating group");
 
     const rules = {
       // define rules to gate different permissions of the group, ie: joining group or sending messages
@@ -36,7 +38,7 @@ export default function CreatePushGroup({
                 // define criteria 1
                 type: ConditionType.PUSH, // define type that rules engine should go for, currently supports PUSH or GUILD
                 category: "ERC721",
-                subcategory: "owner", // define if you are checking 'holder' or 'owner'
+                subcategory: "holder", // define if you are checking 'holder' or 'owner'
                 data: {
                   // define the data check
                   contract: `eip155:80001:${address}`, // pass {blockchain_standard}:{chain_id}:{address} as a shorthand
@@ -56,7 +58,7 @@ export default function CreatePushGroup({
                 // define criteria 1
                 type: ConditionType.PUSH, // define type that rules engine should go for, currently supports PUSH or GUILD
                 category: "ERC721", // define it's ERC20 token that you want to check, supports ERC721 as well
-                subcategory: "owner", // define if you are checking 'holder' or 'owner'
+                subcategory: "holder", // define if you are checking 'holder' or 'owner'
                 data: {
                   // define the data check
                   contract: `eip155:80001:${address}`, // pass {blockchain_standard}:{chain_id}:{address} as a shorthand
@@ -71,54 +73,64 @@ export default function CreatePushGroup({
     } as Rules;
 
     //this does not work unfortunately so lets try it agaon.
-    const createdGroup = await chatter.chat.group.create(
-      `Group chat of ${contract}`,
-      {
-        description:
-          "This group is created by one of the members of this contract group at careerzen.org. ",
-        members: members,
-        image: "https://ipfs.io/",
-        admins: [],
-        private: true,
-        rules: rules,
-      }
-    );
-    const groupChatId = createdGroup.chatId;
-
-    //we want to store this such that we can always retrieve it. so what we do is
-
-    if (groupChatId) {
-      await fetch(`${API_URL}/group/newGroup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chatId: groupChatId,
-          to: address,
-          from: address,
-        }),
-      })
-        .then((result) => {
-          console.log(result);
-          toast({
-            title: "Succesfully Created",
-          });
+    try {
+      const createdGroup = await chatter.chat.group.create(
+        `Group chat of ${truncateMiddle(address.toString(), 8)}`,
+        {
+          description:"This group is created by one of the members of this contract group at careerzen.org. ",
+          members: members,
+          //@ts-ignore
+          image: null, 
+          admins: [],
+          private: true,
+          rules: rules,
+        }
+      );
+      const groupChatId = createdGroup.chatId;
+  
+      //we want to store this such that we can always retrieve it. so what we do is
+  
+      if (groupChatId) {
+        await fetch(`${API_URL}/group/newGroup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chatId: groupChatId,
+            to: address,
+            from: address,
+          }),
         })
-        .catch((err) => {
-          toast({
-            title: "Could not create a new group",
-            description: err.toString(),
+          .then((result) => {
+            console.log(result);
+            toast({
+              title: "Succesfully Created",
+            });
+          })
+          .catch((err) => {
+            toast({
+              title: "Could not create a new group",
+              description: err.toString(),
+            });
           });
-        });
+      }
+    }catch(err){
+      console.log(err)
     }
+   
+    
+    setLoading(false)
   };
 
   return (
     <Card>
       <span>{address}</span>
       <Input placeholder="Group name" value={`Group chat of ${address}`} />
-      <Button onClick={createGroup}>Create Group</Button>
+      <Button onClick={createGroup}
+        disabled={!chatter || !address}
+        loading={loading}
+      >Create Group</Button>
     </Card>
   );
 }

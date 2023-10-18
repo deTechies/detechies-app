@@ -1,10 +1,11 @@
 "use client"
 import useFetchData from "@/lib/useFetchData";
 import { useRouter } from "next/navigation";
+import { Address } from "wagmi";
 import IPFSImageLayer from "../ui/layer";
 import { Skeleton } from "../ui/skeleton";
 
-export default function MemberCard({address}: {address: string}) {
+export default function MemberCard({address}: {address: Address}) {
     const router = useRouter();
     const {data, loading, error} = useFetchData<any>(`/polybase/profile/tba/${address}`);
     

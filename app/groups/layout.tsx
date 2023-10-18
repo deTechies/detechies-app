@@ -13,7 +13,7 @@ export default function GroupLayout({
   return (
     <div>
       <header className="w-full bg-background-layer-1 border-t border-border-div flex justify-center items-center">
-        <nav className="bg-black-200 flex items-center m-3.5 rounded-sm text-center  text-primary">
+        <nav className="bg-black-200 flex items-center gap-4 m-3.5 rounded-sm text-center  text-primary">
           <Link
             href="/groups"
             className={`px-3 py-2 m-1 ${
@@ -24,17 +24,6 @@ export default function GroupLayout({
             }`}
           >
             Groups
-          </Link>
-
-          <Link
-            href="/groups?filter=me"
-            className={`px-3 py-2 m-1 ${
-              pathname.includes("/groups?filter=me")
-                ? "bg-accent-secondary text-accent-primary rounded-sm m-1"
-                : ""
-            }`}
-          >
-            My Groups
           </Link>
 
           <Link

@@ -250,7 +250,7 @@ export default function AddAchievement() {
                   <Loader2 className="animate-spin" /> Loading
                 </span>
               ) : (
-                "Mint"
+                "Create NFT"
               )}
             </Button>
             <span className="text-black-300 text-sm text-center">

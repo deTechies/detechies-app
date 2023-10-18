@@ -1,8 +1,10 @@
+import MemberCard from "@/components/card/member-card";
 import NftListItemLoading from "@/components/card/nft-list-item-loading";
-import ProfileCard from "@/components/card/profile-card";
+import PendingProfileCard from "@/components/card/pending-profile-card";
 
 import AddMemberModal from "@/components/extra/add-member";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { getAddress } from 'viem';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useFetchData from "@/lib/useFetchData";
@@ -18,24 +20,30 @@ interface Profile {
   image: string;
   industry: string;
 }
+
+export interface Member{
+  address: string;
+  tokenboundAccount: string;
+}
 export default function GroupMember({
   address,
   owners,
 }: {
   address: any;
-  owners: string[];
+  owners: Member[];
 }) {
   const { data, loading, error } = useFetchData<Profile[] | null>(
     `/company/members/${address}`
   );
+  
+ getAddress
   const {
-    data: pending,
+    data: pendingData,
     loading: pendingLoading,
     error: pendingError,
   } = useFetchData<Profile[]>(
     `/polybase/company/request?address=${address}&status=open`
   );
-
 
   return (
     <Card className="overflow-auto max-w-[90vw]">
@@ -43,26 +51,13 @@ export default function GroupMember({
         <h3>Members ({data?.length})</h3>
         <AddMemberModal />
       </CardHeader>
-      <CardContent className="flex gap-4"> 
-        <Tabs defaultValue="account" className="w-[400px]">
+      <CardContent className="flex flex-col gap-4">
+        <Tabs defaultValue="active" className="w-[400px]">
           <TabsList>
-            <TabsTrigger value="account">Active</TabsTrigger>
-            <TabsTrigger value="password">Pending</TabsTrigger>
+            <TabsTrigger value="active">Active</TabsTrigger>
+            <TabsTrigger value="pending">Pending</TabsTrigger>
           </TabsList>
-          <TabsContent value="account">
-          {data &&
-          data.map((item: any, index: any) => (
-            <ProfileCard profile={item} key={index} />
-          ))}
-          </TabsContent>
-          <TabsContent value="password">
-          {data &&
-          data.map((item: any, index: any) => (
-            <ProfileCard profile={item} key={index} />
-          ))}
-          </TabsContent>
-        </Tabs>
-        {loading && (
+          {loading && (
           <>
             <NftListItemLoading />
             <NftListItemLoading />
@@ -70,12 +65,25 @@ export default function GroupMember({
             <NftListItemLoading />
           </>
         )}
-        {error && <div>{error}</div>}
-        {data && data.length == 0 && <span>No members for this group</span>}
-        {data &&
-          data.map((item: any, index: any) => (
-            <ProfileCard profile={item} key={index} />
-          ))}
+          <TabsContent value="active">
+            {owners &&
+              owners.map((item: Member, index: any) => (
+                item.tokenboundAccount &&
+                <MemberCard address={getAddress(item.tokenboundAccount)} key={index} />
+              ))}
+          </TabsContent>
+          <TabsContent value="pending" className="flex gap-4">
+            {pendingData &&
+              pendingData.map((item: any, index: number) => (
+                <PendingProfileCard
+                  profile={item}
+                  key={index}
+                  contract={address}
+                />
+              ))}
+          </TabsContent>
+        </Tabs>
+      
       </CardContent>
     </Card>
   );

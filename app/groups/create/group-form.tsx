@@ -271,7 +271,7 @@ export function GroupForm() {
           <Button type="button" variant="secondary">
             Cancel
           </Button>
-          <Button type="submit" >Update profile</Button>
+          <Button type="submit" >Create Group</Button>
         </div>
         
       </form>
