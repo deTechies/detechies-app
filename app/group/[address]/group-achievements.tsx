@@ -38,7 +38,7 @@ export default function GroupAchievements() {
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
         <Tabs defaultValue="nfts" className="">
-          <TabsList>
+          <TabsList className="mb-4">
             <TabsTrigger value="nfts">NFTs</TabsTrigger>
             <TabsTrigger value="pending">In progress.</TabsTrigger>
           </TabsList>

@@ -28,14 +28,14 @@ const MessageItem: React.FC<MessageItemProps> = ({
   push,
   clientAddress,
 }) => {
-  const isSentByClient = message.senderAddress === clientAddress;
-  const senderName = isSentByClient ? "You" : message.senderAddress;
+  const isSentByClient = message.sender === clientAddress;
+  const senderName = isSentByClient ? "You" : message.sender;
 
   return (
     <li
       key={message.id}
       title="Click to log this message to the console"
-      className={clsx("flex flex-col text-sm", {
+      className={clsx("flex flex-col text-sm ", {
         "items-end ": isSentByClient,
         "items-start ": !isSentByClient,
       })}
@@ -49,7 +49,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
       </Avatar>
       <span
         className={clsx(
-          "rounded-sm relative pb-6 -my-8 mx-8 px-4 py-4 leading-5 tracking-wide ",
+          "rounded-sm relative pb-6 -my-8 mx-8 px-4 py-4 leading-5 tracking-wide max-w-[80%]",
           {
             "items-end bg-accent-secondary": isSentByClient,
             "items-start bg-background-layer-2": !isSentByClient,
@@ -61,7 +61,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
           <PopoverTrigger className="ml-4 cursor-pointer absolute  leading-3 tracking-wider  text-xs italic font-light text-text-secondary left-0 bottom-2">
             {message.sent.toLocaleTimeString()}
           </PopoverTrigger>
-          <PopoverContent className="w-content flex flex-col gap-2 overflow-auto">
+          <PopoverContent className=" max-w-[50vw] max-h-[30vh] flex flex-col gap-2 overflow-auto">
             {JSON.stringify(push)}
              <ul>
              {push && Object.entries(push).map(([key, value], subIndex) => (

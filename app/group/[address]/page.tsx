@@ -5,7 +5,7 @@ import CreatePushGroup from "@/components/extra/chat/create-push-group";
 import PushGroupChat from "@/components/extra/chat/push-group-chat";
 import Loading from "@/components/loading";
 import useFetchData from "@/lib/useFetchData";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Address, useAccount } from "wagmi";
 import GroupAchievements from "./group-achievements";
@@ -27,6 +27,11 @@ export default function GroupProfile() {
   const { address: contract } = useParams();
   const [details, setDetails] = useState<any>({});
   const { address } = useAccount();
+  
+  const searchParams = useSearchParams();
+  
+  const chat = searchParams.get("chat");
+
 
   const { data, loading, error } = useFetchData<GroupDetailProps>(
     `/group/single/${contract}`
@@ -50,17 +55,25 @@ export default function GroupProfile() {
           />
       </div>
       <div className="lg:col-span-2 flex flex-col gap-md">
-        <GroupDetails details={data.details} />
-        <GroupAchievements />
-        <GroupMember address={contract.toString()} owners={data.members} />
-        {data.chat?.chatId ? (
-          <PushGroupChat
-            contract={contract as Address}
-            chatId={data.chat.chatId}
-          />
-        ) : (
-          <CreatePushGroup image={data.details?.image} members={[]} />
-        )}
+        {
+          chat ?
+          data.chat?.chatId ? (
+            <PushGroupChat
+              contract={contract as Address}
+              chatId={data.chat.chatId}
+            />
+          ) : (
+            <CreatePushGroup image={data.details?.image} members={[]} />
+          ) : (
+            <>
+            <GroupDetails details={data.details} />
+            <GroupAchievements />
+            <GroupMember address={contract.toString()} owners={data.members} />
+            </>
+          )
+        }
+
+      
       </div>
     </main>
   );

@@ -108,5 +108,5 @@ export async function getEthersSigner({ chainId }: { chainId?: number } = {}) {
 
 
 export function didToAddress(did: string) {
-  return did.split(":")[2]
+  return did.split(":")[1]
 }

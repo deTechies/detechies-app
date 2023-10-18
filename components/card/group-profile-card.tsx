@@ -1,6 +1,6 @@
 "use client";
-import { ExternalLink, Loader2, RefreshCcw } from "lucide-react";
-import { useParams } from "next/navigation";
+import { ExternalLink, Loader2 } from "lucide-react";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { useState } from "react";
 
@@ -8,7 +8,6 @@ import { useState } from "react";
 
 import Image from "next/image";
 import { useAccount } from "wagmi";
-import AddMemberModal from "../extra/add-member";
 
 import { truncateMiddle } from "@/lib/utils";
 import Link from "next/link";
@@ -31,7 +30,17 @@ export default function GroupProfileCard({ profile, image, isMember }: ProfilePr
   const { address } = useAccount();
 
   const { toast } = useToast();
+  
+  const router = useRouter();
+  const [text, setText] = useState("")
 
+  const pathname = usePathname()
+  const searchParams = useSearchParams()!
+  
+  const chat = searchParams.get("chat");
+
+
+  
 
 
   const join = async () => {
@@ -114,27 +123,15 @@ export default function GroupProfileCard({ profile, image, isMember }: ProfilePr
             <ProfileStat name="members" value={profile?.members?.length} />
           </div>
 
-          {profile?.owners?.includes(address) ? (
-            <div className="grid grid-cols-1 gap-2 my-4 items-center">
-              <AddMemberModal />
-              <Button
-                onClick={() => window.alert("not imple")}
-                disabled={loading}
-              >
-                {loading ? (
-                  <span className="flex gap-2">
-                    <RefreshCcw className="animate-spin" /> Requesting..
-                  </span>
-                ) : joined ? (
-                  "Already joined"
-                ) : (
-                  "Request NFT"
-                )}
-              </Button>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 gap-2 my-4 items-center">
-              <Button variant={"secondary"}>Contact Owner</Button>
+
+            <div className="grid gap-2 my-4 items-center">
+              <Button variant={"secondary"}
+                onClick={() => {
+                  chat ? router.push(`${pathname}`) :
+                  router.push(`${pathname}?chat=true`)
+                 
+                }}
+              >{chat ? "Close Chat" : "Contact Owner"}</Button>
               <Button onClick={() => join()} disabled={loading || joined}>
                 {loading ? (
                   <span className="flex gap-2">
@@ -147,7 +144,7 @@ export default function GroupProfileCard({ profile, image, isMember }: ProfilePr
                 )}
               </Button>
             </div>
-          )}
+
         </div>
       </CardContent>
     </Card>

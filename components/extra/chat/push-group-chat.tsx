@@ -35,22 +35,16 @@ export default function PushGroupChat({
     const fetchChat = async (newChat: string) => {
       if (!chatter || !newChat) return;
       await chatter.chat.history(newChat).then((chatFeed) => {
-
+        
         setChats(chatFeed);
       });
     };
 
     const fetchGroupInfo = async () => {
-      if (!chatId) {
-
-        return;
-        
-      }
-
       await chatter?.chat.group
         .info(chatId)
         .then((result) => {
-
+          console.log(result)
           setChatInfo(result);
           const isMemberOf = result.members.some((member: any) => {
             return didToAddress(member.wallet) == currentUser;
@@ -95,11 +89,18 @@ export default function PushGroupChat({
         content: inputValue,
         type: "Text",
       })
-      .then((aliceMessagesBob) => {
+      .then((response) => {
         toast({
-          title: "Message sent",
-          description: aliceMessagesBob.toString(),
+          title: "Message succesfully sent",
+          description: response.toString(),
         });
+        console.log(response)
+        setChats([...chats, {
+          cid: response.cid,
+          messageContent: inputValue,
+          fromDID: response.fromDID,
+          timestamp: response.timestamp
+        }])
         setInputValue("");
       })
       .catch((error) => {
