@@ -47,7 +47,9 @@ export default function ProjectDetailPage() {
   return (
     <main className="max-w-[2400px] grid md:grid-cols-3 m-8 gap-8">
       <section className="md:col-span-2 flex flex-col gap-8">
+      
         {data && <ProjectDetail details={data} />}
+        
         {data.chatId?.chatId  ? (
           <PushGroupChat
             contract={address as Address}
@@ -59,12 +61,12 @@ export default function ProjectDetailPage() {
       </section>
       <section className="col-span-1 flex flex-col gap-8">
         {data && <ProjectInfo info={data} />}
-
+        <ProjectNfts workers={data.workers} />
         {data.workers && data.workers.includes(data.owner) && (
           <ProjectNfts workers={data.workers} />
         )}
         <ProjectMembers workers={data.workers} />
-        <ProjectNfts workers={data.workers} />
+        
 
        
       </section>

@@ -73,7 +73,7 @@ export default function GroupMember({
               ))}
           </TabsContent>
           <TabsContent value="pending" className="flex gap-4">
-            {pendingData &&
+            {pendingData && pendingData?.length > 0 &&
               pendingData.map((item: any, index: number) => (
                 <PendingProfileCard
                   profile={item}

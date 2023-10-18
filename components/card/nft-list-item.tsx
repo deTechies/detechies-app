@@ -16,6 +16,7 @@ export interface NFTItem {
     name: string;
     image: string;
     category: string;
+    description: string;
   };
 }
 interface NftListItemProps {
@@ -63,7 +64,7 @@ export default function NftListItem({
       <div className="w-full aspect-square relative m-0 ">
         {showSelect && (
            <Switch
-           className="absolute top-5 right-5 z-10 text-white hover:text-black cursor-pointer"
+           className="absolute top-5 right-5 z-10 text-white hover:text-text-primary cursor-pointer"
            checked={selected}
            onCheckedChange={() => {
              router.push(pathname + '?' + createQueryString("jacket", removeIPFSPrefix(item?.metadata?.image)))
@@ -79,7 +80,7 @@ export default function NftListItem({
         />
       </div>
       <div className="flex flex-col gap-2 p-4">
-        <Link className="truncate text-primary text-center hover:text-green-800 font-medium" href={`/nft/${item.group.id}/${item.id}`}>
+        <Link className="truncate text-text-primary text-center text-ellipsis hover:text-green-800 " href={`/nft/${item.group.id}/${item.id}`}>
          {item?.metadata.name ? item.metadata.name : "undefined"}
         </Link>
         <Badge variant="info">{item.metadata.category ? item.metadata.category : "not found"}</Badge>

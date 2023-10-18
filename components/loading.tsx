@@ -1,6 +1,16 @@
+"use client"
+import Lottie from "lottie-react";
+import blocks from "./loading.json";
 
+const style = {
+    height: 300,
+  };
+  
 export default function Loading() {
   return (
-    <div>Loading</div>
+    <div className="w-full mt-42">
+        
+        <Lottie animationData={blocks} style={style} />  
+    </div>
   )
 }

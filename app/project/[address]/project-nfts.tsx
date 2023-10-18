@@ -1,19 +1,17 @@
 "use client"
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useAccount } from "wagmi";
+import RequestNFTModal from "./request-nft";
 
 export default function ProjectNfts({workers}: {workers: string[]}) {
   const {address} = useAccount();
     //pretty simple and straightforward, we just going to check which nfts the project holds in order to showcase htem. 
   return (
     <Card>
-        <CardHeader>
+        <CardHeader className="flex items-center justify-between">
             NFTs
-          {address && workers && workers.includes(address) && (
-            <button className="ml-4 text-sm font-medium text-text-primary">
-              Request NFT
-            </button>
-          )}
+
+            <RequestNFTModal />
 
         </CardHeader>
         <CardContent>

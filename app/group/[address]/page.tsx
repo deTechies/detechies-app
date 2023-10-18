@@ -3,6 +3,7 @@
 import GroupProfileCard from "@/components/card/group-profile-card";
 import CreatePushGroup from "@/components/extra/chat/create-push-group";
 import PushGroupChat from "@/components/extra/chat/push-group-chat";
+import Loading from "@/components/loading";
 import useFetchData from "@/lib/useFetchData";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -31,8 +32,7 @@ export default function GroupProfile() {
     `/group/single/${contract}`
   );
 
-  if (loading) return <div>Loading...</div>;
-
+  if (loading) return <Loading />;
   if (!data) {
     return <div>Group not found</div>;
   }
