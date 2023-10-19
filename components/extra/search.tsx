@@ -18,7 +18,7 @@ export default function Search({ placeholder}: {placeholder: string}) {
         router.push(`${pathname}?search=${query}`)
     } , [pathname, query, router])
   return (
-    <div className="relative rounded-sm border">
+    <div className="relative rounded-sm border flex-grow">
         <div className='pointer-events-none absolute inset-y-4 inset-x-4'>
             <SearchIcon 
                 className="h-6 w-6 text-text-placeholder"
