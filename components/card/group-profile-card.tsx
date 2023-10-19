@@ -131,7 +131,7 @@ export default function GroupProfileCard({ profile, image, isMember }: ProfilePr
                   router.push(`${pathname}?chat=true`)
                  
                 }}
-              >{chat ? "Close Chat" : "Contact Owner"}</Button>
+              >{chat ? "Close Chat" : "Group Chat"}</Button>
               <Button onClick={() => join()} disabled={loading || joined}>
                 {loading ? (
                   <span className="flex gap-2">

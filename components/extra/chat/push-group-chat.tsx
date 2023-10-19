@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { PushContext } from "@/lib/usePushProtocol";
+import PushProvider, { PushContext } from "@/lib/usePushProtocol";
 import { didToAddress } from "@/lib/utils";
 import { SendHorizonal } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
@@ -141,6 +141,7 @@ export default function PushGroupChat({
   }
 
   return (
+    <PushProvider>
     <Card className="shadow min-w-[700px]">
       <CardHeader className="flex gap-4 justify-between items-center ">
         Group Chat
@@ -214,5 +215,6 @@ export default function PushGroupChat({
        
       </div>
     </Card>
+    </PushProvider>
   );
 }

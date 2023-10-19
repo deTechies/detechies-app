@@ -58,10 +58,10 @@ export default function NftListItem({
   //if select is pressed we want to add it to the search params how to do that 
   return (
     <section
-      className={`rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[150px] max-w-[175px] border `}
+      className={`rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[150px] max-w-[200px] border `}
       
     >
-      <div className="w-full aspect-square relative m-0 ">
+      <div className="w-full aspect-square relative m-0 object-scale-down ">
         {showSelect && (
            <Switch
            className="absolute top-5 right-5 z-10 text-white hover:text-text-primary cursor-pointer"

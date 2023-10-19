@@ -1,4 +1,3 @@
-
 import { PushAPI } from '@pushprotocol/restapi';
 import { ENV } from '@pushprotocol/restapi/src/lib/constants';
 import { createContext, useEffect, useState } from 'react';
@@ -21,7 +20,6 @@ export default function PushProvider({ children } : {children: any}) {
     // Assume signer is obtained somehow, replace with your logic
     if(signer){
         initializeUser(signer);
-
     }
   }, [signer]);
 

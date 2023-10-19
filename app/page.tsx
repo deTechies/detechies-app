@@ -14,7 +14,7 @@ export default function Home() {
   
   useEffect(() => {
     const fetchProfiles = async () => {
-      const res = await fetch(`https://api.web3.bio/profile/${address}`);
+      const res = await fetch(`https://api.web3.bio/profile/0xfff09621f09caa2c939386b688e62e5be19d2d56`);
       const data = await res.json();
       console.log(data);
 

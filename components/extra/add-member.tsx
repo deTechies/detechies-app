@@ -12,7 +12,7 @@ import { ABI } from "@/lib/constants";
 import useFetchData from "@/lib/useFetchData";
 import Loading from "../loading";
 import { Badge } from "../ui/badge";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "../ui/dialog";
 import PersonItem from "./add-member-item";
 import Search from "./search";
 
@@ -98,9 +98,12 @@ export default function AddMemberModal({type}:{type?: string}) {
             </div>
           </section>
           <div className="flex justify-end gap-4 mt-4">
-            <Button variant={"secondary"} >
+          <DialogClose asChild>
+          <Button variant={"secondary"} >
               Cancel
             </Button>
+          </DialogClose>
+           
             <Button
               onClick={mintTo}
               disabled={isLoading || isMinting}
