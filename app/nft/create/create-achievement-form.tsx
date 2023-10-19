@@ -18,6 +18,7 @@ import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
+import Loading from "@/components/loading";
 import {
   Select,
   SelectContent,
@@ -82,7 +83,7 @@ export function CreateAchievementForm() {
   //get the contract address from a search param
 
   const contract = searchParams.get("contract");
-  
+
   const { write, isLoading, error } = useContractWrite({
     address: contract as Address,
     abi: ABI.group,
@@ -90,16 +91,7 @@ export function CreateAchievementForm() {
   });
 
   async function onSubmit(data: AchievementForm) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify({ ...data, image: file }, null, 2)}
-          </code>
-        </pre>
-      ),
-    });
+
 
     if (!file) {
       toast({
@@ -108,6 +100,16 @@ export function CreateAchievementForm() {
       });
       return;
     }
+    
+    toast({
+      title: "We are now uploading your files to the network:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <Loading />
+          Uploading files.
+        </pre>
+      ),
+    });
 
     const image = await uploadContent(file);
     console.log(image);

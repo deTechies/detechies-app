@@ -69,8 +69,8 @@ export default function PendingNFT({ details }: any) {
         </section>
       </DialogTrigger>
       <DialogContent>
-        <div className="flex flex-col items-center justify-center space-x-2 space-y-4 my-4">
-          <div className="relative aspect-square  rounded-sm object-scale-down w-[400px]">
+        <div className="flex flex-col items-center justify-center space-x-2 space-y-4 my-4 overflow-scroll max-h-[100vh]">
+          <div className="relative aspect-square  rounded-sm object-scale-down w-[200px] my-4">
             <Image
               src={`https://ipfs.io/ipfs/${details.nft.metadata.image}`}
               alt={details.nft.metadata.name}
@@ -78,7 +78,7 @@ export default function PendingNFT({ details }: any) {
               className="rounded-sm shadow-md"
             />
           </div>
-          <div className="bg-black-100 rounded-sm p-2 shadow-sm max-w-md">
+          <div className="bg-black-100 rounded-sm p-2 shadow-sm max-w-md  max-h-[20vh] overflow-auto">
             <dl className="grid grid-cols-4 justify-between p-1 px-2 gap-2 my-2">
               <dd className="text-text-secondary font-light text-sm capitalize">
                 Requester

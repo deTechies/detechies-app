@@ -1,6 +1,7 @@
 "use client";
 
-import NftListItem, { NFTItem } from "@/components/card/nft-list-item";
+import { NFTItem } from "@/components/card/nft-list-item";
+import DisplayNFT from "@/components/nft/display-nft";
 import PendingNFT from "@/components/nft/pending-nft";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -43,8 +44,8 @@ export default function GroupAchievements() {
             <TabsTrigger value="pending">In progress.</TabsTrigger>
           </TabsList>
           <TabsContent value="nfts" className="flex flex-wrap gap-4">
-            {data && data.map((item: any, index: number) => (
-              <NftListItem item={item} key={index} />
+            {data && data.map((item: NFTItem, index: number) => (
+              <DisplayNFT {...item} key={index} />
             ))}
           </TabsContent>
           <TabsContent value="pending" className="grid grid-cols-2 gap-4">

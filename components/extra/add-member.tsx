@@ -6,20 +6,26 @@ import { useEffect, useState } from "react";
 import { Address, useContractWrite } from "wagmi";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
-import ModalLayout from "../user/modal-layout";
 
 import { ABI } from "@/lib/constants";
+
+import useFetchData from "@/lib/useFetchData";
+import Loading from "../loading";
+import { Badge } from "../ui/badge";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import PersonItem from "./add-member-item";
 import Search from "./search";
 
+
 export default function AddMemberModal({type}:{type?: string}) {
-  const searchParams = useSearchParams();
-  const [members, setMembers] = useState([]);
+  const searchParams = useSearchParams()!
+
   const { address } = useParams();
   const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
   const search = searchParams.get("search");
   const selected = searchParams.get("selected");
-  const [isOpen, setIsOpen] = useState(false);
+  const {data:members, loading, error} = useFetchData<any[]>("/polybase/profiles/all");
+
   const [isMinting, setIsMinting] = useState(false);
   
   const {write, isLoading, data} = useContractWrite({
@@ -28,16 +34,6 @@ export default function AddMemberModal({type}:{type?: string}) {
       functionName: type == 'project' ? "addMember" : "safeMint"
   })
 
-  useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_API || "http://localhost:4000";
-    fetch(`${url}/polybase/profiles/all?search=${search}`)
-      .then((res) => res.json())
-      .then((data) => {
-
-        setMembers(data);
-      });
-  }, [search]);
-  
   useEffect(() => {
     if (!selected) return;
     setSelectedMembers(selected.split(","));
@@ -62,11 +58,26 @@ export default function AddMemberModal({type}:{type?: string}) {
     setIsMinting(false);
   }
   
+  if(loading) return <Loading />
+  if(error) return <div>{JSON.stringify(error)}</div>
+  if(!members) return <div>No members found</div>
+  //we can search it aswel
+  const filteredData = search
+  ? members.filter(item => 
+    item.name.toLowerCase().includes(search.toLowerCase())
+    ): members;
+  
+  
+  
   return (
-    <div>
-      <Button onClick={() => setIsOpen(!isOpen)} size="sm">Invite</Button>
-      {isOpen && (
-        <ModalLayout showModal={isOpen} title="Add Members">
+    <Dialog>
+      <DialogTrigger>
+        <Badge variant="accent" className="cursor-pointer">
+        Invite
+        </Badge>
+      </DialogTrigger>
+
+        <DialogContent>
           <h5 className="text-muted-foreground text-md my-4">
             Turn on switch of member if you want to invite
           </h5>
@@ -74,7 +85,7 @@ export default function AddMemberModal({type}:{type?: string}) {
             <Search placeholder="Search members Member Address" />
 
             <div className="rounded-sm h-[30vh] overflow-x-auto my-4">
-              {members.map((member: any, index: number) => (
+              {filteredData && filteredData.map((member: any, index: number) => (
                 <PersonItem
                   key={index}
                   src={member.nft}
@@ -87,7 +98,7 @@ export default function AddMemberModal({type}:{type?: string}) {
             </div>
           </section>
           <div className="flex justify-end gap-4 mt-4">
-            <Button variant={"secondary"} onClick={() => setIsOpen(false)}>
+            <Button variant={"secondary"} >
               Cancel
             </Button>
             <Button
@@ -95,9 +106,9 @@ export default function AddMemberModal({type}:{type?: string}) {
               disabled={isLoading || isMinting}
             >Invite ({selectedMembers.length})</Button>
           </div>
-        </ModalLayout>
-      )}
-    </div>
+        </DialogContent>
+      
+    </Dialog>
   );
 }
 
