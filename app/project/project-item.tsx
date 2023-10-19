@@ -34,7 +34,6 @@ export default function ProjectItem(
             <div className="flex gap-8">
                 <address className="flex gap-2 text-text-secondary text-sm items-center">
                     <LocateFixedIcon />
-                    {details.location ? details.location : "Unknown"}
                 </address>
                 <div className="flex gap-2 text-text-secondary text-sm items-center">
                     <UserCheck />
