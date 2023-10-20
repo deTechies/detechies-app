@@ -142,8 +142,8 @@ export function RequestNftForm() {
         .catch((error) => {
           console.error("Error creating profile:", error);
           toast({
-            title: "Something went wrong with submitting the data", 
-            description: "Please contact the admins to see if there is an issue with the contract"
+            title: "You have already requested the nft", 
+            description: "Please be patient and wait for the group owners to accept it. "
           });
         });
         

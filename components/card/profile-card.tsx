@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { Button } from "../ui/button";
+import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
 
 interface ProfileProps {
@@ -53,7 +54,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
       onClick={() => router.push(`/profiles/${profile.id}`)}
     >
       <div className="w-[64] aspect-square relative  m-0">
-        <span>image here</span>
+        <IPFSImageLayer hashes={profile.nft} />
       </div>
       <div className="p-3">
         <div className="grid grid-cols-2 gap-[1px] ">
