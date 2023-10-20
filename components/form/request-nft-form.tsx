@@ -19,6 +19,7 @@ import {
 import { API_URL } from "@/lib/constants";
 import useFetchData from "@/lib/useFetchData";
 import { ArrowDown, CheckIcon } from "lucide-react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import Loading from "../loading";
@@ -154,7 +155,7 @@ export function RequestNftForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 my-8">
-        <div className="grid grid-cols-1 gap-2">
+        <div className="flex flex-col gap-6 justify-center items-center w-full">
           {
             achievementLoading ?
             <Loading /> : (
@@ -162,7 +163,7 @@ export function RequestNftForm() {
               control={form.control}
               name="achievement"
               render={({ field }) => (
-                <FormItem className="flex flex-col">
+                <FormItem className="flex flex-col w-full">
                   <FormLabel>Select Token</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -230,14 +231,20 @@ export function RequestNftForm() {
             )
           }
         
-        </div>
-        <div className="relative w-[250px">
-          {
-            
-          }
-        </div>
 
-        <Button type="submit">Request User</Button>
+        <div className="relative w-[250px] aspect-square mx-auto">
+          {form.watch("achievement") && (
+            
+            <Image
+              src={`https:/ipfs.io/ipfs/${form.watch("achievement").metadata.image}`}
+              alt={form.watch("achievement").metadata.name}
+              className="rounded-sm"
+              fill={true}
+            />
+          )}
+        </div>
+        <Button type="submit">Request Achievement</Button>
+        </div>
       </form>
     </Form>
   );
