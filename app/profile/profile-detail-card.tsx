@@ -118,7 +118,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
         </section>
         <div className="my-4">
           {address && <Followers address={address} />}
-          {id ? (
+          {id && (
             <div className="grid grid-cols-2 gap-2 my-4 items-center">
                 <span>Chat Implement here.</span>
 
@@ -145,22 +145,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
                 </Button>
               )}
             </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-3 my-4">
-              <Link
-                className="w-full text-md  bg-accent-secondary text-accent-on-secondary text-center hover:bg-green-400 hover:animate-pulse rounded-full py-2"
-                href="/profile/mint"
-              >
-                Create Career NFT
-              </Link>
-              <Link
-                className="w-full text-md hover:animate-pulse bg-button-secondary text-center text-primary rounded-full py-2 hover:outline "
-                href="/profile/select"
-              >
-                Set NFT Profile
-              </Link>
-            </div>
-          )}
+          ) }
         </div>
       </CardContent>
     </Card>

@@ -2,7 +2,7 @@
 
 
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAccount } from "wagmi";
 
 
@@ -20,20 +20,12 @@ export default function ProfileMe() {
   const { address } = useAccount();
   
   const {data, loading} = useFetchData<any>("/nft/all/" + address);
+  
+  const {data:profileData, error:profileError, loading:profileLoading} =useFetchData<any>("/polybase/" + address);
 
 
   
-  useEffect(() => {
-    const getUserDetails = async () => {
-      const url = process.env.NEXT_PUBLIC_API || "http://localhost:4000";
-      const result = await fetch(url + "/polybase/" + address).then((res) => res.json());
-      setProfile(result.message);
-    }
-    
-    if(address){
-      getUserDetails();
-    }
-  }, [address])
+ 
   
   const categories = [
     "Education", "Hackathon", "Project", "Experience", "Community", "Skills", "Other"
@@ -49,7 +41,7 @@ export default function ProfileMe() {
 
   return (
           <>
-            <ProfileDetails profile={{...profile}} />
+            <ProfileDetails profile={profileData} loading={profileLoading} error={profileError} />
             {categories.map((category:string, index:number) => {
                 return <ProfileItems items={[]} name={category} key={index} />;
             })}
