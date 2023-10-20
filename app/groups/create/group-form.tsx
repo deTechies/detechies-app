@@ -20,6 +20,7 @@ import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
+import TransactionData from "@/components/screens/transaction-data";
 import {
   Select,
   SelectContent,
@@ -29,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import { ABI, MUMBAI } from "@/lib/constants";
 import { uploadContent } from "@/lib/upload";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useAccount, useContractWrite } from "wagmi";
 
@@ -75,7 +77,7 @@ export function GroupForm() {
     control: form.control,
   });
   const { address } = useAccount();
-  const { write, isLoading, error } = useContractWrite({
+  const { write, data, isLoading, error } = useContractWrite({
     address: MUMBAI.groupRegistry,
     abi: ABI.groupRegistry,
     functionName: "createGroup",
@@ -101,6 +103,15 @@ export function GroupForm() {
       return;
     }
 
+    toast({
+      title: "Uploading file",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-state-info-secondary p-4">
+          <Loader2 className="animate-spin" size={24} />
+          Uploading file
+        </pre>
+      ),
+    });
     const image = await uploadContent(file);
     console.log(image);
 
@@ -118,6 +129,15 @@ export function GroupForm() {
         image: image,
       })
     );
+    toast({
+      title: "Uploading data",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-state-info-secondary p-4">
+          <Loader2 className="animate-spin" size={24} />
+          Uploading data
+        </pre>
+      ),
+    });
 
     if (image.length < 30 || form.length < 30) {
       toast({
@@ -128,9 +148,12 @@ export function GroupForm() {
     }
 
     //name, image and details
-    write({
+    await write({
       args: [data.groupName, image, form],
     });
+    
+    
+    
   }
 
   const selectFile = (file: File) => {
@@ -243,9 +266,12 @@ export function GroupForm() {
           <Button type="button" variant="secondary">
             Cancel
           </Button>
-          <Button type="submit">Create Group</Button>
+          <Button type="submit"
+          loading={isLoading}
+          >Create Group</Button>
         </div>
       </form>
+      <TransactionData hash={data?.hash} redirect="/groups"/>
     </Form>
   );
 }
