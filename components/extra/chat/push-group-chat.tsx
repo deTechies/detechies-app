@@ -68,6 +68,11 @@ export default function PushGroupChat({
       fetchChat(chatId);
       fetchGroupInfo();
     }
+    
+    console.log("chatId", chatId)
+    console.log("currentUser", currentUser)
+    console.log("isMember", isMember)
+    console.log(contract);
   }, [contract, chatId, chatter, currentUser]);
 
   const handleInputChange = (event: any) => {
@@ -207,7 +212,7 @@ export default function PushGroupChat({
           </Button>
           </>
           ) : (
-            <Button onClick={joinGroupChat}>
+            <Button onClick={joinGroupChat} disabled={!chatter || !chatId}>
               Join Group
             </Button>
           )

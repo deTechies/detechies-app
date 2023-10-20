@@ -45,7 +45,7 @@ export default function GroupListItem({
           <header className="flex justify-between items-center prose">
             <h5>{details.name}</h5>
             <Badge variant={"info"} className="ml-2">
-              {details.status ? details.status : "Promoted"}
+              {details.status ? details.status : "New"}
             </Badge>
           </header>
           <div className="flex gap-2">
