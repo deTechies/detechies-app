@@ -2,6 +2,7 @@ import ConnectGithub from '@/components/connections/github';
 import Loading from '@/components/loading';
 import useFetchData from '@/lib/useFetchData';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useAccount } from 'wagmi';
 
 const networks = [
@@ -71,7 +72,11 @@ export default function Connections() {
                             data?.neighbor  && data.neighbor.map((item) => {
                                 if(item.identity.platform === network.name) {
                                     return (
-                                        <span key={item.identity.identity} className="text-sm text-text-secondary font-light">{item.identity.identity}</span>
+                                        <Link 
+                                        key={item.identity.identity} className="text-sm text-text-secondary font-light" 
+                                        href={`https://twitter.com/${item.identity.identity}`}>
+                                            {item.identity.identity}
+                                            </Link>
                                     )
                                 }
                             })

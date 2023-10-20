@@ -92,7 +92,7 @@ export default function PendingNFT({ details }: any) {
     <Dialog>
       <DialogTrigger>
         <section className="flex gap-4 rounded-sm hover:bg-background-layer-2 cursor-pointer">
-          <div className="aspect-square w-24 h-24 relative object-scale">
+          <div className="aspect-square w-24 h-24 relative object-scale rounded-sm bg-gradient-to-b from-state-info to-accent-secondary">
             <Image
               src={`https://ipfs.io/ipfs/${details.nft?.metadata?.image}`}
               alt={details.nft.metadata?.name}
@@ -114,7 +114,7 @@ export default function PendingNFT({ details }: any) {
       </DialogTrigger>
       <DialogContent>
         <div className="flex flex-col items-center justify-center space-x-2 space-y-4 my-4 overflow-scroll max-h-[100vh]">
-          <div className="relative aspect-square  rounded-sm object-scale-down w-[200px] my-4">
+          <div className="relative aspect-square  rounded-sm object-scale-down bg-gradient-to-b from-state-info to-accent-secondary w-[200px] my-4">
             <Image
               src={`https://ipfs.io/ipfs/${details.nft?.metadata?.image}`}
               alt={details.nft.metadata?.name}

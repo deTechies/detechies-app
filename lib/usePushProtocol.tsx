@@ -1,3 +1,4 @@
+import { toast } from '@/components/ui/use-toast';
 import { PushAPI } from '@pushprotocol/restapi';
 import { ENV } from '@pushprotocol/restapi/src/lib/constants';
 import { createContext, useEffect, useState } from 'react';
@@ -12,16 +13,20 @@ export default function PushProvider({ children } : {children: any}) {
   const signer = useEthersSigner({chainId: 8001});
 
   useEffect(() => {
+    console.log('Signer:', signer);
     const initializeUser = async (signer:any) => {
       const initializedUser = await PushAPI.initialize(signer, { env: ENV.STAGING });
+      console.log('Initialized User:', initializedUser);
+      toast({
+        title: 'Push Protocol Initialized',
+        description: 'Push Protocol has been initialized',
+      });
       setUser(initializedUser);
     };
-
-    // Assume signer is obtained somehow, replace with your logic
     if(signer){
         initializeUser(signer);
     }
-  }, [signer]);
+}, [signer]);
 
   return (
     <PushContext.Provider value={user}>

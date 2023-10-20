@@ -122,15 +122,23 @@ export default function CreatePushGroup({
     
     setLoading(false)
   };
+  
+  console.log(address)
+  console.log(chatter);
+  
+  
 
   return (
+
     <Card>
       <span>{address}</span>
+      <span>{JSON.stringify(chatter)}</span>
       <Input placeholder="Group name" value={`Group chat of ${address}`} />
       <Button onClick={createGroup}
         disabled={!chatter || !address}
         loading={loading}
       >Create Group</Button>
     </Card>
+
   );
 }

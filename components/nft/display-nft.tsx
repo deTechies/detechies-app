@@ -51,7 +51,7 @@ export default function DisplayNFT( details : NFTItem) {
       </DialogTrigger>
       <DialogContent>
         <div className="flex flex-col items-center justify-center space-x-2 space-y-4 my-4">
-          <div className="relative aspect-square  rounded-sm object-scale-down w-[20%]">
+          <div className="relative aspect-square  rounded-sm object-scale-down w-[20%] bg-gradient-to-b from-state-info to-accent-primary">
             <Image
               src={`https://ipfs.io/ipfs/${details.metadata.image}`}
               alt={details.metadata.name}
