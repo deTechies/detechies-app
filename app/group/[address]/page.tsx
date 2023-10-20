@@ -42,6 +42,7 @@ export default function GroupProfile() {
     return <div>Group not found</div>;
   }
 
+  console.log(data);
   const isMember = data.members.some((item: Member) => {
     return item.address === address;
   });
@@ -50,7 +51,7 @@ export default function GroupProfile() {
       <div className="col-span-1">
           <GroupProfileCard
             profile={data}
-            image={data.details?.image}
+            image={data.image}
             isMember={isMember}
           />
       </div>

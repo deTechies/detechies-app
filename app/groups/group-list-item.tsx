@@ -19,7 +19,6 @@ export default function GroupListItem({
 }: {
   details: ProjectItemProps;
 }) {
-  console.log(details);
   return (
     <Link href={`/group/${details.addr}`}>
       <Card className="flex flex-row gap-4">
