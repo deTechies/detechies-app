@@ -2,8 +2,8 @@
 
 
 
+import useFetchData from "@/lib/useFetchData";
 import { DribbbleIcon, Figma, Github, SunMedium, Twitter } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import ProfileDetails from "./profile-details";
 import ProfileItems from "./profile-items";
@@ -13,22 +13,13 @@ import ProfileItems from "./profile-items";
 
 export default function ProfileMe() {
 
-  const [profile, setProfile] = useState<any>(null);
+
   const { address } = useAccount();
-
-
   
-  useEffect(() => {
-    const getUserDetails = async () => {
-      const url = process.env.NEXT_PUBLIC_API || "http://localhost:4000";
-      const result = await fetch(url + "/polybase/" + address).then((res) => res.json());
-      setProfile(result.message);
-    }
-    
-    if(address){
-      getUserDetails();
-    }
-  }, [address])
+  const {data:profile, loading:profileLoading, error:profileError} = useFetchData<any>("/polybase/" + address);
+
+
+
   
   const categories = [
     "Main Account", "TokenBound"
@@ -75,7 +66,7 @@ export default function ProfileMe() {
 
   return (
           <>
-            <ProfileDetails profile={oldprofile} />
+            <ProfileDetails profile={profile} loading={profileLoading} error={profileError} />
             {categories.map((category:string, index:number) => {
                 return <ProfileItems items={[]} name={category} key={index} />;
             })}

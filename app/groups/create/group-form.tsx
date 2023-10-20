@@ -46,7 +46,7 @@ const profileFormSchema = z.object({
   type: z.enum(["company", "community", "education", "hackathon_group"], {
     required_error: "You need to select a notification type.",
   }),
-  introduction: z.string().max(160).min(4),
+  introduction: z.string().max(4000).min(4),
   urls: z
     .array(
       z.object({
