@@ -52,7 +52,7 @@ export default function GroupMember({
         <AddMemberModal />
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <Tabs defaultValue="active" className="w-[400px]">
+        <Tabs defaultValue="active" className="w-full">
           <TabsList>
             <TabsTrigger value="active">Active</TabsTrigger>
             <TabsTrigger value="pending">Pending</TabsTrigger>
@@ -65,11 +65,11 @@ export default function GroupMember({
             <NftListItemLoading />
           </>
         )}
-          <TabsContent value="active">
+          <TabsContent value="active" className="w-full grid md:grid-cols-6 gap-4">
             {owners &&
               owners.map((item: Member, index: any) => (
                 item.tokenboundAccount &&
-                <MemberCard address={getAddress(item.tokenboundAccount)} key={index} />
+                <MemberCard address={getAddress(item.address)} key={index} />
               ))}
           </TabsContent>
           <TabsContent value="pending" className="flex gap-4">
