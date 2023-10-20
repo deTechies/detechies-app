@@ -60,9 +60,7 @@ export default function PendingNFT({ details }: any) {
     .catch((err: Error) => console.log(err));
 
     //check what the type is
-    
-    //batch mint will be... 
-    
+    //we need to get the tokenbound account for everyone to mint it to.     
 
     if (details.type == "project") {
       //for eacht 

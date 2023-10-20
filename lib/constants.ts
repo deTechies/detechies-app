@@ -6,8 +6,8 @@ import groupRegistry from "./abi/groupRegistry.abi.json";
 import project from "./abi/project.abi.json";
 import projectRegistry from "./abi/projectRegistry.abi.json";
 const MUMBAI = {
-    groupRegistry: "0x3F4a60aDc4Ea73Ee85Bc753a8F2494370ABBea5F" as Address,
-    projectRegistry: "0xd2925f94bA3AB298b9AdF0110c4Ed23B466f3cBe" as Address 
+    groupRegistry: "0x81552b688eeE0b1daBeEc3e9b6a45ff2FF062e05" as Address,
+    projectRegistry: "0x613C9DDEDd9A91041ad17E3805C32125fd45e597" as Address 
 }
 
 const ABI = {
