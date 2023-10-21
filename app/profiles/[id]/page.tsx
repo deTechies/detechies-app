@@ -2,11 +2,11 @@
 
 
 
-import { useState } from "react";
 import { useAccount } from "wagmi";
 
 
 import useFetchData from "@/lib/useFetchData";
+import { useParams } from "next/navigation";
 import ProfileDetails from "../../profile/profile-details";
 import ProfileItems from "../../profile/profile-items";
 
@@ -16,7 +16,7 @@ import ProfileItems from "../../profile/profile-items";
 
 export default function ProfileMe() {
 
-  const [profile, setProfile] = useState<any>(null);
+  const {id} = useParams()
   const { address } = useAccount();
   
   const {data, loading} = useFetchData<any>("/nft/all/" + address);
@@ -42,9 +42,8 @@ export default function ProfileMe() {
   return (
           <>
             <ProfileDetails profile={profileData} loading={profileLoading} error={profileError} />
-            {categories.map((category:string, index:number) => {
-                return <ProfileItems items={[]} name={category} key={index} />;
-            })}
+            <ProfileItems address={id.toString()}  />
+
           </>
   );
 }

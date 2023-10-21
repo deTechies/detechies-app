@@ -65,7 +65,7 @@ export default function ProjectDetailPage() {
         {data.workers && data.workers.includes(data.owner) && (
           <ProjectNfts workers={data.workers} />
         )}
-        <ProjectMembers workers={data.workers} />
+        <ProjectMembers workers={data.members} />
         
 
        

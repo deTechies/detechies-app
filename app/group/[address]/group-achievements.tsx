@@ -1,6 +1,7 @@
 "use client";
 
 import { NFTItem } from "@/components/card/nft-list-item";
+import Loading from "@/components/loading";
 import DisplayNFT from "@/components/nft/display-nft";
 import PendingNFT from "@/components/nft/pending-nft";
 import { Badge } from "@/components/ui/badge";
@@ -16,13 +17,13 @@ export default function GroupAchievements() {
   const {address:contract}  = useParams();
   const [createNew, setCreateNew] = useState<boolean>(false);
   const {data, loading} = useFetchData<NFTItem[]>(`/achievement/getByGroup/${contract}`)
-  const {data:pendingAchievements} = useFetchData<NFTItem[]>(`/achievement/getRequests/${contract}`)
+  const {data:pendingAchievements, loading:pendingLoading, error:pendingError} = useFetchData<NFTItem[]>(`/achievement/getRequests/${contract}`)
   
-  if(loading) {
-    return <div>Loading...</div>
+  if(loading || pendingLoading) {
+    return <Loading />
   }
   
-  
+  console.log(pendingAchievements)
   
   return (
     <Card>

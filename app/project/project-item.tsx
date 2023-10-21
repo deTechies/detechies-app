@@ -37,7 +37,7 @@ export default function ProjectItem(
                 </address>
                 <div className="flex gap-2 text-text-secondary text-sm items-center">
                     <UserCheck />
-                    {details.workers?.length} Members
+                    {details.members?.length} Members
                 </div>
             </div>
             <p >

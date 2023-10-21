@@ -65,14 +65,7 @@ export default function PendingNFT({ details }: any) {
     if (details.type == "project") {
       //for eacht 
       const workersAddresses = details.issuer.workers.map((worker:string) => getAddress(worker));
-      console.log(workersAddresses.length)
-      const tokenIds = Array(details.issuer.workers.length).fill(details.tokenId.toBigInt());
-      const amounts = Array(details.issuer.workers.length).fill(1);
-      
-      console.log(tokenIds, workersAddresses, amounts);
-      await batchDistributeAchievement({
-        args: [tokenIds, [workersAddresses], amounts],
-      });
+
     }else {
       await distributeAchievement({
         args: [details.tokenId, details.requester, 1],
