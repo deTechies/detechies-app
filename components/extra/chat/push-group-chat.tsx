@@ -69,10 +69,6 @@ export default function PushGroupChat({
       fetchGroupInfo();
     }
     
-    console.log("chatId", chatId)
-    console.log("currentUser", currentUser)
-    console.log("isMember", isMember)
-    console.log(contract);
   }, [contract, chatId, chatter, currentUser]);
 
   const handleInputChange = (event: any) => {

@@ -10,7 +10,7 @@ interface ProjectItemProps {
     description: string;
     status: string;
     location: string;
-    workers: string[];
+    members: string[];
 }
 export default function ProjectItem(
     {details }: { details: ProjectItemProps}
