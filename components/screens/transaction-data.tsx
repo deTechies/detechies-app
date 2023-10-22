@@ -24,7 +24,7 @@ export default function TransactionData({
       if(isSuccess && redirect){
         router.push(redirect); 
       }
-    }, [isSuccess])
+    }, [isSuccess, redirect, router])
     
     
     if(!hash || isSuccess){ return null }

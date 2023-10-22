@@ -13,6 +13,7 @@ interface ProjectItemProps {
   description: string;
   status: string;
   location: string;
+  creator: string;
   members: string[];
 }
 
