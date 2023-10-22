@@ -20,7 +20,7 @@ export default function PushProvider({ children }: { children: any }) {
       
       //now we want to do that here... 
       console.log(signer)
-      
+      if(!signer) return;
       try {
         console.log("initializing user")
         const initializedUser = await PushAPI.initialize(signer, {
