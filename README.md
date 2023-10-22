@@ -48,5 +48,10 @@ We use push protocol chats for  three different occassions:
 Within the project the members of the Project are able to setup notification channels for updates about  newly added members, new achievements received or work uploaded. 
 The group admin is able to setup the notification based to select or unselect any of the three selections above. If this select will be widely used by the users we are able to set up the some logic for groups to receive notification based on important changes.  
 
+## Next.ID
+[Usage](https://github.com/Projectzenn/backend/tree/main/src/nextid)
+We will be using NEXT.id for the verifying the proofs of the github accounts and other social media accounts. 
+We setup our platform, so we can start using next.id service for linking accounts together. When accounts are connected we might see integration based on acquired achievements. We will be analyzing overlapping activities together with skillsets to create a matching based career service, for projects. 
+
 ## Polybase
 For our backend solution we use polybase to integrate offchain requests that needs to be validated by project owners or groups owners first, we do this to reduce the gas usage of users. Most of the gas costs are covered by the contract owners, this provide an easier way for users to start using and testing the application. 
