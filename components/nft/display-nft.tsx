@@ -20,7 +20,6 @@ export default function DisplayNFT(details: NFTItem) {
     functionName: "distributeAchievement",
   });
   
-  console.log(data);
 
   const handleMint = async () => {
     //@ts-ignore
@@ -33,8 +32,7 @@ export default function DisplayNFT(details: NFTItem) {
       requester: address,
       tokenbound: address,
     };
-    console.log(details)
-    console.log(submitData);
+
 
     if (
       !submitData.contract ||

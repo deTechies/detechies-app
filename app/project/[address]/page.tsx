@@ -16,9 +16,11 @@ export interface ProjectDetailProps {
   image: string;
   name: string;
   description: string;
+  creator: string;
   url: string;
   timestamp: number;
   works: any[];
+  members: any[];
 }
 export default function ProjectDetailPage() {
   //get the params for checking the profile details page.
@@ -28,7 +30,7 @@ export default function ProjectDetailPage() {
     `/project/single/${address}`
   );
 
-  console.log(data);
+
   if (error) return <Error message={error} />;
   if (loading)
     return (
@@ -44,22 +46,23 @@ export default function ProjectDetailPage() {
         </section>
       </main>
     );
+    
+    const workers = data.members?.map((member:any) => member.address);
 
-  //TODO: build the setup of the page to make it look nice.
   return (
     <main className="max-w-[2400px] grid md:grid-cols-3 m-8 gap-8">
       <section className="md:col-span-2 flex flex-col gap-8">
       
         {data && <ProjectDetail details={data} />}
         
-        {data && data.chatId?.chatId && data.workers?.includes(user?.toLowerCase()) && 
+        {data && data.chatId?.chatId && 
          <PushGroupChat
          contract={address as Address}
          chatId={data.chatId.chatId}
        />
         }
-        {!data.chatId?.chatId && data.owner?.toLowerCase() === user?.toLowerCase() &&
-          <CreatePushGroup image={data.details?.image} members={data.members} />
+        {!data.chatId?.chatId && user?.toLowerCase() == data.creator?.toLowerCase() &&
+          <CreatePushGroup image={data.details?.image} members={workers} />
         }
       </section>
       <section className="col-span-1 flex flex-col gap-8">

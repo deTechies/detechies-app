@@ -11,7 +11,6 @@ export default function MemberCard({address}: {address: Address}) {
     const router = useRouter();
     const {data, loading, error} = useFetchData<any>(`/polybase/${address}`);
     
-    console.log(address)
     if(error) return <div>{JSON.stringify(error)}</div>
 
     if(loading) return <Skeleton className="h-[200px] w-[100px] animate-pulse" />

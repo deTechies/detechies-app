@@ -1,9 +1,11 @@
+import IPFSImageLayer from "@/components/ui/layer";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { defaultAvatar } from "@/lib/constants";
+import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 
 import clsx from "clsx";
 import React from "react";
@@ -41,10 +43,8 @@ const MessageItem: React.FC<MessageItemProps> = ({
       })}
     >
 
-      <Avatar className="inline-block border-2 border-background h-12 w-12 rounded-full z-10 ">
-        <AvatarImage src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2360&q=80"
-          className="rounded-full"
-        />
+      <Avatar className="inline-block relative border-2 border-background h-12 w-12 rounded-full z-10 ">
+        <IPFSImageLayer hashes={defaultAvatar} />
         <AvatarFallback>{senderName}</AvatarFallback>
       </Avatar>
       <span

@@ -6,8 +6,7 @@ import { Address, useAccount } from "wagmi";
 export default function ProjectMembers({members, creator}: {members: any[], creator: string}) {
     //getting all the members and holders of this project NFT. 
     const {address} = useAccount();
-    
-    console.log(members)
+
   return (
     <Card>
         <CardHeader className="flex items-center justify-between">

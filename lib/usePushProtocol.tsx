@@ -16,7 +16,7 @@ export default function PushProvider({ children } : {children: any}) {
     console.log('Signer:', signer);
     const initializeUser = async (signer:any) => {
       const initializedUser = await PushAPI.initialize(signer, { env: ENV.STAGING });
-      console.log('Initialized User:', initializedUser);
+
       toast({
         title: 'Push Protocol Initialized',
         description: 'Push Protocol has been initialized',

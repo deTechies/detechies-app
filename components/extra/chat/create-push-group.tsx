@@ -1,7 +1,9 @@
 "use client";
+import Loading from "@/components/loading";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { API_URL } from "@/lib/constants";
 import { PushContext } from "@/lib/usePushProtocol";
@@ -20,11 +22,12 @@ export default function CreatePushGroup({
   const { address } = useParams();
   const chatter = useContext(PushContext);
   const [loading, setLoading] = useState(false);
+const [groupChatName, setGroupChatName] = useState(`Group chat of ${address}`)
 
   const createGroup = async function () {
-    setLoading(true)
+    setLoading(true);
     if (!chatter) return;
-    
+
     const rules = {
       // define rules to gate different permissions of the group, ie: joining group or sending messages
       entry: {
@@ -76,19 +79,20 @@ export default function CreatePushGroup({
       const createdGroup = await chatter.chat.group.create(
         `Group chat of ${truncateMiddle(address.toString(), 8)}`,
         {
-          description:"This group is created by one of the members of this contract group at careerzen.org. ",
+          description:
+            "This group is created by one of the members of this contract group at careerzen.org. ",
           members: [],
           //@ts-ignore
-          image: null, 
+          image: null,
           admins: [],
           private: true,
           rules: rules,
         }
       );
       const groupChatId = createdGroup.chatId;
-  
+
       //we want to store this such that we can always retrieve it. so what we do is
-  
+
       if (groupChatId) {
         await fetch(`${API_URL}/group/newGroup`, {
           method: "POST",
@@ -114,28 +118,39 @@ export default function CreatePushGroup({
             });
           });
       }
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-   
-    
-    setLoading(false)
-  };
-  
-  if(!chatter) return (
-    <Card>
-      <h2>Please wait for Push Protocol is created</h2>
-    </Card> 
-  )
-  
-  return (
-    <Card>
-      <Input placeholder="Group name" value={`Group chat of ${address}`} />
-      <Button onClick={createGroup}
-        disabled={!chatter || !address}
-        loading={loading}
-      >Create Group</Button>
-    </Card>
 
+    setLoading(false);
+  };
+
+  if (!chatter)
+    return (
+      <Card>
+        <h2>Please wait for Push Protocol is created</h2>
+        <Loading />
+      </Card>
+    );
+
+  return (
+    <Card className="justify-center">
+      <CardHeader>Create your personal group</CardHeader>
+
+      <CardContent className="flex flex-col gap-4 max-w-lg ">
+        <Label>Grouop Name</Label>
+        <Input placeholder="Group name"  
+        value={groupChatName}
+        onChange={(e) => setGroupChatName(e.target.value)}
+        maxLength={100} />
+        <Button
+          onClick={createGroup}
+          disabled={!chatter || !address}
+          loading={loading}
+        >
+          Create Group
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
