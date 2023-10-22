@@ -90,7 +90,7 @@ export default function AddMemberModal({type}:{type?: string}) {
                   key={index}
                   src={member.nft}
                   alt="Picture of the author"
-                  name={member.name}
+                  name={member.username}
                   job={member.job}
                   tba={member.id}
                 />

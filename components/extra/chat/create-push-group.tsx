@@ -25,8 +25,6 @@ export default function CreatePushGroup({
     setLoading(true)
     if (!chatter) return;
     
-    
-
     const rules = {
       // define rules to gate different permissions of the group, ie: joining group or sending messages
       entry: {
@@ -123,6 +121,12 @@ export default function CreatePushGroup({
     
     setLoading(false)
   };
+  
+  if(!chatter) return (
+    <Card>
+      <h2>Please wait for Push Protocol is created</h2>
+    </Card> 
+  )
   
   return (
     <Card>

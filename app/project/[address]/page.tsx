@@ -5,11 +5,12 @@ import Error from "@/components/screens/error";
 import { Skeleton } from "@/components/ui/skeleton";
 import useFetchData from "@/lib/useFetchData";
 import { useParams } from "next/navigation";
-import { Address } from "wagmi";
+import { Address, useAccount } from "wagmi";
 import ProjectDetail from "./project-detail";
 import ProjectInfo from "./project-info";
 import ProjectMembers from "./project-members";
 import ProjectNfts from "./project-nfts";
+import ProjectWorks from "./project-works";
 
 export interface ProjectDetailProps {
   image: string;
@@ -17,10 +18,12 @@ export interface ProjectDetailProps {
   description: string;
   url: string;
   timestamp: number;
+  works: any[];
 }
 export default function ProjectDetailPage() {
   //get the params for checking the profile details page.
   const { address } = useParams();
+  const {address:user} = useAccount();  
   const { data, loading, error } = useFetchData<any>(
     `/project/single/${address}`
   );
@@ -37,8 +40,7 @@ export default function ProjectDetailPage() {
         <section className="col-span-1 flex flex-col gap-8">
           <Skeleton className="h-[25vh] w-[20vw] animate-pulse" />
           <Skeleton className="h-[25vh] w-full animate-pulse" />
-          <Skeleton className="h-[25vh] w-full animate-pulse" />
-          <Skeleton className="h-[25vh] w-full animate-pulse" />
+
         </section>
       </main>
     );
@@ -50,17 +52,23 @@ export default function ProjectDetailPage() {
       
         {data && <ProjectDetail details={data} />}
         
-        {data.chatId?.chatId  ? (
-          <PushGroupChat
-            contract={address as Address}
-            chatId={data.chatId.chatId}
-          />
-        ) : (
+        {data && data.chatId?.chatId && data.workers?.includes(user?.toLowerCase()) && 
+         <PushGroupChat
+         contract={address as Address}
+         chatId={data.chatId.chatId}
+       />
+        }
+        {!data.chatId?.chatId && data.owner?.toLowerCase() === user?.toLowerCase() &&
           <CreatePushGroup image={data.details?.image} members={data.members} />
-        )}
+        }
       </section>
       <section className="col-span-1 flex flex-col gap-8">
         {data && <ProjectInfo info={data} />}
+        
+        
+        {
+          data && data.works && data.works.length > 0 && <ProjectWorks works={data.works} />
+        }
         <ProjectNfts workers={data.workers} />
         {data.workers && data.workers.includes(data.owner) && (
           <ProjectNfts workers={data.workers} />

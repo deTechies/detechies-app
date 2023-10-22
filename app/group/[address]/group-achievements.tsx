@@ -44,7 +44,7 @@ export default function GroupAchievements() {
             <TabsTrigger value="nfts">NFTs</TabsTrigger>
             <TabsTrigger value="pending">In progress.</TabsTrigger>
           </TabsList>
-          <TabsContent value="nfts" className="grid sm:grid-cols-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-5 items-stretch gap-4">
+          <TabsContent value="nfts" className="grid sm:grid-cols-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4 items-stretch gap-4">
             {data && data.map((item: NFTItem, index: number) => (
               <DisplayNFT {...item} key={index} />
             ))}

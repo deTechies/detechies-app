@@ -1,6 +1,7 @@
 import ConnectGithub from '@/components/connections/github';
 import Loading from '@/components/loading';
 import useFetchData from '@/lib/useFetchData';
+import { truncateMiddle } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -100,8 +101,8 @@ export default function Connections({address, github}: {address:string, github?:
                                     return (
                                         <Link 
                                         key={item.identity.identity} className="text-sm text-text-secondary font-light" 
-                                        href={`https://twitter.com/${item.identity.identity}`}>
-                                            {item.identity.identity}
+                                        href={`${network.link}/${item.identity.identity}`}>
+                                            {truncateMiddle(item.identity.identity, 20)}
                                             </Link>
                                     )
                                 }
