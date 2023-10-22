@@ -46,7 +46,7 @@ interface Identity {
     updatedAt: number;
   }
 
-export default function Connections({address, github}: {address:string, github?: string[]}) {
+export default function Connections({address, row, github}: {address:string, row?:boolean, github?: string[]}) {
     const {data, loading, error} = useFetchData<Data>(`/nextid/user/profile/ethereum/${address}`);
 
     
@@ -55,9 +55,8 @@ export default function Connections({address, github}: {address:string, github?:
     if(error) return <div>error</div>
     console.log(data);
   return (
-    <section className="grid grid-cols-3 gap-4">
-       
-                <div  className="flex border p-4 border-border-div rounded-sm items-center gap-4">
+    <section className={`grid  ${row ? 'grid-cols-1' : 'grid-cols-3'} gap-4`}>
+                <div  className="flex border p-4 border-border-div rounded-sm items-center gap-4 bg-background-layer-1">
                     <Image 
                         src='/icons/github.png' 
                         alt='github' 
@@ -85,7 +84,7 @@ export default function Connections({address, github}: {address:string, github?:
            
         {
             networks.map((network:any, key:number) => (
-                <div key={key} className="flex border p-4 border-border-div rounded-sm items-center gap-4">
+                <div key={key} className="flex border p-4 border-border-div rounded-sm items-center gap-4 bg-background-layer-1">
                     <Image 
                         src={network.image} 
                         alt={network.name} 

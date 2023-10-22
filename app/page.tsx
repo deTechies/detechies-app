@@ -2,6 +2,7 @@
 import DisplayNFT from "@/components/nft/display-nft";
 import useFetchData from "@/lib/useFetchData";
 import { useAccount } from "wagmi";
+import Connections from "./profile/connections";
 
 
 export default function Home() {
@@ -15,7 +16,11 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between m-20 gap-4">
       <h2 className="text-2xl font-medium text-text-primary">All available achievements</h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid lg:grid-cols-3">
+      <div className="flex flex-col">
+        {address && <Connections address={address} row={true} />}
+      </div>
+      <div className="col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
         {
           data?.map((achievement:any, key:number) => {
             return (
@@ -24,6 +29,8 @@ export default function Home() {
           })
         }
       </div>
+      </div>
+      
       
 
     
