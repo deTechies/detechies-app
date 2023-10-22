@@ -8,7 +8,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 
-import { defaultAvatar } from "@/lib/constants";
+import { API_URL, defaultAvatar } from "@/lib/constants";
 import useFetchData from "@/lib/useFetchData";
 
 import Followers from "../profile/followers";
@@ -37,7 +37,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
   const clothes =
     searchParams.get("clothes") ||
     image[0];
-  const background =
+  const face =
     searchParams.get("face") ||
     image[1];
   const head =
@@ -46,9 +46,10 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
     const hair =
     searchParams.get("hair") ||
     image[3];
-  const hashes = [clothes, background, head,hair, image[4], image[5]];
+  const hashes = [clothes, face, head,hair, image[4], image[5]];
 
   const followUser = async () => {
+    
     const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
     const follow = await fetch(
       `${url}/polybase/follow/${id}/${address}`,
@@ -75,19 +76,43 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
       description: "You have unfollowed " + profile.username,
     });
   };
+  
+  
 
   const updateAvatar = async () => {
-    const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
-    const update = await fetch(
-      `${url}/polybase/update/nft/${address}/${background},${head},${clothes}`
-    ).then((res) => res.json());
-    console.log(update);
-    toast({
-      title: "Avatar Updated",
-      description: "Your avatar has been updated",
-    });
+    setRefresh(true);
+    
+    
+    const avatar = [clothes, face, head, hair, image[4], image[5]];
+    const url = `${API_URL}/polybase/update/avatar/${address}`; // Adjust the URL if you have a different base URL or path
+    
+    const body = JSON.stringify({ avatar: avatar });
 
-    setRefresh(!refresh);
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: body
+        });
+        
+        toast({
+          title:"succesfully updated"
+        })
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json(); // assuming server responds with json
+        return data; // or process the returned data as needed
+    } catch (error) {
+        toast({title:"There was a problem with the fetch operation:"});
+        console.log(error)
+    }
+    
+    setRefresh(false);
   };
 
   //we want to get the tokenbound account at othrees.
@@ -98,7 +123,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
         <div className="w-full aspect-square relative m-0 z-0 bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-md">
           {!id && (
             <RefreshCw
-              className="absolute top-5 right-5 z-10 text-white hover:text-black cursor-pointer"
+              className={`absolute top-5 right-5 z-10 text-white hover:text-black cursor-pointer ${refresh && "animate-spin"}}`}
               onClick={updateAvatar}
             />
           )}
