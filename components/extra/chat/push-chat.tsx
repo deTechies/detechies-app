@@ -1,7 +1,7 @@
 //we want to create a group with all the members of th project.
 "use client";
+import Loading from "@/components/loading";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { PushContext } from "@/lib/usePushProtocol";
@@ -11,19 +11,10 @@ import { useContext, useEffect, useState } from "react";
 import { Address } from "wagmi";
 import MessageItem from "./message-item";
 
-export default function PushChat({
-  contract,
-  chatTo,
-  groupId,
-  members,
-}: {
-  contract?: Address;
-  chatTo?: Address;
-  groupId?: Address;
-  members?: string[];
-}) {
+export default function PushChat({ chatTo }: { chatTo?: Address }) {
   const [chats, setChats] = useState<any>(null);
   const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(true)
   const [sendingMessage, setSendingMessage] = useState(false);
   const chatter = useContext(PushContext);
   const [chatId, setChatId] = useState<string>(
@@ -37,6 +28,8 @@ export default function PushChat({
         console.log(chatFeed);
         setChats(chatFeed);
       });
+      
+      setLoading(false)
     };
 
     //1 - on 1 chat
@@ -44,10 +37,9 @@ export default function PushChat({
       setChatId(chatTo);
       fetchChat(chatTo);
     }
-    
-    //groupChat
 
-  }, [contract, chatter, chatTo]);
+    //groupChat
+  }, [chatter, chatTo]);
 
   const handleInputChange = (event: any) => {
     if (event.key === "Enter") {
@@ -68,13 +60,21 @@ export default function PushChat({
         content: inputValue,
         type: "Text",
       })
-      .then((aliceMessagesBob) => {
-        console.log("Message sent successfully:", aliceMessagesBob);
+      .then((response) => {
+        console.log("Message sent successfully:", response);
         toast({
           title: "Message sent",
-          description: aliceMessagesBob.toString(),
         });
         setInputValue("");
+        setChats([
+          ...chats,
+          {
+            cid: response.cid,
+            messageContent: inputValue,
+            fromDID: response.fromDID,
+            timestamp: response.timestamp,
+          },
+        ]);
       })
       .catch((error) => {
         console.error("Error sending message:", error);
@@ -88,42 +88,33 @@ export default function PushChat({
   };
 
   return (
-    <Card className="shadow min-w-[700px]">
-      <CardHeader className="flex gap-4 items-center ">
-        Group Chat
-        {/*  <div className="flex -space-x-2 overflow-hidden">
-          {selectedUsers.map((user) => (
-            <Avatar
-              key={user.email}
-              className="inline-block border-2 border-background"
-            >
-              <AvatarImage src={user.avatar} />
-              <AvatarFallback>{user.name[0]}</AvatarFallback>
-            </Avatar>
-          ))}
-        </div> */}
-      </CardHeader>
-      <CardContent className="h-[60vh] overflow-auto ">
-        <ul className="flex flex-col gap-10">
-          {chats &&
-            chats.length > 0 &&
-            chats.map((chat: any, index: any) => (
-              <div key={index} className="p3 ">
-                <MessageItem
-                  message={{
-                    id: chat.cid,
-                    content: chat.messageContent,
-                    sender: didToAddress(chat.fromDID),
-                    sent: new Date(chat.timestamp * 1000),
-                    timestamp: chat.timestamp,
-                  }}
-                  push={chat}
-                  clientAddress={didToAddress(chat.fromDID) as Address}
-                />
-              </div>
-            ))}
-        </ul>
-      </CardContent>
+    <div className="m-4">
+      <section className="h-[60vh] overflow-auto ">
+        {
+          loading ? <Loading /> : (
+            <ul className="flex flex-col gap-10">
+            {chats &&
+              chats.length > 0 &&
+              chats.map((chat: any, index: any) => (
+                <div key={index} className="p3 ">
+                  <MessageItem
+                    message={{
+                      id: chat.cid,
+                      content: chat.messageContent,
+                      sender: didToAddress(chat.fromDID),
+                      sent: new Date(chat.timestamp * 1000),
+                      timestamp: chat.timestamp,
+                    }}
+                    push={chat}
+                    clientAddress={didToAddress(chat.fromDID) as Address}
+                  />
+                </div>
+              ))}
+          </ul>
+          )
+        }
+     
+      </section>
       <div className="flex gap-2">
         <Input
           type="text"
@@ -143,6 +134,6 @@ export default function PushChat({
           <SendHorizonal size={22} />
         </Button>
       </div>
-    </Card>
+    </div>
   );
 }

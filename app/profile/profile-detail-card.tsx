@@ -124,7 +124,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
           {address && <Followers address={address} />}
           {id && (
             <div className="grid grid-cols-2 gap-2 my-4 items-center">
-               {address && <UserChat to={address}/>}
+               {address && <UserChat to={profile.id}/>}
 
               {followers?.includes(address) ? (
                 <Button
