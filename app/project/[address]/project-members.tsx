@@ -3,9 +3,11 @@ import AddMemberModal from "@/components/extra/add-member";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Address, useAccount } from "wagmi";
 
-export default function ProjectMembers({workers, creator}: {workers: string[], creator: string}) {
+export default function ProjectMembers({members, creator}: {members: any[], creator: string}) {
     //getting all the members and holders of this project NFT. 
     const {address} = useAccount();
+    
+    console.log(members)
   return (
     <Card>
         <CardHeader className="flex items-center justify-between">
@@ -14,9 +16,9 @@ export default function ProjectMembers({workers, creator}: {workers: string[], c
             
         </CardHeader>
         <CardContent className="grid grid-cols-3 gap-4">
-            { workers && 
-                workers.map((worker, index) => (
-              <MemberCard key={index} address={worker as Address} />
+            { members && 
+                members.map((member, index) => (
+              <MemberCard key={index} address={member.address as Address} />
                 ))  
             }   
         </CardContent>

@@ -19,6 +19,8 @@ export default function DisplayNFT(details: NFTItem) {
     abi: ABI.group,
     functionName: "distributeAchievement",
   });
+  
+  console.log(data);
 
   const handleMint = async () => {
     //@ts-ignore

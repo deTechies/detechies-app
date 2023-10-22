@@ -17,6 +17,10 @@ export interface NFTItem {
     image: string;
     category: string;
     description: string;
+    attributes: {
+      trait_type: string;
+      value: string;
+    }[];
   };
 }
 interface NftListItemProps {
@@ -53,6 +57,9 @@ export default function NftListItem({
     return url;
 }
 
+const hasAvatarAttribute = item.metadata?.attributes?.some(attr => attr.trait_type === "avatar");
+const avatarAttribute = item.metadata?.attributes?.find(attr => attr.trait_type === "avatar");
+
 
  
   //if select is pressed we want to add it to the search params how to do that 
@@ -62,12 +69,12 @@ export default function NftListItem({
       
     >
       <div className="w-full aspect-square relative m-0 object-scale-down ">
-        {item.metadata?.image == 'bafkreicv5muzihhwhpsoxohw3xwuotbh4coivabol4s242mmzewtxnlmxi' && (
+        {hasAvatarAttribute && avatarAttribute && (
            <Switch
            className="absolute top-5 right-5 z-10 text-white hover:text-text-primary cursor-pointer"
            checked={selected}
            onCheckedChange={() => {
-             router.push(pathname + '?' + createQueryString("clothes", removeIPFSPrefix(item?.metadata?.image)))
+             router.push(pathname + '?' + createQueryString(avatarAttribute.value, removeIPFSPrefix(item?.metadata?.image)))
            }}
          />
         )}

@@ -56,7 +56,7 @@ export default function ProjectDetailPage() {
             chatId={data.chatId.chatId}
           />
         ) : (
-          <CreatePushGroup image={data.details?.image} members={[]} />
+          <CreatePushGroup image={data.details?.image} members={data.members} />
         )}
       </section>
       <section className="col-span-1 flex flex-col gap-8">
@@ -65,7 +65,7 @@ export default function ProjectDetailPage() {
         {data.workers && data.workers.includes(data.owner) && (
           <ProjectNfts workers={data.workers} />
         )}
-        <ProjectMembers creator={data.creator} workers={data.members} />
+        <ProjectMembers creator={data.creator} members={data.members} />
         
 
        

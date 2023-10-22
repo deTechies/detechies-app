@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { LocateFixedIcon, UserCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useAccount } from "wagmi";
 interface ProjectItemProps {
     id: string;
     name: string;
@@ -10,11 +11,13 @@ interface ProjectItemProps {
     description: string;
     status: string;
     location: string;
-    members: string[];
+    creator: string;
+    members: any[];
 }
 export default function ProjectItem(
     {details }: { details: ProjectItemProps}
 ) {
+    const {address} = useAccount();
     console.log(details);
   return (
     <Link href={`/project/${details.id}`}>
@@ -29,7 +32,8 @@ export default function ProjectItem(
         <section className="flex flex-col gap-2 w-full prose">
             <header className="flex justify-between items-center prose">
                 <h5>{details.name}</h5>
-                 <Badge variant={"info"} className="ml-2">{details.status ? details.status : "Promoted"}</Badge>
+    
+                {details.creator == address?.toLowerCase() &&  <Badge variant={"info"} className="ml-2">Owner</Badge>}
             </header>
             <div className="flex gap-8">
                 <address className="flex gap-2 text-text-secondary text-sm items-center">

@@ -92,7 +92,7 @@ export default function AddMemberModal({type}:{type?: string}) {
                   alt="Picture of the author"
                   name={member.name}
                   job={member.job}
-                  tba={member.TBA}
+                  tba={member.id}
                 />
               ))}
             </div>
