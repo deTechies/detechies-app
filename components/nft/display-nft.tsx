@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { ABI, API_URL } from "@/lib/constants";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Address, useAccount, useContractWrite } from "wagmi";
 import NftListItem, { NFTItem } from "../card/nft-list-item";
@@ -12,6 +13,7 @@ export default function DisplayNFT(details: NFTItem) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const {address}= useAccount();
   
+  const {address:contract} = useParams();
   const { write, isLoading, error, data } = useContractWrite({
     address: details.contract as Address,
     abi: ABI.group,
@@ -22,13 +24,15 @@ export default function DisplayNFT(details: NFTItem) {
     //@ts-ignore
     setRequesting(true);
     const submitData = {
-      contract: details.contract,
+      contract: contract,
       tokenId: details.id,
       type: "individual",
       data: [""],
       requester: address,
       tokenbound: address,
     };
+    console.log(details)
+    console.log(submitData);
 
     if (
       !submitData.contract ||

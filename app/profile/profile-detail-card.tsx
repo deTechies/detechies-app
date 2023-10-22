@@ -75,7 +75,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
   const updateAvatar = async () => {
     const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
     const update = await fetch(
-      `${url}/polybase/update/nft/${address}/${background},${head},${jacket}`
+      `${url}/polybase/update/nft/${address}/${background},${head},${clothes}`
     ).then((res) => res.json());
     console.log(update);
     toast({
