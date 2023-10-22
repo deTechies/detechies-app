@@ -1,16 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAccount } from "wagmi";
 import Links from "./links";
 
 export interface InfoProps {
   type: string;
   owner: string;
-  workers: string[];
+  members: string[];
   urls: string[];
   location: string;
 }
 export default function ProjectInfo({ info }: { info: InfoProps }) {
-  const links = ["https://github.com/tse-lao", "https://www.figma.com/file/HRDJ9JdplVUOoY1v01u7pY/Careerzen_UI?node-id=364%3A4798&mode=dev"];
+  const {address} = useAccount();
+
   
   
   return (
@@ -32,7 +34,7 @@ export default function ProjectInfo({ info }: { info: InfoProps }) {
           <dd>
             <h6 className="mb-2 font-medium">Members</h6>
             <span className="text-text-secondary">
-              {info.workers ? info.workers.length : 0}
+              {info.members ? info.members.length : 0}
             </span>
           </dd>
           <dd>
@@ -44,8 +46,9 @@ export default function ProjectInfo({ info }: { info: InfoProps }) {
         </section>
 
         <Links links={info.urls} />
-
-        <Button className="col-span-2 w-full">Join Project</Button>
+        {address && info.members?.includes(address.toString()) && 
+        <Button className="col-span-2 w-full">Upload Works</Button>
+        }
       </CardContent>
     </Card>
   );

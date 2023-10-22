@@ -12,7 +12,7 @@ export default function ProjectDetail({
     <Card className="w-full">
       <header className="flex gap-8 items-center">
         <Image
-          src={`https://ipfs.io/ipfs/${details.image}`}
+          src={`${details.image ? details.image : "/images/no-item.png"}`}
           width={100}
           height={100}
           className="rounded-[6px] bg-accent-secondary"

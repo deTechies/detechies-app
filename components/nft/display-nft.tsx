@@ -2,13 +2,15 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { ABI, API_URL } from "@/lib/constants";
 import Image from "next/image";
-import { Address, useContractWrite } from "wagmi";
+import { useState } from "react";
+import { Address, useAccount, useContractWrite } from "wagmi";
 import NftListItem, { NFTItem } from "../card/nft-list-item";
 import TransactionData from "../screens/transaction-data";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
-export default function DisplayNFT( details : NFTItem) {
-  
+export default function DisplayNFT(details: NFTItem) {
+  const [requesting, setRequesting] = useState<boolean>(false);
+  const {address}= useAccount();
   
   const { write, isLoading, error, data } = useContractWrite({
     address: details.contract as Address,
@@ -16,33 +18,68 @@ export default function DisplayNFT( details : NFTItem) {
     functionName: "distributeAchievement",
   });
 
-  const mintNFT = async () => {
-    //in here we want to have the profile.id
+  const handleMint = async () => {
+    //@ts-ignore
+    setRequesting(true);
+    const submitData = {
+      contract: details.contract,
+      tokenId: details.id,
+      type: "individual",
+      data: [""],
+      requester: address,
+      tokenbound: address,
+    };
 
-    if (!details) {
+    if (
+      !submitData.contract ||
+      !submitData.tokenId ||
+      !submitData.data ||
+      !submitData.requester ||
+      !submitData.tokenbound
+    ) {
       toast({
-        title: "Error minting ",
+        title: "Something went wrong with submitting the data",
         description:
-          "You have provided an invalid address, please check if the user still exists",
-        variant: "destructive",
+          "Please contact the admins to see if there is an issue with the contract",
       });
+      console.log(submitData);
+
+      return;
     }
 
-    await fetch(
-      `${API_URL}/polybase/nft/accepted/${details.id}`,
-      {}
-    ).then((res) => {
-      console.log(res)
+    await fetch(`${API_URL}/achievement/request`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(submitData),
     })
-    .catch((err: Error) => console.log(err));
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status) {
+          toast({
+            title: "Success",
+            description: "Your request has been submitted",
+          });
+        } else {
+          console.error("Error creating profile:", data.message);
+          toast({
+            title: "Something went wrong with submitting the data",
+            description:
+              "Please contact the admins to see if there is an issue with the contract",
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error creating profile:", error);
+        toast({
+          title: "Something went wrong with submitting the data",
+          description:
+            "Please contact the admins to see if there is an issue with the contract",
+        });
+      });
 
-
-    
-    //await write({ args: [details.id, details, 1] });
-    
-   
-
-    //await write();
+    setRequesting(false);
   };
   return (
     <Dialog>
@@ -78,9 +115,7 @@ export default function DisplayNFT( details : NFTItem) {
         </div>
         <div className="grid grid-cols-2 gap-8">
           <Button variant={"secondary"}>Cancel</Button>
-          <Button
-            onClick={() => mintNFT()}
-          >Reward </Button>
+          <Button onClick={handleMint}>Request </Button>
         </div>
       </DialogContent>
       <TransactionData hash={data?.hash} />

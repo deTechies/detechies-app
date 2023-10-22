@@ -33,8 +33,8 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
   
   const {data:followers, loading} = useFetchData<any[]>(`/polybase/followers/${id}`);
 
-  const jacket =
-    searchParams.get("jacket") ||
+  const clothes =
+    searchParams.get("clothes") ||
     image[0];
   const background =
     searchParams.get("face") ||
@@ -42,7 +42,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
   const head =
     searchParams.get("eyes") ||
     image[2];
-  const hashes = [jacket, background, head,image[3], image[4], image[5]];
+  const hashes = [clothes, background, head,image[3], image[4], image[5]];
 
   const followUser = async () => {
     const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
