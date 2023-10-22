@@ -1,36 +1,49 @@
-import { toast } from '@/components/ui/use-toast';
-import { PushAPI } from '@pushprotocol/restapi';
-import { ENV } from '@pushprotocol/restapi/src/lib/constants';
-import { createContext, useEffect, useState } from 'react';
-import { useEthersSigner } from './utils';
+"use client"
+import { PushAPI } from "@pushprotocol/restapi";
+import { ENV } from "@pushprotocol/restapi/src/lib/constants";
+import { createContext, useEffect, useState } from "react";
+import { useAccount } from "wagmi";
+import { useEthersSigner } from "./utils";
 
 // 1. Create a PushContext
 export const PushContext = createContext<PushAPI | null>(null);
 
 // 2. Create a UserProvider component
-export default function PushProvider({ children } : {children: any}) {
+export default function PushProvider({ children }: { children: any }) {
   const [user, setUser] = useState<PushAPI | null>(null);
+  const {address, isConnected} = useAccount();
   const signer = useEthersSigner({chainId: 8001});
 
   useEffect(() => {
-    console.log('Signer:', signer);
-    const initializeUser = async (signer:any) => {
-      const initializedUser = await PushAPI.initialize(signer, { env: ENV.STAGING });
 
-      toast({
-        title: 'Push Protocol Initialized',
-        description: 'Push Protocol has been initialized',
-      });
-      setUser(initializedUser);
+    const initializeUser = async () => {
+      
+      //now we want to do that here... 
+      console.log(signer)
+      
+      try {
+        console.log("initializing user")
+        const initializedUser = await PushAPI.initialize(signer, {
+          env: ENV.STAGING,
+        });
+        
+        console.log(initializeUser)
+        
+        const information = await initializedUser.info();
+        console.log(information)
+        setUser(initializedUser);
+
+      }catch(err){
+        console.log(err)
+      }
+
+ 
+
     };
-    if(signer){
-        initializeUser(signer);
+    if (signer && isConnected) {
+      initializeUser();
     }
-}, [signer]);
+  }, [signer, address, isConnected]);
 
-  return (
-    <PushContext.Provider value={user}>
-      {children}
-    </PushContext.Provider>
-  );
+  return <PushContext.Provider value={user}>{children}</PushContext.Provider>;
 }

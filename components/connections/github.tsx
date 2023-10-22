@@ -2,9 +2,10 @@
 
 import { API_URL } from "@/lib/constants";
 import { useEthersSigner } from "@/lib/utils";
+//@ts-ignore
 import { ethers } from "ethers";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { Badge } from "../ui/badge";
@@ -27,7 +28,7 @@ const ConnectGithub = () => {
   const code = searchParams.get("code");
   const signer = useEthersSigner();
   const [verify, setVerify] = useState<VerifyResponse>();
-
+    const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchGithub = async () => {
@@ -77,6 +78,8 @@ const ConnectGithub = () => {
             title: "Github Verified",
             description: "Your Github account has been successfully verified.",
           });
+          
+          router.refresh()
     }).catch((err: Error) => console.log(err));
 
 

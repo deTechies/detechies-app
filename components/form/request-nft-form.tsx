@@ -37,6 +37,7 @@ import { toast } from "../ui/use-toast";
 const accountFormSchema = z.object({
   achievement: z.object({
     id: z.string().nonempty({ message: "Please select a token." }),
+    tokenId: z.string().nonempty({ message: "Please select a token." }),
     group: z.object({
       addr: z.string(),
       name: z.string(),
@@ -59,6 +60,7 @@ interface Group {
 interface Achievement {
   id: string;
   group: Group;
+  tokenId:string;
   metadata: {
     name: string;
     description: string;
@@ -95,7 +97,7 @@ export function RequestNftForm() {
   setRequesting(true);
       const submitData = {
         contract: data.achievement.group.addr,
-        tokenId: data.achievement.id,
+        tokenId: data.achievement.tokenId,
         type: "project",
         data: [""],
         requester: address, 

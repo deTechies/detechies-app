@@ -9,6 +9,7 @@ import { Switch } from "../ui/switch";
 export interface NFTItem {
   contract: string;
   id: string;
+  tokenId: number;
   group:{
     id: any;
   }
@@ -87,7 +88,7 @@ const avatarAttribute = item.metadata?.attributes?.find(attr => attr.trait_type 
         />
       </div>
       <div className="flex flex-col gap-2 p-4">
-        <Link className="truncate text-text-primary text-center text-ellipsis hover:text-green-800 " href={`/nft/${item.group?.id}/${item.id}`}>
+        <Link className="truncate text-text-primary text-center text-ellipsis hover:text-green-800 " href={`/nft/${item.group?.id}/${item.tokenId}`}>
          {item?.metadata.name ? item.metadata.name : "undefined"}
         </Link>
         <Badge variant="info">{item.metadata.category ? item.metadata.category : "not found"}</Badge>

@@ -60,9 +60,10 @@ export default function App({ children }: { children: any }) {
   return (
     <WagmiConfig config={config}>
       <PushProvider>
-      <Navbar />
+        <Navbar />
         {children}
-      <Toaster />
+
+        <Toaster />
       </PushProvider>
     </WagmiConfig>
   );

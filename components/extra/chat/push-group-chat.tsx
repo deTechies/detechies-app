@@ -27,7 +27,7 @@ export default function PushGroupChat({
   const [inputValue, setInputValue] = useState("");
   const [sendingMessage, setSendingMessage] = useState(false);
   const [isMember, setIsMember] = useState(false);
-  const chatter = useContext(PushContext);
+  let chatter = useContext(PushContext);
   const [chatInfo, setChatInfo] = useState<any>(null);
   const {address:currentUser} = useAccount();
 
