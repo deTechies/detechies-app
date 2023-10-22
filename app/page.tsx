@@ -17,9 +17,9 @@ export default function Home() {
       <h2 className="text-2xl font-medium text-text-primary">All available achievements</h2>
       <div className="grid grid-cols-4 gap-4">
         {
-          data?.map((achievement:any) => {
+          data?.map((achievement:any, key:number) => {
             return (
-             <DisplayNFT {...achievement}/>
+             <DisplayNFT key={key} {...achievement}/>
             )
           })
         }
