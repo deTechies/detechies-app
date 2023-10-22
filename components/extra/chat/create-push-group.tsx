@@ -15,7 +15,7 @@ export default function CreatePushGroup({
   members,
 }: {
   image: string;
-  members: string[];
+  members: any[];
 }) {
   const { address } = useParams();
   const chatter = useContext(PushContext);
@@ -24,7 +24,8 @@ export default function CreatePushGroup({
   const createGroup = async function () {
     setLoading(true)
     if (!chatter) return;
-
+    
+    
 
     const rules = {
       // define rules to gate different permissions of the group, ie: joining group or sending messages
@@ -78,7 +79,7 @@ export default function CreatePushGroup({
         `Group chat of ${truncateMiddle(address.toString(), 8)}`,
         {
           description:"This group is created by one of the members of this contract group at careerzen.org. ",
-          members: members,
+          members: [],
           //@ts-ignore
           image: null, 
           admins: [],

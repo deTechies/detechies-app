@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { defaultAvatar } from "@/lib/constants";
 import useFetchData from "@/lib/useFetchData";
 import { useParams } from "next/navigation";
+import { getAddress } from "viem";
 import AvatarNFTs from "../../profile/avatar-nfts";
 
 export default function ProfileViewLayout({
@@ -24,7 +25,7 @@ export default function ProfileViewLayout({
     data: profile,
     error,
     loading,
-  } = useFetchData<any>(`/polybase/${params.id}`);
+  } = useFetchData<any>(`/polybase/${getAddress(params.id.toString())}`);
   
 
   if (loading) return <Loading />;

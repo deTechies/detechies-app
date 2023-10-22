@@ -50,38 +50,26 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
   };
   return (
     <section
-      className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[100px] max-w-[250px] hover:shadow-lg cursor-pointer"
+      className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[100px] max-w-[250px] hover:shadow-lg cursor-pointer flex flex-col justify-center gap-2"
       onClick={() => router.push(`/profiles/${profile.id}`)}
     >
       <div className="w-[64] aspect-square relative  m-0">
-        <IPFSImageLayer hashes={profile.nft} />
+        <IPFSImageLayer hashes={profile.nft} className="rounded-t-sm" />
       </div>
       <div className="p-3">
-        <div className="grid grid-cols-2 gap-[1px] ">
-          <span
-            className="text-accent-primary text-sm col-span-1 flex-grow h-4"
-            style={{
-              background: "linear-gradient(180deg, #66FB4D, #16ACCD)",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            {profile.industry}
-          </span>
-        </div>
-        <h5 className="font-semibold text-md capitalize">{profile.username}</h5>
+        <h5 className="font-semibold text-md capitalize ">{profile.username}</h5>
 
         {}
         {followed || isFollowing ? (
           <Button
-            variant={"secondary"}
-            className="mt-2 text-sm z-10"
+            variant="secondary"
+            className=" text-sm z-10 py-2 mx-auto"
             onClick={unfollowUser}
           >
             Following
           </Button>
         ) : (
-          <Button variant={"ghost"} className="mt-2 z-10 " onClick={followUser}>
+          <Button  className="z-10 tex-sm py-2  mx-auto my-2 " onClick={followUser}>
             Follow
           </Button>
         )}

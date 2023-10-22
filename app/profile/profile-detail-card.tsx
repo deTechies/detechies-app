@@ -13,6 +13,7 @@ import useFetchData from "@/lib/useFetchData";
 
 import Followers from "../profile/followers";
 
+import UserChat from "@/components/extra/chat/user-chat";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -42,7 +43,10 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
   const head =
     searchParams.get("eyes") ||
     image[2];
-  const hashes = [clothes, background, head,image[3], image[4], image[5]];
+    const hair =
+    searchParams.get("hair") ||
+    image[3];
+  const hashes = [clothes, background, head,hair, image[4], image[5]];
 
   const followUser = async () => {
     const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
@@ -120,7 +124,7 @@ export default function ProfileDetailCard({ profile, image }: ProfileProps) {
           {address && <Followers address={address} />}
           {id && (
             <div className="grid grid-cols-2 gap-2 my-4 items-center">
-                <span>Chat Implement here.</span>
+               {address && <UserChat to={address}/>}
 
               {followers?.includes(address) ? (
                 <Button

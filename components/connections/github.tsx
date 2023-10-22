@@ -71,7 +71,7 @@ const ConnectGithub = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...verify }),
+      body: JSON.stringify({ ...verify, address: address }),
     }).then(() => {
         toast({
             title: "Github Verified",

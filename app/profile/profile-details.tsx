@@ -13,6 +13,7 @@ export default function ProfileDetails({ profile, loading, error }: { profile: a
   )
   if(error) return <Error message={"error while oading profile"} />
 
+  console.log(profile)
   return (
     <Card>
       <CardContent className="flex flex-col gap-8">
@@ -23,7 +24,7 @@ export default function ProfileDetails({ profile, loading, error }: { profile: a
             <p>{profile?.description}</p>
           </section>
         )}
-       <Connections />
+       <Connections github={profile.message.github} address={profile.message.id}/>
       </CardContent>
     </Card>
   );
