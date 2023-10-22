@@ -1,5 +1,4 @@
 "use client"
-import PushChat from "@/components/extra/chat/push-chat";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
@@ -31,10 +30,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col items-center justify-center">
-        <PushChat members={[]} />
-        <section>
-
-      </section>
+        Coming soon!
       </div>
     
     </main>
