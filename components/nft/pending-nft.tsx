@@ -1,6 +1,6 @@
 "use client";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { getAddress } from 'viem';
+import { getAddress } from "viem";
 
 import { ABI, API_URL } from "@/lib/constants";
 import { truncateMiddle } from "@/lib/utils";
@@ -29,7 +29,7 @@ export default function PendingNFT({ details }: any) {
   const { data: batch, write: batchDistributeAchievement } = useContractWrite({
     address: details.contract as Address,
     abi: ABI.group,
-    functionName: "batchDistibuteAchievements",
+    functionName: "rewardProject",
   });
 
   const mintNFT = async () => {
@@ -44,40 +44,51 @@ export default function PendingNFT({ details }: any) {
       });
     }
 
-    await fetch(`${API_URL}/achievement/update`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: details.id,
-        status: 'accepted',
-      }),
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err: Error) => console.log(err));
-
     //check what the type is
-    //we need to get the tokenbound account for everyone to mint it to.     
+    //we need to get the tokenbound account for everyone to mint it to.
 
     if (details.type == "project") {
-      //for eacht 
-      const workersAddresses = details.issuer.workers.map((worker:string) => getAddress(worker));
+      //for eacht
+      const workersAddresses = details.issuer.members.map((worker: any) =>
+        getAddress(worker.address)
+      );
+      console.log(workersAddresses);
 
-    }else {
+    /*   await batchDistributeAchievement({
+        args: [details.tokenId, workersAddresses],
+      }); */
+      
+      for(let i = 0; i < workersAddresses.length; i++){
+        await distributeAchievement({
+          args: [details.tokenId, workersAddresses[i], 1],
+        });
+      }
+      
+      await distributeAchievement({
+        args: [details.tokenId, details.requester, 1],
+      })
+    } else {
       await distributeAchievement({
         args: [details.tokenId, details.requester, 1],
       });
-      
     }
 
-   
+    await fetch(`${API_URL}/achievement/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: details.id,
+        status: "accepted",
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err: Error) => console.log(err));
 
     setMinting(false);
-
-    //await write();
   };
   return (
     <Dialog>
@@ -152,10 +163,13 @@ export default function PendingNFT({ details }: any) {
         </div>
         <div className="grid grid-cols-2 gap-8">
           <Button variant={"secondary"}>Reject</Button>
-          <Button onClick={() => mintNFT()}>Confirm</Button>
+          <Button onClick={() => mintNFT()}
+            loading={minting || isLoading}
+          >Confirm</Button>
         </div>
       </DialogContent>
       <TransactionData hash={data?.hash} />
+      <TransactionData hash={batch?.hash} />
     </Dialog>
   );
 }
