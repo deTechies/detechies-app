@@ -15,10 +15,9 @@ export default function ProjectWorks({ works }: { works: any[] }) {
           {works.map(({ id, description, status }) => (
             <li key={id || description} className="flex gap-4 justify-between">
               {isValidLink(description) ? (
-                <Link href={description}>
-                  <a className="text-text-primary" rel="noopener noreferrer">
+                <Link href={description}  className="text-text-primary" rel="noopener noreferrer">
+
                     {description}
-                  </a>
                 </Link>
               ) : (
                 <span>{description}</span>
