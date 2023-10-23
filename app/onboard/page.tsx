@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 
 import Image from "next/image";
 import { useConnect } from "wagmi";
@@ -27,13 +26,3 @@ export default function OnboardPage() {
     </div>
   );
 };
-
-
-const FinishedCard = () => (
-  <div className="flex flex-col space-y-4">
-    <span>Please continue and enjoy your career NFT.</span>
-    <Link href="/dashboard" className="text-blue-500">
-      Go to Dashboard
-    </Link>
-  </div>
-);

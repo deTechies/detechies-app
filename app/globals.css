@@ -154,6 +154,20 @@ html {
   scrollbar-width: none; /* For Firefox */
   -ms-overflow-style: none;  /* For Internet Explorer and Edge */
 }
+@keyframes popper {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2) rotate(360deg);  
+  }
+}
+
+.animate-popper {
+  animation: popper 1.5s forwards;
+}
 
 }
  

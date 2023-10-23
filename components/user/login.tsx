@@ -1,9 +1,13 @@
 "use client";
 
+import { defaultAvatar } from "@/lib/constants";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAccount, useConnect, useNetwork } from "wagmi";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
+import IPFSImageLayer from "../ui/layer";
 import ModalLayout from "./modal-layout";
 import ProfileDetails from "./profile-details";
 
@@ -59,10 +63,16 @@ export default function Login() {
     return (
       
       <div className="flex rounded-md  items-center gap-2">
+              <Link href="/profile">
+        <Avatar className="bg-gradient-to-r from-cyan-500 to-blue-500">
+          <IPFSImageLayer hashes={defaultAvatar} />
+          <AvatarFallback>CZ</AvatarFallback>
+        </Avatar>
+        </Link>
         <Button
           variant="secondary"
           size="sm"
-          className="text_link text-black text-md px-4 py-2"
+          className="text_link text-black px-4 py-3"
           onClick={() => setShowModal(!showModal)}
         >
           {truncateTextMiddle(address, 13)}

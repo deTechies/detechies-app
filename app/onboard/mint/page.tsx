@@ -1,4 +1,5 @@
-import MintAvatar from "@/app/profile/mint-avatar"
+import MintAvatar from "./mint-avatar"
+
 
 
 

@@ -1,8 +1,8 @@
 "use client"
 
+import Loading from "@/components/loading";
 import { Card, CardContent } from "@/components/ui/card";
 import useFetchData from "@/lib/useFetchData";
-
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 
@@ -17,11 +17,13 @@ export default function OnboardLayout({
   
   
   if(isConnecting){
-    return <main className="flex items-center justify-center p-24 min-h-[69vh]">
+    return (
+    <main className="flex items-center justify-center p-24 min-h-[69vh]">
       <Card className="min-w-[400px]  max-w-lg">
+        <Loading />
         <CardContent>Connecting...</CardContent>
       </Card>
-    </main>
+    </main>)
   }
   
   if(!isConnecting && !address){

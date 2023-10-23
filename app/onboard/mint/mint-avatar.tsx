@@ -2,7 +2,7 @@
 
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { toast } from "@/components/ui/use-toast";
 import { ABI, MUMBAI, defaultAvatar } from "@/lib/constants";
@@ -17,6 +17,7 @@ import {
   useContractWrite,
   useWaitForTransaction,
 } from "wagmi";
+import Confetti from "./confetti";
 
 
 //TODO: Not working!!!
@@ -97,6 +98,8 @@ export default function MintAvatar() {
       //need to check if it already has a profile
       checkTBA();
     }
+    
+    setMinting(false);
   }, [data, address, tba, url, waitForTransaction.status]);
   
 
@@ -104,8 +107,7 @@ export default function MintAvatar() {
 
   if (parseInt(data?.toString()) > 0 || savedTBA) {
     return (
-      <Card>
-        <CardContent>
+
           <section className="flex flex-col gap-4">
             <div className="w-full aspect-square relative m-0 z-0">
               <IPFSImageLayer hashes={defaultAvatar} />
@@ -146,26 +148,40 @@ export default function MintAvatar() {
               </div>
             </section>
           </section>
-        </CardContent>
-      </Card>
+
     );
   }
 
   return (
-    <Card className="w-[350px]">
-      <CardHeader className="flex flex-col gap-4">
-        <h1 >Get NFT Career Profile</h1>
-        <span className="text-sm text-text-secondary ">
-          Let’s mint NFT wallet that can authenticate your career and own all
-          kinds of NFT and crypto. And you will receive some NFTs for free.
-        </span>
+    <div> 
+      
+      <CardHeader className="flex flex-col gap-4 z-10">
+        <h1 className="text-2xl">Get Digital Career Profile</h1>
+        <p className="text-sm tracking-wide font-light leading-5 text-text-secondary">
+          To start your career we will give you a free career profile and some free credits to look around. 
+        </p>
       </CardHeader>
       <CardContent>
         <section className="flex flex-col gap-4">
-          <div className="w-full aspect-square relative m-0 z-0">
+          <div className="w-full aspect-square border rounded-md relative m-0 z-0">
             <IPFSImageLayer hashes={defaultAvatar} />
           </div>
-
+          <section className="">
+              <h1 className="font-semibold mb-2 ml-2">Gifted Profile Items</h1>
+              <div className="text-center text-light text-secondary justify-evenly flex flex-wrap gap-4 border border-border-div rounded-sm p-3">
+                {defaultAvatar.map((nft: string, index: any) => (
+                  <div key={index}>
+                    <Image
+                      src={`https://ipfs.io/ipfs/${nft}`}
+                      className="rounded-sm bg-button-secondary w-16 h-16"
+                      width={80}
+                      height={80}
+                      alt="avatar nft"
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
           <Button
             disabled={isLoading || parseInt(data?.toString()) > 0}
             onClick={() => {
@@ -183,8 +199,18 @@ export default function MintAvatar() {
               "Mint"
             )}
           </Button>
+          
         </section>
       </CardContent>
-    </Card>
+      <Confetti 
+        count={16} 
+        images={[
+          '/confetti/confetti1.png',
+          '/confetti/confetti2.png',
+          '/confetti/confetti3.png',
+          '/confetti/confetti4.png'
+        ]} 
+      />
+      </div>
   );
 }
