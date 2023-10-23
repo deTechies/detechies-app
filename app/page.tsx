@@ -18,7 +18,7 @@ export default function Home() {
       <h2 className="text-2xl font-medium text-text-primary">All available achievements</h2>
       <div className="grid lg:grid-cols-3">
       <div className="flex flex-col">
-        {address && <Connections address={address} row={true} />}
+      
       </div>
       <div className="col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
         {
