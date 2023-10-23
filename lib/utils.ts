@@ -110,3 +110,9 @@ export async function getEthersSigner({ chainId }: { chainId?: number } = {}) {
 export function didToAddress(did: string) {
   return did.split(":")[1]
 }
+
+const URL_REGEX = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+
+export function isValidLink(s: string): boolean {
+    return URL_REGEX.test(s);
+}

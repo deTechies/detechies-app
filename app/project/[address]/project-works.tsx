@@ -1,32 +1,33 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Link } from "lucide-react";
+import { isValidLink } from "@/lib/utils";
+import Link from "next/link";
+
 
 export default function ProjectWorks({ works }: { works: any[] }) {
-  
-  function isValidLink(s: string): boolean {
-    const regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-    return regex.test(s);
-}
   return (
     <Card>
       <CardHeader>
         <h2>Works</h2>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2">
-        {works.map((work: any, key: number) => (
-          <div key={key} className="flex gap-2 justify-between">
-            
+      <CardContent>
+        <ul className="flex flex-col gap-4">
+          {works.map(({ id, description, status }) => (
+            <li key={id || description} className="flex gap-4 justify-between">
+              {isValidLink(description) ? (
+                <Link href={description}>
+                  <a className="text-text-primary" rel="noopener noreferrer">
+                    {description}
+                  </a>
+                </Link>
+              ) : (
+                <span>{description}</span>
+              )}
 
-              {isValidLink(work.description) ? 
-              <Link href={work.description} className="text-text-primary">
-                {work.description}
-              </Link> : <span>{work.description}</span>}
-
-
-            <Badge variant={"info"}>{work.status}</Badge>
-          </div>
-        ))}
+              <Badge variant={"info"}>{status}</Badge>
+            </li>
+          ))}
+        </ul>
       </CardContent>
     </Card>
   );
