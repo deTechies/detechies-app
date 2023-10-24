@@ -57,7 +57,7 @@ const Confetti: React.FC<ConfettiProps> = ({ count = 10, images = [] }) => {
           alt="confetti"
           width={32}
           height={28}
-          className="fixed w-8 h-8 top-50 left-50  bg-center animate-popper  z-[-10] ${!isVisible ? 'hidden' : ''}`"
+          className="fixed w-8 h-8 top-50 left-50  bg-center animate-popper z-[-10] ${!isVisible ? 'hidden' : ''}`"
           style={style}
           onAnimationIteration={() => handleAnimationIteration(i)}
         />

@@ -4,7 +4,6 @@
 
 import useFetchData from "@/lib/useFetchData";
 import { useAccount } from "wagmi";
-import GithubProfile from "./github";
 import ProfileDetails from "./profile-details";
 import ProfileItems from "./profile-items";
 
@@ -29,7 +28,6 @@ export default function ProfileMe() {
             <ProfileDetails profile={profile} loading={profileLoading} error={profileError} />
            {address && <ProfileItems address={address} /> }
            
-           {profile && profile?.message?.github && <GithubProfile username={profile?.message.github} />}
           </>
   );
 }

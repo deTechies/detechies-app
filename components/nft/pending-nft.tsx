@@ -26,11 +26,6 @@ export default function PendingNFT({ details }: any) {
 
   const [minting, setMinting] = useState(false);
 
-  const { data: batch, write: batchDistributeAchievement } = useContractWrite({
-    address: details.contract as Address,
-    abi: ABI.group,
-    functionName: "rewardProject",
-  });
 
   const mintNFT = async () => {
     //in here we want to have the profile.id
@@ -69,7 +64,7 @@ export default function PendingNFT({ details }: any) {
       })
     } else {
       await distributeAchievement({
-        args: [details.tokenId, details.requester, 1],
+        args: [details.achievement.tokenId, details.requester, 1],
       });
     }
 
@@ -169,7 +164,6 @@ export default function PendingNFT({ details }: any) {
         </div>
       </DialogContent>
       <TransactionData hash={data?.hash} />
-      <TransactionData hash={batch?.hash} />
     </Dialog>
   );
 }
