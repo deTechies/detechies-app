@@ -1,37 +1,134 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { signIn } from 'next-auth/react'
-import { useSearchParams } from 'next/navigation'
-
-
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
+import { API_URL } from "@/lib/constants";
+import { LucideGithub } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const GithubSignIn = () => {
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') as string;
+  const { data } = useSession();
+  const pathName = usePathname();
 
+  const [repos, setRepos] = useState<any[]>([]);
+  const [dependencies, setDependencies] = useState<any[]>([]);
+
+  console.log(data);
+
+  const collectRepoInfo = async (owner: string, repoName: string) => {
+    console.log(owner, repoName);
+    const response = await fetch(`${API_URL}/github/repo-details`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "accessToken " + data?.accessToken,
+      },
+      body: JSON.stringify({
+        owner: owner,
+        repoName: repoName,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        `Error fetching repo details: ${errorData.message || "Unknown error"}`
+      );
+    }
+
+    const dataReponse = await response.json();
+
+    setDependencies(dataReponse);
+    return dataReponse;
+  };
+
+  const collectRepositories = async () => {
+    if (!data?.user?.name) {
+      toast({
+        title: "Error",
+        description: "Please connect your Github account first",
+      });
+    }
+    const response = await fetch(`${API_URL}/github/repositories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "accessToken " + data?.accessToken,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .catch((err) => console.log(err));
+
+    setRepos(response);
+  };
+
+  if (data?.accessToken && repos.length > 0) {
+    return (
+      <div className="max-w-xl p-2">
+        <h1 className="font-medium">Repository</h1>
+
+        <div className="flex flex-col gap-4 bg-background-layer-1 border rounded-sm w-full  text-text-primary max-h-[200px] overflow-auto ">
+          {repos.map((repo: any) => {
+            return (
+              <div
+                className="p-2 flex flex-col hover:bg-black-200 items-center justify-center "
+                key={repo.name}
+              >
+                <p className="font-medium text-text-primary tracking-wider uppercase">
+                  {repo.name}
+                </p>
+                <p className="text-text-secondary tracking-wide">
+                  {repo.description}
+                </p>
+                <p className="text-text-secondary text-sm font-light">
+                  {repo.updatedAt}
+                </p>
+                <Button
+                  onClick={() => collectRepoInfo(repo.owner.login, repo.name)}
+                >
+                  Import
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+
+        <section className="h-[40vh] overflow-auto py-2">
+          <h1>Dependencies total: {dependencies.length}</h1>
+          {dependencies.map((dependency: any) => (
+            <li className="my-2 bg-background-layer-1 py-2 rounded-[6px]" key={dependency}>{dependency}</li>
+          ))}
+        </section>
+      </div>
+    );
+  }
+
+  if (data?.accessToken) {
+    return (
+      <Button
+        className="w-full bg-black text-white flex gap-8"
+        onClick={() => collectRepositories()}
+      >
+        Show Repositories
+      </Button>
+    );
+  }
   return (
     <Button
-      className='w-full'
-      onClick={() => signIn('github', { callbackUrl })}
+      className="w-full bg-black text-white flex gap-8"
+      onClick={() =>
+        signIn("github", { callbackUrl: `http://localhost:3000/${pathName}` })
+      }
     >
-      <svg
-        aria-hidden='true'
-        focusable='false'
-        data-icon='google'
-        className='mr-8 w-5'
-        role='img'
-        xmlns='http://www.w3.org/2000/svg'
-        viewBox='0 0 488 512'
-      >
-        <path
-          fill='red'
-          d='M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z'
-        ></path>
-      </svg>
-      Continue with Github
+      <LucideGithub />
+      Connect with Github
     </Button>
-  )
-}
+  );
+};
 
-export default GithubSignIn
+export default GithubSignIn;

@@ -2,6 +2,7 @@
 
 import { Toaster } from "@/components/ui/toaster";
 import { polygonMumbai } from "@/helpers/mumbai";
+import SessionProvider from "@/lib/SessionProvider";
 import PushProvider from "@/lib/usePushProtocol";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
@@ -59,12 +60,14 @@ const config = createConfig({
 export default function App({ children }: { children: any }) {
   return (
     <WagmiConfig config={config}>
+      <SessionProvider>
       <PushProvider>
         <Navbar />
         {children}
 
         <Toaster />
       </PushProvider>
+      </SessionProvider>
     </WagmiConfig>
   );
 }

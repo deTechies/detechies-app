@@ -13,7 +13,7 @@ export default function ProjectNfts({ workers }: { workers: string[] }) {
     `/achievement/getAchievementRequests/${address}`
   );
 
-  console.log(data);
+
   return (
     <Card>
       <CardHeader className="flex items-center justify-between">

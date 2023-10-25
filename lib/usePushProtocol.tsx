@@ -20,7 +20,6 @@ export default function PushProvider({ children }: { children: any }) {
     const initializeUser = async () => {
       
       //now we want to do that here... 
-      console.log(signer)
       if(!signer) return;
       try {
         console.log("initializing user")
@@ -28,10 +27,9 @@ export default function PushProvider({ children }: { children: any }) {
           env: ENV.STAGING,
         });
         
-        console.log(initializeUser)
-        
-        const information = await initializedUser.info();
-        console.log(information)
+
+    
+
         setUser(initializedUser);
 
       }catch(err){
