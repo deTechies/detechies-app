@@ -199,6 +199,15 @@ export default function MintAvatar() {
               "Mint"
             )}
           </Button>
+          <Confetti
+          count={16}
+          images={[
+            "/confetti/confetti1.png",
+            "/confetti/confetti2.png",
+            "/confetti/confetti3.png",
+            "/confetti/confetti4.png",
+          ]}
+        />
         </section>
       </CardContent>
     </div>

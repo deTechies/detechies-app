@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gradient-to-b from-state-info to-accent-secondary text-primary min-h-[100vh]`} suppressHydrationWarning
+      <body className={`${inter.className} bg-gradient-to-b from-state-info-secondary to-accent-secondary text-primary min-h-[100vh]`} suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"

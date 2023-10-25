@@ -1,3 +1,4 @@
+import GithubSignIn from "@/components/connections/github/github-signin";
 import UploadWorks from "@/components/modal/upload-works";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAccount } from "wagmi";
@@ -46,6 +47,9 @@ export default function ProjectInfo({ info }: { info: InfoProps }) {
               {info.location ? info.location : "Everywhere"}
             </span>
           </dd>
+        </section>
+        <section>
+          <GithubSignIn />
         </section>
 
     

@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
 
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -25,11 +25,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { ABI, MUMBAI } from "@/lib/constants";
 import { uploadContent } from "@/lib/upload";
@@ -164,11 +164,16 @@ export default function CreateProject() {
       <DialogContent>
         <DialogTitle>Create Project</DialogTitle>
         <DialogDescription>
-            <p>
-                Create a project to share with the community. You can create a
-                hackathon, side project or a contract.
-            </p>
+          <p>
+            Create a project to share with the community. You can create a
+            hackathon, side project or a contract.
+          </p>
         </DialogDescription>
+        <div>
+          <Button>
+            Import Project
+          </Button>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <section className="flex gap-8">
@@ -240,7 +245,6 @@ export default function CreateProject() {
                 </FormItem>
               )}
             />
-
 
             <div>
               {fields.map((field, index) => (

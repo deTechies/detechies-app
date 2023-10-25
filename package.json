@@ -35,6 +35,7 @@
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.284.0",
     "next": "13.5.4",
+    "next-auth": "^4.24.3",
     "next-themes": "^0.2.1",
     "nft.storage": "^7.1.1",
     "react": "^18",

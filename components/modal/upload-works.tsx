@@ -47,6 +47,7 @@ export default function UploadWorks({ type }: { type?: string }) {
 
       <DialogContent>
         <p>Upload you work</p>
+      
         <Input placeholder="name"  
             onChange={(e) => setName(e.target.value)}
             value={name}

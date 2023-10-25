@@ -18,7 +18,7 @@ const Confetti: React.FC<ConfettiProps> = ({ count = 10, images = [] }) => {
       setIterations(prev => {
         const newIterations = [...prev];
         newIterations[index]++;
-        if (newIterations[index] >= 3) {
+        if (newIterations[index] >= 10) {
           setIsVisible(false);
         }
         return newIterations;
@@ -34,7 +34,7 @@ const Confetti: React.FC<ConfettiProps> = ({ count = 10, images = [] }) => {
         animationName: `popper-${i}`, // Unique animation name for each confetti piece
         animationDuration: `${1 + Math.random()}s`,
         animationDelay: `${Math.random() * 0.5}s`,
-        animationIterationCount: "3", // Repeat the animation three times
+        animationIterationCount: "10", // Repeat the animation three times
         animationFillMode: "forwards", // Keep the state of the animation's end state
       };
       // Create unique keyframes for each confetti piece

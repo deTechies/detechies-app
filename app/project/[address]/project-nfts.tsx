@@ -1,5 +1,5 @@
 "use client";
-import DisplayNFT from "@/components/nft/display-nft";
+import ListItemNFT from "@/components/nft/list-item-nft";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import useFetchData from "@/lib/useFetchData";
 import { useParams } from "next/navigation";
@@ -26,7 +26,7 @@ export default function ProjectNfts({ workers }: { workers: string[] }) {
         ) : error ? (
           <div>{error}</div>
         ) : (
-          data?.map((nft, i) => <DisplayNFT {...nft.achievement} key={i} />)
+          data?.map((nft, i) => <ListItemNFT details={nft.achievement} key={i} />)
         )}
       </CardContent>
     </Card>
