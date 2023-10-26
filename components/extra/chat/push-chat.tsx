@@ -11,6 +11,26 @@ import { useContext, useEffect, useState } from "react";
 import { Address } from "wagmi";
 import MessageItem from "./message-item";
 
+type Chat = {
+  cid: string;
+  messageContent: string;
+  fromDID: string;
+  timestamp: number;
+};
+
+type MessageProps = {
+  chats: Chat[];
+};
+
+type MessageInputProps = {
+  inputValue: string;
+  onInputChange: (event: React.KeyboardEvent<HTMLInputElement> & React.ChangeEvent<HTMLInputElement>) => void;
+  onSend: () => void;
+  isDisabled: boolean;
+  isLoading: boolean;
+};
+
+
 export default function PushChat({ chatTo }: { chatTo?: Address }) {
   const [chats, setChats] = useState<any>(null);
   const [inputValue, setInputValue] = useState("");
@@ -23,23 +43,26 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
 
   useEffect(() => {
     const fetchChat = async (newChat: string) => {
-      if (!chatter || !newChat) return;
-      await chatter.chat.history(newChat).then((chatFeed) => {
+      if ( !newChat) return;
+      if(!chatter.user) {
+        chatter.initializeUser();
+        return;
+      }
+      
+      await chatter.user.chat.history(newChat).then((chatFeed) => {
         console.log(chatFeed);
         setChats(chatFeed);
       });
       
-      setLoading(false)
+      setLoading(false);
     };
 
-    //1 - on 1 chat
     if (chatTo) {
       setChatId(chatTo);
       fetchChat(chatTo);
     }
-
-    //groupChat
   }, [chatter, chatTo]);
+
 
   const handleInputChange = (event: any) => {
     if (event.key === "Enter") {
@@ -51,11 +74,11 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
 
   const sendMessage = async function () {
     //const secondMe = "0xdb1B6961d1F9d1A17C02f23BD186b3bC4f3e7E2A" as Address;
-    if (!chatter) return;
+    if (!chatter.user) return;
     if (!chatId) return;
     setSendingMessage(true);
 
-    await chatter.chat
+    await chatter.user.chat
       .send(chatId, {
         content: inputValue,
         type: "Text",
@@ -89,51 +112,66 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
 
   return (
     <div className="m-4">
-      <section className="h-[60vh] overflow-auto ">
-        {
-          loading ? <Loading /> : (
-            <ul className="flex flex-col gap-10">
-            {chats &&
-              chats.length > 0 &&
-              chats.map((chat: any, index: any) => (
-                <div key={index} className="p3 ">
-                  <MessageItem
-                    message={{
-                      id: chat.cid,
-                      content: chat.messageContent,
-                      sender: didToAddress(chat.fromDID),
-                      sent: new Date(chat.timestamp * 1000),
-                      timestamp: chat.timestamp,
-                    }}
-                    push={chat}
-                    clientAddress={didToAddress(chat.fromDID) as Address}
-                  />
-                </div>
-              ))}
-          </ul>
-          )
-        }
-     
-      </section>
-      <div className="flex gap-2">
-        <Input
-          type="text"
-          onKeyPress={handleInputChange}
-          onChange={handleInputChange}
-          value={inputValue}
-          placeholder="Type your text here "
-          className="col-span-5 bg-secondary flex w-full flex-wrap py-4 text-sm"
-        />
-        <Button
-          onClick={sendMessage}
-          size="sm"
-          className="rounded-[6px] border border-accent-primary"
-          disabled={!inputValue || !chatter || !chatId}
-          loading={sendingMessage}
-        >
-          <SendHorizonal size={22} />
-        </Button>
-      </div>
+    <section className="h-[60vh] overflow-auto ">
+      {loading ? <Loading /> : <MessageList chats={chats} />}
+    </section>
+    <MessageInput
+      inputValue={inputValue}
+      onInputChange={handleInputChange}
+      onSend={sendMessage}
+      isDisabled={!inputValue || !chatter || !chatId}
+      isLoading={sendingMessage}
+    />
+  </div>
+  );
+}
+
+export function MessageList({ chats }: MessageProps) {
+  return (
+    <ul className="flex flex-col gap-10">
+      {chats &&
+        chats.length > 0 &&
+        chats.map((chat, index) => (
+          <div key={index} className="p3 ">
+            <MessageItem
+              message={{
+                id: chat.cid,
+                content: chat.messageContent,
+                sender: didToAddress(chat.fromDID),
+                sent: new Date(chat.timestamp * 1000),
+                timestamp: chat.timestamp,
+              }}
+              push={chat}
+              clientAddress={didToAddress(chat.fromDID) as Address}
+            />
+          </div>
+        ))}
+    </ul>
+  );
+}
+
+export function MessageInput({ inputValue, onInputChange, onSend, isDisabled, isLoading }: MessageInputProps) {
+  return (
+    <div className="flex gap-2">
+      <Input
+        type="text"
+        onKeyPress={onInputChange}
+        onChange={onInputChange}
+        value={inputValue}
+        placeholder="Type your text here "
+        className="col-span-5 bg-secondary flex w-full flex-wrap py-4 text-sm"
+      />
+      <Button
+        onClick={onSend}
+        size="sm"
+        className="rounded-[6px] border border-accent-primary"
+        disabled={isDisabled}
+        loading={isLoading}
+      >
+        <SendHorizonal size={22} />
+      </Button>
     </div>
   );
 }
+
+

@@ -3,14 +3,34 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { PushContext } from "@/lib/usePushProtocol";
 import { didToAddress } from "@/lib/utils";
-import { SendHorizonal } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { Address, useAccount } from "wagmi";
-import MessageItem from "./message-item";
+import { MessageInput, MessageList } from "./push-chat";
+
+type Chat = {
+  cid: string;
+  messageContent: string;
+  fromDID: string;
+  timestamp: number;
+};
+
+type GroupMember = {
+  wallet: string;
+  image?: string;
+};
+
+type GroupInfo = {
+  members: GroupMember[];
+};
+
+type PushGroupChatProps = {
+  contract?: Address;
+  chatId: string;
+  members?: string[];
+};
 
 
 
@@ -33,15 +53,23 @@ export default function PushGroupChat({
 
   useEffect(() => {
     const fetchChat = async (newChat: string) => {
-      if (!chatter || !newChat) return;
-      await chatter.chat.history(newChat).then((chatFeed) => {
+      if (!newChat) return;
+      if(!chatter.user) {
+        chatter.initializeUser();
+        return;
+      }
+      await chatter.user.chat.history(newChat).then((chatFeed) => {
         
         setChats(chatFeed);
       });
     };
 
     const fetchGroupInfo = async () => {
-      await chatter?.chat.group
+      if(!chatter.user) {
+        chatter.initializeUser();
+        return;
+      }
+      await chatter.user.chat.group
         .info(chatId)
         .then((result) => {
           console.log(result)
@@ -85,7 +113,13 @@ export default function PushGroupChat({
     if (!chatId) return;
     setSendingMessage(true);
 
-    await chatter.chat
+    if(!chatter.user) {
+      toast({
+        title: "Please connect your wallet",
+      });
+      return;
+    }
+    await chatter.user.chat
       .send(chatId, {
         content: inputValue,
         type: "Text",
@@ -117,10 +151,13 @@ export default function PushGroupChat({
   
   const joinGroupChat = async function () {
     setSendingMessage(true);
-    if (!chatter) return;
+    if (!chatter.user) {
+      await chatter.initializeUser();
+      return
+    };
     if (!chatId) return;
     
-  await chatter.chat.group.join(chatId)
+  await chatter.user.chat.group.join(chatId)
   .then((result) => {
     toast({
       title: "Succesfully joined the chat"
@@ -146,72 +183,22 @@ export default function PushGroupChat({
     <Card className="shadow min-w-[700px]">
       <CardHeader className="flex gap-4 justify-between items-center ">
         Group Chat
-         <div className="flex -space-x-2 overflow-hidden">
-          {chatInfo?.members && chatInfo.members.map((user: any) => (
-            <Avatar
-              key={user.wallet}
-              className="inline-block border-2 border-background"
-            >
-              <AvatarImage src={user.image} />
-              <AvatarFallback>{user.wallet}</AvatarFallback>
-              
-            </Avatar>
-          ))}
-        </div> 
+        {chatInfo?.members && <MemberAvatars members={chatInfo.members} />}
       </CardHeader>
       {isMember && (
-      <CardContent className="h-[60vh] overflow-auto ">
-       
-              <ul className="flex flex-col gap-10">
-              {chats &&
-                chats.length > 0 &&
-                chats.map((chat: any, index: any) => (
-                  <div key={index} className="p3 ">
-                    <MessageItem
-                      message={{
-                        id: chat.cid,
-                        content: chat.messageContent,
-                        sender: didToAddress(chat.fromDID),
-                        sent: new Date(chat.timestamp * 1000),
-                        timestamp: chat.timestamp,
-                      }}
-                      push={chat}
-                      clientAddress={didToAddress(chat.fromDID) as Address}
-                    />
-                  </div>
-                ))}
-            </ul>
-
-    
+      <CardContent className="h-[60vh] overflow-auto ">       
+              <MessageList chats={chats} />
       </CardContent>
               )}
       <div className="flex gap-2">
         {
-          isMember ? (
-            <>
-            <Input
-            type="text"
-            onKeyPress={handleInputChange}
-            onChange={handleInputChange}
-            value={inputValue}
-            placeholder="Type your text here "
-            className="col-span-5 bg-secondary flex w-full flex-wrap py-4 text-sm"
-          />
-          <Button
-            onClick={sendMessage}
-            size="sm"
-            className="rounded-[6px] border border-accent-primary"
-            disabled={!inputValue || !chatter || !chatId}
-            loading={sendingMessage}
-          >
-            <SendHorizonal size={22} />
-          </Button>
-          </>
-          ) : (
+          isMember ? 
+            <MessageInput inputValue={inputValue} onInputChange={handleInputChange} onSend={sendMessage} isDisabled={!inputValue || !chatter || !chatId} isLoading={sendingMessage} />
+           : 
             <Button onClick={joinGroupChat} disabled={!chatter || !chatId}>
               Join Group
             </Button>
-          )
+          
         }
        
       </div>
@@ -219,3 +206,20 @@ export default function PushGroupChat({
 
   );
 }
+
+type MemberAvatarsProps = {
+  members: GroupMember[];
+};
+
+const MemberAvatars: React.FC<MemberAvatarsProps> = ({ members }) => {
+  return (
+    <div className="flex -space-x-2 overflow-hidden">
+      {members.map((user) => (
+        <Avatar key={user.wallet} className="inline-block border-2 border-background">
+          <AvatarImage src={user.image} />
+          <AvatarFallback>{user.wallet}</AvatarFallback>
+        </Avatar>
+      ))}
+    </div>
+  );
+};

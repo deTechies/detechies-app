@@ -76,7 +76,11 @@ const [groupChatName, setGroupChatName] = useState(`Group chat of ${address}`)
 
     //this does not work unfortunately so lets try it agaon.
     try {
-      const createdGroup = await chatter.chat.group.create(
+      if (!chatter.user) {
+        chatter.initializeUser();
+        return;
+      }
+      const createdGroup = await chatter.user.chat.group.create(
         `Group chat of ${truncateMiddle(address.toString(), 8)}`,
         {
           description:
