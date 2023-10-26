@@ -53,7 +53,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
       className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[100px] max-w-[250px] hover:shadow-lg cursor-pointer flex flex-col justify-center gap-2"
       onClick={() => router.push(`/profiles/${profile.id}`)}
     >
-      <div className="w-[64] aspect-square relative  m-0">
+      <div className="w-[64] aspect-square relative  rounded-t-sm m-0">
         <IPFSImageLayer hashes={profile.nft} className="rounded-t-sm" />
       </div>
       <div className="p-3">

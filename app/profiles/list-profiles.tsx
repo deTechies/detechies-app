@@ -77,11 +77,11 @@ export default function ListProfiles() {
     }
   return (
     
-    <Card className="flex-grow bg-transparent max-w-4xl">
+    <Card className="flex-grow bg-transparent border-none shdow-none w-full">
         <CardHeader>
             <h3 className="text-2xl font-semibold">Profiles</h3>
         </CardHeader>
-        <CardContent className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 flex-wrap justify-evenly gap-8">
+        <CardContent className="grid xl:grid-cols-4 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 flex-wrap justify-evenly gap-8">
             {/* <loop through profile */}
             {profiles
             .filter((profile: Profile) => {

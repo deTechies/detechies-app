@@ -42,6 +42,7 @@
     "next-themes": "^0.2.1",
     "nft.storage": "^7.1.1",
     "novel": "^0.1.22",
+    "openai-edge": "^1.2.2",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
