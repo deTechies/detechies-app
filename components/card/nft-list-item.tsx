@@ -16,6 +16,10 @@ export interface NFTItem {
       addr:string;
     };
   }
+  group: {
+    id: any;
+    addr:string;
+  };
   metadata: {
     name: string;
     image: string;
@@ -77,10 +81,14 @@ export default function NftListItem({
           alt="nft_list_item"
           className="object-scale-down rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
           fill={true}
+          priority={true}
         />
       </div>
       <div className="flex flex-col gap-2 p-4">
-        <Link className="truncate text-text-primary font-medium text-center capitalize text-ellipsis hover:text-green-800 " href={`/nft/${item.achievement.group.addr}/${item.achievement.tokenId.toString()}`}>
+        <Link 
+          className="truncate text-text-primary font-medium text-center capitalize text-ellipsis hover:text-green-800 " 
+          href={`/nft/${item.achievement ? item.achievement?.group?.addr : item.group.id}/${item.achievement ? item.achievement.tokenId.toString() : item.tokenId.toString()}`}
+          >
           {item.metadata.name || "undefined"}
         </Link>
         <Badge variant="info" className="flex justify-center text-sm py-2 text-center capitalize">{item.metadata.category || "not found"}</Badge>
