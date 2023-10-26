@@ -1,6 +1,5 @@
 "use client"
 
-import Loading from "@/components/loading";
 import { Card, CardContent } from "@/components/ui/card";
 import useFetchData from "@/lib/useFetchData";
 import { useRouter } from "next/navigation";
@@ -16,15 +15,7 @@ export default function OnboardLayout({
   const router = useRouter();
   
   
-  if(isConnecting){
-    return (
-    <main className="flex items-center justify-center p-24 min-h-[69vh]">
-      <Card className="min-w-[400px]  max-w-lg">
-        <Loading />
-        <CardContent>Connecting...</CardContent>
-      </Card>
-    </main>)
-  }
+ 
   
   if(!isConnecting && !address){
     router.push('/onboard');
@@ -34,13 +25,7 @@ export default function OnboardLayout({
     router.push('/onboard/profile')
   }
   
-  if(isConnecting && loading){
-    return <main className="flex items-center justify-center p-24 min-h-[69vh]">
-      <Card className="min-w-[400px]  max-w-lg">
-        <CardContent>Connecting...</CardContent>
-      </Card>
-    </main>
-  }
+
   
   
   
