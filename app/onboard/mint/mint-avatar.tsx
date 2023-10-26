@@ -6,6 +6,7 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { toast } from "@/components/ui/use-toast";
 import { ABI, MUMBAI, defaultAvatar } from "@/lib/constants";
 
+import TransactionData from "@/components/screens/transaction-data";
 import { RefreshCw } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,11 +37,12 @@ export default function MintAvatar() {
 
   const waitForTransaction = useWaitForTransaction({
     hash: mintingStatus?.hash,
-    onSuccess(data) {
-      if (data.status == "success") {
+    onSuccess() {
+
         toast({ title: "Successfully minted all the items" });
         setMinting(false);
-      }
+        setSavedTBA(true);
+
     },
   });
 
@@ -199,17 +201,9 @@ export default function MintAvatar() {
               "Mint"
             )}
           </Button>
-          <Confetti
-          count={16}
-          images={[
-            "/confetti/confetti1.png",
-            "/confetti/confetti2.png",
-            "/confetti/confetti3.png",
-            "/confetti/confetti4.png",
-          ]}
-        />
         </section>
       </CardContent>
+      <TransactionData hash={mintingStatus?.hash} />
     </div>
   );
 }
