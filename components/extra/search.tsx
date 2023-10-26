@@ -1,3 +1,4 @@
+"use client"
 import { SearchIcon } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -19,7 +20,7 @@ export default function Search({ placeholder}: {placeholder: string}) {
     } , [pathname, query, router])
   return (
     <div className="relative rounded-sm border flex-grow">
-        <div className='pointer-events-none absolute inset-y-4 inset-x-4'>
+        <div className='pointer-events-none absolute inset-y-3 inset-x-4'>
             <SearchIcon 
                 className="h-6 w-6 text-text-placeholder"
                 aria-hidden="true"
@@ -29,7 +30,7 @@ export default function Search({ placeholder}: {placeholder: string}) {
             value={text}
             placeholder={placeholder}
             onChange={(e) => setText(e.target.value)}
-            className="block w-full text-text-primary bg-background-layer-1  rounded-sm tracking-wide border-0 py-4 px-12"
+            className="block w-full text-text-primary bg-background-layer-1  rounded-sm tracking-wide border-0 py-3 px-12"
         />
     </div>
   )

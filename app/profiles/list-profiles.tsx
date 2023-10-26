@@ -1,7 +1,7 @@
 "use client"
 
 import ProfileCard from "@/components/card/profile-card";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,9 +26,10 @@ export default function ListProfiles() {
     const {address} = useAccount();
 
   const searchParams = useSearchParams()!;
+  
     
   const nameFilter =
-    searchParams.get("name") ||
+    searchParams.get("search") ||
     "";
     const industryFilter =
     searchParams.get("industry") ||
@@ -45,9 +46,6 @@ export default function ListProfiles() {
             const result = await fetch(`${url}/polybase/profiles/all`).then(res => res.json());
             setProfiles(result);
             setLoading(false);
-            
-
-
 
             const followers = await fetch(`${url}/polybase/following/${address}`).then(res => res.json());
             setFollowers(followers);
@@ -77,11 +75,11 @@ export default function ListProfiles() {
     }
   return (
     
-    <Card className="flex-grow bg-transparent border-none shdow-none w-full">
-        <CardHeader>
-            <h3 className="text-2xl font-semibold">Profiles</h3>
-        </CardHeader>
-        <CardContent className="grid xl:grid-cols-4 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 flex-wrap justify-evenly gap-8">
+
+
+
+
+        <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-4 xs:grid-cols-3 grid-cols-2 gap-4">
             {/* <loop through profile */}
             {profiles
             .filter((profile: Profile) => {
@@ -95,7 +93,7 @@ export default function ListProfiles() {
                 <ProfileCard key={index} profile={profile} followed={followers && followers.includes(profile.id)}/>
             ))
             }
-        </CardContent>
-    </Card>
+        </div>
+
   )
 }

@@ -54,22 +54,22 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
       onClick={() => router.push(`/profiles/${profile.id}`)}
     >
       <div className="w-[64] aspect-square relative  rounded-t-sm m-0">
-        <IPFSImageLayer hashes={profile.nft} className="rounded-t-sm" />
+        <IPFSImageLayer hashes={profile.nft} className="rounded-b-none" />
       </div>
-      <div className="p-3">
-        <h5 className="font-semibold text-md capitalize ">{profile.username}</h5>
-
+      <div className="p-2 flex flex-col">
+        <h5 className="font-semibold text-md capitalize truncate ">{profile.username}</h5>
+        <span className=" text-ellipse truncate w-full capitalize text-sm overflow-hidden text-text-secondary">{profile.job ? profile.job : "Other"}</span>
         {}
         {followed || isFollowing ? (
           <Button
             variant="secondary"
-            className=" text-sm z-10 py-2 mx-auto"
+            className="z-10 text-sm py-2  mx-auto my-2"
             onClick={unfollowUser}
           >
             Following
           </Button>
         ) : (
-          <Button  className="z-10 tex-sm py-2  mx-auto my-2 " onClick={followUser}>
+          <Button  className="z-10 text-sm py-2  mx-auto my-2 " onClick={followUser}>
             Follow
           </Button>
         )}
