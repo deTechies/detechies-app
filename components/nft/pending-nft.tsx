@@ -69,7 +69,7 @@ export default function PendingNFT({ details }: any) {
     }
 
     
-    if(isSuccess){
+    if(data && data.hash){
       await fetch(`${API_URL}/achievement/update`, {
         method: "POST",
         headers: {
