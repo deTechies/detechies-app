@@ -1,5 +1,7 @@
+
 import Links from "@/app/project/[address]/links";
 import { Card } from "@/components/ui/card";
+
 
 export default function GroupDetails({ details }: { details: any }) {
   return (

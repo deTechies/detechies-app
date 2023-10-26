@@ -15,8 +15,6 @@ export default function OnboardLayout({
   const router = useRouter();
   
   
- 
-  
   if(!isConnecting && !address){
     router.push('/onboard');
   }
@@ -25,11 +23,13 @@ export default function OnboardLayout({
     router.push('/onboard/profile')
   }
   
-
+  if(!loading && data && data?.message?.TBA){
+    //user is logged in and has a tokenbound account
+    //redirect to profile page
+    router.push('/profile');
+  }
   
-  
-  
-  if(address && data && !loading && data?.message?.TBA){
+  if(data && !loading && !data.message?.TBA){
     //user is logged in and has a tokenbound account
     //redirect to profile page
     router.push('/onboard/mint'); 

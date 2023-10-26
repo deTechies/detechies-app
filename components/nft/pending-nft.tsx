@@ -55,33 +55,37 @@ export default function PendingNFT({ details }: any) {
       
       for(let i = 0; i < workersAddresses.length; i++){
         await distributeAchievement({
-          args: [details.tokenId, workersAddresses[i], 1],
+          args: [details.nft.tokenId, workersAddresses[i], 1],
         });
       }
       
       await distributeAchievement({
-        args: [details.tokenId, details.requester, 1],
+        args: [details.nft.tokenId, details.requester, 1],
       })
     } else {
       await distributeAchievement({
-        args: [details.achievement.tokenId, details.requester, 1],
+        args: [details.nft.tokenId, details.requester, 1],
       });
     }
 
-    await fetch(`${API_URL}/achievement/update`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: details.id,
-        status: "accepted",
-      }),
-    })
-      .then((res) => {
-        console.log(res);
+    
+    if(isSuccess){
+      await fetch(`${API_URL}/achievement/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: details.id,
+          status: "accepted",
+        }),
       })
-      .catch((err: Error) => console.log(err));
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err: Error) => console.log(err));
+      
+    }
 
     setMinting(false);
   };
