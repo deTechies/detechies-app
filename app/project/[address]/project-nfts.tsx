@@ -26,7 +26,7 @@ export default function ProjectNfts({ workers }: { workers: string[] }) {
         ) : error ? (
           <div>{error}</div>
         ) : (
-          data?.map((nft, i) => <ListItemNFT details={nft.achievement} key={i} />)
+          data?.map((nft, i) => <ListItemNFT details={nft} key={i} />)
         )}
       </CardContent>
     </Card>

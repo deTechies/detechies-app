@@ -5,9 +5,16 @@ import { useAccount } from "wagmi";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
+interface Profile {
+  id: string;
+  name: string;
+  username: string;
+  job?: string;
+  nft: string[];
+}
 
 interface ProfileProps {
-  profile: any;
+  profile: Profile;
   followed?: boolean;
 }
 
@@ -16,7 +23,7 @@ interface ProfileProps {
 export default function ProfileCard({ profile, followed }: ProfileProps) {
   const { address } = useAccount();
   const router = useRouter();
-  const [isFollowing, setIsFollowing] = useState<boolean>(false);
+  const [isFollowing, setIsFollowing] = useState<boolean>(followed || false);
   const followUser = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {

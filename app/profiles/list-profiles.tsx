@@ -17,6 +17,7 @@ export interface Profile {
     avatar: string;
     organisation: string;
     image: string;
+    nft: string[];
     industry: string;
 }
 export default function ListProfiles() {
