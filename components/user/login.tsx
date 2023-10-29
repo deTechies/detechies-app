@@ -1,6 +1,7 @@
 "use client";
 
 import { defaultAvatar } from "@/lib/constants";
+import { truncateMiddle } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -24,7 +25,6 @@ export default function Login() {
   const { chain, chains } = useNetwork();
   const [showModal, setShowModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
-  const [hasProfile, setHasProfile] = useState(false);
   
   
 
@@ -41,19 +41,6 @@ export default function Login() {
     connect({ connector: connectors as any });
   }, [connect, connectors, isDisconnected]);
 
-  function truncateTextMiddle(text: string, maxLength: number) {
-    if (text.length <= maxLength) {
-      return text;
-    }
-
-    const halfLength = Math.floor((maxLength - 3) / 2); // Subtracting 3 to accommodate for the ellipsis
-
-    const start = text.slice(0, halfLength);
-    const end = text.slice(-halfLength);
-
-    const truncatedText = start + "..." + end;
-    return truncatedText;
-  }
 
   if (isConnecting) {
     return <Button size="sm" variant={"secondary"}  className="text-md" disabled={true}>Connect</Button>;
@@ -75,7 +62,7 @@ export default function Login() {
           className="text_link text-black px-4 py-3"
           onClick={() => setShowModal(!showModal)}
         >
-          {truncateTextMiddle(address, 13)}
+          { truncateMiddle(address, 13)}
           {showModal && (
             <ProfileDetails
               address={address}
@@ -90,7 +77,7 @@ export default function Login() {
             size="sm"
             onClick={() => setShowModal(!showModal)}
           >
-            Unsupported Chain
+            Change Chain
           </Button>
         )}
       </div>

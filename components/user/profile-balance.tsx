@@ -8,10 +8,10 @@ export default function ProfileBalance({ loading, balance, token, active}: { loa
 
     return (
       <div className={`bg-background-layer-1 flex flex-row items-center justify-between gap-4 p-4 px-8 rounded-sm outline outline-border-div 
-      ${active && 'border-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%'} ${!active && 'cursor-pointer'}`} 
+      ${active && 'outline-accent-primary'} ${!active && 'cursor-pointer'}`} 
       onClick={() => {if(!active){ switchNetwork?.(token.id)}}}>
         <div className="flex flex-col">
-          <span className="text-md  text-primary font-medium capitalize">{token.name}</span>
+          <span className="text-primary font-medium capitalize">{token.name}</span>
           <span className={`text-text-secondary tracking-wider font-light `}>{loading ? "loading" : Math.floor(Number(balance) * 1000000)/1000000}</span>
         </div>
         <div>
