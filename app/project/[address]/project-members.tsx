@@ -1,3 +1,4 @@
+"use client"
 import MemberCard from "@/components/card/member-card";
 import AddMemberModal from "@/components/extra/add-member";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";

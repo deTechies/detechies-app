@@ -21,7 +21,6 @@ const Links: React.FC<Props> = ({ links }) => {
                 <ExternalLink size="16"/>
               </AvatarFallback>
               </Avatar>
-
           </Link>
         );
       })}

@@ -55,7 +55,7 @@ export default function Connections({address, row, github}: {address:string, row
     if(error) return <div>error</div>
     console.log(data);
   return (
-    <section className={`grid  ${row ? 'grid-cols-1' : 'grid-cols-3'} gap-4`}>
+    <section className={`grid  md:grid-cols-3 sm:grid-cols-2 gap-4`}>
                 <div  className="flex border p-4 border-border-div rounded-sm items-center gap-4 bg-background-layer-1">
                     <Image 
                         src='/icons/github.png' 

@@ -1,3 +1,4 @@
+"use client"
 import GithubSignIn from "@/components/connections/github/github-signin";
 import UploadWorks from "@/components/modal/upload-works";
 import { Card, CardContent } from "@/components/ui/card";
