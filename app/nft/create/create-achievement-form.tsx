@@ -19,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import Loading from "@/components/loading";
+import TransactionData from "@/components/screens/transaction-data";
 import {
   Select,
   SelectContent,
@@ -84,7 +85,7 @@ export function CreateAchievementForm() {
 
   const contract = searchParams.get("contract");
 
-  const { write, isLoading, error } = useContractWrite({
+  const { write, isLoading, error, data } = useContractWrite({
     address: contract as Address,
     abi: ABI.group,
     functionName: "addAchievement",
@@ -347,6 +348,7 @@ export function CreateAchievementForm() {
       </form>
       
       <div>
+        <TransactionData hash={data?.hash} />
     
       </div>
     </Form>

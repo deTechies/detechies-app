@@ -42,7 +42,7 @@ export default function ProjectListPage() {
         <CreateProject />
       </div>
 
-      <section className="grid md:grid-cols-2 gap-4">
+      <section className="grid md:grid-cols-2  gap-4">
         {filteredData && filteredData.length > 0 ? (
           filteredData.map((item: ProjectItemProps) => (
             <ProjectItem key={item.id} details={item} />

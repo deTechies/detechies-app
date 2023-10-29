@@ -21,7 +21,7 @@ export default function GroupList() {
   
   
   
-  return <div className="w-full grid grid-cols-2 gap-8 items-stretch">
+  return <div className="w-full grid md:grid-cols-2 gap-4 items-stretch">
     {
       filteredData && filteredData.map((group: any, key:number) => {
         return <GroupListItem key={key} details={group} />
