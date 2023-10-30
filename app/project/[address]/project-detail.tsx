@@ -28,6 +28,9 @@ export default function ProjectDetail({
       <div className="prose mt-4 w-full">
         <h5>Project Details</h5>
         <p className="leading-6 tracking-wider w-full">
+          {
+            details.description ? details.description : "No description"
+          }
           The problem Careerzen solves Problem There is 2 problems in job market
           such as Linkedin. The first problem is career information such as
           resume, experience and job description. Many recruiter have said they

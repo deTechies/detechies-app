@@ -1,3 +1,4 @@
+"use client"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { ABI, API_URL } from "@/lib/constants";

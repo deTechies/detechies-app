@@ -20,4 +20,26 @@ export async function getUserAchievements(address?:string) {
    
     return res.json()
   }
+  
+  export async function getGroupAchievements(address:string){
+    const res = await fetch(`${API_URL}/achievement/getByGroup/${address}`)
+    
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
+    }
+    
+    return res.json()
+  }
+  
+  export async function getPendingAchievements(address:string){
+    const res = await fetch(`${API_URL}/achievement/getAchievementRequests/${address}`)
+    
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
+    }
+    
+    return res.json()
+  }
    

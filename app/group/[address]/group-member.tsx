@@ -1,3 +1,4 @@
+"use client"
 import MemberCard from "@/components/card/member-card";
 import NftListItemLoading from "@/components/card/nft-list-item-loading";
 import PendingProfileCard from "@/components/card/pending-profile-card";
