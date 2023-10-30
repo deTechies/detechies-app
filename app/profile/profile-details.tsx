@@ -1,19 +1,10 @@
-"use client"
-import Loading from "@/components/loading";
-import Error from "@/components/screens/error";
 import { Card, CardContent } from "@/components/ui/card";
+import { getUserProfile } from "@/lib/data/user";
 import Connections from "./connections";
 
-export default function ProfileDetails({ profile, loading, error }: { profile: any, loading: boolean, error: any }) {
+export default async function ProfileDetails() {
 
-  if(loading) return (
-    <Card>
-      <Loading />
-    </Card>
-  )
-  if(error) return <Error message={"error while oading profile"} />
-
-  console.log(profile)
+  const profile = await getUserProfile();
   return (
     <Card>
       <CardContent className="flex flex-col gap-8">
@@ -24,7 +15,7 @@ export default function ProfileDetails({ profile, loading, error }: { profile: a
             <p>{profile?.description}</p>
           </section>
         )}
-       <Connections github={profile.message.github} address={profile.message.id}/>
+       <Connections github={profile?.github} address={profile?.id}/>
       </CardContent>
     </Card>
   );

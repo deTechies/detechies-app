@@ -1,3 +1,4 @@
+"use client"
 import ConnectGithub from '@/components/connections/github';
 import Loading from '@/components/loading';
 import useFetchData from '@/lib/useFetchData';

@@ -7,8 +7,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Project Zen - Built by Careerzen Team ",
-  description: "Project Zen - Built by Careerzen Team ",
+  title: "Careerzen - Validate your career",
+  description: "We help you build your career profile and grow your personal career and network",
 };
 
 export default function RootLayout({

@@ -41,8 +41,8 @@ export default function ProfileMe() {
 
   return (
           <>
-            <ProfileDetails profile={profileData} loading={profileLoading} error={profileError} />
-            <ProfileItems address={id.toString()}  />
+            <ProfileDetails />
+            <ProfileItems  />
 
           </>
   );

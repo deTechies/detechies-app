@@ -5,6 +5,7 @@ import { useAccount, useDisconnect, useNetwork } from "wagmi";
 
 import { Address, createPublicClient, http } from "viem";
 
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
@@ -98,7 +99,10 @@ export default function ProfileDetails({ showModal }: any) {
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Button onClick={() => disconnect()} variant="destructive">
+            <Button onClick={() => {
+              disconnect()
+              signOut()
+            }} variant="destructive">
               Sign out
             </Button>
             <Link

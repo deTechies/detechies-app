@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const GithubSignIn = () => {
-  const { data } = useSession();
+  const { data } = useSession() as any;
   const pathName = usePathname();
 
   const [repos, setRepos] = useState<any[]>([]);

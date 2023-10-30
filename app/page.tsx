@@ -1,31 +1,13 @@
-"use client";
 
 import { defaultAvatar } from "@/lib/constants";
-import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
-
+import { getUserProfile } from "@/lib/data/user";
 import AvatarNFTs from "./profile/avatar-nfts";
 import ProfileMe from "./profile/page";
 import ProfileDetailCard from "./profile/profile-detail-card";
-
-export default function ProfileLayout() {
-  const [profile, setProfile] = useState<any>(null);
-  const { address } = useAccount();
-
-  useEffect(() => {
-    const getUserDetails = async () => {
-      const url = process.env.NEXT_PUBLIC_API || "http://localhost:4000";
-      const result = await fetch(url + "/polybase/" + address).then((res) =>
-        res.json()
-      );
-      setProfile(result.message);
-    };
-
-    if (address) {
-      getUserDetails();
-    }
-  }, [address]);
-
+export default async function ProfileDashboard() {
+  
+  const profile = await getUserProfile();
+  console.log(profile)
   return (
     <main className="m-10">
       <div className="absolute bg-[url('/landing/background-card.png')] object-scale-down top-[64px] left-0  z-[-10] min-h-[20vh] min-w-full" />

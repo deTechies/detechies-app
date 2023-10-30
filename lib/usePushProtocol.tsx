@@ -1,5 +1,7 @@
+"use client"
 import { PushAPI } from "@pushprotocol/restapi";
 import { ENV } from "@pushprotocol/restapi/src/lib/constants";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
@@ -17,6 +19,7 @@ export default function PushProvider({ children }: { children: any }) {
   const {address, isConnected, isDisconnected} = useAccount();
   const signer = useEthersSigner({chainId: 8001});
   const router = useRouter();
+  const {data: session} = useSession();
 
   const initializeUser = useCallback(async () => {
     if(!signer) return;
@@ -36,6 +39,7 @@ export default function PushProvider({ children }: { children: any }) {
     if(isDisconnected && !address){
       router.push("/onboard");
     }
+    
   }, [address, isDisconnected, router]);
 
   return (

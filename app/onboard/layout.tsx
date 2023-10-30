@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
-import useFetchData from "@/lib/useFetchData";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 
@@ -11,7 +11,7 @@ export default function OnboardLayout({
   children: React.ReactNode;
 }) {
   const {address, isConnecting} = useAccount();  
-  const {data, error, loading} = useFetchData<any>("/polybase/" + address);
+  const {data} = useSession();
   const router = useRouter();
   
   
@@ -19,17 +19,21 @@ export default function OnboardLayout({
     router.push('/onboard');
   }
   
-  if(address && error){
+  if(address && !data?.web3?.address){
+    router.push('/onboard');
+  }
+  
+  if(address && data?.web3?.address && !data?.web3?.user){
     router.push('/onboard/profile')
   }
   
-  if(!loading && data && data?.message?.TBA){
+  if(data && data?.web3?.user && data.web3.user.TBA){
     //user is logged in and has a tokenbound account
     //redirect to profile page
     router.push('/profile');
   }
   
-  if(data && !loading && !data.message?.TBA){
+  if(data?.web3?.user && !data.web3.user.TBA){
     //user is logged in and has a tokenbound account
     //redirect to profile page
     router.push('/onboard/mint'); 

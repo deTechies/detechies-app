@@ -1,33 +1,22 @@
-"use client";
 
+import Loading from "@/components/loading";
 
-
-import useFetchData from "@/lib/useFetchData";
-import { useAccount } from "wagmi";
+import { getUserProfile } from "@/lib/data/user";
+import { Suspense } from "react";
 import ProfileDetails from "./profile-details";
 import ProfileItems from "./profile-items";
-
 //categories 
 
 
-export default function ProfileMe() {
+export default async function ProfileMe() {  
+  const profile = await getUserProfile();
 
-
-  const { address } = useAccount();
-  
-  const {data:profile, loading:profileLoading, error:profileError} = useFetchData<any>("/polybase/" + address);
-
-
-
-
-  //we goging to makes ure taht we have a profile to be minded 
-  
 
   return (
-          <>
-            <ProfileDetails profile={profile} loading={profileLoading} error={profileError} />
-           {address && <ProfileItems address={address} /> }
+          <Suspense fallback={<Loading />}>
+            <ProfileDetails/>
+            <ProfileItems /> 
            
-          </>
+          </Suspense>
   );
 }

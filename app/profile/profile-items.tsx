@@ -2,18 +2,19 @@
 import NftListItem, { NFTItem } from "@/components/card/nft-list-item";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import useFetchData from "@/lib/useFetchData";
+import { getUserAchievements } from "@/lib/data/achievements";
 import Image from "next/image";
 import Link from "next/link";
 
 
-export default function ProfileItems({
-  address
-}: {
-  address: string
-}) {
+export default async function ProfileItems() {
   
-  const {data:items, loading, error} = useFetchData<NFTItem[]>(`/achievement/userAchievements/${address}`);
+//  const session = await getSession();
+
+  
+  const items:NFTItem[] = await getUserAchievements();
+  
+  //const {data:items, loading, error} = useFetchData<NFTItem[]>(`/achievement/userAchievements/${address}`);
 
   return (
     <Card>
