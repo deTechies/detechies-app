@@ -1,9 +1,9 @@
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import Image from "next/image";
 import Link from "next/link";
-import { useAccount } from "wagmi";
 
 interface ProjectItemProps {
   name: string;
@@ -22,16 +22,14 @@ export default function GroupListItem({
   details: ProjectItemProps;
 }) {
   
-  const {address} = useAccount();
+
   return (
     <Link href={`/group/${details.addr}`}>
       <Card className="flex flex-row gap-4">
-        <Avatar className="w-50 h-50">
+        <Avatar className="w-16 h-16 aspect-square">
           <AvatarImage
             src={`https://ipfs.io/ipfs/${details.image}`}
             alt={details.name}
-            width={100}
-            height={100}
             className="rounded-full"
           />
           <AvatarFallback className="relative">
@@ -39,17 +37,12 @@ export default function GroupListItem({
                 src="/images/careerzen.png"
                 alt="no-item"
                 fill={true}
-
-                
             />
         </AvatarFallback>
         </Avatar>
         <section className="flex flex-col gap-2 w-full prose">
           <header className="flex justify-between items-center prose">
             <h5>{details.name}</h5>
-
-            {details.creator == address?.toLowerCase() &&  <Badge variant={"info"} className="ml-2">Owner</Badge>}
-
           </header>
           <div className="flex gap-2">
             <Badge className="bg-accent-secondary text-accent-primary">

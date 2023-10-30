@@ -11,11 +11,15 @@ export const metadata: Metadata = {
   description: "We help you build your career profile and grow your personal career and network",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  
+
+
+  
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gradient-to-b from-state-info-secondary to-accent-secondary text-primary min-h-[100vh]`} suppressHydrationWarning

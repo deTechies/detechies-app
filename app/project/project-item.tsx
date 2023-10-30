@@ -1,8 +1,7 @@
-import { Badge } from "@/components/ui/badge";
 import { LocateIcon, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useAccount } from "wagmi";
+
 
 interface ProjectItemProps {
     id: string;
@@ -19,8 +18,6 @@ interface ProjectItemProps {
 const DEFAULT_DESCRIPTION = "Random description";
 
 export default function ProjectItem({ details }: { details: ProjectItemProps }) {
-    const { address } = useAccount();
-    const normalizedAddress = address?.toLowerCase();
 
     return (
         <Link href={`/project/${details.id}`} 
@@ -36,7 +33,6 @@ export default function ProjectItem({ details }: { details: ProjectItemProps }) 
                 <section className="col-span-3 flex flex-col gap-3 my-2 w-full">
                     <header className="flex justify-between items-center capitalize">
                         <h5 className="text-xl text-text-primary font-medium">{details.name}</h5>
-                        {details.creator === normalizedAddress && <Badge variant="info" className="ml-2">Owner</Badge>}
                     </header>
                     <div className="flex gap-8">
                         <div className="flex gap-2 text-text-secondary text-sm font-light items-center">

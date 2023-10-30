@@ -17,44 +17,49 @@ import { useAccount } from "wagmi";
 export default function NFTDetailPage() {
   //want the read the token uri and display the content.
   //want to read the token id and display the content.
-  const {tokenid, contract} = useParams();
+  const { tokenid, contract } = useParams();
   const [details, setDetails] = useState<any>();
   const [requesting, setRequesting] = useState<boolean>(false);
-  const {address} = useAccount();
-const router = useRouter();
-  
-  const {data, loading, error} = useFetchData<NFTItem>(`/achievement/getSingle/${contract}/${tokenid}`);
-  
-  if(loading) return <Loading />
-  
-  if(error) return <div>Error</div>
-  
-  const handleMint = async() => {
+  const { address } = useAccount();
+  const router = useRouter();
+
+  const { data, loading, error } = useFetchData<NFTItem>(
+    `/achievement/getSingle/${contract}/${tokenid}`
+  );
+
+  if (loading) return <Loading />;
+
+  if (error) return <div>Error</div>;
+
+  const handleMint = async () => {
     //@ts-ignore
-setRequesting(true);
+    setRequesting(true);
     const submitData = {
       contract: contract,
       tokenId: tokenid,
       type: "individual",
       data: [""],
-      requester: address, 
+      requester: address,
       tokenbound: address,
-    }; 
-    
+    };
 
-    if (!submitData.contract || !submitData.tokenId || !submitData.data || !submitData.requester || !submitData.tokenbound) {
-
+    if (
+      !submitData.contract ||
+      !submitData.tokenId ||
+      !submitData.data ||
+      !submitData.requester ||
+      !submitData.tokenbound
+    ) {
       toast({
-        title: "Something went wrong with submitting the data", 
-        description: "Please contact the admins to see if there is an issue with the contract"
+        title: "Something went wrong with submitting the data",
+        description:
+          "Please contact the admins to see if there is an issue with the contract",
       });
       console.log(submitData);
-      
+
       return;
     }
-    
 
-    
     await fetch(`${API_URL}/achievement/request`, {
       method: "POST",
       headers: {
@@ -68,26 +73,27 @@ setRequesting(true);
           toast({
             title: "Success",
             description: "Your request has been submitted",
-          })
+          });
           router.replace(`/group/${contract}`);
-
         } else {
           console.error("Error creating profile:", data.message);
           toast({
-            title: "Something went wrong with submitting the data", 
-            description: "Please contact the admins to see if there is an issue with the contract"
+            title: "Something went wrong with submitting the data",
+            description:
+              "Please contact the admins to see if there is an issue with the contract",
           });
         }
       })
       .catch((error) => {
         console.error("Error creating profile:", error);
         toast({
-          title: "Something went wrong with submitting the data", 
-          description: "Please contact the admins to see if there is an issue with the contract"
+          title: "Something went wrong with submitting the data",
+          description:
+            "Please contact the admins to see if there is an issue with the contract",
         });
       });
-      
-      setRequesting(false);
+
+    setRequesting(false);
   };
 
   return (
@@ -122,36 +128,47 @@ setRequesting(true);
                 />
               </div>
               <div className="flex w-full">
-                <Badge variant={"info"} className="w-full text-md justify-center capitalize text-center outline outline-state-info">
+                <Badge
+                  variant={"info"}
+                  className="w-full text-md justify-center capitalize text-center outline outline-state-info"
+                >
                   <span className="truncate">{data.metadata?.category}</span>
                 </Badge>
               </div>
-              
+
               <p className="text-text-secondary">
                 {data.metadata?.description}
               </p>
 
-            <div className="bg-black-100 rounded-sm p-2 shadow-sm">
-                  {data.metadata && Object.entries(data.metadata).map(([key, value], index) => (
-                    <tr className="flex  justify-between p-1 px-2 gap-2 my-2" key={index} >
-                      <td className="text-text-secondary text-light text-sm capitalize">{key}</td>
-                      <td className="text-primary text-sm text-ellipsis overflow-hidden">{value?.toString()}</td>
+              <div className="bg-black-100 rounded-sm p-2 shadow-sm">
+                {data.metadata &&
+                  Object.entries(data.metadata).map(([key, value], index) => (
+                    <tr
+                      className="flex  justify-between p-1 px-2 gap-2 my-2"
+                      key={index}
+                    >
+                      <td className="text-text-secondary text-light text-sm capitalize">
+                        {key}
+                      </td>
+                      <td className="text-primary text-sm text-ellipsis overflow-hidden">
+                        {value?.toString()}
+                      </td>
                     </tr>
                   ))}
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                    <Button variant="secondary" onClick={() => router.back()}>
-                        Go back
-                    </Button>
-                    <Button
-                      onClick={handleMint}
-                      loading={requesting}
-                      disabled={requesting}
-                    >
-                        Request mint
-                    </Button>
-                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <Button variant="secondary" onClick={() => router.back()}>
+                  Go back
+                </Button>
+                <Button
+                  onClick={handleMint}
+                  loading={requesting}
+                  disabled={requesting}
+                >
+                  Request mint
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
