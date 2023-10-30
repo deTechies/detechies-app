@@ -40,7 +40,6 @@
     "lucide-react": "^0.284.0",
     "next": "^14.0.0",
     "next-auth": "^4.24.4",
-    "next-headers": "^0.0.5",
     "next-themes": "^0.2.1",
     "nft.storage": "^7.1.1",
     "novel": "^0.1.22",
