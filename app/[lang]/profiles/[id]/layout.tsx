@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import ProfileDetailCard from "@/app/profile/profile-detail-card";
+import ProfileDetailCard from "@/app/[lang]/profile/profile-detail-card";
 import { Card } from "@/components/ui/card";
 import { defaultAvatar } from "@/lib/constants";
 import { getUserProfile } from "@/lib/data/user";

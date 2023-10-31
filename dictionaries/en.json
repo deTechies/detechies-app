@@ -1,0 +1,16 @@
+{
+    "nav": {
+      "dashboard": "dashboard", 
+      "profiles": "profiles",
+      "groups": "groups",
+      "projects": "project"
+    },
+    "user": {
+      "details": {
+        "followers": "followers", 
+        "following": "following", 
+        "Avatar Items": "avatar items", 
+        "Profile Items": "profile items"
+      }      
+    }
+}

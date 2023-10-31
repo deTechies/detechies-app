@@ -1,5 +1,5 @@
 
-import Links from "@/app/project/[address]/links";
+import Links from "@/app/[lang]/project/[address]/links";
 import { Card } from "@/components/ui/card";
 
 

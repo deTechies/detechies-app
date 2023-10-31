@@ -1,0 +1,16 @@
+{
+    "nav": {
+      "Dashboard": "계기반", 
+      "Profile": "옆모습",
+      "Groups": "여러 떼",
+      "Project": "프로젝트"
+    },
+    "user": {
+      "details": {
+        "followers": "followers", 
+        "following": "following", 
+        "Avatar Items": "avatar items", 
+        "Profile Items": "profile items"
+      }      
+    }
+}

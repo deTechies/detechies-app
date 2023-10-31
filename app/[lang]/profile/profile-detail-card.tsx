@@ -11,7 +11,7 @@ import { useAccount } from "wagmi";
 import { API_URL, defaultAvatar } from "@/lib/constants";
 import useFetchData from "@/lib/useFetchData";
 
-import Followers from "../profile/followers";
+import Followers from "./followers";
 
 import UserChat from "@/components/extra/chat/user-chat";
 import { Badge } from "@/components/ui/badge";

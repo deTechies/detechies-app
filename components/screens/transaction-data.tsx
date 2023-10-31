@@ -1,5 +1,5 @@
 "use client";
-import Confetti from "@/app/onboard/mint/confetti";
+import Confetti from "@/app/[lang]/onboard/mint/confetti";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Address, useWaitForTransaction } from "wagmi";

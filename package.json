@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.4.2",
     "@headlessui/react": "^1.7.17",
     "@hookform/resolvers": "^3.3.1",
     "@pushprotocol/restapi": "^1.4.24",
@@ -38,6 +39,7 @@
     "idb": "^7.1.1",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.284.0",
+    "negotiator": "^0.6.3",
     "next": "^14.0.0",
     "next-auth": "^4.24.4",
     "next-themes": "^0.2.1",
@@ -55,6 +57,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/negotiator": "^0.6.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

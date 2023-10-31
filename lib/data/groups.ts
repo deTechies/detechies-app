@@ -18,7 +18,7 @@ export async function getGroupDetail(address: string){
     const data = await response.json();
     const session = await getServerSession(authOptions) as any;
     
-    const isMember  = data.members.find((member: any) => member.address === session?.web3?.address);
+    //const isMember  = data.members.find((member: any) => member.address === session?.web3?.address);
     const isOwner = data.owner === session?.web3?.address;
-    return {...data, isMember: isMember, isOwner: isOwner};
+    return {...data, isMember: false, isOwner: isOwner};
 }

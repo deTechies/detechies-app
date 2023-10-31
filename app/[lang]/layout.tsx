@@ -1,9 +1,11 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import App from "./app";
 import "./globals.css";
-import Nav from "./nav";
+import Navbar from "./nav-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +16,15 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
+  params,
   children,
 }: {
+  params: { lang: Locale };
   children: React.ReactNode;
 }) {
+  
+  const dictionary = await getDictionary(params.lang) as any;
+  console.log(dictionary)
   return (
     <html lang="en">
       <body
@@ -31,7 +38,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <App>
-            <Nav />
+            <Navbar lang={dictionary.nav} />
             {children}
           </App>
         </ThemeProvider>
@@ -39,3 +46,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

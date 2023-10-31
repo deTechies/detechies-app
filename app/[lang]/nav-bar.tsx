@@ -8,25 +8,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Navbar() {
+export default function Navbar({lang}: {lang: any}) {
   //check if the current one is active
   const pathname = usePathname();
   
   const links = [
     {
-      name: "Dashboard",
+      name: lang.dashboard,
       href: "/",
     },
     {
-      name: "Groups",
+      name: lang.groups,
       href: "/groups",
     },
     {
-      name: "Project",
+      name: lang.projects,
       href: "/project",
     },
     {
-      name: "Profiles",
+      name: lang.profiles,
       href: "/profiles",
     },
   ];
