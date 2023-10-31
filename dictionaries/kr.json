@@ -1,9 +1,9 @@
 {
     "nav": {
-      "Dashboard": "계기반", 
-      "Profile": "옆모습",
-      "Groups": "여러 떼",
-      "Project": "프로젝트"
+      "dashboard": "계기반", 
+      "profiles": "옆모습",
+      "groups": "여러 떼",
+      "projects": "프로젝트"
     },
     "user": {
       "details": {
