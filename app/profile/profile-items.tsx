@@ -7,12 +7,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-export default async function ProfileItems() {
+export default async function ProfileItems({address}:{address?:string}) {
   
 //  const session = await getSession();
 
   
-  const items:NFTItem[] = await getUserAchievements();
+  const items:NFTItem[] = await getUserAchievements(address);
   
   //const {data:items, loading, error} = useFetchData<NFTItem[]>(`/achievement/userAchievements/${address}`);
 

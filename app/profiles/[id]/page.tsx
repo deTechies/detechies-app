@@ -12,8 +12,7 @@ export default function ProfileMe({params}: {params: {id: string}}) {
   return (
           <>
             <ProfileDetails />
-            <ProfileItems  />
-
+            <ProfileItems  address={params.id} />
           </>
   );
 }

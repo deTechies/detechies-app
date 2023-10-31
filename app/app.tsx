@@ -9,7 +9,6 @@ import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
 import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
-import Navbar from "./nav-bar";
 
 // Configure chains & providers with the Public provider.
 const { chains, publicClient, webSocketPublicClient } = configureChains(
@@ -62,7 +61,7 @@ export default function App({ children }: { children: any }) {
     <WagmiConfig config={config}>
       <SessionProvider>
         <PushProvider>
-          <Navbar />
+          
           {children}
           <Toaster />
         </PushProvider>

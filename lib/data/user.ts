@@ -25,3 +25,14 @@ export async function getUserProfile(address?: string) {
 
   return res.json();
 }
+
+export async function getUserConnections(address: string) {
+  const res = await fetch(`${API_URL}/nextid/user/profile/ethereum/${address}`);
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}

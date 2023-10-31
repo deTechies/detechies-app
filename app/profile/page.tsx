@@ -10,10 +10,9 @@ export default async function ProfileMe() {
 
 
   return (
-          <main>
+          <>
             <ProfileDetails />
             <ProfileItems /> 
-           
-          </main>
+          </>
   );
 }

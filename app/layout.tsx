@@ -3,12 +3,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import App from "./app";
 import "./globals.css";
+import Nav from "./nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Careerzen - Validate your career",
-  description: "We help you build your career profile and grow your personal career and network",
+  description:
+    "We help you build your career profile and grow your personal career and network",
 };
 
 export default async function RootLayout({
@@ -16,13 +18,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
-
-
-  
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gradient-to-b from-state-info-secondary to-accent-secondary text-primary min-h-[100vh]`} suppressHydrationWarning
+      <body
+        className={`${inter.className} bg-gradient-to-b from-state-info-secondary to-accent-secondary text-primary min-h-[100vh]`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
@@ -30,7 +30,10 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <App>{children}</App>
+          <App>
+            <Nav />
+            {children}
+          </App>
         </ThemeProvider>
       </body>
     </html>

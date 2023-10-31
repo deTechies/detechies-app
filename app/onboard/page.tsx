@@ -12,7 +12,13 @@ export default function OnboardPage() {
   const { data: session } = useSession();
 
   if (address && !session?.web3?.address && !isConnecting) {
-    return <AuthenticateButton />;
+    return (<div className="flex flex-col gap-8">
+      <h1 className="text-2xl font-medium tracking-wide">Sign Up</h1>
+      <div>
+        Please validate that you are the owner of this address, so we can use it to securely store your achievements.
+      </div>
+      <AuthenticateButton />
+    </div>)
   }
   
   
