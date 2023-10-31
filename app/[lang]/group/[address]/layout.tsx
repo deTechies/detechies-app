@@ -18,7 +18,6 @@ export default function GroupDetailLayout({
             <Link href={`/group/${params.address}/chat`}>
                 Chat
             </Link>
-                
         </div>
       </div>
       <div className="lg:col-span-2 flex flex-col gap-md">{children}</div>

@@ -76,6 +76,18 @@ export default async function GroupProfileCard({ id }: { id: string }) {
               )
             }
           </div>
+          {
+            groupDetail.isOwner && (
+              <div className="grid gap-2 my-4 items-center">
+                  <Link href={`/group/${groupDetail.address}/achievements`}>
+                      Manage Achievements
+                  </Link>
+                  <Link href={`/group/${groupDetail.address}/achievements`}>
+                      Manage Members
+                  </Link>
+              </div>
+            )
+          }
         </div>
       </CardContent>
     </Card>

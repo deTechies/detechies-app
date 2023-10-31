@@ -8,10 +8,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getGroupAchievements, getPendingAchievements } from "@/lib/data/achievements";
 import Link from "next/link";
 
-export default async function GroupAchievements({address}: {address: string}) {
+export default async function GroupAchievements({params}: {params: {address: string}}) {
   
-  const achievements = await getGroupAchievements(address)
-  const pendingGroupAchievements = await getPendingAchievements(address)
+  const achievements = await getGroupAchievements(params.address)
+  const pendingGroupAchievements = await getPendingAchievements(params.address)
 
   
   
@@ -19,7 +19,7 @@ export default async function GroupAchievements({address}: {address: string}) {
     <Card>
       <CardHeader className="flex justify-between items-center">
         Achievements
-        <Link href={`/nft/create?contract=${address}`}>
+        <Link href={`/nft/create?contract=${params.address}`}>
           <Badge 
             className="cursor-pointer" 
             variant={"accent"}
@@ -36,7 +36,7 @@ export default async function GroupAchievements({address}: {address: string}) {
           </TabsList>
           <TabsContent value="nfts" className="grid sm:grid-cols-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4 items-stretch gap-4">
             {achievements && achievements.map((item: NFTItem, index: number) => (
-              <DisplayNFT {...item} key={index} />
+              <DisplayNFT details={item}  key={index} />
             ))}
           </TabsContent>
           <TabsContent value="pending" className="grid grid-cols-2 gap-4">

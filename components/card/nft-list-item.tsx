@@ -68,7 +68,7 @@ export default function NftListItem({
   return (
     <section className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[150px] max-w-[200px] border">
       <div className="w-full aspect-square relative m-0 object-scale-down ">
-        {avatarAttribute && (
+        {showSelect && avatarAttribute && (
           <Switch
             className="absolute top-5 right-5 z-10 text-white hover:text-text-primary cursor-pointer"
             checked={selected}

@@ -10,6 +10,7 @@ export async function getGroups(search?: string){
     if(search){
         return data.filter((group: any) => group.name.toLowerCase().includes(search.toLowerCase()));
     }
+    
     return data;   
 }
 
@@ -18,7 +19,16 @@ export async function getGroupDetail(address: string){
     const data = await response.json();
     const session = await getServerSession(authOptions) as any;
     
-    //const isMember  = data.members.find((member: any) => member.address === session?.web3?.address);
-    const isOwner = data.owner === session?.web3?.address;
-    return {...data, isMember: false, isOwner: isOwner};
+    console.log(data);
+    
+    const isMember  = data.members.find((member: any) => member.address === session?.web3?.address.toLowerCase());
+    const isOwner = data.creator === session?.web3?.address.toLowerCase();
+    return {...data, isMember: isMember, isOwner: isOwner};
+}
+
+export async function getPendingMembers(address: string){
+    const response = await fetch(`${API_URL}/polybase/company/request?address=${address}&status=open`);
+    const data = await response.json();
+    
+    return data;
 }

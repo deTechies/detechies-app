@@ -10,7 +10,7 @@ import NftListItem, { NFTItem } from "../card/nft-list-item";
 import TransactionData from "../screens/transaction-data";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
-export default function DisplayNFT(details: NFTItem) {
+export default function DisplayNFT({details, showSelect}: {details:NFTItem , showSelect?: boolean}) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const {address}= useAccount();
   
@@ -89,7 +89,7 @@ export default function DisplayNFT(details: NFTItem) {
   return (
     <Dialog>
       <DialogTrigger>
-        <NftListItem item={details} />
+        <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
       <DialogContent>
         <div className="flex flex-col items-center justify-center space-x-2 space-y-4 my-4">
