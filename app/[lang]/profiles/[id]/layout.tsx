@@ -29,6 +29,7 @@ export default  async function ProfileViewLayout({
         <div className="col-span-1  flex flex-col gap-4">
           {profile.message && profile.message.TBA ? (
             <ProfileDetailCard
+              lang={{}}
               profile={profile.message}
               image={profile.message.nft ? profile.message.nft : defaultAvatar}
             />
