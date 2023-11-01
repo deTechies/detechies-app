@@ -17,5 +17,8 @@
         "create project": "프로젝트 만들기",
         "create group": "그룹 만들기",
         "create profile": "프로필 만들기"
+    },
+    "profile_detail_card": {
+        "example": "example"
     }
 }

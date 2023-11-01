@@ -39,7 +39,7 @@ export default function ProfileLayout({
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 grid-cols-1 gap-8 align-center relative">
       <div className="col-span-1  flex flex-col gap-4">
-        {profile && profile.TBA && <ProfileDetailCard profile={profile} image={profile.nft ? profile.nft : defaultAvatar} /> }
+        {profile && profile.TBA && <ProfileDetailCard  lang={null} profile={profile} image={profile.nft ? profile.nft : defaultAvatar} /> }
         {profile && profile.nft?.length > 0  && <AvatarNFTs nfts={profile.nft}/>}
       </div>
         <div className="flex flex-col gap-6 lg:col-span-2">

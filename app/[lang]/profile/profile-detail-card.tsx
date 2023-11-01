@@ -21,11 +21,12 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { useToast } from "@/components/ui/use-toast";
 
 interface ProfileProps {
+  lang: any;
   profile: any;
   image: string[];
 }
 
-export default function ProfileDetailCard({ profile, image }: ProfileProps) {
+export default function ProfileDetailCard({ lang, profile, image }: ProfileProps) {
   const { id } = useParams();
   const searchParams = useSearchParams()!;
   const [refresh, setRefresh] = useState<boolean>(false);

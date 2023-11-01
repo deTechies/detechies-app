@@ -9,12 +9,11 @@ import Link from "next/link";
 
 export default async function ProfileItems({address}:{address?:string}) {
   
-//  const session = await getSession();
+
 
   
   const items:NFTItem[] = await getUserAchievements(address);
   
-  //const {data:items, loading, error} = useFetchData<NFTItem[]>(`/achievement/userAchievements/${address}`);
 
   return (
     <Card>
@@ -28,7 +27,7 @@ export default async function ProfileItems({address}:{address?:string}) {
         {items && items.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {items.map((item: any, index: number) => (
-              <NftListItem key={index} item={item} />
+              <NftListItem key={index} item={item.achievement} showSelect={!address}  />
             ))}
           </div>
         ) : (

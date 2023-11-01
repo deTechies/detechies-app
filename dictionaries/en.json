@@ -12,5 +12,8 @@
         "Avatar Items": "avatar items", 
         "Profile Items": "profile items"
       }      
+    }, 
+    "profile_detail_card": {
+        "example": "example"
     }
 }
