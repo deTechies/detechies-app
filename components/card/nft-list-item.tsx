@@ -62,8 +62,8 @@ export default function NftListItem({
   function removeIPFSPrefix(url: string): string {
     return url.startsWith(DEFAULT_IPFS_URL) ? url.substring(DEFAULT_IPFS_URL.length) : url;
   }
-  console.log(item)
-  const avatarAttribute = item.metadata?.attributes?.find(attr => attr.trait_type === "avatar");
+
+  const avatarAttribute = item.metadata.attributes?.find(attr => attr.trait_type === "avatar");
 
   return (
     <section className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[150px] max-w-[200px] border">

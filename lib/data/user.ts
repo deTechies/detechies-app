@@ -26,6 +26,14 @@ export async function getUserProfile(address?: string) {
   return res.json();
 }
 
+export async function getUserSession(){
+  const session = (await getServerSession(authOptions)) as Session;
+  if(!session?.web3?.user) {
+    redirect("/onboard");
+  }
+  return session.web3;
+}
+
 export async function getUserConnections(address: string) {
   const res = await fetch(`${API_URL}/nextid/user/profile/ethereum/${address}`);
 
@@ -35,4 +43,17 @@ export async function getUserConnections(address: string) {
   }
 
   return res.json();
+}
+
+export async function getGithubToken() {
+  const res = await fetch(`/api/auth/github`);
+  const result = await res.json();
+
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+  
+  return result;
 }

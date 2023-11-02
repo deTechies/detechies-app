@@ -2,7 +2,7 @@
 
 
 import { truncateMiddle } from "@/lib/utils";
-import { ExternalLink, RefreshCw, Star } from "lucide-react";
+import { Badge, ExternalLink, RefreshCw, Star } from "lucide-react";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -11,14 +11,17 @@ import { useAccount } from "wagmi";
 import { API_URL, defaultAvatar } from "@/lib/constants";
 import useFetchData from "@/lib/useFetchData";
 
+import UserChat from "@/components/extra/chat/user-chat";
+import { Card } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
 import Followers from "./followers";
 
-import UserChat from "@/components/extra/chat/user-chat";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
-import { useToast } from "@/components/ui/use-toast";
+
+
+
 
 interface ProfileProps {
   lang: any;

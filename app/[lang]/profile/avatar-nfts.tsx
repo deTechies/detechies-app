@@ -1,5 +1,5 @@
 "use client"
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from 'next/image';
 
 export default function AvatarNFTs({nfts}: {nfts: string[]}) {

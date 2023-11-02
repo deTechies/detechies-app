@@ -1,10 +1,11 @@
 import { API_URL } from "@/lib/constants";
+import { getUserSession } from "@/lib/data/user";
 import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 declare module "next-auth" {
   interface Session {
-    authToken: string;
+    authToken: string
     web3: {
       address: string;
       user: {
@@ -12,12 +13,12 @@ declare module "next-auth" {
         nft: string[];
         username: string;
         id: string;
-      };
-    };
+      }
+    }, 
     github?: {
       id: string;
       expires: string;
-    };
+    }
   }
 
   interface JWT {
@@ -49,21 +50,24 @@ export const authOptions: NextAuthOptions = {
         signedMessage: { label: "Signed Message", type: "text" }, // aka signature
       },
       authorize: async (credentials) => {
+
         const res = await fetch(`${API_URL}/auth/siwe`, {
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
+          headers: { 'Content-Type': 'application/json' },
         });
+        
 
         const user = await res.json();
+        
 
         if (res.ok && user) {
           return Promise.resolve(user);
         } else {
-          return Promise.reject(new Error("Invalid SIWE credentials"));
+          return Promise.reject(new Error('Invalid SIWE credentials'));
         }
       },
-      /*  async authorize(credentials, req) {
+     /*  async authorize(credentials, req) {
         if (!credentials?.signedMessage || !credentials?.message) {
           return null;
         }
@@ -130,17 +134,29 @@ export const authOptions: NextAuthOptions = {
       const expirationTime = new Date(
         Date.now() + 2 * 60 * 60 * 1000
       ).toISOString();
+      
+     
+      
+  
 
-      if (account) {
+      if(account){
         if (account.provider === "github") {
+          const session = await getUserSession();
+          
+          token.web3 = session;
+          console.log(account, user, token)
           token.github = {
             id: account.providerAccountId,
+            accessToken: account.access_token,
             expires: expirationTime,
           };
         } else if (account.provider === "web3") {
           token.web3 = user.user;
+          token.web3.accessToken = user.accessToken;
+
         }
       }
+     
 
       return token;
     },
@@ -148,9 +164,10 @@ export const authOptions: NextAuthOptions = {
       // We'll directly place the `sessions` object from the token into the session.
       // This way, we have all the data from different providers in the session.
 
+     
       session.user = session.user || {};
       if (token.github) {
-        session.github = token.github;
+        session = token;
       }
       if (token.web3) {
         session.web3 = token.web3;

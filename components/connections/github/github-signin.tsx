@@ -23,7 +23,7 @@ const GithubSignIn = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "accessToken " + data?.accessToken,
+        Authorization: "accessToken " + data?.github.accessToken,
       },
       body: JSON.stringify({
         owner: owner,
@@ -55,7 +55,7 @@ const GithubSignIn = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "accessToken " + data?.accessToken,
+        Authorization: "accessToken " + data?.github.accessToken,
       },
     })
       .then((res) => {
@@ -67,7 +67,7 @@ const GithubSignIn = () => {
     setRepos(response);
   };
 
-  if (data?.accessToken && repos.length > 0) {
+  if (data?.github?.accessToken && repos.length > 0) {
     return (
       <div className="max-w-xl p-2">
         <h1 className="font-medium">Repository</h1>
@@ -108,7 +108,7 @@ const GithubSignIn = () => {
     );
   }
 
-  if (data?.accessToken) {
+  if (data?.github?.accessToken) {
     return (
       <Button
         className="w-full bg-black text-white flex gap-8"
