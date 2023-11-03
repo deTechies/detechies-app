@@ -1,115 +1,51 @@
 "use client";
-
+// components/MintAvatar.js
+import TransactionData from "@/components/screens/transaction-data";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardHeader } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
-import { toast } from "@/components/ui/use-toast";
-import { ABI, MUMBAI, defaultAvatar } from "@/lib/constants";
-
-import TransactionData from "@/components/screens/transaction-data";
+import { defaultAvatar } from "@/lib/constants";
 import { RefreshCw } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import {
-  useAccount,
-  useContractRead,
-  useContractWrite,
-  useWaitForTransaction,
-} from "wagmi";
+
+import { toast } from "@/components/ui/use-toast";
+import { checkTBA, updateTBA } from "@/lib/data/user";
+import { useAvatarData } from "@/lib/hooks/avatar/readMint";
+import { useMint } from "@/lib/hooks/avatar/useMint";
+import { useEffect } from "react";
 import Confetti from "./confetti";
 
-//TODO: Not working!!!
 export default function MintAvatar() {
-  //creation of the contract
-  const [minting, setMinting] = useState(false);
-  const [savedTBA, setSavedTBA] = useState(false);
-  const {
-    write,
-    isLoading,
-    data: mintingStatus,
-  } = useContractWrite({
-    address: MUMBAI.profile,
-    abi: ABI.profile,
-    functionName: "mint",
-  });
-  const { address } = useAccount();
+  const { data, tba } = useAvatarData();
+  const { minting, mint, isLoading, mintingStatus } = useMint();
 
-  const waitForTransaction = useWaitForTransaction({
-    hash: mintingStatus?.hash,
-    onSuccess() {
-
-        toast({ title: "Successfully minted all the items" });
-        setMinting(false);
-        setSavedTBA(true);
-
-    },
-  });
-
-  const { data }: { data: any; isLoading: boolean } = useContractRead({
-    address: MUMBAI.profile,
-    abi: ABI.profile,
-    functionName: "balanceOf",
-    args: [address],
-  });
-
-  const { data: tba }: { data: any; isLoading: boolean } = useContractRead({
-    address: MUMBAI.groupRegistry,
-    abi: ABI.groupRegistry,
-    functionName: "getTBA",
-    args: [address],
-  });
-
-  const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
   useEffect(() => {
-    const updateTBA = async () => {
-      setMinting(true);
-      await fetch(`${url}/polybase/update/tba/${address}/${tba}`).then((res) =>
-        res.json()
-      );
-
-      toast({
-        title: "succesfully added the TBA",
-      });
-
-      setMinting(false);
-      setSavedTBA(true);
-    };
-
-    const checkTBA = async () => {
-      const result = await fetch(`${url}/polybase/${address}`).then((res) =>
-        res.json()
-      );
-
-      console.log(result);
-      if (result.status) {
-        if (!result.message.TBA) {
-          updateTBA();
-          setSavedTBA(false);
+    
+    const updateAccount = async () => {
+      if (data && (parseInt(data?.toString()) > 0) || tba) {
+        const checkResult = await checkTBA();
+        if (checkResult.status && !checkResult.message.TBA) {
+          const updateResult = await updateTBA(checkResult.message.TBA);
+          toast({ title: "succesfully added the TBA" });
         }
-        //here we just check if indeed this is the case. and
-        return;
       }
     };
-
-    if ((parseInt(data?.toString()) > 0 && address) || tba) {
-      //need to check if it already has a profile
-      checkTBA();
+    if(data){
+      updateAccount();
     }
+  }, [data, tba]);
 
-    setMinting(false);
-  }, [data, address, tba, url, waitForTransaction.status]);
-
-  if (parseInt(data?.toString()) > 0 || savedTBA) {
+  if (data && parseInt(data.toString()) > 0 || tba) {
     return (
       <section className="flex flex-col gap-4">
         <div className="w-full aspect-square relative m-0 z-0">
           <IPFSImageLayer hashes={defaultAvatar} />
         </div>
         <h1 className="text-3xl font-bold">NFT Career Profile is ready</h1>
-        <p className="text-sm tracking-wide  leading-5 text-text-secondary">
-          Congratulation!! Your NFT Account has been created successfully and
-          you received some nft. you can collect career NFT in mypage.
+        <p className="text-sm tracking-wide leading-5 text-text-secondary">
+          Congratulations!! Your NFT Account has been created successfully, and
+          you have received some NFTs. You can collect career NFTs on My Page.
         </p>
         <div className="flex gap-4">
           <Link
@@ -159,7 +95,7 @@ export default function MintAvatar() {
       <CardHeader className="flex flex-col gap-4 z-10">
         <h1 className="text-2xl">Get Digital Career Profile</h1>
         <p className="text-sm tracking-wide font-light leading-5 text-text-secondary">
-          To start your career we will give you a free career profile and some
+          To start your career, we will give you a free career profile and some
           free credits to look around.
         </p>
       </CardHeader>
@@ -185,17 +121,16 @@ export default function MintAvatar() {
             </div>
           </section>
           <Button
-            disabled={isLoading || parseInt(data?.toString()) > 0}
+            disabled={isLoading}
             onClick={() => {
-              write();
-              setMinting(true);
+              mint();
             }}
           >
             {isLoading || minting ? (
               <span className="flex gap-2">
-                <RefreshCw className="animate-spin" /> Minting..{" "}
+                <RefreshCw className="animate-spin" /> Minting..
               </span>
-            ) : parseInt(data?.toString()) > 0 ? (
+            ) : data && parseInt(data?.toString()) > 0 ? (
               "You already have a profile"
             ) : (
               "Mint"

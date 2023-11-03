@@ -2,7 +2,7 @@
 
 
 import { truncateMiddle } from "@/lib/utils";
-import { Badge, ExternalLink, RefreshCw, Star } from "lucide-react";
+import { ExternalLink, RefreshCw, Star } from "lucide-react";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -16,6 +16,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import Followers from "./followers";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";

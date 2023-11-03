@@ -1,43 +1,43 @@
 "use client"
-
 import { Card, CardContent } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useAccount } from "wagmi";
+
+
+
 
 export default function OnboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const {address, isConnecting} = useAccount();  
-  const {data} = useSession();
   const router = useRouter();
+  const {address} = useAccount();
+  const { data } = useSession() as any;
   
+  useEffect(() => {
+    console.log(data)
+    if(!data){
+      return;
+    }
+    if(data?.web3?.address === address && typeof data.web3.user === "object" && data.web3.user.TBA){
+      router.push("/profile");
+    }
+    if(data.web3.address === address && typeof data.web3.user === "object" && !data.web3.user.TBA){
+      router.push("/onboard/mint");
+    }
+    if(data.web3.address === address && typeof data.web3.user !== "object"){
+      router.push("/onboard/profile")
+    }
+    if(data.web3.address !== address){
+      router.push("/onboard");
+    }
+    
+  }, [data, address, router])
+
   
-  if(!isConnecting && !address){
-    router.push('/onboard');
-  }
-  
-  if(address && !data?.web3?.address){
-    router.push('/onboard');
-  }
-  
-  if(address && data?.web3?.address && !data?.web3?.user){
-    router.push('/onboard/profile')
-  }
-  
-  if(data && data?.web3?.user && data.web3.user.TBA){
-    //user is logged in and has a tokenbound account
-    //redirect to profile page
-    router.push('/profile');
-  }
-  
-  if(data?.web3?.user && !data.web3.user.TBA){
-    //user is logged in and has a tokenbound account
-    //redirect to profile page
-    router.push('/onboard/mint'); 
-  }
   
   
   return (

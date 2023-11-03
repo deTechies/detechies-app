@@ -5,35 +5,35 @@ import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
 
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { cn, jobList } from "@/lib/utils";
 
 import { Textarea } from "@/components/ui/textarea";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
 } from "@/components/ui/command";
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { uploadContent } from "@/lib/upload";
 import { ArrowDown, CheckIcon } from "lucide-react";
 import { useState } from "react";
-import { jobList } from "../../onboard/profile/page";
+
 
 const projectFormSchema = z.object({
   name: z

@@ -1,6 +1,8 @@
 
+
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Session, getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { API_URL } from "../constants";
 
@@ -56,5 +58,25 @@ export async function getGithubToken() {
     throw new Error("Failed to fetch data");
   }
   
+  return result;
+}
+
+// src/services/accountService.ts
+export async function checkTBA(): Promise<any> {
+  const session = await getSession() as Session;
+  if(!session?.web3?.user) {
+    redirect("/onboard");
+  }
+  const result = await fetch(`${API_URL}/polybase/${session.web3.user.id}`).then(res => res.json());
+  return result;
+}
+
+export async function updateTBA(tba: any): Promise<any> {
+  const session =await getSession() as Session;
+  if(!session?.web3?.user) {
+    redirect("/onboard");
+  }
+  const address = session.web3.user.id;
+  const result = await fetch(`${API_URL}/polybase/update/tba/${address}/${tba}`).then(res => res.json());
   return result;
 }

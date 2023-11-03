@@ -43,7 +43,7 @@ export default function Login() {
     connect({ connector: connectors as any });
   }, [connect, connectors, isDisconnected]);
 
-  console.log(session);
+
   if (isConnecting || isReconnecting) {
     return (
       <Button
@@ -63,8 +63,14 @@ export default function Login() {
      <AuthenticateButton />
     );
   }
+  
+  if(!isConnecting && address == session?.web3?.address && !session?.web3.user.username){
+    <div>
+      Create Profile
+    </div>
+  }
 
-  if (!isConnecting && address && address == session?.web3?.address) {
+  if (!isConnecting && address == session?.web3?.address && session?.web3?.user?.username) {
     return (
       <div className="flex rounded-md  items-center gap-2">
         <Link href="/profile">
@@ -80,7 +86,8 @@ export default function Login() {
           onClick={() => setShowModal(!showModal)}
         >
           <span className="text-sm">
-            {truncateMiddle(session.web3.user.username, 13)}
+            {session.web3.user.username}
+              
           </span>
           <span className="text-sm text-text-secondary font-light">
             {truncateMiddle(session.web3.address, 13)}
@@ -167,7 +174,6 @@ const ConnectModal = ({
         message: JSON.stringify(message),
         signedMessage,
         redirect: true,
-        callbackUrl: "/profile",
       });
       if (response?.error) {
         console.log("Error occured:", response.error);
