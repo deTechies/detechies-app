@@ -43,7 +43,7 @@ type Job = {
   name: string;
 };
 
-const jobList: Job[] = [
+export const jobList: Job[] = [
   { id: 1, groupName: "Developer", name: "Front-end Developer" },
   { id: 2, groupName: "Developer", name: "Back-end Developer" },
   { id: 3, groupName: "Developer", name: "Data Scientist" },
