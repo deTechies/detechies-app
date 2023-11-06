@@ -49,10 +49,10 @@ module.exports = {
               letterSpacing: "0.4px",
             },
             p: {
-              color: "var(--text-secondary)",
+              color: "var(--text-primary)",
               fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "14px",
+              fontSize: "16",
+              lineHeight: "4px",
               letterSpacing: "0.4px",
             },
             body: {
@@ -65,7 +65,15 @@ module.exports = {
             a: {
               color: "var(--text-secondary)", 
               fontWeight: "400", 
-            }
+            },
+            input: {
+              color: "var(--text-secondary)",
+              fontWeight: "400",
+              fontSize: "14px",
+              lineHeight: "14px",
+              letterSpacing: "0.4px",
+
+            },
           }
         }
       }),

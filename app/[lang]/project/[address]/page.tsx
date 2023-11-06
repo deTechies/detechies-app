@@ -1,4 +1,3 @@
-import CreatePushGroup from "@/components/extra/chat/create-push-group";
 import PushGroupChat from "@/components/extra/chat/push-group-chat";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSingleProject } from "@/lib/data/project";
@@ -64,8 +63,6 @@ export default async function ProjectDetailPage({ params }: { params: { address:
             chatId={data.chatId.chatId}
           />
         )}
-
-        <CreatePushGroup image={data.details?.image} members={workers} />
 
       </section>
       <section className="col-span-1 flex flex-col gap-8">

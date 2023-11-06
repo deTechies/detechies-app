@@ -1,19 +1,53 @@
-'use client'
+"use client";
 
-import { useEditor, EditorContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { Editor, EditorContent } from "@tiptap/react";
+import { useEffect, useState } from "react";
+import { BubbleMenuEditor } from "../editor/bubble-menu-editor";
+import { FloatingMenuEditor } from "../editor/floating-menu-editor";
+import { Button } from "./button";
 
-const TextEditor = () => {
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-    ],
-    content: '<p>Hello World! 🌎️</p>',
-  })
-
-  return (
-    <EditorContent editor={editor} />
-  )
+type Props ={
+  editor: Editor;
 }
 
-export default TextEditor
+
+export const TextEditor = ({
+  editor
+}: Props) => {
+ 
+
+  const [isEditable, setIsEditable] = useState(true);
+
+  useEffect(() => {
+    if (editor) {
+      editor.setEditable(isEditable);
+    }
+  }, [isEditable, editor]);
+
+  return (
+    <>
+      <div className="text-text-primary">
+        <input
+          type="checkbox"
+          checked={isEditable}
+          onChange={() => setIsEditable(!isEditable)}
+        />
+        Editable
+      </div>
+      <Button
+        size="sm"
+        onClick={() => setIsEditable(!isEditable)}
+      >
+        Editable
+      </Button>
+      {editor && <BubbleMenuEditor editor={editor} />}
+
+      {editor && <FloatingMenuEditor editor={editor} />}
+      <EditorContent 
+        editor={editor} 
+        className=""
+      />
+    </>
+  );
+};
+
