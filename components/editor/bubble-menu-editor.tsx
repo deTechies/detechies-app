@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { BubbleMenu, Editor as EditorProp } from "@tiptap/react";
-import { Button } from "../ui/button";
 
 type Props = {
   editor: EditorProp;
@@ -16,7 +15,7 @@ export const BubbleMenuEditor = ({ editor }: Props) => {
       >
         <div className="flex flex-col items-center">
           <div className="flex space-x-1">
-            <Button
+       {/*      <Button
               variant={"secondary"}
               size={"sm"}
               onClick={() => editor.chain().focus().toggleBold().run()}
@@ -65,7 +64,7 @@ export const BubbleMenuEditor = ({ editor }: Props) => {
               className={editor.isActive("link") ? "is-active" : ""}
             >
               Link
-            </Button>
+            </Button> */}
           </div>
         </div>
       </BubbleMenu>

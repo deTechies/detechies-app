@@ -5,7 +5,6 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
 
 type Props = {
   editor: EditorProp;
@@ -77,7 +76,7 @@ export const FloatingMenuEditor = ({ editor }: Props) => {
     >
       <div className="flex flex-col p-1 items-center">
         <div className="flex space-x-3">
-          <Button
+      {/*     <Button
           variant={"secondary"}
           size={"sm"}
             onClick={() =>
@@ -176,10 +175,10 @@ export const FloatingMenuEditor = ({ editor }: Props) => {
               </span>
             ) : (
               "Image"
-            )} */}
+            )}
             Image
-          </Button>
-        </div>
+          </Button> */}
+    </div>
       </div>
     </FloatingMenu>
   );
