@@ -1,44 +1,63 @@
 "use client"
+import TransactionData from "@/components/screens/transaction-data";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { TextEditor } from "@/components/ui/text-editor";
-import Color from "@tiptap/extension-color";
-import Dropcursor from "@tiptap/extension-dropcursor";
-import { Link as ExtensionLink } from "@tiptap/extension-link";
-import ListItem from "@tiptap/extension-list-item";
-import TextStyle from "@tiptap/extension-text-style";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { Input } from "@/components/ui/input";
+import { ABI } from "@/lib/constants";
+import { uploadContent } from "@/lib/upload";
 import Image from "next/image";
 import Link from "next/link";
+import { Editor } from "novel";
+import { useState } from "react";
+import { getAddress } from "viem";
+import { useAccount, useContractWrite } from "wagmi";
 import { ProjectDetailProps } from "./page";
+
 
 export default function ProjectDetail({
   details,
 }: {
   details: ProjectDetailProps;
+
 }) {
   
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      ExtensionLink.configure({
-        protocols: [],
-      }),
-      Color.configure({ types: [TextStyle.name, ListItem.name] }),
-      TextStyle.configure({ types: [ListItem.name] } as any),
-      Dropcursor.configure({
-        width: 2,
-        class: "polynote-image",
-      }),
-    ],
-    editorProps: {
-      attributes: {
-        class: 'prose p-8 focus:outline-none focus:shadow-none focus:ring-0 focus:bg-gray-100 rounded-sm focus:border focus:border-border-input',
-      },
-    },
-    content: "<p>Just some random content.</p>"
+  const [editing, setEditing] = useState(false);
+  const {address} = useAccount();
+  const [data, setData] = useState<any>(
+    {content: details.introduction, 
+    name: details.name,
+      url: details.url,
+  }
+    );
 
-  });
+    const {write, isLoading, data:deploy} = useContractWrite({
+      address: getAddress(details.id),
+      functionName: "updateProject",
+      abi: ABI.project,
+    });
+  
+  const startSaving = async() => {
+    setEditing(false);
+    console.log(data);
+    
+    const uploadedContent = await uploadContent(
+      JSON.stringify({
+        ...details,
+        introduction: data.content,
+        name: data.name,
+        url: data.url,
+      })
+    );
+
+    console.log(uploadedContent);
+    
+
+       write({
+        args: [data.name, uploadedContent, data.url, 0]
+      }) 
+
+    
+  }
 
   return (
     <Card className="w-full">
@@ -50,18 +69,83 @@ export default function ProjectDetail({
           className="rounded-[6px] bg-accent-secondary"
           alt="project_image_holder"
         />
-        <div className="prose">
-          <h3>{details.name}</h3>
-          <Link href={details.url ? details.url : "https://careerzen.org"}>
-            {details.url ? details.url : "https://careerzen.org"}
+        <div className="flex flex-col gap-1">
+          {
+            editing ?
+            <Input type="text" className="w-full text-3xl font-medium" defaultValue={details.name} onChange={
+              (e) => {
+                setData((prev:any) => ({
+                  ...prev,
+                  name: e.target.value,
+                }));
+              }
+            }/> :
+            <h1 className="text-3xl font-medium">{data.name}</h1>
+          }
+
+{
+            editing ?
+            <Input type="url" placeholder="https://careerzen.org" className="w-full" defaultValue={data.url} onChange={
+              (e) => {
+                setData((prev:any) => ({
+                  ...prev,
+                  url: e.target.value,
+                }));
+              }
+            }/> :
+            <Link href={data.url ? data.url : "https://careerzen.org"}>
+            {data.url ? data.url : "https://careerzen.org"}
           </Link>
+          }
+    
         </div>
       </header>
       <div className="mt-4 w-full flex flex-col gap-4">
-        <h5>Project Details</h5>
+      {
+          details.creator == address?.toLowerCase() && (
+        <div className="flex justify-end gap-4">
+        
+              
+            
+        <Button variant="secondary" size="sm"
+          onClick={() => setEditing(!editing)}
+        >
+          {editing ? "Stop" : "Edit"}
+        </Button>
+        <Button
+          size={"sm"}
+          
+          onClick={startSaving}
+        >
+          Save
+        </Button>
+        </div>
+        )
+      }
+     
+        {
+          editing ? 
+          (
+            <Editor 
+            defaultValue={details.introduction ? details.introduction : "No introduction yet."}
+            storageKey={details.name + '_introduction'}
+            onUpdate={(editor) => {
+              setData((prev:any) => ({
+                ...prev,
+                content: editor?.getHTML(),
+              }));
+            }}
+          />
+          ): (
+            <div className="prose">
 
-        {editor && <TextEditor editor={editor} />}
+              <div dangerouslySetInnerHTML={{__html: data.content ? data.content : "No introduction yet."}}></div>
+            </div>
+          )
+        }
+       
       </div>
+      <TransactionData hash={deploy?.hash} />
     </Card>
   );
 }

@@ -26,26 +26,19 @@ export const TextEditor = ({
 
   return (
     <>
-      <div className="text-text-primary">
-        <input
-          type="checkbox"
-          checked={isEditable}
-          onChange={() => setIsEditable(!isEditable)}
-        />
-        Editable
-      </div>
       <Button
         size="sm"
+        className="w-fit self"
         onClick={() => setIsEditable(!isEditable)}
       >
-        Editable
+        {isEditable ? "You can edit" : "Read Only"}
       </Button>
       {editor && <BubbleMenuEditor editor={editor} />}
 
       {editor && <FloatingMenuEditor editor={editor} />}
       <EditorContent 
         editor={editor} 
-        className=""
+        className="border border-border-div rounded-md"
       />
     </>
   );

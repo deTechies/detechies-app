@@ -52,7 +52,7 @@ module.exports = {
               color: "var(--text-primary)",
               fontWeight: "400",
               fontSize: "16",
-              lineHeight: "4px",
+              lineHeight: "18px",
               letterSpacing: "0.4px",
             },
             body: {

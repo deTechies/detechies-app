@@ -9,6 +9,7 @@ import ProjectNfts from "./project-nfts";
 import ProjectWorks from "./project-works";
 
 export interface ProjectDetailProps {
+  id: string;
   image: string;
   name: string;
   description: string;
@@ -19,6 +20,7 @@ export interface ProjectDetailProps {
   urls: string[];
   location:string;
   chatId: any;
+  introduction: string;
   details: any;
   owner: string;
   workers: string[];

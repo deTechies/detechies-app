@@ -51,22 +51,6 @@ const projectFormSchema = z.object({
   type: z.enum(["hackathon", "side_project", "project"], {
     required_error: "You need to select a  type.",
   }),
-  location: z.enum(
-    [
-      "everywhere",
-      "europe",
-      "asia",
-      "north-america",
-      "africa",
-      "south-america",
-    ],
-    {
-      required_error: "You need to select a region type.",
-    }
-  ),
-
-  requirementDeadline: z.date().min(new Date()).optional(),
-  projectDeadline: z.date().min(new Date()).optional(),
   urls: z
     .array(
       z.object({

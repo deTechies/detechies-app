@@ -1,5 +1,4 @@
 "use client";
-import Confetti from "@/app/[lang]/onboard/mint/confetti";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Address, useWaitForTransaction } from "wagmi";
@@ -25,9 +24,6 @@ export default function TransactionData({
     }
   }, [isSuccess, redirect, router]);
   
-  if(isSuccess){
-      return <Confetti />
-  }
 
   if (!hash || isSuccess) {
     return null;
@@ -36,7 +32,7 @@ export default function TransactionData({
   
 
   return (
-    <div className="">
+    <div className="fixed bottom-5 right-5 border-border-div rounded-sm">
       <span>
         <Loading />
         <div className="flex flex-col gap-4">
