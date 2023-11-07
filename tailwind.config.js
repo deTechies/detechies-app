@@ -215,6 +215,8 @@ module.exports = {
       fontSize: {
         'sm': ['0.875rem', { lineHeight: '0.875rem'},{ fontWeight: '400' }],
         'md': ['1rem', { lineHeight: '1.5rem'},{ fontWeight: '400' }, { letterSpacing: '0.5px' }],  
+        'subhead_m': ['1.2rem', { lineHeight: '1.3rem'},{ fontWeight: '600' }, { letterSpacing: '0.5px' }],
+        'title_m': ['1rem', { fontWeight: '600' }, {lineHeight: '1.3rem'}, { letterSpacing: '0.1px' }],
       }
     },
   },
