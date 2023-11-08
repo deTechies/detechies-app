@@ -2,13 +2,12 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
-    
     container: {
       center: true,
       padding: "",
@@ -20,7 +19,7 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            h1:{
+            h1: {
               color: "var(--text-primary)",
               fontWeight: "700",
               fontSize: "48px",
@@ -63,8 +62,8 @@ module.exports = {
               letterSpacing: "0.4px",
             },
             a: {
-              color: "var(--text-secondary)", 
-              fontWeight: "400", 
+              color: "var(--text-secondary)",
+              fontWeight: "400",
             },
             input: {
               color: "var(--text-secondary)",
@@ -72,10 +71,9 @@ module.exports = {
               fontSize: "14px",
               lineHeight: "14px",
               letterSpacing: "0.4px",
-
             },
-          }
-        }
+          },
+        },
       }),
       colors: {
         border: "hsl(var(--border))",
@@ -92,41 +90,40 @@ module.exports = {
         "accent-secondary": "var(--accent-secondary)",
         "accent-on-primary": "var(--accent-on-primary)",
         "accent-on-secondary": "var(--accent-on-secondary)",
-        greywhite: "#FFFFFF", 
-        textg: "#6B7684", 
-        textb: "#101113", 
+        greywhite: "#FFFFFF",
+        textg: "#6B7684",
+        textb: "#101113",
         text: {
-          "primary": "var(--text-primary)",
-          "secondary": "var(--text-secondary)",
-          "placeholder": "var(--text-placeholder)",
+          primary: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          placeholder: "var(--text-placeholder)",
         },
         background: {
-          "base": "var(--background-base)",
+          base: "var(--background-base)",
           "layer-1": "var(--background-layer-1)",
           "layer-2": "var(--background-layer-2)",
         },
         border: {
-          "input": "var(--border-input)",
-          "primary": "var(--border-primary)",
-          "secondary": "var(--border-secondary)",
-          "div": "var(--border-div)",
+          input: "var(--border-input)",
+          primary: "var(--border-primary)",
+          secondary: "var(--border-secondary)",
+          div: "var(--border-div)",
         },
         button: {
-          "secondary": "var(--button-secondary)",
+          secondary: "var(--button-secondary)",
           "secondary-hover": "var(--button-secondary-hover)",
           "secondary-disabled": "var(--button-secondary-disabled)",
           "secondary-pressed": "var(--button-secondary-pressed)",
         },
         state: {
-          "error": "var(--state-error-primary)",
-          "success": "var(--state-success-primary)",
-          "warning": "var(--state-warning-primary)",
-          "info": "var(--state-info-primary)",
+          error: "var(--state-error-primary)",
+          success: "var(--state-success-primary)",
+          warning: "var(--state-warning-primary)",
+          info: "var(--state-info-primary)",
           "error-secondary": "var(--state-error-secondary)",
           "success-secondary": "var(--state-success-secondary)",
           "warning-secondary": "var(--state-warning-secondary)",
           "info-secondary": "var(--state-info-secondary)",
-
         },
         black: {
           DEFAULT: "#101113",
@@ -138,15 +135,15 @@ module.exports = {
           400: "#EFF0F2",
           300: "rgba(150, 166, 180, 1)",
           200: "#F6F7F8",
-          100: "rgba(239, 240, 242, 1)", 
+          100: "rgba(239, 240, 242, 1)",
         },
         green: {
           DEFAULT: "#19C900",
-          medium: "#19C900", 
-          300:  "#DEFFD9", 
+          medium: "#19C900",
+          300: "#DEFFD9",
           400: "#DBFDF0",
-          500: "#00D41D", 
-          800: "rgba(15, 219, 139, 1)", 
+          500: "#00D41D",
+          800: "rgba(15, 219, 139, 1)",
           light: "#DEFFD9",
         },
         primary: {
@@ -177,7 +174,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -186,8 +182,8 @@ module.exports = {
         xs: "8px",
       },
       gap: {
-        "md": "24px", 
-      }, 
+        md: "24px",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
@@ -199,26 +195,53 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'footer-texture': "url('/public/onboard-bg.png')",
+        "footer-texture": "url('/public/onboard-bg.png')",
       },
       boxShadow: {
-        "custom": "2px 2px 10px 0px rgba(0, 0, 0, 0.05)"
+        custom: "2px 2px 10px 0px rgba(0, 0, 0, 0.05)",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       text: {
-        large: "48px", 
+        large: "48px",
         medium: "24px",
       },
       fontSize: {
-        'sm': ['0.875rem', { lineHeight: '0.875rem'},{ fontWeight: '400' }],
-        'md': ['1rem', { lineHeight: '1.5rem'},{ fontWeight: '400' }, { letterSpacing: '0.5px' }],  
-        'subhead_m': ['1.2rem', { lineHeight: '1.3rem'},{ fontWeight: '600' }, { letterSpacing: '0.5px' }],
-        'title_m': ['1rem', { fontWeight: '600' }, {lineHeight: '1.3rem'}, { letterSpacing: '0.1px' }],
-      }
+        sm: ["0.875rem", { lineHeight: "0.875rem" }, { fontWeight: "400" }],
+        md: [
+          "1rem",
+          { lineHeight: "1.5rem" },
+          { fontWeight: "400" },
+          { letterSpacing: "0.5px" },
+        ],
+        subhead_s: [
+          "1rem",
+          { lineHeight: "1.4rem" },
+          { fontWeight: "600" },
+          { letterSpacing: "0.5px" },
+        ],
+        subhead_m: [
+          "1.2rem",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "600" },
+          { letterSpacing: "0.5px" },
+        ],
+        title_m: [
+          "1rem",
+          { fontWeight: "600" },
+          { lineHeight: "1.3rem" },
+          { letterSpacing: "0.1px" },
+        ],
+        title_l: [
+          "1rem",
+          { fontWeight: "600" },
+          { lineHeight: "1.1rem" },
+          { letterSpacing: "0.1px" },
+        ],
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-}
+};

@@ -1,7 +1,7 @@
 "use client"
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import Image from "next/image";
+import IPFSImageLayer from "../ui/layer";
 import { Switch } from "../ui/switch";
 
 export default function PersonItem({
@@ -44,11 +44,7 @@ export default function PersonItem({
       <article className="flex justify-between items-center p-4 ">
         <figure className="flex gap-4">
           <div className="relative w-12 h-12 rounded-full">
-                    <Image src="https://careerzen.org/images/careerzen.png"
-                    alt="CareerZen"
-                    width={48}
-                    height={48}
-                    className="rounded-full" />
+              <IPFSImageLayer hashes={src} />
           </div>
           <div>
             <p className="font-bold">{name}</p>

@@ -111,8 +111,8 @@ export default function UploadWorks({ type }: { type?: string }) {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button className="cursor-pointer">Upload Works</Button>
+      <DialogTrigger className="w-full">
+        <Button className="cursor-pointer" >Upload Works</Button>
       </DialogTrigger>
 
       <DialogContent>
