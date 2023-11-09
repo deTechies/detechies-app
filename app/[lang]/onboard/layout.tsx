@@ -2,7 +2,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isAddress } from 'viem';
 import { useAccount } from 'wagmi';
 
@@ -21,6 +21,7 @@ interface OnboardLayoutProps {
 
 export default function OnboardLayout({ children }: OnboardLayoutProps): JSX.Element {
   const { data: sessionData } = useSession() as { data: SessionData };
+  const [loading, setLoading] = useState(true);
   const { address } = useAccount();
   const router = useRouter();
 
@@ -35,23 +36,28 @@ export default function OnboardLayout({ children }: OnboardLayoutProps): JSX.Ele
     try {
       const web3 = sessionData?.web3;
       
+      
+      if(!web3 && !address){
+        return;
+      }
       // Check for web3 and address presence
       if (!web3 || !web3.address) {
-        redirectTo('/onboard');
+        return;
       }
 
       // Address mismatch, go to onboard
-      if (web3.address !== address) {
-        redirectTo('/onboard');
+      if (web3?.address !== address) {
+        return;
+
       }
 
       // No user object, go to onboard/profile
-      if (typeof web3.user !== 'object') {
+      if (typeof web3?.user !== 'object') {
         redirectTo('/onboard/profile');
       }
 
       // Invalid or no TBA address, go to onboard/mint
-      if (!web3.user.TBA || !isAddress(web3.user.TBA)) {
+      if (!web3?.user?.TBA || !isAddress(web3?.user.TBA)) {
         redirectTo('/onboard/mint');
       }
 
@@ -61,6 +67,8 @@ export default function OnboardLayout({ children }: OnboardLayoutProps): JSX.Ele
       // Catch the redirect "error" to prevent it from being thrown globally.
       console.error(redirectError);
     }
+    
+    
   }, [sessionData, address, router]);
 
   return (

@@ -32,7 +32,7 @@ export default async function MemberListItem({userAddress}: {userAddress: string
         <IPFSImageLayer hashes={data?.message.nft} />
     </Avatar>
     <div className="ml-4 space-y-1">
-      <p className="text-sm font-medium leading-none">{data.message.name}</p>
+      <p className="text-sm font-medium leading-none">{data.message.username}</p>
       <p className="text-sm text-muted-foreground">
         {data.message.job}
       </p>

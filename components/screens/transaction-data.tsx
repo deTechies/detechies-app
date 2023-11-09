@@ -28,15 +28,11 @@ export default function TransactionData({
   if (!hash || isSuccess) {
     return null;
   }
-  //TODO: fix this code to make it look nice. 
-  
 
   return (
-    <div className="fixed bottom-5 right-5 border-border-div rounded-sm">
+    <div className="fixed bottom-5 right-5 border-border-div rounded-md bg-background-layer-2">
       <span>
-        <Loading />
         <div className="flex flex-col gap-4">
-          <h1>Data is being processed</h1>
           <Loading />
           <span>
             {isLoading

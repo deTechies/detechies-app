@@ -23,6 +23,7 @@ export default function OnboardPage() {
   
   
   
+  
   return (
     <div className="flex flex-col gap-8">
       <h1 className="text-2xl font-medium tracking-wide">Sign Up</h1>

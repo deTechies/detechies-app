@@ -43,8 +43,9 @@ export default function MintAvatar() {
     }
     
     if(finished){
-      //lets create the tba here.. 
       updateAccount();
+      //now we need to get a tba account here so we can use it directly to update. 
+      
     }
   }, [data, tba, finished]);
 
