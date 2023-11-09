@@ -38,7 +38,7 @@ const AuthenticateButton = () => {
         message: JSON.stringify(message),
         signedMessage,
         redirect: true,
-        callbackUrl: "/profile",
+        callbackUrl: "/onboard",
       });
       if (response?.error) {
         console.log("Error occured:", response.error);
