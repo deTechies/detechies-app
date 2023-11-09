@@ -26,12 +26,10 @@ export default function MintAvatar() {
   useEffect(() => {
     
     const updateAccount = async () => {
-      if (data && (parseInt(data?.toString()) > 0) || tba) {
+      if (data && (parseInt(data?.toString()) > 0) ) {
         const checkResult = await checkTBA();
-        
-        console.log(checkResult);
-
-        if (isAddress(tba) && !isAddress(checkResult.message.TBA)) {
+        if(!tba){return;}
+        if (isAddress(tba.toString()) && !isAddress(checkResult.message.TBA)) {
           const updateResult = await updateTBA(tba);
           toast({ title: "succesfully added the TBA" });
         }
