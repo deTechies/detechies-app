@@ -121,7 +121,7 @@ export default function OnboardProfileForm() {
           });
 
           setLoading(false);
-          router.replace("/onboard/mint");
+          router.push("/onboard/mint");
         } else {
           console.error("Error creating profile:", data.message);
           toast({

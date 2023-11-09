@@ -10,8 +10,9 @@ interface JoinGroupProps {
   address: string;
 }
 
-export default function JoinGroup({ address }: JoinGroupProps) {
+export default function JoinProject({ address }: JoinGroupProps) {
     const [loading, setLoading] = useState<boolean>(false);
+    
     const {data:session} = useSession();
   const join = async () => {
     //@ts-ignore
@@ -24,7 +25,6 @@ export default function JoinGroup({ address }: JoinGroupProps) {
       requester: session?.web3.address,
       tokenbound: session?.web3.user.TBA,
     };
-
 
     fetch(`${API_URL}/polybase/requestMint`, {
       method: "POST",
@@ -57,7 +57,7 @@ export default function JoinGroup({ address }: JoinGroupProps) {
     loading={loading}
     className="w-full"
   >
-    Join Group
+    Join Project
   </Button>
   );
 }
