@@ -58,6 +58,8 @@ export default function ProjectDetail({
 
     
   }
+  
+  console.log(details)
 
   return (
     <Card className="w-full">

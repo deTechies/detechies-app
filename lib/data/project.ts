@@ -6,7 +6,7 @@ export async function getSingleProject(address:string) {
   //getting profile session
   const session = (await getServerSession(authOptions)) as any;
   
-    const res = await fetch(`${API_URL}/project/single/${address}`, { next: { revalidate: 60 } })
+    const res = await fetch(`${API_URL}/project/single/${address}`, {next: { revalidate: 10 },} )
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
     

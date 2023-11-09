@@ -37,16 +37,13 @@ export default function ProjectItem({ details }: { details: ProjectItemProps }) 
                     <div className="flex gap-8">
                         <div className="flex gap-2 text-text-secondary text-sm font-light items-center">
                             <Users size={16} stroke={"currentColor"} className="text-text-secondary" />
-                            {details.members?.length}
+                            {details.members?.length} Members
                         </div>
                         <div className="flex gap-2 text-text-secondary text-sm font-light items-center capitalize">
                             <WorkflowIcon size={16} stroke={"currentColor"} className="text-text-secondary " />
-                            {details.works?.length}
+                            {details.works?.length} Works
                         </div>
                     </div>
-                    <span className="text-text-primary font-light text-sm w-full">
-                        {details.introduction || DEFAULT_DESCRIPTION}
-                    </span>
                     
                     
                 </section>

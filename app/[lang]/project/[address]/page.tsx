@@ -72,7 +72,7 @@ export default async function ProjectDetailPage({
       <ProjectInfo info={data} />
 
         {data && data.works && data.works.length > 0 && (
-          <ProjectWorks works={data.works} />
+          <ProjectWorks works={data.works} isCreator={data.isCreator} contract={data.id as Address}/>
         )}
       </section>
     </main>
