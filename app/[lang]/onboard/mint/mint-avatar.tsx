@@ -14,7 +14,7 @@ import AuthenticateButton from "@/components/user/authenticate-button";
 import { checkTBA, updateTBA } from "@/lib/data/user";
 import { useAvatarData } from "@/lib/hooks/avatar/readMint";
 import { useMint } from "@/lib/hooks/avatar/useMint";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { isAddress } from 'viem';
 import Confetti from "./confetti";
@@ -31,7 +31,10 @@ export default function MintAvatar() {
         if(!tba){return;}
         if (isAddress(tba.toString()) && !isAddress(checkResult.message.TBA)) {
           const updateResult = await updateTBA(tba);
+          //sign out the user 
+          
           toast({ title: "succesfully added the TBA" });
+          signOut()
         }
       }
     };
