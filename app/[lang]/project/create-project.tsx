@@ -154,11 +154,7 @@ export default function CreateProject() {
             hackathon, side project or a contract.
           </p>
         </DialogDescription>
-        <div>
-          <Button>
-            Import Project
-          </Button>
-        </div>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <section className="flex gap-8">

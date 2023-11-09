@@ -6,6 +6,7 @@ import { useContractWrite, useWaitForTransaction } from "wagmi";
 
 export function useMint() {
   const [minting, setMinting] = useState(false);
+  const [finished, setFinished] = useState(false);
   const { write, isLoading, data: mintingStatus } = useContractWrite({
     address: MUMBAI.profile,
     abi: ABI.profile,
@@ -17,6 +18,7 @@ export function useMint() {
     onSuccess() {
       toast({ title: "Successfully minted all the items" });
       setMinting(false);
+      setFinished(true);
     },
   });
 
@@ -25,5 +27,5 @@ export function useMint() {
     setMinting(true);
   };
 
-  return { minting, mint, isLoading, mintingStatus };
+  return { minting, mint, isLoading, mintingStatus, finished };
 }

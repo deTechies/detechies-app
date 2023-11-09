@@ -36,6 +36,7 @@ export async function getUserProfile(address?: string) {
   return res.json();
 }
 
+
 export async function getUserSession(){
   const session = (await getServerSession(authOptions)) as Session;
   if(!session?.web3?.user) {

@@ -20,7 +20,7 @@ import { isAddress } from 'viem';
 import Confetti from "./confetti";
 export default function MintAvatar() {
   const { data, tba } = useAvatarData();
-  const { minting, mint, isLoading, mintingStatus } = useMint();
+  const { minting, mint, isLoading, mintingStatus, finished } = useMint();
   const {data:session} = useSession();
 
   useEffect(() => {
@@ -41,9 +41,14 @@ export default function MintAvatar() {
     if(data){
       updateAccount();
     }
-  }, [data, tba]);
+    
+    if(finished){
+      //lets create the tba here.. 
+      updateAccount();
+    }
+  }, [data, tba, finished]);
 
-  if (parseInt(data) > 0) {
+  if (parseInt(data) > 0 || finished) {
     return (
       <section className="flex flex-col gap-4">
         <div className="w-full aspect-square relative m-0 z-0">
