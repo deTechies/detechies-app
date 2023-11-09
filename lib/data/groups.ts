@@ -4,7 +4,7 @@ import { API_URL } from "../constants";
 
 
 export async function getGroups(search?: string){
-    const response = await fetch(`${API_URL}/group/all`);
+    const response = await fetch(`${API_URL}/group/all`, { next: { revalidate: 60 } });
     const data = await response.json();
     
     if(search){
@@ -15,7 +15,7 @@ export async function getGroups(search?: string){
 }
 
 export async function getGroupDetail(address: string){
-    const response = await fetch(`${API_URL}/group/single/${address}`);
+    const response = await fetch(`${API_URL}/group/single/${address}`, { next: { revalidate: 60 } });
     const data = await response.json();
     const session = await getServerSession(authOptions) as any;
     
@@ -27,7 +27,7 @@ export async function getGroupDetail(address: string){
 }
 
 export async function getPendingMembers(address: string){
-    const response = await fetch(`${API_URL}/polybase/company/request?address=${address}&status=open`);
+    const response = await fetch(`${API_URL}/polybase/company/request?address=${address}&status=open`, { next: { revalidate: 60 } });
     const data = await response.json();
     
     return data;
