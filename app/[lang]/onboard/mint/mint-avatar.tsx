@@ -10,23 +10,29 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { toast } from "@/components/ui/use-toast";
+import AuthenticateButton from "@/components/user/authenticate-button";
 import { checkTBA, updateTBA } from "@/lib/data/user";
 import { useAvatarData } from "@/lib/hooks/avatar/readMint";
 import { useMint } from "@/lib/hooks/avatar/useMint";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { isAddress } from 'viem';
 import Confetti from "./confetti";
-
 export default function MintAvatar() {
   const { data, tba } = useAvatarData();
   const { minting, mint, isLoading, mintingStatus } = useMint();
+  const {data:session} = useSession();
 
   useEffect(() => {
     
     const updateAccount = async () => {
       if (data && (parseInt(data?.toString()) > 0) || tba) {
         const checkResult = await checkTBA();
-        if (checkResult.status && !checkResult.message.TBA) {
-          const updateResult = await updateTBA(checkResult.message.TBA);
+        
+        console.log(checkResult);
+
+        if (isAddress(tba) && !isAddress(checkResult.message.TBA)) {
+          const updateResult = await updateTBA(tba);
           toast({ title: "succesfully added the TBA" });
         }
       }
@@ -36,7 +42,7 @@ export default function MintAvatar() {
     }
   }, [data, tba]);
 
-  if (data && parseInt(data.toString()) > 0 || tba) {
+  if (parseInt(data) > 0) {
     return (
       <section className="flex flex-col gap-4">
         <div className="w-full aspect-square relative m-0 z-0">
@@ -48,18 +54,27 @@ export default function MintAvatar() {
           you have received some NFTs. You can collect career NFTs on My Page.
         </p>
         <div className="flex gap-4">
-          <Link
-            href="/profiles"
-            className="w-full py-3 rounded-md bg-button-secondary text-primary text-center"
-          >
-            Browse Builders
-          </Link>
-          <Link
-            href="/profile"
-            className="w-full py-3 rounded-md bg-accent-secondary text-accent-on-secondary text-center"
-          >
-            View my Profile
-          </Link>
+          {
+            tba && session?.web3.user.TBA && !isAddress(session.web3.user.TBA)  ? (
+                <AuthenticateButton />
+            ): (
+              <>
+              <Link
+              href="/profiles"
+              className="w-full py-3 rounded-md bg-button-secondary text-primary text-center"
+            >
+              Browse Builders
+            </Link>
+            <Link
+              href="/profile"
+              className="w-full py-3 rounded-md bg-accent-secondary text-accent-on-secondary text-center"
+            >
+              View my Profile
+            </Link>
+            </>
+            )
+          }
+       
         </div>
         <section className="z-10">
           <h1 className="font-semibold mb-2 ml-2">NFT received</h1>

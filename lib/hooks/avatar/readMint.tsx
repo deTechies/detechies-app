@@ -22,8 +22,8 @@ export function useAvatarData(): UseAvatarDataReturnType {
   });
 
   const { data: tbaData } = useContractRead({
-    address: MUMBAI.groupRegistry,
-    abi: ABI.groupRegistry,
+    address: MUMBAI.profile,
+    abi: ABI.profile,
     functionName: "getTBA",
     args: [address],
   });

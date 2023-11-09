@@ -1,4 +1,3 @@
-
 import GithubSignIn from "@/components/connections/github/github-signin";
 import UploadWorks from "@/components/modal/upload-works";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,7 +7,7 @@ import ProjectMembers from "./project-members";
 import ProjectNfts from "./project-nfts";
 
 export interface InfoProps {
-  id:string;
+  id: string;
   type: string;
   owner: string;
   creator: string;
@@ -32,23 +31,23 @@ export default async function ProjectInfo({ info }: { info: InfoProps }) {
           <dd>
             <h6 className="text-subhead_s">Owner</h6>
             <span className="text-text-secondary text-title_l">
-              {info.creator ? truncateMiddle(info.creator, 16) : "Careerzen Member"}
+              {info.creator
+                ? truncateMiddle(info.creator, 16)
+                : "Careerzen Member"}
             </span>
           </dd>
         </section>
         <section>
-          <ProjectNfts address={info.id}/>
+          <ProjectNfts address={info.id} />
         </section>
         <section>
-          <ProjectMembers members={info.members} creator={info.creator}/>
+          <ProjectMembers members={info.members} creator={info.creator} />
         </section>
         <section className="grid grid-cols-2">
-          {session?.web3.address && info.members?.includes(session?.web3.address) && (
-            <>
-              <GithubSignIn />
-              <UploadWorks />
-            </>
-          )}
+          <>
+            <GithubSignIn />
+            <UploadWorks />
+          </>
         </section>
       </CardContent>
     </Card>

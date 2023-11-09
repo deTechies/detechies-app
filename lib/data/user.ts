@@ -4,8 +4,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Session, getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { isAddress } from "viem";
 import { API_URL } from "../constants";
-
 export async function getUserProfile(address?: string) {
   //getting profile session
 
@@ -15,7 +15,13 @@ export async function getUserProfile(address?: string) {
       redirect("/onboard");
     }
     return session.web3.user;
+    
+    if(!isAddress(session.web3?.user.TBA)){
+      redirect("/onboard/mint");
+    }
   }
+  
+  
 
   const res = await fetch(`${API_URL}/polybase/${address}`);
   // The return value is *not* serializedå
@@ -77,7 +83,18 @@ export async function updateTBA(tba: any): Promise<any> {
   if(!session?.web3?.user) {
     redirect("/onboard");
   }
+  
+  console.log(tba)
   const address = session.web3.user.id;
-  const result = await fetch(`${API_URL}/polybase/update/tba/${address}/${tba}`).then(res => res.json());
+  const result = await fetch(`${API_URL}/polybase/update/tba`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      address: address,
+      tba: tba
+    })
+  }).then(res => res.json());
   return result;
 }
