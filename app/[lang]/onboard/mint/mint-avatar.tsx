@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import { isAddress } from 'viem';
 import Confetti from "./confetti";
 export default function MintAvatar() {
-  const { data, tba } = useAvatarData();
+  const { data, tba, refetch } = useAvatarData();
   const { minting, mint, isLoading, mintingStatus, finished } = useMint();
   const {data:session} = useSession();
 
@@ -40,14 +40,15 @@ export default function MintAvatar() {
     };
     if(data){
       updateAccount();
+     
     }
     
     if(finished){
-      updateAccount();
+      refetch();
       //now we need to get a tba account here so we can use it directly to update. 
       
     }
-  }, [data, tba, finished]);
+  }, [data, tba, finished, refetch]);
 
   if (parseInt(data) > 0 || finished) {
     return (

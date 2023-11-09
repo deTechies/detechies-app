@@ -2,7 +2,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { isAddress } from 'viem';
 import { useAccount } from 'wagmi';
 
@@ -20,56 +20,47 @@ interface OnboardLayoutProps {
 }
 
 export default function OnboardLayout({ children }: OnboardLayoutProps): JSX.Element {
-  const { data: sessionData } = useSession() as { data: SessionData };
-  const [loading, setLoading] = useState(true);
+  const { data: sessionData, status } = useSession();
   const { address } = useAccount();
   const router = useRouter();
 
   useEffect(() => {
+    let shouldRedirect = false;
     const redirectTo = (path: string) => {
-      router.push(path);
-      // We throw an error to escape the rest of the logic in the useEffect if a redirect is required.
-      // This error is caught by React and does not crash the application.
-      throw new Error(`Redirecting to ${path}`);
+      shouldRedirect = true;
+      setTimeout(() => router.push(path), 0); // Delay the redirect to after the effect
     };
 
-    try {
-      const web3 = sessionData?.web3;
-      
-      
-      if(!web3 && !address){
-        return;
-      }
-      // Check for web3 and address presence
-      if (!web3 || !web3.address) {
-        return;
-      }
+    const web3 = sessionData?.web3;
 
-      // Address mismatch, go to onboard
-      if (web3?.address !== address) {
-        return;
-
-      }
-
-      // No user object, go to onboard/profile
-      if (typeof web3?.user !== 'object') {
-        redirectTo('/onboard/profile');
-      }
-
-      // Invalid or no TBA address, go to onboard/mint
-      if (!web3?.user?.TBA || !isAddress(web3?.user.TBA)) {
-        redirectTo('/onboard/mint');
-      }
-
-      // If TBA exists and is valid, go to profile
-      redirectTo('/profile');
-    } catch (redirectError) {
-      // Catch the redirect "error" to prevent it from being thrown globally.
-      console.error(redirectError);
+    if (!web3 && !address) {
+      return;
     }
-    
-    
+    if (!web3 || !web3.address) {
+      return;
+    }
+    if (web3?.address !== address) {
+      return;
+    }
+    if (typeof web3?.user !== 'object') {
+      redirectTo('/onboard/profile');
+    } else if (!web3?.user?.TBA || !isAddress(web3?.user.TBA)) {
+      redirectTo('/onboard/mint');
+    } else {
+      redirectTo('/profile');
+    }
+
+    return () => {
+      if (shouldRedirect) {
+        // Here you can handle any cleanup if needed before redirecting
+      }
+    };
   }, [sessionData, address, router]);
+
+  // Here you might want to handle the 'loading' state or check 'status' of session
+  if (status === 'loading') {
+    return <div>Loading...</div>; // Replace with your loading component
+  }
 
   return (
     <main className="flex items-center justify-center p-24 min-h-[69vh]">

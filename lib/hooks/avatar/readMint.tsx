@@ -7,6 +7,7 @@ import { AvatarData } from "./avatar-types";
 type UseAvatarDataReturnType = {
   data: AvatarData | any;
   tba: unknown | null;  // Replace 'unknown' with the actual type of 'tba'
+  refetch: () => void;
 };
 
 export function useAvatarData(): UseAvatarDataReturnType {
@@ -14,14 +15,14 @@ export function useAvatarData(): UseAvatarDataReturnType {
   const [data, setData] = useState<AvatarData | any>(null);
   const [tba, setTba] = useState<unknown | null>(null);  // Replace 'unknown' with the actual type of 'tba'
 
-  const { data: balanceData } = useContractRead({
+  const { data: balanceData, refetch: refetchBalanceData } = useContractRead({
     address: MUMBAI.profile,
     abi: ABI.profile,
     functionName: "balanceOf",
     args: [address],
   });
 
-  const { data: tbaData } = useContractRead({
+  const { data: tbaData, refetch: refetchTbaData } = useContractRead({
     address: MUMBAI.profile,
     abi: ABI.profile,
     functionName: "getTBA",
@@ -33,5 +34,10 @@ export function useAvatarData(): UseAvatarDataReturnType {
     setTba(tbaData);
   }, [balanceData, tbaData]);
 
-  return { data, tba };
+  const refetch = () => {
+    refetchBalanceData();
+    refetchTbaData();
+  };
+
+  return { data, tba, refetch };
 }
