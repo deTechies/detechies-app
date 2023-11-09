@@ -1,8 +1,8 @@
 import GithubSignIn from "@/components/connections/github/github-signin";
 import UploadWorks from "@/components/modal/upload-works";
+import JoinProject from "@/components/project/join-project";
 import { Card, CardContent } from "@/components/ui/card";
 import { truncateMiddle } from "@/lib/utils";
-import { getSession } from "next-auth/react";
 import ProjectMembers from "./project-members";
 import ProjectNfts from "./project-nfts";
 
@@ -12,12 +12,14 @@ export interface InfoProps {
   owner: string;
   creator: string;
   workers: string[];
+  isMember: boolean;
+  isCreator: boolean;
   members: any[];
   urls: string[];
   location: string;
 }
 export default async function ProjectInfo({ info }: { info: InfoProps }) {
-  const session = await getSession();
+
   return (
     <Card>
       <CardContent className="flex flex-col gap-8">
@@ -38,17 +40,23 @@ export default async function ProjectInfo({ info }: { info: InfoProps }) {
           </dd>
         </section>
         <section>
-          <ProjectNfts address={info.id} />
+          <ProjectNfts address={info.id} isCreator={info.isCreator}/>
         </section>
         <section>
-          <ProjectMembers members={info.members} creator={info.creator} />
+          <ProjectMembers members={info.members} contract={info.id} isCreator={info.isCreator} />
         </section>
-        <section className="grid grid-cols-2">
-          <>
-            <GithubSignIn />
-            <UploadWorks />
-          </>
-        </section>
+       
+          {
+            info.isMember ? (
+              <section className="flex flex-col gap-4">
+
+              <GithubSignIn />
+              <UploadWorks />
+
+          </section>
+            ) : <JoinProject address={info.id} />
+          }
+         
       </CardContent>
     </Card>
   );

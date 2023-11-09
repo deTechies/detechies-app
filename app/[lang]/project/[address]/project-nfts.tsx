@@ -5,8 +5,9 @@ import useFetchData from "@/lib/useFetchData";
 import RequestNFTModal from "./request-nft";
 
 export default function ProjectNfts({
-  address
-}: { address: string}) {
+  address,
+  isCreator
+}: { address: string, isCreator?: boolean}) {
 
   //pretty simple and straightforward, we just going to check which nfts the project holds in order to showcase htem.
   //we want top check if we own any of the data is pending..
@@ -19,7 +20,7 @@ export default function ProjectNfts({
     <section className="flex flex-col gap-2">
       <header className="flex items-center justify-between">
         <h5 className="font-medium">Achievements</h5>
-        <RequestNFTModal />
+        {isCreator && <RequestNFTModal />}
       </header>
       <div className="flex flex-wrap gap-2">
         {loading ? (

@@ -17,6 +17,7 @@ interface ProjectItemProps {
   status: string;
   location: string;
   introduction:string;
+  works: any[];
   creator: string;
   members: string[];
 }

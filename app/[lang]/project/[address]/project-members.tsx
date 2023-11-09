@@ -4,10 +4,12 @@ import { Address } from "wagmi";
 
 export default function ProjectMembers({
   members,
-  creator,
+  isCreator,
+  contract
 }: {
   members: any[];
-  creator: string;
+  isCreator: boolean;
+  contract: string;
 }) {
   //getting all the members and holders of this project NFT.
 
@@ -15,7 +17,7 @@ export default function ProjectMembers({
     <section className="flex flex-col gap-4">
       <header className="flex items-center justify-between">
         <h5 className="text-subhead_s text-text-primary font-medium">Members</h5>
-        <AddMemberModal type="project" />
+        {isCreator && <AddMemberModal type="project" />}
       </header>
       <div className="flex flex-col gap-4">
         {members &&
@@ -26,6 +28,8 @@ export default function ProjectMembers({
             />
           ))}
       </div>
+      
+      
     </section>
   );
 }

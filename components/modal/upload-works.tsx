@@ -80,7 +80,7 @@ export default function UploadWorks({ type }: { type?: string }) {
   };
 
   const prepareWorkData = async () => {
-    const fileContentsPromises = files.map((file) => getFileContents(file));
+    const fileContentsPromises = files.map((file) => uploadContent(file));
     const filesData = await Promise.all(fileContentsPromises);
 
     return JSON.stringify({

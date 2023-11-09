@@ -1,4 +1,4 @@
-import { LocateIcon, Users } from "lucide-react";
+import { Users, WorkflowIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,8 +10,8 @@ interface ProjectItemProps {
     description: string;
     introduction:string;
     status: string;
-    location: string;
     creator: string;
+    works: any[];
     members: any[];
 }
 
@@ -40,8 +40,8 @@ export default function ProjectItem({ details }: { details: ProjectItemProps }) 
                             {details.members?.length}
                         </div>
                         <div className="flex gap-2 text-text-secondary text-sm font-light items-center capitalize">
-                            <LocateIcon size={16} stroke={"currentColor"} className="text-text-secondary " />
-                            {details.location}
+                            <WorkflowIcon size={16} stroke={"currentColor"} className="text-text-secondary " />
+                            {details.works?.length}
                         </div>
                     </div>
                     <span className="text-text-primary font-light text-sm w-full">

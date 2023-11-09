@@ -13,6 +13,8 @@ export interface ProjectDetailProps {
   description: string;
   creator: string;
   url: string;
+  isCreator: boolean;
+  isMember: boolean;
   timestamp: number;
   type: string;
   urls: string[];
