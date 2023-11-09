@@ -64,7 +64,7 @@ export default function AddMemberModal({type}:{type?: string}) {
   //we can search it aswel
   const filteredData = search
   ? members.filter(item => 
-    item.name.toLowerCase().includes(search.toLowerCase())
+    item.username.toLowerCase().includes(search.toLowerCase())
     ): members;
   
   
