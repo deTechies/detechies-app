@@ -30,7 +30,6 @@ import {
 import { ABI } from "@/lib/constants";
 import { uploadContent } from "@/lib/upload";
 import { XIcon } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Address, useAccount, useContractWrite } from "wagmi";
 
@@ -71,7 +70,7 @@ const defaultValues: Partial<AchievementForm> = {
 
 };
 
-export function CreateAchievementForm() {
+export function CreateAchievementForm({contract}: {contract:Address}) {
   const form = useForm<AchievementForm>({
     resolver: zodResolver(createAchievementForm),
     defaultValues,
@@ -80,10 +79,7 @@ export function CreateAchievementForm() {
   //const { address: contract } = useParams();
   const [file, setFile] = useState<File | null>(null);
   const { address } = useAccount();
-  const searchParams = useSearchParams()!;
-  //get the contract address from a search param
 
-  const contract = searchParams.get("contract");
 
   const { write, isLoading, error, data } = useContractWrite({
     address: contract as Address,

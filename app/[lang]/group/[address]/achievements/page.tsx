@@ -2,11 +2,10 @@
 import { NFTItem } from "@/components/card/nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
 import PendingNFT from "@/components/nft/pending-nft";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getGroupAchievements, getPendingAchievements } from "@/lib/data/achievements";
-import Link from "next/link";
+import AchievementLink from "./achievement-link";
 
 export default async function GroupAchievements({params}: {params: {address: string}}) {
   
@@ -19,14 +18,7 @@ export default async function GroupAchievements({params}: {params: {address: str
     <Card>
       <CardHeader className="flex justify-between items-center">
         Achievements
-        <Link href={`/nft/create?contract=${params.address}`}>
-          <Badge 
-            className="cursor-pointer" 
-            variant={"accent"}
-          >
-           Create
-          </Badge>
-        </Link>
+       <AchievementLink address={params.address.toString()} />
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
         <Tabs defaultValue="nfts" className="">
