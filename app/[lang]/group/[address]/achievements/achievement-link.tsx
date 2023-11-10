@@ -1,35 +1,20 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useCallback } from "react"
+import Link from "next/link"
 
 export default function AchievementLink({address}: {address: string}) {
-    const router = useRouter()
-      const searchParams = useSearchParams()!
-
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-          const params = new URLSearchParams(searchParams)
-          params.set(name, value)
-     
-          return params.toString()
-        },
-        [searchParams]
-      )
   return (
-
+    address && <Link  href={{
+        pathname: `/nft/create/${address}`
+      }}
+      replace>
           <Badge 
             className="cursor-pointer" 
             variant={"accent"}
-            onClick={() => {
-
-                router.push('/nft/create' + '?' + createQueryString('sort', 'asc'))
-            }
-            }
           >
-           Create {address}
+           Create Achievement
           </Badge>
-
+        </Link>
   )
 }
