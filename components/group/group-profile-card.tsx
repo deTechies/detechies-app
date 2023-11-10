@@ -68,7 +68,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
           <div className="grid gap-2 my-4 items-center">
             {
               groupDetail.isMember ? (
-                <Link href={`/group/${groupDetail.address}/chat`}>
+                <Link href={`/group/${groupDetail.address}/chat`} className="w-full text-center bg-button-secondary py-2 rounded-sm text-accent-primary">
                   Group Chat
                 </Link>
               ) : (
@@ -79,10 +79,13 @@ export default async function GroupProfileCard({ id }: { id: string }) {
           {
             groupDetail.isOwner && (
               <div className="grid gap-2 my-4 items-center">
-                  <Link href={`/group/${groupDetail.address}/achievements`}>
+                 <Link href={`/group/${groupDetail.address}`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
+                      Home
+                  </Link>
+                  <Link href={`/group/${groupDetail.address}/achievements`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
                       Manage Achievements
                   </Link>
-                  <Link href={`/group/${groupDetail.address}/achievements`}>
+                  <Link href={`/group/${groupDetail.address}/members`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
                       Manage Members
                   </Link>
               </div>

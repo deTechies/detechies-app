@@ -33,7 +33,7 @@ const pendingData = await getPendingMembers(params.address);
         <h3>Members ({pendingData?.length})</h3>
         <AddMemberModal />
       </CardHeader>
-      <CardContent className="flex flex-col gap-4">
+      <CardContent className="flex gap-4">
 
             {pendingData && pendingData?.length > 0 &&
               pendingData.map((item: any, index: number) => (

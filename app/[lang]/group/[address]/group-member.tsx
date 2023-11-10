@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getAddress } from "viem";
 
 import useFetchData from "@/lib/useFetchData";
+import { Link } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface Profile {
   id: string;
@@ -25,13 +27,18 @@ export interface Member {
 export default function GroupMember({
   address,
   owners,
+  isCreator,
+  
 }: {
   address: any;
   owners: Member[];
+  isCreator?: boolean;
 }) {
   const { data, loading, error } = useFetchData<Profile[] | null>(
     `/company/members/${address}`
   );
+  
+  const pathName= usePathname();
 
   getAddress;
   const {
@@ -46,6 +53,9 @@ export default function GroupMember({
     <Card className="overflow-auto max-w-[90vw]">
       <CardHeader className="flex items-center justify-between">
         <h3>Members ({data?.length})</h3>
+        {
+          isCreator && <Link href={pathName + '/members'}>Manage</Link>
+        }
       </CardHeader>
 
       <CardContent className="w-full grid md:grid-cols-6 gap-4">

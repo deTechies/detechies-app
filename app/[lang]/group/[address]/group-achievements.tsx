@@ -5,11 +5,14 @@ import {
   getGroupAchievements,
   getPendingAchievements,
 } from "@/lib/data/achievements";
+import { CreateAchievement } from "./create-achievement";
 
 export default async function GroupAchievements({
   address,
+  isCreator,
 }: {
   address: string;
+  isCreator?: boolean;
 }) {
   const achievements = await getGroupAchievements(address);
   const pendingGroupAchievements = await getPendingAchievements(address);
@@ -18,6 +21,7 @@ export default async function GroupAchievements({
     <Card>
       <CardHeader className="flex justify-between items-center">
         Achievements
+        {isCreator && <CreateAchievement  />}
       </CardHeader>
 
       <CardContent className="grid grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 items-stretch gap-4">
