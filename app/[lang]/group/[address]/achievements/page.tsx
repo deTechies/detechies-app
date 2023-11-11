@@ -12,6 +12,7 @@ export default async function GroupAchievements({params}: {params: {address: str
   const achievements = await getGroupAchievements(params.address)
   const pendingGroupAchievements = await getPendingAchievements(params.address)
 
+  console.log(params.address)
   
   
   return (

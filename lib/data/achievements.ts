@@ -33,13 +33,19 @@ export async function getUserAchievements(address?:string) {
   }
   
   export async function getPendingAchievements(address:string){
-    const res = await fetch(`${API_URL}/achievement/getAchievementRequests/${address}`)
+
+    const res = await fetch(`${API_URL}/achievement/getRequests/${address}`)
+    console.log(address)
+    
+
     
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error('Failed to fetch data')
     }
     
-    return res.json()
+    const result = await res.json()
+    
+    return result;
   }
    
