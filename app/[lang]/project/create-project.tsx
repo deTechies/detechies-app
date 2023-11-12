@@ -25,6 +25,7 @@ import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
+import TransactionData from "@/components/screens/transaction-data";
 import {
   Select,
   SelectContent,
@@ -270,6 +271,7 @@ export default function CreateProject() {
               </Button>
             </div>
           </form>
+          <TransactionData hash={data?.hash} />
         </Form>
       </DialogContent>
     </Dialog>

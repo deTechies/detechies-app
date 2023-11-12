@@ -41,7 +41,7 @@ export default function Navbar({lang}: {lang: any}) {
           <div className="px-6 lg:px-8 bg-background-layer-1 shadow-sm">
             <div className="flex h-16 justify-between">
               <div className="flex">
-                <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap">
+                <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
 
                   <Image
                     className="block h-12 object-contain "

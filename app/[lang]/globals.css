@@ -171,3 +171,20 @@ html {
 
 }
  
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 0.5s ease;
+}

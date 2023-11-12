@@ -17,12 +17,10 @@ import {
 } from "@/components/ui/form";
 
 import { API_URL } from "@/lib/constants";
-import useFetchData from "@/lib/useFetchData";
 import { ArrowDown, CheckIcon } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import Loading from "../loading";
 import { Button } from "../ui/button";
 import {
   Command,
@@ -68,7 +66,7 @@ interface Achievement {
   };
 }
 
-export function RequestNftForm() {
+export function RequestNftForm({achievements}: {achievements: Achievement[]}) {
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
   });
@@ -77,11 +75,7 @@ export function RequestNftForm() {
 
 
   //make a fetch for all the token ids and anmes out there.
-  const {
-    data: achievements,
-    loading: achievementLoading,
-    error: achievementError,
-  } = useFetchData<Achievement[]>("/achievement/all");
+
 
   async function onSubmit(data: AccountFormValues) {
     toast({
@@ -158,9 +152,7 @@ export function RequestNftForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 my-8">
         <div className="flex flex-col gap-6 justify-center items-center w-full">
-          {
-            achievementLoading ?
-            <Loading /> : (
+
               <FormField
               control={form.control}
               name="achievement"
@@ -230,8 +222,7 @@ export function RequestNftForm() {
                 </FormItem>
               )}
             />
-            )
-          }
+
         
 
         <div className="relative w-[250px] aspect-square mx-auto">

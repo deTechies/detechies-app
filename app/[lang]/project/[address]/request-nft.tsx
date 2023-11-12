@@ -1,4 +1,4 @@
-"use client"
+
 import { RequestNftForm } from "@/components/form/request-nft-form";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -10,7 +10,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export default function RequestNFTModal() {
+export default  function RequestNFTModal() {
+  
+
+  
+    //const data = await getAllAchievements();
+    const data = null;
+    
+    if(!data) return null;
 
     return (
         <Dialog>
@@ -21,7 +28,7 @@ export default function RequestNFTModal() {
           <DialogHeader>
             <DialogTitle>Request Achievement</DialogTitle>
             <DialogDescription>
-                <RequestNftForm />
+                {data && <RequestNftForm achievements={data}/>}
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

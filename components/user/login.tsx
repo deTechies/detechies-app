@@ -189,6 +189,7 @@ const ConnectModal = ({
         By connecting a wallet, you agree to Careerzen’s Terms of Service
       </span>
       <div className="flex flex-col gap-2 my-4">
+
         {!isConnected && (
           <>
             <div className="flex flex-col space-y-1 gap-4">

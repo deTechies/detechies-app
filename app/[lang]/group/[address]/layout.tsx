@@ -1,5 +1,4 @@
 import GroupProfileCard from "@/components/group/group-profile-card";
-import Link from "next/link";
 
 
 export default function GroupDetailLayout({
@@ -14,11 +13,6 @@ export default function GroupDetailLayout({
       <div className="col-span-1 flex flex-col gap-4">
         <GroupProfileCard id={params.address} />
         
-        <div>
-            <Link href={`/group/${params.address}/chat`}>
-                Chat
-            </Link>
-        </div>
       </div>
       <div className="lg:col-span-2 flex flex-col gap-md">{children}</div>
     </main>

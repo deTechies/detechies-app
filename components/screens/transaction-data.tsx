@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Address, useWaitForTransaction } from "wagmi";
 import Loading from "../loading";
 
@@ -18,10 +18,22 @@ export default function TransactionData({
   });
   const router = useRouter();
 
+  const [isVisible, setIsVisible] = useState(true);
+
+
   useEffect(() => {
     if (isSuccess && redirect) {
       router.push(redirect);
     }
+
+    // Set a timeout to hide the component after a certain time
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 5000); // 5000 milliseconds or 5 seconds
+
+    return () => {
+      clearTimeout(timer); // Clear the timeout if the component unmounts
+    };
   }, [isSuccess, redirect, router]);
   
 
@@ -30,19 +42,17 @@ export default function TransactionData({
   }
 
   return (
-    <div className="fixed bottom-5 right-5 border-border-div rounded-md bg-background-layer-2">
+    <div className={`fixed bottom-5 right-5 border-border-div rounded-md shadow-md bg-background-layer-2 fade-in`}>
+    <div className="flex flex-col gap-4">
+      <Loading /> {/* Consider a custom animated loader */}
       <span>
-        <div className="flex flex-col gap-4">
-          <Loading />
-          <span>
-            {isLoading
-              ? "Please wait while we process your transaction"
-              : isError
-              ? "There was an error processing your transaction"
-              : "Your transaction is being processed"}
-          </span>
-        </div>
+        {isLoading
+          ? "Processing your transaction..."
+          : isError
+            ? <button >Retry Transaction</button>
+            : "Transaction processed successfully!"}
       </span>
     </div>
+  </div>
   )
 } 
