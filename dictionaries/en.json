@@ -1,7 +1,7 @@
 {
     "nav": {
       "dashboard": "dashboard", 
-      "profiles": "profiles",
+      "profiles": "members",
       "groups": "groups",
       "projects": "project"
     },

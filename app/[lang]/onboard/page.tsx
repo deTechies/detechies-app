@@ -16,7 +16,7 @@ export default function OnboardPage() {
   if (address && !session?.web3?.address && !isConnecting && chain?.id == 80001) {
     return (
       <div className="flex flex-col gap-8">
-        <h1 className="text-2xl font-medium tracking-wide">Sign Up</h1>
+        <h1 className="text-2xl font-medium tracking-wide">Authenticate </h1>
         <div>
           Please validate that you are the owner of this address, so we can use
           it to securely store your achievements.
@@ -53,7 +53,7 @@ export default function OnboardPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="text-2xl font-medium tracking-wide">Sign Up</h1>
+      <h1 className="text-2xl font-medium tracking-wide">Sign In</h1>
       <div className="flex flex-col space-y-1 gap-4">
         <div
           key={connectors[0].id}

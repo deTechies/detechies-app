@@ -74,7 +74,7 @@ export default function Login() {
     return (
       <div className="flex rounded-md  items-center gap-2">
         <Link href="/profile">
-          <Avatar className="bg-gradient-to-r from-cyan-500 to-blue-500">
+          <Avatar className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:border hover:border-accent-primary">
             <IPFSImageLayer hashes={session.web3.user.nft} />
             <AvatarFallback>CZ</AvatarFallback>
           </Avatar>

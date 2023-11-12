@@ -15,8 +15,8 @@ export default function Navbar({lang}: {lang: any}) {
   
   const links = [
     {
-      name: lang.dashboard,
-      href: "/",
+      name: lang.profiles,
+      href: "/profiles",
     },
     {
       name: lang.groups,
@@ -25,11 +25,8 @@ export default function Navbar({lang}: {lang: any}) {
     {
       name: lang.projects,
       href: "/project",
-    },
-    {
-      name: lang.profiles,
-      href: "/profiles",
-    },
+    }
+
   ];
   
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
@@ -48,7 +45,7 @@ export default function Navbar({lang}: {lang: any}) {
                     src="/images/careerzen.png"
                     alt="Careerzen"
                     fill={true}
-                    onClick={() => {window.location.href = "/"}}
+                    onClick={() => {window.location.href = "/profiles"}}
                     priority={true}
                   />
 
