@@ -127,10 +127,17 @@ export default function ProfileDetailCard({ lang, profile, image }: ProfileProps
       <CardContent>
         <div className="w-full aspect-square relative m-0 z-0 bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-md">
           {!id && (
+            <Button
+            size="icon"
+            variant={"secondary"}
+            className={`absolute top-5 right-5 z-10 py-1 px-1 rounded-[6px] cursor-pointer ${refresh && "animate-spin"}} `}
+            onClick={updateAvatar}
+            >
             <RefreshCw
-              className={`absolute top-5 right-5 z-10 text-white hover:text-black cursor-pointer ${refresh && "animate-spin"}}`}
-              onClick={updateAvatar}
+              className={``}
+             
             />
+            </Button>
           )}
 
           <IPFSImageLayer hashes={image ? hashes : defaultAvatar} />

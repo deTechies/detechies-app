@@ -132,7 +132,6 @@ export default function CreateProject() {
       args: [data.projectName, image, form],
     });
 
-    console.log(transactionData);
 
     setLoading(false);
   }

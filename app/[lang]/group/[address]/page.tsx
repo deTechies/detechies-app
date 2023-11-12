@@ -26,7 +26,7 @@ export default async function GroupProfile({params}: {params: {address: string}}
     <div className="flex flex-col gap-4">
             <GroupDetails details={data.details} />
             <GroupAchievements address={params.address.toString()} isCreator={data.isCreator}/>
-            <GroupMember address={params.address.toString()} owners={data.members} />
+            <GroupMember address={params.address.toString()} members={data.members} />
       
       </div>
 

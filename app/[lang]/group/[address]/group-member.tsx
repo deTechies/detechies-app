@@ -4,7 +4,6 @@ import MemberCard from "@/components/card/member-card";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getAddress } from "viem";
 
-import useFetchData from "@/lib/useFetchData";
 import { Link } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -26,41 +25,30 @@ export interface Member {
 }
 export default function GroupMember({
   address,
-  owners,
+  members,
   isCreator,
   
 }: {
   address: any;
-  owners: Member[];
+  members: Member[];
   isCreator?: boolean;
 }) {
-  const { data, loading, error } = useFetchData<Profile[] | null>(
-    `/company/members/${address}`
-  );
   
   const pathName= usePathname();
 
-  getAddress;
-  const {
-    data: pendingData,
-    loading: pendingLoading,
-    error: pendingError,
-  } = useFetchData<Profile[]>(
-    `/polybase/company/request?address=${address}&status=open`
-  );
 
   return (
     <Card className="overflow-auto max-w-[90vw]">
       <CardHeader className="flex items-center justify-between">
-        <h3>Members ({data?.length})</h3>
+        <h3>Members ({members?.length})</h3>
         {
           isCreator && <Link href={pathName + '/members'}>Manage</Link>
         }
       </CardHeader>
 
       <CardContent className="w-full grid md:grid-cols-6 gap-4">
-        {owners &&
-          owners.map(
+        {members &&
+          members.map(
             (item: Member, index: any) =>
               item.tokenboundAccount && (
                 <MemberCard address={getAddress(item.address)} key={index} />
