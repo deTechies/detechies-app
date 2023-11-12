@@ -14,11 +14,13 @@ export async function getUserProfile(address?: string) {
     if(!session?.web3?.user) {
       redirect("/onboard");
     }
-    return session.web3.user;
+    
     
     if(!isAddress(session.web3?.user.TBA)){
       redirect("/onboard/mint");
+
     }
+    return session.web3.user;
   }
   
   

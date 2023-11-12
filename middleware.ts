@@ -24,11 +24,15 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export function middleware(request: NextRequest) {
+export  function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
+/*   const session = await getServerSession(authOptions);
 
-
+  if (session?.web3.user?.TBA && !isAddress(session?.web3?.user?.TBA)) {
+    return NextResponse.redirect("/onboard/mint");
+  }
+   */
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale: any) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
