@@ -65,7 +65,7 @@ export default function Navbar({lang}: {lang: any}) {
                       ${
                         pathname.endsWith(link.href)
                           ? "border-accent-primary text-accent-primary"
-                          : "border-transparent text-text-secondary hover:border-accent-secondary hover:text-accent-secondary"
+                          : "border-transparent text-text-secondary hover:text-text-primary"
                       }  
                       px-1 pt-1 text-md  text-primary`}
                     >
