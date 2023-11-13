@@ -51,13 +51,19 @@ export default function ProfileDetailCard({ lang, profile, image }: ProfileProps
     const hair =
     searchParams.get("hair") ||
     image[3];
-  const hashes = [clothes, face, head,hair, image[4], image[5]];
+  const background = 
+    searchParams.get("background") || null;
+    
+    let hashes = [clothes, face, head,hair, image[4], image[5]];
+    if(background) {
+       hashes = [background, clothes, face, head, hair, image[4], image[5]];
+    }
+
 
   const followUser = async () => {
     
-    const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
     const follow = await fetch(
-      `${url}/polybase/follow/${id}/${address}`,
+      `${API_URL}/polybase/follow/${id}/${address}`,
       {}
     ).then((res) => res.json());
     console.log(follow);
@@ -69,9 +75,9 @@ export default function ProfileDetailCard({ lang, profile, image }: ProfileProps
   };
 
   const unfollowUser = async () => {
-    const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
+
     const follow = await fetch(
-      `${url}/polybase/unfollow/${id}/${address}`,
+      `${API_URL}/polybase/unfollow/${id}/${address}`,
       {}
     ).then((res) => res.json());
     console.log(follow);
@@ -144,7 +150,7 @@ export default function ProfileDetailCard({ lang, profile, image }: ProfileProps
         </div>
         <section className="flex items-center justify-between my-4">
           <h2 className="text-2xl font-bold">
-            #{profile.username}
+            # {profile.username}
           </h2>
           <Link
             href={`https://mumbai.polygonscan.com/address/${profile?.TBA}`}
