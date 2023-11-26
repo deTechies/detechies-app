@@ -3,7 +3,7 @@
 
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-import { Menu, X } from "lucide-react";
+import { BellIcon, Menu, MessageSquareIcon, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -50,6 +50,7 @@ export default function Navbar({lang}: {lang: any}) {
                   />
 
                 </div>
+              </div>
 
                 <div className="hidden sm:ml-6 md:ml-24 sm:flex sm:space-x-8 ">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
@@ -70,10 +71,15 @@ export default function Navbar({lang}: {lang: any}) {
                     </Link>
                   ))}
                 </div>
-              </div>
               <div className="hidden sm:ml-8  sm:flex sm:items-center">
                 {/* Profile dropdown */}
-                <div className="relative ml-3 text-secondary">
+                <div className="mx-3">
+                  <MessageSquareIcon className="h-5 w-5 text-text-secondary" />
+                </div>
+                <div className="mx-3">
+                  <BellIcon className="h-5 w-5 text-text-secondary cursor-pointer hover:text-text-primary" />
+                </div>
+                <div className="relative ml-3 text-text-secondary hover:text-text-primary cursor-pointer">
                   <Login />
                 </div>
               </div>

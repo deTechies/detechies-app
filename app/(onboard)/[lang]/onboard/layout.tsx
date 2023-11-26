@@ -1,9 +1,7 @@
-"use client"
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
-import { isAddress } from 'viem';
-import { useAccount } from 'wagmi';
+"use client";
+import App from "@/app/[lang]/app";
+import { SessionProvider } from "next-auth/react";
+import React from "react";
 
 interface SessionData {
   web3?: {
@@ -18,8 +16,10 @@ interface OnboardLayoutProps {
   children: React.ReactNode;
 }
 
-export default function OnboardLayout({ children }: OnboardLayoutProps): JSX.Element {
-  const { data: sessionData, status } = useSession();
+export default function OnboardLayout({
+  children,
+}: OnboardLayoutProps): JSX.Element {
+  /*  const { data: sessionData, status } = useSession();
   const { address } = useAccount();
   const router = useRouter();
 
@@ -60,12 +60,14 @@ export default function OnboardLayout({ children }: OnboardLayoutProps): JSX.Ele
   if (status === 'loading') {
     return <div>Loading...</div>; // Replace with your loading component
   }
-
+ */
   return (
-    <main className="flex items-center justify-center p-24 min-h-[69vh] bg-background-layer-1">
-      <div className="min-w-[400px] max-w-lg">
-        {children}
-      </div>
-    </main>
+    <App>
+      <SessionProvider>
+        <main className="flex items-center justify-center h-[100vh] w-[100vw] bg-background-layer-1 z-10 ">
+          <div className="min-w-[400px] max-w-lg">{children}</div>
+        </main>
+      </SessionProvider>
+    </App>
   );
 }
