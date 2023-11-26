@@ -85,10 +85,6 @@ export default function Login() {
           className="text_link text-text-primary flex  gap-2 px-4 py-3"
           onClick={() => setShowModal(!showModal)}
         >
-          <span className="text-sm">
-            {session.web3.user.username}
-              
-          </span>
           <span className="text-sm text-text-secondary font-light">
             {truncateMiddle(session.web3.address, 13)}
           </span>

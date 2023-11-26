@@ -1,9 +1,4 @@
 
-// Library imports
-
-// Relative imports
-
-// Component imports
 import Search from "@/components/extra/search";
 import { getProjects } from "@/lib/data/project";
 import CreateProject from "./create-project";

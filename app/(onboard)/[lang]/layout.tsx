@@ -3,13 +3,14 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
-import App from "./app";
-import "./globals.css";
-import Navbar from "./nav-bar";
+
+import App from "@/app/[lang]/app";
+import "../../[lang]/globals.css";
+
  
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
-  src: './pretendard.woff2',
+  src: '../../[lang]/pretendard.woff2',
   display: 'swap',
 })
 
@@ -42,7 +43,6 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <App>
-            <Navbar lang={dictionary.nav} />
             {children}
           </App>
         </ThemeProvider>

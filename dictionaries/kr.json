@@ -20,5 +20,24 @@
     },
     "profile_detail_card": {
         "example": "example"
+    },
+    "onboard": {
+      "verify_email": {
+        "title": "회원가입",
+        "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.", 
+        "email": "이메일", 
+        "email_verify": "인증완료",
+        "alert_title": "완벽한 개인정보 보안",
+        "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.", 
+        "accordion": {
+          "terms_of_services": "서비스 이용약관 (필수)",
+          "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
+          "privacy_policy": "개인정보처리방침 (필수)",
+          "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
+          "reward_notification": "보상 및 이벤트 알림 (선택)",
+          "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+        }
+        
+      }
     }
 }
