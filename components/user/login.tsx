@@ -1,7 +1,6 @@
 "use client";
 
 import { polygonMumbai } from "@/helpers/mumbai";
-import { truncateMiddle } from "@/lib/utils";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -63,19 +62,12 @@ export default function Login() {
      <AuthenticateButton />
     );
   }
-  
-  if(!isConnecting && address == session?.web3?.address && !session?.web3.user.username){
-    <div>
-      Create Profile
-    </div>
-  }
-
-  if (!isConnecting && address == session?.web3?.address && session?.web3?.user?.username) {
+  if (!isConnecting && address == session?.web3?.address) {
     return (
       <div className="flex rounded-md  items-center gap-2">
         <Link href="/profile">
           <Avatar className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:border hover:border-accent-primary">
-            <IPFSImageLayer hashes={session.web3.user.nft} />
+            <IPFSImageLayer hashes={session?.web3?.user?.nft ? session.web3.user.nft : []} />
             <AvatarFallback>CZ</AvatarFallback>
           </Avatar>
         </Link>
@@ -85,9 +77,6 @@ export default function Login() {
           className="text_link text-text-primary flex  gap-2 px-4 py-3"
           onClick={() => setShowModal(!showModal)}
         >
-          <span className="text-sm text-text-secondary font-light">
-            {truncateMiddle(session.web3.address, 13)}
-          </span>
           {showModal && (
             <ProfileDetails
               address={address}

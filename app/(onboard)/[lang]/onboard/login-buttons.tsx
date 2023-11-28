@@ -1,4 +1,6 @@
-'use client';
+"use client";
+import AuthenticateButton from "@/components/user/authenticate-button";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useAccount, useConnect } from "wagmi";
@@ -6,17 +8,39 @@ import { useAccount, useConnect } from "wagmi";
 export default function LoginButtons() {
   const { connect, connectors } = useConnect();
   const { address } = useAccount();
+  const { data: session } = useSession();
 
   useEffect(() => {
-    if (address) {
-      window.location.href = "/onboard/profile";
+    //check if user is signed in
+
+    if (session && address && session.web3?.address) {
+      
+      //check if there is a user profile 
+      
+      if(session.web3?.user?.TBA){
+        window.location.href = "/profile";
+      }
+      //if not, redirect to onboard/mint
+      if(!session.web3?.user?.verified){
+        window.location.href = "/onboard/profile";
+      }
+      window.location.href = "/onboard/email";
     }
-  }, [address]);
+    console.log(session)
+    console.log(address)
+  }, [address, session]);
 
-  const handleConnect = (connector:any) => {
+  const handleConnect = (connector: any) => {
     connect({ connector });
-
   };
+
+  if (address && session?.web3?.address != address) {
+    return (
+      <div>
+        <AuthenticateButton />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col space-y-1 gap-4">
       <div

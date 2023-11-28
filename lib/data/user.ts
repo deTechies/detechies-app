@@ -81,6 +81,24 @@ export async function checkTBA(): Promise<any> {
   return result;
 }
 
+export const createUser = async (formData: FormData) => {
+  
+  const session = await getSession() as Session;
+  
+  try{
+    await fetch(`${API_URL}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+  }catch(err){
+    console.log(err)
+  }
+ 
+}
+
 export async function updateTBA(tba: any): Promise<any> {
   const session =await getSession() as Session;
   if(!session?.web3?.user) {

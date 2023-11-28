@@ -1,14 +1,15 @@
 import Image from "next/image";
 import LoginButtons from "./login-buttons";
 
-export default function OnboardPage() {
+export default async function OnboardPage() {
+  
   return (
     <div className="flex flex-col gap-8">
       <Image
         src={`/images/careerzen.png`}
         height={40}
         width={400}
-        alt={`WAGMI Logo`}
+        alt={`careerzen Logo`}
       />
       <h1 className="text-xl font-medium tracking-wider text-center">
         전문가들의 커리어 인증은 다르다.

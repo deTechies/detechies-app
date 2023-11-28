@@ -3,11 +3,7 @@
 
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-<<<<<<< HEAD
-import { Menu, X } from "lucide-react";
-=======
 import { BellIcon, Menu, MessageSquareIcon, X } from "lucide-react";
->>>>>>> new
 
 import Image from "next/image";
 import Link from "next/link";
@@ -75,12 +71,6 @@ export default function Navbar({lang}: {lang: any}) {
                     </Link>
                   ))}
                 </div>
-<<<<<<< HEAD
-              </div>
-              <div className="hidden sm:ml-8  sm:flex sm:items-center">
-                {/* Profile dropdown */}
-                <div className="relative ml-3 text-secondary">
-=======
               <div className="hidden sm:ml-8  sm:flex sm:items-center">
                 {/* Profile dropdown */}
                 <div className="mx-3">
@@ -90,7 +80,6 @@ export default function Navbar({lang}: {lang: any}) {
                   <BellIcon className="h-5 w-5 text-text-secondary cursor-pointer hover:text-text-primary" />
                 </div>
                 <div className="relative ml-3 text-text-secondary hover:text-text-primary cursor-pointer">
->>>>>>> new
                   <Login />
                 </div>
               </div>
