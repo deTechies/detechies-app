@@ -50,6 +50,15 @@ export async function getUserProfile(address?: string) {
   return res.json();
 }
 
+export async function getUsers(){
+  const res = await fetch(`${newURL}/users`);
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
 export async function sendVerifyEmail(code: string) {
   //const session = (await getServerSession(authOptions)) as Session;
   const session = await getSession() as Session

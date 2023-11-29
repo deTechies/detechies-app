@@ -21,6 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import TransactionData from "@/components/screens/transaction-data";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -162,18 +163,19 @@ export function GroupForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex justify-center flex-col">
-        <section className="grid md:grid-cols-3 gap-4 items-center">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex justify-center flex-col md:max-w-md w-full">
+        <section className="flex flex-col gap-4">
           <div className="w-[200px]">
+            <Label className="mb-2">Club Image</Label>
             <MediaUploader onFileSelected={selectFile} width={50} height={50} />
           </div>
-          <div className="md:col-span-2 flex flex-col gap-8 ">
+          <div className="flex flex-col gap-8 ">
             <FormField
               control={form.control}
               name="groupName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Group Name</FormLabel>
+                  <FormLabel>Club Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your groupname" {...field} />
                   </FormControl>
@@ -201,7 +203,7 @@ export function GroupForm() {
 
           </div>
         </section>
-        <section className="grid md:grid-cols-2 gap-4">
+
         <FormField
           control={form.control}
           name="type"
@@ -261,7 +263,6 @@ export function GroupForm() {
         </div>
 
     
-        </section>
         <div className="flex items-center justify-end gap-8">
           <Button type="button" variant="secondary">
             Cancel

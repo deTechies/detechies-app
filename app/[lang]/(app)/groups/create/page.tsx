@@ -5,7 +5,7 @@ export default function CreateGroup() {
   return (
     <Card className="m-20 max-w-4xl">   
         <CardHeader className="flex gap-4 items-center prose">
-          <h4>Create New Group</h4>
+          <h4>Create Club</h4>
         </CardHeader>
         <CardContent>
             <GroupForm />                
