@@ -4,23 +4,35 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Session, getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { isAddress } from "viem";
 import { API_URL } from "../constants";
+
+const newURL = 'http://localhost:4000'
 export async function getUserProfile(address?: string) {
   //getting profile session
+  
 
   if (!address) {
     const session = (await getServerSession(authOptions)) as Session;
-    if(!session?.web3?.user) {
-      redirect("/onboard");
-    }
     
     
-    if(!isAddress(session.web3?.user.TBA)){
-      redirect("/onboard/mint");
-
+    const user = await fetch(`http://localhost:4000/users/${session?.web3.address}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.web3.accessToken}`,
+      },
+    });
+    
+    console.log(user)
+    
+    
+    
+    if (!user.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error("Failed to fetch data");
     }
-    return session.web3.user;
+    return user.json();
+    //return session.web3.user;
   }
   
   
@@ -37,6 +49,29 @@ export async function getUserProfile(address?: string) {
 
   return res.json();
 }
+
+export async function sendVerifyEmail(code: string) {
+  //const session = (await getServerSession(authOptions)) as Session;
+  const session = await getSession() as Session
+  
+  const res = await fetch(`${newURL}/users/verify?token=${code}`, 
+  {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.web3.accessToken}`
+    }
+  }
+  )
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 
 
 export async function getUserSession(){

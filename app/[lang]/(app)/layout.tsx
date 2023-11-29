@@ -3,13 +3,13 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
-import App from "./app";
-import "./globals.css";
+import App from "../app";
+import "../globals.css";
 import Navbar from "./nav-bar";
  
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
-  src: './pretendard.woff2',
+  src: '../pretendard.woff2',
   display: 'swap',
 })
 

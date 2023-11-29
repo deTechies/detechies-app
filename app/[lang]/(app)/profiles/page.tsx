@@ -2,6 +2,8 @@ import ListProfiles from "./list-profiles";
 import ProfileFilter from "./profile-filter";
 
 export default function ProfilePage() {
+  // lets get all the users profiles here.. 
+  
   return (
     <main className="flex md:flex-row flex-col gap-4 m-8 items-start">
         <ProfileFilter />

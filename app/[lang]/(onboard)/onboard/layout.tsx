@@ -64,8 +64,8 @@ export default function OnboardLayout({
   return (
     <App>
       <SessionProvider>
-        <main className="flex items-center justify-center h-[100vh] w-[100vw] bg-background-layer-1 z-10 ">
-          <div className="min-w-[400px] max-w-lg">{children}</div>
+        <main className=" flex min-h-[100vh] items-center justify-center my-auto border">
+          <div className="min-w-[400px] max-w-lg ">{children}</div>
         </main>
       </SessionProvider>
     </App>

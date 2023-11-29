@@ -1,11 +1,10 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
 
 import App from "@/app/[lang]/app";
-import "../../[lang]/globals.css";
+import "..//globals.css";
 
  
 // Font files can be colocated inside of `app`
@@ -29,11 +28,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   
-  const dictionary = await getDictionary(params.lang) as any;
   return (
     <html lang="en">
       <body
-        className={`${pretendard.className} bg-gradient-to-b from-state-info-secondary to-accent-secondary text-primary min-h-[100vh]`}
+        className={`${pretendard.className} text-primary bg-background-layer-1`}
         suppressHydrationWarning
       >
         <ThemeProvider

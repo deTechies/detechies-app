@@ -13,7 +13,7 @@ export default function LoginButtons() {
   useEffect(() => {
     //check if user is signed in
 
-    if (session && address && session.web3?.address) {
+    if (session && address == session.web3?.address) {
       
       //check if there is a user profile 
       
