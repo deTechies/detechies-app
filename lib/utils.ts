@@ -117,6 +117,14 @@ export function isValidLink(s: string): boolean {
     return URL_REGEX.test(s);
 }
 
+export const fileToBase64 = (file: File): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+
 
 type Job = {
   id: number;

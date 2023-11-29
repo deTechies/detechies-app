@@ -11,7 +11,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -20,23 +20,15 @@ import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
-import TransactionData from "@/components/screens/transaction-data";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ABI, MUMBAI } from "@/lib/constants";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ClubType } from "@/lib/interfaces";
+
+import { createGroup } from "@/lib/data/groups";
 import { uploadContent } from "@/lib/upload";
-import { Loader2 } from "lucide-react";
 import { useState } from "react";
-import { useAccount, useContractWrite } from "wagmi";
 
 const profileFormSchema = z.object({
-  groupName: z
+  name: z
     .string()
     .min(2, {
       message: "Your groups name must be at least 2 characters.",
@@ -44,25 +36,17 @@ const profileFormSchema = z.object({
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
-  type: z.enum(["company", "community", "education", "hackathon_group"], {
-    required_error: "You need to select a notification type.",
-  }),
-  introduction: z.string().max(4000).min(4),
-  urls: z
-    .array(
-      z.object({
-        value: z.string().url({ message: "Please enter a valid URL." }),
-      })
-    )
-    .optional(),
+  type: z.nativeEnum(ClubType),
+  description: z.string().max(4000).min(4),
+  urls: z.array(z.string().url({ message: "Please enter a valid URL." })),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
-  introduction: "I am writing something unique about myself.",
-  urls: [{ value: "https://google.com" }],
+  description: "I am writing something unique about myself.",
+  urls: ["https://google.com"],
 };
 
 export function GroupForm() {
@@ -73,28 +57,29 @@ export function GroupForm() {
   });
 
   const [file, setFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { fields, append } = useFieldArray({
     name: "urls",
     control: form.control,
   });
-  const { address } = useAccount();
-  const { write, data, isLoading, error } = useContractWrite({
-    address: MUMBAI.groupRegistry,
-    abi: ABI.groupRegistry,
-    functionName: "createGroup",
-  });
 
   async function onSubmit(data: ProfileFormValues) {
+    setIsLoading(true)
+    const image = await uploadContent(file);
+    console.log(image);
     toast({
       title: "You submitted the following values:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">
-            {JSON.stringify({ ...data, image: file }, null, 2)}
+            {JSON.stringify({ ...data, image: image }, null, 2)}
           </code>
         </pre>
       ),
     });
+    
+
 
     if (!file) {
       toast({
@@ -103,132 +88,99 @@ export function GroupForm() {
       });
       return;
     }
+    
 
-    toast({
-      title: "Uploading file",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-state-info-secondary p-4">
-          <Loader2 className="animate-spin" size={24} />
-          Uploading file
-        </pre>
-      ),
-    });
-    const image = await uploadContent(file);
-    console.log(image);
 
-    if (!image) {
+    //name, image and detail
+    if(!image) {
       toast({
         title: "Error",
         description: "Make sure your have valid image file",
       });
       return;
     }
-
-    const form = await uploadContent(
-      JSON.stringify({
-        ...data,
-        image: image,
-      })
-    );
-    toast({
-      title: "Uploading data",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-state-info-secondary p-4">
-          <Loader2 className="animate-spin" size={24} />
-          Uploading data
-        </pre>
-      ),
-    });
-
-    if (image.length < 30 || form.length < 30) {
-      toast({
-        title: "Error",
-        description: "Make sure you have all the right credentails",
-      });
-      return;
-    }
-
-    //name, image and details
-    await write({
-      args: [data.groupName, image, form],
-    });
-    
-    
-    
+     await createGroup({ ...data, image: image });
+     
+     setIsLoading(false)
   }
 
-  const selectFile = (file: File) => {
+  const selectFile = (file: File, base64: string) => {
     setFile(file);
+
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex justify-center flex-col md:max-w-md w-full">
-        <section className="flex flex-col gap-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 flex justify-center flex-col "
+      >
+        <section className="flex flex-col gap-8 space-y-8">
           <div className="w-[200px]">
-            <Label className="mb-2">Club Image</Label>
             <MediaUploader onFileSelected={selectFile} width={50} height={50} />
           </div>
-          <div className="flex flex-col gap-8 ">
-            <FormField
-              control={form.control}
-              name="groupName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Club Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your groupname" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-              <FormField
-          control={form.control}
-          name="introduction"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Introduction of your Group</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Tell us a little bit about your group here"
-                  className="resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-          </div>
-        </section>
-
-        <FormField
+          <div className="flex flex-col space-y-8 ">
+          <FormField
           control={form.control}
           name="type"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your group type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="company">Company</SelectItem>
-                  <SelectItem value="community">Community</SelectItem>
-                  <SelectItem value="public-good">Public Good</SelectItem>
-                  <SelectItem value="education">Education</SelectItem>
-                  <SelectItem value="hackathon_group">Other</SelectItem>
-                </SelectContent>
-              </Select>
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                className="flex flex-row space-x-1"
+              >
+                {Object.values(ClubType).map((type) => (
+                  <FormItem
+                    key={type}
+                    className="flex items-center space-x-3 space-y-0"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value={type} />
+                    </FormControl>
+                    <FormLabel className="font-normal capitalize">{type}</FormLabel>
+                  </FormItem>
+                ))}
+              </RadioGroup>
 
               <FormMessage />
             </FormItem>
           )}
         />
+        
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Club Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Club Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Tell us a little bit about your group here"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </section>
 
       
 
@@ -237,7 +189,7 @@ export function GroupForm() {
             <FormField
               control={form.control}
               key={field.id}
-              name={`urls.${index}.value`}
+              name={`urls.${index}`}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={cn(index !== 0 && "sr-only")}>
@@ -256,23 +208,22 @@ export function GroupForm() {
             variant="outline"
             size="sm"
             className="mt-2"
-            onClick={() => append({ value: "" })}
+            onClick={() => append("")}
           >
             Add URL
           </Button>
         </div>
 
-    
         <div className="flex items-center justify-end gap-8">
-          <Button type="button" variant="secondary">
+          <Button type="button" variant="secondary" >
             Cancel
           </Button>
           <Button type="submit"
           loading={isLoading}
+          disabled={isLoading}
           >Create Group</Button>
         </div>
       </form>
-      <TransactionData hash={data?.hash} redirect="/groups"/>
     </Form>
   );
 }
