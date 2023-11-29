@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -65,7 +64,7 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {};
 
-export default function OnboardProfileForm() {
+export default function EditProfile() {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -136,14 +135,14 @@ export default function OnboardProfileForm() {
   return (
     <Form {...form}>
       <section className="mb-8">
-        <h1 className="text-4xl font-medium mb-6 text-primary">회원가입</h1>
-        <h4 className="text-text-secondary">
-          전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은
-          퇴사하는 경우 계정을 찾기 어려워요.
-        </h4>
+        <h1 className="text-4xl font-medium mb-6 text-primary">프로필 수정</h1>
       </section>
       <section className="my-2">
-        <EmailVerification />
+        <label className="">이메일</label>
+        <div className="flex gap-2 items-center mt-2">
+          <Input placeholder="email" />
+          <Button className="w-[150px]">인증완료</Button>
+        </div>
       </section>
       <Alert variant={"info"} className="my-8">
         <AlertTitle className="text-state-info">
@@ -164,9 +163,6 @@ export default function OnboardProfileForm() {
               <FormControl>
                 <Input placeholder="Enter a username" {...field} />
               </FormControl>
-              <FormDescription className="font-light">
-                This name will be displayed to the public.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -235,32 +231,17 @@ export default function OnboardProfileForm() {
           )}
         />
 
-        <div className="flex items-center gap-8 w-full">
-          <Button type="button" variant="secondary" className="w-full">
-            Cancel
-          </Button>
+        <div className="flex items-center w-full">
           <Button
             type="submit"
             className="w-full"
             disabled={loading}
             loading={loading}
           >
-            Create Profile
+            저장하기
           </Button>
         </div>
       </form>
     </Form>
   );
 }
-
-const EmailVerification = () => {
-  return (
-    <div>
-      <label className="">이메일</label>
-      <div className="flex gap-2 items-center mt-2">
-        <Input placeholder="email" />
-        <Button className="w-[150px]">인증완료</Button>
-      </div>
-    </div>
-  );
-};

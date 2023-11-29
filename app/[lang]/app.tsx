@@ -1,6 +1,4 @@
 "use client";
-
-
 import { Toaster } from "@/components/ui/toaster";
 import { polygonMumbai } from "@/helpers/mumbai";
 import SessionProvider from "@/lib/SessionProvider";
@@ -62,7 +60,6 @@ export default function App({ children }: { children: any }) {
     <WagmiConfig config={config}>
       <SessionProvider>
         <PushProvider>
-          
           {children}
           <Toaster />
         </PushProvider>
