@@ -8,12 +8,16 @@ declare module "next-auth" {
     authToken: string
     web3: {
       address: string;
+      accessToken: string;      
       user: {
         TBA: string;
         nft: string[];
         username: string;
         id: string;
+        email: string;
+        verified: boolean;
       }
+
     }, 
     github?: {
       id: string;
@@ -47,11 +51,12 @@ export const authOptions: NextAuthOptions = {
       name: "web3",
       credentials: {
         message: { label: "Message", type: "text" },
-        signedMessage: { label: "Signed Message", type: "text" }, // aka signature
+        signature: { label: "Signed Message", type: "text" }, // aka signature
+        address: { label: "Address", type: "text" },
       },
       authorize: async (credentials) => {
 
-        const res = await fetch(`${API_URL}/auth/siwe`, {
+        const res = await fetch(`${API_URL}/users/auth`, {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { 'Content-Type': 'application/json' },
@@ -59,6 +64,8 @@ export const authOptions: NextAuthOptions = {
         
 
         const user = await res.json();
+        console.log("whowe the reuslt");
+        console.log(user)
         
 
         if (res.ok && user) {
@@ -112,8 +119,16 @@ export const authOptions: NextAuthOptions = {
             expires: expirationTime,
           };
         } else if (account.provider === "web3") {
-          token.web3 = user.user;
-          token.web3.accessToken = user.accessToken;
+          
+
+          token.web3 = {
+            user: {
+              id: user.user.id,
+              username: user.user.display_name,
+            },
+            address: user.user.id,
+            accessToken: user.token,
+          }
 
         }
       }

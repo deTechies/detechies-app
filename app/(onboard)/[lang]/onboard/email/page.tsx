@@ -2,7 +2,9 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { EmailVerification } from "./email-verify";
+
+import EmailVerification from "./email-verify";
+import UserSettings from "./user-settings";
 
 export default async function EmailVerify({
   params: { lang },
@@ -32,6 +34,9 @@ export default async function EmailVerify({
             {text.alert_body}
         </AlertDescription>
       </Alert>
+      <section>
+        <UserSettings />
+      </section>  
     </div>
   );
 }
