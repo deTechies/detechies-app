@@ -3,7 +3,7 @@ import { ExternalLink } from "lucide-react";
 
 import Image from "next/image";
 
-import { getGroupDetail } from "@/lib/data/groups";
+import { getClub } from "@/lib/data/groups";
 import { truncateMiddle } from "@/lib/utils";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "../ui/card";
@@ -18,7 +18,7 @@ interface ProfileProps {
 export default async function GroupProfileCard({ id }: { id: string }) {
 
   
-  const groupDetail = await getGroupDetail(id);
+  const groupDetail = await getClub(id);
 
 
 
@@ -60,7 +60,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
           <div className="grid grid-cols-2 border rounded-sm">
             <ProfileStat
               name="achievements"
-              value={groupDetail.achievements.length}
+              value={groupDetail.achievements?.length}
             />
             <ProfileStat name="members" value={groupDetail?.members?.length} />
           </div>

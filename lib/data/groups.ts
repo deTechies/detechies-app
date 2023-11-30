@@ -5,18 +5,25 @@ import { API_URL } from "../constants";
 import { CreateClub } from "../interfaces";
 
 export async function getGroups(search?: string) {
-  const response = await fetch(`${API_URL}/group/all`, {
-    next: { revalidate: 60 },
+  const session = (await getServerSession(authOptions)) as any;
+  const response = await fetch(`${API_URL}/clubs`, {
+    headers: {
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
   });
-  const data = await response.json();
 
-  if (search) {
-    return data.filter((group: any) =>
-      group.name.toLowerCase().includes(search.toLowerCase())
-    );
-  }
+  return response.json();
+}
 
-  return data;
+export async function getClub(clubId:string){
+    const session = (await getServerSession(authOptions)) as any;
+    const response = await fetch(`${API_URL}/clubs/${clubId}`, {
+        headers: {
+        Authorization: `Bearer ${session?.web3?.accessToken}`,
+        },
+    });
+    
+    return response.json();
 }
 
 //get the interface for the group
@@ -34,7 +41,7 @@ export async function createGroup(formData: CreateClub) {
   return data;
 }
 
-export async function getGroupDetail(address: string) {
+/* export async function getGroupDetail(address: string) {
   const response = await fetch(`${API_URL}/group/single/${address}`, {
     next: { revalidate: 60 },
   });
@@ -48,7 +55,7 @@ export async function getGroupDetail(address: string) {
   );
   const isOwner = data.creator === session?.web3?.address.toLowerCase();
   return { ...data, isMember: isMember, isOwner: isOwner };
-}
+} */
 
 export async function getPendingMembers(address: string) {
   const response = await fetch(
