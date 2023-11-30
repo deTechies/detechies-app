@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -25,7 +26,6 @@ import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
-import TransactionData from "@/components/screens/transaction-data";
 import {
   Select,
   SelectContent,
@@ -33,14 +33,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ABI, MUMBAI } from "@/lib/constants";
+import { createProject } from "@/lib/data/project";
 import { uploadContent } from "@/lib/upload";
-import { DialogDescription } from "@radix-ui/react-dialog";
 import { useState } from "react";
-import { useContractWrite } from "wagmi";
 
 const projectFormSchema = z.object({
-  projectName: z
+  name: z
     .string()
     .min(2, {
       message: "Your groups name must be at least 2 characters.",
@@ -48,23 +46,21 @@ const projectFormSchema = z.object({
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
-  introduction: z.string().max(160).min(4),
+  description: z.string().max(160).min(4),
   type: z.enum(["hackathon", "side_project", "project"], {
     required_error: "You need to select a  type.",
   }),
   urls: z
     .array(
-      z.object({
-        value: z.string().url({ message: "Please enter a valid URL." }),
-      })
+       z.string().url({ message: "Please enter a valid URL." }),
     )
     .optional(),
 });
 
 type ProfileFormValues = z.infer<typeof projectFormSchema>;
 const defaultValues: Partial<ProfileFormValues> = {
-  introduction: "I am writing something unique about myself.",
-  urls: [{ value: "https://google.com" }],
+  description: "Amazing project built by the careerzenTeam.",
+  urls: ["https://google.com" ],
 };
 
 export default function CreateProject() {
@@ -79,11 +75,7 @@ export default function CreateProject() {
     name: "urls",
     control: form.control,
   });
-  const { write, isLoading, error, data } = useContractWrite({
-    address: MUMBAI.projectRegistry,
-    abi: ABI.projectRegsitry,
-    functionName: "createProject",
-  });
+
 
   const [loading, setLoading] = useState(false);
 
@@ -109,14 +101,14 @@ export default function CreateProject() {
       return;
     }
 
-    const form = await uploadContent(
+    const form =
       JSON.stringify({
         ...data,
         image: image,
       })
-    );
-
-    console.log(form);
+      
+      
+      
 
     //testing if they are valid string lenghts
     if (image.length < 30 || form.length < 30) {
@@ -126,12 +118,9 @@ export default function CreateProject() {
       });
       return;
     }
-    //name, image, details
-
-    const transactionData = await write({
-      args: [data.projectName, image, form],
-    });
-
+    //TODO: add create form for project
+    await createProject({...data, image:image});
+    
 
     setLoading(false);
   }
@@ -168,7 +157,7 @@ export default function CreateProject() {
               <div className="flex flex-col gap-4 flex-grow">
                 <FormField
                   control={form.control}
-                  name="projectName"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Name</FormLabel>
@@ -211,7 +200,7 @@ export default function CreateProject() {
 
             <FormField
               control={form.control}
-              name="introduction"
+              name="description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Description</FormLabel>
@@ -232,7 +221,7 @@ export default function CreateProject() {
                 <FormField
                   control={form.control}
                   key={field.id}
-                  name={`urls.${index}.value`}
+                  name={`urls.${index}`}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className={cn(index !== 0 && "sr-only")}>
@@ -251,7 +240,7 @@ export default function CreateProject() {
                 variant="outline"
                 size="sm"
                 className="mt-2"
-                onClick={() => append({ value: "" })}
+                onClick={() => append("https://")}
               >
                 Add URL
               </Button>
@@ -263,14 +252,13 @@ export default function CreateProject() {
               </Button>
               <Button
                 type="submit"
-                disabled={isLoading || !form.formState.isValid}
-                loading={isLoading || loading}
+                disabled={loading || !form.formState.isValid}
+                loading={loading}
               >
                 Create Project
               </Button>
             </div>
           </form>
-          <TransactionData hash={data?.hash} />
         </Form>
       </DialogContent>
     </Dialog>
