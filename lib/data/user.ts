@@ -23,21 +23,22 @@ export async function getUserProfile(address?: string) {
       },
     });
     
-    console.log(user)
-    
-    
-    
+
+    const data = await user.json();
+    console.log(data)
+
     if (!user.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error("Failed to fetch data");
     }
-    return user.json();
+    
+    return data;
     //return session.web3.user;
   }
   
   
 
-  const res = await fetch(`${API_URL}/polybase/${address}`);
+  const res = await fetch(`${API_URL}/users/${address}`);
   // The return value is *not* serializedå
   // You can return Date, Map, Set, etc.
 
@@ -51,7 +52,7 @@ export async function getUserProfile(address?: string) {
 }
 
 export async function getUsers(){
-  const res = await fetch(`${newURL}/users`);
+  const res = await fetch(`${API_URL}/users`);
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");

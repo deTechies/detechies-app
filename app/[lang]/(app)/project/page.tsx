@@ -4,7 +4,7 @@ import { getProjects } from "@/lib/data/project";
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
 
-interface ProjectItemProps {
+export interface ProjectItemProps {
   id: string;
   name: string;
   image: string;
@@ -12,6 +12,7 @@ interface ProjectItemProps {
   status: string;
   location: string;
   introduction:string;
+  type:string;
   works: any[];
   creator: string;
   members: string[];
@@ -37,7 +38,7 @@ export default async function ProjectListPage() {
       <section className="grid md:grid-cols-2  gap-4">
         {projects.length > 0 ? (
           projects.map((item: ProjectItemProps) => (
-            <ProjectItem key={item.id} details={item} />
+            <ProjectItem key={item.id} details={item } />
           ))
         ) : (
           <div>No projects found</div>

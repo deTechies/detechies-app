@@ -1,10 +1,10 @@
 import CreatePushGroup from '@/components/extra/chat/create-push-group';
 import PushGroupChat from '@/components/extra/chat/push-group-chat';
-import { getGroupDetail } from '@/lib/data/groups';
+import { getClub } from '@/lib/data/groups';
 import { Address } from 'wagmi';
 
 export default async function GroupChat({params}: {params: {address: string}}) {
-    const groupDetails = await getGroupDetail(params.address);
+    const groupDetails = await getClub(params.address);
     
     
   return (

@@ -38,7 +38,12 @@ const profileFormSchema = z.object({
     }),
   type: z.nativeEnum(ClubType),
   description: z.string().max(4000).min(4),
-  urls: z.array(z.string().url({ message: "Please enter a valid URL." })),
+  urls: z
+    .array(
+      z.object({
+        value: z.string().url({ message: "Please enter a valid URL." }),
+      })
+    )
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -46,7 +51,7 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
   description: "I am writing something unique about myself.",
-  urls: ["https://google.com"],
+  urls: [{ value: "https://" }],
 };
 
 export function GroupForm() {
@@ -60,12 +65,12 @@ export function GroupForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { fields, append } = useFieldArray({
-    name: "urls",
     control: form.control,
+    name: "urls",
   });
 
   async function onSubmit(data: ProfileFormValues) {
-    setIsLoading(true)
+    setIsLoading(true);
     const image = await uploadContent(file);
     console.log(image);
     toast({
@@ -78,8 +83,6 @@ export function GroupForm() {
         </pre>
       ),
     });
-    
-
 
     if (!file) {
       toast({
@@ -88,25 +91,31 @@ export function GroupForm() {
       });
       return;
     }
-    
-
 
     //name, image and detail
-    if(!image) {
+    if (!image) {
       toast({
         title: "Error",
         description: "Make sure your have valid image file",
       });
       return;
     }
-     await createGroup({ ...data, image: image });
-     
-     setIsLoading(false)
+
+    const urls = data.urls.map((url) => url.value);
+
+    await createGroup({
+      image: image,
+      name: data.name,
+      description: data.description,
+      type: data.type,
+      urls: urls,
+    });
+
+    setIsLoading(false);
   }
 
   const selectFile = (file: File, base64: string) => {
     setFile(file);
-
   };
 
   return (
@@ -120,35 +129,37 @@ export function GroupForm() {
             <MediaUploader onFileSelected={selectFile} width={50} height={50} />
           </div>
           <div className="flex flex-col space-y-8 ">
-          <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Type</FormLabel>
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex flex-row space-x-1"
-              >
-                {Object.values(ClubType).map((type) => (
-                  <FormItem
-                    key={type}
-                    className="flex items-center space-x-3 space-y-0"
+            <FormField
+              control={form.control}
+              name="type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Type</FormLabel>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-row space-x-1"
                   >
-                    <FormControl>
-                      <RadioGroupItem value={type} />
-                    </FormControl>
-                    <FormLabel className="font-normal capitalize">{type}</FormLabel>
-                  </FormItem>
-                ))}
-              </RadioGroup>
+                    {Object.values(ClubType).map((type) => (
+                      <FormItem
+                        key={type}
+                        className="flex items-center space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <RadioGroupItem value={type} />
+                        </FormControl>
+                        <FormLabel className="font-normal capitalize">
+                          {type}
+                        </FormLabel>
+                      </FormItem>
+                    ))}
+                  </RadioGroup>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="name"
@@ -182,18 +193,16 @@ export function GroupForm() {
           </div>
         </section>
 
-      
-
         <div>
           {fields.map((field, index) => (
             <FormField
               control={form.control}
               key={field.id}
-              name={`urls.${index}`}
+              name={`urls.${index}.value`}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={cn(index !== 0 && "sr-only")}>
-                    Official Channels
+                    Social Profiles
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -208,20 +217,19 @@ export function GroupForm() {
             variant="outline"
             size="sm"
             className="mt-2"
-            onClick={() => append("")}
+            onClick={() => append({ value: "" })}
           >
             Add URL
           </Button>
         </div>
 
         <div className="flex items-center justify-end gap-8">
-          <Button type="button" variant="secondary" >
+          <Button type="button" variant="secondary">
             Cancel
           </Button>
-          <Button type="submit"
-          loading={isLoading}
-          disabled={isLoading}
-          >Create Group</Button>
+          <Button type="submit" loading={isLoading} disabled={isLoading}>
+            Create Group
+          </Button>
         </div>
       </form>
     </Form>

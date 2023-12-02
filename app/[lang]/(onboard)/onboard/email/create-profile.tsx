@@ -6,13 +6,13 @@ import { getSession } from "next-auth/react";
 import { useState } from "react";
 
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -68,7 +68,7 @@ export default function CreateProfile({ text }: { text: any }) {
     const credentials = {
         email: data.email,
         display_name: data.display_name,
-        user_id: session.web3.user.id,
+        wallet: session.web3.user.id,
         
     };
 

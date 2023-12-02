@@ -17,6 +17,10 @@ export async function getGroups(search?: string) {
 
 export async function getClub(clubId:string){
     const session = (await getServerSession(authOptions)) as any;
+    
+    if(!session?.web3?.accessToken){
+      throw new Error("Session not found or address missing in session");
+    }
     const response = await fetch(`${API_URL}/clubs/${clubId}`, {
         headers: {
         Authorization: `Bearer ${session?.web3?.accessToken}`,

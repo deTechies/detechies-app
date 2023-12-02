@@ -2,6 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useFetchData from "@/lib/useFetchData";
 
+import { Card, CardHeader } from "@/components/ui/card";
 import RequestNFTModal from "./request-nft";
 
 export default function ProjectNfts({
@@ -17,18 +18,18 @@ export default function ProjectNfts({
 
 
   return (
-    <section className="flex flex-col gap-2">
-      <header className="flex items-center justify-between">
+    <Card className="flex flex-col gap-2">
+      <CardHeader className="flex items-center justify-between">
         <h5 className="font-medium">Achievements</h5>
         {isCreator && <RequestNFTModal />}
-      </header>
+      </CardHeader>
       <div className="flex flex-wrap gap-2">
         {loading ? (
           <div>loading...</div>
         ) : error ? (
           <div>{error}</div>
         ) : (
-          data?.map((nft, i) =>( 
+          data && data?.length > 0 &&  data?.map((nft, i) =>( 
             <Avatar key={i}>
               <AvatarImage 
               src={`https://ipfs.io/ipfs/${nft.metadata?.image}`}
@@ -41,6 +42,6 @@ export default function ProjectNfts({
           ))
         )}
       </div>
-    </section>
+    </Card>
   );
 }

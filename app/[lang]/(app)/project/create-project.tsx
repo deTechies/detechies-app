@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -50,17 +50,17 @@ const projectFormSchema = z.object({
   type: z.enum(["hackathon", "side_project", "project"], {
     required_error: "You need to select a  type.",
   }),
-  urls: z
-    .array(
-       z.string().url({ message: "Please enter a valid URL." }),
-    )
-    .optional(),
+  urls: z.array(
+    z.object({
+      value: z.string().url({ message: "Please enter a valid URL." }),
+    })
+  ),
 });
 
 type ProfileFormValues = z.infer<typeof projectFormSchema>;
 const defaultValues: Partial<ProfileFormValues> = {
   description: "Amazing project built by the careerzenTeam.",
-  urls: ["https://google.com" ],
+  urls: [{ value: "https://google.com" }],
 };
 
 export default function CreateProject() {
@@ -75,7 +75,6 @@ export default function CreateProject() {
     name: "urls",
     control: form.control,
   });
-
 
   const [loading, setLoading] = useState(false);
 
@@ -101,14 +100,10 @@ export default function CreateProject() {
       return;
     }
 
-    const form =
-      JSON.stringify({
-        ...data,
-        image: image,
-      })
-      
-      
-      
+    const form = JSON.stringify({
+      ...data,
+      image: image,
+    });
 
     //testing if they are valid string lenghts
     if (image.length < 30 || form.length < 30) {
@@ -118,9 +113,15 @@ export default function CreateProject() {
       });
       return;
     }
-    //TODO: add create form for project
-    await createProject({...data, image:image});
     
+    
+    await createProject({
+      image: image,
+      name: data.name,
+      description: data.description,
+      type: data.type,
+      urls: data.urls.map((url) => url.value),
+     });
 
     setLoading(false);
   }
@@ -221,7 +222,7 @@ export default function CreateProject() {
                 <FormField
                   control={form.control}
                   key={field.id}
-                  name={`urls.${index}`}
+                  name={`urls.${index}.value`}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className={cn(index !== 0 && "sr-only")}>
@@ -240,7 +241,7 @@ export default function CreateProject() {
                 variant="outline"
                 size="sm"
                 className="mt-2"
-                onClick={() => append("https://")}
+                onClick={() => append({ value: "https://" })}
               >
                 Add URL
               </Button>

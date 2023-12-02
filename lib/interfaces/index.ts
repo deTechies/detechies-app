@@ -101,7 +101,7 @@ export enum ClubType {
   }
   
   export interface CreateProject {
-    projectName: string;
+    name: string;
     description: string;
     image: string;
     creator?: string;
