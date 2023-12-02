@@ -1,4 +1,6 @@
 "use client";
+import { defaultAvatar } from "@/lib/constants";
+import { deleteFollowUser, startFollow } from "@/lib/data/network";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAccount } from "wagmi";
@@ -8,7 +10,7 @@ import { toast } from "../ui/use-toast";
 interface Profile {
   id: string;
   name: string;
-  username: string;
+  display_name: string;
   job?: string;
   nft: string[];
 }
@@ -28,11 +30,8 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.stopPropagation(); // Prevent event propagation
-    const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
-    await fetch(`${url}/polybase/follow/${profile.id}/${address}`, {}).then(
-      (res) => res.json()
-    );
-
+    
+    await startFollow(profile.id);
     followed = true;
 
     setIsFollowing(true);
@@ -45,10 +44,8 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.stopPropagation(); // Prevent event propagation
-    const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
-    await fetch(`${url}/polybase/unfollow/${profile.id}/${address}`, {}).then(
-      (res) => res.json()
-    );
+    
+    await deleteFollowUser(profile.id);
 
 
     toast({
@@ -57,16 +54,14 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
   };
   return (
     <section
-      className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[100px] max-w-[250px] hover:shadow-lg cursor-pointer flex flex-col justify-center gap-2"
-      onClick={() => router.push(`/profiles/${profile.id}`)}
+      className="rounded-sm shadow-custom bg-background-layer-1 p-0 hover:shadow-lg cursor-pointer flex flex-col justify-center gap-2 "
+      onClick={() => router.push(`/profile/${profile.id}`)}
     >
-      <div className="w-[64] aspect-square relative  rounded-t-sm m-0">
-        <IPFSImageLayer hashes={profile.nft} className="rounded-b-none" />
+      <div className="w-full aspect-square relative  rounded-t-sm m-0">
+        <IPFSImageLayer hashes={profile.nft ? profile.nft : defaultAvatar} className="rounded-b-none" />
       </div>
       <div className="p-2 flex flex-col">
-        <h5 className="font-semibold text-md capitalize truncate ">{profile.username}</h5>
-        <span className=" text-ellipse truncate w-full capitalize text-sm overflow-hidden text-text-secondary">{profile.job ? profile.job : "Other"}</span>
-        {}
+        <h5 className="font-medium tracking-wider text-md capitalize truncate text-center">{profile.display_name? profile.display_name : 'not_found'}</h5>
         {followed || isFollowing ? (
           <Button
             variant="secondary"

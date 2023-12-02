@@ -1,15 +1,17 @@
+import { getFollowingList } from "@/lib/data/network";
+import { getUsers } from "@/lib/data/user";
 import ListProfiles from "./list-profiles";
-import ProfileFilter from "./profile-filter";
 
-export default function ProfilePage() {
-  // lets get all the users profiles here.. 
+export default async function ProfilePage() {
+  // lets get all the users profiles here..
+
+  const users = await getUsers();
   
+  const followers = await getFollowingList();
+
   return (
-    <main className="flex md:flex-row flex-col gap-4 m-8 items-start">
-        <ProfileFilter />
-        <section className="flex gap-md flex-start justify-center md:flex-row flex-col">
-          <ListProfiles />
-        </section>
+    <main className="flex gap-md  justify-center mx-auto max-w-5xl	">
+      <ListProfiles users={users} followers={followers} />
     </main>
   );
 }

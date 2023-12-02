@@ -1,10 +1,11 @@
 // MediaUploader.tsx
+import { fileToBase64 } from "@/lib/utils";
 import { ImagePlus } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface MediaUploaderProps {
-  onFileSelected?: (file: File) => void;
+  onFileSelected?: (file: File, base64: string) => void;
   width: number;
     height: number;
     deleteFile?: boolean;
@@ -14,7 +15,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({ onFileSelected, deleteFil
   const [mediaSource, setMediaSource] = useState<string | null>(null);
   const [mediaType, setMediaType] = useState<"image" | "video" | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async(event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     console.log(width, height)
     if (file) {
@@ -23,13 +24,19 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({ onFileSelected, deleteFil
         const src = URL.createObjectURL(file);
         setMediaSource(src);
         setMediaType(fileType);
+        
+        try {
+          const base64String = await fileToBase64(file);
+          if (onFileSelected) {
+            onFileSelected(file, base64String);
+          }
+        } catch (error) {
+          console.error("Error converting file to base64:", error);
+        }
       } else {
         alert("Please upload an image or video format.");
       }
 
-      if (onFileSelected) {
-        onFileSelected(file);
-      }
     }
   };
   
