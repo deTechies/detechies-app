@@ -28,10 +28,10 @@ export default async function EmailVerify({
     
       <section className="my-2">
         {
-          !user && <CreateProfile text={text}/> 
+          !user.email && <CreateProfile text={text}/> 
         }
         {
-          user && !user.verified && <EmailVerification text={text}/>
+          user && !user.verified && user.email && <EmailVerification text={text}/>
         }
         {
           user && user.verified && <FinishedProfile />

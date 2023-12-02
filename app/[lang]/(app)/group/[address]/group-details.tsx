@@ -9,7 +9,7 @@ export default function GroupDetails({ details }: { details: any }) {
       <section className="w-full border rounded-sm flex flex-col gap-2 p-4">
         <h4 className="font-medium">Description</h4>
         <p className="text-text-secondary tracking-tight">
-          {details.introduction ? details.introduction : "No description"}
+          {details.description ? details.description : "No description"}
         </p>
       </section>
       <section className="w-full border rounded-sm flex flex-col gap-2 p-4">

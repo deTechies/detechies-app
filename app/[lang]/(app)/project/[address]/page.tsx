@@ -4,7 +4,8 @@ import { getSingleProject } from "@/lib/data/project";
 import { Address } from "wagmi";
 import ProjectDetail from "./project-detail";
 import ProjectInfo from "./project-info";
-import ProjectWorks from "./project-works";
+import ProjectMembers from "./project-members";
+import ProjectNfts from "./project-nfts";
 
 export interface ProjectDetailProps {
   id: string;
@@ -16,6 +17,7 @@ export interface ProjectDetailProps {
   isCreator: boolean;
   isMember: boolean;
   timestamp: number;
+  created_at: string;
   type: string;
   urls: string[];
   location: string;
@@ -23,8 +25,6 @@ export interface ProjectDetailProps {
   introduction: string;
   details: any;
   owner: string;
-  workers: string[];
-  works: any[];
   members: any[];
 }
 export default async function ProjectDetailPage({
@@ -54,13 +54,16 @@ export default async function ProjectDetailPage({
       </main>
     );
 
-  const workers = data.members?.map((member: any) => member.address);
 
   return (
     <main className="max-w-[2400px] grid md:grid-cols-3 m-8 gap-8">
       <section className="md:col-span-2 flex flex-col gap-8">
          <ProjectDetail details={data} />
 
+         <section>
+          <ProjectMembers members={data.members} isCreator={data.isCreator} />
+        </section>
+        
         { data.chatId?.chatId && (
           <PushGroupChat
             contract={params.address as Address}
@@ -70,10 +73,7 @@ export default async function ProjectDetailPage({
       </section>
       <section className="col-span-1 flex flex-col gap-8">
       <ProjectInfo info={data} />
-
-        {data && data.works && data.works.length > 0 && (
-          <ProjectWorks works={data.works} isCreator={data.isCreator} contract={data.id as Address}/>
-        )}
+      <ProjectNfts address={data.id} isCreator={data.isCreator}/>
       </section>
     </main>
   );

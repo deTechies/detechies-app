@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface ProjectItemProps {
+  id:string;
   name: string;
   image: string;
   description: string;
@@ -24,7 +25,7 @@ export default function GroupListItem({
   
 
   return (
-    <Link href={`/group/${details.addr}`}>
+    <Link href={`/group/${details.id}`}>
       <Card className="flex flex-row gap-4">
         <Avatar className="w-16 h-16 aspect-square">
           <AvatarImage

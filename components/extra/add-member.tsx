@@ -7,9 +7,10 @@ import { Address, useContractWrite } from "wagmi";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 
-import { ABI } from "@/lib/constants";
+import { ABI, defaultAvatar } from "@/lib/constants";
 
 import useFetchData from "@/lib/useFetchData";
+import { Plus } from "lucide-react";
 import Loading from "../loading";
 import { Badge } from "../ui/badge";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "../ui/dialog";
@@ -24,7 +25,7 @@ export default function AddMemberModal({type}:{type?: string}) {
   const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
   const search = searchParams.get("search");
   const selected = searchParams.get("selected");
-  const {data:members, loading, error} = useFetchData<any[]>("/polybase/profiles/all");
+  const {data:members, loading, error} = useFetchData<any[]>("/users");
 
   const [isMinting, setIsMinting] = useState(false);
   
@@ -72,8 +73,8 @@ export default function AddMemberModal({type}:{type?: string}) {
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge variant="accent" className="cursor-pointer">
-        Invite
+        <Badge variant="secondary" className="cursor-pointer text-sm font-normal py-2 px-4">
+         Invite <Plus size={16} className="inline-block ml-2" />
         </Badge>
       </DialogTrigger>
 
@@ -88,10 +89,10 @@ export default function AddMemberModal({type}:{type?: string}) {
               {filteredData && filteredData.map((member: any, index: number) => (
                 <PersonItem
                   key={index}
-                  src={member.nft}
+                  src={member.nft ? member.nft : defaultAvatar}
                   alt="Picture of the author"
-                  name={member.username}
-                  job={member.job}
+                  name={member.display_name}
+                  job={member.tba}
                   tba={member.id}
                 />
               ))}

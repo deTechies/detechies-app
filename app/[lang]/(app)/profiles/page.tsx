@@ -6,7 +6,7 @@ export default async function ProfilePage() {
   // lets get all the users profiles here..
 
   const users = await getUsers();
-  
+  console.log(users);
   const followers = await getFollowingList();
 
   return (

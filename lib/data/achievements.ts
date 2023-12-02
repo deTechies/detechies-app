@@ -8,28 +8,16 @@ export async function getUserAchievements(address?:string) {
   if(!address){
     const session = await getServerSession(authOptions) as Session;
     address = session?.web3?.address;
+
   }
-    const res = await fetch(`${API_URL}/achievement/userAchievements/${address}`)
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-   
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data')
-    }
-   
-    return res.json()
+  
+  return [];
+  //TODO: needs implementation
+
   }
   
   export async function getGroupAchievements(address:string){
-    const res = await fetch(`${API_URL}/achievement/getByGroup/${address}`)
-    
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data')
-    }
-    
-    return res.json()
+    return [];
   }
   
   export async function getAllAchievements(){
@@ -45,18 +33,6 @@ export async function getUserAchievements(address?:string) {
   
   export async function getPendingAchievements(address:string){
 
-    const res = await fetch(`${API_URL}/achievement/getRequests/${address}`)
-    console.log(address)
-    
-
-    
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data')
-    }
-    
-    const result = await res.json()
-    
-    return result;
+   return [];
   }
    

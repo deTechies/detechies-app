@@ -100,12 +100,17 @@ export enum ClubType {
     created_at: Date;
   }
   
-  export interface Project {
-    id: string;
-    projectName: string;
+  export interface CreateProject {
+    name: string;
     description: string;
     image: string;
-    creator: string;
+    creator?: string;
+    type: string;
+    urls: string[];
+    
+  }
+  export interface Project extends CreateProject {
+    id: string;
     onchain_id: string
     members: User[]
     files: File[]
