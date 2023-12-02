@@ -3,12 +3,11 @@
 
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Address, useContractWrite } from "wagmi";
 import { Button } from "../ui/button";
-import { toast } from "../ui/use-toast";
 
-import { ABI, defaultAvatar } from "@/lib/constants";
+import { defaultAvatar } from "@/lib/constants";
 
+import { inviteProjectMembers } from "@/lib/data/project";
 import useFetchData from "@/lib/useFetchData";
 import { Plus } from "lucide-react";
 import Loading from "../loading";
@@ -27,13 +26,8 @@ export default function AddMemberModal({type}:{type?: string}) {
   const selected = searchParams.get("selected");
   const {data:members, loading, error} = useFetchData<any[]>("/users");
 
-  const [isMinting, setIsMinting] = useState(false);
-  
-  const {write, isLoading, data} = useContractWrite({
-      address: address as Address, 
-      abi: type === 'project' ? ABI.project : ABI.groupRegistry, 
-      functionName: type == 'project' ? "addMember" : "safeMint"
-  })
+  const [isInviting, setIsInviting] = useState(false);
+
 
   useEffect(() => {
     if (!selected) return;
@@ -41,22 +35,10 @@ export default function AddMemberModal({type}:{type?: string}) {
     
   }, [selected]);
   
-  const mintTo = async () => {
-    setIsMinting(true);
-
-    if(selectedMembers.length == 0){
-      toast({
-        title: "No members selected",
-        description: "Please select at least one member to invite",
-      })
-      return;
-    }
-    
-    for(let i = 0; i < selectedMembers.length; i++){
-      write({args: [selectedMembers[i]]});
-    }
-    
-    setIsMinting(false);
+  const inviteMembers = async () => {
+    setIsInviting(true);
+    const result = await inviteProjectMembers(selectedMembers, address as string);
+    setIsInviting(false);
   }
   
   if(loading) return <Loading />
@@ -83,7 +65,7 @@ export default function AddMemberModal({type}:{type?: string}) {
             Turn on switch of member if you want to invite
           </h5>
           <section className="flex flex-col gap-4">
-            <Search placeholder="Search members Member Address" />
+            <Search placeholder="Search for members" />
 
             <div className="rounded-sm h-[30vh] overflow-x-auto my-4">
               {filteredData && filteredData.map((member: any, index: number) => (
@@ -106,8 +88,8 @@ export default function AddMemberModal({type}:{type?: string}) {
           </DialogClose>
            
             <Button
-              onClick={mintTo}
-              disabled={isLoading || isMinting}
+              onClick={inviteMembers}
+              disabled={isInviting}
             >Invite ({selectedMembers.length})</Button>
           </div>
         </DialogContent>

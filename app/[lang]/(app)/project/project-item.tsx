@@ -32,7 +32,10 @@ export default function ProjectItem({
             <Badge>{details.type}</Badge>
         </div>
         <div>
-          <p className="text-text-secondary">{details.description}</p>
+          <p className="text-text-secondary truncate max-h-12"  dangerouslySetInnerHTML={{
+                __html: details.description ? details.description : "No introduction yet.",
+              }}>
+                </p>
         </div>
       </section>
     </Link>

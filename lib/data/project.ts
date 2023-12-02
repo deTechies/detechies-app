@@ -88,4 +88,24 @@ export async function getProjects() {
    
     return res.json()
 }
+
+
+export async function inviteProjectMembers(members: string[], projectId: string){
+  const session = await getSession();
+  const response = await fetch(`${API_URL}/project-member/invite`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    body: JSON.stringify({ userId: members, projectId: projectId, inviterId: session?.web3?.address}),
+  });
+  
+  if(!response.ok){
+    throw new Error("Failed to invite members")
+  }
+
+  revalidateTag('projects')
+  return response.json();
+}
    
