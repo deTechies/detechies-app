@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Menu from "./menu";
 import Profile from "./profile";
+import RequestList from "./RequestList";
 
 const page = () => {
   return (
@@ -20,7 +21,8 @@ const page = () => {
         </div>
         {/* main */}
         <div className="basis-3/4 m-8">
-          <EditProfile />
+          {/* <EditProfile /> */}
+          <RequestList />
         </div>
       </div>
 
