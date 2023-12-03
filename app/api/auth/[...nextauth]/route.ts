@@ -119,14 +119,13 @@ export const authOptions: NextAuthOptions = {
             expires: expirationTime,
           };
         } else if (account.provider === "web3") {
-          
-
           token.web3 = {
             user: {
+              ...user.user, 
               id: user.user.id,
               username: user.user.display_name,
             },
-            address: user.user.id,
+            address: user.user.wallet,
             accessToken: user.token,
           }
 

@@ -52,7 +52,9 @@ export async function getUserProfile(address?: string) {
 }
 
 export async function getUsers(){
-  const res = await fetch(`${API_URL}/users`);
+  const res = await fetch(`${API_URL}/users`, {
+    next: { revalidate: 60 },
+  });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
