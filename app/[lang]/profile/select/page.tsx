@@ -1,15 +1,9 @@
 "use client";
-
-
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-
-
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import NftOwned from "./nft-owned";
-
 
 export default function ProfileMe() {
 
@@ -28,11 +22,7 @@ export default function ProfileMe() {
     }
   }, [address])
   
-
-  
-
   return (
-
           <Card>
             <CardHeader>NFTs</CardHeader>
             <CardContent>
