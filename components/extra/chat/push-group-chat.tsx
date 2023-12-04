@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { PushContext } from "@/lib/usePushProtocol";
-import { didToAddress } from "@/lib/utils";
 import { useContext, useEffect, useState } from "react";
 import { Address, useAccount } from "wagmi";
 import { MessageInput, MessageList } from "./push-chat";
@@ -74,11 +73,11 @@ export default function PushGroupChat({
         .then((result) => {
           console.log(result)
           setChatInfo(result);
-          const isMemberOf = result.members.some((member: any) => {
+         /*  const isMemberOf = result.members?.some((member: any) => {
             return didToAddress(member.wallet) == currentUser;
-          });
+          }); */
           //check group info and see if the user is member or not..
-          setIsMember(isMemberOf);
+          setIsMember(false);
           
         })
         .catch((error) => {
