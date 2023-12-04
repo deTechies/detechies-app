@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { API_URL } from "../constants";
 import { authOptions } from "../helpers/authOptions";
 
-const newURL = "http://localhost:4000";
+
 export async function getUserProfile(address?: string) {
   if (!address) {
     const session = (await getServerSession(authOptions)) as Session;
@@ -58,7 +58,7 @@ export async function getUsers() {
 export async function sendVerifyEmail(code: string) {
   const session = (await getServerSession(authOptions)) as Session;
 
-  const res = await fetch(`${newURL}/users/verify?token=${code}`, {
+  const res = await fetch(`${API_URL}/users/verify?token=${code}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
