@@ -77,7 +77,7 @@ export default function ProjectDetail({
           </div>
         </div>
       </header>
-      <div className="mt-4 w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-2">
         {details.isCreator && (
           <div className="flex justify-end gap-4">
             <Button

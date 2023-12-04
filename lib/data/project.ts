@@ -1,9 +1,10 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { API_URL } from "../constants";
-import { CreateProject } from "../interfaces";
+import { authOptions } from "../helpers/authOptions";
+import { CreateProject, JoinProject } from "../interfaces";
 
 export async function getSingleProject(id:string) {
   //getting profile session
@@ -65,7 +66,7 @@ export async function getSingleProject(id:string) {
       throw new Error("Failed to create project")
     }
 
-    revalidateTag('projects')
+    revalidatePath('/project')
     return response.json();
   }
 
@@ -88,4 +89,58 @@ export async function getProjects() {
    
     return res.json()
 }
+
+
+export async function inviteProjectMembers(members: string[], projectId: string){
+  const session = await getSession();
+  const response = await fetch(`${API_URL}/project-member/invite`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    body: JSON.stringify({ userId: members, projectId: projectId, inviterId: session?.web3?.address}),
+  });
+  
+  if(!response.ok){
+    throw new Error("Failed to invite members")
+  }
+
+  revalidateTag('projects')
+  return response.json();
+}
+
+export async function getPendingProjectMembers(address: string) {
+  const session = (await getServerSession(authOptions)) as any;
+  if(!address){
+    return;
+  }
+  const response = await fetch(
+    `${API_URL}/project-member/invites/${address}`,
+    
+    { 
+      headers: {
+        Authorization: `Bearer ${session.web3.accessToken}`,
+      },
+      next: { revalidate: 1 } }
+  );
+  const data = await response.json();
+  
+  console.log(data);
+
+  return data;
+}
    
+
+export async function joinProject(data: JoinProject ){
+  const session = await getSession();
+  
+  const response = await fetch(`${API_URL}/project-member/join`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    body: JSON.stringify({ userId: session?.web3.address, projectId: data.projectId, message: data.message, role: data.role }),
+  });
+}

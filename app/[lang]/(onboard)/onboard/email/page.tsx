@@ -1,4 +1,3 @@
-
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
@@ -16,28 +15,18 @@ export default async function EmailVerify({
   const dictionary = await getDictionary(lang);
   const text = dictionary.onboard.verify_email;
 
-  
-  
   const user = await getUserProfile();
-  
 
-  
-  
+
   return (
     <div>
-    
       <section className="my-2">
-        {
-          !user.email && <CreateProfile text={text}/> 
-        }
-        {
-          user && !user.verified && user.email && <EmailVerification text={text}/>
-        }
-        {
-          user && user.verified && <FinishedProfile />
-        }
+        {!user.email && <CreateProfile text={text} />}
+        {user && !user.verified && user.email && (
+          <EmailVerification text={text} user={user}/>
+        )}
+        {user && user.verified && <FinishedProfile />}
       </section>
     </div>
   );
 }
-

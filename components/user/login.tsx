@@ -3,7 +3,6 @@
 import { polygonMumbai } from "@/helpers/mumbai";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
@@ -65,18 +64,15 @@ export default function Login() {
   if (!isConnecting && address == session?.web3?.address) {
     return (
       <div className="flex rounded-md  items-center gap-2">
-        <Link href="/profile">
-          <Avatar className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:border hover:border-accent-primary">
+
+          <Avatar className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:outline hover:outline-accent-primary"
+          onClick={() => setShowModal(!showModal)}
+          >
             <IPFSImageLayer hashes={session?.web3?.user?.nft ? session.web3.user.nft : []} />
             <AvatarFallback>CZ</AvatarFallback>
           </Avatar>
-        </Link>
-        <Button
-          variant="secondary"
-          size="sm"
-          className="text_link text-text-primary flex  gap-2 px-4 py-3"
-          onClick={() => setShowModal(!showModal)}
-        >
+
+
           {showModal && (
             <ProfileDetails
               address={address}
@@ -84,7 +80,7 @@ export default function Login() {
               setShowModal={setShowModal}
             />
           )}
-        </Button>
+
         {chain?.id != 314159 && chain?.id != 80001 && (
           <Button
             variant={"destructive"}

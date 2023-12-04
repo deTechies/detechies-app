@@ -1,7 +1,8 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
+import { authOptions } from "../helpers/authOptions";
 import { CreateClub } from "../interfaces";
 
 export async function getGroups(search?: string) {
