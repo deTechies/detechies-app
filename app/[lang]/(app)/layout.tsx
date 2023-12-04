@@ -15,7 +15,7 @@ const pretendard = localFont({
 
 
 export const metadata: Metadata = {
-  title: "Careerzen - Build you career profile and grow your personal career and network",
+  title: "Careerzen - Build you career profile and grow with valuable insights",
   description:
     "We help you build your career profile and grow your personal career and network",
 };
