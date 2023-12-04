@@ -17,6 +17,12 @@
         "example": "example"
     },
     "onboard": {
+      "welcome": {
+        "title": "Welkom bij Careerzen",
+        "body": "Login met je eigen wallet om je account aan te maken of in te loggen..",
+        "web3": "Social Media Login", 
+        "browser": "Browser Wallet login"
+      },
       "verify_email": {
         "title": "Sign up!",
         "body": "Professional personal members, please make sure to verify your personal email, work emails make it harder to find your account if you leave..", 

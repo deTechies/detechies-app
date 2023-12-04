@@ -17,6 +17,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Checkbox } from "@/components/ui/checkbox";
+import { API_URL } from "@/lib/constants";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -56,25 +58,21 @@ export default function CreateProfile({ text }: { text: any }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  async function sendVerification(data:ProfileFormValues){
-    
+  async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
     const session = await getSession();
     console.log(session);
     if (session === null)
       return window.alert("You must be logged in to verify your email");
 
-
     const credentials = {
-        email: data.email,
-        display_name: data.display_name,
-        wallet: session.web3.user.id,
-        
+      email: data.email,
+      display_name: data.display_name,
+      wallet: session.web3.address,
     };
 
-    console.log(session.web3.accessToken);
 
-    await fetch("http://localhost:4000/users", {
+    await fetch(`${API_URL}/users`, {
       body: JSON.stringify(credentials),
       method: "POST",
       headers: {
@@ -85,8 +83,9 @@ export default function CreateProfile({ text }: { text: any }) {
       .then((result) => {
         console.log(result);
         toast({
-          title: "Success",
-          description: "Email verification sent",
+          title: "Email verification sent",
+          description:
+            "We have send you an email with the instructions to verify your account. Please follow the instructions.",
         });
 
         //handle and submit this to update the user session
@@ -99,8 +98,9 @@ export default function CreateProfile({ text }: { text: any }) {
         })
       );
 
+    revalidatePath("/onboard/email");
     setIsLoading(false);
-  };
+  }
 
   return (
     <Form {...form}>
@@ -108,7 +108,6 @@ export default function CreateProfile({ text }: { text: any }) {
         onSubmit={form.handleSubmit(sendVerification)}
         className="space-y-8 my-8"
       >
-
         <h1 className="text-4xl font-bold mb-6 text-primary">{text.title}</h1>
         <h4 className="text-text-secondary font-light tracking-wider">
           {text.body}
@@ -157,7 +156,7 @@ export default function CreateProfile({ text }: { text: any }) {
               <div className="space-y-1 leading-none">
                 <FormLabel>{text.accordion.terms_of_services}</FormLabel>
                 <FormDescription>
-                  Click for more details about the {" "}
+                  Click for more details about the{" "}
                   <Link
                     href="https://careerzen.org/terms-of-service"
                     className="text-accent-primary"
@@ -184,7 +183,7 @@ export default function CreateProfile({ text }: { text: any }) {
               <div className="space-y-1 leading-none">
                 <FormLabel>{text.accordion.privacy_policy}</FormLabel>
                 <FormDescription>
-                  Click for more details about the {" "}
+                  Click for more details about the{" "}
                   <Link
                     href="https://careerzen.org/privacy-policy"
                     className="text-accent-primary"
@@ -211,7 +210,7 @@ export default function CreateProfile({ text }: { text: any }) {
               <div className="space-y-1 leading-none">
                 <FormLabel>{text.accordion.reward_notification}</FormLabel>
                 <FormDescription>
-                  Click for more details about the {" "}
+                  Click for more details about the{" "}
                   <Link
                     className="text-accent-primary"
                     href="https://careerzen.org/terms-of-service"

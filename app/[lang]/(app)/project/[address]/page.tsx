@@ -61,7 +61,7 @@ export default async function ProjectDetailPage({
          <ProjectDetail details={data} />
 
          <section>
-          <ProjectMembers members={data.members} isCreator={data.isCreator} />
+          <ProjectMembers members={data.members} isCreator={data.isCreator} projectId={params.address} />
         </section>
         
         { data.chatId?.chatId && (

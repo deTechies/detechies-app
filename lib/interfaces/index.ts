@@ -119,3 +119,10 @@ export enum ClubType {
     updated_at: Date;
   }
   
+  
+  export interface JoinProject{
+    projectId: string;
+    userId?: string;
+    message?:string
+    role?: string;
+  }

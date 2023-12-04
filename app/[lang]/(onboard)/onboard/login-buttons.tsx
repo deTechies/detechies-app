@@ -5,37 +5,36 @@ import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useConnect, useSignMessage } from "wagmi";
 
-export default function LoginButtons() {
+export default function LoginButtons({
+  text,
+}: {
+  text?: any;
+}) {
   const { connect, connectors } = useConnect();
   const { address } = useAccount();
   const { data: session } = useSession();
-  const router = useRouter();
   const { signMessageAsync } = useSignMessage();
 
   useEffect(() => {
-    //check if user is signed in
-
     if (session && session.web3?.accessToken) {
-      if (session.web3.address != address) {
+      if (session.web3.address == address) {
+        if(session.web3.user?.verified){
+          redirect("/project");
+        }
         redirect("/onboard/email");
 
       }
 
-      if (!session.web3?.user?.verified) {
-        redirect("/onboard/email");
-      }
-      redirect("/project");
     }
+    console.log(address)
+    console.log(session);
 
-    if (address && session?.web3.accessToken && session?.web3?.address != address) {
-     // signIn;
-    }
-  }, [address, session, router]);
+  }, [address, session]);
 
   const handleConnect = (connector: any) => {
     connect({ connector });
@@ -76,7 +75,7 @@ export default function LoginButtons() {
     }
   };
 
-  if (!session?.web3?.accessToken) {
+  if (address && (!session?.web3?.accessToken || session?.web3.address != address)) {
     return (
       <Button variant={"secondary"} onClick={() => {
         handleSign()
@@ -99,7 +98,7 @@ export default function LoginButtons() {
           alt={connectors[1].name}
           quality={2}
         />
-        <span className="w-full text-center">소셜 계정으로 계속하기</span>
+        <span className="w-full text-center">{text.web3 ? text.web3 : 'Social Wallet'}</span>
       </div>
 
       <div
@@ -114,7 +113,7 @@ export default function LoginButtons() {
           alt={connectors[0].name}
         />
         <span className="w-full text-center text-text-primary">
-          메타마스크 지갑
+          {text.browser ? text.browser : 'Browser Wallet'}
         </span>
       </div>
     </div>

@@ -32,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${pretendard.className} bg-background-layer-2 text-primary min-h-[100vh]`}
+        className={`${pretendard.className} bg-[#F2F3F5] text-primary min-h-[100vh]`}
         suppressHydrationWarning
       >
         <ThemeProvider

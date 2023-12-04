@@ -1,6 +1,7 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 import { Session, getServerSession } from "next-auth";
 import { API_URL } from "../constants";
+import { authOptions } from "../helpers/authOptions";
 
 export async function getUserAchievements(address?:string) {
   //getting profile session
