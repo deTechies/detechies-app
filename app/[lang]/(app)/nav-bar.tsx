@@ -32,10 +32,10 @@ export default function Navbar({lang}: {lang: any}) {
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
 
   return (
-    <Disclosure as="nav" className="bg-background-layer-1 z-10">
+    <Disclosure as="nav" className="mx-auto bg-background-layer-1 z-10 ">
       {({ open }) => (
         <>
-          <div className="px-6 lg:px-8 bg-background-layer-1 shadow-sm">
+          <div className="px-6 lg:px-8 bg-background-layer-1 max-w-[1920px] mx-auto shadow-sm">
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
@@ -61,7 +61,7 @@ export default function Navbar({lang}: {lang: any}) {
                       aria-disabled={link?.disabled}
                       className={`inline-flex items-center border-b-2 capitalize 
                       ${
-                        pathname.endsWith(link.href)
+                        pathname.includes(link.href)
                           ? "border-accent-primary text-accent-primary"
                           : "border-transparent text-text-secondary hover:text-text-primary"
                       }  

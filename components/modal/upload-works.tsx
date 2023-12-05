@@ -104,23 +104,19 @@ export default function UploadWorks({ type }: { type?: string }) {
       });
       return;
     }
-    await write({ args: [name, uploadedContent] });
+    
 
     setLoading(false);
   };
 
   return (
     <Dialog>
-      <DialogTrigger className="w-full">
-        <Button className="cursor-pointer" >Upload Works</Button>
+      <DialogTrigger className="">
+        <Badge variant="accent">Add Link</Badge>
       </DialogTrigger>
 
       <DialogContent>
         <h3 className="text-subhead_m">Upload you work</h3>
-        <p>
-          If you upload file or links of your works, owner or sponsor will
-          review the works. Once it is accepted it will be visible for everyone.
-        </p>
 
         <section className="my-4 flex flex-col gap-3">
           <header className="flex justify-between  items-center">

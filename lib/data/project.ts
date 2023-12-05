@@ -1,7 +1,6 @@
 
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-import { revalidatePath, revalidateTag } from "next/cache";
 import { API_URL } from "../constants";
 import { authOptions } from "../helpers/authOptions";
 import { CreateProject, JoinProject } from "../interfaces";
@@ -47,7 +46,6 @@ export async function getSingleProject(id:string) {
       throw new Error("Failed to update project")
     }
 
-    revalidateTag('projects')
     return response.json();
   }
   
@@ -65,8 +63,7 @@ export async function getSingleProject(id:string) {
     if(!response.ok){
       throw new Error("Failed to create project")
     }
-
-    revalidatePath('/project')
+    
     return response.json();
   }
 
@@ -91,7 +88,7 @@ export async function getProjects() {
 }
 
 
-export async function inviteProjectMembers(members: string[], projectId: string){
+export async function inviteProjectMembers(members: string[], role:string,  projectId: string){
   const session = await getSession();
   const response = await fetch(`${API_URL}/project-member/invite`, {
     method: "POST",
@@ -99,14 +96,13 @@ export async function inviteProjectMembers(members: string[], projectId: string)
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-    body: JSON.stringify({ userId: members, projectId: projectId, inviterId: session?.web3?.address}),
+    body: JSON.stringify({ userId: members, projectId: projectId,role:role, inviterId: session?.web3?.address}),
   });
   
   if(!response.ok){
     throw new Error("Failed to invite members")
   }
 
-  revalidateTag('projects')
   return response.json();
 }
 
@@ -143,4 +139,14 @@ export async function joinProject(data: JoinProject ){
     },
     body: JSON.stringify({ userId: session?.web3.address, projectId: data.projectId, message: data.message, role: data.role }),
   });
+  
+  if(!response.ok){
+    throw new Error("Failed to join project")
+  }
+  
+  return true;
+}
+
+export async function inviteByEmail(name: string, email:string, projectId: string){
+  return null;
 }

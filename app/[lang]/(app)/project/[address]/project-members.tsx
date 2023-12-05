@@ -1,7 +1,7 @@
 
-import AddMemberModal from "@/components/extra/add-member";
 import { Card } from "@/components/ui/card";
 
+import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 import PendingMemberList from "@/components/modal/pending-member-list";
 import { getPendingProjectMembers } from "@/lib/data/project";
 import { Address } from "wagmi";
@@ -26,17 +26,17 @@ export default async function ProjectMembers({
 
   return (
     <section className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-4 py-4">
+      <Card className="flex flex-col gap-4 p-6">
         <header className="flex items-center justify-between">
           <h5 className="text-subhead_s text-text-primary font-medium">
             Members ({members.length})
           </h5>
           {pendingMembers.length > 0 && (
-            <span className="text-subhead_s text-text-secondary">
+            <span className="text-xs text-text-secondary">
               <PendingMemberList pendingMembers={pendingMembers} />
             </span>
           )}
-          {isCreator && <AddMemberModal type="project" />}
+          {isCreator && <InviteProjectMember projectId={projectId} />}
         </header>
       </Card>
 

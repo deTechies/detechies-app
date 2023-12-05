@@ -1,7 +1,7 @@
 
 import PendingProfileCard from "@/components/card/pending-profile-card";
+import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 
-import AddMemberModal from "@/components/extra/add-member";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { getPendingMembers } from "@/lib/data/groups";
@@ -31,7 +31,7 @@ const pendingData = await getPendingMembers(params.address);
     <Card className="overflow-auto max-w-[90vw]">
       <CardHeader className="flex items-center justify-between">
         <h3>Members ({pendingData?.length})</h3>
-        <AddMemberModal />
+        <InviteProjectMember projectId={params.address} />
       </CardHeader>
       <CardContent className="flex gap-4">
 

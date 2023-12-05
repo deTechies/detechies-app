@@ -12,6 +12,10 @@ export async function getUserProfile(address?: string) {
     const session = (await getServerSession(authOptions)) as Session;
 
     console.log(session);
+    
+    if(!session){
+      redirect("/onboard");
+    }
     const user = await fetch(`${API_URL}/users/${session?.web3.address}`, {
       method: "GET",
       headers: {
@@ -22,10 +26,10 @@ export async function getUserProfile(address?: string) {
     });
 
     const data = await user.json();
-    console.log(data);
 
     if (!user.ok) {
       // This will activate the closest `error.js` Error Boundary
+      redirect("/onboard");
       throw new Error("Failed to fetch data");
     }
 
