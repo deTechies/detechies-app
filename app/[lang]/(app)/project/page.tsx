@@ -1,5 +1,7 @@
 
 import Search from "@/components/extra/search";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { getProjects } from "@/lib/data/project";
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
@@ -18,26 +20,42 @@ export interface ProjectItemProps {
   members: string[];
 }
 
-export default async function ProjectListPage() {
-
+export default async function ProjectListPage({
+  searchParams
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  
 
   
   const projects = await getProjects();
-  
-/*   const filteredData = search 
-    ? data?.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())) 
-    : data; */
+  const searchItem = searchParams.search as string
+   let filteredData = searchParams.search 
+    ? projects?.filter((item:any) => item.name.toLowerCase().includes(searchItem.toLowerCase())) 
+    : projects; 
+    
+
 
   return (
-    <main className="flex flex-col gap-8 w-full max-w-6xl p-8 mx-auto">
-      <div className="my-12 flex gap-3 justify-between">
-        <Search placeholder="search" />
+    <main className="flex flex-col gap-4 w-full my-4 p-4 mx-auto">
+      <Card className="flex gap-3 justify-between">
+        <h1 className="text-subhead_s">Projects</h1>
+        <div className="flex justify-between">
+          <div className="flex gap-4 items-center ">
+              <Search placeholder="search" />
+              <div className="flex items-center gap-4">
+                <Checkbox />
+                My Projects
+              </div>
+          </div>
         <CreateProject />
-      </div>
+          
+        </div>
+      </Card>
 
-      <section className="grid md:grid-cols-2  gap-4">
-        {projects.length > 0 ? (
-          projects.map((item: ProjectItemProps) => (
+      <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-8">
+        {filteredData.length > 0 ? (
+          filteredData.map((item: ProjectItemProps) => (
             <ProjectItem key={item.id} details={item } />
           ))
         ) : (

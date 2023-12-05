@@ -20,18 +20,19 @@ export default function Search({ placeholder}: {placeholder: string}) {
     } , [pathname, query, router])
   return (
     <div className="relative rounded-sm border flex-grow">
-        <div className='pointer-events-none absolute inset-y-3 inset-x-4'>
-            <SearchIcon 
-                className="h-6 w-6 text-text-placeholder"
-                aria-hidden="true"
-            />
-        </div>
+       
         <input 
             value={text}
             placeholder={placeholder}
             onChange={(e) => setText(e.target.value)}
-            className="block w-full text-text-primary bg-background-layer-1  rounded-sm tracking-wide border-0 py-3 px-12"
+            className="block w-full text-text-primary bg-background-layer-2  rounded-sm tracking-wide border-0 py-2 px-12 focus:outline-border-input"
         />
+         <div className='pointer-events-none absolute inset-y-3 inset-x-4'>
+            <SearchIcon 
+                className="h-4 w-4 text-text-placeholder"
+                aria-hidden="true"
+            />
+        </div>
     </div>
   )
 }

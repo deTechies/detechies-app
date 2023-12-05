@@ -1,32 +1,11 @@
-import PushGroupChat from "@/components/extra/chat/push-group-chat";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSingleProject } from "@/lib/data/project";
-import { Address } from "wagmi";
+import { Project } from "@/lib/interfaces";
 import ProjectDetail from "./project-detail";
 import ProjectInfo from "./project-info";
 import ProjectMembers from "./project-members";
 import ProjectNfts from "./project-nfts";
 
-export interface ProjectDetailProps {
-  id: string;
-  image: string;
-  name: string;
-  description: string;
-  creator: string;
-  url: string;
-  isCreator: boolean;
-  isMember: boolean;
-  timestamp: number;
-  created_at: string;
-  type: string;
-  urls: string[];
-  location: string;
-  chatId: any;
-  introduction: string;
-  details: any;
-  owner: string;
-  members: any[];
-}
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -37,7 +16,7 @@ export default async function ProjectDetailPage({
     `/project/single/${address}`
   ); */
 
-  const data: ProjectDetailProps = await getSingleProject(params.address);
+  const data: Project = await getSingleProject(params.address);
   //check if we can fetch this without doing it on the client side.
 
   if (!data)
@@ -64,12 +43,6 @@ export default async function ProjectDetailPage({
           <ProjectMembers members={data.members} isCreator={data.isCreator} projectId={params.address} />
         </section>
         
-        { data.chatId?.chatId && (
-          <PushGroupChat
-            contract={params.address as Address}
-            chatId={data.chatId.chatId}
-          />
-        )}
       </section>
       <section className="col-span-1 flex flex-col gap-8">
       <ProjectInfo info={data} />

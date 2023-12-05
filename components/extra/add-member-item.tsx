@@ -1,63 +1,36 @@
 "use client"
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+
+
+import { User } from "@/lib/interfaces";
 import IPFSImageLayer from "../ui/layer";
-import { Switch } from "../ui/switch";
 
 export default function PersonItem({
-    src,
-    alt,
-    name,
-    job,
-    tba,
+    member,
+    returnValue,
+    selected
   }: {
-    src: string[];
-    alt: string;
-    name: string;
-    job: string;
-    tba: string;
+    member: User
+    returnValue: any;
+    selected?: boolean;
   }) {
-    const router = useRouter();
-    const pathName = usePathname();
-    const searchParams = useSearchParams();
-    const result = searchParams.get("selected");
-    const listMembers = result?.split(",")
     
-    const changeValue = (value: boolean, tba: string) => {
-      console.log(value, tba);
-   
-      
-      if(value){    
-        console.log(tba)
-        if(tba){
-            console.log(value)
-            
-            if(result){
-                router.push(pathName + `?selected=${result},${tba}`)
-            }else{
-                router.push(pathName + `?selected=${tba}`)
-            }
-        }
-      }
-    };
+    //on select 
+
     return (
-      <article className="flex justify-between items-center p-4 ">
+      <button className={`flex justify-between items-center p-4 hover:bg-background-layer-2 w-full rounded-sm ${selected && 'bg-accent-secondary hover:bg-state-error-secondary'}`} onClick={() => {
+         returnValue(member)
+      }}>
         <figure className="flex gap-4">
-          <div className="relative w-12 h-12 rounded-full">
-              <IPFSImageLayer hashes={src} />
+          <div className="relative w-12 h-12 rounded-[6px] bg-background-layer-2">
+              <IPFSImageLayer hashes={[]} />
           </div>
-          <div>
-            <p className="font-bold">{name}</p>
-            <p className="text-muted-foreground">{job}</p>
+          <div className="text-left">
+            <p className="font-bold">{member?.display_name}</p>
+            <p className="text-muted-foreground">{'no jobtitle found'}</p>
           </div>
         </figure>
-  
-        <Switch
-            disabled={!tba}
-            checked={listMembers?.includes(tba)}
-             onCheckedChange={(value) => changeValue(value, tba)}
-        />
-      </article>
+      </button>
     );
   }
   

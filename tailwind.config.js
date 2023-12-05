@@ -102,6 +102,7 @@ module.exports = {
           base: "var(--background-base)",
           "layer-1": "var(--background-layer-1)",
           "layer-2": "var(--background-layer-2)",
+          "input-inactive": "var(--background-input-inactive)",
         },
         border: {
           input: "var(--border-input)",
@@ -217,7 +218,7 @@ module.exports = {
           { letterSpacing: "0.5px" },
         ],
         subhead_s: [
-          "1rem",
+          "20px",
           { lineHeight: "1.4rem" },
           { fontWeight: "600" },
           { letterSpacing: "0.5px" },
@@ -239,6 +240,24 @@ module.exports = {
           { fontWeight: "600" },
           { lineHeight: "1.1rem" },
           { letterSpacing: "0.1px" },
+        ],
+        body_s: [
+          "0.875rem",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "400" },
+          { letterSpacing: "0.5px" },
+        ],
+        body_m: [
+          "1rem",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "400" },
+          { letterSpacing: "0.4px" },
+        ],
+        label_l: [
+          "16px",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "400" },
+          { letterSpacing: "0.5px" },
         ],
       },
     },

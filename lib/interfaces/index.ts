@@ -57,7 +57,22 @@ export enum ClubType {
     COMMUNITY = 'community',
     OTHER = 'other'
   }
+  
+  export enum ProjectType {
+    CLIENT = 'client',
+    INTERNAL = 'internal',
+    SIDE = 'side',
+    HACKATHON = 'hackathon',
+    OTHER = 'other'
+  }
 
+  export enum ProjectCategory {
+    WEB = 'web',
+    MOBILE = 'mobile',
+    DESIGN = 'design',
+    GAME = 'game',
+    OTHER = 'other'
+  }
   
   export interface Member {
     id: string;
@@ -105,13 +120,18 @@ export enum ClubType {
     description: string;
     image: string;
     creator?: string;
-    type: string;
-    urls: string[];
+    type: ProjectType;
+    begin_date: string;
+    end_date?: string
+    category: ProjectCategory;
     
   }
   export interface Project extends CreateProject {
     id: string;
     onchain_id: string
+    isCreator: boolean;
+    isMember?: boolean;
+    urls?: string[];
     members: User[]
     files: File[]
     achievements: Achievement[]

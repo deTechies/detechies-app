@@ -32,18 +32,20 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${pretendard.className} bg-[#F2F3F5] text-primary min-h-[100vh]`}
+        className={`${pretendard.className} bg-background-layer-2 text-text-primary min-h-[100vh] `}
         suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+          enableSystem={true}
+          disableTransitionOnChange={true}
         >
           <App>
             <Navbar lang={dictionary.nav} />
+            <main className="mx-auto max-w-[1920px]">
             {children}
+            </main>
           </App>
         </ThemeProvider>
       </body>

@@ -1,19 +1,14 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { updateProject } from "@/lib/data/project";
+import { Project } from "@/lib/interfaces";
 import Image from "next/image";
 import { Editor } from "novel";
 import { useState } from "react";
-import { ProjectDetailProps } from "./page";
 
-export default function ProjectDetail({
-  details,
-}: {
-  details: ProjectDetailProps;
-}) {
+export default function ProjectDetail({ details }: { details: Project }) {
   const [editing, setEditing] = useState(false);
   const [data, setData] = useState<any>({
     content: details.description,
@@ -24,25 +19,18 @@ export default function ProjectDetail({
   const startSaving = async () => {
     setEditing(false);
     console.log(data);
-    
-    if(data.content != details.description || data.name != details.name){
+
+    if (data.content != details.description || data.name != details.name) {
       //save the data.
-      const result = await updateProject(
-        details.id,
-        data.name,
-        data.content
-      );
-      
+      const result = await updateProject(details.id, data.name, data.content);
+
       console.log(result);
     }
-    
   };
-
-  console.log(details);
 
   return (
     <Card className="w-full ">
-      <header className="flex gap-8 items-center ">
+      <header className="flex gap-8 items-start ">
         <Image
           src={`${
             details.image
@@ -58,7 +46,7 @@ export default function ProjectDetail({
           {editing ? (
             <Input
               type="text"
-              className="w-full text-3xl font-medium"
+              className="w-full py-1 text-2xl font-medium"
               defaultValue={details.name}
               onChange={(e) => {
                 setData((prev: any) => ({
@@ -68,30 +56,39 @@ export default function ProjectDetail({
               }}
             />
           ) : (
-            <h1 className="text-3xl font-medium">{data.name}</h1>
+            <h1 className="text-2xl font-medium mb-3">{data.name}</h1>
           )}
 
-          <div className="flex gap-4 items-center ">
-            <Badge>{details.type}</Badge>
-            <span>{details.created_at}</span>
+          <div className="flex gap-4 items-center text-label_l text-text-secondary ">
+            <span>{details?.category}</span>
+            <span>{details.type}</span>
+            <span>{details.created_at.toLocaleString("nl-NL")}</span>
+          </div>
+          <div className="flex gap-1 items-center text-label_l text-text-secondary">
+            <span>{details?.begin_date}</span>
+            <span>~</span>
+            <span>{details.end_date}</span>
           </div>
         </div>
       </header>
-      <div className="w-full flex flex-col gap-2">
-        {details.isCreator && (
-          <div className="flex justify-end gap-4">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setEditing(!editing)}
-            >
-              {editing ? "Stop" : "Edit"}
-            </Button>
-            <Button size={"sm"} onClick={startSaving}>
-              Save
-            </Button>
-          </div>
-        )}
+      <div className="w-full flex flex-col gap-2 mt-4">
+        <div className="flex justify-between mb-4 items-center">
+          <h3 className="text-subhead_m ">Project Description</h3>
+          {details.isCreator && (
+            <div className="flex justify-end gap-4">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => setEditing(!editing)}
+              >
+                {editing ? "Stop" : "Edit"}
+              </Button>
+              <Button size={"sm"} onClick={startSaving}>
+                Save
+              </Button>
+            </div>
+          )}
+        </div>
 
         {editing ? (
           <Editor
@@ -107,7 +104,7 @@ export default function ProjectDetail({
             }}
           />
         ) : (
-          <div className={`overflow-hidden ${showFull ? '' : 'max-h-[100px]'}`}>
+          <div className={`overflow-hidden ${showFull ? "" : "max-h-[100px]"}`}>
             <div
               dangerouslySetInnerHTML={{
                 __html: data.content ? data.content : "No introduction yet.",
@@ -116,12 +113,15 @@ export default function ProjectDetail({
           </div>
         )}
       </div>
-      
-      <Button variant={"ghost"}
+
+      <Button
+        variant={"ghost"}
         onClick={() => {
-          setShowFull(!showFull)
+          setShowFull(!showFull);
         }}
-      >{showFull? 'hide': 'show more'}</Button>
+      >
+        {showFull ? "hide" : "show more"}
+      </Button>
     </Card>
   );
 }
