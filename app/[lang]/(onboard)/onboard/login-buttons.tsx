@@ -93,7 +93,7 @@ export default function LoginButtons({
           alt={connectors[1].name}
           quality={2}
         />
-        <span className="w-full text-center">{text.web3 ? text.web3 : 'Social Wallet'}</span>
+        <span className="w-full text-center">{text?.web3 ? text.web3 : 'Social Wallet'}</span>
       </div>
 
       <div
@@ -108,7 +108,7 @@ export default function LoginButtons({
           alt={connectors[0].name}
         />
         <span className="w-full text-center text-text-primary">
-          {text.browser ? text.browser : 'Browser Wallet'}
+          {text?.browser ? text.browser : 'Browser Wallet'}
         </span>
       </div>
     </div>
