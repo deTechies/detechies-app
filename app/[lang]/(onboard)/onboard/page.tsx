@@ -1,7 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import Image from "next/image";
-import LoginButtons from "./login-buttons";
 
 export default async function OnboardPage({
   params: { lang },
@@ -30,9 +29,7 @@ export default async function OnboardPage({
         }
       </h5>
       <div className="flex flex-col space-y-1 gap-4 w-full">
-        <LoginButtons 
-          text={dictionary.onboard.welcome}
-        />
+        
       </div>
     </div>
   );
