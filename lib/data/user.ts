@@ -11,7 +11,6 @@ export async function getUserProfile(address?: string) {
   if (!address) {
     const session = (await getServerSession(authOptions)) as Session;
 
-    console.log(session);
     
     if(!session){
       redirect("/onboard");
