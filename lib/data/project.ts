@@ -69,6 +69,10 @@ export async function getSingleProject(id:string) {
 
 export async function getProjects() {
   const session = (await getServerSession(authOptions)) as any;
+  
+  if(!session?.web3?.address){
+    throw new Error("No address found")
+  }
     const res = await fetch(`${API_URL}/projects`,  {
       headers: {
         Authorization: `Bearer ${session?.web3?.accessToken}`,

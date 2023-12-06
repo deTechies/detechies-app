@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectItemProps } from "./page";
 
-const DEFAULT_DESCRIPTION = "Random description";
 
 export default function ProjectItem({
   details,
