@@ -1,6 +1,7 @@
 import { API_URL } from "@/lib/constants";
 import { getUserSession } from "@/lib/data/user";
-import NextAuth, { NextAuthOptions, Session } from "next-auth";
+import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
+import NextAuth, { NextAuthOptions, Session, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 
@@ -105,3 +106,7 @@ export const authOptions = {
   
 
   export const {handlers, signOut} = NextAuth(authOptions);
+  
+  export function auth(...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []) {
+    return getServerSession(...args, authOptions)
+  }

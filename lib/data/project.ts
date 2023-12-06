@@ -2,7 +2,7 @@
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
-import { authOptions } from "../helpers/authOptions";
+import { auth, authOptions } from "../helpers/authOptions";
 import { CreateProject, JoinProject } from "../interfaces";
 
 export async function getSingleProject(id:string) {
@@ -68,8 +68,9 @@ export async function getSingleProject(id:string) {
   }
 
 export async function getProjects() {
-  const session = (await getServerSession(authOptions)) as any;
-  
+  //const session = (await getServerSession(authOptions)) as any;
+
+  const session = await auth();
   if(!session?.web3?.address){
     throw new Error("No address found")
   }
