@@ -14,7 +14,7 @@ async function getSessionAddress() {
 }
 
 export async function getFollowingList(address?: string) {
-  const session = await getSessionAddress();
+/*   const session = await getSessionAddress();
   address = address || session.web3.address;
   const response = await fetch(`${API_URL}/networking/following/${address}`, {
     headers: {
@@ -26,7 +26,8 @@ export async function getFollowingList(address?: string) {
     throw new Error("Failed to fetch following list");
   }
 
-  return response.json();
+  return response.json(); */
+  return [];
 }
 
 export async function getFollowersList(address?: string) {

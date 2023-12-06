@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectItemProps } from "./page";
 
-const DEFAULT_DESCRIPTION = "Random description";
 
 export default function ProjectItem({
   details,
@@ -25,6 +24,8 @@ export default function ProjectItem({
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
           fill={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 75vw"
+
         />
       </figure>
       <section className="col-span-3 flex gap-1 flex-col w-full">
@@ -35,7 +36,7 @@ export default function ProjectItem({
         </header>
         <section className="space-x-2 divide-x font-light text-text-secondary text-body_s">
             <span>{details.type}</span>
-            <span className="pl-2">category</span>
+            <span className="pl-2">{details.category}</span>
         </section>
         <div>
           <p className="text-text-secondary h-12 overflow-hidden text-body_s"  dangerouslySetInnerHTML={{
