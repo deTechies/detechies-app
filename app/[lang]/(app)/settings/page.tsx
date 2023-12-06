@@ -1,10 +1,9 @@
-"use client";
-import { useSession } from "next-auth/react";
+import { getSessionToken } from "@/lib/data/project"
 
 
-export default function SettingsPAge() {
+export default  async function SettingsPAge() {
 
-    const { data: session } = useSession();
+    const session  =await getSessionToken()
   return (
     <div>{
         JSON.stringify(

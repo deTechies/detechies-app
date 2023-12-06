@@ -156,3 +156,8 @@ export async function joinProject(data: JoinProject ){
 export async function inviteByEmail(name: string, email:string, projectId: string){
   return null;
 }
+
+export async function getSessionToken(){
+  const session = await auth();
+  return session
+}
