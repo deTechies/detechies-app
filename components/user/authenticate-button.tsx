@@ -1,6 +1,8 @@
+"use client"
 import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
 import { getCsrfToken, signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useSignMessage } from "wagmi";
 import { Button } from "../ui/button";
@@ -8,6 +10,10 @@ import { Button } from "../ui/button";
 const AuthenticateButton = () => {
   const { address } = useAccount();
   const { signMessageAsync } = useSignMessage();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <></>;
 
   const handleSign = async () => {
     try {

@@ -53,7 +53,7 @@ export default async function ProjectListPage({
         </div>
       </Card>
 
-      <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-8">
+      <section className="w-full grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-4 my-8">
         {filteredData.length > 0 ? (
           filteredData.map((item: ProjectItemProps) => (
             <ProjectItem key={item.id} details={item } />

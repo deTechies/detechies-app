@@ -1,12 +1,11 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
 
 import "../../globals.css";
 
-import Navbar from "../../(app)/nav-bar";
+import { Suspense } from "react";
 import App from "../../app";
 
  
@@ -31,12 +30,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   
-  const dictionary = await getDictionary(params.lang) as any;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${pretendard.className} bg-background-layer-2 text-text-primary min-h-[100vh] `}
-        suppressHydrationWarning
+        className={`${pretendard.className} bg-background-layer-1 text-text-primary min-h-[100vh] `}
+
       >
         <ThemeProvider
           attribute="class"
@@ -44,12 +42,13 @@ export default async function RootLayout({
           enableSystem={true}
           disableTransitionOnChange={true}
         >
+          <Suspense fallback="loading app">
           <App>
-            <Navbar lang={dictionary.nav} />
-            <main className="mx-auto max-w-[1920px]">
+            <main className="mx-auto max-w-lg flex items-center min-h-[100vh]">
             {children}
             </main>
           </App>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

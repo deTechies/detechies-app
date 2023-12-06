@@ -25,6 +25,8 @@ export default function ProjectItem({
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
           fill={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 75vw"
+
         />
       </figure>
       <section className="col-span-3 flex gap-1 flex-col w-full">

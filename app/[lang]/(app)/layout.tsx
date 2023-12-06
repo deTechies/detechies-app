@@ -33,7 +33,7 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={`${pretendard.className} bg-background-layer-2 text-text-primary min-h-[100vh] `}
-        suppressHydrationWarning
+        suppressHydrationWarning={true}
       >
         <ThemeProvider
           attribute="class"
@@ -41,7 +41,7 @@ export default async function RootLayout({
           enableSystem={true}
           disableTransitionOnChange={true}
         >
-          <App>
+          <App >
             <Navbar lang={dictionary.nav} />
             <main className="mx-auto max-w-[1920px]">
             {children}
