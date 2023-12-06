@@ -12,7 +12,6 @@ export default async function OnboardPage({
 
   return (
     <main className="flex flex-col gap-8 items-center w-full">
-
       <Image
         src={`/images/careerzen.png`}
         width={200}
@@ -21,7 +20,6 @@ export default async function OnboardPage({
         alt={`careerzen Logo`}
       />
 
-     
       <h1 className="text-xl font-medium tracking-wider text-center">
         {/* {
           dictionary.onboard.welcome.title
@@ -34,8 +32,8 @@ export default async function OnboardPage({
         }
       </h5> */}
       <div className="flex flex-col space-y-1 gap-4 w-full">
-      <Suspense fallback={<p>Loading buttons...</p>}>
-        <LoginButtons />
+        <Suspense fallback={<p>Loading buttons...</p>}>
+          <LoginButtons />
         </Suspense>
       </div>
     </main>

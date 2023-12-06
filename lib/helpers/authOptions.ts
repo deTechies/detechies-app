@@ -1,10 +1,10 @@
 import { API_URL } from "@/lib/constants";
 import { getUserSession } from "@/lib/data/user";
-import { NextAuthOptions, Session } from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
     providers: [
       GithubProvider({
         clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID ?? "",
@@ -101,4 +101,7 @@ export const authOptions: NextAuthOptions = {
         return session;
       },
     },
-  };
+  } satisfies NextAuthOptions;
+  
+
+  export const {handlers, signOut} = NextAuth(authOptions);
