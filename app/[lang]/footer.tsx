@@ -1,12 +1,11 @@
 "use client"
 
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 
 
 export default function Footer({links}: {links: any}) {
-  const { setTheme } = useTheme()
+  
 
   return (
     <main className="flex mt-24 mb-4 justify-center">

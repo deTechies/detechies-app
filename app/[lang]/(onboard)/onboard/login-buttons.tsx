@@ -22,13 +22,18 @@ export default function LoginButtons({
 
   useEffect(() => {
     if (session && session.web3?.accessToken) {
-      if (session.web3?.address == address) {
-        if(session.web3?.user?.verified){
+      if (session.web3.address == address) {
+        if(session.web3.user?.verified){
           redirect("/project");
         }
         redirect("/onboard/email");
+
       }
+
     }
+    console.log(address)
+    console.log(session);
+
   }, [address, session]);
 
   const handleConnect = (connector: any) => {
@@ -70,7 +75,7 @@ export default function LoginButtons({
     }
   };
 
-  if (address && (!session?.web3?.accessToken || session?.web3?.address != address)) {
+  if (address && (!session?.web3?.accessToken || session?.web3.address != address)) {
     return (
       <Button variant={"secondary"} onClick={() => {
         handleSign()
