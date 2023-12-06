@@ -75,7 +75,7 @@ export default function LoginButtons({
     }
   };
 
-  if (address && (!session?.web3?.accessToken || session?.web3.address != address)) {
+  if (address && session &&  (!session?.web3?.accessToken || session?.web3?.address != address)) {
     return (
       <Button variant={"secondary"} onClick={() => {
         handleSign()
