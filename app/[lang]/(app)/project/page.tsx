@@ -14,6 +14,7 @@ export interface ProjectItemProps {
   status: string;
   location: string;
   introduction:string;
+  category:string;
   type:string;
   works: any[];
   creator: string;

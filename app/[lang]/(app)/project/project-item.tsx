@@ -36,7 +36,7 @@ export default function ProjectItem({
         </header>
         <section className="space-x-2 divide-x font-light text-text-secondary text-body_s">
             <span>{details.type}</span>
-            <span className="pl-2">category</span>
+            <span className="pl-2">{details.category}</span>
         </section>
         <div>
           <p className="text-text-secondary h-12 overflow-hidden text-body_s"  dangerouslySetInnerHTML={{
