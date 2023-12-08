@@ -1,8 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { sendVerifyEmail } from "@/lib/data/user";
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -63,21 +65,34 @@ export default function EmailVerification({
   }
 
   return (
-    <main className="flex flex-col gap-4">
-      <h2>Verify Email</h2>
-      <p>
+    <main className="flex flex-col gap-4 max-w-[400px]">
+      <h2 className="text-heading_s">Verify Email</h2>
+      <h5 className="text-body_s text-text-secondary">
         We have send you an email to <b>{user.email}</b> with a 6-digit code.
         You can use this code to verify your email address.
-      </p>
-      <div className="flex flex-row items-center">
+      </h5>
+      <div className="flex flex-col gap-6">
+        <div className="">
+          <Label>
+            Email
+          </Label>
+      <div className="flex flex-row items-center gap-2">
+
         <Input
           value={user.email}
           className="border p-2 text-center tracking-widest"
           placeholder="Your email"
         />
-        <Button size={"sm"} onClick={() => resendEmail()}>Resend code</Button>
+        <Button size={"sm"} onClick={() => resendEmail()}
+          className="rounded-sm"
+        >Resend</Button>
+        </div>
+      
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col gap-3">
+        <Label>
+          Verification code
+        </Label>
         <Input
           value={code}
           onChange={(e) => router.push(pathName + "?code=" + e.target.value)}
@@ -85,9 +100,13 @@ export default function EmailVerification({
           placeholder="Enter 6-digit code"
         />
       </div>
-      <Button onClick={verifyEmail} disabled={!isValid}>
+      <Button onClick={verifyEmail} disabled={!isValid}
+        className="py-3 rounded-sm"
+      >
         Verify email
       </Button>
+      </div>
+     
     </main>
   );
 }

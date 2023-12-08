@@ -18,8 +18,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -57,6 +57,7 @@ export default function CreateProfile({ text }: { text: any }) {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const {reload} = useRouter();
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
@@ -98,7 +99,7 @@ export default function CreateProfile({ text }: { text: any }) {
         })
       );
 
-    revalidatePath("/onboard/email");
+      reload();
     setIsLoading(false);
   }
 
@@ -108,8 +109,8 @@ export default function CreateProfile({ text }: { text: any }) {
         onSubmit={form.handleSubmit(sendVerification)}
         className="space-y-8 my-8"
       >
-        <h1 className="text-4xl font-bold mb-6 text-primary">{text.title}</h1>
-        <h4 className="text-text-secondary font-light tracking-wider">
+        <h1 className="text-heading_s mb-6 text-primary">{text.title}</h1>
+        <h4 className="text-text-secondary text-body_s">
           {text.body}
         </h4>
 
