@@ -1,3 +1,4 @@
+
 export interface User {
     id: string;
     email: string;
@@ -65,6 +66,16 @@ export enum ClubType {
     HACKATHON = 'hackathon',
     OTHER = 'other'
   }
+  
+  export enum ContributionType {
+    DEVELOPMENT = 'development',
+    DESIGN = 'design',
+    PRODUCT = 'product',
+    MANAGEMENT = 'management',
+    MARKETING = 'marketing',
+    OTHER = 'other'
+    
+  }
 
   export enum ProjectCategory {
     WEB = 'web',
@@ -131,6 +142,7 @@ export enum ClubType {
     onchain_id: string
     isCreator: boolean;
     isMember?: boolean;
+    userRole?: 'admin' | 'member' | 'client' | 'none';
     urls?: string[];
     members: User[]
     files: File[]
@@ -145,4 +157,14 @@ export enum ClubType {
     userId?: string;
     message?:string
     role?: string;
+  }
+  
+  export interface ProjectWork {
+    id: string;
+    name: string;
+    percentage: number;
+    begin_date: string;
+    end_date?: string;
+    description: string;
+    created_at: Date;
   }
