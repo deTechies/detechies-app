@@ -76,13 +76,13 @@ export default function JoinProject({ address }: JoinGroupProps) {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button loading={loading} className="w-full">
-          Join Project
+        <Button loading={loading} size="sm">
+          Join
         </Button>
       </DialogTrigger>
       <DialogContent>
         <h3 className="text-subhead_s font-medium">
-          프로젝트 참여하기 | Join Project
+          프로젝트 참여하기
         </h3>
         <p className="text-body_m text-text-secondary mb-4">
           프로젝트에서 어떤 역할을 했는지 선택하고, 리더에게 참여 요청 메세지를

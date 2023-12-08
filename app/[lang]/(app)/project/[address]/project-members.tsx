@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 import PendingMemberList from "@/components/modal/pending-member-list";
+import JoinProject from "@/components/project/join-project";
 import { getPendingProjectMembers } from "@/lib/data/project";
 import { Address } from "wagmi";
 import ProjectMemberItem from "./_components/project-member-item";
@@ -36,6 +37,7 @@ export default async function ProjectMembers({
               <PendingMemberList pendingMembers={pendingMembers} />
             </span>
           )}
+          {!isCreator && <JoinProject address={projectId} />}
           {isCreator && <InviteProjectMember projectId={projectId} />}
         </header>
       </Card>
@@ -44,6 +46,7 @@ export default async function ProjectMembers({
         {members &&
           members.map((member, index) => (
             <ProjectMemberItem
+              projectId={projectId}
               key={index}
               details={member}
               userAddress={member.address as Address}

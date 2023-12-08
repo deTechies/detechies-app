@@ -1,4 +1,6 @@
 
+
+import { ContributionFormData } from "@/app/[lang]/(app)/project/[address]/_components/project-contribution-form";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
@@ -22,8 +24,7 @@ export async function getSingleProject(id:string) {
     
     const result = await res.json()
     
-    result.isCreator = result.owner === session?.web3?.address
-    
+    result.isCreator = result.userRole === 'admin'
     
     //we want to check if the user is amember 
     
@@ -61,6 +62,8 @@ export async function getSingleProject(id:string) {
     });
     
     if(!response.ok){
+      console.log(response);
+      console.log(response.json());
       throw new Error("Failed to create project")
     }
     
@@ -103,6 +106,9 @@ export async function inviteProjectMembers(members: string[], role:string,  proj
     },
     body: JSON.stringify({ userId: members, projectId: projectId,role:role, inviterId: session?.web3?.address}),
   });
+  
+  console.log(response.json());
+  
   
   if(!response.ok){
     throw new Error("Failed to invite members")
@@ -154,4 +160,53 @@ export async function joinProject(data: JoinProject ){
 
 export async function inviteByEmail(name: string, email:string, projectId: string){
   return null;
+}
+
+export async function getSessionToken(){
+  const session = await auth();
+  return session
+}
+
+export async function addMembersWork(contributionData: ContributionFormData[], projectId: string) {
+  const session = await getSession();
+
+  // Check for a valid session and required tokens
+  if (!session || !session.web3 || !session.web3.accessToken) {
+    throw new Error("Invalid session or missing access token");
+  }
+
+  const errors = [];
+  const responses = [];
+
+  const requests = contributionData.map(async (item) => {
+    try {
+      const response = await fetch(`${API_URL}/project-work`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.web3.accessToken}`,
+        },
+        body: JSON.stringify({ userId: session.web3.address, projectId, ...item, percentage: item.percentage[0] }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        errors.push({ item, error: errorData });
+      } else {
+        const data = await response.json();
+        responses.push(data);
+      }
+    } catch (error) {
+      errors.push({ item, error });
+    }
+  });
+
+  await Promise.all(requests);
+
+  if (errors.length > 0) {
+    // Handle or throw the accumulated errors
+    throw new Error(`Failed to add work for ${errors.length} items`);
+  }
+
+  return true;
 }
