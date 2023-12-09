@@ -5,6 +5,8 @@ export interface User {
     wallet: string;
     credits: number;
     display_name: string;
+    nft: string[];
+    avatar: string;
     verified: boolean;
     login_method: 'metamask'|'web3auth'
   }
@@ -14,8 +16,7 @@ export interface User {
     full_name: string;
     country: string;
     description: string;
-    avatar: string;
-    nft: string[];
+
     app_settings: UserSettings;
   }
   
