@@ -48,10 +48,14 @@ export default function EmailVerification({
         title: "Email verified",
         description: "Email verified",
       });
+      
+      router.refresh();
     } else {
       toast({
         title: "Invalid code",
-        description: "Invalid code",
+        description:
+          "Something went wrong with verifying your email, please check if you email is correct. ",
+        variant: "destructive",
       });
     }
   }
@@ -73,40 +77,40 @@ export default function EmailVerification({
       </h5>
       <div className="flex flex-col gap-6">
         <div className="">
-          <Label>
-            Email
-          </Label>
-      <div className="flex flex-row items-center gap-2">
-
-        <Input
-          value={user.email}
-          className="border p-2 text-center tracking-widest"
-          placeholder="Your email"
-        />
-        <Button size={"sm"} onClick={() => resendEmail()}
-          className="rounded-sm"
-        >Resend</Button>
+          <Label>Email</Label>
+          <div className="flex flex-row items-center gap-2">
+            <Input
+              value={user.email}
+              className="tracking-widest"
+              placeholder="Your email"
+              disabled
+            />
+            <Button
+              size={"sm"}
+              onClick={() => resendEmail()}
+              className="rounded-sm"
+            >
+              Resend
+            </Button>
+          </div>
         </div>
-      
+        <div className="flex flex-col gap-3">
+          <Label>Verification code</Label>
+          <Input
+            value={code}
+            onChange={(e) => router.push(pathName + "?code=" + e.target.value)}
+            className="border p-2 text-center tracking-widest"
+            placeholder="Enter 6-digit code"
+          />
+        </div>
+        <Button
+          onClick={verifyEmail}
+          disabled={!isValid}
+          className="py-3 rounded-sm"
+        >
+          Verify email
+        </Button>
       </div>
-      <div className="flex flex-col gap-3">
-        <Label>
-          Verification code
-        </Label>
-        <Input
-          value={code}
-          onChange={(e) => router.push(pathName + "?code=" + e.target.value)}
-          className="border p-2 text-center tracking-widest"
-          placeholder="Enter 6-digit code"
-        />
-      </div>
-      <Button onClick={verifyEmail} disabled={!isValid}
-        className="py-3 rounded-sm"
-      >
-        Verify email
-      </Button>
-      </div>
-     
     </main>
   );
 }

@@ -217,6 +217,11 @@ module.exports = {
           { fontWeight: "400" },
           { letterSpacing: "0.5px" },
         ],
+        heading_s: [
+          "1.5rem",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "700" },
+        ],
         subhead_s: [
           "1.2rem",
           { lineHeight: "1.3rem" },
@@ -264,6 +269,12 @@ module.exports = {
           { lineHeight: "1.3rem" },
           { fontWeight: "400" },
           { letterSpacing: "0.5px" },
+        ],
+        label_m: [
+          "14px",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "400" },
+          { letterSpacing: "0.4px" },
         ],
       },
     },

@@ -70,11 +70,10 @@ export async function sendVerifyEmail(code: string) {
   });
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    return null;
   }
 
-  return res.json();
+  return true;
 }
 
 export async function getUserSession() {
