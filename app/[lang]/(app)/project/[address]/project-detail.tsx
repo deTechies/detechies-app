@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { updateProject } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { Editor } from "novel";
 import { useState } from "react";
@@ -29,7 +30,7 @@ export default function ProjectDetail({ details }: { details: Project }) {
   };
 
   return (
-    <Card className="w-full ">
+    <Card className="w-full">
       <header className="flex gap-8 items-start ">
         <Image
           src={`${
@@ -56,24 +57,24 @@ export default function ProjectDetail({ details }: { details: Project }) {
               }}
             />
           ) : (
-            <h1 className="text-2xl font-medium mb-3">{data.name}</h1>
+            <h1 className="text-heading_s mb-3">{data.name}</h1>
           )}
 
           <div className="flex gap-4 items-center text-label_l text-text-secondary ">
-            <span>{details?.category}</span>
+            <span className="text-label_l">{details?.category}</span>
+            <span>|</span>
             <span>{details.type}</span>
-            <span>{details.created_at.toLocaleString("nl-NL")}</span>
           </div>
           <div className="flex gap-1 items-center text-label_l text-text-secondary">
             <span>{details?.begin_date}</span>
-            <span>~</span>
+            <span> ~ </span>
             <span>{details.end_date}</span>
           </div>
         </div>
       </header>
       <div className="w-full flex flex-col gap-2 mt-4">
         <div className="flex justify-between mb-4 items-center">
-          <h3 className="text-subhead_m ">Project Description</h3>
+          <h3 className="text-subhead_l ">Project Description</h3>
           {details.isCreator && (
             <div className="flex justify-end gap-4">
               <Button
@@ -106,6 +107,7 @@ export default function ProjectDetail({ details }: { details: Project }) {
         ) : (
           <div className={`overflow-hidden ${showFull ? "" : "max-h-[100px]"}`}>
             <div
+              className="text-body_m"
               dangerouslySetInnerHTML={{
                 __html: data.content ? data.content : "No introduction yet.",
               }}
@@ -114,14 +116,17 @@ export default function ProjectDetail({ details }: { details: Project }) {
         )}
       </div>
 
-      <Button
-        variant={"ghost"}
-        onClick={() => {
-          setShowFull(!showFull);
-        }}
-      >
-        {showFull ? "hide" : "show more"}
-      </Button>
+      {details.description.length > 200 && (
+        <button
+          onClick={() => {
+            setShowFull(!showFull);
+          }}
+          className="text-label_m text-text-secondary flex gap-2 items-center w-fit mx-auto"
+        >
+          {showFull ? "hide" : "show more"}
+          {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
+        </button>
+      )}
     </Card>
   );
 }

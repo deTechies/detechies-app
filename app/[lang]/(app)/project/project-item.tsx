@@ -17,30 +17,29 @@ export default function ProjectItem({
   return (
     <Link
       href={`/project/${details.id}`}
-      className="grid grid-cols-4 row gap-6 bg-background-layer-1 rounded-md px-6 py-5 items-center hover:shadow-lg "
+      className="flex flex-row gap-6 bg-background-layer-1 rounded-md px-4 py-3 items-center hover:shadow-lg "
     >
-      <figure className="col-span-1 relative  min-w-20 border border-border-div  aspect-square rounded-sm bg-accent-secondary object-scale-down">
+      <figure className="relative w-32  aspect-square rounded-sm bg-accent-secondary object-scale-down">
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
           fill={true}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 75vw"
 
         />
       </figure>
-      <section className="col-span-3 flex gap-1 flex-col w-full">
+      <section className="grow flex gap-1 flex-col w-full">
         <header className="flex justify-between items-center capitalize">
-          <h5 className="text-xl text-text-primary font-medium">
+          <h5 className="text-title_m text-text-primary">
             {details.name}
           </h5>   
         </header>
-        <section className="space-x-2 divide-x font-light text-text-secondary text-body_s">
+        <section className="space-x-2 divide-x text-text-secondary text-body_s">
             <span>{details.type}</span>
             <span className="pl-2">{details.category}</span>
         </section>
         <div>
-          <p className="text-text-secondary h-12 overflow-hidden text-body_s"  dangerouslySetInnerHTML={{
-                __html: details.description ? truncateText(details.description, 200) : "No introduction yet.",
+          <p className="text-text-secondary overflow-hidden text-body_s"  dangerouslySetInnerHTML={{
+                __html: details.description ? truncateText(details.description, 50) : "No introduction yet.",
               }}>
                 </p>
         </div>

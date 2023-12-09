@@ -14,6 +14,8 @@ export interface User {
     full_name: string;
     country: string;
     description: string;
+    avatar: string;
+    nft: string[];
     app_settings: UserSettings;
   }
   
@@ -144,13 +146,20 @@ export enum ClubType {
     isMember?: boolean;
     userRole?: 'admin' | 'member' | 'client' | 'none';
     urls?: string[];
-    members: User[]
+    members: ProjectMember[]
     files: File[]
     achievements: Achievement[]
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
   }
   
+  export interface ProjectMember {
+    id: string;
+    user: User;
+    role: string;
+    joined_at: Date;
+    verified: boolean;
+  }
   
   export interface JoinProject{
     projectId: string;

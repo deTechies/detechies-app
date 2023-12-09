@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
@@ -23,13 +22,12 @@ export default async function ProjectMembers({
   if (isCreator) {
     pendingMembers = await getPendingProjectMembers(projectId);
   }
-  
 
   return (
     <section className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-4 p-6">
+      <Card className="flex flex-col gap-4 p-4 px-6">
         <header className="flex items-center justify-between">
-          <h5 className="text-subhead_s text-text-primary font-medium">
+          <h5 className="text-subhead_s text-text-primary ">
             Members ({members.length})
           </h5>
           {pendingMembers.length > 0 && (
@@ -56,4 +54,3 @@ export default async function ProjectMembers({
     </section>
   );
 }
-

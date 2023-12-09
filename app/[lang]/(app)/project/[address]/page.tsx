@@ -21,7 +21,7 @@ export default async function ProjectDetailPage({
 
   if (!data)
     return (
-      <main className="max-w-[2400px] grid md:grid-cols-3 m-8 gap-8">
+      <main className="grid md:grid-cols-3 m-8 gap-6">
         <section className="md:col-span-2 flex flex-col gap-8">
           <Skeleton className="h-96 w-full" />
           <Skeleton className="h-96 w-full" />
@@ -33,20 +33,19 @@ export default async function ProjectDetailPage({
       </main>
     );
 
-
   return (
-    <main className="max-w-[2400px] grid md:grid-cols-3 m-8 gap-8">
-      <section className="md:col-span-2 flex flex-col gap-8">
-         <ProjectDetail details={data} />
-
-         <section>
-          <ProjectMembers members={data.members} isCreator={data.isCreator} projectId={params.address} />
-        </section>
-        
+    <main className="flex m-8 gap-6">
+      <section className="grow flex flex-col gap-8">
+        <ProjectDetail details={data} />
+        <ProjectMembers
+          members={data.members}
+          isCreator={data.isCreator}
+          projectId={params.address}
+        />
       </section>
-      <section className="col-span-1 flex flex-col gap-8">
-      <ProjectInfo info={data} />
-      <ProjectNfts address={data.id} isCreator={data.isCreator}/>
+      <section className="flex flex-col gap-8 w-[250px]">
+        <ProjectInfo info={data} />
+        <ProjectNfts address={data.id} isCreator={data.isCreator} />
       </section>
     </main>
   );
