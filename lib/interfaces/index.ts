@@ -160,6 +160,7 @@ export enum ClubType {
     role: string;
     joined_at: Date;
     verified: boolean;
+    works: ProjectWork[] | string[]
   }
   
   export interface JoinProject{

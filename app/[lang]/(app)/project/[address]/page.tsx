@@ -39,7 +39,7 @@ export default async function ProjectDetailPage({
         <ProjectDetail details={data} />
         <ProjectMembers
           members={data.members}
-          isCreator={data.isCreator}
+          userRole={data.userRole}
           projectId={params.address}
         />
       </section>

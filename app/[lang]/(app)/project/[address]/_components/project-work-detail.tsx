@@ -20,3 +20,25 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
     </main>
   );
 }
+
+
+export function BlurredProjectWorkDetail() {
+  return (
+    <main className="flex gap-6 text-text-secondary my-2">
+      <div className="flex flex-col gap-2">
+        <div className="divide-x">
+          <span className="text-label_m capitalize pr-2 blur">Development</span>
+          <span className="pl-2 text-label_m blur">50 %</span>
+        </div>
+        <span className="text-label_m blur">
+          {formatDate(Date.now().toString())} ~ {formatDate(Date.now().toString())}
+        </span>
+      </div>
+      <div className="grow">
+        <span className="text-label_m blur">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        </span>
+      </div>
+    </main>
+  );
+}

@@ -5,7 +5,7 @@ import { defaultAvatar } from "@/lib/constants";
 import { auth } from "@/lib/helpers/authOptions";
 import { User } from "@/lib/interfaces";
 import ProjectContribution from "./project-contribution";
-import ProjectWorkDetail from "./project-work-detail";
+import ProjectWorkDetail, { BlurredProjectWorkDetail } from "./project-work-detail";
 
 interface MemberDetails {
   memberId: string;
@@ -20,25 +20,25 @@ interface MemberDetails {
 
 export default async function ProjectMemberItem({
   details,
-  userAddress,
+  access,
   projectId,
 }: {
   details: MemberDetails;
   projectId: string;
-  userAddress: string;
+  access: boolean;
 }) {
   const session = await auth();
 
   
   return (
     <Card className="flex flex-row flex-start gap-5">
-      <figure className="relative bg-background-layer-2 h-24 w-24 rounded-[6px]">
+      <figure className="relative bg-background-layer-2 h-20 aspect-square rounded-[6px]">
         <IPFSImageLayer
           hashes={details?.user?.nft ? details.user?.nft : defaultAvatar}
           className="rounded-sm"
         />
       </figure>
-      <div className="flex flex-col gap-2 flex-grow">
+      <div className="flex flex-col gap-2 grow">
         <header className="flex gap-4 items-center">
           <h5 className="text-title_m">
             {details.user?.display_name} | {details.role}
@@ -46,10 +46,17 @@ export default async function ProjectMemberItem({
           <Badge>Rewards</Badge>
         </header>
         <section>
-          {details?.works &&
+          {access && details?.works &&
             details.works.map((work) => (
               <ProjectWorkDetail data={work} key={work.id} />
             ))}
+            
+            {
+              !access && details?.works &&
+              details.works.map((work) => (
+                <BlurredProjectWorkDetail key={work.id} />
+              ))
+            }
         </section>
       </div>
       
