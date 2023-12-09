@@ -145,7 +145,7 @@ export enum ClubType {
     onchain_id: string
     isCreator: boolean;
     isMember?: boolean;
-    userRole?: 'admin' | 'member' | 'client' | 'none';
+    userRole: 'admin' | 'member' | 'client' | 'none';
     urls?: string[];
     members: ProjectMember[]
     files: File[]
