@@ -2,42 +2,32 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-    Form
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { API_URL } from "@/lib/constants";
-import useFetchData from "@/lib/useFetchData";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAccount } from "wagmi";
 import * as z from "zod";
 
-type Job = {
-  id: number;
-  groupName: string;
-  name: string;
-};
-
 const profileFormSchema = z.object({
-  username: z
+  first_name: z
     .string()
     .min(2, {
-      message: "Your name must be at least 2 characters.",
+      message: "Your first name must be at least 2 characters.",
     })
-    .max(30, {
-      message: "Your name must not be longer than 30 characters.",
-    }),
-  job: z.object({
-    id: z.number(),
-    groupName: z.string(),
-    name: z.string(),
-  }),
+    .optional(),
+  last_name: z
+    .string()
+    .min(2, {
+      message: "Your last name must be at least 2 characters.",
+    })
+    .optional(),
+  job: z.string().optional(),
+  specialisation: z.string().optional(),
+  description: z.string().optional(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -71,131 +61,123 @@ export default function EditProfile() {
     mode: "onChange",
   });
 
-  const { address } = useAccount();
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
-  const {
-    data,
-    error,
-    loading: profileLoading,
-  } = useFetchData(`${API_URL}/polybase/${address}`);
 
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
 
+    toast({
+      title: "Creating profile...",
+      description: <pre>
+        {JSON.stringify(data, null, 2)}
+        </pre>,
+    });
     //@ts-ignore
-    data.address = address;
 
-    fetch(`${API_URL}/polybase/profile/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: data.username.toString(),
-        name: "",
-        email: "",
-        job: data.job.name,
-        description: "",
-        address: address,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.status) {
-          toast({
-            title: "Profile created successfully.",
-            description: (
-              <pre className="mt-2 w-[340px] rounded-md bg-state-info-secondary p-4">
-                <code className="text-state-info">
-                  Sucessfully created your profile, we send 0.01 MATIC to your
-                  account. You are now able to use our platform! Please continue
-                  and mint your unique character
-                </code>
-              </pre>
-            ),
-          });
-
-          setLoading(false);
-          router.push("/onboard/mint");
-        } else {
-          console.error("Error creating profile:", data.message);
-          toast({
-            title: "Error creating profile.",
-            description: "Please contact the owner on Telegram",
-          });
-
-          setLoading(false);
-        }
-      });
+    setLoading(false);
   }
 
   return (
     <>
       <Card className="">
         <Form {...form}>
-          <section className="mb-8">
-            <h1 className="text-2xl font-medium mb-6 text-primary">
-              프로필 수정
-            </h1>
-          </section>
-          <section className="my-2">
-            <div className="flex">
-              <div className="flex flex-col basis-1/2">
-                <div>
-                  <label className="">본명 (비공개)</label>
-                  <div className="flex gap-2 items-center mt-2">
-                    <Input placeholder="이름" />
-                    <Input placeholder="성" />
-                  </div>
-                </div>
-                <div className="my-10">
-                  <label className="">닉네임</label>
-                  <div className="flex gap-2 items-center mt-2">
-                    <Input placeholder="다른 유저에게 공개될 별명을 입력해주세요." />
-                  </div>
-                </div>
-              </div>
-              <div className="basis-1/2 ml-6">
-                <div>
-                  <label className="">직업</label>
-                  <div className="flex gap-2 items-center mt-2">
-                    <Input placeholder="개발자" />
-                    {/* <Dropdown placeholder="개발자" options={jobList} /> */}
-                  </div>
-                </div>
-                <div className="my-10">
-                  <label className="">전문분야</label>
-                  <div className="flex gap-2 items-center mt-2">
-                    <Input placeholder="프론트엔드 개발" />
-                    {/* <Dropdown placeholder="개발자" options={jobList} /> */}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className="my-2">
-            <div>
-              <label>내 소개</label>
-              <div className="flex gap-2 items-center mt-2">
-                <Textarea
-                  placeholder="익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다."
-                  style={{ height: "200px" }}
-                />
-              </div>
-            </div>
-          </section>
           <form onSubmit={form.handleSubmit(onSubmit)}>
+            <section className="mb-8">
+              <h1 className="mb-6 text-primary text-subhead_m">
+                Edit Profile
+              </h1>
+            </section>
+            <section className="my-2">
+              <div className="flex">
+                <div className="flex flex-col basis-1/2">
+                  <div>
+                    <label className="">Full name (비공개)</label>
+                    <div className="flex gap-2 items-center mt-2">
+                      <FormField
+                        control={form.control}
+                        name="first_name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input placeholder="FirstName" {...field} />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="last_name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input placeholder="Last name" {...field} />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                  <div className="my-10">
+                    <label className="">Job</label>
+                      <FormField
+                        control={form.control}
+                        name="job"
+                        render={({ field }) => (
+                          <FormItem className="mt-2">
+                            <FormControl>
+                              <Input placeholder="job" {...field} />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                  </div>
+                </div>
+                <div className="basis-1/2 ml-6">
+                  <div className="">
+                    <label className="">Specialisation</label>
+                      <FormField
+                        control={form.control}
+                        name="specialisation"
+                        render={({ field }) => (
+                          <FormItem className="mt-2">
+                            <FormControl>
+                              <Input placeholder="Speciality" {...field} />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section className="my-2">
+              <div>
+                <label>Profile Description</label>
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Textarea
+                            placeholder="익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다."
+                            style={{ height: "200px" }}
+                            {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+              </div>
+            </section>
+
             <div className="flex items-center w-full mt-10">
               <Button
                 type="submit"
                 className="w-full h-[64px] text-1xl"
-                disabled={loading}
                 loading={loading}
               >
-                저장하기
+                Save Profile
               </Button>
             </div>
           </form>
@@ -210,7 +192,10 @@ export default function EditProfile() {
         {/* 4개씩 3줄짜리 테이블 */}
         <div className="flex flex-wrap">
           {logos.map((logo, i) => (
-            <div key={i} className={`flex basis-[23%] border rounded-md mt-2 mr-4`}>
+            <div
+              key={i}
+              className={`flex basis-[23%] border rounded-md mt-2 mr-4`}
+            >
               <div className="flex justify-center m-4">
                 <Image src={logo.src} width={50} height={50} alt={logo.alt} />
               </div>
