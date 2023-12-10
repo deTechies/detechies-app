@@ -1,18 +1,12 @@
-
-
 import ProfileDetails from "./profile-details";
 import ProfileItems from "./profile-items";
-//categories 
+//categories
 
-
-export default async function ProfileMe() {  
-
-
-
+export default async function ProfileMe() {
   return (
-          <>
-            <ProfileDetails />
-            <ProfileItems /> 
-          </>
+    <>
+      <ProfileDetails />
+      <ProfileItems />
+    </>
   );
 }

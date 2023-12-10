@@ -1,6 +1,8 @@
 import GithubSignIn from "@/components/connections/github/github-signin";
 import LinkedinLogin from "@/components/connections/linkedin/linkedin-login";
 import TwitterLogin from "@/components/connections/twitter/twitter-login";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { API_URL } from "@/lib/constants";
 import { getSessionToken } from "@/lib/data/project";
 import UpdateProfile from "./update-profile";
@@ -13,7 +15,7 @@ export default async function SettingsPAge() {
       Authorization: `Bearer ${session?.web3.accessToken}`,
     },
   });
-  
+
   const connections = [
     {
       name: "Github",
@@ -30,29 +32,36 @@ export default async function SettingsPAge() {
       component: <LinkedinLogin />,
       connected: false,
     },
-  ]
+  ];
 
   return (
     <main>
       <div className="flex p-4 flex-wrap">
-        {
-          connections.map((connection, key) => {
-            return (
-              <div key={key} className='bg-background-layer-1 border border-border-div p-2 m-4 ounded-sm flex flex-col gap-2 max-w-xs'>
-                <h5 className='text-title_m'>{connection.name}</h5>
-                {connection.component}
-                
-              </div>
-            )
-          })
-        }
+        <Tabs defaultValue="account" className="w-[400px]">
+          <TabsList>
+            <TabsTrigger value="account">Account</TabsTrigger>
+            <TabsTrigger value="password">Password</TabsTrigger>
+          </TabsList>
+          <TabsContent value="account">
+            Make changes to your account here.
+          </TabsContent>
+          <TabsContent value="password">Change your password here.</TabsContent>
+        </Tabs>
+        {connections.map((connection, key) => {
+          return (
+            <Card key={key}>
 
+              <span className="text-label_s">:able s</span>
+              <h5 className="text-title_l">{connection.name}</h5>
+              {connection.component}
+            </Card>
+          );
+        })}
       </div>
-     
+
       <div className="">
         <UpdateProfile />
       </div>
-      
     </main>
   );
 }
