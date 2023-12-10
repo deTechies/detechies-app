@@ -21,6 +21,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
+import { Badge } from "../ui/badge";
 import { toast } from "../ui/use-toast";
 
 const FormSchema = z.object({
@@ -76,9 +77,9 @@ export default function JoinProject({ address }: JoinGroupProps) {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button loading={loading} size="sm">
+        <Badge>
           Join
-        </Button>
+        </Badge>
       </DialogTrigger>
       <DialogContent>
         <h3 className="text-subhead_s font-medium">

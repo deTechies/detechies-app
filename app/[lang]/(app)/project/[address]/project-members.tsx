@@ -1,35 +1,32 @@
-
 import { Card } from "@/components/ui/card";
 
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 import PendingMemberList from "@/components/modal/pending-member-list";
 import JoinProject from "@/components/project/join-project";
 import { getPendingProjectMembers } from "@/lib/data/project";
-import { Address } from "wagmi";
 import ProjectMemberItem from "./_components/project-member-item";
 
 export default async function ProjectMembers({
   members,
-  isCreator,
+  userRole,
   projectId,
 }: {
   members: any[];
   projectId: string;
-  isCreator: boolean;
+  userRole: string;
 }) {
   //getting all the members and holders of this project NFT.
 
   let pendingMembers: any[] = [];
-  if (isCreator) {
+  if (userRole == "admin") {
     pendingMembers = await getPendingProjectMembers(projectId);
   }
-  
 
   return (
     <section className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-4 p-6">
+      <Card className="flex flex-col gap-4 p-4 px-6">
         <header className="flex items-center justify-between">
-          <h5 className="text-subhead_s text-text-primary font-medium">
+          <h5 className="text-subhead_s text-text-primary ">
             Members ({members.length})
           </h5>
           {pendingMembers.length > 0 && (
@@ -37,8 +34,8 @@ export default async function ProjectMembers({
               <PendingMemberList pendingMembers={pendingMembers} />
             </span>
           )}
-          {!isCreator && <JoinProject address={projectId} />}
-          {isCreator && <InviteProjectMember projectId={projectId} />}
+          {userRole == 'none' && <JoinProject address={projectId} />}
+          {userRole == 'admin' && <InviteProjectMember projectId={projectId} />}
         </header>
       </Card>
 
@@ -48,12 +45,11 @@ export default async function ProjectMembers({
             <ProjectMemberItem
               projectId={projectId}
               key={index}
+              access={userRole != 'none'}
               details={member}
-              userAddress={member.address as Address}
             />
           ))}
       </div>
     </section>
   );
 }
-

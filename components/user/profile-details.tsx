@@ -7,7 +7,6 @@ import { Address, createPublicClient, http } from "viem";
 
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { ThemeToggle } from "../extra/theme-toggle";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
 import ModalLayout from "./modal-layout";
@@ -98,9 +97,6 @@ export default function ProfileDetails({ showModal }: any) {
                 active={balance.active}
               />
             ))}
-          </div>
-          <div>
-            <ThemeToggle />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Button onClick={() => {

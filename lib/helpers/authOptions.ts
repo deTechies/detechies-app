@@ -103,6 +103,8 @@ export const authOptions = {
 
       if (trigger === "update") {
         token.web3 = session.web3;
+        
+        
         return { ...token, ...session.web3 };
       }
 

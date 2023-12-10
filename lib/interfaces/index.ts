@@ -5,6 +5,8 @@ export interface User {
     wallet: string;
     credits: number;
     display_name: string;
+    nft: string[];
+    avatar: string;
     verified: boolean;
     login_method: 'metamask'|'web3auth'
   }
@@ -14,6 +16,7 @@ export interface User {
     full_name: string;
     country: string;
     description: string;
+
     app_settings: UserSettings;
   }
   
@@ -142,15 +145,23 @@ export enum ClubType {
     onchain_id: string
     isCreator: boolean;
     isMember?: boolean;
-    userRole?: 'admin' | 'member' | 'client' | 'none';
+    userRole: 'admin' | 'member' | 'client' | 'none';
     urls?: string[];
-    members: User[]
+    members: ProjectMember[]
     files: File[]
     achievements: Achievement[]
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
   }
   
+  export interface ProjectMember {
+    id: string;
+    user: User;
+    role: string;
+    joined_at: Date;
+    verified: boolean;
+    works: ProjectWork[] | string[]
+  }
   
   export interface JoinProject{
     projectId: string;

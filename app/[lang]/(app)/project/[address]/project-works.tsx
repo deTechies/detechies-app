@@ -38,7 +38,7 @@ const FileButton = ({ file }: { file: File | string }) => {
   const downloadFile = () => {
     const element = document.createElement("a");
 
-    if (typeof file !== "string" ) {
+    if (typeof file !== "string") {
       const href = file.content.startsWith("data:")
         ? file.content
         : `https://ipfs.io/ipfs/${file.content}`;
