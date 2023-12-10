@@ -12,16 +12,19 @@ export default async function MyPageLayout ({
 }) {
   
   const dictionary = (await getDictionary(params.lang)) as any;
+  
+  
   return (
     <div>
-      <div className="flex bg-gray-200">
+      <div className="flex m-8 gap-8">
         {/* LeftSide */}
-        <div className="basis-1/4">
+        <div className="min-w-[368px] flex flex-col gap-8">
             <Profile />
-            <Menu />
+            <Menu links={dictionary.mypage.menu}/>
         </div>
         {/* main */}
-        <div className="basis-3/4 m-8">
+        <div className="grow">
+
           {children}
           {/* <EditProfile /> */}
         </div>

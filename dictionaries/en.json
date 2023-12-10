@@ -49,5 +49,13 @@
           "button": "Join Project"
         }
       }
+    },
+    "mypage": {
+      "menu": {
+        "profile": "Profile",
+        "projects": "Projects",
+        "groups": "Groups",
+        "settings": "Settings"
+      }
     }
 }

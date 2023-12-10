@@ -1,39 +1,18 @@
-"use client";
-import { useState } from "react";
+import { getUserProfile } from "@/lib/data/user";
+import ProfileDetails from "./_components/profile-details";
+import ProfileProjects from "./_components/profile-projects";
 
-const RequestList = () => {
-  const [activeTab, setActiveTab] = useState(0);
 
-  const handleTabClick = (index: number) => {
-    setActiveTab(index);
-  };
+export default async function Dashboard() {
 
-  const tabData = [
-    { id: 0, title: "내가 요청한 평가", content: "Content for Tab 1" },
-    { id: 1, title: "요청받은 평가", content: "Content for Tab 2" },
-    { id: 2, title: "내가 작성한 평가", content: "Content for Tab 3" },
-  ];
-
+  const profile = await getUserProfile();
   return (
-    <div>
-      <div className="">
-        {tabData.map((tab, index) => (
-          <button
-            key={tab.id}
-            onClick={() => handleTabClick(index)}
-            className={index === activeTab ? "active" : "none"}
-          >
-            <p className="text-lg m-5">{tab.title}</p>
-          </button>
-        ))}
-      </div>
-      <div>
-        <hr style={{ height: "0.2rem", background: "gray" }} />
-        <hr style={{  height: "0.3rem", background: "green" }} />
-      </div>
-      <div className="">{tabData[activeTab].content}</div>
-    </div>
+    <main className='flex flex-col gap-8'>
+           <pre className="hidden">
+        {JSON.stringify(profile, null, 2)}
+      </pre>
+        <ProfileDetails profile={profile} />
+        <ProfileProjects projects={profile.projectMembers} />
+    </main>
   );
-};
-
-export default RequestList;
+}
