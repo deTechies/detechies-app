@@ -19,6 +19,10 @@ declare module "next-auth" {
       id: string;
       expires: string;
     };
+    twitter: {
+      account:any, 
+      user:any
+    }
   }
 
   interface JWT {
@@ -32,6 +36,10 @@ declare module "next-auth" {
         chainId: string;
         expires: string;
       };
+      twitter: {
+        account:any, 
+        user:any
+      }
     };
   }
 }
