@@ -1,42 +1,22 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { API_URL } from "@/lib/constants";
 import useFetchData from "@/lib/useFetchData";
-import { cn, jobList } from "@/lib/utils";
-import { ArrowDown, CheckIcon } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useAccount } from "wagmi";
-import { Textarea } from "@/components/ui/textarea";
+import * as z from "zod";
 
 type Job = {
   id: number;
@@ -154,7 +134,7 @@ export default function EditProfile() {
 
   return (
     <>
-      <div className="bg-black-100 p-10 rounded-md">
+      <Card className="">
         <Form {...form}>
           <section className="mb-8">
             <h1 className="text-2xl font-medium mb-6 text-primary">
@@ -220,10 +200,10 @@ export default function EditProfile() {
             </div>
           </form>
         </Form>
-      </div>
+      </Card>
 
       {/* 아래 */}
-      <div className="bg-black-100 p-10 mt-10 rounded-md">
+      <Card className="m-8">
         <h1 className="text-2xl font-medium mb-6 text-primary">
           아이덴티티 인증
         </h1>
@@ -241,7 +221,7 @@ export default function EditProfile() {
             </div>
           ))}
         </div>
-      </div>
+      </Card>
     </>
   );
 }

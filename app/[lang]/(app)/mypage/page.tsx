@@ -1,30 +1,39 @@
-import Menu from "./menu";
-import Profile from "./profile";
-import RequestList from "./RequestList";
+"use client";
+import { useState } from "react";
 
-const page = () => {
+const RequestList = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabClick = (index: number) => {
+    setActiveTab(index);
+  };
+
+  const tabData = [
+    { id: 0, title: "내가 요청한 평가", content: "Content for Tab 1" },
+    { id: 1, title: "요청받은 평가", content: "Content for Tab 2" },
+    { id: 2, title: "내가 작성한 평가", content: "Content for Tab 3" },
+  ];
+
   return (
     <div>
-      <div className="flex bg-gray-200">
-        {/* LeftSide */}
-        <div className="basis-1/4">
-          <div className="m-8 bg-black-100 h-[300px] rounded-md p-5">
-            <Profile />
-          </div>
-          <div className="m-8 bg-black-100 h-[250px] rounded-md p-5">
-            <Menu />
-          </div>
-        </div>
-        {/* main */}
-        <div className="basis-3/4 m-8">
-          {/* <EditProfile /> */}
-          <RequestList />
-        </div>
+      <div className="">
+        {tabData.map((tab, index) => (
+          <button
+            key={tab.id}
+            onClick={() => handleTabClick(index)}
+            className={index === activeTab ? "active" : "none"}
+          >
+            <p className="text-lg m-5">{tab.title}</p>
+          </button>
+        ))}
       </div>
-
-      {/* <Footer /> */}
+      <div>
+        <hr style={{ height: "0.2rem", background: "gray" }} />
+        <hr style={{  height: "0.3rem", background: "green" }} />
+      </div>
+      <div className="">{tabData[activeTab].content}</div>
     </div>
   );
 };
 
-export default page;
+export default RequestList;

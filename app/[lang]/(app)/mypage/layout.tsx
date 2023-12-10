@@ -1,19 +1,32 @@
-"use client";
-import App from "@/app/[lang]/app";
-import React from "react";
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
+import Menu from "./menu";
+import Profile from "./profile";
 
-interface MyPageLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function MyPageLayout({
+export default async function MyPageLayout ({
+  params,
   children,
-}: MyPageLayoutProps): JSX.Element {
+}: {
+  params: { lang: Locale };
+  children: React.ReactNode;
+}) {
+  
+  const dictionary = (await getDictionary(params.lang)) as any;
   return (
-    <App>
-      <main className="h-[100vh] w-[100vw] bg-background-layer-1 z-10 ">
-        <div>{children}</div>
-      </main>
-    </App>
+    <div>
+      <div className="flex bg-gray-200">
+        {/* LeftSide */}
+        <div className="basis-1/4">
+            <Profile />
+            <Menu />
+        </div>
+        {/* main */}
+        <div className="basis-3/4 m-8">
+          {children}
+          {/* <EditProfile /> */}
+        </div>
+      </div>
+
+    </div>
   );
-}
+};
