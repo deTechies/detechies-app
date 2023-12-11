@@ -136,7 +136,21 @@ export default function EditProfile() {
                   </div>
                 </div>
                 <div className="basis-1/2 ml-6">
-                  <div className="">
+                <div className="">
+                    <label className="">Username</label>
+                      <FormField
+                        control={form.control}
+                        name="specialisation"
+                        render={({ field }) => (
+                          <FormItem className="mt-2">
+                            <FormControl>
+                              <Input placeholder="Speciality" {...field} disabled/>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                  </div>
+                  <div className="my-10">
                     <label className="">Specialisation</label>
                       <FormField
                         control={form.control}

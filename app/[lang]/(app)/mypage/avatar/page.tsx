@@ -1,39 +1,34 @@
-"use client";
-import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getUserProfile } from "@/lib/data/user";
+import NftOwned from "../../profile/select/nft-owned";
 
-const RequestList = () => {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const handleTabClick = (index: number) => {
-    setActiveTab(index);
-  };
-
-  const tabData = [
-    { id: 0, title: "내가 요청한 평가", content: "Content for Tab 1" },
-    { id: 1, title: "요청받은 평가", content: "Content for Tab 2" },
-    { id: 2, title: "내가 작성한 평가", content: "Content for Tab 3" },
-  ];
+export default async function Avatars() {
+  const profile = await getUserProfile();
 
   return (
-    <div>
-      <div className="">
-        {tabData.map((tab, index) => (
-          <button
-            key={tab.id}
-            onClick={() => handleTabClick(index)}
-            className={index === activeTab ? "active" : "none"}
-          >
-            <p className="text-lg m-5">{tab.title}</p>
-          </button>
-        ))}
-      </div>
-      <div>
-        <hr style={{ height: "0.2rem", background: "gray" }} />
-        <hr style={{  height: "0.3rem", background: "green" }} />
-      </div>
-      <div className="">{tabData[activeTab].content}</div>
-    </div>
+    <Tabs defaultValue="all">
+      <TabsList className="grid w-full grid-cols-4 gap-4">
+        <TabsTrigger value="all">All</TabsTrigger>
+        <TabsTrigger value="career">Career</TabsTrigger>
+        <TabsTrigger value="minting">on Minting</TabsTrigger>
+      </TabsList>
+      <TabsContent value="all">
+        {profile ? <NftOwned address={profile} /> : "No account found!"}
+      </TabsContent>
+      <TabsContent value="career">
+        {profile?.TBA ? (
+          <NftOwned address={profile.TBA} avatar={profile?.nft} />
+        ) : (
+          "No tokenbound account found!"
+        )}
+      </TabsContent>
+      <TabsContent value="minting">
+        {profile ? (
+          <NftOwned address={profile} status="minting" />
+        ) : (
+          "No minting account found!"
+        )}
+      </TabsContent>
+    </Tabs>
   );
-};
-
-export default RequestList;
+}

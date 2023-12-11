@@ -1,5 +1,4 @@
 "use client";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
@@ -23,9 +22,7 @@ export default function ProfileMe() {
   }, [address])
   
   return (
-          <Card>
-            <CardHeader>NFTs</CardHeader>
-            <CardContent>
+          <div>
               <Tabs defaultValue="all">
                 <TabsList className="grid w-full grid-cols-4 gap-4">
                   <TabsTrigger value="tokenbound">Career</TabsTrigger>
@@ -40,8 +37,7 @@ export default function ProfileMe() {
               </Tabs>
             
               
-            </CardContent>
-          </Card>
+          </div>
 
   );
 }
