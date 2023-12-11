@@ -6,6 +6,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { updateUserProfile } from "@/lib/data/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useState } from "react";
@@ -25,7 +26,7 @@ const profileFormSchema = z.object({
       message: "Your last name must be at least 2 characters.",
     })
     .optional(),
-  job: z.string().optional(),
+  profession: z.string().optional(),
   specialisation: z.string().optional(),
   description: z.string().optional(),
 });
@@ -66,13 +67,15 @@ export default function EditProfile() {
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
 
+
+    //@ts-ignore
+    const result =await updateUserProfile(data)
     toast({
       title: "Creating profile...",
       description: <pre>
-        {JSON.stringify(data, null, 2)}
+        {JSON.stringify(result, null, 2)}
         </pre>,
     });
-    //@ts-ignore
 
     setLoading(false);
   }
@@ -118,14 +121,14 @@ export default function EditProfile() {
                     </div>
                   </div>
                   <div className="my-10">
-                    <label className="">Job</label>
+                    <label className="">profession</label>
                       <FormField
                         control={form.control}
-                        name="job"
+                        name="profession"
                         render={({ field }) => (
                           <FormItem className="mt-2">
                             <FormControl>
-                              <Input placeholder="job" {...field} />
+                              <Input placeholder="profession" {...field} />
                             </FormControl>
                           </FormItem>
                         )}
