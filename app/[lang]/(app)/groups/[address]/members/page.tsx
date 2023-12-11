@@ -29,7 +29,7 @@ const pendingData = await getPendingMembers(params.address);
 
   return (
     <Card className="overflow-auto max-w-[90vw]">
-      <CardHeader className="flex items-center justify-between">
+      <CardHeader>
         <h3>Members ({pendingData?.length})</h3>
         <InviteProjectMember projectId={params.address} />
       </CardHeader>

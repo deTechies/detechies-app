@@ -35,9 +35,9 @@ const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <h1
+  <div
     ref={ref}
-    className={cn("text-normal font-medium w-full  leading-3 tracking-wide",
+    className={cn("flex justify-between items-center w-full",
     className
   )}
     {...props}
