@@ -87,6 +87,12 @@ export enum ClubType {
     GAME = 'game',
     OTHER = 'other'
   }
+  export enum QuestionCategory {
+    TECHNICAL = 'technical',
+    OTHER = 'other',
+    COMMUNICATION = 'communication',
+    DELIVERY = 'delivery'
+  }
   
   export interface Member {
     id: string;
