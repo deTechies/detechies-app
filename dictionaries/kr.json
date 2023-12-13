@@ -56,11 +56,42 @@
       }
     },
     "mypage": {
+      "profile": {
+        "following": "팔로잉", 
+        "followers": "팔로워", 
+        "token": "토큰", 
+        "avatar_settings": "아바타 설정",
+        "name": "이름"
+      },
+      "main": {
+        "profile": "프로필", 
+        "edit": "수정하기", 
+        "description": "내 소개"
+      },
+      "edit_profile": {
+        "edit_profile": "프로필 수정", 
+        "full_name": "본명 (비공개)", 
+        "first_name": "이름",
+        "last_name": "성",
+        "profession": "직업", 
+        "specialisation": "전문분야", 
+        "profile_description": "내 소개",
+        "username": "닉네임", 
+        "save_changes": "저장하기"
+      },
+      "project": {
+        "projects": "프로젝트",
+        "new_project": "추가하기", 
+        "evaluation": "성과 평가 ", 
+        "present": "present",
+        "view_project": "자세히 보기 "
+      },
       "menu": {
-        "profile": "Profile",
-        "projects": "Projects",
-        "groups": "Groups",
-        "settings": "Settings"
+        "portfolio": "포트폴리오",
+        "edit_profile": "프로필 수정",
+        "evaluation_history": "평가 요청 내역",
+        "reputation_history": "평판 조회 내역",
+        "career_avatar": "커리어 아바타"
       }
     }
 }

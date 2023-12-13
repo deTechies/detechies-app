@@ -1,9 +1,12 @@
+import { Badge } from "@/components/ui/badge";
 import { ProjectWork } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
   return (
-    <main className="flex gap-6 text-text-secondary my-2">
+    <main className="flex gap-2 text-text-secondary my-2 flex-col">
+      <div>
+        
       <div className="flex flex-col gap-2">
         <div className="divide-x">
           <span className="text-label_m capitalize pr-2">{data.name}</span>
@@ -13,10 +16,20 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
           {formatDate(data.begin_date)} ~ {" "}
           {data.end_date ? formatDate(data.end_date) : "Present"}
         </span>
+
       </div>
       <div className="grow">
         <span className="text-label_m">{data.description}</span>
       </div>
+      </div>
+      <div className="flex flex-wrap gap-2">
+          <Badge variant="ghost" >Dev Ops</Badge>
+          <Badge variant="ghost">Backend</Badge>
+          <Badge variant="ghost">Fullstack</Badge>
+          <Badge variant="ghost" >Dev Ops</Badge>
+          <Badge variant="ghost">Backend</Badge>
+          <Badge variant="ghost">Fullstack</Badge>
+        </div>
     </main>
   );
 }
@@ -33,6 +46,12 @@ export function BlurredProjectWorkDetail() {
         <span className="text-label_m blur">
           {formatDate(Date.now().toString())} ~ {formatDate(Date.now().toString())}
         </span>
+        
+        <div>
+          <Badge variant="secondary" className="blur">Dev Ops</Badge>
+          <Badge variant="secondary" className="blur">Backend</Badge>
+          <Badge variant="secondary" className="blur">Fullstack</Badge>
+        </div>
       </div>
       <div className="grow">
         <span className="text-label_m blur">

@@ -51,11 +51,42 @@
       }
     },
     "mypage": {
+      "profile": {
+        "following": "following", 
+        "followers": "followers", 
+        "token": "token", 
+        "avatar_settings": "avatar settings",
+        "name": "name"
+      },
+      "edit_profile": {
+        "edit_profile": "edit profile", 
+        "full_name": "full name", 
+        "first_name": "first name",
+        "last_name": "last name",
+        "profession": "profession", 
+        "specialisation": "specialisation", 
+        "profile_description": "profile description",
+        "username": "username", 
+        "save_changes": "save changes"
+      },
+      "project": {
+        "projects": "Projects", 
+        "new_project": "New project", 
+        "evaluation": "evaluation", 
+        "present": "present",
+        "view_project": "view project"
+      },
+      "main": {
+        "profile": "profile", 
+        "edit": "edit", 
+        "description": "description"
+      },
       "menu": {
-        "profile": "Profile",
-        "projects": "Projects",
-        "groups": "Groups",
-        "settings": "Settings"
+        "portfolio": "portfolio",
+        "edit_profile": "edit profile",
+        "evaluation_history": "evaluation history",
+        "reputation_history": "reputation history",
+        "career_avatar": "career avatar"
       }
     }
 }

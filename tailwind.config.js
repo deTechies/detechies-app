@@ -223,8 +223,8 @@ module.exports = {
           { fontWeight: "700" },
         ],
         subhead_s: [
-          "1.2rem",
-          { lineHeight: "1.3rem" },
+          "20px",
+          { lineHeight: "1.4rem" },
           { fontWeight: "600" },
           { letterSpacing: "0px" },
         ],
@@ -237,7 +237,7 @@ module.exports = {
         title_m: [
           "1rem",
           { fontWeight: "600" },
-          { lineHeight: "1.4rem" },
+          { lineHeight: "1.3rem" },
           { letterSpacing: "0.15px" },
         ],
         title_l: [

@@ -22,7 +22,6 @@ export async function getUserProfile(address?: string) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${session?.web3.accessToken}`,
       },
-      next: { tags: ["user/profile"] },
     });
 
     const data = await user.json();

@@ -8,21 +8,25 @@ export default function Menu({ links }: { links: any }) {
   
   const menuItems = [
     {
-      name: links.profile,
+      name: links.portfolio,
       link: "/mypage",
     },
     {
-      name: links.projects,
+      name: links.edit_profile,
       link: "/mypage/edit",
     }, 
     {
-      name: "Projects",
-      link: "#",
-    },
+      name: links.evaluation_history,
+      link: "/mypage/evalutions",
+    }, 
     {
-      name: "Avatar",
-      link: "#",
-    },
+      name: links.reputation_history,
+      link: "/mypage/reputation",
+    }, 
+    {
+      name: links.career_avatar,
+      link: "/mypage/avatar",
+    }, 
   ]
   return (
     <div className="bg-background-layer-1 rounded-sm grid items-center">
@@ -33,8 +37,8 @@ export default function Menu({ links }: { links: any }) {
               key={item.name}
               href={item.link}
               className={`
-              text-title_m text-text-secondary py-[18px] px-6 first:rounded-t-sm last:rounded-b-sm
-              ${pathName.endsWith(item.link) ? "bg-accent-secondary text-text-primary" : "bg-none"}
+              text-title_m  py-[18px] px-6 first:rounded-t-sm last:rounded-b-sm capitalize
+              ${pathName.endsWith(item.link) ? 'bg-accent-secondary text-text-primary' : "text-text-secondary"}
               `}
             >
               {item.name}

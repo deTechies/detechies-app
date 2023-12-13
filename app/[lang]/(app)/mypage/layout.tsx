@@ -16,10 +16,10 @@ export default async function MyPageLayout ({
   
   return (
     <div>
-      <div className="flex m-8 gap-8">
+      <div className="flex sm:flex-row flex-col m-8 gap-8">
         {/* LeftSide */}
         <div className="min-w-[368px] flex flex-col gap-8">
-            <Profile />
+            <Profile text={dictionary.mypage.profile}/>
             <Menu links={dictionary.mypage.menu}/>
         </div>
         {/* main */}

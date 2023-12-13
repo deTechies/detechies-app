@@ -7,15 +7,15 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectWorkDetail from "../../project/[address]/_components/project-work-detail";
 
-export default function ProfileProjects({ projects }: { projects: any }) {
+export default function ProfileProjects({ projects, text }: { projects: any, text:any }) {
   //get all the projects the user the user is part of
 
   return (
     <div className="flex flex-col gap-8">
       <Card className="flex flex-row justify-between items-center">
-        <h5 className="text-subhead_s">Projects</h5>
+        <h5 className="text-subhead_s">{text?.projects}</h5>
         <Button size="sm" variant="secondary">
-          New Project{" "}
+          {text?.new_project} {" "}
           <PlusIcon size="16" className="text-text-secondary ml-2" />
         </Button>
       </Card>
@@ -40,7 +40,7 @@ export default function ProfileProjects({ projects }: { projects: any }) {
                     {formatDate(project.project.begin_date)} ~{" "}
                     {project.project.end_date
                       ? formatDate(project.project.end_date)
-                      : "present"}{" "}
+                      : text?.present}{" "}
                   </span>
                 </header>
                 <div>
@@ -51,12 +51,12 @@ export default function ProfileProjects({ projects }: { projects: any }) {
                 </div>
               </div>
               <div className="flex flex-col justify-between  ">
-                <Badge>Evaluation (0)</Badge>
+                <Badge>{text?.evaluation} (0)</Badge>
                 <Link
                   href={`/project/${project.project.id}`}
                   className="text-label_s text-text-secondary flex gap-2 items-center"
                 >
-                  View Project <ChevronRight size="16" />
+                  {text?.view_project} <ChevronRight size="16" />
                 </Link>
               </div>
             </Card>

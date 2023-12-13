@@ -5,8 +5,8 @@ import { Locale } from './i18n.config'
 // We also get the default import for cleaner types
 const dictionaries = {
   en: () => import('./dictionaries/en.json').then((module) => module.default),
-  nl: () => import('./dictionaries/nl.json').then((module) => module.default),
-  cs: () => import('./dictionaries/cs.json').then((module) => module.default),
+  //nl: () => import('./dictionaries/nl.json').then((module) => module.default),
+  //cs: () => import('./dictionaries/cs.json').then((module) => module.default),
   kr: () => import('./dictionaries/kr.json').then((module) => module.default),
 }
 
