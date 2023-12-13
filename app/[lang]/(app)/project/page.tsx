@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { getProjects } from "@/lib/data/project";
 import { ProjectType } from "@/lib/interfaces";
+import { Suspense } from "react";
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
 
@@ -69,16 +70,17 @@ export default async function ProjectListPage({
           <CreateProject />
         </div>
       </Card>
-
-      <section className="w-full grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-8">
-        {filteredData.length > 0 ? (
-          filteredData.map((item: ProjectItemProps) => (
-            <ProjectItem key={item.id} details={item} />
-          ))
-        ) : (
-          <div>No projects found</div>
-        )}
-      </section>
+      <Suspense fallback={<div>Loading...</div>}>
+        <section className="w-full grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-8">
+          {filteredData.length > 0 ? (
+            filteredData.map((item: ProjectItemProps) => (
+              <ProjectItem key={item.id} details={item} />
+            ))
+          ) : (
+            <div>No projects found</div>
+          )}
+        </section>
+      </Suspense>
     </main>
   );
 }

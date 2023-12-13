@@ -1,7 +1,9 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
+import { auth } from "@/lib/helpers/authOptions";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import LoginButtons from "./login-buttons";
 
@@ -12,12 +14,12 @@ export default async function OnboardPage({
 }) {
   const dictionary = await getDictionary(lang);
 
-  //const session = await auth();
+  const session = await auth();
 
-/*   if (session?.web3?.user?.verified) {
+  if (session?.web3?.user?.verified) {
     redirect("/project");
   }
-   */
+  
 
   return (
     <main className="flex flex-col gap-12 items-center w-full max-w-[400px]">

@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
-import { getCsrfToken, signIn } from "next-auth/react";
+import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
@@ -12,7 +13,7 @@ import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
 export default function LoginButtons({ text }: { text?: any }) {
   const { connect, connectors } = useConnect();
   const { address } = useAccount();
- // const { data: session } = useSession();
+  const { data: session } = useSession();
   const { signMessageAsync } = useSignMessage();
   const [signing, setSigning] = useState(false);  
   const { disconnect } = useDisconnect();
@@ -20,7 +21,7 @@ export default function LoginButtons({ text }: { text?: any }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-/*   useEffect(() => {
+  useEffect(() => {
     if (session && session.web3?.accessToken) {
       if (session.web3.address == address) {
         if (session.web3.user?.verified) {
@@ -30,7 +31,7 @@ export default function LoginButtons({ text }: { text?: any }) {
       }
     }
   }, [address, session]);
- */
+
   const handleConnect = (connector: any) => {
     connect({ connector });
   };
