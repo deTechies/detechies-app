@@ -15,6 +15,7 @@ export async function getUserProfile(address?: string) {
     if(!session){
       redirect("/onboard");
     }
+    
     const user = await fetch(`${API_URL}/users/${session?.web3.address}`, {
       method: "GET",
       headers: {

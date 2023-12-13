@@ -34,6 +34,7 @@ import {
 
 
 import { useAccount } from "wagmi"
+import CreateSurvey from "./create-survey"
 import { DataTablePagination } from "./table-pagination"
 
 interface DataTableProps<TData, TValue> {
@@ -170,7 +171,7 @@ export function QuestionTable<TData, TValue, hideColumn>({
 
     </div>
     <div className="text-right">
-      {table.getFilteredSelectedRowModel().rows.length  > 0 && <Button onClick={() => console.log("leuk")} >Download ({table.getFilteredSelectedRowModel().rows.length}) files</Button>}
+      {table.getFilteredSelectedRowModel().rows.length  > 0 && <CreateSurvey questions={table.getFilteredSelectedRowModel().rows} />}
     </div>
     </div>
   )
