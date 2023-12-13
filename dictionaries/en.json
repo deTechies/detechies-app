@@ -76,6 +76,13 @@
         "present": "present",
         "view_project": "view project"
       },
+      "evaluations": {
+        "menu": {
+          "evaluation_requested": "Evaluation Requested", 
+          "evaluation_requests": "Evaluations Requests", 
+          "evaluation_wrote": "Evaluation Written"
+        }
+      },
       "main": {
         "profile": "profile", 
         "edit": "edit", 

@@ -6,7 +6,7 @@ import Image from "next/image";
 export default async function Profile({ text }: { text: any }) {
   const profile = await getUserProfile();
   return (
-    <Card className="grid">
+    <Card className="flex flex-col gap-5">
       <div className="flex">
         <div>
           <Image
@@ -15,22 +15,23 @@ export default async function Profile({ text }: { text: any }) {
                 ? profile.avatar
                 : "https://ipfs.io/ipfs/bafybeiaw4okk76pbpihg4tyfnrufkizy4f6y2g3xlbisvq6zk5xxuhrrju"
             }
-            width={100}
-            height={100}
+            width={120}
+            height={120}
             className=" rounded-sm bg-background-layer-2"
             alt={"avatar"}
           />
         </div>
 
-        <div className="flex flex-col justify-between basis-auto ml-2">
+        <div className="flex flex-col justify-between basis-auto ml-4">
           <div>
-            <p className="text-title_m">#{profile.display_name}</p>
+            <p className="text-title_l"># {profile.display_name}</p>
+            <span className="text-title_m">{profile.profile_details?.full_name}</span>
           </div>
           <Badge className="text-title_s">{text?.avatar_settings}</Badge>
         </div>
       </div>
 
-      <div className="grid px-5 py-3 mt-2 border rounded-sm border-border-div">
+      <div className="grid px-5 py-3  border rounded-sm border-border-div">
         <div className="flex p-1">
           <div className="basis-1/2 gap-2">
             <p className="text-subhead_s">2,334</p>
@@ -47,7 +48,7 @@ export default async function Profile({ text }: { text: any }) {
         </div>
       </div>
 
-      <div className="grid mt-2 border rounded-sm border-border-div">
+      <div className="grid border rounded-sm border-border-div">
         <div className="flex justify-between p-5 items-center">
           <div className="flex items-center">
             <figure className="flex items-center justify-center w-8 h-8 mr-2 bg-background-layer-2 rounded-full">

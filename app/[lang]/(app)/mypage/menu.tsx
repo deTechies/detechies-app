@@ -17,7 +17,7 @@ export default function Menu({ links }: { links: any }) {
     }, 
     {
       name: links.evaluation_history,
-      link: "#",
+      link: "/mypage/evaluation",
     }, 
     {
       name: links.reputation_history,

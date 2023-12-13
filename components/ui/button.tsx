@@ -10,6 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        primary: "text-accent-primary bg-accent-secondary hover:bg-accent/90",
         default: "bg-accent-secondary text-accent-primary hover:bg-accent-secondary",
         destructive:
           "bg-state-error-secondary text-state-error hover:bg-destructive/20",
@@ -22,8 +23,8 @@ const buttonVariants = cva(
       },
       size: {
         default: "px-6 py-4 rounded-full",
-        sm: "rounded-md px-4 py-2",
-        lg: "h-11 rounded-md px-8",
+        sm: "text-sm rounded-md px-3 py-2",
+        lg: "px-[62.50px] py-[15.50px] rounded-md ",
         icon: "h-10 w-10",
       },
     },

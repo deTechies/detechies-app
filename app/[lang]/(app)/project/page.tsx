@@ -44,7 +44,7 @@ export default async function ProjectListPage({
     : projects;
 
   return (
-    <main className="flex flex-col gap-4 w-full my-4 p-4 mx-auto">
+    <main className="flex flex-col gap-4 w-full my-10 min-mx-5 p-4 mx-auto">
       <Card className="flex gap-3 justify-between">
         <h1 className="text-subhead_s">Projects</h1>
         <div className="flex justify-between sm:flex-row flex-col">

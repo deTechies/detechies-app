@@ -4,10 +4,9 @@ import { formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
   return (
-    <main className="flex gap-2 text-text-secondary my-2 flex-col">
-      <div>
-        
-      <div className="flex flex-col gap-2">
+    <>
+    <div className="justify-start items-start gap-4 inline-flex text-text-secondary">
+      <div className="flex-col justify-start items-start gap-2 inline-flex">
         <div className="divide-x">
           <span className="text-label_m capitalize pr-2">{data.name}</span>
           <span className="pl-2 text-label_m">{data.percentage} %</span>
@@ -18,11 +17,11 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
         </span>
 
       </div>
-      <div className="grow">
+      <div className="self-stretch grow shrink basis-0 ">
         <span className="text-label_m">{data.description}</span>
       </div>
-      </div>
-      <div className="flex flex-wrap gap-2">
+    </div>
+      <div className="justify-start items-start gap-2 inline-flex">
           <Badge variant="ghost" >Dev Ops</Badge>
           <Badge variant="ghost">Backend</Badge>
           <Badge variant="ghost">Fullstack</Badge>
@@ -30,7 +29,7 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
           <Badge variant="ghost">Backend</Badge>
           <Badge variant="ghost">Fullstack</Badge>
         </div>
-    </main>
+    </>
   );
 }
 
