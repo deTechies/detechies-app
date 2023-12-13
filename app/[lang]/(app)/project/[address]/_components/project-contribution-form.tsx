@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/select";
 
 import { Checkbox } from "@/components/ui/checkbox";
+import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
@@ -69,7 +70,24 @@ export default function ProjectContributionForm({
   const currentPercentage = form.watch("percentage", [0]);
 
   const [loading, setLoading] = useState(false);
-
+  
+  const handleKeyDown = (e : any) => {
+    if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
+      e.preventDefault(); // Prevent form submit
+  
+      const newTag = e.currentTarget.value.trim(); // Get the current value of the input
+      const currentTags = form.watch("tags");
+  
+      if (Array.isArray(currentTags)) {
+        form.setValue("tags", [...currentTags, newTag], { shouldValidate: true });
+      } else {
+        form.setValue("tags", [newTag], { shouldValidate: true });
+      }
+  
+      e.currentTarget.value = ""; // Clear the input field
+    }
+  };
+  
 
   const onSubmit = async (values: ContributionFormData) => {
     console.log(values);
@@ -77,7 +95,7 @@ export default function ProjectContributionForm({
 
     toast({
       title: "Success",
-      description: <pre>{JSON.stringify(result, null, 2)}</pre>,
+      description: "Your contribution has been added.",
     });
   };
 
@@ -85,8 +103,9 @@ export default function ProjectContributionForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 border p-3 rounded-sm "
+        className="spaxe-y-8 "
       >
+        <main className="border p-3 rounded-sm space-y-8">
         <section className="flex flex-col gap-4">
           <div className="grid grid-cols-1 gap-4">
             <FormField
@@ -117,7 +136,7 @@ export default function ProjectContributionForm({
               )}
             />
           </div>
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex flex-col gap-3 w-full">
             <div className="flex justify-between">
               <Label>Period</Label>
               <div className="flex items-center gap-3">
@@ -162,31 +181,21 @@ export default function ProjectContributionForm({
         </section>
 
         <section>
-        <Controller
-                name="tags"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Tags</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Type and press enter"
-                        {...field}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            const newTags = [
-                              ...form.watch("tags"),
-                              e.currentTarget.value,
-                            ];
-                            form.setValue("tags", newTags, { shouldValidate: true });
-                            e.currentTarget.value = "";
-                            e.preventDefault(); // Prevent form submit
-                          }
-                        }}
-                      />
-                    </FormControl>
-                    <div>
-{/*                       {form.watch("tags").map((tag, index) => (
+          <Controller
+            name="tags"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tags</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Type and press enter"
+                    {...field}
+                    onKeyDown={handleKeyDown}
+                  />
+                </FormControl>
+                <div>
+                  {/*                       {form.watch("tags").map((tag, index) => (
                         <span
                           key={index}
                           className="bg-gray-100 px-2 py-1 rounded-full text-xs mr-2"
@@ -194,10 +203,10 @@ export default function ProjectContributionForm({
                           {tag}
                         </span>
                       ))} */}
-                    </div>
-                  </FormItem>
-                )}
-              />
+                </div>
+              </FormItem>
+            )}
+          />
         </section>
 
         <section>
@@ -242,19 +251,23 @@ export default function ProjectContributionForm({
               <FormDescription className="flex">
                 <FormMessage className="w-full" />
                 <span className="content-right text-right w-full">
-                  {messageValue.length} / 5000
+                  {messageValue.length} / 500
                 </span>
               </FormDescription>
             </FormItem>
           )}
         />
+        </main>
 
         <div className="flex items-center justify-center gap-8">
+          <DialogClose asChild>
+            <Button variant={"secondary"}>Cancel</Button>
+          </DialogClose>
           <Button
             type="submit"
             disabled={loading || !form.formState.isValid}
             loading={loading}
-            size="sm"
+            variant="default"
           >
             Save Contribution
           </Button>

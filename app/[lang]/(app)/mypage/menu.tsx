@@ -17,15 +17,15 @@ export default function Menu({ links }: { links: any }) {
     }, 
     {
       name: links.evaluation_history,
-      link: "/mypage/evalutions",
+      link: "#",
     }, 
     {
       name: links.reputation_history,
-      link: "/mypage/reputation",
+      link: "#",
     }, 
     {
       name: links.career_avatar,
-      link: "/mypage/avatar",
+      link: "#",
     }, 
   ]
   return (

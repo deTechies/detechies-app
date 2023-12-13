@@ -1,14 +1,17 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { updateUserProfile } from "@/lib/data/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -29,6 +32,7 @@ const profileFormSchema = z.object({
   profession: z.string().optional(),
   specialisation: z.string().optional(),
   description: z.string().optional(),
+  skills: z.array(z.string()).optional(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -39,17 +43,20 @@ const defaultValues: Partial<ProfileFormValues> = {};
 
 interface EditProfileProps {
     text: any;
+    currentValues: Partial<ProfileFormValues>;
     username: string;
     }
 
-export default function EditProfile({text, username}: EditProfileProps) {
+export default function EditProfile({text, username, currentValues}: EditProfileProps) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues,
+    defaultValues: currentValues,
     mode: "onChange",
   });
+  const {push} = useRouter()
 
   const [loading, setLoading] = useState(false);
+  const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
 
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
@@ -63,9 +70,25 @@ export default function EditProfile({text, username}: EditProfileProps) {
         {JSON.stringify(result, null, 2)}
         </pre>,
     });
+     
+    push("/mypage");
 
     setLoading(false);
   }
+  
+    
+  const handleKeyDown = (e:any) => {
+    if (e.key === "Enter" && newTag.trim() !== "") {
+      e.preventDefault();
+      const currentTags = form.getValues("skills") || [];
+      form.setValue("skills", [...currentTags, newTag.trim()], { shouldValidate: true });
+      setNewTag(""); // Clear the input field for new tag
+    }
+  };
+
+  const handleNewTagChange = (e:any) => {
+    setNewTag(e.target.value);
+  };
 
   return (
     <>
@@ -78,8 +101,8 @@ export default function EditProfile({text, username}: EditProfileProps) {
               </h1>
             </section>
             <section className="my-2">
-              <div className="flex">
-                <div className="flex flex-col basis-1/2">
+              <div className="flex flex-col gap-10">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label className="">{text?.full_name}</Label>
                     <div className="flex gap-2 items-center mt-2">
@@ -107,8 +130,16 @@ export default function EditProfile({text, username}: EditProfileProps) {
                       />
                     </div>
                   </div>
-                  <div className="my-10">
-                    <Label className="">{text?.profession}</Label>
+                  <div className="">
+                    <Label className="mb-2">{text?.username}</Label>
+                    <Input placeholder={username} value={username} disabled className="mt-2"/>
+                   
+                  </div>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                  <Label className="">{text?.profession}</Label>
                       <FormField
                         control={form.control}
                         name="profession"
@@ -121,13 +152,7 @@ export default function EditProfile({text, username}: EditProfileProps) {
                         )}
                       />
                   </div>
-                </div>
-                <div className="basis-1/2 ml-6">
-                <div className="">
-                    <Label className="">{text?.username}</Label>
-                    <Input placeholder={username} value={username} disabled/>
-                  </div>
-                  <div className="my-10">
+                  <div className="">
                     <Label className="">{text?.specialisation}</Label>
                       <FormField
                         control={form.control}
@@ -144,7 +169,38 @@ export default function EditProfile({text, username}: EditProfileProps) {
                 </div>
               </div>
             </section>
-            <section className="my-2">
+            <section className="my-10">
+              <div>
+              <FormItem>
+            <FormLabel>Skills</FormLabel>
+            <FormControl>
+              <Input
+                placeholder="Type and press enter"
+                value={newTag}
+                onChange={handleNewTagChange}
+                onKeyDown={handleKeyDown}
+              />
+            </FormControl>
+            <div>
+              {form.watch("skills")?.map((tag, index) => (
+                <Badge 
+                key={index} 
+                className="bg-background-layer-1 border border-accent-primary px-3 py-2 rounded-full text-xs mr-2"
+                onClick={() => {
+                  const currentTags = form.getValues("skills") || [];
+                  const newTags = currentTags.filter((t) => t !== tag);
+                  form.setValue("skills", newTags, { shouldValidate: true });
+                }}
+                >
+                  
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </FormItem>
+              </div>
+            </section>
+            <section className="my-10">
               <div>
                 <Label>{text?.profile_description}</Label>
                   <FormField
@@ -164,11 +220,12 @@ export default function EditProfile({text, username}: EditProfileProps) {
                   />
               </div>
             </section>
+          
 
             <div className="flex items-center w-full mt-10">
               <Button
+                className="w-full  text-1xl"
                 type="submit"
-                className="w-full h-[64px] text-1xl"
                 loading={loading}
               >
                 {text?.save_changes}
