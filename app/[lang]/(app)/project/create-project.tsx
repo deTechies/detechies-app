@@ -141,7 +141,7 @@ export default function CreateProject() {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button>Create Project</Button>
+        <Button size="lg">Create Project</Button>
       </DialogTrigger>
 
       <DialogContent>
