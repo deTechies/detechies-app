@@ -36,7 +36,7 @@ export default function ProjectItem({
           </Badge> */}
         </header>
 
-        <section className="space-x-2 divide-x text-text-secondary text-body_s">
+        <section className="space-x-2 divide-x text-text-secondary text-label_m">
           <span>{details.type}</span>
         </section>
 
@@ -51,7 +51,7 @@ export default function ProjectItem({
           ></p>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 justify-self-end">
           {/* category should come in the form of an array. */}
           <Badge className="bg-transparent border-border-input border text-text-placeholder py-2 px-2.5">
             {details.category}

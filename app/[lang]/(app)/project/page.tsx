@@ -13,6 +13,7 @@ import { getProjects } from "@/lib/data/project";
 import { ProjectType, PrivacyType } from "@/lib/interfaces";
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
+import { Button } from "@/components/ui/button";
 
 export interface ProjectItemProps {
   id: string;
@@ -53,7 +54,7 @@ export default async function ProjectListPage({
           <div className="flex gap-5 items-center sm:flex-row flex-col">
             <Select>
               <SelectTrigger className="w-[180px] px-3 py-3.5">
-                <SelectValue placeholder="All projects"/>
+                <SelectValue placeholder="All projects" />
               </SelectTrigger>
 
               <SelectContent>
@@ -82,14 +83,14 @@ export default async function ProjectListPage({
             <Search placeholder="search" />
             <div className="flex items-center gap-3">
               <Checkbox />
-              <Label>My Projects</Label>
+              <Label className="text-title_m">My Projects</Label>
             </div>
           </div>
           <CreateProject />
         </div>
       </Card>
 
-      <section className="w-full grid grid-cols-2 gap-4">
+      <section className="w-full grid md:grid-cols-2 gap-4">
         {filteredData.length > 0 ? (
           filteredData.map((item: ProjectItemProps) => (
             <ProjectItem key={item.id} details={item} />
@@ -98,6 +99,12 @@ export default async function ProjectListPage({
           <div>No projects found</div>
         )}
       </section>
+
+      {filteredData.length > 0 && (
+        <Button size="lg" variant="secondary">
+          View More
+        </Button>
+      )}
     </main>
   );
 }
