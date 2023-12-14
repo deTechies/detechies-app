@@ -3,9 +3,11 @@ import { ProjectWork } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
+  
+  if (!data) return null;
   return (
     <>
-    <div className="justify-start items-start gap-4 inline-flex text-text-secondary">
+    <div className="justify-start items-start gap-4 inline-flex text-text-secondary flex-wrap">
       <div className="flex-col justify-start items-start gap-2 inline-flex">
         <div className="divide-x">
           <span className="text-label_m capitalize pr-2">{data.name}</span>
@@ -21,7 +23,7 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
         <span className="text-label_m">{data.description}</span>
       </div>
     </div>
-      <div className="justify-start items-start gap-2 inline-flex">
+      <div className="justify-start items-start gap-2 inline-flex flex-wrap">
           <Badge variant="ghost" >Dev Ops</Badge>
           <Badge variant="ghost">Backend</Badge>
           <Badge variant="ghost">Fullstack</Badge>

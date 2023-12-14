@@ -3,30 +3,21 @@ import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
 import { auth } from "@/lib/helpers/authOptions";
-import { User } from "@/lib/interfaces";
+import { ProjectMember } from "@/lib/interfaces";
 import ProjectContribution from "./project-contribution";
 import ProjectMemberEvaluate from "./project-evaluate";
 import ProjectWorkDetail, {
   BlurredProjectWorkDetail,
 } from "./project-work-detail";
 
-interface MemberDetails {
-  memberId: string;
-  created_at: string;
-  level: number;
-  verified: boolean;
-  user: User;
-  role: string;
-  works: any[];
-  joined: string;
-}
+
 
 export default async function ProjectMemberItem({
   details,
   access,
   projectId,
 }: {
-  details: MemberDetails;
+  details: ProjectMember;
   projectId: string;
   access: boolean;
 }) {
@@ -41,7 +32,7 @@ export default async function ProjectMemberItem({
             className="rounded-sm"
           />
         </figure>
-        <div className="grow w-full basis-0 gap-2 justify-start items-start flex">
+        <div className="grow w-full basis-0 gap-2 justify-start items-start flex flex-wrap">
           <div className="flex-col grow shrink gap-2 flex">
             <header className="flex gap-4 items-center">
               <h5 className="text-title_m">
@@ -50,19 +41,22 @@ export default async function ProjectMemberItem({
               <Badge>Rewards</Badge>
             </header>
             <>
-              {access ?
+              {access  ?
                   <ProjectWorkDetail data={details.works[0]}  />
 
                   :
-                  <BlurredProjectWorkDetail key={details.works[0]} />
+                  <BlurredProjectWorkDetail />
               }
             </>
           </div>
           <div className="flex flex-col justify-start items-end gap-3 ">
             {session?.web3.address == details.user.wallet ? (
               <>
-                <ProjectContribution projectId={projectId} />
-                <ProjectMemberEvaluate projectId={projectId} />
+                <ProjectContribution project={details.project} />
+                {
+                  details.works.length > 0 &&    <ProjectMemberEvaluate projectMember={details} />
+                }
+             
               </>
             ) : (
               <Badge>

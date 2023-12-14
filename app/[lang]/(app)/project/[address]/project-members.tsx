@@ -40,7 +40,7 @@ export default async function ProjectMembers({
       </Card>
 
       <div className="flex flex-col gap-4">
-        {members &&
+        {members.length > 0 &&
           members.map((member, index) => (
             <ProjectMemberItem
               projectId={projectId}

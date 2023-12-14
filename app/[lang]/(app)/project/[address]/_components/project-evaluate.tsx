@@ -2,21 +2,19 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { ProjectMember } from "@/lib/interfaces";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { ContributionFormData } from "./project-contribution-form";
+import { useRouter } from "next/navigation";
 import ProjectMemberInline from "./project-member-inline";
 import ProjectSwitcher from "./project-switcher";
 
-const newContribution = {
-  valid: false,
-} as ContributionFormData;
-
 type ProjectContributionProps = {
-  projectId: string;
+  projectMember: ProjectMember;
 };
 export default function ProjectMemberEvaluate({
-  projectId,
+  projectMember,
 }: ProjectContributionProps) {
+    const router = useRouter()
   return (
     <Dialog>
       <DialogTrigger>
@@ -47,40 +45,38 @@ export default function ProjectMemberEvaluate({
 
           <div className="self-stretch flex-col gap-4 flex">
             <h3 className="text-title_m">프로젝트</h3>
-            <ProjectSwitcher projectId={projectId} />
+            <ProjectSwitcher project={projectMember.project} />
           </div>
           <div className="self-stretch flex-col gap-4 flex">
             <h3 className="text-title_m">평가받는 사람</h3>
-            <ProjectMemberInline />
+            <ProjectMemberInline projectMember={projectMember} />
           </div>
-          <div className="self-stretch h-[149px] flex-col justify-center items-center gap-4 flex">
-            <div className="self-stretch h-[21px] flex-col justify-start items-start gap-7 flex">
-              <div className="h-[21px] flex-col justify-start items-start flex">
-                <div className="text-neutral-900 text-base font-semibold leading-tight tracking-tight">
-                  업무 내용
-                </div>
-              </div>
+          <div className="self-stretch flex-col gap-4 flex">
+            <div className="text-neutral-900 text-base font-semibold leading-tight tracking-tight">
+              업무 내용
             </div>
-            <div className="self-stretch p-5 rounded-[20px] border border-gray-100 justify-start items-center gap-5 inline-flex">
-              <div className="grow shrink basis-0 self-stretch text-neutral-900 text-base font-normal leading-normal tracking-wide">
-                DB 데이터 엑셀 업로드 및 일별 마케팅 대시보드 업데이트
-                <br />
-                일별 전사 대시보드 업데이트 및 분석 결과 내부 공유
-                <br />
-                정확한 데이터 공유 및 분석을 통해 전사 데이터 기반 의사결정
-              </div>
+          </div>
+          <div className="self-stretch p-5 rounded-md border border-border-div gap-5 inline-flex">
+            <div className="text-body_m">
+              {projectMember.works[0].description}
             </div>
           </div>
         </div>
         <div className="flex justify-center gap-3">
-            <DialogClose>
-                <Button variant="secondary" size="lg">
-                    평가하기
-                </Button>
-            </DialogClose>
-            <Button variant={"primary"} size="lg">
-                취소하기
+          <DialogClose>
+            <Button variant="secondary" size="lg">
+              평가하기
             </Button>
+          </DialogClose>
+          <Button
+            variant={"primary"}
+            size="lg"
+            onClick={() => {
+                router.push(`/project/${projectMember.project.id}/${projectMember.user.id}`)
+            }}
+          >
+            to evaluation
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

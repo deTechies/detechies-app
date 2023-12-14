@@ -64,3 +64,22 @@ export async function createSurvey(data: any){
     
     return result.json();
 }
+
+
+export async function submitVerifyWork(data: any, projectId: string, userId: string){
+    const session = await getSession();
+    const result = await fetch(`${API_URL}/project-work-feedback/basic`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${session?.web3?.accessToken}`,
+        },
+        body: JSON.stringify({
+        ...data,
+        projectId,
+        userId: userId,
+        }),
+    });
+    
+    return result.json();
+}
