@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { getProjects } from "@/lib/data/project";
 import { ProjectType } from "@/lib/interfaces";
+import { Suspense } from "react";
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
 
@@ -43,7 +44,7 @@ export default async function ProjectListPage({
     : projects;
 
   return (
-    <main className="flex flex-col gap-4 w-full my-4 p-4 mx-auto">
+    <main className="flex flex-col gap-4 w-full my-10 min-mx-5 p-4 mx-auto">
       <Card className="flex gap-3 justify-between">
         <h1 className="text-subhead_s">Projects</h1>
         <div className="flex justify-between sm:flex-row flex-col">
@@ -69,16 +70,17 @@ export default async function ProjectListPage({
           <CreateProject />
         </div>
       </Card>
-
-      <section className="w-full grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-8">
-        {filteredData.length > 0 ? (
-          filteredData.map((item: ProjectItemProps) => (
-            <ProjectItem key={item.id} details={item} />
-          ))
-        ) : (
-          <div>No projects found</div>
-        )}
-      </section>
+      <Suspense fallback={<div>Loading...</div>}>
+        <section className="w-full grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-8">
+          {filteredData.length > 0 ? (
+            filteredData.map((item: ProjectItemProps) => (
+              <ProjectItem key={item.id} details={item} />
+            ))
+          ) : (
+            <div>No projects found</div>
+          )}
+        </section>
+      </Suspense>
     </main>
   );
 }

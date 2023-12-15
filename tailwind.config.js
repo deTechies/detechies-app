@@ -223,8 +223,8 @@ module.exports = {
           { fontWeight: "700" },
         ],
         subhead_s: [
-          "1.2rem",
-          { lineHeight: "1.3rem" },
+          "1.1rem",
+          { lineHeight: "1.4rem" },
           { fontWeight: "600" },
           { letterSpacing: "0px" },
         ],
@@ -234,14 +234,19 @@ module.exports = {
           { fontWeight: "600" },
           { letterSpacing: "0.5px" },
         ],
+        subhead_l: [
+          "1.5rem",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "600" },
+        ],
         title_m: [
           "1rem",
           { fontWeight: "600" },
-          { lineHeight: "1.4rem" },
-          { letterSpacing: "0.15px" },
+          { lineHeight: "1.3rem" },
+          { letterSpacing: "0.1px" },
         ],
         title_l: [
-          "1rem",
+          "1.1rem",
           { fontWeight: "600" },
           { lineHeight: "1.1rem" },
           { letterSpacing: "0.1px" },
@@ -272,6 +277,12 @@ module.exports = {
         ],
         label_m: [
           "14px",
+          { lineHeight: "1.3rem" },
+          { fontWeight: "400" },
+          { letterSpacing: "0.4px" },
+        ],
+        label_s: [
+          "12px",
           { lineHeight: "1.3rem" },
           { fontWeight: "400" },
           { letterSpacing: "0.4px" },
