@@ -16,65 +16,6 @@ module.exports = {
       },
     },
     extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            h1: {
-              color: "var(--text-primary)",
-              fontWeight: "700",
-              fontSize: "48px",
-              lineHeight: "56px",
-              letterSpacing: "-0.5px",
-            },
-            h3: {
-              color: "var(--text-primary)",
-              fontWeight: "500",
-              fontSize: "23px",
-              lineHeight: "24px",
-              letterSpacing: "-0.5px",
-            },
-            h5: {
-              color: "var(--text-primary)",
-              fontWeight: "400",
-              fontSize: "18px",
-              lineHeight: "28px",
-              letterSpacing: "-0.5px",
-            },
-            h6: {
-              color: "var(--text-primary)",
-              fontWeight: "400",
-              fontSize: "16px",
-              lineHeight: "16px",
-              letterSpacing: "0.4px",
-            },
-            p: {
-              color: "var(--text-primary)",
-              fontWeight: "400",
-              fontSize: "16",
-              lineHeight: "18px",
-              letterSpacing: "0.4px",
-            },
-            body: {
-              color: "var(--text-secondary)",
-              fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "14px",
-              letterSpacing: "0.4px",
-            },
-            a: {
-              color: "var(--text-secondary)",
-              fontWeight: "400",
-            },
-            input: {
-              color: "var(--text-secondary)",
-              fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "14px",
-              letterSpacing: "0.4px",
-            },
-          },
-        },
-      }),
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -125,6 +66,8 @@ module.exports = {
           "success-secondary": "var(--state-success-secondary)",
           "warning-secondary": "var(--state-warning-secondary)",
           "info-secondary": "var(--state-info-secondary)",
+          status: "var(--state-status-primary)",
+          "status-secondary": "var(--state-status-secondary)",
         },
         black: {
           DEFAULT: "#101113",
@@ -204,10 +147,6 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-      },
-      text: {
-        large: "48px",
-        medium: "24px",
       },
       fontSize: {
         sm: ["0.875rem", { lineHeight: "0.875rem" }, { fontWeight: "400" }],

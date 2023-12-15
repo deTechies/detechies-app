@@ -64,14 +64,38 @@
           "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.", 
           "":"이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
           "does_the_work_details_match_the_facts": "윤창진님이 기재한 업무내용이 사실과 일치하나요?", 
-          "more_than_20": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
+          "more_than_20_message": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
           "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상", 
           "more_than_10": "기재한 내용 중 사실과 다른 부분이 10% 이상",
           "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상", 
           "all_match": "네, 모두 일치합니다.",
           "go_back": "뒤로가기",
           "next": "다음",
-          "reject": "업무내용 사실여부 평가 사유"
+          "reject": "업무내용 사실여부 평가 사유",
+          "meet_requirements": {
+            "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
+            "step_1_message": "20_message percentage message",
+            "step_2_message": "40_message User meet the requirements of the project",
+            "step_3_message": "60_message User meet the requirements of the project",
+            "step_4_message": "80_message User meet the requirements of the project",
+            "step_5_message": "100_message User meet the requirements of the project"            
+          },
+          "meet_schedule": {
+            "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
+            "step_1_message": "20_message percentage message",
+            "step_2_message": "40_message User meet the requirements of the project",
+            "step_3_message": "60_message User meet the requirements of the project",
+            "step_4_message": "80_message User meet the requirements of the project",
+            "step_5_message": "100_message User meet the requirements of the project"
+          },
+          "work_contribution": {
+            "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
+            "step_1_message": "20_message percentage message",
+            "step_2_message": "40_message User meet the requirements of the project",
+            "step_3_message": "60_message User meet the requirements of the project",
+            "step_4_message": "80_message User meet the requirements of the project",
+            "step_5_message": "100_message User meet the requirements of the project"   
+          }
         }
       }
     },

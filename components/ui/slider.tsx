@@ -11,15 +11,20 @@ const Slider = React.forwardRef<
 >(({ className, ...props }, ref) => {
   // Create step markers
   const stepMarkers = [];
-  for (let i = 1; i < 10; i++) {
+  
+  let steps = 10;
+  if(props.step) steps =  100 / props.step;
+  for (let i = 1; i < steps; i++) {
     stepMarkers.push(
       <div
         key={i}
         className="absolute h-4 w-1 bg-background-layer-1"
-        style={{ left: `${i * 10}%` }}
+        style={{ left: `${i * (100/steps)}%` }}
       />
     );
   }
+  
+  let bg = props.color ? props.color : "bg-accent-primary";
 
   return (
     <SliderPrimitive.Root
@@ -29,9 +34,9 @@ const Slider = React.forwardRef<
         className
       )}
       {...props}
-    >
+    > 
       <SliderPrimitive.Track className="relative h-4 w-full grow overflow-hidden rounded-full bg-background-layer-2">
-        <SliderPrimitive.Range className="absolute h-full bg-accent-primary" />
+        <SliderPrimitive.Range className={`absolute h-full ${bg}`} />
         {/* Insert step markers */}
         {stepMarkers}
       </SliderPrimitive.Track>

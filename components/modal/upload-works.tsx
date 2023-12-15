@@ -8,7 +8,6 @@ import { ABI } from "@/lib/constants";
 
 import { uploadContent } from "@/lib/upload";
 import { PlusIcon, X } from "lucide-react";
-import TransactionData from "../screens/transaction-data";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
@@ -203,7 +202,7 @@ export default function UploadWorks({ type }: { type?: string }) {
         </Button>
       </DialogContent>
 
-      <TransactionData hash={data?.hash} />
+
     </Dialog>
   );
 }
