@@ -1,9 +1,10 @@
 
+
+import { ContributionFormData } from "@/app/[lang]/(app)/project/[address]/_components/project-contribution-form";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-import { revalidatePath, revalidateTag } from "next/cache";
 import { API_URL } from "../constants";
-import { authOptions } from "../helpers/authOptions";
+import { auth, authOptions } from "../helpers/authOptions";
 import { CreateProject, JoinProject } from "../interfaces";
 
 export async function getSingleProject(id:string) {
@@ -23,8 +24,7 @@ export async function getSingleProject(id:string) {
     
     const result = await res.json()
     
-    result.isCreator = result.owner === session?.web3?.address
-    
+    result.isCreator = result.userRole === 'admin'
     
     //we want to check if the user is amember 
     
@@ -47,7 +47,6 @@ export async function getSingleProject(id:string) {
       throw new Error("Failed to update project")
     }
 
-    revalidateTag('projects')
     return response.json();
   }
   
@@ -63,15 +62,21 @@ export async function getSingleProject(id:string) {
     });
     
     if(!response.ok){
+      console.log(response);
+      console.log(response.json());
       throw new Error("Failed to create project")
     }
-
-    revalidatePath('/project')
+    
     return response.json();
   }
 
 export async function getProjects() {
-  const session = (await getServerSession(authOptions)) as any;
+  //const session = (await getServerSession(authOptions)) as any;
+
+  const session = await auth();
+  if(!session?.web3?.address){
+    throw new Error("No address found")
+  }
     const res = await fetch(`${API_URL}/projects`,  {
       headers: {
         Authorization: `Bearer ${session?.web3?.accessToken}`,
@@ -91,7 +96,7 @@ export async function getProjects() {
 }
 
 
-export async function inviteProjectMembers(members: string[], projectId: string){
+export async function inviteProjectMembers(members: string[], role:string,  projectId: string){
   const session = await getSession();
   const response = await fetch(`${API_URL}/project-member/invite`, {
     method: "POST",
@@ -99,14 +104,16 @@ export async function inviteProjectMembers(members: string[], projectId: string)
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-    body: JSON.stringify({ userId: members, projectId: projectId, inviterId: session?.web3?.address}),
+    body: JSON.stringify({ userId: members, projectId: projectId,role:role, inviterId: session?.web3?.address}),
   });
+  
+  console.log(response.json());
+  
   
   if(!response.ok){
     throw new Error("Failed to invite members")
   }
 
-  revalidateTag('projects')
   return response.json();
 }
 
@@ -143,4 +150,63 @@ export async function joinProject(data: JoinProject ){
     },
     body: JSON.stringify({ userId: session?.web3.address, projectId: data.projectId, message: data.message, role: data.role }),
   });
+  
+  if(!response.ok){
+    throw new Error("Failed to join project")
+  }
+  
+  return true;
+}
+
+export async function inviteByEmail(name: string, email:string, projectId: string){
+  return null;
+}
+
+export async function getSessionToken(){
+  const session = await auth();
+  return session
+}
+
+export async function addMembersWork(contributionData: ContributionFormData[], projectId: string) {
+  const session = await getSession();
+
+  // Check for a valid session and required tokens
+  if (!session || !session.web3 || !session.web3.accessToken) {
+    throw new Error("Invalid session or missing access token");
+  }
+
+  const errors = [];
+  const responses = [];
+
+  const requests = contributionData.map(async (item) => {
+    try {
+      const response = await fetch(`${API_URL}/project-work`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.web3.accessToken}`,
+        },
+        body: JSON.stringify({ userId: session.web3.address, projectId, ...item, percentage: item.percentage[0] }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        errors.push({ item, error: errorData });
+      } else {
+        const data = await response.json();
+        responses.push(data);
+      }
+    } catch (error) {
+      errors.push({ item, error });
+    }
+  });
+
+  await Promise.all(requests);
+
+  if (errors.length > 0) {
+    // Handle or throw the accumulated errors
+    throw new Error(`Failed to add work for ${errors.length} items`);
+  }
+
+  return true;
 }

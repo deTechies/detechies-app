@@ -38,6 +38,16 @@ export function truncateMiddle(input: string, maxLength: number): string {
   return input.substr(0, frontChars) + '...' + input.substr(input.length - backChars);
 }
 
+//convert a date into a format of 01.01.2023 for me 
+
+export function formatDate(stringDate: string):string {
+  const date = new Date(stringDate);
+
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+  return `${day}.${month}.${year}`
+}
 
 /* export function walletClientToSigner(walletClient: any) {
   const ethersWalletClient = {

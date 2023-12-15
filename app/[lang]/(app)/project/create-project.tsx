@@ -1,16 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
-import * as z from "zod";
-
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -20,7 +10,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,6 +27,11 @@ import {
 } from "@/components/ui/select";
 import { createProject } from "@/lib/data/project";
 import { uploadContent } from "@/lib/upload";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { ProjectCategory, ProjectType } from "@/lib/interfaces";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const projectFormSchema = z.object({
@@ -46,21 +43,20 @@ const projectFormSchema = z.object({
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
+  begin_date: z.string(),
+  end_date: z.string(),
   description: z.string().max(160).min(4),
-  type: z.enum(["hackathon", "side_project", "project"], {
+  type: z.nativeEnum(ProjectType, {
     required_error: "You need to select a  type.",
   }),
-  urls: z.array(
-    z.object({
-      value: z.string().url({ message: "Please enter a valid URL." }),
-    })
-  ),
+  category: z.nativeEnum(ProjectCategory, {
+    required_error: "You need to select a category.",
+  }),
 });
 
 type ProfileFormValues = z.infer<typeof projectFormSchema>;
 const defaultValues: Partial<ProfileFormValues> = {
   description: "Amazing project built by the careerzenTeam.",
-  urls: [{ value: "https://google.com" }],
 };
 
 export default function CreateProject() {
@@ -71,12 +67,9 @@ export default function CreateProject() {
   });
 
   const [file, setFile] = useState<File | null>(null);
-  const { fields, append } = useFieldArray({
-    name: "urls",
-    control: form.control,
-  });
-
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [present, setPresent] = useState(false);
 
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
@@ -114,14 +107,29 @@ export default function CreateProject() {
       return;
     }
     
-    
-    await createProject({
+    if(present){
+      data.end_date = "present";
+    }
+
+    const result = await createProject({
       image: image,
       name: data.name,
       description: data.description,
+      begin_date: data.begin_date,
+      end_date: data.end_date,
+      category: data.category,
       type: data.type,
-      urls: data.urls.map((url) => url.value),
-     });
+    });
+    
+    console.log(result);
+
+    if (result.id) {
+      toast({
+        title: "Success",
+        description: "Project created successfully",
+      });
+      router.push(`/project/${result.id}`);
+    }
 
     setLoading(false);
   }
@@ -133,28 +141,15 @@ export default function CreateProject() {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button>Create Project</Button>
+        <Button size="lg">Create Project</Button>
       </DialogTrigger>
 
       <DialogContent>
-        <DialogTitle>Create Project</DialogTitle>
-        <DialogDescription>
-          <p>
-            Create a project to share with the community. You can create a
-            hackathon, side project or a contract.
-          </p>
-        </DialogDescription>
+        <h3 className="text-subhead_s font-medium mb-4">Create Project</h3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <section className="flex gap-8">
-              <div className="w-[200px]">
-                <MediaUploader
-                  onFileSelected={selectFile}
-                  width={50}
-                  height={50}
-                />
-              </div>
               <div className="flex flex-col gap-4 flex-grow">
                 <FormField
                   control={form.control}
@@ -169,33 +164,109 @@ export default function CreateProject() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="type"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Type</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a type" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="hackathon">Hackathon</SelectItem>
-                          <SelectItem value="side_project">
-                            Side Project
-                          </SelectItem>
-                          <SelectItem value="contract">Contract</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="type"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Type</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Object.values(ProjectType).map((type) => (
+                              <SelectItem key={type} value={type}>
+                                {type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="category"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Category</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Object.values(ProjectCategory).map((type) => (
+                              <SelectItem key={type} value={type}>
+                                {type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="flex flex-col gap-2 w-full">
+                  <div className="flex justify-between">
+                    <Label>Period</Label>
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                      onCheckedChange={() => {
+                        setPresent(!present);
+                      }}
+                      />
+                      <Label>Present</Label>
+
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row gap-2 items-center w-full">
+                    <FormField
+                      control={form.control}
+                      name="begin_date"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <Input
+                            type="date"
+                            placeholder="Select a type"
+                            {...field}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <span>~</span>
+                    <FormField
+                      control={form.control}
+                      name="end_date"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <Input
+                            type="date"
+                            placeholder="Select a type"
+                            {...field}
+                            disabled={present}
+                          />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -217,40 +288,20 @@ export default function CreateProject() {
               )}
             />
 
-            <div>
-              {fields.map((field, index) => (
-                <FormField
-                  control={form.control}
-                  key={field.id}
-                  name={`urls.${index}.value`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className={cn(index !== 0 && "sr-only")}>
-                        Links
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ))}
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="mt-2"
-                onClick={() => append({ value: "https://" })}
-              >
-                Add URL
-              </Button>
+            <div className="w-[200px] mx-auto">
+              <MediaUploader
+                onFileSelected={selectFile}
+                width={50}
+                height={50}
+              />
             </div>
 
-            <div className="flex items-center justify-end gap-8">
-              <Button type="button" variant="secondary">
-                Cancel
-              </Button>
+            <div className="flex items-center justify-center gap-8">
+            <DialogClose asChild>
+                <Button variant="secondary">
+                  Close
+                </Button>
+              </DialogClose>
               <Button
                 type="submit"
                 disabled={loading || !form.formState.isValid}

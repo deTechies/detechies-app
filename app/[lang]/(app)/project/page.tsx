@@ -1,8 +1,19 @@
-
 import Search from "@/components/extra/search";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { getProjects } from "@/lib/data/project";
+import { ProjectType, PrivacyType } from "@/lib/interfaces";
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
+import { Button } from "@/components/ui/button";
 
 export interface ProjectItemProps {
   id: string;
@@ -11,39 +22,89 @@ export interface ProjectItemProps {
   description: string;
   status: string;
   location: string;
-  introduction:string;
-  type:string;
+  introduction: string;
+  category: string;
+  type: string;
   works: any[];
   creator: string;
   members: string[];
 }
 
-export default async function ProjectListPage() {
-
-
-  
+export default async function ProjectListPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const projects = await getProjects();
-  
-/*   const filteredData = search 
-    ? data?.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())) 
-    : data; */
+
+  console.log(projects);
+
+  const searchItem = searchParams.search as string;
+  let filteredData = searchParams.search
+    ? projects?.filter((item: any) =>
+        item.name.toLowerCase().includes(searchItem.toLowerCase())
+      )
+    : projects;
 
   return (
-    <main className="flex flex-col gap-8 w-full max-w-6xl p-8 mx-auto">
-      <div className="my-12 flex gap-3 justify-between">
-        <Search placeholder="search" />
-        <CreateProject />
-      </div>
+    <main className="flex flex-col gap-6 w-full my-4 p-4 mx-auto">
+      <Card className="flex gap-5 justify-between pt-7 px-8 pb-8">
+        <h1 className="text-subhead_s">Projects</h1>
+        <div className="flex justify-between sm:flex-row flex-col">
+          <div className="flex gap-5 items-center sm:flex-row flex-col">
+            <Select>
+              <SelectTrigger className="w-[180px] px-3 py-3.5">
+                <SelectValue placeholder="All projects" />
+              </SelectTrigger>
 
-      <section className="grid md:grid-cols-2  gap-4">
-        {projects.length > 0 ? (
-          projects.map((item: ProjectItemProps) => (
-            <ProjectItem key={item.id} details={item } />
+              <SelectContent>
+                {Object.values(ProjectType).map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select>
+              <SelectTrigger className="w-[180px] px-3 py-3.5">
+                <SelectValue placeholder="Public" />
+              </SelectTrigger>
+
+              <SelectContent>
+                {Object.values(PrivacyType).map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Search placeholder="search" />
+            <div className="flex items-center gap-3">
+              <Checkbox />
+              <Label className="text-title_m">My Projects</Label>
+            </div>
+          </div>
+          <CreateProject />
+        </div>
+      </Card>
+
+      <section className="w-full grid md:grid-cols-2 gap-4">
+        {filteredData.length > 0 ? (
+          filteredData.map((item: ProjectItemProps) => (
+            <ProjectItem key={item.id} details={item} />
           ))
         ) : (
           <div>No projects found</div>
         )}
       </section>
+
+      {filteredData.length > 0 && (
+        <Button size="lg" variant="secondary">
+          View More
+        </Button>
+      )}
     </main>
   );
 }

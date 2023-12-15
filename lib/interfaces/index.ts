@@ -1,9 +1,12 @@
+
 export interface User {
     id: string;
     email: string;
     wallet: string;
     credits: number;
     display_name: string;
+    nft: string[];
+    avatar: string;
     verified: boolean;
     login_method: 'metamask'|'web3auth'
   }
@@ -13,6 +16,7 @@ export interface User {
     full_name: string;
     country: string;
     description: string;
+
     app_settings: UserSettings;
   }
   
@@ -57,7 +61,38 @@ export enum ClubType {
     COMMUNITY = 'community',
     OTHER = 'other'
   }
+  
+  export enum ProjectType {
+    CLIENT = 'client',
+    INTERNAL = 'internal',
+    SIDE = 'side',
+    HACKATHON = 'hackathon',
+    OTHER = 'other'
+  }
+  
+  export enum PrivacyType {
+    ALL = 'all',
+    PROJECT = 'project',
+    GROUP = 'group'
+  }
 
+  export enum ContributionType {
+    DEVELOPMENT = 'development',
+    DESIGN = 'design',
+    PRODUCT = 'product',
+    MANAGEMENT = 'management',
+    MARKETING = 'marketing',
+    OTHER = 'other'
+    
+  }
+
+  export enum ProjectCategory {
+    WEB = 'web',
+    MOBILE = 'mobile',
+    DESIGN = 'design',
+    GAME = 'game',
+    OTHER = 'other'
+  }
   
   export interface Member {
     id: string;
@@ -105,24 +140,48 @@ export enum ClubType {
     description: string;
     image: string;
     creator?: string;
-    type: string;
-    urls: string[];
+    type: ProjectType;
+    begin_date: string;
+    end_date?: string
+    category: ProjectCategory;
     
   }
   export interface Project extends CreateProject {
     id: string;
     onchain_id: string
-    members: User[]
+    isCreator: boolean;
+    isMember?: boolean;
+    userRole: 'admin' | 'member' | 'client' | 'none';
+    urls?: string[];
+    members: ProjectMember[]
     files: File[]
     achievements: Achievement[]
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
   }
   
+  export interface ProjectMember {
+    id: string;
+    user: User;
+    role: string;
+    joined_at: Date;
+    verified: boolean;
+    works: ProjectWork[] | string[]
+  }
   
   export interface JoinProject{
     projectId: string;
     userId?: string;
     message?:string
     role?: string;
+  }
+  
+  export interface ProjectWork {
+    id: string;
+    name: string;
+    percentage: number;
+    begin_date: string;
+    end_date?: string;
+    description: string;
+    created_at: Date;
   }

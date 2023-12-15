@@ -1,32 +1,25 @@
-import GithubSignIn from "@/components/connections/github/github-signin";
 import UploadWorks from "@/components/modal/upload-works";
-import JoinProject from "@/components/project/join-project";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Project } from "@/lib/interfaces";
 import Links from "./links";
-import { ProjectDetailProps } from "./page";
 
-
-export default async function ProjectInfo({ info }: { info: ProjectDetailProps }) {
-
+export default async function ProjectInfo({
+  info,
+}: {
+  info: Project;
+}) {
   return (
     <Card>
+      <CardHeader className="flex justify-between items-center">
+      <h3>Links</h3>
+      {
+        (info.userRole === 'member' || info.userRole === 'admin') && (
+          <UploadWorks />
+        )
+      }
+      </CardHeader>
       <CardContent className="flex flex-col gap-8">
-        <div>
-          {info.urls && <Links links={info.urls} /> }
-        </div>
-       
-       
-          {
-            info.isMember ? (
-              <section className="flex flex-col gap-4">
-
-              <GithubSignIn />
-              <UploadWorks />
-
-          </section>
-            ) : <JoinProject address={info.id} />
-          }
-         
+        {info.urls && <Links links={info.urls} />}
       </CardContent>
     </Card>
   );

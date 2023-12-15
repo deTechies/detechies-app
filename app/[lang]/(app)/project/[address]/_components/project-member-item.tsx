@@ -1,68 +1,78 @@
-import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
-import { getUserProfile } from "@/lib/data/user";
+import { auth } from "@/lib/helpers/authOptions";
+import { User } from "@/lib/interfaces";
+import ProjectContribution from "./project-contribution";
+import ProjectWorkDetail, { BlurredProjectWorkDetail } from "./project-work-detail";
 
 interface MemberDetails {
   memberId: string;
   created_at: string;
   level: number;
   verified: boolean;
+  user: User;
   role: string;
+  works: any[];
   joined: string;
 }
 
 export default async function ProjectMemberItem({
   details,
-  userAddress,
+  access,
+  projectId,
 }: {
   details: MemberDetails;
-  userAddress: string;
+  projectId: string;
+  access: boolean;
 }) {
-  const data = await getUserProfile(userAddress);
+  const session = await auth();
 
-  if (!data)
-    return (
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <IPFSImageLayer hashes={[]} />
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Unknown</p>
-          <p className="text-sm text-muted-foreground">Unknown</p>
-        </div>
-        <div className="ml-auto font-medium">
-          <Badge variant={"info"}>Member</Badge>
-        </div>
-      </div>
-    );
-
+  
   return (
     <Card className="flex flex-row flex-start gap-5">
-      <div className="relative bg-background-layer-2 h-24 w-24 rounded-[6px]">
+      <figure className="relative bg-background-layer-2 h-20 aspect-square rounded-[6px]">
         <IPFSImageLayer
-          hashes={data?.nft ? data.nft : defaultAvatar}
+          hashes={details?.user?.nft ? details.user?.nft : defaultAvatar}
           className="rounded-sm"
         />
-      </div>
-      <div className="flex flex-col gap-2 flex-grow">
-        <header className="flex gap-2 items-center">
-            <h5 className="font-medium leading-none">{data?.display_name} | {details.role}</h5>
-            <Badge variant={"info"}>Rewards</Badge>
+      </figure>
+      <div className="flex flex-col gap-2 grow">
+        <header className="flex gap-4 items-center">
+          <h5 className="text-title_m">
+            {details.user?.display_name} | {details.role}
+          </h5>
+          <Badge>Rewards</Badge>
         </header>
-        <p className="text-sm text-muted-foreground">Joined at {details?.created_at}</p>
-
+        <section>
+          {access && details?.works &&
+            details.works.map((work) => (
+              <ProjectWorkDetail data={work} key={work.id} />
+            ))}
+            
+            {
+              !access && details?.works &&
+              details.works.map((work) => (
+                <BlurredProjectWorkDetail key={work.id} />
+              ))
+            }
+        </section>
       </div>
+      
       <div className="flex flex-col gap-4 flex-end">
-        <Button variant="default" size="sm">
+        {session?.web3.address == details.user.wallet ? (
+          <>
+            <ProjectContribution projectId={projectId} />
+            <Badge variant="secondary">
+              <span className="text-sm">Request</span>
+            </Badge>
+          </>
+        ) : (
+          <Badge>
             <span className="text-sm">Review</span>
-        </Button>
-        <Button variant="secondary" size="sm">
-            <span className="text-sm">Request</span>
-        </Button>
+          </Badge>
+        )}
       </div>
     </Card>
   );

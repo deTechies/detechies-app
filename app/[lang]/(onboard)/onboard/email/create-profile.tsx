@@ -18,8 +18,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
-import { revalidatePath } from "next/cache";
-import Link from "next/link";
+
+import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -57,13 +58,21 @@ export default function CreateProfile({ text }: { text: any }) {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const { refresh } = useRouter();
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
     const session = await getSession();
     console.log(session);
-    if (session === null)
-      return window.alert("You must be logged in to verify your email");
+
+    if (!session) {
+      toast({
+        title: "Error",
+        description: "Please login to your account account. ",
+        variant: "destructive",
+      });
+      return;
+    }
 
     const credentials = {
       email: data.email,
@@ -71,34 +80,32 @@ export default function CreateProfile({ text }: { text: any }) {
       wallet: session.web3.address,
     };
 
-
-    await fetch(`${API_URL}/users`, {
+    const response = await fetch(`${API_URL}/users`, {
       body: JSON.stringify(credentials),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${session.web3.accessToken}`,
       },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      toast({
+        title: "Error",
+        description: errorData.message,
+        variant: "destructive",
+      });
+      setIsLoading(false)
+      return;
+    }
+    
+    toast({
+        title: "Succesfully created the account",
+        description: "Please check your email for the verification link",
     })
-      .then((result) => {
-        console.log(result);
-        toast({
-          title: "Email verification sent",
-          description:
-            "We have send you an email with the instructions to verify your account. Please follow the instructions.",
-        });
 
-        //handle and submit this to update the user session
-      })
-      .catch((err) =>
-        toast({
-          title: "Error",
-          description: "Error sending verification email",
-          variant: "destructive",
-        })
-      );
-
-    revalidatePath("/onboard/email");
+    refresh();
     setIsLoading(false);
   }
 
@@ -108,10 +115,8 @@ export default function CreateProfile({ text }: { text: any }) {
         onSubmit={form.handleSubmit(sendVerification)}
         className="space-y-8 my-8"
       >
-        <h1 className="text-4xl font-bold mb-6 text-primary">{text.title}</h1>
-        <h4 className="text-text-secondary font-light tracking-wider">
-          {text.body}
-        </h4>
+        <h1 className="text-heading_s mb-6 text-primary">{text.title}</h1>
+        <h4 className="text-text-secondary text-body_s">{text.body}</h4>
 
         <FormField
           control={form.control}
@@ -142,30 +147,22 @@ export default function CreateProfile({ text }: { text: any }) {
             </FormItem>
           )}
         />
+        <section className="flex flex-col">
         <FormField
           control={form.control}
           name="terms_of_service"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+            <FormItem className="flex flex-row items-center  space-x-3 space-y-0 py-3 border-b border-border-div ">
               <FormControl>
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />
               </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>{text.accordion.terms_of_services}</FormLabel>
-                <FormDescription>
-                  Click for more details about the{" "}
-                  <Link
-                    href="https://careerzen.org/terms-of-service"
-                    className="text-accent-primary"
-                  >
-                    Terms of Service
-                  </Link>
-                  .
-                </FormDescription>
+              <div className="space-y-1 leading-none w-full">
+                <FormLabel className="text-title_m">{text.accordion.terms_of_services}</FormLabel>
               </div>
+              <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
             </FormItem>
           )}
         />
@@ -173,26 +170,18 @@ export default function CreateProfile({ text }: { text: any }) {
           control={form.control}
           name="privacy_policy"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+            <FormItem className="flex flex-row items-center space-x-3 py-3 space-y-0 border-b border-border-div">
               <FormControl>
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
+                  className="my-auto"
                 />
               </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>{text.accordion.privacy_policy}</FormLabel>
-                <FormDescription>
-                  Click for more details about the{" "}
-                  <Link
-                    href="https://careerzen.org/privacy-policy"
-                    className="text-accent-primary"
-                  >
-                    Privacy Policy
-                  </Link>
-                  .
-                </FormDescription>
+              <div className="space-y-1 leading-none w-full">
+                <FormLabel className="text-title_m flex-stretch">{text.accordion.privacy_policy}</FormLabel>
               </div>
+              <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
             </FormItem>
           )}
         />
@@ -200,29 +189,24 @@ export default function CreateProfile({ text }: { text: any }) {
           control={form.control}
           name="email_policy"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+            <FormItem className="flex flex-row items-center space-x-3 space-y-0 py-3 border-b border-border-div">
               <FormControl>
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
+                  className="my-auto"
                 />
               </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>{text.accordion.reward_notification}</FormLabel>
-                <FormDescription>
-                  Click for more details about the{" "}
-                  <Link
-                    className="text-accent-primary"
-                    href="https://careerzen.org/terms-of-service"
-                  >
-                    Notification Service
-                  </Link>
-                  .
-                </FormDescription>
+              <div className="space-y-1 leading-none flex-stretch w-full">
+                <FormLabel className="text-title_m">{text.accordion.reward_notification}</FormLabel>
               </div>
+              <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
+              
             </FormItem>
           )}
         />
+        </section>
+       
 
         <div className="flex items-center gap-8 w-full">
           <Button type="button" variant="secondary" className="w-full">

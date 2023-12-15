@@ -40,5 +40,14 @@
         }
         
       }
+    },
+    "project": {
+      "details": {
+        "join_project": {
+          "title": "Join Project",
+          "body": "Join this project to start working on it.",
+          "button": "Join Project"
+        }
+      }
     }
 }

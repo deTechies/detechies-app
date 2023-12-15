@@ -6,12 +6,15 @@ import { redirect } from "next/navigation";
 import { API_URL } from "../constants";
 import { authOptions } from "../helpers/authOptions";
 
-const newURL = "http://localhost:4000";
+
 export async function getUserProfile(address?: string) {
   if (!address) {
     const session = (await getServerSession(authOptions)) as Session;
 
-    console.log(session);
+    
+    if(!session){
+      redirect("/onboard");
+    }
     const user = await fetch(`${API_URL}/users/${session?.web3.address}`, {
       method: "GET",
       headers: {
@@ -22,10 +25,10 @@ export async function getUserProfile(address?: string) {
     });
 
     const data = await user.json();
-    console.log(data);
 
     if (!user.ok) {
       // This will activate the closest `error.js` Error Boundary
+      redirect("/onboard");
       throw new Error("Failed to fetch data");
     }
 
@@ -58,7 +61,7 @@ export async function getUsers() {
 export async function sendVerifyEmail(code: string) {
   const session = (await getServerSession(authOptions)) as Session;
 
-  const res = await fetch(`${newURL}/users/verify?token=${code}`, {
+  const res = await fetch(`${API_URL}/users/verify?token=${code}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -67,11 +70,10 @@ export async function sendVerifyEmail(code: string) {
   });
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    return null;
   }
 
-  return res.json();
+  return true;
 }
 
 export async function getUserSession() {

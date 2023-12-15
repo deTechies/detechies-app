@@ -67,6 +67,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
             variant="secondary"
             className="z-10 text-sm py-2  mx-auto my-2"
             onClick={unfollowUser}
+            disabled
           >
             Following
           </Button>

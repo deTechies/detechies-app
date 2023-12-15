@@ -1,8 +1,8 @@
 {
     "nav": {
       "dashboard": "계기반", 
-      "profiles": "옆모습",
-      "groups": "여러 떼",
+      "profiles": "프로필",
+      "groups": "그룹",
       "projects": "프로젝트"
     },
     "user": {
@@ -44,6 +44,15 @@
           "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
         }
         
+      }
+    },
+    "project": {
+      "details": {
+        "join_project": {
+          "title": "Join Project",
+          "body": "Join this project to start working on it.",
+          "button": "Join Project"
+        }
       }
     }
 }

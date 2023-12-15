@@ -36,10 +36,8 @@ declare module "next-auth" {
   }
 }
 
-//@ts-nocheck
 
-//@ts-ignore
 const handler = NextAuth(authOptions) as any;
-//@ts-ignore
+
 export { handler as GET, handler as POST };
 
