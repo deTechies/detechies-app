@@ -9,20 +9,8 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
 
-interface ProfileProps {
-  profile: any;
-  image: string;
-  isMember: boolean;
-}
-
 export default async function GroupProfileCard({ id }: { id: string }) {
-
-  
   const groupDetail = await getClub(id);
-
-
-
-
 
   return (
     <Card className="w-full sticky top-10">
@@ -67,8 +55,8 @@ export default async function GroupProfileCard({ id }: { id: string }) {
 
           <div className="grid gap-2 my-4 items-center">
             {
-              groupDetail.isMember ? (
-                <Link href={`/group/${groupDetail.address}/chat`} className="w-full text-center bg-button-secondary py-2 rounded-sm text-accent-primary">
+              groupDetail.userRole =='member' ? (
+                <Link href={`/groups/${groupDetail.address}/chat`} className="w-full text-center bg-button-secondary py-2 rounded-sm text-accent-primary">
                   Group Chat
                 </Link>
               ) : (
@@ -77,15 +65,15 @@ export default async function GroupProfileCard({ id }: { id: string }) {
             }
           </div>
           {
-            groupDetail.isOwner && (
+            groupDetail.userRole == 'admin' && (
               <div className="grid gap-2 my-4 items-center">
-                 <Link href={`/group/${groupDetail.address}`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
+                 <Link href={`/groups/${id}`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
                       Home
                   </Link>
-                  <Link href={`/group/${groupDetail.address}/achievements`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
+                  <Link href={`/groups/${id}/achievements`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
                       Manage Achievements
                   </Link>
-                  <Link href={`/group/${groupDetail.address}/members`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
+                  <Link href={`/groups/${id}/members`} className="w-full text-center bg-accent-secondary py-2 rounded-sm text-accent-primary">
                       Manage Members
                   </Link>
               </div>

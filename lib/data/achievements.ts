@@ -21,6 +21,7 @@ export async function getUserAchievements(address?:string) {
     return [];
   }
   
+  
   export async function getAllAchievements(){
     const res = await fetch(`${API_URL}/achievement/all`)
     if (!res.ok) {

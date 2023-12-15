@@ -14,12 +14,8 @@ export default function Navbar({ lang }: { lang: any }) {
 
   const links = [
     {
-      name: lang.profiles,
-      href: "/profiles",
-    },
-    {
-      name: lang.groups,
-      href: "/groups",
+      name: "Dashboard",
+      href: "/mypage",
     },
     {
       name: lang.projects,

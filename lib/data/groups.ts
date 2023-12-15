@@ -1,8 +1,7 @@
-
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
-import { authOptions } from "../helpers/authOptions";
+import { auth, authOptions } from "../helpers/authOptions";
 import { CreateClub } from "../interfaces";
 
 export async function getGroups(search?: string) {
@@ -16,19 +15,19 @@ export async function getGroups(search?: string) {
   return response.json();
 }
 
-export async function getClub(clubId:string){
-    const session = (await getServerSession(authOptions)) as any;
-    
-    if(!session?.web3?.accessToken){
-      throw new Error("Session not found or address missing in session");
-    }
-    const response = await fetch(`${API_URL}/clubs/${clubId}`, {
-        headers: {
-        Authorization: `Bearer ${session?.web3?.accessToken}`,
-        },
-    });
-    
-    return response.json();
+export async function getClub(clubId: string) {
+  const session = (await getServerSession(authOptions)) as any;
+
+  if (!session?.web3?.accessToken) {
+    throw new Error("Session not found or address missing in session");
+  }
+  const response = await fetch(`${API_URL}/clubs/${clubId}`, {
+    headers: {
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  return response.json();
 }
 
 //get the interface for the group
@@ -63,11 +62,14 @@ export async function createGroup(formData: CreateClub) {
 } */
 
 export async function getPendingMembers(address: string) {
-  const response = await fetch(
-    `${API_URL}/polybase/company/request?address=${address}&status=open`,
-    { next: { revalidate: 60 } }
-  );
-  const data = await response.json();
+  const session = await auth();
+  const response = await fetch(`${API_URL}/members/${address}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    next: { revalidate: 60 },
+  });
 
-  return data;
+  return response.json();
 }

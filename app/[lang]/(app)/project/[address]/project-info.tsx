@@ -3,23 +3,21 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Project } from "@/lib/interfaces";
 import Links from "./links";
 
-export default async function ProjectInfo({
-  info,
-}: {
-  info: Project;
-}) {
+export default async function ProjectInfo({ info }: { info: Project }) {
   return (
-    <Card>
+    <Card className="min-w-[300px]">
       <CardHeader className="flex justify-between items-center">
-      <h3>Links</h3>
-      {
-        (info.userRole === 'member' || info.userRole === 'admin') && (
+        <h3 className="text-subhead_s">Links</h3>
+        {(info.userRole === "member" || info.userRole === "admin") && (
           <UploadWorks />
-        )
-      }
+        )}
       </CardHeader>
-      <CardContent className="flex flex-col gap-8">
-        {info.urls && <Links links={info.urls} />}
+      <CardContent className="py-4">
+        {info.urls ? (
+          <Links links={info.urls} />
+        ) : (
+          <p className="text-label_m text-text-secondary text-center">작업 산출물 제출하기</p>
+        )}
       </CardContent>
     </Card>
   );

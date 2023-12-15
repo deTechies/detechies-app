@@ -10,7 +10,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getProjects } from "@/lib/data/project";
+
 import { ProjectType, PrivacyType } from "@/lib/interfaces";
+import { Suspense } from "react";
+
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
 import { Button } from "@/components/ui/button";
@@ -47,6 +50,7 @@ export default async function ProjectListPage({
     : projects;
 
   return (
+
     <main className="flex flex-col gap-6 w-full my-4 p-4 mx-auto">
       <Card className="flex gap-5 justify-between pt-7 px-8 pb-8">
         <h1 className="text-subhead_s">Projects</h1>
@@ -89,7 +93,7 @@ export default async function ProjectListPage({
           <CreateProject />
         </div>
       </Card>
-
+<Suspense fallback={<div>Loading...</div>}>
       <section className="w-full grid md:grid-cols-2 gap-4">
         {filteredData.length > 0 ? (
           filteredData.map((item: ProjectItemProps) => (
@@ -105,6 +109,7 @@ export default async function ProjectListPage({
           View More
         </Button>
       )}
+        </Suspense>
     </main>
   );
 }

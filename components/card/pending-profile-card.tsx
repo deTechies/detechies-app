@@ -3,10 +3,9 @@ import Link from "next/link";
 
 
 import { Check, Loader2, X } from "lucide-react";
-import { Address, useContractWrite, useWaitForTransaction } from "wagmi";
+import { Address, useContractWrite } from "wagmi";
 
-import { ABI } from "@/lib/constants";
-import TransactionData from "../screens/transaction-data";
+import { ABI, defaultAvatar } from "@/lib/constants";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
@@ -54,9 +53,6 @@ export default function PendingProfileCard({
 
     //await write();
   };
-  const { isLoading:makingTransaction, data:transactionData, isSuccess } = useWaitForTransaction({
-    hash: data?.hash,
-  })
   const rejectEmployee = async () => {
     if (!profile.id) {
       toast({
@@ -81,7 +77,7 @@ export default function PendingProfileCard({
         href={`/profiles/${profile?.profile?.id}`}
       >
         <div className="w-full aspect-square relative m-0 bg-accent-secondary rounded-t-sm">
-          <IPFSImageLayer hashes={profile.profile.nft} />
+          <IPFSImageLayer hashes={profile.nft? profile.nft : defaultAvatar} />
         </div>
       </Link>
       <div className="text-center">
@@ -90,7 +86,7 @@ export default function PendingProfileCard({
           href={`/profiles/${profile?.profile?.id}`}
           target="_blank"
         >
-          {profile.profile?.username}
+          {profile?.display_name}
         </Link>
       </div>
       <div className="flex gap-2 justify-evenly">
@@ -106,7 +102,6 @@ export default function PendingProfileCard({
           <X size={16} />
         </Button>
       </div>
-       <TransactionData hash={data?.hash}/>
     </section>
   );
 }

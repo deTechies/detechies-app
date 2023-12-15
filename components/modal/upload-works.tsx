@@ -112,12 +112,11 @@ export default function UploadWorks({ type }: { type?: string }) {
   return (
     <Dialog>
       <DialogTrigger className="">
-        <Badge variant="accent">Add Link</Badge>
+        <Badge variant="secondary" className="text-title_s">UPLOAD</Badge>
       </DialogTrigger>
 
       <DialogContent>
         <h3 className="text-subhead_m">Upload you work</h3>
-
         <section className="my-4 flex flex-col gap-3">
           <header className="flex justify-between  items-center">
             <h6 className="text-title_m">Files of works</h6>

@@ -1,10 +1,14 @@
+import { Badge } from "@/components/ui/badge";
 import { ProjectWork } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
+  
+  if (!data) return null;
   return (
-    <main className="flex gap-6 text-text-secondary my-2">
-      <div className="flex flex-col gap-2">
+    <>
+    <div className="justify-start items-start gap-4 inline-flex text-text-secondary flex-wrap">
+      <div className="flex-col justify-start items-start gap-2 inline-flex">
         <div className="divide-x">
           <span className="text-label_m capitalize pr-2">{data.name}</span>
           <span className="pl-2 text-label_m">{data.percentage} %</span>
@@ -13,11 +17,21 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
           {formatDate(data.begin_date)} ~ {" "}
           {data.end_date ? formatDate(data.end_date) : "Present"}
         </span>
+
       </div>
-      <div className="grow">
+      <div className="self-stretch grow shrink basis-0 ">
         <span className="text-label_m">{data.description}</span>
       </div>
-    </main>
+    </div>
+      <div className="justify-start items-start gap-2 inline-flex flex-wrap">
+          <Badge variant="ghost" >Dev Ops</Badge>
+          <Badge variant="ghost">Backend</Badge>
+          <Badge variant="ghost">Fullstack</Badge>
+          <Badge variant="ghost" >Dev Ops</Badge>
+          <Badge variant="ghost">Backend</Badge>
+          <Badge variant="ghost">Fullstack</Badge>
+        </div>
+    </>
   );
 }
 
@@ -33,6 +47,12 @@ export function BlurredProjectWorkDetail() {
         <span className="text-label_m blur">
           {formatDate(Date.now().toString())} ~ {formatDate(Date.now().toString())}
         </span>
+        
+        <div>
+          <Badge variant="secondary" className="blur">Dev Ops</Badge>
+          <Badge variant="secondary" className="blur">Backend</Badge>
+          <Badge variant="secondary" className="blur">Fullstack</Badge>
+        </div>
       </div>
       <div className="grow">
         <span className="text-label_m blur">

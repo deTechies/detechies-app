@@ -93,6 +93,12 @@ export enum ClubType {
     GAME = 'game',
     OTHER = 'other'
   }
+  export enum QuestionCategory {
+    TECHNICAL = 'technical',
+    OTHER = 'other',
+    COMMUNICATION = 'communication',
+    DELIVERY = 'delivery'
+  }
   
   export interface Member {
     id: string;
@@ -163,10 +169,11 @@ export enum ClubType {
   export interface ProjectMember {
     id: string;
     user: User;
+    percentage: number;
     role: string;
-    joined_at: Date;
+    project: Project;
     verified: boolean;
-    works: ProjectWork[] | string[]
+    works: ProjectWork[]
   }
   
   export interface JoinProject{
@@ -180,6 +187,7 @@ export enum ClubType {
     id: string;
     name: string;
     percentage: number;
+    tags: string[];
     begin_date: string;
     end_date?: string;
     description: string;
