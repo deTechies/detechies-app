@@ -48,6 +48,73 @@
           "body": "Join this project to start working on it.",
           "button": "Join Project"
         }
+      },
+      "member": {
+        "evaluate": {
+          "evaluate_performance": "Evaluation Performance", 
+          "evaluate_performance_description": "Please evaluate users role and performance in this project", 
+          "basic_information": "Basic Information",
+          "billable_hourly_wage":  "Billable Hourly Wage", 
+          "time_weekly": "Total hour (weekly)", 
+          "hourly_wage_team": "Enter hourly wage set for the team member.", 
+          "please_evaluate_users_role_and_performance_in_this_project":"Please evaluate users role and performance in this project.", 
+          "does_the_work_details_match_the_facts": "Does the work written by the user match the facts?", 
+          "more_than_20": "More than 20% of the information stated is different from the facts", 
+          "more_than_15": "More than 15% of the information stated is different from the facts", 
+          "more_than_10": "More than 10% of the information stated is different from the facts",
+          "more_than_5": "More than 5% of the information stated is different from the facts", 
+          "all_match": "Yes, they all match.",
+          "go_back": "Go Back",
+          "next": "Next",
+          "reject": "Reason of rejection"
+        }
+      }
+    },
+    "mypage": {
+      "profile": {
+        "following": "following", 
+        "followers": "followers", 
+        "token": "token", 
+        "avatar_settings": "avatar settings",
+        "name": "name"
+      },
+      "edit_profile": {
+        "edit_profile": "edit profile", 
+        "full_name": "full name", 
+        "first_name": "first name",
+        "last_name": "last name",
+        "profession": "profession", 
+        "specialisation": "specialisation", 
+        "profile_description": "profile description",
+        "username": "username", 
+        "save_changes": "save changes"
+      },
+      "project": {
+        "projects": "Projects", 
+        "new_project": "New project", 
+        "evaluation": "evaluation", 
+        "present": "present",
+        "view_project": "view project"
+        
+      },
+      "evaluations": {
+        "menu": {
+          "evaluation_requested": "Evaluation Requested", 
+          "evaluation_requests": "Evaluations Requests", 
+          "evaluation_wrote": "Evaluation Written"
+        }
+      },
+      "main": {
+        "profile": "profile", 
+        "edit": "edit", 
+        "description": "description"
+      },
+      "menu": {
+        "portfolio": "portfolio",
+        "edit_profile": "edit profile",
+        "evaluation_history": "evaluation history",
+        "reputation_history": "reputation history",
+        "career_avatar": "career avatar"
       }
     }
 }

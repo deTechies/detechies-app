@@ -7,6 +7,7 @@ import { Address, createPublicClient, http } from "viem";
 
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
 import ModalLayout from "./modal-layout";
@@ -16,7 +17,7 @@ export default function ProfileDetails({ showModal }: any) {
   const { toast } = useToast();
   const { disconnect } = useDisconnect();
   const [loading, setLoading] = useState(true);
-  //get all the chains configered from wagmi
+  const router = useRouter();
   const { chain, chains } = useNetwork();
   const [balances, setBalances] = useState<any>([]);
 
@@ -102,6 +103,7 @@ export default function ProfileDetails({ showModal }: any) {
             <Button onClick={() => {
               disconnect()
               signOut()
+              router.push('/onboard')
             }} variant="destructive">
               Sign out
             </Button>

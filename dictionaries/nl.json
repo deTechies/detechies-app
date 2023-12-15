@@ -49,5 +49,20 @@
           "button": "Join Project"
         }
       }
+    },
+    "mypage": {
+      "profile": {
+        "following": "volgend", 
+        "followers": "volgers", 
+        "token": "token", 
+        "avatar_settings": "avatar instellingen",
+        "name": "naam"
+      },
+      "menu": {
+        "profile": "Profile",
+        "projects": "Projects",
+        "groups": "Groups",
+        "settings": "Settings"
+      }
     }
 }

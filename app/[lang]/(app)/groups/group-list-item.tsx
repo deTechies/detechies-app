@@ -25,7 +25,7 @@ export default function GroupListItem({
   
 
   return (
-    <Link href={`/group/${details.id}`}>
+    <Link href={`/groups/${details.id}`}>
       <Card className="flex flex-row gap-4">
         <Avatar className="w-16 h-16 aspect-square">
           <AvatarImage

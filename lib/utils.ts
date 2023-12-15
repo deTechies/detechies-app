@@ -49,6 +49,10 @@ export function formatDate(stringDate: string):string {
   return `${day}.${month}.${year}`
 }
 
+export function beginEndDates(beginDate: string, endDate?: string):string {
+  return endDate ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}` : `${formatDate(beginDate)} - ongoing`
+}
+
 /* export function walletClientToSigner(walletClient: any) {
   const ethersWalletClient = {
     getAddress: async (): Promise<`0x${string}`> => {

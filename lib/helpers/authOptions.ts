@@ -12,12 +12,23 @@ import NextAuth, {
 } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
+import LinkedinProvider from "next-auth/providers/linkedin";
+import TwitterProvider from "next-auth/providers/twitter";
 
 export const authOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID ?? "",
       clientSecret: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET ?? "",
+    }),
+    LinkedinProvider({
+      clientId: process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID ?? "",
+      clientSecret: process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET ?? "",
+    }),
+    TwitterProvider({
+      clientId: process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID ?? "",
+      clientSecret: process.env.NEXT_PUBLIC_TWITTER_CLIENT_SECRET ?? "",
+      version: "2.0", // opt-in to Twitter OAuth 2.0
     }),
     CredentialsProvider({
       id: "web3",
@@ -77,6 +88,40 @@ export const authOptions = {
       ).toISOString();
 
       if (account) {
+        if (account.provider === "linkedin") {
+          const session = await getUserSession();
+
+          token.web3 = session;
+          
+          console.log(account, user, token);
+          token.linkedin = {
+            id: account.providerAccountId,
+            accessToken: account.access_token,
+            expires: expirationTime,
+          };
+        }
+        if (account.provider === "twitter") {
+          const session = await getUserSession();
+
+          token.web3 = session;
+          
+          console.log("twitter account")
+          console.log(account)
+          
+          console.log("twitter user") 
+          console.log(user)
+          
+          console.log("twitter token")
+          console.log(token)
+
+          
+          token.twitter = {
+            user: user, 
+            account: account,
+          }
+                 
+        }
+        
         if (account.provider === "github") {
           const session = await getUserSession();
 
@@ -103,8 +148,7 @@ export const authOptions = {
 
       if (trigger === "update") {
         token.web3 = session.web3;
-        
-        
+
         return { ...token, ...session.web3 };
       }
 
@@ -117,6 +161,10 @@ export const authOptions = {
       }
       if (token.web3) {
         session.web3 = token.web3;
+      }
+      
+      if(token.twitter){
+        session.twitter = token.twitter
       }
 
       return session;
