@@ -225,7 +225,7 @@ export default function ProjectEditForm({
             <div className="flex gap-3">
               <div className="w-[140px]">
                <Image 
-                src={file ? URL.createObjectURL(file) : `https://ipfs.io/ipfs/${defaultValues.image}`}
+                src={file ? URL.createObjectURL(file) : (defaultValues?.image ? `https://ipfs.io/ipfs/${defaultValues.image}` : "/images/placeholder.png")}
                 alt="placeholder"
                 width={140}
                 height={140}

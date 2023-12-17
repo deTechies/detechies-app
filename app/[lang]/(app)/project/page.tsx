@@ -11,27 +11,12 @@ import {
 } from "@/components/ui/select";
 import { getProjects } from "@/lib/data/project";
 
-import { ProjectType, PrivacyType } from "@/lib/interfaces";
+import { PrivacyType, Project, ProjectType } from "@/lib/interfaces";
 import { Suspense } from "react";
 
+import { Button } from "@/components/ui/button";
 import CreateProject from "./create-project";
 import ProjectItem from "./project-item";
-import { Button } from "@/components/ui/button";
-
-export interface ProjectItemProps {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  status: string;
-  location: string;
-  introduction: string;
-  category: string;
-  type: string;
-  works: any[];
-  creator: string;
-  members: string[];
-}
 
 export default async function ProjectListPage({
   searchParams,
@@ -96,7 +81,7 @@ export default async function ProjectListPage({
 <Suspense fallback={<div>Loading...</div>}>
       <section className="w-full grid md:grid-cols-2 gap-4">
         {filteredData.length > 0 ? (
-          filteredData.map((item: ProjectItemProps) => (
+          filteredData.map((item: Project) => (
             <ProjectItem key={item.id} details={item} />
           ))
         ) : (

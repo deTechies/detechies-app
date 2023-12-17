@@ -147,6 +147,7 @@ export enum ClubType {
     image: string;
     creator?: string;
     scope?: string;
+    type: string;
     tags?: string[];
     begin_date: string;
     end_date?: string
@@ -158,6 +159,7 @@ export enum ClubType {
     onchain_id: string
     isCreator: boolean;
     isMember?: boolean;
+    type: string;
     userRole: 'admin' | 'member' | 'client' | 'none';
     urls?: string[];
     members: ProjectMember[]

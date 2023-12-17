@@ -1,31 +1,16 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { updateProject } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function ProjectDetail({ details }: { details: Project }) {
-  const [editing, setEditing] = useState(false);
   const [data, setData] = useState<any>({
     content: details.description,
     name: details.name,
   });
   const [showFull, setShowFull] = useState(false);
-
-  const startSaving = async () => {
-    setEditing(false);
-    console.log(data);
-
-    if (data.content != details.description || data.name != details.name) {
-      //save the data.
-      const result = await updateProject(details.id, data.name, data.content);
-
-      console.log(result);
-    }
-  };
 
   return (
     <Card className="w-full p-8">
@@ -42,26 +27,12 @@ export default function ProjectDetail({ details }: { details: Project }) {
           alt="project_image_holder"
         />
         <div className="flex flex-col gap-2">
-          {editing ? (
-            <Input
-              type="text"
-              className="w-full py-1 text-2xl font-medium"
-              defaultValue={details.name}
-              onChange={(e) => {
-                setData((prev: any) => ({
-                  ...prev,
-                  name: e.target.value,
-                }));
-              }}
-            />
-          ) : (
-            <h1 className="text-heading_s mb-2">{data.name}</h1>
-          )}
+          <h1 className="text-heading_s mb-2">{data.name}</h1>
 
           <div className="flex gap-4 items-center text-label_l text-text-secondary ">
             <span className="text-label_l">{details?.category}</span>
             <span>|</span>
-            <span>{details.type}</span>
+            <span>{details.scope}</span>
           </div>
           <div className="flex gap-1 items-center text-label_l text-text-secondary">
             <span>{details?.begin_date}</span>
@@ -75,12 +46,12 @@ export default function ProjectDetail({ details }: { details: Project }) {
           <h3 className="text-subhead_l ">Project Description</h3>
         </div>
 
-          <div className={`overflow-hidden ${showFull ? "" : "max-h-[100px]"}`}>
-            <div
-              className="text-body_m"
-              dangerouslySetInnerHTML={{ __html: details.description }}
-            ></div>
-          </div>
+        <div className={`overflow-hidden ${showFull ? "" : "max-h-[100px]"}`}>
+          <div
+            className="text-body_m"
+            dangerouslySetInnerHTML={{ __html: details.description }}
+          ></div>
+        </div>
       </div>
 
       {details.description.length > 200 && (

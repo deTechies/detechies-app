@@ -29,11 +29,9 @@ export async function getSingleProject(id: string) {
   return result;
 }
 
-export async function updateProject(
-  data: any
-) {
+export async function updateProject(data: any) {
   const session = await getSession();
-  const response = await fetch(`${API_URL}/projects/${id}`, {
+  const response = await fetch(`${API_URL}/projects/${data.id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -85,8 +83,6 @@ export async function createProject(formData: CreateProject) {
 
   return response.json();
 }
-
-
 
 export async function getProjects() {
   //const session = (await getServerSession(authOptions)) as any;
@@ -234,8 +230,8 @@ export async function getProjectMember(projectId: string, userId: string) {
   url.searchParams.append("projectId", projectId);
   url.searchParams.append("userId", userId);
 
-  if(!session?.web3?.accessToken){
-    throw new Error("No access token found")
+  if (!session?.web3?.accessToken) {
+    throw new Error("No access token found");
   }
   const response = await fetch(url, {
     method: "GET",
