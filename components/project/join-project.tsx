@@ -23,6 +23,8 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import { Badge } from "../ui/badge";
 import { toast } from "../ui/use-toast";
+import { PlusIcon } from "lucide-react";
+
 
 const FormSchema = z.object({
   role: z.enum(["admin", "member", "client"], {
@@ -77,8 +79,12 @@ export default function JoinProject({ address }: JoinGroupProps) {
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge>
+        <Badge className="px-2.5 py-1.5 flex gap-1.5">
+          <span>
           Join
+          </span>
+
+          <PlusIcon className="w-3 h-3 text-text-secondary"></PlusIcon>
         </Badge>
       </DialogTrigger>
       <DialogContent>

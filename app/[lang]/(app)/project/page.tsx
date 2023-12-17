@@ -40,8 +40,6 @@ export default async function ProjectListPage({
 }) {
   const projects = await getProjects();
 
-  console.log(projects);
-
   const searchItem = searchParams.search as string;
   let filteredData = searchParams.search
     ? projects?.filter((item: any) =>

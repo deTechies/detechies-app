@@ -1,11 +1,11 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Project } from "@/lib/interfaces";
 import ProjectContributionForm, {
   ContributionFormData,
 } from "./project-contribution-form";
 import ProjectSwitcher from "./project-switcher";
+import { Button } from "@/components/ui/button";
 const newContribution = {
   valid: false,
 } as ContributionFormData;
@@ -19,7 +19,7 @@ export default function ProjectContribution({
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge variant={"accent"}>Add Work</Badge>
+        <Button variant={"primary"} size={"lg"} className={"px-6"}>Add Work</Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-8">
         <header className="flex flex-col gap-4">
@@ -36,7 +36,7 @@ export default function ProjectContribution({
         <section className="flex flex-col gap-4">
           <h4 className="text-subhead_s">Contribution</h4>
 
-          <ProjectContributionForm projectId={project.id} />
+          {project?.id && <ProjectContributionForm projectId={project.id} />}
         </section>
       </DialogContent>
     </Dialog>

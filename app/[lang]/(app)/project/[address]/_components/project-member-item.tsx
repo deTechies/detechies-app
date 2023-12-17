@@ -10,8 +10,6 @@ import ProjectWorkDetail, {
   BlurredProjectWorkDetail,
 } from "./project-work-detail";
 
-
-
 export default async function ProjectMemberItem({
   details,
   access,
@@ -24,7 +22,7 @@ export default async function ProjectMemberItem({
   const session = await auth();
 
   return (
-    <Card className="flex flex-row flex-start gap-5 p-8">
+    <Card className="flex flex-row flex-start gap-5 px-8 pb-8 pt-7">
       <div className="flex w-full gap-5 ">
         <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
           <IPFSImageLayer
@@ -32,31 +30,32 @@ export default async function ProjectMemberItem({
             className="rounded-sm"
           />
         </figure>
-        <div className="grow w-full basis-0 gap-2 justify-start items-start flex flex-wrap">
-          <div className="flex-col grow shrink gap-2 flex">
-            <header className="flex gap-4 items-center">
+
+        <div className="grow w-full basis-0 gap-4 justify-start items-center flex">
+          <div className="flex-col grow shrink gap-4 flex">
+            <header className="flex gap-3 items-center">
               <h5 className="text-title_m">
                 {details.user?.display_name} | {details.role}
               </h5>
+
               <Badge>Rewards</Badge>
             </header>
             <>
-              {access  ?
-                  <ProjectWorkDetail data={details.works[0]}  />
-
-                  :
-                  <BlurredProjectWorkDetail />
-              }
+              {access ? (
+                <ProjectWorkDetail data={details.works[0]} />
+              ) : (
+                <BlurredProjectWorkDetail />
+              )}
             </>
           </div>
+
           <div className="flex flex-col justify-start items-end gap-3 ">
             {session?.web3.address == details.user.wallet ? (
               <>
                 <ProjectContribution project={details.project} />
-                {
-                  details.works.length > 0 &&    <ProjectMemberEvaluate projectMember={details} />
-                }
-             
+                {details.works.length > 0 && (
+                  <ProjectMemberEvaluate projectMember={details} />
+                )}
               </>
             ) : (
               <Badge>
@@ -64,9 +63,7 @@ export default async function ProjectMemberItem({
               </Badge>
             )}
           </div>
-        
         </div>
-       
       </div>
     </Card>
   );

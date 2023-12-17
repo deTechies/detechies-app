@@ -23,8 +23,8 @@ export default async function ProjectMembers({
   }
 
   return (
-    <section className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-4 p-4 px-6">
+    <section className="flex flex-col gap-3">
+      <Card className="flex flex-col gap-4 pt-7 px-9 pb-9">
         <header className="flex items-center justify-between">
           <h5 className="text-subhead_s text-text-primary ">
             Members ({members.length})
