@@ -14,12 +14,20 @@ export default function Navbar({ lang }: { lang: any }) {
 
   const links = [
     {
-      name: "Dashboard",
-      href: "/mypage",
+      name: lang.find_expert,
+      href: "/profiles",
     },
     {
-      name: lang.projects,
+      name: lang.project,
       href: "/project",
+    },
+    {
+      name: lang.groups,
+      href: "/groups",
+    },
+    {
+      name: lang.my_profile,
+      href: "/mypage",
     },
   ];
 

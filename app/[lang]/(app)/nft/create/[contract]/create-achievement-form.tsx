@@ -19,7 +19,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import Loading from "@/components/loading";
-import TransactionData from "@/components/screens/transaction-data";
 import {
   Select,
   SelectContent,
@@ -344,8 +343,7 @@ export function CreateAchievementForm({contract}: {contract:Address}) {
       </form>
       
       <div>
-        <TransactionData hash={data?.hash} />
-    
+
       </div>
     </Form>
     

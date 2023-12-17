@@ -7,7 +7,6 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Address, useAccount, useContractWrite } from "wagmi";
 import NftListItem, { NFTItem } from "../card/nft-list-item";
-import TransactionData from "../screens/transaction-data";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 export default function DisplayNFT({details, showSelect}: {details:NFTItem , showSelect?: boolean}) {
@@ -123,7 +122,6 @@ export default function DisplayNFT({details, showSelect}: {details:NFTItem , sho
           <Button onClick={handleMint}>Request </Button>
         </div>
       </DialogContent>
-      <TransactionData hash={data?.hash} />
     </Dialog>
   );
 }

@@ -193,3 +193,20 @@ export enum ClubType {
     description: string;
     created_at: Date;
   }
+  
+export interface Question { 
+  id: string;
+  content: string;
+  category: string;
+  scale: number; 
+  messages?: string[];
+  created_at: Date;
+}
+
+export interface Survey {
+  id: string;
+  name: string;
+  description: string;
+  questions: Question[];
+  created_at: Date;
+}

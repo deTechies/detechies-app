@@ -73,6 +73,9 @@
     --state-info-primary: #2E94FF;
     --state-info-secondary: #E9F4FF;
     
+    --state-status-primary: #FFEB39;
+    --state-status-secondary: #FFFBDC;
+    
     
  
     --radius: 0.5rem;
@@ -143,6 +146,9 @@
     --state-warning-secondary: #361803;
     --state-info-primary: #0061C7;
     --state-info-secondary: #00162E;
+    
+    --state-status-primary: #FFEB39;
+    --state-status-secondary: #FFFBDC;
   }
   
   /* Hide scrollbar for Chrome, Safari and Opera */
