@@ -30,9 +30,7 @@ export async function getSingleProject(id: string) {
 }
 
 export async function updateProject(
-  id: string,
-  name: string,
-  description: string
+  data: any
 ) {
   const session = await getSession();
   const response = await fetch(`${API_URL}/projects/${id}`, {
@@ -41,11 +39,28 @@ export async function updateProject(
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-    body: JSON.stringify({ name: name, description: description }),
+    body: JSON.stringify({ ...data, owner: session?.web3?.address }),
   });
 
   if (!response.ok) {
     throw new Error("Failed to update project");
+  }
+
+  return response.json();
+}
+
+export async function deleteProject(id: string) {
+  const session = await getSession();
+  const response = await fetch(`${API_URL}/projects/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete project");
   }
 
   return response.json();
@@ -70,6 +85,8 @@ export async function createProject(formData: CreateProject) {
 
   return response.json();
 }
+
+
 
 export async function getProjects() {
   //const session = (await getServerSession(authOptions)) as any;

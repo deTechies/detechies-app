@@ -13,7 +13,7 @@ const buttonVariants = cva(
         primary: "text-accent-primary bg-accent-secondary ",
         default: "bg-accent-secondary text-accent-primary hover:bg-gray-200",
         destructive:
-          "bg-state-error-secondary text-state-error hover:bg-destructive/20",
+          "bg-state-error text-[#FFFFFF] hover:bg-destructive/20",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
@@ -24,7 +24,7 @@ const buttonVariants = cva(
       size: {
         default: "px-6 py-4 rounded-full",
         sm: "text-title_s rounded-md px-3 py-2",
-        lg: "h-[3.25rem] rounded-full px-8 text-title_m",
+        lg: "py-[15.5px] rounded-full px-[78px] text-title_m",
         icon: "h-10 w-10",
       },
     },

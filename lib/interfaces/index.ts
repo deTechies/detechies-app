@@ -146,7 +146,8 @@ export enum ClubType {
     description: string;
     image: string;
     creator?: string;
-    type: ProjectType;
+    scope?: string;
+    tags?: string[];
     begin_date: string;
     end_date?: string
     category: ProjectCategory;
