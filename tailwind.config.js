@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const {fontFamily} = require("tailwindcss/defaultTheme");
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -22,18 +25,14 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        "light-accent-secondary": "var(--light-accent-secondary)",
-        "light-border-input": "var(--light-border-input)",
-        "light-text-secondary": "var(--light-text-secondary)",
-        "light-text-primary": "var(--light-text-primary)",
-        "light-btn-secondary": "#EFF0F2",
+        accent: {
+          primary: "hsl(var(--accent-primary))",
+          secondary: "hsl(var(--accent-secondary))",
+          onPrimary: "hsl(var(--accent-on-primary))",
+          onSecondary: "hsl(var(--accent-on-secondary))",
+        },
         "accent-primary": "var(--accent-primary)",
         "accent-secondary": "var(--accent-secondary)",
-        "accent-on-primary": "var(--accent-on-primary)",
-        "accent-on-secondary": "var(--accent-on-secondary)",
-        greywhite: "#FFFFFF",
-        textg: "#6B7684",
-        textb: "#101113",
         text: {
           primary: "var(--text-primary)",
           secondary: "var(--text-secondary)",
@@ -71,10 +70,7 @@ module.exports = {
         },
         black: {
           DEFAULT: "#101113",
-          normal: "#101113",
           800: "#101113",
-          medium: "#F6F7F8",
-          light: "#EFF0F2",
           700: "#6B7684",
           400: "#EFF0F2",
           300: "rgba(150, 166, 180, 1)",
@@ -83,40 +79,10 @@ module.exports = {
         },
         green: {
           DEFAULT: "#19C900",
-          medium: "#19C900",
           300: "#DEFFD9",
           400: "#DBFDF0",
           500: "#00D41D",
           800: "rgba(15, 219, 139, 1)",
-          light: "#DEFFD9",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent-secondary))",
-          foreground: "hsl(var(--accent-primary))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
         },
       },
       borderRadius: {
@@ -137,9 +103,6 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
-      },
-      backgroundImage: {
-        "footer-texture": "url('/public/onboard-bg.png')",
       },
       boxShadow: {
         custom: "2px 2px 10px 0px rgba(0, 0, 0, 0.05)",
@@ -226,6 +189,9 @@ module.exports = {
           { fontWeight: "400" },
           { letterSpacing: "0.4px" },
         ],
+      },
+      fontFamily: {
+        sans: ["var(--font-pretendard)", "sans-serif"],
       },
     },
   },

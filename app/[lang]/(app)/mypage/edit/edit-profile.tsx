@@ -30,7 +30,6 @@ const profileFormSchema = z.object({
     })
     .optional(),
   profession: z.string().optional(),
-  specialisation: z.string().optional(),
   description: z.string().optional(),
   skills: z.array(z.string()).optional(),
 });
@@ -102,8 +101,8 @@ export default function EditProfile({text, username, currentValues}: EditProfile
             </section>
             <section className="my-2">
               <div className="flex flex-col gap-10">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
+
+                  <div className="w-full">
                     <Label className="">{text?.full_name}</Label>
                     <div className="flex gap-2 items-center mt-2">
                       <FormField
@@ -130,12 +129,8 @@ export default function EditProfile({text, username, currentValues}: EditProfile
                       />
                     </div>
                   </div>
-                  <div className="">
-                    <Label className="mb-2">{text?.username}</Label>
-                    <Input placeholder={username} value={username} disabled className="mt-2"/>
-                   
-                  </div>
-                </div>
+               
+
                 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -153,18 +148,9 @@ export default function EditProfile({text, username, currentValues}: EditProfile
                       />
                   </div>
                   <div className="">
-                    <Label className="">{text?.specialisation}</Label>
-                      <FormField
-                        control={form.control}
-                        name="specialisation"
-                        render={({ field }) => (
-                          <FormItem className="mt-2">
-                            <FormControl>
-                              <Input placeholder={text?.specialisation} {...field} />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
+                    <Label className="mb-2">{text?.username}</Label>
+                    <Input placeholder={username} value={username} disabled className="mt-2"/>
+                   
                   </div>
                 </div>
               </div>

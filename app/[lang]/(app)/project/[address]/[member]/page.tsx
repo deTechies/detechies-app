@@ -29,7 +29,7 @@ export default async function ProjectMemberEvaluation({
             text={dictionary.project.member.evaluate}
             projectId={params.address}
             userId={params.member}
-            verified={details.works[0].work_verified.match != "80"}
+            verified={true}
           />
         </div>
       </section>
