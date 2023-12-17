@@ -1,12 +1,13 @@
 "use client";
+import PercentageSliderField from "@/components/form/percentage-helper";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -22,15 +23,19 @@ interface BasicEvaluationInfoProps {
   text: any;
   projectId: string;
   userId: string;
+  verified: boolean;
 }
 
 const baseInfoSchema = z.object({
-  match: z.enum(["100", "80", "85", "90", "95"], {
+  match: z.enum(["100", "80"], {
     required_error: "You need to select a matching performance.",
   }),
   weekly_hours: z.string().optional(),
   billable_hourly_wage: z.string().optional(),
   reject_letter: z.string().optional(),
+  work_contribution: z.array(z.number().min(0).max(100)),
+  meet_requirements: z.array(z.number().min(0).max(100)),
+  meet_schedule: z.array(z.number().min(0).max(100)),
 });
 
 type verifyWorkValues = z.infer<typeof baseInfoSchema>;
@@ -42,6 +47,7 @@ export default function BasicEvaluationInfo({
   text,
   projectId,
   userId,
+  verified,
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
     resolver: zodResolver(baseInfoSchema),
@@ -52,22 +58,23 @@ export default function BasicEvaluationInfo({
 
   async function onSubmit(data: verifyWorkValues) {
     //TODO: build the data object to send to the backend
-    
-    const result = await submitVerifyWork(data, projectId, userId)
-    
-    if(data.match == "80") {
-        toast({
-            title: "You submitted the following values:",
-            description: (
-              <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                <code className="text-white">{JSON.stringify(result, null, 2)}</code>
-              </pre>
-            ),
-          });
-          router.push(`/project/${projectId}`);
-    }
-    else {
-        router.push(`/project/${projectId}/${userId}/evaluate-team-member`);
+
+    const result = await submitVerifyWork(data, projectId, userId);
+
+    if (data.match == "80") {
+      toast({
+        title: "You submitted the following values:",
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
+              {JSON.stringify(result, null, 2)}
+            </code>
+          </pre>
+        ),
+      });
+      router.push(`/project/${projectId}`);
+    } else {
+      router.push(`/project/${projectId}/${userId}/evaluate-team-member`);
     }
     toast({
       title: "You submitted the following values:",
@@ -146,30 +153,6 @@ export default function BasicEvaluationInfo({
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
-                            <RadioGroupItem value="85" />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            {text.more_than_15}
-                          </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="90" />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            {text.more_than_10}
-                          </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="95" />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            {text.more_than_5}
-                          </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
                             <RadioGroupItem value="100" />
                           </FormControl>
                           <FormLabel className="font-normal lowercase">
@@ -182,8 +165,8 @@ export default function BasicEvaluationInfo({
                 )}
               />
             </section>
-            {form.watch("match") == "80" && (
-              <section className="flex flex-col gap-4">
+            {form.watch("match") == "80" ? (
+              <section className="flex flex-col gap-7">
                 <FormField
                   control={form.control}
                   name="reject_letter"
@@ -200,14 +183,51 @@ export default function BasicEvaluationInfo({
                   )}
                 />
               </section>
+            ) : (
+              <section className="space-y-7">
+                <PercentageSliderField
+                  name="meet_requirements"
+                  form={form}
+                  steps={5}
+                  label={text.meet_requirements.label}
+                  messages={text.meet_requirements.messages}
+                />
+                <PercentageSliderField
+                  name="work_contribution"
+                  form={form}
+                  steps={5}
+                  label={text.meet_requirements.label}
+                />
+                <PercentageSliderField
+                  name="meet_schedule"
+                  form={form}
+                  steps={5}
+                  label={text.meet_requirements.label}
+                />
+              </section>
             )}
             <section className="flex justify-between">
-              <Button variant="secondary" size="lg">
+              <Button variant="secondary" size="lg" type="button">
                 {text.go_back}
               </Button>
-              <Button variant="primary" size="lg" type="submit">
-                {text.next}
-              </Button>
+              {verified ? (
+                <Button
+                  variant="primary"
+                  size="lg"
+                  type="button"
+                  onClick={() => {
+                    router.push(
+                      `/project/${projectId}/${userId}/evaluate-team-member`
+                    );
+                  }}
+                >
+                  {text.next}
+                </Button>
+              ) : (
+                <Button variant="primary" size="lg" type="submit">
+                  Save
+                </Button>
+              )}
             </section>
           </Card>
         </form>

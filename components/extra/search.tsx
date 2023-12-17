@@ -21,8 +21,10 @@ export default function Search({ placeholder }: { placeholder: string }) {
     <div className="relative rounded-sm flex-grow">
       <Input
         value={text}
+        type="Search"
         placeholder={placeholder}
         onChange={(e) => setText(e.target.value)}
+        className="px-4 py-3.5"
       />
     </div>
   );
