@@ -70,6 +70,12 @@ export enum ClubType {
     OTHER = 'other'
   }
   
+  export enum PrivacyType {
+    ALL = 'all',
+    PROJECT = 'project',
+    GROUP = 'group'
+  }
+
   export enum ContributionType {
     DEVELOPMENT = 'development',
     DESIGN = 'design',
