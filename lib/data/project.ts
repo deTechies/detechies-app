@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
 import { auth, authOptions } from "../helpers/authOptions";
-import { CreateProject, JoinProject } from "../interfaces";
+import { JoinProject } from "../interfaces";
 
 export async function getSingleProject(id: string) {
   //getting profile session
@@ -29,19 +29,15 @@ export async function getSingleProject(id: string) {
   return result;
 }
 
-export async function updateProject(
-  id: string,
-  name: string,
-  description: string
-) {
+export async function updateProject(data: any) {
   const session = await getSession();
-  const response = await fetch(`${API_URL}/projects/${id}`, {
+  const response = await fetch(`${API_URL}/projects/${data.id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-    body: JSON.stringify({ name: name, description: description }),
+    body: JSON.stringify({ ...data, owner: session?.web3?.address }),
   });
 
   if (!response.ok) {
@@ -51,7 +47,24 @@ export async function updateProject(
   return response.json();
 }
 
-export async function createProject(formData: CreateProject) {
+export async function deleteProject(id: string) {
+  const session = await getSession();
+  const response = await fetch(`${API_URL}/projects/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete project");
+  }
+
+  return response.json();
+}
+
+export async function createProject(formData: any) {
   const session = await getSession();
   const response = await fetch(`${API_URL}/projects`, {
     method: "POST",
@@ -217,8 +230,8 @@ export async function getProjectMember(projectId: string, userId: string) {
   url.searchParams.append("projectId", projectId);
   url.searchParams.append("userId", userId);
 
-  if(!session?.web3?.accessToken){
-    throw new Error("No access token found")
+  if (!session?.web3?.accessToken) {
+    throw new Error("No access token found");
   }
   const response = await fetch(url, {
     method: "GET",

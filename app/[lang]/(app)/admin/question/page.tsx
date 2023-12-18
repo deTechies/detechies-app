@@ -10,7 +10,7 @@ export default async function Questions() {
   const questions = await getQuestions();
 
   return (
-    <Card className="m-8">
+    <Card className="">
       <CardHeader>
         <h3>Questions</h3>
         <CreateQuestion />

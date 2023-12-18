@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Address, useContractWrite } from "wagmi";
-import TransactionData from "../screens/transaction-data";
+
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 
@@ -168,7 +168,7 @@ export default function PendingNFT({ details }: any) {
           >Confirm</Button>
         </div>
       </DialogContent>
-      <TransactionData hash={data?.hash} />
+
     </Dialog>
   );
 }

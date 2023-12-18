@@ -1,11 +1,9 @@
 import { getSurveys } from "@/lib/data/feedback";
+import ListSurveys from "./list-surveys";
 
 export default async function Survey() {
     const surveys = await getSurveys();
   return (
-
-    <pre>
-        {JSON.stringify(surveys, null, 2)}
-    </pre>
+      <ListSurveys  survey={surveys}/>
   )
 }

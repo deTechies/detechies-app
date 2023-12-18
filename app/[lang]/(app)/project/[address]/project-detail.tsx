@@ -2,8 +2,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { updateProject } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
@@ -16,24 +14,11 @@ export default function ProjectDetail({
   details: Project;
   userRole: string;
 }) {
-  const [editing, setEditing] = useState(false);
   const [data, setData] = useState<any>({
     content: details.description,
     name: details.name,
   });
   const [showFull, setShowFull] = useState(false);
-
-  const startSaving = async () => {
-    setEditing(false);
-    console.log(data);
-
-    if (data.content != details.description || data.name != details.name) {
-      //save the data.
-      const result = await updateProject(details.id, data.name, data.content);
-
-      console.log(result);
-    }
-  };
 
   return (
     <Card className="w-full pt-8 px-8 gap-8 pb-5">
@@ -49,36 +34,14 @@ export default function ProjectDetail({
           className="rounded-[6px] bg-accent-secondary max-h-[100px]"
           alt="project_image_holder"
         />
-        <div className="flex flex-col gap-4 grow">
-          <div className="flex justify-between gap-3">
-            {editing ? (
-              <Input
-                type="text"
-                className="w-full py-1 text-2xl font-medium"
-                defaultValue={details.name}
-                onChange={(e) => {
-                  setData((prev: any) => ({
-                    ...prev,
-                    name: e.target.value,
-                  }));
-                }}
-              />
-            ) : (
-              <h1 className="text-heading_s">{data.name}</h1>
-            )}
+        <div className="flex flex-col gap-2">
+          <h1 className="text-heading_s mb-2">{data.name}</h1>
 
-            {/* {userRole == "admin" && (
-              <Button
-                size={"sm"}
-                variant={"secondary"}
-                className={"h-8 px-2.5 py-1.5"}
-                onClick={() => {
-                  setEditing(!editing);
-                }}
-              >
-                Edit
-              </Button>
-            )} */}
+          <div className="flex gap-4 items-center text-label_l text-text-secondary ">
+            <span className="text-label_l">{details?.category}</span>
+            <span>|</span>
+            <span>{details.scope}</span>
+
           </div>
 
           <div className="flex flex-col gap-2">

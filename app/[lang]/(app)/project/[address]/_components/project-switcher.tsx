@@ -38,7 +38,7 @@ const ProjectDisplay = ({project}:{project:Project}) => {
 
         <section className="flex flex-col gap-2">
           <span className="text-label_m text-text-secondary">
-            {project.type} | {project.category}
+            {project.scope} | {project.category}
           </span>
 
           <span className="text-label_m text-text-secondary">
