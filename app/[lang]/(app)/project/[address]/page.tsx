@@ -11,6 +11,7 @@ export default async function ProjectDetailPage({
 }: {
   params: { address: string };
 }) {
+
   //get the params for checking the profile details page.
   /*   const { data, loading, error } = useFetchData<any>(
     `/project/single/${address}`
@@ -35,8 +36,11 @@ export default async function ProjectDetailPage({
 
   return (
     <main className="flex md:flex-row flex-col my-12 mx-5 gap-7">
-      <section className="flex flex-col grow gap-8">
-        <ProjectDetail details={data} />
+      <section className="flex flex-col grow gap-5">
+        <ProjectDetail 
+          details={data} 
+          userRole={data.userRole}
+        />
         <ProjectMembers
           members={data.members}
           userRole={data.userRole}

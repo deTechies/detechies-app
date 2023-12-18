@@ -70,24 +70,25 @@ export default function ProjectContributionForm({
   const currentPercentage = form.watch("percentage", [0]);
 
   const [loading, setLoading] = useState(false);
-  
-  const handleKeyDown = (e : any) => {
+
+  const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
       e.preventDefault(); // Prevent form submit
-  
+
       const newTag = e.currentTarget.value.trim(); // Get the current value of the input
       const currentTags = form.watch("tags");
-  
+
       if (Array.isArray(currentTags)) {
-        form.setValue("tags", [...currentTags, newTag], { shouldValidate: true });
+        form.setValue("tags", [...currentTags, newTag], {
+          shouldValidate: true,
+        });
       } else {
         form.setValue("tags", [newTag], { shouldValidate: true });
       }
-  
+
       e.currentTarget.value = ""; // Clear the input field
     }
   };
-  
 
   const onSubmit = async (values: ContributionFormData) => {
     console.log(values);
@@ -101,101 +102,101 @@ export default function ProjectContributionForm({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="spaxe-y-8 "
-      >
-        <main className="border p-3 rounded-sm space-y-8">
-        <section className="flex flex-col gap-4">
-          <div className="grid grid-cols-1 gap-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a type" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Object.values(ContributionType).map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {type}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex flex-col gap-3 w-full">
-            <div className="flex justify-between">
-              <Label>Period</Label>
-              <div className="flex items-center gap-3">
-                <Checkbox
-                  onCheckedChange={(e: boolean) => {
-                    form.setValue("present", e.valueOf());
-                  }}
+      <form onSubmit={form.handleSubmit(onSubmit)} className="spaxe-y-8 ">
+        <main className="border p-5 rounded-sm space-y-8 mb-6">
+          <section className="flex flex-col gap-5">
+            <div className="grid grid-cols-1 gap-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>내가 담당한 역할</FormLabel>
+
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Object.values(ContributionType).map((type) => (
+                          <SelectItem key={type} value={type}>
+                            {type}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex flex-col gap-3 w-full">
+              <div className="flex justify-between">
+                <Label>내 업무 기간</Label>
+                <div className="flex items-center gap-1">
+                  <Checkbox
+                    onCheckedChange={(e: boolean) => {
+                      form.setValue("present", e.valueOf());
+                    }}
+                  />
+                  <Label>진행중</Label>
+                </div>
+              </div>
+
+              <div className="flex flex-row gap-2 items-center w-full">
+                <FormField
+                  control={form.control}
+                  name="begin_date"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <Input
+                        type="date"
+                        placeholder="Select a type"
+                        {...field}
+                      />
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-                <Label>Present</Label>
+                <span>~</span>
+                <FormField
+                  control={form.control}
+                  name="end_date"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <Input
+                        type="date"
+                        placeholder="Select a type"
+                        {...field}
+                        disabled={form.watch("present", false)}
+                      />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </div>
 
-            <div className="flex flex-row gap-2 items-center w-full">
-              <FormField
-                control={form.control}
-                name="begin_date"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <Input type="date" placeholder="Select a type" {...field} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <span>~</span>
-              <FormField
-                control={form.control}
-                name="end_date"
-                render={({ field }) => (
-                  <FormItem className="w-full">
+            <Controller
+              name="tags"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>상세 업무 종류</FormLabel>
+                  <FormControl>
                     <Input
-                      type="date"
-                      placeholder="Select a type"
+                      placeholder="프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)"
                       {...field}
-                      disabled={form.watch("present", false)}
+                      onKeyDown={handleKeyDown}
                     />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <Controller
-            name="tags"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Tags</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Type and press enter"
-                    {...field}
-                    onKeyDown={handleKeyDown}
-                  />
-                </FormControl>
-                <div>
-                  {/*                       {form.watch("tags").map((tag, index) => (
+                  </FormControl>
+                  <div>
+                    {/*                       {form.watch("tags").map((tag, index) => (
                         <span
                           key={index}
                           className="bg-gray-100 px-2 py-1 rounded-full text-xs mr-2"
@@ -203,73 +204,77 @@ export default function ProjectContributionForm({
                           {tag}
                         </span>
                       ))} */}
-                </div>
-              </FormItem>
-            )}
-          />
-        </section>
+                  </div>
+                </FormItem>
+              )}
+            />
 
-        <section>
-          <FormField
-            control={form.control}
-            name="percentage"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Contribution Percentage</FormLabel>
-                <div className="flex w-full justify-between text-xs text-text-secondary">
-                  <span>0</span>
-                  <span className="content-center w-full text-right">50</span>
-                  <span className="content-right text-right w-full">100</span>
-                </div>
-                <FormControl>
-                  <Slider {...field} step={10} onValueChange={field.onChange} />
-                </FormControl>
-                <FormDescription className="flex">
-                  <FormMessage className="w-full" />
-                  <span className="content-right text-right w-full">
-                    {currentPercentage[0]} of 100
-                  </span>
-                </FormDescription>
-              </FormItem>
-            )}
-          />
-        </section>
+            <FormField
+              control={form.control}
+              name="percentage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>업무 기여도</FormLabel>
+                  <div className="flex w-full justify-between text-xs text-text-secondary">
+                    <span>0</span>
+                    <span className="content-center w-full text-right">50</span>
+                    <span className="content-right text-right w-full">100</span>
+                  </div>
+                  <FormControl>
+                    <Slider
+                      {...field}
+                      step={10}
+                      onValueChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormDescription className="flex">
+                    <FormMessage className="w-full" />
+                    {/* <span className="content-right text-right w-full">
+                      {currentPercentage[0]} of 100
+                    </span> */}
+                  </FormDescription>
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Work Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Tell more about your project"
-                  className="resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription className="flex">
-                <FormMessage className="w-full" />
-                <span className="content-right text-right w-full">
-                  {messageValue.length} / 500
-                </span>
-              </FormDescription>
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>업무 내용</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Tell more about your project"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormDescription className="flex">
+                    <FormMessage className="w-full" />
+                    <span className="content-right text-right w-full">
+                      {messageValue.length} / 5000
+                    </span>
+                  </FormDescription>
+                </FormItem>
+              )}
+            />
+          </section>
         </main>
 
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center justify-center gap-2">
           <DialogClose asChild>
-            <Button variant={"secondary"}>Cancel</Button>
+            <Button variant={"secondary"} className="grow max-w-[212px]">나중에 할게요</Button>
           </DialogClose>
           <Button
             type="submit"
             disabled={loading || !form.formState.isValid}
             loading={loading}
             variant="default"
+            className="grow max-w-[212px]"
           >
-            Save Contribution
+            등록하기
           </Button>
         </div>
       </form>

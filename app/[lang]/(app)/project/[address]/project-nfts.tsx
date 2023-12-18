@@ -16,12 +16,12 @@ export default function ProjectNfts({
 
 
   return (
-    <Card className="flex flex-col gap-2">
+    <Card className="flex flex-col gap-7 pb-9">
       <CardHeader className="flex items-center justify-between">
         <h5 className="text-subhead_s">Achievements</h5>
         {isCreator && <RequestNFTModal />}
       </CardHeader>
-      <CardContent className="my-3">
+      <CardContent>
         {
           data && data?.length > 0 ?  data?.map((nft, i) =>( 
             <Avatar key={i}>
