@@ -38,7 +38,7 @@ export interface User {
   export interface CreateClub {
     name: string;
     image: string;
-    type: ClubType;
+    type: GROUP_TYPE;
     description: string;
     urls: string[];
     owner_email? : string;
@@ -54,12 +54,11 @@ export interface User {
     updated_at?: Date;
   }
   
-export enum ClubType {
-    AUTHORITY = 'authority',
-    EDUCATION = 'education',
-    COMPANY = 'company', 
+export enum GROUP_TYPE {
     COMMUNITY = 'community',
-    OTHER = 'other'
+    COMPANY = 'company',
+    AGENCY = 'agency',
+    EDUCATION = 'education',
   }
   
   export enum ProjectType {

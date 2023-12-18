@@ -84,6 +84,38 @@ const FormItem = React.forwardRef<
 })
 FormItem.displayName = "FormItem"
 
+const FormInlineItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const id = React.useId()
+
+  return (
+    <FormItemContext.Provider value={{ id }}>
+      <div ref={ref} className={cn("space-x-2", className, 'flex items-center ')} {...props} />
+    </FormItemContext.Provider>
+  )
+})
+FormInlineItem.displayName = "FormInlineItem"
+
+const FormInlineLabel = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+>(({ className, ...props }, ref) => {
+  const { error, formItemId } = useFormField()
+
+  return (
+    <Label
+      ref={ref}
+      className={cn(error && "text-destructive", className, 'min-w-[165px]')}
+      htmlFor={formItemId}
+      {...props}
+    />
+  )
+})
+FormInlineLabel.displayName = "FormInlineLabel"
+
+
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
@@ -166,7 +198,7 @@ FormMessage.displayName = "FormMessage"
 
 export {
   Form, FormControl,
-  FormDescription, FormField, FormItem,
+  FormDescription, FormField, FormInlineItem, FormInlineLabel, FormItem,
   FormLabel, FormMessage, useFormField
 }
 

@@ -9,6 +9,8 @@ import {
   Form,
   FormControl,
   FormField,
+  FormInlineItem,
+  FormInlineLabel,
   FormItem,
   FormLabel,
   FormMessage,
@@ -16,14 +18,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
+import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { ClubType } from "@/lib/interfaces";
-
 import { createGroup } from "@/lib/data/groups";
+import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useState } from "react";
 
@@ -36,14 +37,13 @@ const profileFormSchema = z.object({
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
-  type: z.nativeEnum(ClubType),
+  type: z.nativeEnum(GROUP_TYPE),
   description: z.string().max(4000).min(4),
-  urls: z
-    .array(
-      z.object({
-        value: z.string().url({ message: "Please enter a valid URL." }),
-      })
-    )
+  urls: z.array(
+    z.object({
+      value: z.string().url({ message: "Please enter a valid URL." }),
+    })
+  ),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -61,7 +61,8 @@ export function GroupForm() {
     mode: "onChange",
   });
 
-  const [file, setFile] = useState<File | null>(null);
+  const [icon, setIcon] = useState<File | null>(null);
+  const [cover, setCover] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const { fields, append } = useFieldArray({
@@ -71,7 +72,7 @@ export function GroupForm() {
 
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
-    const image = await uploadContent(file);
+    const image = await uploadContent(icon);
     console.log(image);
     toast({
       title: "You submitted the following values:",
@@ -84,7 +85,7 @@ export function GroupForm() {
       ),
     });
 
-    if (!file) {
+    if (!icon) {
       toast({
         title: "Error",
         description: "Make sure your have valid image file",
@@ -114,8 +115,11 @@ export function GroupForm() {
     setIsLoading(false);
   }
 
-  const selectFile = (file: File | null, base64: string |null) => {
-    setFile(file);
+  const selectIcon = (file: File | null, base64: string | null) => {
+    setIcon(file);
+  };
+  const selectCover = (file: File | null, base64: string | null) => {
+    setCover(file);
   };
 
   return (
@@ -124,103 +128,127 @@ export function GroupForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 flex justify-center flex-col "
       >
-        <section className="flex flex-col gap-8 space-y-8">
-          <div className="w-[200px]">
-            <MediaUploader onFileSelected={selectFile} width={50} height={50} />
-          </div>
-          <div className="flex flex-col space-y-8 ">
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type</FormLabel>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-row space-x-1"
-                  >
-                    {Object.values(ClubType).map((type) => (
-                      <FormItem
-                        key={type}
-                        className="flex items-center space-x-3 space-y-0"
-                      >
-                        <FormControl>
-                          <RadioGroupItem value={type} />
-                        </FormControl>
-                        <FormLabel className="font-normal capitalize">
-                          {type}
-                        </FormLabel>
-                      </FormItem>
-                    ))}
-                  </RadioGroup>
+        <div className="flex flex-col space-y-8 ">
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormInlineItem>
+                <FormInlineLabel>Type</FormInlineLabel>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-row space-x-1 flex-wrap"
+                >
+                  {Object.values(GROUP_TYPE).map((type) => (
+                    <FormItem
+                      key={type}
+                      className="flex items-center space-x-3 space-y-0 flex-wrap"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value={type} />
+                      </FormControl>
+                      <FormLabel className="font-normal capitalize">
+                        {type}
+                      </FormLabel>
+                    </FormItem>
+                  ))}
+                </RadioGroup>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormMessage />
+              </FormInlineItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Club Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Club Description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Tell us a little bit about your group here"
-                      className="resize-none"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        </section>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormInlineItem>
+                <FormInlineLabel>Name</FormInlineLabel>
+                <FormControl>
+                  <Input placeholder="Enter your name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormInlineItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormInlineItem>
+                <FormInlineLabel className="items-start">
+                  Description
+                </FormInlineLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell us a little bit about your group here"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormInlineItem>
+            )}
+          />
 
-        <div>
+          <FormInlineItem>
+            <FormInlineLabel className="justify-start">Image</FormInlineLabel>
+            <MediaUploader
+              key="icon"
+              onFileSelected={selectIcon}
+              width={50}
+              height={50}
+            />
+          </FormInlineItem>
+
+          <FormInlineItem>
+            <FormInlineLabel className="items-start">
+              Cover Image
+            </FormInlineLabel>
+            <MediaUploader
+              key="cover"
+              onFileSelected={selectCover}
+              width={256}
+              height={192}
+            />
+          </FormInlineItem>
+        </div>
+
+        <div className="flex flex-col gap-2">
           {fields.map((field, index) => (
             <FormField
               control={form.control}
               key={field.id}
               name={`urls.${index}.value`}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={cn(index !== 0 && "sr-only")}>
-                    Social Profiles
-                  </FormLabel>
+                <FormInlineItem>
+                  <FormInlineLabel className={cn(index !== 0 && "sr-only")}>
+                    Links
+                  </FormInlineLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
                   <FormMessage />
-                </FormItem>
+                </FormInlineItem>
+               
               )}
             />
+            
           ))}
+          <div className="justify-right items-end align-end">
           <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="mt-2"
-            onClick={() => append({ value: "" })}
-          >
-            Add URL
-          </Button>
+                 type="button"
+                 variant="outline"
+                 size="sm"
+                 className="mt-2 justify-end text-right"
+                 onClick={() => append({ value: "" })}
+               >
+                 Add URL
+               </Button>
+          </div>
+
         </div>
 
         <div className="flex items-center justify-end gap-8">
