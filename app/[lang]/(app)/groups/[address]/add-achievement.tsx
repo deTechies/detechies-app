@@ -83,7 +83,7 @@ export default function AddAchievement() {
     ],
   });
 
-  const selectFile = (file: File) => {
+  const selectFile = (file: File | null) => {
     setFile(file);
   };
 

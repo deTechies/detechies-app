@@ -114,7 +114,7 @@ export function GroupForm() {
     setIsLoading(false);
   }
 
-  const selectFile = (file: File, base64: string) => {
+  const selectFile = (file: File | null, base64: string |null) => {
     setFile(file);
   };
 

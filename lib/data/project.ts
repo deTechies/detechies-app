@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
 import { auth, authOptions } from "../helpers/authOptions";
-import { CreateProject, JoinProject } from "../interfaces";
+import { JoinProject } from "../interfaces";
 
 export async function getSingleProject(id: string) {
   //getting profile session
@@ -64,7 +64,7 @@ export async function deleteProject(id: string) {
   return response.json();
 }
 
-export async function createProject(formData: CreateProject) {
+export async function createProject(formData: any) {
   const session = await getSession();
   const response = await fetch(`${API_URL}/projects`, {
     method: "POST",
