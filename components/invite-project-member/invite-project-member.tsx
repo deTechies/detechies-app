@@ -53,18 +53,25 @@ export default function InviteProjectMember({
         </Badge>
       </DialogTrigger>
 
-      <DialogContent>
-        <h5 className="text-subhead_m">Invite member</h5>
-        <p className="text-body_m">
-          At the same time as inviting team members, managers, and clients who
+      <DialogContent className="gap-6">
+        <div className="flex flex-col gap-4">
+          <h5 className="text-subhead_m">멤버 초대하고 평가받기</h5>
+
+          <p className="text-body_m">
+            {/* At the same time as inviting team members, managers, and clients who
           worked on the project together, a request for evaluation of my
-          performance is also sent.
-        </p>
-        <section className="flex flex-col gap-4">
-          {!byEmail && selected == null &&  (
+          performance is also sent. */}
+            프로젝트를 함께 진행했던 팀원, 관리자, 클라이언트를 초대하는 것과
+            동시에, 내 성과에 대한 평가요청도 전송돼요.
+          </p>
+        </div>
+
+        <section className="flex flex-col gap-6">
+          {!byEmail && selected == null && (
             <>
-              <Search placeholder="Search for members" />
-              <div className="rounded-sm max-h-[30vh] overflow-x-auto my-4">
+              <Search placeholder="user1234@gmail.com" />
+
+              <div className="rounded-sm max-h-[30vh] overflow-x-auto">
                 {members &&
                   members.map((member: User, index: number) => (
                     <PersonItem
@@ -76,24 +83,26 @@ export default function InviteProjectMember({
                     />
                   ))}
               </div>
+
               <button
                 onClick={() => setByEmail(true)}
                 className="flex gap-2 text-center mx-auto"
               >
-                <span>I can not find my nickname.</span>
-                <span className="text-accent-primary">Invite by email</span>
+                <span>닉네임을 찾을 수 없어요.</span>
+                <span className="text-accent-primary">이메일로 초대하기</span>
               </button>
-              <div className="flex justify-center gap-4 mt-4">
+
+              <div className="flex justify-center gap-4">
                 <DialogClose asChild>
-                  <Button variant={"secondary"}>Cancel</Button>
+                  <Button variant={"secondary"} size={"lg"} className="max-w-[212px] grow">나중에 할게요</Button>
                 </DialogClose>
               </div>
             </>
           )}
           {selected && (
             <SelectedProjectMember
-            projectId={projectId}
-                          user={selected}
+              projectId={projectId}
+              user={selected}
               onSelectValue={() => setSelected(null)}
             />
           )}

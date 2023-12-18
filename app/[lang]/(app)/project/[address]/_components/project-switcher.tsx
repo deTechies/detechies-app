@@ -48,7 +48,7 @@ const ProjectDisplay = ({project}:{project:Project}) => {
       </div>
 
       <Badge variant="info">
-        그룹 프로젝트
+        그룹 멤버
       </Badge>
     </div>
   );
