@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Project } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 import { FolderArchiveIcon } from "lucide-react";
@@ -19,9 +20,11 @@ export default function ProjectSwitcher({ project }: ProjectSwitcherProps) {
 }
 
 const ProjectDisplay = ({project}:{project:Project}) => {
+  console.log(project);
+
   return (
-    <div className="bg-background-layer-1 border border-border-div rounded-sm p-4 flex gap-6 items-center">
-      <figure className="flex bg-background-layer-2 w-24 h-24 rounded-sm items-center justify-center">
+    <div className="bg-background-layer-1 border border-border-div rounded-md p-5 flex gap-6 items-start">
+      <figure className="flex bg-background-layer-2 w-[100px] h-[100px] rounded-sm items-center justify-center">
         {
           project?.image
             ? <Image src={`https://ipfs.io/ipfs/`+project.image} alt={project.name} width={54} height={54} />
@@ -29,17 +32,24 @@ const ProjectDisplay = ({project}:{project:Project}) => {
         }
         
       </figure>
-      <div className="flex flex-col gap-4">
+
+      <div className="flex flex-col gap-4 grow">
         <h5 className="text-title_m">{project.name}</h5>
+
         <section className="flex flex-col gap-2">
           <span className="text-label_m text-text-secondary">
             {project.type} | {project.category}
           </span>
+
           <span className="text-label_m text-text-secondary">
             {formatDate(project.begin_date) } ~ {project.end_date ? formatDate(project.end_date) : "present"}
           </span>
         </section>
       </div>
+
+      <Badge variant="info">
+        그룹 프로젝트
+      </Badge>
     </div>
   );
 };
