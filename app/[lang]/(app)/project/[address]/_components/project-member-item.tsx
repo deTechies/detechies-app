@@ -38,7 +38,7 @@ export default async function ProjectMemberItem({
                 {details.user?.display_name} | {details.role}
               </h5>
 
-              <Badge>Rewards</Badge>
+              <Badge>성과 미등록</Badge>
             </header>
             <>
               {access ? (
@@ -49,10 +49,12 @@ export default async function ProjectMemberItem({
             </>
           </div>
 
-          <div className="flex flex-col justify-start items-end gap-3 ">
+          <div className="flex flex-col justify-start items-end gap-3 h-full">
             {session?.web3.address == details.user.wallet ? (
               <>
-                <ProjectContribution project={details.project} />
+                {details.works.length < 1 && (
+                  <ProjectContribution project={details.project} />
+                )}
                 {details.works.length > 0 && (
                   <ProjectMemberEvaluate projectMember={details} />
                 )}

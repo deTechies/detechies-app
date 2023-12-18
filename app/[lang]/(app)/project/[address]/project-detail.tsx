@@ -35,6 +35,8 @@ export default function ProjectDetail({
     }
   };
 
+  console.log(details);
+
   return (
     <Card className="w-full pt-8 px-8 gap-8 pb-5">
       <header className="flex gap-9 items-start ">
@@ -81,6 +83,7 @@ export default function ProjectDetail({
             )} */}
           </div>
 
+          {/* category */}
           <div className="flex flex-col gap-2">
             <div className="flex gap-4 items-center text-label_l text-text-secondary ">
               <span className="text-label_l">{details?.category}</span>

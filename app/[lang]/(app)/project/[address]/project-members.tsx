@@ -27,13 +27,15 @@ export default async function ProjectMembers({
       <Card className="flex flex-col gap-4 pt-7 px-9 pb-9">
         <header className="flex items-center justify-between">
           <h5 className="text-subhead_s text-text-primary ">
-            Members ({members.length})
+            프로젝트 멤버 ({members.length})
           </h5>
-          {pendingMembers.length > 0 && (
+
+          {/* {pendingMembers.length > 0 && (
             <span className="text-xs text-text-secondary">
               <PendingMemberList pendingMembers={pendingMembers} />
             </span>
-          )}
+          )} */}
+
           {userRole == 'none' && <JoinProject address={projectId} />}
           {userRole == 'admin' && <InviteProjectMember projectId={projectId} />}
         </header>
