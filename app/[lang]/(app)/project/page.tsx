@@ -14,27 +14,12 @@ import { getProjects } from "@/lib/data/project";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
-import { ProjectType, PrivacyType } from "@/lib/interfaces";
-import { Suspense, useEffect } from "react";
+import { ProjectType, Project, PrivacyType } from "@/lib/interfaces";
+import { Suspense } from "react";
 
-import CreateProject from "./create-project";
-import ProjectItem from "./project-item";
 import { Button } from "@/components/ui/button";
-
-export interface ProjectItemProps {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  status: string;
-  location: string;
-  introduction: string;
-  category: string;
-  type: string;
-  works: any[];
-  creator: string;
-  members: string[];
-}
+import Link from "next/link";
+import ProjectItem from "./project-item";
 
 export default async function ProjectListPage({
   searchParams,
@@ -100,14 +85,18 @@ export default async function ProjectListPage({
               </Label>
             </div>
           </div>
-          <CreateProject />
+          <Link href="/project/create" role="link"
+            className="px-3 py-2 bg-accent-secondary text-accent-primary rounded-md text-title_m "
+          >
+            Create Project
+          </Link>
         </div>
       </Card>
 
       <Suspense fallback={<div>Loading...</div>}>
         <section className="w-full grid md:grid-cols-2 gap-4">
           {filteredData.length > 0 ? (
-            filteredData.map((item: ProjectItemProps) => (
+            filteredData.map((item: Project) => (
               <ProjectItem key={item.id} details={item} />
             ))
           ) : (

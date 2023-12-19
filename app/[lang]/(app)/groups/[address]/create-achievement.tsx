@@ -15,7 +15,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import MediaUploader from "@/components/extra/media-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
@@ -235,9 +234,8 @@ export function CreateAchievement() {
 
         <div className="w-[200px]">
             <Label>Achievement Image</Label>
-            <MediaUploader onFileSelected={selectFile} width={50} height={50} />
-        </div>
 
+        </div>
         <div className="flex items-center justify-end gap-8">
           <Button type="button" variant="secondary" onClick={() => {form.reset()}}>
             Cancel

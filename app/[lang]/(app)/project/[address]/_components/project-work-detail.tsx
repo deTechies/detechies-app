@@ -12,7 +12,6 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
             <span className="text-label_m capitalize pr-2">{data.name}</span>
             <span className="pl-2 text-label_m">{data.percentage} %</span>
           </div>
-
           <span className="text-label_m">
             {formatDate(data.begin_date)} ~{" "}
             {data.end_date ? formatDate(data.end_date) : "Present"}

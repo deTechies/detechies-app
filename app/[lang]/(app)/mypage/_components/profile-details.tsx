@@ -28,7 +28,7 @@ export default async function ProfileDetails({
         <Connections github={profile?.github} address={profile?.id}/>
 
         {profile?.profile_details.description && (
-          <section className="border border-border-div rounded-sm flex flex-col px-4 py-3 gap-3">
+          <section className="border border-border-div rounded-sm flex flex-col p-4 gap-4">
             <h5 className="text-title_m capitalize">{text?.description}</h5>
             <p className="text-body_m">{profile?.profile_details.description}</p>
           </section>

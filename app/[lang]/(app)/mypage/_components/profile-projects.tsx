@@ -7,7 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectWorkDetail from "../../project/[address]/_components/project-work-detail";
 
-export default function ProfileProjects({ projects, text }: { projects: any, text:any }) {
+export default function ProfileProjects({
+  projects,
+  text,
+}: {
+  projects: any;
+  text: any;
+}) {
   //get all the projects the user the user is part of
 
   return (
@@ -15,7 +21,7 @@ export default function ProfileProjects({ projects, text }: { projects: any, tex
       <Card className="flex flex-row justify-between items-center">
         <h5 className="text-subhead_s">{text?.projects}</h5>
         <Button size="sm" variant="secondary">
-          {text?.new_project} {" "}
+          {text?.new_project}{" "}
           <PlusIcon size="16" className="text-text-secondary ml-2" />
         </Button>
       </Card>
@@ -23,7 +29,7 @@ export default function ProfileProjects({ projects, text }: { projects: any, tex
       {projects &&
         projects.map((project: any) => {
           return (
-            <Card key={project.id} className="flex flex-row">
+            <Card key={project.id} className="inline-flex flex-row my-2">
               <div className="w-[68px] h-[68px] relative aspect-square rounded-sm">
                 <Image
                   src={`https://ipfs.io/ipfs/${project.project.image}`}
@@ -32,7 +38,7 @@ export default function ProfileProjects({ projects, text }: { projects: any, tex
                   className="rounded-sm"
                 />
               </div>
-              <div className="grow">
+              <div className="flex flex-col gap-4 grow shrink flex-wrap">
                 <header className="flex gap-2 items-center">
                   <h5 className="text-subhead_s">{project.project.name}</h5>
                   <span className="text-text-secondary text-label_m ">
@@ -44,13 +50,12 @@ export default function ProfileProjects({ projects, text }: { projects: any, tex
                   </span>
                 </header>
                 <div>
-                  {project.works &&
-                    project.works.map((work: any) => {
-                      return <ProjectWorkDetail data={work} key={work.id} />;
-                    })}
+                  {project.works && (
+                    <ProjectWorkDetail data={project.works[0]} />
+                  )}
                 </div>
               </div>
-              <div className="flex flex-col justify-between  ">
+              <div className="flex flex-col justify-between shrink-0">
                 <Badge>{text?.evaluation} (0)</Badge>
                 <Link
                   href={`/project/${project.project.id}`}

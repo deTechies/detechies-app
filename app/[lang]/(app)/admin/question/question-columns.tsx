@@ -5,36 +5,11 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { formatDate } from "@/lib/utils"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
+import PreviewQuestion from "./preview-question"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type LighthouseFile = {
-  id: string
-  publicKey: string, 
-  fileName: string,
-  mimeType: string,
-  txHash: string,
-  status: string,
-  createdAt: number,
-  fileSizeInBytes: number,
-  cid: string,
-  lastUpdated: number
-  encryption: boolean
-}
 
-
-export function formatBytes(bytes:number) {
-  const kilobytes = bytes / 1024;
-  const megabytes = kilobytes / 1024;
-
-  if (megabytes >= 1) {
-    return megabytes.toFixed(2) + " MB";
-  } else {
-    return kilobytes.toFixed(2) + " KB";
-  }
-}
-
-
-export const questionColumns: ColumnDef<LighthouseFile>[] = [
+export const questionColumns: ColumnDef<any>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -87,4 +62,17 @@ export const questionColumns: ColumnDef<LighthouseFile>[] = [
       return <div className="font-medium">{formatted}</div>
     }
   },
+  {
+    accessorKey: "actions",
+    header: "actions",
+    cell: ({ row }: {row:any}) => {
+      return (
+        <div className="flex gap-4">
+          <PreviewQuestion question={row.original} />
+        </div>
+      )
+    },
+    enableSorting: false,
+    enableHiding: false,
+  }
 ]

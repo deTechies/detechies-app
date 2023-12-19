@@ -9,7 +9,7 @@ export default function GroupList({
 
   //const resultsText = products.length > 1 ? 'results' : 'result';
   
-  return <div className="w-full grid md:grid-cols-2 gap-4 items-stretch">
+  return <div className="w-full grid md:grid-cols-3 gap-5 items-stretch">
     { 
       groups.map((group: any, key:number) => {
         return <GroupListItem key={key} details={group} />
