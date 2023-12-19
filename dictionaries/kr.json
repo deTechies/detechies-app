@@ -47,6 +47,27 @@
       }
     },
     "project": {
+      "list": {
+        "projects": "프로젝트",
+        "all_project": "전체 프로젝트",
+        "scope_of_disclosure": "공개 범위",
+        "project_type": {
+          "client": "외주 프로젝트",
+          "internal": "사내 프로젝트",
+          "side": "사이드 프로젝트",
+          "hackathon": "해커톤",
+          "other": "기타"
+        },
+        "privacy_type": {
+          "all": "모든 유저",
+          "project": "프로젝트 멤버",
+          "group": "그룹 멤버"
+        },
+        "search": "키워드를 한글자 이상 입력해주세요.",
+        "my_project": "내 프로젝트",
+        "no_projects_found": "검색 결과가 없습니다.",
+        "view_more": "더 보기"
+      },
       "details": {
         "join_project": {
           "title": "Join Project",

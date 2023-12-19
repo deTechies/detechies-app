@@ -38,10 +38,30 @@
           "reward_notification": "In-app notification (optional)",
           "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
         }
-        
       }
     }, 
     "project": {
+      "list": {
+        "projects": "projects",
+        "all_project": "All project",
+        "scope_of_disclosure": "Scope of disclosure",
+        "project_type": {
+          "client": "Client",
+          "internal": "Internal",
+          "side": "Side",
+          "hackathon": "Hackathon",
+          "other": "Other"
+        },
+        "privacy_type": {
+          "all": "All users",
+          "project": "project member",
+          "group": "group member"
+        },
+        "search": "Search",
+        "my_project": "my project",
+        "no_projects_found": "No projects found",
+        "view_more": "View More"
+      },
       "details": {
         "join_project": {
           "title": "Join Project",
