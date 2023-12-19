@@ -165,7 +165,7 @@ export default function BasicEvaluationInfo({
                 )}
               />
             </section>
-            {form.watch("match") == "80" ? (
+            {form.watch("match") == "80" && (
               <section className="flex flex-col gap-7">
                 <FormField
                   control={form.control}
@@ -183,26 +183,31 @@ export default function BasicEvaluationInfo({
                   )}
                 />
               </section>
-            ) : (
+            ) }
+            {form.watch("match") == "100" && (
               <section className="space-y-7">
                 <PercentageSliderField
                   name="meet_requirements"
                   form={form}
-                  steps={5}
+                  steps={20}
                   label={text.meet_requirements.label}
                   messages={text.meet_requirements.messages}
                 />
                 <PercentageSliderField
                   name="work_contribution"
                   form={form}
-                  steps={5}
-                  label={text.meet_requirements.label}
+                  steps={20}
+                  label={text.work_contribution.label}
+                  messages={text.work_contribution.messages}
+                  
                 />
                 <PercentageSliderField
                   name="meet_schedule"
                   form={form}
-                  steps={5}
-                  label={text.meet_requirements.label}
+                  steps={20}
+                  label={text.meet_schedule.label}
+                  messages={text.meet_schedule.messages}
+                  
                 />
               </section>
             )}
@@ -224,7 +229,7 @@ export default function BasicEvaluationInfo({
                   {text.next}
                 </Button>
               ) : (
-                <Button variant="primary" size="lg" type="submit">
+                <Button size="lg" type="submit">
                   Save
                 </Button>
               )}

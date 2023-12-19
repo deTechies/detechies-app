@@ -4,7 +4,7 @@ import InviteProjectMember from "@/components/invite-project-member/invite-proje
 import PendingMemberList from "@/components/modal/pending-member-list";
 import JoinProject from "@/components/project/join-project";
 import { getPendingProjectMembers } from "@/lib/data/project";
-import ProjectMemberItem from "./_components/project-member-item";
+import ProjectMemberItem from "./project-member-item";
 
 export default async function ProjectMembers({
   members,

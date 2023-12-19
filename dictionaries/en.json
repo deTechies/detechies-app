@@ -67,28 +67,34 @@
         "next": "Next",
         "reject": "Reason of rejection",
         "meet_requirements": {
-          "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"
+          "label": "Did the user meet the requirements?",
+          "messages": [     
+            "20_message percentage message",
+            "40_message User meet the requirements of the project",
+            "60_message User meet the requirements of the project",
+            "80_message User meet the requirements of the project",
+            "100_message User meet the requirements of the project"
+          ]
         },
         "meet_schedule": {
-          "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"
+          "label": "Did the users meet the time schedules of the project?",
+          "messages": [     
+            "20_message percentage message",
+            "40_message User meet the requirements of the project",
+            "60_message User meet the requirements of the project",
+            "80_message User meet the requirements of the project",
+            "100_message User meet the requirements of the project"
+          ]
         },
         "work_contribution": {
-          "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"
+          "label": "Please tell us about teh contribution to the work.",
+          "messages": [     
+            "20_message percentage message",
+            "40_message User meet the requirements of the project",
+            "60_message User meet the requirements of the project",
+            "80_message User meet the requirements of the project",
+            "100_message User meet the requirements of the project"
+          ]
         }
       }
     }

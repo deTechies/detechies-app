@@ -1,10 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSingleProject } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
-import ProjectDetail from "./project-detail";
-import ProjectInfo from "./project-info";
-import ProjectMembers from "./project-members";
-import ProjectNfts from "./project-nfts";
+import ProjectDetail from "../_components/project-detail";
+import ProjectInfo from "../_components/project-info";
+import ProjectMembers from "../_components/project-members";
+import ProjectNfts from "../_components/project-nfts";
 
 export default async function ProjectDetailPage({
   params,

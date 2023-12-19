@@ -33,7 +33,7 @@ const ProjectDisplay = ({project}:{project:Project}) => {
         <h5 className="text-title_m">{project.name}</h5>
         <section className="flex flex-col gap-2">
           <span className="text-label_m text-text-secondary">
-            {project.scope} | {project.category}
+            {project.type} | {project.category}
           </span>
           <span className="text-label_m text-text-secondary">
             {formatDate(project.begin_date) } ~ {project.end_date ? formatDate(project.end_date) : "present"}

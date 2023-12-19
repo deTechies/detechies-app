@@ -1,4 +1,4 @@
-import { ContributionFormData } from "@/app/[lang]/(app)/project/[address]/_components/project-contribution-form";
+import { ContributionFormData } from "@/app/[lang]/(app)/project/_components/project-contribution-form";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";

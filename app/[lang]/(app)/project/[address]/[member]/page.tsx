@@ -1,8 +1,8 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getProjectMember } from "@/lib/data/project";
-import ProjectMemberInline from "../_components/project-member-inline";
-import ProjectSwitcher from "../_components/project-switcher";
+import ProjectMemberInline from "../../_components/project-member-inline";
+import ProjectSwitcher from "../../_components/project-switcher";
 import BasicEvaluationInfo from "./_components/basic-info";
 import ProjectMemberWorkDetails from "./_components/details-work";
 

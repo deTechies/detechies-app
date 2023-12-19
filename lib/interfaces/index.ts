@@ -16,7 +16,6 @@ export interface User {
     full_name: string;
     country: string;
     description: string;
-
     app_settings: UserSettings;
   }
   
@@ -62,11 +61,9 @@ export enum GROUP_TYPE {
   }
   
   export enum ProjectType {
-    CLIENT = 'client',
-    INTERNAL = 'internal',
-    SIDE = 'side',
-    HACKATHON = 'hackathon',
-    OTHER = 'other'
+    COMPANY = 'company',
+    FREELANCE = 'freelance',
+    SIDE = 'side'
   }
   
   export enum PrivacyType {
