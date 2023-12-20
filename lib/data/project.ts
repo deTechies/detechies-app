@@ -159,6 +159,47 @@ export async function getPendingProjectMembers(address: string) {
   return data;
 }
 
+export async function acceptProjectMember(projectMemberId: string){
+  const session = await getSession();
+
+  const response = await fetch(`${API_URL}/project-member/accept/member/${projectMemberId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+  
+ // revalidatePath('/', 'layout')
+
+
+  if (!response.ok) {
+    throw new Error("Failed to join project");
+  }
+
+  return true;
+}
+
+
+export async function acceptProjectInvitation(projectMemberId: string){
+  const session = await getSession();
+
+  const response = await fetch(`${API_URL}/project-member/accept/invite/${projectMemberId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to join project");
+  }
+
+  
+  return response.json();
+}
+
 export async function joinProject(data: JoinProject) {
   const session = await getSession();
 
@@ -176,11 +217,8 @@ export async function joinProject(data: JoinProject) {
     }),
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to join project");
-  }
 
-  return true;
+  return response;
 }
 
 export async function inviteByEmail(

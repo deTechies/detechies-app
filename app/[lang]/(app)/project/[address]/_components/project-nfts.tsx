@@ -2,7 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import RequestNFTModal from "./request-nft";
+import RequestNFTModal from "../../_components/request-nft";
 
 export default function ProjectNfts({
   address,

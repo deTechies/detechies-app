@@ -156,7 +156,7 @@ export enum GROUP_TYPE {
     isCreator: boolean;
     isMember?: boolean;
     type: string;
-    userRole: 'admin' | 'member' | 'client' | 'none';
+    userRole: string;
     urls?: string[];
     members: ProjectMember[]
     files: File[]
@@ -166,7 +166,7 @@ export enum GROUP_TYPE {
   }
   
   export interface ProjectMember {
-    id: string;
+    memberId: string;
     user: User;
     percentage: number;
     role: string;

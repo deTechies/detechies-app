@@ -1,16 +1,23 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
 import { auth } from "@/lib/helpers/authOptions";
 import { ProjectMember } from "@/lib/interfaces";
-import ProjectContribution from "./project-contribution";
-import ProjectMemberEvaluate from "./project-evaluate";
+import { MoreVertical } from "lucide-react";
+import ProjectContribution from "../../_components/project-contribution";
+import ProjectMemberEvaluate from "../../_components/project-evaluate";
 import ProjectWorkDetail, {
   BlurredProjectWorkDetail,
-} from "./project-work-detail";
-
-
+} from "../../_components/project-work-detail";
+import DeleteMember from "./modals/delete-member";
+import RequestEvaluation from "./modals/request-evaluation";
 
 export default async function ProjectMemberItem({
   details,
@@ -41,32 +48,41 @@ export default async function ProjectMemberItem({
               <Badge>Rewards</Badge>
             </header>
             <>
-              {access  ?
-                  <ProjectWorkDetail data={details.works[0]}  />
-
-                  :
-                  <BlurredProjectWorkDetail />
-              }
+              {access ? (
+                details.works.length > 0 && (
+                  <ProjectWorkDetail data={details.works[0]} />
+                )
+              ) : (
+                <BlurredProjectWorkDetail />
+              )}
             </>
           </div>
           <div className="flex flex-col justify-start items-end gap-3 ">
             {session?.web3.address == details.user.wallet ? (
               <>
                 <ProjectContribution project={details.project} />
-                {
-                  details.works.length > 0 &&    <ProjectMemberEvaluate projectMember={details} />
-                }
-             
               </>
             ) : (
-              <Badge>
-                <span className="text-sm">Review</span>
-              </Badge>
+              <>
+                {details.works.length > 0 && (
+                  <ProjectMemberEvaluate projectMember={details} />
+                )}
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <MoreVertical className="text-text-secondary h-6 w-6 hover:text-text-primary"/>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <div className="flex flex-col gap-3 px-3 my-4 text-left">
+                      <RequestEvaluation memberId={details.memberId} />
+                      <DropdownMenuItem>관리자 권한 위임</DropdownMenuItem>
+                      <DeleteMember memberId={details.memberId} />
+                    </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
             )}
           </div>
-        
         </div>
-       
       </div>
     </Card>
   );

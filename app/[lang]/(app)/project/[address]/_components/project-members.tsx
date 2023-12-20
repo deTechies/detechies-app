@@ -1,9 +1,7 @@
 import { Card } from "@/components/ui/card";
 
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
-import PendingMemberList from "@/components/modal/pending-member-list";
 import JoinProject from "@/components/project/join-project";
-import { getPendingProjectMembers } from "@/lib/data/project";
 import ProjectMemberItem from "./project-member-item";
 
 export default async function ProjectMembers({
@@ -17,10 +15,6 @@ export default async function ProjectMembers({
 }) {
   //getting all the members and holders of this project NFT.
 
-  let pendingMembers: any[] = [];
-  if (userRole == "admin") {
-    pendingMembers = await getPendingProjectMembers(projectId);
-  }
 
   return (
     <section className="flex flex-col gap-4">
@@ -29,11 +23,7 @@ export default async function ProjectMembers({
           <h5 className="text-subhead_s text-text-primary ">
             Members ({members.length})
           </h5>
-          {pendingMembers.length > 0 && (
-            <span className="text-xs text-text-secondary">
-              <PendingMemberList pendingMembers={pendingMembers} />
-            </span>
-          )}
+
           {userRole == 'none' && <JoinProject address={projectId} />}
           {userRole == 'admin' && <InviteProjectMember projectId={projectId} />}
         </header>
