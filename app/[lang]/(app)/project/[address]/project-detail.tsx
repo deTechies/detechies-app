@@ -10,15 +10,20 @@ import { useState } from "react";
 export default function ProjectDetail({
   details,
   userRole,
+  lang,
 }: {
   details: Project;
   userRole: string;
+  lang: any;
 }) {
   const [data, setData] = useState<any>({
     content: details.description,
     name: details.name,
   });
   const [showFull, setShowFull] = useState(false);
+
+  console.log("TEST!");
+  console.log(details);
 
   return (
     <Card className="w-full pt-8 px-8 gap-8 pb-5">
@@ -34,22 +39,15 @@ export default function ProjectDetail({
           className="rounded-[6px] bg-accent-secondary max-h-[100px]"
           alt="project_image_holder"
         />
-        <div className="flex flex-col gap-2">
-          <h1 className="text-heading_s mb-2">{data.name}</h1>
-
-          <div className="flex gap-4 items-center text-label_l text-text-secondary ">
-            <span className="text-label_l">{details?.category}</span>
-            <span>|</span>
-            <span>{details.scope}</span>
-
-          </div>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-heading_s">{data.name}</h1>
 
           {/* category */}
           <div className="flex flex-col gap-2">
             <div className="flex gap-4 items-center text-label_l text-text-secondary ">
               <span className="text-label_l">{details?.category}</span>
               <span>|</span>
-              <span>{details.type}</span>
+              <span>{lang.list.project_type[details.type]}</span>
             </div>
 
             <div className="flex gap-1 items-center text-label_l text-text-secondary">
@@ -60,17 +58,24 @@ export default function ProjectDetail({
           </div>
 
           <div className="flex gap-3 flex-wrap">
-            {/* After the category data is converted to an array, I will edit it. */}
-            <Badge className="bg-transparent border border-accent-primary text-accent-primary py-2 px-2.5">
-              {details.category}
-            </Badge>
+            {details.tags &&
+            details.tags?.map((tag) => (
+              <Badge
+                key={tag}
+                className="bg-transparent border border-accent-primary text-accent-primary py-2 px-2.5"
+              >
+                {tag}
+              </Badge>
+            ))}
           </div>
         </div>
       </header>
 
       <div className="w-full flex flex-col gap-5">
         <div className="flex justify-between items-center">
-          <h3 className="text-subhead_l ">Project Description</h3>
+          <h3 className="text-subhead_l ">
+            {lang.details.project_description}
+          </h3>
         </div>
 
         <div className={`overflow-hidden ${showFull ? "" : "max-h-[100px]"}`}>
@@ -87,7 +92,7 @@ export default function ProjectDetail({
             }}
             className="text-label_m text-text-secondary flex gap-2 items-center w-fit mx-auto"
           >
-            {showFull ? "hide" : "show more"}
+            {showFull ? lang.details.hide : lang.details.show_more}
             {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
           </button>
         )}

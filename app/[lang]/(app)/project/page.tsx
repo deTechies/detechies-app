@@ -31,11 +31,19 @@ export default async function ProjectListPage({
   const projects = await getProjects();
 
   const searchItem = searchParams.search as string;
-  let filteredData = searchParams.search
-    ? projects?.filter((item: any) =>
-        item.name.toLowerCase().includes(searchItem.toLowerCase())
-      )
-    : projects;
+
+  let filteredData = projects?.filter((item: any) => {
+    const matchesSearch = searchParams.search
+      ? item.name.toLowerCase().includes(searchItem.toLowerCase())
+      : true;
+
+    // const matchesScope = searchParams.scope
+    //   ? item.scope === searchParams.scope || item.scope === null
+    //   : true;
+
+    // return matchesSearch && matchesScope;
+    return matchesSearch;
+  });
 
   const dictionary = (await getDictionary(params.lang)) as any;
 
@@ -86,9 +94,9 @@ export default async function ProjectListPage({
             </div>
           </div>
           <Link href="/project/create" role="link"
-            className="px-3 py-2 bg-accent-secondary text-accent-primary rounded-md text-title_m "
+            className="px-5 py-2 bg-accent-secondary text-accent-primary rounded-full text-title_m flex items-center justify-center"
           >
-            Create Project
+            {dictionary.project.list.create_project}
           </Link>
         </div>
       </Card>
@@ -97,7 +105,7 @@ export default async function ProjectListPage({
         <section className="w-full grid md:grid-cols-2 gap-4">
           {filteredData.length > 0 ? (
             filteredData.map((item: Project) => (
-              <ProjectItem key={item.id} details={item} />
+              <ProjectItem key={item.id} details={item} lang={dictionary.project.list}/>
             ))
           ) : (
             <div>{dictionary.project.list.no_projects_found}</div>
