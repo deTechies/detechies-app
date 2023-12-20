@@ -12,10 +12,12 @@ export default function SelectedProjectMember({
   user,
   projectId,
   onSelectValue,
+  lang
 }: {
   user: User;
   projectId: string;
   onSelectValue: (value: string) => void;
+  lang: any;
 }) {
   const [role, setRole] = useState<string>("member");
 
@@ -33,7 +35,7 @@ export default function SelectedProjectMember({
         />
       </div>
 
-      <Label className="mb-3">Select Member</Label>
+      <Label className="mb-3">{lang.details.invite_member.member_type}</Label>
 
       <RadioGroup
         className="flex gap-9 py-4 mb-6"
@@ -44,15 +46,15 @@ export default function SelectedProjectMember({
       >
         <div className="flex gap-3 items-center">
           <RadioGroupItem value="member" />
-          <Label>팀원</Label>
+          <Label>{lang.details.role_type.member}</Label>
         </div>
         <div className="flex gap-3 items-center">
           <RadioGroupItem value="admin" />
-          <Label>관리자</Label>
+          <Label>{lang.details.role_type.admin}</Label>
         </div>
         <div className="flex gap-3 items-center">
           <RadioGroupItem value="client"/>
-          <Label>클라이언트</Label>
+          <Label>{lang.details.role_type.client}</Label>
         </div>
       </RadioGroup>
 
@@ -67,14 +69,14 @@ export default function SelectedProjectMember({
           <Button
             variant={"secondary"}
             size="lg"
-            className="max-w-[212px] grow"
+            className="max-w-[212px] grow px-0"
           >
-            나중에 할게요
+            {lang.details.invite_member.back}
           </Button>
         </DialogClose>
 
-        <Button onClick={inviteMember} size="lg" className="max-w-[212px] grow">
-          초대하기
+        <Button onClick={inviteMember} size="lg" className="max-w-[212px] grow px-0">
+          {lang.details.invite_member.invite}
         </Button>
       </div>
     </section>

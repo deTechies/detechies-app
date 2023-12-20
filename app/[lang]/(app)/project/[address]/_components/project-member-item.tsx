@@ -14,10 +14,14 @@ export default async function ProjectMemberItem({
   details,
   access,
   projectId,
+  lang,
+  userRole,
 }: {
   details: ProjectMember;
   projectId: string;
   access: boolean;
+  lang: any;
+  userRole: string;
 }) {
   const session = await auth();
 
@@ -35,10 +39,10 @@ export default async function ProjectMemberItem({
           <div className="flex-col grow shrink gap-4 flex">
             <header className="flex gap-3 items-center">
               <h5 className="text-title_m">
-                {details.user?.display_name} | {details.role}
+                {details.user?.display_name} | {lang.details.role_type[details.role]}
               </h5>
 
-              <Badge>성과 미등록</Badge>
+              <Badge>{lang.details.members.unregistered}</Badge>
             </header>
             <>
               {access ? (

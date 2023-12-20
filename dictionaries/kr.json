@@ -75,13 +75,29 @@
         "back": "뒤로가기",
         "submit": "참여 요청하기"
       },
+      "invite_member": {
+        "title": "멤버 초대하고 평가받기",
+        "body": "프로젝트를 함께 진행했던 팀원, 관리자, 클라이언트를 초대하는 것과 동시에, 내 성과에 대한 평가요청도 전송돼요.",
+        "search": "사용자 닉네임을 입력해주세요.",
+        "can_not_find": "닉네임을 찾을 수 없어요.",
+        "invite_by_email": "이메일로 초대하기",
+        "back": "나중에 할게요",
+        "invite": "초대하기",
+        "no_members_found": "검색 결과가 없습니다",
+        "member_type": "멤버 종류",
+        "name": "이름",
+        "last_name": "성",
+        "first_name": "이름",
+        "email": "이메일"
+      },
       "project_description": "프로젝트 설명",
       "hide": "숨기기",
       "show_more": "자세히 보기",
       "members": {
         "project_member": "프로젝트 멤버",
         "invite": "초대하기",
-        "unregistered": "성과 미등록"
+        "unregistered": "성과 미등록",
+        "evaluate": "평가하기"
       },
       "role_type": {
         "admin": "관리자",

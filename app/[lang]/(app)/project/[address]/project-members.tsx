@@ -43,7 +43,9 @@ export default async function ProjectMembers({
           {userRole == "none" && (
             <JoinProject address={projectId} lang={lang} />
           )}
-          {userRole == "admin" && <InviteProjectMember projectId={projectId} />}
+          {userRole == "admin" && (
+            <InviteProjectMember projectId={projectId} lang={lang} />
+          )}
         </header>
       </Card>
 
@@ -55,6 +57,8 @@ export default async function ProjectMembers({
               key={index}
               access={userRole != "none"}
               details={member}
+              lang={lang}
+              userRole={userRole}
             />
           ))}
       </div>
