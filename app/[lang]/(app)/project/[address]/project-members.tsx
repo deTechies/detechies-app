@@ -10,10 +10,12 @@ export default async function ProjectMembers({
   members,
   userRole,
   projectId,
+  lang,
 }: {
   members: any[];
   projectId: string;
   userRole: string;
+  lang: any;
 }) {
   //getting all the members and holders of this project NFT.
 
@@ -22,20 +24,28 @@ export default async function ProjectMembers({
     pendingMembers = await getPendingProjectMembers(projectId);
   }
 
+  console.log(userRole);
+
   return (
     <section className="flex flex-col gap-3">
       <Card className="flex flex-col gap-4 pt-7 px-9 pb-9">
         <header className="flex items-center justify-between">
           <h5 className="text-subhead_s text-text-primary ">
-            Members ({members.length})
+            {lang.details.members.project_member} ({members.length})
           </h5>
-          {pendingMembers.length > 0 && (
+
+          {/* {pendingMembers.length > 0 && (
             <span className="text-xs text-text-secondary">
               <PendingMemberList pendingMembers={pendingMembers} />
             </span>
+          )} */}
+
+          {userRole == "none" && (
+            <JoinProject address={projectId} lang={lang} />
           )}
-          {userRole == 'none' && <JoinProject address={projectId} />}
-          {userRole == 'admin' && <InviteProjectMember projectId={projectId} />}
+          {userRole == "admin" && (
+            <InviteProjectMember projectId={projectId} lang={lang} />
+          )}
         </header>
       </Card>
 
@@ -45,8 +55,10 @@ export default async function ProjectMembers({
             <ProjectMemberItem
               projectId={projectId}
               key={index}
-              access={userRole != 'none'}
+              access={userRole != "none"}
               details={member}
+              lang={lang}
+              userRole={userRole}
             />
           ))}
       </div>

@@ -41,11 +41,68 @@
     }
   },
   "project": {
+    "list": {
+      "projects": "projects",
+      "all_project": "All project",
+      "scope_of_disclosure": "Scope",
+      "project_type": {
+        "client": "Client",
+        "internal": "Internal",
+        "side": "Side",
+        "hackathon": "Hackathon",
+        "other": "Other"
+      },
+      "privacy_type": {
+        "all": "All users",
+        "project": "project member",
+        "group": "group member",
+        "private": "private"
+      },
+      "search": "Search",
+      "my_project": "my project",
+      "no_projects_found": "No projects found",
+      "view_more": "View More",
+      "create_project": "Create Project"
+    },
     "details": {
       "join_project": {
         "title": "Join Project",
         "body": "Join this project to start working on it.",
-        "button": "Join Project"
+        "button": "Join Project",
+        "role": "role",
+        "message": "message",
+        "message_ex": "Tell us a little bit about yourself",
+        "back": "Close",
+        "submit": "Submit"
+      },
+      "invite_member": {
+        "title": "Invite member",
+        "body": "At the same time as inviting team members, managers, and clients who worked on the project together, a request for evaluation of my performance is also sent.",
+        "search": "search",
+        "can_not_find": "I can not find my nickname.",
+        "invite_by_email": "Invite by email",
+        "back": "Close",
+        "invite": "Invite",
+        "no_members_found": "No members found",
+        "member_type": "member type",
+        "name": "Name",
+        "last_name": "Last Name",
+        "first_name": "First Name",
+        "email": "email"
+      },
+      "project_description": "Project Description",
+      "hide": "hide",
+      "show_more": "show more",
+      "members": {
+        "project_member": "Project Members",
+        "invite": "invite",
+        "unregistered": "unregistered",
+        "evaluate": "evaluate"
+      },
+      "role_type": {
+        "admin": "Admin",
+        "member": "Member",
+        "client": "Client"
       }
     },
     "member": {

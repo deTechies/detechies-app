@@ -1,6 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSingleProject } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
+
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
+
 import ProjectDetail from "./project-detail";
 import ProjectInfo from "./project-info";
 import ProjectMembers from "./project-members";
@@ -9,7 +13,7 @@ import ProjectNfts from "./project-nfts";
 export default async function ProjectDetailPage({
   params,
 }: {
-  params: { address: string };
+  params: { address: string; lang: Locale; };
 }) {
 
   //get the params for checking the profile details page.
@@ -27,6 +31,7 @@ export default async function ProjectDetailPage({
           <Skeleton className="h-96 w-full" />
           <Skeleton className="h-96 w-full" />
         </section>
+
         <section className="col-span-1 flex flex-col gap-8">
           <Skeleton className="h-[25vh] w-[20vw] animate-pulse" />
           <Skeleton className="h-[25vh] w-full animate-pulse" />
@@ -34,19 +39,24 @@ export default async function ProjectDetailPage({
       </main>
     );
 
+  const dictionary = (await getDictionary(params.lang)) as any;
+
   return (
     <main className="flex md:flex-row flex-col my-12 mx-5 gap-7">
       <section className="flex flex-col grow gap-5">
         <ProjectDetail 
           details={data} 
           userRole={data.userRole}
+          lang={dictionary.project}
         />
         <ProjectMembers
           members={data.members}
           userRole={data.userRole}
           projectId={params.address}
+          lang={dictionary.project}
         />
       </section>
+      
       <section className="flex flex-col gap-8 min-w-[300px]">
         <ProjectInfo info={data} />
         <ProjectNfts address={data.id} isCreator={data.isCreator} />

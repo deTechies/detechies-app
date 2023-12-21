@@ -22,8 +22,10 @@ import SelectedProjectMember from "./selected-project-member";
 
 export default function InviteProjectMember({
   projectId,
+  lang,
 }: {
   projectId: string;
+  lang: any;
 }) {
   const searchParams = useSearchParams()!;
   const search = searchParams.get("search") as string;
@@ -34,9 +36,9 @@ export default function InviteProjectMember({
 
   if (loading) return <Skeleton className="h-3 w-10 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
-  if (!members) return <div>No members found</div>;
+  if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
 
-  console.log(members);
+  // console.log(members);
 
   /*   const filteredData = members.filter((member: any) => {
     return member.display_name.toLowerCase().includes(search.toLowerCase());
@@ -45,31 +47,31 @@ export default function InviteProjectMember({
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge
+        <Button
           variant="secondary"
           className="cursor-pointer text-sm font-normal py-2 px-4"
         >
-          Invite <Plus size={16} className="inline-block ml-2" />
-        </Badge>
+          {lang.details.invite_member.invite}
+          <Plus size={16} className="inline-block ml-2" />
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="gap-6">
         <div className="flex flex-col gap-4">
-          <h5 className="text-subhead_m">멤버 초대하고 평가받기</h5>
+          <h5 className="text-subhead_m">{lang.details.invite_member.title}</h5>
 
           <p className="text-body_m">
             {/* At the same time as inviting team members, managers, and clients who
           worked on the project together, a request for evaluation of my
           performance is also sent. */}
-            프로젝트를 함께 진행했던 팀원, 관리자, 클라이언트를 초대하는 것과
-            동시에, 내 성과에 대한 평가요청도 전송돼요.
+            {lang.details.invite_member.body}
           </p>
         </div>
 
         <section className="flex flex-col gap-6">
           {!byEmail && selected == null && (
             <>
-              <Search placeholder="user1234@gmail.com" />
+              <Search placeholder={lang.details.invite_member.search} />
 
               <div className="rounded-sm max-h-[30vh] overflow-x-auto">
                 {members &&
@@ -88,14 +90,28 @@ export default function InviteProjectMember({
                 onClick={() => setByEmail(true)}
                 className="flex gap-2 text-center mx-auto"
               >
-                <span>닉네임을 찾을 수 없어요.</span>
-                <span className="text-accent-primary">이메일로 초대하기</span>
+                <span>{lang.details.invite_member.can_not_find}</span>
+                <span className="text-accent-primary">{lang.details.invite_member.invite_by_email}</span>
               </button>
 
               <div className="flex justify-center gap-4">
                 <DialogClose asChild>
-                  <Button variant={"secondary"} size={"lg"} className="max-w-[212px] grow">나중에 할게요</Button>
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className="max-w-[212px] grow px-0"
+                  >
+                    {lang.details.invite_member.back}
+                  </Button>
                 </DialogClose>
+
+                <Button
+                  size="lg"
+                  className="max-w-[212px] grow px-0"
+                  disabled
+                >
+                  {lang.details.invite_member.invite}
+                </Button>
               </div>
             </>
           )}
@@ -104,12 +120,14 @@ export default function InviteProjectMember({
               projectId={projectId}
               user={selected}
               onSelectValue={() => setSelected(null)}
+              lang={lang}
             />
           )}
           {byEmail && (
             <InviteByEmail
               projectId={projectId}
               cancelByEmail={() => setByEmail(false)}
+              lang={lang}
             />
           )}
         </section>
