@@ -285,3 +285,26 @@ export async function getProjectMember(projectId: string, userId: string) {
 
   return response.json();
 }
+
+
+export async function getProjectWork(id:string){
+  const session = await auth();
+  const url = new URL(`${API_URL}/project-work/${id}`);
+
+  if (!session?.web3?.accessToken) {
+    throw new Error("No access token found");
+  }
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch project member");
+  }
+
+  return response.json();
+}

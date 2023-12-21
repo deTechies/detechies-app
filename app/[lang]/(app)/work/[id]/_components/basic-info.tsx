@@ -30,12 +30,12 @@ const baseInfoSchema = z.object({
   match: z.enum(["100", "80"], {
     required_error: "You need to select a matching performance.",
   }),
-  weekly_hours: z.string().optional(),
+  hourly_rate: z.string().optional(),
   billable_hourly_wage: z.string().optional(),
   reject_letter: z.string().optional(),
-  work_contribution: z.array(z.number().min(0).max(100)),
-  meet_requirements: z.array(z.number().min(0).max(100)),
-  meet_schedule: z.array(z.number().min(0).max(100)),
+  rate_contributions: z.number().min(0).max(100).optional(),
+  rate_requirements: z.number().min(0).max(100).optional(),
+  rate_time_schedule: z.number().min(0).max(100).optional(),
 });
 
 type verifyWorkValues = z.infer<typeof baseInfoSchema>;
@@ -58,7 +58,15 @@ export default function BasicEvaluationInfo({
 
   async function onSubmit(data: verifyWorkValues) {
     //TODO: build the data object to send to the backend
-
+    
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
     const result = await submitVerifyWork(data, projectId, userId);
 
     if (data.match == "80") {
@@ -73,17 +81,8 @@ export default function BasicEvaluationInfo({
         ),
       });
       router.push(`/project/${projectId}`);
-    } else {
-      router.push(`/project/${projectId}/${userId}/evaluate-team-member`);
     }
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
-        </pre>
-      ),
-    });
+ 
 
     //router.push(`/project/${projectId}/${userId}/evaluate-team-member`);
   }
@@ -114,7 +113,7 @@ export default function BasicEvaluationInfo({
 
               <FormField
                 control={form.control}
-                name="weekly_hours"
+                name="hourly_rate"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{text.time_weekly}</FormLabel>
@@ -187,14 +186,14 @@ export default function BasicEvaluationInfo({
             {form.watch("match") == "100" && (
               <section className="space-y-7">
                 <PercentageSliderField
-                  name="meet_requirements"
+                  name="rate_requirements"
                   form={form}
                   steps={20}
                   label={text.meet_requirements.label}
                   messages={text.meet_requirements.messages}
                 />
                 <PercentageSliderField
-                  name="work_contribution"
+                  name="rate_contributions"
                   form={form}
                   steps={20}
                   label={text.work_contribution.label}
@@ -202,7 +201,7 @@ export default function BasicEvaluationInfo({
                   
                 />
                 <PercentageSliderField
-                  name="meet_schedule"
+                  name="rate_time_schedule"
                   form={form}
                   steps={20}
                   label={text.meet_schedule.label}

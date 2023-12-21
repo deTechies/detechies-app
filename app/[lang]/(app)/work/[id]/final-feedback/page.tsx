@@ -14,7 +14,7 @@ export default async function FinalFeedbackPage({
         
   return (
     <Card className="max-w-2xl mx-auto">
-        <FinalFeedbackForm text={dictionary.project.member.evaluate}/>
+        <FinalFeedbackForm text={dictionary.project.member.evaluate} />
     </Card>
   )
 }

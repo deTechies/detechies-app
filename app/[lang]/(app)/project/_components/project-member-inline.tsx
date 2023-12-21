@@ -1,8 +1,8 @@
-import { ProjectMember } from "@/lib/interfaces";
+import { ProjectMember, ProjectWork } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import Image from "next/image";
 
-export default function ProjectMemberInline({projectMember}: {projectMember: ProjectMember}) {
+export default function ProjectMemberInline({projectMember, projectWork}: {projectMember: ProjectMember, projectWork?: ProjectWork}) {
   return (
     <div className="bg-background-layer-1 self-stretch p-5 rounded-[20px] border border-border-div gap-5 inline-flex">
       <div className="w-20 h-20 relative rounded-xl bg-background-layer-2">
@@ -31,7 +31,7 @@ export default function ProjectMemberInline({projectMember}: {projectMember: Pro
             </div>
 
             <div className="text-text-secondary text-label_m tracking-wide">
-              {beginEndDates(projectMember.works[0].begin_date, projectMember.works[0].end_date)}
+              {projectWork && beginEndDates(projectWork.begin_date, projectWork.end_date)}
             </div>
           </div>
         </div>

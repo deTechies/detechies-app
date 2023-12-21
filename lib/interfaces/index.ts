@@ -183,7 +183,7 @@ export enum GROUP_TYPE {
   }
   
   export interface ProjectWork {
-    id: string;
+    workId: string;
     name: string;
     percentage: number;
     tags: string[];

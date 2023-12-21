@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { submitSwotAnalysis } from "@/lib/data/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -13,9 +14,10 @@ interface BasicEvaluationInfoProps {
 }
 
 const finalFeedbackForm = z.object({
-  strengths: z.string().optional(),
-  weaknesses: z.string().optional(),
-  advise: z.string().optional(),
+  strength: z.string().optional(),
+  weakness: z.string().optional(),
+  opportunity: z.string().optional(),
+  threat: z.string().optional(),
 });
 
 type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
@@ -30,17 +32,21 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
   });
   const router = useRouter();
 
-  function onSubmit(data: FinalFeedbackValues) {
+  async function onSubmit(data: FinalFeedbackValues) {
+
+    
+    const result = await submitSwotAnalysis(data, "id")
     toast({
       title: "You submitted the following values:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
         </pre>
       ),
     });
     
-    router.push('/mypage/evaluation')
+    //router.push('/mypage/evaluation')
   }
   return (
     <Form {...form}>
@@ -49,7 +55,7 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
         <section className="flex flex-col gap-4">
           <FormField
             control={form.control}
-            name="strengths"
+            name="strength"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Strengths</FormLabel>
@@ -64,7 +70,7 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
         <section className="flex flex-col gap-4">
           <FormField
             control={form.control}
-            name="weaknesses"
+            name="weakness"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Weakness</FormLabel>
@@ -79,7 +85,7 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
         <section className="flex flex-col gap-4">
           <FormField
             control={form.control}
-            name="advise"
+            name="opportunity"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Advise</FormLabel>
