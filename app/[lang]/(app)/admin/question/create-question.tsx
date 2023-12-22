@@ -30,15 +30,20 @@ import {
 } from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
+import { MultiSelectFormField } from "@/components/ui/select-multiple";
 import { createQuestion } from "@/lib/data/feedback";
-import { QuestionCategory } from "@/lib/interfaces";
+import { QuestionCategory, QuestionType } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const questionFormSchema = z.object({
   content: z.string().min(2).max(1000).optional(),
+  type: z.string(),
   comments: z.string().min(2).max(1000).optional(),
   language: z.string().min(2).max(1000).optional(),
+  max_text: z.string().min(2).max(50).optional(),
+  min_text: z.string().min(2).max(50).optional(),
+  roles: z.array(z.string().optional()).optional(),
   category: z.nativeEnum(QuestionCategory, {
     required_error: "You need to select a category.",
   }),
@@ -58,6 +63,8 @@ export default function CreateQuestion() {
   });
 
   const scale = form.watch("scale", 0); // Watching scale value
+
+  const selectedType = form.watch("type", "slider");
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -93,6 +100,33 @@ export default function CreateQuestion() {
             <section className="flex gap-8">
               <div className="flex flex-col gap-4 flex-grow">
                 <div className="grid grid-cols-3 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="type"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Category</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Object.values(QuestionType).map((type) => (
+                              <SelectItem key={type} value={type}>
+                                {type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <FormField
                     control={form.control}
                     name="category"
@@ -163,7 +197,32 @@ export default function CreateQuestion() {
                       </FormItem>
                     )}
                   />
+                  <FormField
+                    control={form.control}
+                    name="roles" // Update the name to match the field name in your form
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Available roles</FormLabel>
+                        <FormControl>
+                          <MultiSelectFormField
+                            control={form.control}
+                            name="roles"
+                            options={[
+                              { value: "option1", label: "Option 1" },
+                              { value: "option2", label: "Option 2" },
+                              { value: "option3", label: "Option 3" },
+                              { value: "option4", label: "Option 4" },
+                              // ...other options
+                            ]}
+                            // Pass other necessary props
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
+
                 <FormField
                   control={form.control}
                   name="content"
@@ -183,22 +242,60 @@ export default function CreateQuestion() {
               </div>
             </section>
 
-            {Array.from({ length: scale }, (_, index) => (
-              <FormField
-                key={index}
-                control={form.control}
-                name={`messages.${index}`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{`Message ${index + 1}`}</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ))}
+            {selectedType == "slider" &&
+              Array.from({ length: scale }, (_, index) => (
+                <FormField
+                  key={index}
+                  control={form.control}
+                  name={`messages.${index}`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{`Message ${index + 1}`}</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+
+            {selectedType == "circles" && (
+              <section className="grid grid-cols-2 gap-2">
+                <FormField
+                  control={form.control}
+                  name="min_text"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Min Text</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Write out the question"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="max_text"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Max Text</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Write out the question"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </section>
+            )}
 
             <div className="flex items-center justify-center gap-8">
               <DialogClose asChild>

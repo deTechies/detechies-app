@@ -1,10 +1,12 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSingleProject } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
-import ProjectDetail from "./project-detail";
-import ProjectInfo from "./project-info";
-import ProjectMembers from "./project-members";
-import ProjectNfts from "./project-nfts";
+import ProjectDetail from "../_components/project-detail";
+import ProjectInfo from "../_components/project-info";
+import AcceptInvitation from "./_components/accept-invitation";
+import PendingMemberList from "./_components/pending-members-list";
+import ProjectMembers from "./_components/project-members";
+import ProjectNfts from "./_components/project-nfts";
 
 export default async function ProjectDetailPage({
   params,
@@ -33,6 +35,8 @@ export default async function ProjectDetailPage({
       </main>
     );
 
+  if (data.userRole == "invited") return <AcceptInvitation image={data.image} projectId={data.id} />
+
   return (
     <main className="flex md:flex-row flex-col my-12 mx-5 gap-7">
       <section className="flex flex-col grow gap-8">
@@ -43,9 +47,13 @@ export default async function ProjectDetailPage({
           projectId={params.address}
         />
       </section>
-      <section className="flex flex-col gap-8 min-w-[300px]">
+      <section className="flex flex-col gap-8 min-w-[350px]">
         <ProjectInfo info={data} />
         <ProjectNfts address={data.id} isCreator={data.isCreator} />
+        <PendingMemberList
+          projectId={params.address}
+          userRole={data.userRole}
+        />
       </section>
     </main>
   );

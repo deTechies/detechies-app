@@ -26,9 +26,9 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         accent: {
-          primary: "hsl(var(--accent-primary))",
+          primary: "var(--accent-primary)",
           secondary: "hsl(var(--accent-secondary))",
-          onPrimary: "hsl(var(--accent-on-primary))",
+          "onPrimary": "hsl(var(--accent-on-primary))",
           onSecondary: "hsl(var(--accent-on-secondary))",
         },
         "accent-primary": "var(--accent-primary)",

@@ -1,13 +1,9 @@
+import { Badge } from "@/components/ui/badge";
+import { Project } from "@/lib/interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { ProjectItemProps } from "./page";
-import { Badge } from "@/components/ui/badge";
 
-export default function ProjectItem({
-  details,
-}: {
-  details: ProjectItemProps;
-}) {
+export default function ProjectItem({ details }: { details: Project }) {
   const truncateText = (text: string, maxLength: number): string => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
@@ -31,9 +27,9 @@ export default function ProjectItem({
         <header className="flex justify-between items-center capitalize">
           <h5 className="text-title_m text-text-primary">{details.name}</h5>
 
-          {/* <Badge className="bg-state-info-secondary text-state-info py-2 px-2.5">
-            Group
-          </Badge> */}
+          <Badge className="bg-state-info-secondary text-state-info py-2 px-2.5">
+            {details.scope}
+          </Badge>
         </header>
 
         <section className="space-x-2 divide-x text-text-secondary text-label_m">
@@ -53,9 +49,14 @@ export default function ProjectItem({
 
         <div className="flex gap-3 justify-self-end">
           {/* category should come in the form of an array. */}
-          <Badge className="bg-transparent border-border-input border text-text-placeholder py-2 px-2.5">
-            {details.category}
-          </Badge>
+          {details.tags && details.tags?.map((tag) => (
+            <Badge
+              key={tag}
+              className="bg-transparent border-border-input border text-text-placeholder py-2 px-2.5"
+            >
+              {tag}
+            </Badge>
+          ))}
         </div>
       </section>
     </Link>
