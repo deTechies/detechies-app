@@ -37,7 +37,7 @@ export default function Navbar({ lang }: { lang: any }) {
     <Disclosure as="nav" className="mx-auto bg-background-layer-1 z-10 ">
       {({ open }) => (
         <>
-          <div className="px-6 lg:px-8 bg-background-layer-1 max-w-[1920px] mx-auto shadow-sm">
+          <div className="px-6 lg:px-8 bg-background-layer-1 max-w-[1920px] mx-auto ">
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">

@@ -1,12 +1,14 @@
 import PercentageSliderField from "@/components/form/percentage-helper";
+import { Ranking } from "@/components/group/ranking";
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
 } from "@/components/ui/dialog";
-import { Form } from "@/components/ui/form";
+import { Form, FormInlineItem, FormInlineLabel } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Question } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -35,15 +37,36 @@ export default function PreviewQuestion({ question }: PreviewQuestionProps) {
       <DialogContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
-            <PercentageSliderField
-              form={form}
-              name="question"
-              label={question.content}
-              steps={100 / question.scale}
-              messages={question.messages}
-            />
+            {question.type == "slider" && (
+              <PercentageSliderField
+                form={form}
+                name="question"
+                label={question.content}
+                steps={100 / question.scale}
+                messages={question.messages}
+              />
+            )}
 
-            <pre>{JSON.stringify(question, null, 2)}</pre>
+            <div>
+              {question.type == "circles" && (
+                <Ranking
+                  key={question.id}
+                  ranks={3}
+                  minText={question.minText}
+                  maxText={question.maxText}
+                  activeRank={1}
+                  onSelectRank={(message) => window.alert(message)}
+                />
+              )}
+            </div>
+            
+            {
+              question.type == "input" && 
+              <FormInlineItem>
+                <FormInlineLabel>{question.content}</FormInlineLabel>
+                <Input />
+              </FormInlineItem>
+            }
 
             <DialogClose>
               <Button variant="ghost">Close</Button>

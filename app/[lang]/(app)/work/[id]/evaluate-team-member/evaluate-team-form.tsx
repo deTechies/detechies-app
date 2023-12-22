@@ -38,9 +38,8 @@ type CriteriaByCategory = {
 };
 
 export default function EvaluateTeamForm({
-    projectId,
-    userId
-    }: { projectId: string, userId: string
+    workId,
+    }: { workId:string
 }) {
   // Group criteria by category
   const criteriaByCategory: CriteriaByCategory = criteria.reduce((acc, criterion) => {
@@ -61,6 +60,8 @@ export default function EvaluateTeamForm({
   };
   
   const submitResult = () => {
+    
+    
     toast({
       title: "You submitted the following values:",
       description: (
@@ -70,7 +71,7 @@ export default function EvaluateTeamForm({
       ),
     })
     
-     router.push(`/project/${projectId}/${userId}/final-feedback`)
+     router.push(`/work/${workId}/final-feedback`)
   }
 
   return (

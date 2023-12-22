@@ -96,6 +96,12 @@ export enum GROUP_TYPE {
     DELIVERY = 'delivery'
   }
   
+  export enum QuestionType {
+    INPUT = 'input',
+    SLIDER = 'slider',
+    CIRCLES = 'circles',
+  }
+  
   export interface Member {
     id: string;
     user: string;
@@ -109,6 +115,7 @@ export enum GROUP_TYPE {
     creator: string;
     created_at: Date;
   }
+  
   
   export interface FileShare {
     id: string;
@@ -195,10 +202,13 @@ export enum GROUP_TYPE {
   
 export interface Question { 
   id: string;
+  type: string;
   content: string;
   category: string;
   scale: number; 
   messages?: string[];
+  minText: string;
+  maxText: string;
   created_at: Date;
 }
 

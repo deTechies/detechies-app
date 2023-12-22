@@ -4,9 +4,9 @@ import { Locale } from "@/i18n.config";
 import FinalFeedbackForm from "./final-feedback-form";
 
 export default async function FinalFeedbackPage({
-    params: { lang, app, address, member },
+    params: { lang, app, id },
 }: {
-    params: { lang: Locale; app: string; address: string; member: string;}}) {
+    params: { lang: Locale; app: string; id: string; member: string;}}) {
         
         const dictionary = await getDictionary(lang);
         
@@ -14,7 +14,7 @@ export default async function FinalFeedbackPage({
         
   return (
     <Card className="max-w-2xl mx-auto">
-        <FinalFeedbackForm text={dictionary.project.member.evaluate} />
+        <FinalFeedbackForm text={dictionary.project.member.evaluate} workId={id}/>
     </Card>
   )
 }

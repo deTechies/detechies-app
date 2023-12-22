@@ -66,8 +66,7 @@ export async function createSurvey(data: any) {
 
 export async function submitVerifyWork(
   data: any,
-  projectId: string,
-  userId: string
+  workId: string,
 ) {
   const session = await getSession();
   const result = await fetch(`${API_URL}/project-work-feedback/basic`, {
@@ -78,8 +77,7 @@ export async function submitVerifyWork(
     },
     body: JSON.stringify({
       ...data,
-      projectId,
-      userId: userId,
+      workId: workId
     }),
   });
 

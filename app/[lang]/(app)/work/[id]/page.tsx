@@ -41,8 +41,7 @@ export default async function ProjectMemberEvaluation({
         <div className="space-y-8 grow">
           <BasicEvaluationInfo
             text={dictionary.project.member.evaluate}
-            projectId={details.projectMember.project.id}
-            userId={details.projectMember.user.id}
+            workId={params.id}
             verified={details.work_verified != null}
           />
         </div>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,9 +14,9 @@ interface BasicEvaluationInfoProps {
 }
 
 const finalFeedbackForm = z.object({
-  strength: z.string().optional(),
-  weakness: z.string().optional(),
-  opportunity: z.string().optional(),
+  strength: z.string(),
+  weakness: z.string(),
+  opportunity: z.string(),
   threat: z.string().optional(),
 });
 
@@ -25,7 +25,13 @@ type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
 // This can come from your database or API.
 const defaultValues: Partial<FinalFeedbackValues> = {};
 
-export default function FinalFeedbackForm({ text }: { text: any }) {
+export default function FinalFeedbackForm({
+  text,
+  workId,
+}: {
+  text: any;
+  workId: any;
+}) {
   const form = useForm<FinalFeedbackValues>({
     resolver: zodResolver(finalFeedbackForm),
     defaultValues,
@@ -33,9 +39,7 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
   const router = useRouter();
 
   async function onSubmit(data: FinalFeedbackValues) {
-
-    
-    const result = await submitSwotAnalysis(data, "id")
+    const result = await submitSwotAnalysis(data, workId);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -45,7 +49,7 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
         </pre>
       ),
     });
-    
+
     //router.push('/mypage/evaluation')
   }
   return (
@@ -59,10 +63,7 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Strengths</FormLabel>
-                <Textarea
-                  {...field}
-
-                />
+                <Textarea {...field} />
               </FormItem>
             )}
           />
@@ -74,10 +75,7 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Weakness</FormLabel>
-                <Textarea
-                  {...field}
-
-                />
+                <Textarea {...field} />
               </FormItem>
             )}
           />
@@ -89,25 +87,25 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Advise</FormLabel>
-                <Textarea
-                  {...field}
-
-                />
+                <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
         <section className="flex justify-between">
-            <Button variant="secondary" size="lg"
-                onClick={() => {
-                    router.back();
-                }}
-            >
-                {text.go_back}
-            </Button>
-            <Button type="submit" variant={'primary'} size='lg'>
-                {text.next}
-            </Button>
+          <Button
+            variant="secondary"
+            size="lg"
+            type="button"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            {text.go_back}
+          </Button>
+          <Button type="submit" variant={"primary"} size="lg">
+            {text.next}
+          </Button>
         </section>
       </form>
     </Form>

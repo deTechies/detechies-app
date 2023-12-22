@@ -21,8 +21,7 @@ import { z } from "zod";
 
 interface BasicEvaluationInfoProps {
   text: any;
-  projectId: string;
-  userId: string;
+  workId: string;
   verified: boolean;
 }
 
@@ -45,8 +44,7 @@ const defaultValues: Partial<verifyWorkValues> = {};
 
 export default function BasicEvaluationInfo({
   text,
-  projectId,
-  userId,
+  workId, 
   verified,
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
@@ -67,7 +65,7 @@ export default function BasicEvaluationInfo({
         </pre>
       ),
     });
-    const result = await submitVerifyWork(data, projectId, userId);
+    const result = await submitVerifyWork(data, workId);
 
     if (data.match == "80") {
       toast({
@@ -80,7 +78,7 @@ export default function BasicEvaluationInfo({
           </pre>
         ),
       });
-      router.push(`/project/${projectId}`);
+      router.push(`/project`);
     }
  
 
@@ -221,7 +219,7 @@ export default function BasicEvaluationInfo({
                   type="button"
                   onClick={() => {
                     router.push(
-                      `/project/${projectId}/${userId}/evaluate-team-member`
+                      `/work/${workId}/evaluate-team-member`
                     );
                   }}
                 >
