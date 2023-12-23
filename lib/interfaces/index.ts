@@ -195,6 +195,7 @@ export enum GROUP_TYPE {
     percentage: number;
     tags: string[];
     begin_date: string;
+    surveyResponses: any[];
     end_date?: string;
     description: string;
     created_at: Date;

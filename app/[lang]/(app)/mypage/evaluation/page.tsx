@@ -28,7 +28,7 @@ export default async function Evaluation({
       <TabsContent value="requests">
         <EvaluationRequests />
       </TabsContent>
-      <TabsContent value="evaluation s">
+      <TabsContent value="evaluations">
         <EvaluationProvided />
       </TabsContent>
     </Tabs>

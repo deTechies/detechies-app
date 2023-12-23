@@ -23,6 +23,7 @@ interface BasicEvaluationInfoProps {
   text: any;
   workId: string;
   verified: boolean;
+  defaultValues:  Partial<verifyWorkValues>;
 }
 
 const baseInfoSchema = z.object({
@@ -30,7 +31,7 @@ const baseInfoSchema = z.object({
     required_error: "You need to select a matching performance.",
   }),
   hourly_rate: z.string().optional(),
-  billable_hourly_wage: z.string().optional(),
+  weekly_hours: z.string().optional(),
   reject_letter: z.string().optional(),
   rate_contributions: z.number().min(0).max(100).optional(),
   rate_requirements: z.number().min(0).max(100).optional(),
@@ -40,12 +41,11 @@ const baseInfoSchema = z.object({
 type verifyWorkValues = z.infer<typeof baseInfoSchema>;
 
 // This can come from your database or API.
-const defaultValues: Partial<verifyWorkValues> = {};
-
 export default function BasicEvaluationInfo({
   text,
   workId, 
   verified,
+  defaultValues
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
     resolver: zodResolver(baseInfoSchema),
@@ -82,7 +82,7 @@ export default function BasicEvaluationInfo({
     }
  
 
-    //router.push(`/project/${projectId}/${userId}/evaluate-team-member`);
+    router.push(`/work/${workId}/survey`);
   }
 
   return (
@@ -95,7 +95,7 @@ export default function BasicEvaluationInfo({
             <section className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="billable_hourly_wage"
+                name="weekly_hours"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{text.billable_hourly_wage}</FormLabel>
@@ -219,7 +219,7 @@ export default function BasicEvaluationInfo({
                   type="button"
                   onClick={() => {
                     router.push(
-                      `/work/${workId}/evaluate-team-member`
+                      `/work/${workId}/survey`
                     );
                   }}
                 >

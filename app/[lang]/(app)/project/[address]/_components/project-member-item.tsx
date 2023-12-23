@@ -45,7 +45,7 @@ export default async function ProjectMemberItem({
               <h5 className="text-title_m">
                 {details.user?.display_name} | {details.role}
               </h5>
-              <Badge>Rewards</Badge>
+              <Badge>{details.works[0]?.surveyResponses?.length}</Badge>
             </header>
             <>
               {access ? (

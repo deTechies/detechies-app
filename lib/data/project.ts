@@ -170,14 +170,7 @@ export async function acceptProjectMember(projectMemberId: string){
     },
   });
   
- // revalidatePath('/', 'layout')
-
-
-  if (!response.ok) {
-    throw new Error("Failed to join project");
-  }
-
-  return true;
+  return response.json();
 }
 
 
@@ -191,10 +184,6 @@ export async function acceptProjectInvitation(projectMemberId: string){
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
   });
-
-  if (!response.ok) {
-    throw new Error("Failed to join project");
-  }
 
   
   return response.json();
