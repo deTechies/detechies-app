@@ -1,4 +1,4 @@
-import { ContributionFormData } from "@/app/[lang]/(app)/project/[address]/_components/project-contribution-form";
+import { ContributionFormData } from "@/app/[lang]/(app)/project/_components/project-contribution-form";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
@@ -159,6 +159,36 @@ export async function getPendingProjectMembers(address: string) {
   return data;
 }
 
+export async function acceptProjectMember(projectMemberId: string){
+  const session = await getSession();
+
+  const response = await fetch(`${API_URL}/project-member/accept/member/${projectMemberId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+  
+  return response.json();
+}
+
+
+export async function acceptProjectInvitation(projectMemberId: string){
+  const session = await getSession();
+
+  const response = await fetch(`${API_URL}/project-member/accept/invite/${projectMemberId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  
+  return response.json();
+}
+
 export async function joinProject(data: JoinProject) {
   const session = await getSession();
 
@@ -176,11 +206,8 @@ export async function joinProject(data: JoinProject) {
     }),
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to join project");
-  }
 
-  return true;
+  return response;
 }
 
 export async function inviteByEmail(
@@ -229,6 +256,29 @@ export async function getProjectMember(projectId: string, userId: string) {
   const url = new URL(`${API_URL}/project-member/single`);
   url.searchParams.append("projectId", projectId);
   url.searchParams.append("userId", userId);
+
+  if (!session?.web3?.accessToken) {
+    throw new Error("No access token found");
+  }
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch project member");
+  }
+
+  return response.json();
+}
+
+
+export async function getProjectWork(id:string){
+  const session = await auth();
+  const url = new URL(`${API_URL}/project-work/${id}`);
 
   if (!session?.web3?.accessToken) {
     throw new Error("No access token found");

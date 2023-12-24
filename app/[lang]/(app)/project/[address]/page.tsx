@@ -5,10 +5,13 @@ import { Project } from "@/lib/interfaces";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
-import ProjectDetail from "./project-detail";
-import ProjectInfo from "./project-info";
-import ProjectMembers from "./project-members";
-import ProjectNfts from "./project-nfts";
+import AcceptInvitation from "./_components/accept-invitation";
+import PendingMemberList from "./_components/pending-members-list";
+
+import ProjectDetail from "../_components/project-detail";
+import ProjectInfo from "../_components/project-info";
+import ProjectMembers from "./_components/project-members";
+import ProjectNfts from "./_components/project-nfts";
 
 export default async function ProjectDetailPage({
   params,
@@ -40,6 +43,7 @@ export default async function ProjectDetailPage({
     );
 
   const dictionary = (await getDictionary(params.lang)) as any;
+  if (data.userRole == "invited") return <AcceptInvitation image={data.image} projectId={data.id} />
 
   return (
     <main className="flex md:flex-row flex-col my-12 mx-5 gap-7">
@@ -60,6 +64,10 @@ export default async function ProjectDetailPage({
       <section className="flex flex-col gap-8 min-w-[300px]">
         <ProjectInfo info={data} />
         <ProjectNfts address={data.id} isCreator={data.isCreator} />
+        <PendingMemberList
+          projectId={params.address}
+          userRole={data.userRole}
+        />
       </section>
     </main>
   );

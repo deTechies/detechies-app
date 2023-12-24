@@ -63,12 +63,11 @@ export async function createGroup(formData: CreateClub) {
 
 export async function getPendingMembers(address: string) {
   const session = await auth();
-  const response = await fetch(`${API_URL}/members/${address}`, {
+  const response = await fetch(`${API_URL}/project/${address}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-    next: { revalidate: 60 },
   });
 
   return response.json();

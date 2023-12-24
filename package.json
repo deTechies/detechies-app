@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.17",
     "@hookform/resolvers": "^3.3.2",
     "@nextui-org/react": "^2.2.9",
+    "@preline/select": "^2.0.1",
     "@pushprotocol/restapi": "^1.4.24",
     "@pushprotocol/socket": "^0.5.2",
     "@radix-ui/react-avatar": "^1.0.4",

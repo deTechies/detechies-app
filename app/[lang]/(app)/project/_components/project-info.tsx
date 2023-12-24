@@ -1,7 +1,7 @@
 import UploadWorks from "@/components/modal/upload-works";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Project } from "@/lib/interfaces";
-import Links from "./links";
+import Links from "../[address]/links";
 
 export default async function ProjectInfo({ info }: { info: Project }) {
 

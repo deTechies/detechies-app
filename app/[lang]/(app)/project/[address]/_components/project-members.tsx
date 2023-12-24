@@ -1,10 +1,12 @@
 import { Card } from "@/components/ui/card";
 
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
-import PendingMemberList from "@/components/modal/pending-member-list";
+
 import JoinProject from "@/components/project/join-project";
 import { getPendingProjectMembers } from "@/lib/data/project";
-import ProjectMemberItem from "./_components/project-member-item";
+import PendingMemberList from "./pending-members-list";
+import ProjectMemberItem from "./project-member-item";
+
 
 export default async function ProjectMembers({
   members,
@@ -15,7 +17,7 @@ export default async function ProjectMembers({
   members: any[];
   projectId: string;
   userRole: string;
-  lang: any;
+  lang: any
 }) {
   //getting all the members and holders of this project NFT.
 
@@ -23,29 +25,24 @@ export default async function ProjectMembers({
   if (userRole == "admin") {
     pendingMembers = await getPendingProjectMembers(projectId);
   }
+  
 
-  console.log(userRole);
+  
 
   return (
-    <section className="flex flex-col gap-3">
-      <Card className="flex flex-col gap-4 pt-7 px-9 pb-9">
+    <section className="flex flex-col gap-4">
+      <Card className="flex flex-col gap-4 p-4 px-6">
         <header className="flex items-center justify-between">
           <h5 className="text-subhead_s text-text-primary ">
-            {lang.details.members.project_member} ({members.length})
+            Members ({members.length})
           </h5>
-
-          {/* {pendingMembers.length > 0 && (
+          {pendingMembers.length > 0 && (
             <span className="text-xs text-text-secondary">
-              <PendingMemberList pendingMembers={pendingMembers} />
+              <PendingMemberList projectId={projectId} userRole={userRole} />
             </span>
-          )} */}
-
-          {userRole == "none" && (
-            <JoinProject address={projectId} lang={lang} />
           )}
-          {userRole == "admin" && (
-            <InviteProjectMember projectId={projectId} lang={lang} />
-          )}
+          {userRole == 'none' && <JoinProject lang={lang} address={projectId} />}
+          {userRole == 'admin' && <InviteProjectMember lang={lang} projectId={projectId} />}
         </header>
       </Card>
 
@@ -55,10 +52,10 @@ export default async function ProjectMembers({
             <ProjectMemberItem
               projectId={projectId}
               key={index}
-              access={userRole != "none"}
-              details={member}
-              lang={lang}
               userRole={userRole}
+              lang={lang}
+              access={userRole != 'none'}
+              details={member}
             />
           ))}
       </div>

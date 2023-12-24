@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { submitSwotAnalysis } from "@/lib/data/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -13,9 +14,10 @@ interface BasicEvaluationInfoProps {
 }
 
 const finalFeedbackForm = z.object({
-  strengths: z.string().optional(),
-  weaknesses: z.string().optional(),
-  advise: z.string().optional(),
+  strength: z.string(),
+  weakness: z.string(),
+  opportunity: z.string(),
+  threat: z.string().optional(),
 });
 
 type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
@@ -23,24 +25,32 @@ type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
 // This can come from your database or API.
 const defaultValues: Partial<FinalFeedbackValues> = {};
 
-export default function FinalFeedbackForm({ text }: { text: any }) {
+export default function FinalFeedbackForm({
+  text,
+  workId,
+}: {
+  text: any;
+  workId: any;
+}) {
   const form = useForm<FinalFeedbackValues>({
     resolver: zodResolver(finalFeedbackForm),
     defaultValues,
   });
   const router = useRouter();
 
-  function onSubmit(data: FinalFeedbackValues) {
+  async function onSubmit(data: FinalFeedbackValues) {
+    const result = await submitSwotAnalysis(data, workId);
     toast({
       title: "You submitted the following values:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
         </pre>
       ),
     });
-    
-    router.push('/mypage/evaluation')
+
+    //router.push('/mypage/evaluation')
   }
   return (
     <Form {...form}>
@@ -49,14 +59,11 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
         <section className="flex flex-col gap-4">
           <FormField
             control={form.control}
-            name="strengths"
+            name="strength"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Strengths</FormLabel>
-                <Textarea
-                  {...field}
-
-                />
+                <Textarea {...field} />
               </FormItem>
             )}
           />
@@ -64,14 +71,11 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
         <section className="flex flex-col gap-4">
           <FormField
             control={form.control}
-            name="weaknesses"
+            name="weakness"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Weakness</FormLabel>
-                <Textarea
-                  {...field}
-
-                />
+                <Textarea {...field} />
               </FormItem>
             )}
           />
@@ -79,29 +83,29 @@ export default function FinalFeedbackForm({ text }: { text: any }) {
         <section className="flex flex-col gap-4">
           <FormField
             control={form.control}
-            name="advise"
+            name="opportunity"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Advise</FormLabel>
-                <Textarea
-                  {...field}
-
-                />
+                <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
         <section className="flex justify-between">
-            <Button variant="secondary" size="lg"
-                onClick={() => {
-                    router.back();
-                }}
-            >
-                {text.go_back}
-            </Button>
-            <Button type="submit" variant={'primary'} size='lg'>
-                {text.next}
-            </Button>
+          <Button
+            variant="secondary"
+            size="lg"
+            type="button"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            {text.go_back}
+          </Button>
+          <Button type="submit" variant={"primary"} size="lg">
+            {text.next}
+          </Button>
         </section>
       </form>
     </Form>
