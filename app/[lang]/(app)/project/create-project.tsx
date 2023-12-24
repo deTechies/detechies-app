@@ -134,7 +134,7 @@ export default function CreateProject() {
     setLoading(false);
   }
 
-  const selectFile = (file: File) => {
+  const selectFile = (file: File | null) => {
     setFile(file);
   };
 

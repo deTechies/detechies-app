@@ -1,58 +1,91 @@
 {
-    "nav": {
-      "find_expert": "전문가 찾기", 
-      "project": "프로젝트",
-      "groups": "그룹",
-      "my_profile": "내 프로필"
+  "nav": {
+    "find_expert": "Experts",
+    "project": "Projects",
+    "groups": "Groups",
+    "my_profile": "Me"
+  },
+  "user": {
+    "details": {
+      "followers": "followers",
+      "following": "following",
+      "Avatar Items": "avatar items",
+      "Profile Items": "profile items"
+    }
+  },
+  "profile_detail_card": {
+    "example": "example"
+  },
+  "onboard": {
+    "welcome": {
+      "title": "Professional career certifications are different!",
+      "body": "If you already have an account, log in to Careerzen using your existing account.",
+      "web3": "Social Wallet",
+      "browser": "Browser Wallet"
     },
-    "user": {
-      "details": {
-        "followers": "folowers", 
-        "following": "following", 
-        "Avatar Items": "avatar items", 
-        "Profile Items": "profile items"
-      }      
-    }, 
-    "buttons": {
-        "create project": "프로젝트 만들기",
-        "create group": "그룹 만들기",
-        "create profile": "프로필 만들기"
-    },
-    "profile_detail_card": {
-        "example": "example"
-    },
-    "onboard": {
-      "welcome": {
-        "title": "전문가들의 커리어 인증은 다르다!",
-        "body": "이미 계정이 있다면 기존 계정을 사용해 Careerzen에 로그인 합니다.",
-        "web3": "소셜 계정으로 계속하기", 
-        "browser": "메타마스크 지갑"
-      },
-      "verify_email": {
-        "title": "회원가입",
-        "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.", 
-        "email": "이메일", 
-        "email_verify": "인증완료",
-        "alert_title": "완벽한 개인정보 보안",
-        "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.", 
-        "accordion": {
-          "terms_of_services": "서비스 이용약관 (필수)",
-          "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
-          "privacy_policy": "개인정보처리방침 (필수)",
-          "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
-          "reward_notification": "보상 및 이벤트 알림 (선택)",
-          "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
-        }
-        
+    "verify_email": {
+      "title": "Sign up!",
+      "body": "Professional personal members, please make sure to verify your personal email, work emails make it harder to find your account if you leave..",
+      "email": "email",
+      "email_verify": "verify email",
+      "alert_title": "완벽한 개인정보 보안",
+      "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
+      "accordion": {
+        "terms_of_services": "Terms of Services (required)",
+        "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
+        "privacy_policy": "Privacy Policy (required)",
+        "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
+        "reward_notification": "In-app notification (optional)",
+        "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
       }
+    }
+  },
+  "project": {
+    "list": {
+      "projects": "프로젝트",
+      "all_project": "전체 프로젝트",
+      "scope_of_disclosure": "공개 범위",
+      "project_type": {
+        "client": "외주 프로젝트",
+        "internal": "사내 프로젝트",
+        "side": "사이드 프로젝트",
+        "hackathon": "해커톤",
+        "other": "기타"
+      },
+      "privacy_type": {
+        "all": "모든 유저",
+        "project": "프로젝트 멤버",
+        "group": "그룹 멤버",
+        "private": "프라이빗"
+      },
+      "search": "키워드를 한글자 이상 입력해주세요.",
+      "my_project": "내 프로젝트",
+      "no_projects_found": "검색 결과가 없습니다.",
+      "view_more": "더 보기",
+      "create_project": "내 프로젝트 만들기"
     },
-    "project": {
-      "details": {
-        "join_project": {
-          "title": "Join Project",
-          "body": "Join this project to start working on it.",
-          "button": "Join Project"
-        }
+    "details": {
+      "join_project": {
+        "title": "프로젝트 참여하기",
+        "body": "프로젝트에서 어떤 역할을 했는지 선택하고, 리더에게 참여 요청 메세지를 보내세요. 리더가 승인하면 프로젝트 멤버가 될 수 있어요.",
+        "button": "프로젝트 참여하기",
+        "role": "멤버 종류",
+        "message": "요청 메시지",
+        "message_ex": "안녕하세요. 프론트엔드 개발자 홍길동 입니다.",
+        "back": "뒤로가기",
+        "submit": "참여 요청하기"
+      },
+      "invite_member": {
+        "title": "멤버 초대하고 평가받기",
+        "body": "프로젝트를 함께 진행했던 팀원, 관리자, 클라이언트를 초대하는 것과 동시에, 내 성과에 대한 평가요청도 전송돼요.",
+        "search": "사용자 닉네임을 입력해주세요.",
+        "can_not_find": "닉네임을 찾을 수 없어요.",
+        "invite_by_email": "이메일로 초대하기",
+        "back": "나중에 할게요",
+        "invite": "초대하기",
+        "no_members_found": "검색 결과가 없습니다",
+        "member_type": "멤버 종류",
+        "name": "이름"
       },
       "member": {
         "evaluate": {
@@ -64,7 +97,7 @@
           "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.", 
           "":"이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
           "does_the_work_details_match_the_facts": "윤창진님이 기재한 업무내용이 사실과 일치하나요?", 
-          "more_than_20_message": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
+          "more_than_20": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
           "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상", 
           "more_than_10": "기재한 내용 중 사실과 다른 부분이 10% 이상",
           "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상", 
@@ -74,27 +107,33 @@
           "reject": "업무내용 사실여부 평가 사유",
           "meet_requirements": {
             "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
-            "step_1_message": "20_message percentage message",
-            "step_2_message": "40_message User meet the requirements of the project",
-            "step_3_message": "60_message User meet the requirements of the project",
-            "step_4_message": "80_message User meet the requirements of the project",
-            "step_5_message": "100_message User meet the requirements of the project"            
+            "messages": [     
+              "20_message percentage message",
+              "40_message User meet the requirements of the project",
+              "60_message User meet the requirements of the project",
+              "80_message User meet the requirements of the project",
+              "100_message User meet the requirements of the project"
+            ]         
           },
           "meet_schedule": {
             "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
-            "step_1_message": "20_message percentage message",
-            "step_2_message": "40_message User meet the requirements of the project",
-            "step_3_message": "60_message User meet the requirements of the project",
-            "step_4_message": "80_message User meet the requirements of the project",
-            "step_5_message": "100_message User meet the requirements of the project"
+            "messages": [     
+              "20_message percentage message",
+              "40_message User meet the requirements of the project",
+              "60_message User meet the requirements of the project",
+              "80_message User meet the requirements of the project",
+              "100_message User meet the requirements of the project"
+            ]
           },
           "work_contribution": {
             "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
-            "step_1_message": "20_message percentage message",
-            "step_2_message": "40_message User meet the requirements of the project",
-            "step_3_message": "60_message User meet the requirements of the project",
-            "step_4_message": "80_message User meet the requirements of the project",
-            "step_5_message": "100_message User meet the requirements of the project"   
+            "messages": [     
+              "20_message percentage message",
+              "40_message User meet the requirements of the project",
+              "60_message User meet the requirements of the project",
+              "80_message User meet the requirements of the project",
+              "100_message User meet the requirements of the project"
+            ]
           }
         }
       }
@@ -115,34 +154,125 @@
       "edit_profile": {
         "edit_profile": "프로필 수정", 
         "full_name": "본명 (비공개)", 
-        "first_name": "이름",
         "last_name": "성",
-        "profession": "직업", 
-        "specialisation": "전문분야", 
-        "profile_description": "내 소개",
-        "username": "닉네임", 
-        "save_changes": "저장하기"
+        "first_name": "이름",
+        "email": "이메일"
       },
-      "project": {
-        "projects": "프로젝트",
-        "new_project": "추가하기", 
-        "evaluation": "성과 평가 ", 
-        "present": "present",
-        "view_project": "자세히 보기 "
+      "project_description": "프로젝트 설명",
+      "hide": "숨기기",
+      "show_more": "자세히 보기",
+      "members": {
+        "project_member": "프로젝트 멤버",
+        "invite": "초대하기",
+        "unregistered": "성과 미등록",
+        "evaluate": "평가하기"
       },
-      "menu": {
-        "portfolio": "포트폴리오",
-        "edit_profile": "프로필 수정",
-        "evaluation_history": "평가 요청 내역",
-        "reputation_history": "평판 조회 내역",
-        "career_avatar": "커리어 아바타"
-      },
-      "evaluations": {
-        "menu": {
-          "evaluation_requested": "내가 요청한 평가", 
-          "evaluation_requests": "요청받은 평가", 
-          "evaluation_wrote": "내가 작성한 평가"
+      "role_type": {
+        "admin": "관리자",
+        "member": "팀원",
+        "client": "클라이언트"
+      }
+    },
+    "member": {
+      "evaluate": {
+        "evaluate_performance": "성과 평가하기", 
+        "evaluate_performance_description": "이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
+        "basic_information": "기본 정보",
+        "billable_hourly_wage":  "청구시급", 
+        "time_weekly": "투입시간 (주 평균)", 
+        "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.", 
+        "":"이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
+        "does_the_work_details_match_the_facts": "윤창진님이 기재한 업무내용이 사실과 일치하나요?", 
+        "more_than_20_message": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
+        "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상", 
+        "more_than_10": "기재한 내용 중 사실과 다른 부분이 10% 이상",
+        "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상", 
+        "all_match": "네, 모두 일치합니다.",
+        "go_back": "뒤로가기",
+        "next": "다음",
+        "reject": "업무내용 사실여부 평가 사유",
+        "meet_requirements": {
+          "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
+          "step_1_message": "20_message percentage message",
+          "step_2_message": "40_message User meet the requirements of the project",
+          "step_3_message": "60_message User meet the requirements of the project",
+          "step_4_message": "80_message User meet the requirements of the project",
+          "step_5_message": "100_message User meet the requirements of the project"            
+        },
+        "meet_schedule": {
+          "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
+          "step_1_message": "20_message percentage message",
+          "step_2_message": "40_message User meet the requirements of the project",
+          "step_3_message": "60_message User meet the requirements of the project",
+          "step_4_message": "80_message User meet the requirements of the project",
+          "step_5_message": "100_message User meet the requirements of the project"
+        },
+        "work_contribution": {
+          "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
+          "step_1_message": "20_message percentage message",
+          "step_2_message": "40_message User meet the requirements of the project",
+          "step_3_message": "60_message User meet the requirements of the project",
+          "step_4_message": "80_message User meet the requirements of the project",
+          "step_5_message": "100_message User meet the requirements of the project"   
         }
       }
     }
+  },
+  "mypage": {
+    "profile": {
+      "following": "팔로잉", 
+      "followers": "팔로워", 
+      "token": "토큰", 
+      "avatar_settings": "아바타 설정",
+      "name": "이름"
+    },
+    "main": {
+      "profile": "프로필", 
+      "edit": "수정하기", 
+      "description": "내 소개"
+    },
+    "edit_profile": {
+      "edit_profile": "프로필 수정", 
+      "full_name": "본명 (비공개)", 
+      "first_name": "이름",
+      "last_name": "성",
+      "profession": "직업", 
+      "specialisation": "전문분야", 
+      "profile_description": "내 소개",
+      "username": "닉네임", 
+      "save_changes": "저장하기"
+    },
+    "project": {
+      "projects": "프로젝트",
+      "new_project": "추가하기", 
+      "evaluation": "성과 평가 ", 
+      "present": "present",
+      "view_project": "자세히 보기 "
+    },
+    "menu": {
+      "portfolio": "포트폴리오",
+      "edit_profile": "프로필 수정",
+      "evaluation_history": "평가 요청 내역",
+      "reputation_history": "평판 조회 내역",
+      "career_avatar": "커리어 아바타"
+    },
+    "evaluations": {
+      "menu": {
+        "evaluation_requested": "내가 요청한 평가", 
+        "evaluation_requests": "요청받은 평가", 
+        "evaluation_wrote": "내가 작성한 평가"
+      }
+    }
+  },
+  "group": {
+    "create": {
+      "title": "Create Group", 
+      "required_text": "*는 필수입력 사항입니다.", 
+      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
+      "form": {
+        "type": "그룹 카테고리 *", 
+        "help_text": "해당 그룹은 조직 대표 이메일 인증이 필요해요. 대표 메일을 입력하고 인증코드를 확인해주세요."
+      }
+    }
+  }
 }

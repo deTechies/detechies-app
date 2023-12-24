@@ -18,16 +18,17 @@ export default function PersonItem({
     //on select 
 
     return (
-      <button className={`flex justify-between items-center p-4 hover:bg-background-layer-2 w-full rounded-sm ${selected && 'bg-accent-secondary hover:bg-state-error-secondary'}`} onClick={() => {
+      <button className={`flex justify-between items-center py-4 hover:bg-background-layer-2 w-full rounded-sm ${selected && 'bg-accent-secondary hover:bg-state-error-secondary'}`} onClick={() => {
          returnValue(member)
       }}>
         <figure className="flex gap-4">
-          <div className="relative w-12 h-12 rounded-[6px] bg-background-layer-2">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden bg-background-layer-2">
               <IPFSImageLayer hashes={[]} />
           </div>
-          <div className="text-left">
-            <p className="font-bold">{member?.display_name}</p>
-            <p className="text-muted-foreground">{'no jobtitle found'}</p>
+
+          <div className="text-left flex flex-col gap-1">
+            <p className="text-title-s">{member?.display_name}</p>
+            <p className="text-label-m text-muted-foreground">{'no jobtitle found'}</p>
           </div>
         </figure>
       </button>

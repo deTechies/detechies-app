@@ -41,11 +41,68 @@
     }
   },
   "project": {
+    "list": {
+      "projects": "projects",
+      "all_project": "All project",
+      "scope_of_disclosure": "Scope",
+      "project_type": {
+        "client": "Client",
+        "internal": "Internal",
+        "side": "Side",
+        "hackathon": "Hackathon",
+        "other": "Other"
+      },
+      "privacy_type": {
+        "all": "All users",
+        "project": "project member",
+        "group": "group member",
+        "private": "private"
+      },
+      "search": "Search",
+      "my_project": "my project",
+      "no_projects_found": "No projects found",
+      "view_more": "View More",
+      "create_project": "Create Project"
+    },
     "details": {
       "join_project": {
         "title": "Join Project",
         "body": "Join this project to start working on it.",
-        "button": "Join Project"
+        "button": "Join Project",
+        "role": "role",
+        "message": "message",
+        "message_ex": "Tell us a little bit about yourself",
+        "back": "Close",
+        "submit": "Submit"
+      },
+      "invite_member": {
+        "title": "Invite member",
+        "body": "At the same time as inviting team members, managers, and clients who worked on the project together, a request for evaluation of my performance is also sent.",
+        "search": "search",
+        "can_not_find": "I can not find my nickname.",
+        "invite_by_email": "Invite by email",
+        "back": "Close",
+        "invite": "Invite",
+        "no_members_found": "No members found",
+        "member_type": "member type",
+        "name": "Name",
+        "last_name": "Last Name",
+        "first_name": "First Name",
+        "email": "email"
+      },
+      "project_description": "Project Description",
+      "hide": "hide",
+      "show_more": "show more",
+      "members": {
+        "project_member": "Project Members",
+        "invite": "invite",
+        "unregistered": "unregistered",
+        "evaluate": "evaluate"
+      },
+      "role_type": {
+        "admin": "Admin",
+        "member": "Member",
+        "client": "Client"
       }
     },
     "member": {
@@ -67,28 +124,34 @@
         "next": "Next",
         "reject": "Reason of rejection",
         "meet_requirements": {
-          "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"
+          "label": "Did the user meet the requirements?",
+          "messages": [     
+            "20_message percentage message",
+            "40_message User meet the requirements of the project",
+            "60_message User meet the requirements of the project",
+            "80_message User meet the requirements of the project",
+            "100_message User meet the requirements of the project"
+          ]
         },
         "meet_schedule": {
-          "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"
+          "label": "Did the users meet the time schedules of the project?",
+          "messages": [     
+            "20_message percentage message",
+            "40_message User meet the requirements of the project",
+            "60_message User meet the requirements of the project",
+            "80_message User meet the requirements of the project",
+            "100_message User meet the requirements of the project"
+          ]
         },
         "work_contribution": {
-          "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"
+          "label": "Please tell us about teh contribution to the work.",
+          "messages": [     
+            "20_message percentage message",
+            "40_message User meet the requirements of the project",
+            "60_message User meet the requirements of the project",
+            "80_message User meet the requirements of the project",
+            "100_message User meet the requirements of the project"
+          ]
         }
       }
     }
@@ -137,6 +200,17 @@
       "evaluation_history": "evaluation history",
       "reputation_history": "reputation history",
       "career_avatar": "career avatar"
+    }
+  },
+  "group": {
+    "create": {
+      "title": "Create Group", 
+      "required_text": "*는 필수입력 사항입니다.", 
+      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
+      "form": {
+        "type": "그룹 카테고리 *", 
+        "help_text": "해당 그룹은 조직 대표 이메일 인증이 필요해요. 대표 메일을 입력하고 인증코드를 확인해주세요."
+      }
     }
   }
 }

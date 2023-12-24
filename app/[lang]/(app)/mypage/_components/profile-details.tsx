@@ -27,10 +27,10 @@ export default async function ProfileDetails({
       <CardContent className="flex flex-col gap-8">
         <Connections github={profile?.github} address={profile?.id}/>
 
-        {profile?.profile_details.description && (
+        {profile?.profile_details?.description && (
           <section className="border border-border-div rounded-sm flex flex-col p-4 gap-4">
             <h5 className="text-title_m capitalize">{text?.description}</h5>
-            <p className="text-body_m">{profile?.profile_details.description}</p>
+            <p className="text-body_m">{profile?.profile_details?.description}</p>
           </section>
         )}
       </CardContent>

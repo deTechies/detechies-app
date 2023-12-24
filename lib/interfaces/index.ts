@@ -16,7 +16,6 @@ export interface User {
     full_name: string;
     country: string;
     description: string;
-
     app_settings: UserSettings;
   }
   
@@ -38,7 +37,7 @@ export interface User {
   export interface CreateClub {
     name: string;
     image: string;
-    type: ClubType;
+    type: GROUP_TYPE;
     description: string;
     urls: string[];
     owner_email? : string;
@@ -54,20 +53,17 @@ export interface User {
     updated_at?: Date;
   }
   
-export enum ClubType {
-    AUTHORITY = 'authority',
-    EDUCATION = 'education',
-    COMPANY = 'company', 
+export enum GROUP_TYPE {
     COMMUNITY = 'community',
-    OTHER = 'other'
+    COMPANY = 'company',
+    AGENCY = 'agency',
+    EDUCATION = 'education',
   }
   
   export enum ProjectType {
-    CLIENT = 'client',
-    INTERNAL = 'internal',
-    SIDE = 'side',
-    HACKATHON = 'hackathon',
-    OTHER = 'other'
+    COMPANY = 'company',
+    FREELANCE = 'freelance',
+    SIDE = 'side'
   }
   
   export enum PrivacyType {
@@ -100,6 +96,12 @@ export enum ClubType {
     DELIVERY = 'delivery'
   }
   
+  export enum QuestionType {
+    INPUT = 'input',
+    SLIDER = 'slider',
+    CIRCLES = 'circles',
+  }
+  
   export interface Member {
     id: string;
     user: string;
@@ -113,6 +115,7 @@ export enum ClubType {
     creator: string;
     created_at: Date;
   }
+  
   
   export interface FileShare {
     id: string;
@@ -146,7 +149,9 @@ export enum ClubType {
     description: string;
     image: string;
     creator?: string;
-    type: ProjectType;
+    scope?: string;
+    type: string;
+    tags?: string[];
     begin_date: string;
     end_date?: string
     category: ProjectCategory;
@@ -157,7 +162,8 @@ export enum ClubType {
     onchain_id: string
     isCreator: boolean;
     isMember?: boolean;
-    userRole: 'admin' | 'member' | 'client' | 'none';
+    type: string;
+    userRole: string;
     urls?: string[];
     members: ProjectMember[]
     files: File[]
@@ -167,7 +173,7 @@ export enum ClubType {
   }
   
   export interface ProjectMember {
-    id: string;
+    memberId: string;
     user: User;
     percentage: number;
     role: string;
@@ -184,11 +190,12 @@ export enum ClubType {
   }
   
   export interface ProjectWork {
-    id: string;
+    workId: string;
     name: string;
     percentage: number;
     tags: string[];
     begin_date: string;
+    surveyResponses: any[];
     end_date?: string;
     description: string;
     created_at: Date;
@@ -196,10 +203,13 @@ export enum ClubType {
   
 export interface Question { 
   id: string;
+  type: string;
   content: string;
   category: string;
   scale: number; 
   messages?: string[];
+  minText: string;
+  maxText: string;
   created_at: Date;
 }
 

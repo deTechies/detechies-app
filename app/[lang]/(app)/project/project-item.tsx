@@ -1,12 +1,15 @@
+import { Badge } from "@/components/ui/badge";
+import { Project } from "@/lib/interfaces";
+import { Locale } from "@/i18n.config";
 import Image from "next/image";
 import Link from "next/link";
-import { ProjectItemProps } from "./page";
-import { Badge } from "@/components/ui/badge";
 
 export default function ProjectItem({
   details,
+  lang,
 }: {
-  details: ProjectItemProps;
+  details: Project;
+  lang: any;
 }) {
   const truncateText = (text: string, maxLength: number): string => {
     if (text.length <= maxLength) return text;
@@ -31,13 +34,19 @@ export default function ProjectItem({
         <header className="flex justify-between items-center capitalize">
           <h5 className="text-title_m text-text-primary">{details.name}</h5>
 
-          {/* <Badge className="bg-state-info-secondary text-state-info py-2 px-2.5">
-            Group
-          </Badge> */}
+          {details.scope === "private" ? (
+            <Badge className="py-2 px-2.5" variant="tertiary">
+              {lang.privacy_type.private}
+            </Badge>
+          ) : details.scope === "group" ? (
+            <Badge className="py-2 px-2.5" variant="info">
+              {lang.privacy_type.group}
+            </Badge>
+          ) : null}
         </header>
 
         <section className="space-x-2 divide-x text-text-secondary text-label_m">
-          <span>{details.type}</span>
+          <span>{lang.project_type[details.type]}</span>
         </section>
 
         <div>
@@ -52,10 +61,15 @@ export default function ProjectItem({
         </div>
 
         <div className="flex gap-3 justify-self-end">
-          {/* category should come in the form of an array. */}
-          <Badge className="bg-transparent border-border-input border text-text-placeholder py-2 px-2.5">
-            {details.category}
-          </Badge>
+          {details.tags &&
+            details.tags?.map((tag) => (
+              <Badge
+                key={tag}
+                className="bg-transparent border-border-input border text-text-placeholder py-2 px-2.5"
+              >
+                {tag}
+              </Badge>
+            ))}
         </div>
       </section>
     </Link>

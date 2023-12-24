@@ -19,6 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
 
+import { Label } from "@radix-ui/react-label";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -160,7 +161,7 @@ export default function CreateProfile({ text }: { text: any }) {
                 />
               </FormControl>
               <div className="space-y-1 leading-none w-full">
-                <FormLabel className="text-title_m">{text.accordion.terms_of_services}</FormLabel>
+                <Label className="text-title_m">{text.accordion.terms_of_services}</Label>
               </div>
               <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
             </FormItem>
@@ -179,7 +180,7 @@ export default function CreateProfile({ text }: { text: any }) {
                 />
               </FormControl>
               <div className="space-y-1 leading-none w-full">
-                <FormLabel className="text-title_m flex-stretch">{text.accordion.privacy_policy}</FormLabel>
+                <Label className="text-title_m flex-stretch">{text.accordion.privacy_policy}</Label>
               </div>
               <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
             </FormItem>
