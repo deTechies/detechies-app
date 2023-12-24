@@ -22,8 +22,10 @@ import SelectedProjectMember from "./selected-project-member";
 
 export default function InviteProjectMember({
   projectId,
+  lang,
 }: {
   projectId: string;
+  lang: any;
 }) {
   const searchParams = useSearchParams()!;
   const search = searchParams.get("search") as string;
@@ -34,9 +36,9 @@ export default function InviteProjectMember({
 
   if (loading) return <Skeleton className="h-3 w-10 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
-  if (!members) return <div>No members found</div>;
+  if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
 
-  console.log(members);
+  // console.log(members);
 
   /*   const filteredData = members.filter((member: any) => {
     return member.display_name.toLowerCase().includes(search.toLowerCase());
@@ -45,26 +47,33 @@ export default function InviteProjectMember({
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge
+        <Button
           variant="secondary"
           className="cursor-pointer text-sm font-normal py-2 px-4"
         >
-          Invite <Plus size={16} className="inline-block ml-2" />
-        </Badge>
+          {lang.details.invite_member.invite}
+          <Plus size={16} className="inline-block ml-2" />
+        </Button>
       </DialogTrigger>
 
-      <DialogContent>
-        <h5 className="text-subhead_m">Invite member</h5>
-        <p className="text-body_m">
-          At the same time as inviting team members, managers, and clients who
+      <DialogContent className="gap-6">
+        <div className="flex flex-col gap-4">
+          <h5 className="text-subhead_m">{lang.details.invite_member.title}</h5>
+
+          <p className="text-body_m">
+            {/* At the same time as inviting team members, managers, and clients who
           worked on the project together, a request for evaluation of my
-          performance is also sent.
-        </p>
-        <section className="flex flex-col gap-4">
-          {!byEmail && selected == null &&  (
+          performance is also sent. */}
+            {lang.details.invite_member.body}
+          </p>
+        </div>
+
+        <section className="flex flex-col gap-6">
+          {!byEmail && selected == null && (
             <>
-              <Search placeholder="Search for members" />
-              <div className="rounded-sm max-h-[30vh] overflow-x-auto my-4">
+              <Search placeholder={lang.details.invite_member.search} />
+
+              <div className="rounded-sm max-h-[30vh] overflow-x-auto">
                 {members &&
                   members.map((member: User, index: number) => (
                     <PersonItem
@@ -76,31 +85,49 @@ export default function InviteProjectMember({
                     />
                   ))}
               </div>
+
               <button
                 onClick={() => setByEmail(true)}
                 className="flex gap-2 text-center mx-auto"
               >
-                <span>I can not find my nickname.</span>
-                <span className="text-accent-primary">Invite by email</span>
+                <span>{lang.details.invite_member.can_not_find}</span>
+                <span className="text-accent-primary">{lang.details.invite_member.invite_by_email}</span>
               </button>
-              <div className="flex justify-center gap-4 mt-4">
+
+              <div className="flex justify-center gap-4">
                 <DialogClose asChild>
-                  <Button variant={"secondary"}>Cancel</Button>
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className="max-w-[212px] grow px-0"
+                  >
+                    {lang.details.invite_member.back}
+                  </Button>
                 </DialogClose>
+
+                <Button
+                  size="lg"
+                  className="max-w-[212px] grow px-0"
+                  disabled
+                >
+                  {lang.details.invite_member.invite}
+                </Button>
               </div>
             </>
           )}
           {selected && (
             <SelectedProjectMember
-            projectId={projectId}
-                          user={selected}
+              projectId={projectId}
+              user={selected}
               onSelectValue={() => setSelected(null)}
+              lang={lang}
             />
           )}
           {byEmail && (
             <InviteByEmail
               projectId={projectId}
               cancelByEmail={() => setByEmail(false)}
+              lang={lang}
             />
           )}
         </section>

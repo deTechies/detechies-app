@@ -4,15 +4,17 @@ import { Project } from "@/lib/interfaces";
 import Links from "../[address]/links";
 
 export default async function ProjectInfo({ info }: { info: Project }) {
+
   return (
-    <Card className="min-w-[300px]">
+    <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-7">
       <CardHeader className="flex justify-between items-center">
         <h3 className="text-subhead_s">Links</h3>
         {(info.userRole === "member" || info.userRole === "admin") && (
           <UploadWorks />
         )}
       </CardHeader>
-      <CardContent className="py-4">
+      <CardContent>
+        {/* urls */}
         {info.urls ? (
           <Links links={info.urls} />
         ) : (

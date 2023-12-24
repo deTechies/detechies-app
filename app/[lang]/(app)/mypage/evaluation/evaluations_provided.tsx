@@ -27,7 +27,6 @@ export default async function EvaluationProvided() {
           <EvaluationStat key={index} {...stat} />
         ))}
       </section>
-
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
