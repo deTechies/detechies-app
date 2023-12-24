@@ -1,5 +1,6 @@
 "use client";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ProjectMember } from "@/lib/interfaces";
@@ -18,7 +19,7 @@ export default function ProjectMemberEvaluate({
   return (
     <Dialog>
       <DialogTrigger>
-          evaluate
+      <Badge variant={"accent"}>Evaluate</Badge>
 
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-8 ">

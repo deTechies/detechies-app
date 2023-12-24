@@ -43,6 +43,7 @@ export default async function ProjectMemberEvaluation({
             text={dictionary.project.member.evaluate}
             workId={params.id}
             verified={details.work_verified != null}
+            defaultValues={details.work_verified}
           />
         </div>
       </section>

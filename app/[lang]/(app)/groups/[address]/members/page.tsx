@@ -3,6 +3,8 @@ import PendingProfileCard from "@/components/card/pending-profile-card";
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 
 import { getPendingMembers } from "@/lib/data/groups";
 
@@ -22,16 +24,17 @@ export interface Member{
   address: string;
   tokenboundAccount: string;
 }
-export default async function GroupMember({params}: {params: {address: string}}) {
+export default async function GroupMember({params}: {params: {address: string, lang: Locale}}) {
 
   
 const pendingData = await getPendingMembers(params.address);
+const dictionary = await getDictionary(params.lang);
 
   return (
     <Card className="overflow-auto max-w-[90vw]">
       <CardHeader>
         <h3>Members ({pendingData?.length})</h3>
-        <InviteProjectMember projectId={params.address} />
+        <InviteProjectMember projectId={params.address} lang={dictionary.project} />
       </CardHeader>
       <CardContent className="flex gap-4">
 

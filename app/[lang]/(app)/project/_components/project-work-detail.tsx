@@ -6,25 +6,30 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
   if (!data) return null;
   return (
     <>
-      <div className="gap-4 inline-flex grow shrink text-text-secondary">
-        <div className="flex-col gap-2 inline-flex">
-          <div className="text-label_m">
-            <span className="capitalize">{data.name}</span>
-            <span className="pl-2 ">| {data.percentage} %</span>
+      <div className="justify-start items-start gap-4 inline-flex text-text-secondary flex-wrap">
+        <div className="flex-col justify-start items-start gap-2 inline-flex">
+          <div className="divide-x">
+            <span className="text-label_m capitalize pr-2">{data.name}</span>
+            <span className="pl-2 text-label_m">{data.percentage} %</span>
           </div>
           <span className="text-label_m">
             {formatDate(data.begin_date)} ~{" "}
             {data.end_date ? formatDate(data.end_date) : "Present"}
           </span>
         </div>
-        <div className="self-stretch grow shrink basis-0 ">
-          <span className="text-label_m">{data.description}</span>
+
+        <div className="self-stretch grow shrink basis-0 line-clamp-2">
+          <span className="text-label_m">{data.description}{data.description}{data.description}{data.description}{data.description}{data.description}</span>
         </div>
       </div>
-      <div className="justify-start items-start gap-2 inline-flex flex-wrap mt-4">
-        <Badge variant="ghost">Dev Ops</Badge>
-        <Badge variant="ghost">Backend</Badge>
-        <Badge variant="ghost">Fullstack</Badge>
+
+      <div className="justify-start items-start gap-2 inline-flex flex-wrap">
+        <Badge className="px-2.5 py-1.5" variant="ghost">Dev Ops</Badge>
+        <Badge className="px-2.5 py-1.5" variant="ghost">Backend</Badge>
+        <Badge className="px-2.5 py-1.5" variant="ghost">Fullstack</Badge>
+        <Badge className="px-2.5 py-1.5" variant="ghost">Dev Ops</Badge>
+        <Badge className="px-2.5 py-1.5" variant="ghost">Backend</Badge>
+        <Badge className="px-2.5 py-1.5" variant="ghost">Fullstack</Badge>
       </div>
     </>
   );

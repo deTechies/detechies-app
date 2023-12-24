@@ -23,6 +23,7 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import { Badge } from "../ui/badge";
 import { toast } from "../ui/use-toast";
+import { PlusIcon } from "lucide-react";
 
 const FormSchema = z.object({
   role: z.enum(["admin", "member", "client"], {
@@ -39,14 +40,15 @@ const FormSchema = z.object({
 });
 interface JoinGroupProps {
   address: string;
+  lang: any;
 }
 
-export default function JoinProject({ address }: JoinGroupProps) {
+export default function JoinProject({ address, lang }: JoinGroupProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
-  const closeButtonRef =  useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const messageValue = form.watch("message", "");
 
@@ -59,17 +61,14 @@ export default function JoinProject({ address }: JoinGroupProps) {
       message: data.message,
       role: data.role,
     });
-    
+
     if (result) {
       toast({
         title: "Successfully requested to join project",
         description: "The project leader will review your request",
-      })
-  
-      closeButtonRef.current?.click();
+      });
 
-      
-      
+      closeButtonRef.current?.click();
     }
 
     setLoading(false);
@@ -77,17 +76,17 @@ export default function JoinProject({ address }: JoinGroupProps) {
   return (
     <Dialog>
       <DialogTrigger>
-        <Badge>
-          Join
-        </Badge>
+        <Button variant="primary" size="lg" className="px-5">
+          {lang.details.join_project.button}
+        </Button>
       </DialogTrigger>
+
       <DialogContent>
         <h3 className="text-subhead_s font-medium">
-          프로젝트 참여하기
+          {lang.details.join_project.title}
         </h3>
         <p className="text-body_m text-text-secondary mb-4">
-          프로젝트에서 어떤 역할을 했는지 선택하고, 리더에게 참여 요청 메세지를
-          보내세요. 리더가 승인하면 프로젝트 멤버가 될 수 있어요.
+          {lang.details.join_project.body}
         </p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -96,7 +95,7 @@ export default function JoinProject({ address }: JoinGroupProps) {
               name="role"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>Role</FormLabel>
+                  <FormLabel>{lang.details.join_project.role}</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -107,19 +106,25 @@ export default function JoinProject({ address }: JoinGroupProps) {
                         <FormControl>
                           <RadioGroupItem value="admin" />
                         </FormControl>
-                        <FormLabel className="capitalize">Admin</FormLabel>
+                        <FormLabel className="capitalize">
+                          {lang.details.role_type.admin}
+                        </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="member" />
                         </FormControl>
-                        <FormLabel className="capitalize">member</FormLabel>
+                        <FormLabel className="capitalize">
+                          {lang.details.role_type.member}
+                        </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value="client" />
                         </FormControl>
-                        <FormLabel className="capitalize">client</FormLabel>
+                        <FormLabel className="capitalize">
+                          {lang.details.role_type.client}
+                        </FormLabel>
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
@@ -133,10 +138,10 @@ export default function JoinProject({ address }: JoinGroupProps) {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Message</FormLabel>
+                  <FormLabel>{lang.details.join_project.message}</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us a little bit about yourself"
+                      placeholder={lang.details.join_project.message_ex}
                       className="resize-none"
                       {...field}
                     />
@@ -148,14 +153,21 @@ export default function JoinProject({ address }: JoinGroupProps) {
                 </FormItem>
               )}
             />
-            <div className="flex  flex-row justify-center gap-4 mx-auto">
+            <div className="flex  flex-row justify-center gap-2 mx-auto">
               <DialogClose asChild>
-                <Button variant="secondary" ref={closeButtonRef}>
-                  Close
+                <Button
+                  variant="secondary"
+                  ref={closeButtonRef}
+                  className="max-w-[212px] grow"
+                >
+                  {lang.details.join_project.back}
                 </Button>
               </DialogClose>
-              <Button type="submit" className="bg-accent-secondary">
-                Submit
+              <Button
+                type="submit"
+                className="bg-accent-secondary max-w-[212px] grow"
+              >
+                {lang.details.join_project.submit}
               </Button>
             </div>
           </form>
