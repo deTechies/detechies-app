@@ -34,16 +34,16 @@ export default function Navbar({ lang }: { lang: any }) {
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
 
   return (
-    <Disclosure as="nav" className="mx-auto bg-background-layer-1 z-10 ">
+    <Disclosure as="nav" className="z-10 mx-auto bg-background-layer-1 ">
       {({ open }) => (
         <>
           <div className="px-6 lg:px-8 bg-background-layer-1 max-w-[1920px] mx-auto shadow-sm">
-            <div className="flex h-16 justify-between">
+            <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
    
                   <Image
-                    className="block h-12 object-contain dark:hidden"
+                    className="block object-contain h-12 dark:hidden"
                     src="/images/careerzen.png"
                     alt="Careerzen"
                     fill={true}
@@ -53,7 +53,7 @@ export default function Navbar({ lang }: { lang: any }) {
                     priority={true}
                   />
                      <Image
-                    className="h-12 object-contain hidden dark:block"
+                    className="hidden object-contain h-12 dark:block"
                     src="/images/logo-invert.png"
                     alt="Careerzen"
                     fill={true}
@@ -65,48 +65,47 @@ export default function Navbar({ lang }: { lang: any }) {
                 </div>
               </div>
 
-              <div className="hidden sm:ml-6 md:ml-24 sm:flex sm:space-x-8 ">
+              <div className="hidden sm:ml-6 md:ml-24 sm:flex sm:space-x-8 text-title_m">
                 {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                 {links.map((link: any, index: number) => (
                   <Link
                     key={index}
                     href={link.href}
                     aria-disabled={link?.disabled}
-                    className={`inline-flex items-center border-b-2 capitalize 
+                    className={`inline-flex items-center border-b-[3px] capitalize 
                       ${
                         pathname.includes(link.href)
-                          ? "border-accent-primary text-accent-primary"
-                          : "border-transparent text-text-secondary hover:text-text-primary"
+                          ? "border-accent-primary text-text-primary"
+                          : "border-transparent text-text-placeholder hover:text-text-primary"
                       }  
-                      px-1 pt-1 text-md  text-primary`}
+                      px-1 pt-1 text-md`}
                   >
                     {link.name}
                   </Link>
                 ))}
               </div>
-              <div className="hidden sm:ml-8  sm:flex sm:items-center">
+              <div className="hidden sm:ml-8 sm:flex sm:items-center">
                 {/* Profile dropdown */}
                 <div className="mx-3">
-                  <MessageSquareIcon className="h-5 w-5 text-text-secondary" />
+                  <MessageSquareIcon className="w-5 h-5 text-text-secondary" />
                 </div>
                 <div className="mx-3">
-                  <BellIcon className="h-5 w-5 text-text-secondary cursor-pointer hover:text-text-primary" />
+                  <BellIcon className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
                 </div>
-                <div className="relative ml-3 text-text-secondary hover:text-text-primary cursor-pointer">
+                <div className="relative ml-3 cursor-pointer text-text-secondary hover:text-text-primary">
                   <Login />
                 </div>
               </div>
-              <div className="-mr-2 flex items-center sm:hidden">
+              <div className="flex items-center -mr-2 sm:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button
-                  className="inline-flex items-center justify-center rounded-md p-2
-                 text-primary hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-accent-primary"
+                  className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-accent-primary"
                 >
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <X className="block h-6 w-6" aria-hidden="true" />
+                    <X className="block w-6 h-6" aria-hidden="true" />
                   ) : (
-                    <Menu className="block h-6 w-6" aria-hidden="true" />
+                    <Menu className="block w-6 h-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
@@ -114,7 +113,7 @@ export default function Navbar({ lang }: { lang: any }) {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 pb-3 pt-2 z-10">
+            <div className="z-10 pt-2 pb-3 space-y-1">
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
               {links.map((link: any, index: number) => (
                 <Disclosure.Button
@@ -132,7 +131,7 @@ export default function Navbar({ lang }: { lang: any }) {
                   {link.name}
                 </Disclosure.Button>
               ))}
-              <div className="mt-6 w-full flex justify-center">
+              <div className="flex justify-center w-full mt-6">
                 <Login />
               </div>
             </div>
