@@ -207,7 +207,8 @@
       "about": "About",
       "nft": "NFT certificate",
       "members": "Members",
-      "mission": "Missions"
+      "mission": "Missions",
+      "manage": "Manage Group"
     },
     "create": {
       "title": "Create Group", 

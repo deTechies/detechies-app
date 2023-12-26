@@ -269,7 +269,8 @@
       "about": "그룹 소개",
       "nft": "NFT 증명서",
       "members": "멤버",
-      "mission": "미션"
+      "mission": "미션",
+      "manage": "그룹관리"
     },
     "create": {
       "title": "Create Group", 

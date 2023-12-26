@@ -43,9 +43,6 @@ export default async function GroupProfileCard({ id }: { id: string }) {
     "https://youtube.com/address",
     // "https://twitter.com/address",
     "https://instagram.com/address",
-    "https://instagram.com/address",
-    "https://instagram.com/address",
-    "https://instagram.com/address",
     "https://x.com/address",
   ];
 
@@ -111,7 +108,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
           })}
         </div>
 
-        {/* {
+        {
           groupDetail.userRole == "admin" && (
           <div className="flex justify-end gap-3 grow">
             <Button size="lg" variant="primary" className="max-w-[230px] grow">
@@ -126,13 +123,13 @@ export default async function GroupProfileCard({ id }: { id: string }) {
         }
         
         {
-          groupDetail.userRole == "client" && (
+          groupDetail.userRole == "none" && (
           <div className="flex justify-end gap-3 grow">
-            <JoinGroup groupId={groupDetail.id}/>
+            <JoinGroup groupId={groupDetail.id} details={groupDetail}/>
           </div>
           )
-        } */}
-        <JoinGroup groupId={groupDetail.id} details={groupDetail} />
+        }
+        {/* <JoinGroup groupId={groupDetail.id} details={groupDetail} /> */}
       </CardContent>
     </Card>
   );
