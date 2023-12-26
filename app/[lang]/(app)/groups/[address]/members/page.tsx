@@ -2,8 +2,11 @@ import PendingProfileCard from "@/components/card/pending-profile-card";
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import MemberCard from "@/components/card/member-card";
 import Search from "@/components/extra/search";
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 
 // import { getPendingMembers } from "@/lib/data/groups";
 import { getClub } from "@/lib/data/groups";
@@ -60,6 +63,7 @@ export default async function GroupMember({
                 <MemberCard
                   address={item.memberId}
                   info={item.user}
+
                   key={index}
                 />
               );
@@ -69,7 +73,6 @@ export default async function GroupMember({
             //   <MemberCard address={getAddress(item.address)} key={index} />
             // )
           )}
-
         {filteredData < 1 && (
           <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
             검색 결과가 없습니다.

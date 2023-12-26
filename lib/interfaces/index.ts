@@ -16,7 +16,6 @@ export interface User {
     full_name: string;
     country: string;
     description: string;
-
     app_settings: UserSettings;
   }
   
@@ -62,11 +61,9 @@ export enum GROUP_TYPE {
   }
   
   export enum ProjectType {
-    CLIENT = 'client',
-    INTERNAL = 'internal',
-    SIDE = 'side',
-    HACKATHON = 'hackathon',
-    OTHER = 'other'
+    COMPANY = 'company',
+    FREELANCE = 'freelance',
+    SIDE = 'side'
   }
   
   export enum PrivacyType {
@@ -99,6 +96,12 @@ export enum GROUP_TYPE {
     DELIVERY = 'delivery'
   }
   
+  export enum QuestionType {
+    INPUT = 'input',
+    SLIDER = 'slider',
+    CIRCLES = 'circles',
+  }
+  
   export interface Member {
     id: string;
     user: string;
@@ -112,6 +115,7 @@ export enum GROUP_TYPE {
     creator: string;
     created_at: Date;
   }
+  
   
   export interface FileShare {
     id: string;
@@ -159,7 +163,7 @@ export enum GROUP_TYPE {
     isCreator: boolean;
     isMember?: boolean;
     type: string;
-    userRole: 'admin' | 'member' | 'client' | 'none';
+    userRole: string;
     urls?: string[];
     members: ProjectMember[]
     files: File[]
@@ -169,7 +173,7 @@ export enum GROUP_TYPE {
   }
   
   export interface ProjectMember {
-    id: string;
+    memberId: string;
     user: User;
     percentage: number;
     role: string;
@@ -186,11 +190,12 @@ export enum GROUP_TYPE {
   }
   
   export interface ProjectWork {
-    id: string;
+    workId: string;
     name: string;
     percentage: number;
     tags: string[];
     begin_date: string;
+    surveyResponses: any[];
     end_date?: string;
     description: string;
     created_at: Date;
@@ -198,10 +203,13 @@ export enum GROUP_TYPE {
   
 export interface Question { 
   id: string;
+  type: string;
   content: string;
   category: string;
   scale: number; 
   messages?: string[];
+  minText: string;
+  maxText: string;
   created_at: Date;
 }
 

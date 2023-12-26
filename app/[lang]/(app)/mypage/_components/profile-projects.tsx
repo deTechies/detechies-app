@@ -5,7 +5,7 @@ import { formatDate } from "@/lib/utils";
 import { ChevronRight, PlusIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import ProjectWorkDetail from "../../project/[address]/_components/project-work-detail";
+import ProjectWorkDetail from "../../project/_components/project-work-detail";
 
 export default function ProfileProjects({
   projects,

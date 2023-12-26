@@ -10,8 +10,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-accent-secondary text-accent-primary primary-test",
-        default: "bg-accent-secondary text-accent-primary hover:bg-gray-200 default-test",
+        primary: "bg-accent-secondary text-accent-primary",
+        default: "bg-accent-secondary text-accent-primary hover:bg-gray-200",
         destructive: "bg-state-error text-[#FFFFFF] hover:bg-destructive/20",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-background-layer-2 text-[#3B414B] hover:bg-gray-100 cursor:pointer",
@@ -23,6 +23,7 @@ const buttonVariants = cva(
         sm: "text-title_s rounded-md px-3 py-2",
         lg: "px-3 py-[15.5px] rounded-full text-title_m",
         icon: "h-10 w-10 rounded-md",
+
       },
     },
     defaultVariants: {
@@ -43,7 +44,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const content = loading ? (
-      <button className="flex items-center gap-4 animate-pulse">
+      <button className="flex gap-4 items-center ">
         {/* Replace with your spinning icon component */}
         <Loader2 size={16} className="animate-spin" />
         Loading...

@@ -21,33 +21,31 @@ import { z } from "zod";
 
 interface BasicEvaluationInfoProps {
   text: any;
-  projectId: string;
-  userId: string;
+  workId: string;
   verified: boolean;
+  defaultValues:  Partial<verifyWorkValues>;
 }
 
 const baseInfoSchema = z.object({
   match: z.enum(["100", "80"], {
     required_error: "You need to select a matching performance.",
   }),
+  hourly_rate: z.string().optional(),
   weekly_hours: z.string().optional(),
-  billable_hourly_wage: z.string().optional(),
   reject_letter: z.string().optional(),
-  work_contribution: z.array(z.number().min(0).max(100)),
-  meet_requirements: z.array(z.number().min(0).max(100)),
-  meet_schedule: z.array(z.number().min(0).max(100)),
+  rate_contributions: z.number().min(0).max(100).optional(),
+  rate_requirements: z.number().min(0).max(100).optional(),
+  rate_time_schedule: z.number().min(0).max(100).optional(),
 });
 
 type verifyWorkValues = z.infer<typeof baseInfoSchema>;
 
 // This can come from your database or API.
-const defaultValues: Partial<verifyWorkValues> = {};
-
 export default function BasicEvaluationInfo({
   text,
-  projectId,
-  userId,
+  workId, 
   verified,
+  defaultValues
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
     resolver: zodResolver(baseInfoSchema),
@@ -58,8 +56,16 @@ export default function BasicEvaluationInfo({
 
   async function onSubmit(data: verifyWorkValues) {
     //TODO: build the data object to send to the backend
-
-    const result = await submitVerifyWork(data, projectId, userId);
+    
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
+    const result = await submitVerifyWork(data, workId);
 
     if (data.match == "80") {
       toast({
@@ -72,20 +78,11 @@ export default function BasicEvaluationInfo({
           </pre>
         ),
       });
-      router.push(`/project/${projectId}`);
-    } else {
-      router.push(`/project/${projectId}/${userId}/evaluate-team-member`);
+      router.push(`/project`);
     }
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
-        </pre>
-      ),
-    });
+ 
 
-    //router.push(`/project/${projectId}/${userId}/evaluate-team-member`);
+    router.push(`/work/${workId}/survey`);
   }
 
   return (
@@ -98,7 +95,7 @@ export default function BasicEvaluationInfo({
             <section className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="billable_hourly_wage"
+                name="weekly_hours"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{text.billable_hourly_wage}</FormLabel>
@@ -114,7 +111,7 @@ export default function BasicEvaluationInfo({
 
               <FormField
                 control={form.control}
-                name="weekly_hours"
+                name="hourly_rate"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{text.time_weekly}</FormLabel>
@@ -165,7 +162,7 @@ export default function BasicEvaluationInfo({
                 )}
               />
             </section>
-            {form.watch("match") == "80" ? (
+            {form.watch("match") == "80" && (
               <section className="flex flex-col gap-7">
                 <FormField
                   control={form.control}
@@ -183,26 +180,31 @@ export default function BasicEvaluationInfo({
                   )}
                 />
               </section>
-            ) : (
+            ) }
+            {form.watch("match") == "100" && (
               <section className="space-y-7">
                 <PercentageSliderField
-                  name="meet_requirements"
+                  name="rate_requirements"
                   form={form}
-                  steps={5}
+                  steps={20}
                   label={text.meet_requirements.label}
                   messages={text.meet_requirements.messages}
                 />
                 <PercentageSliderField
-                  name="work_contribution"
+                  name="rate_contributions"
                   form={form}
-                  steps={5}
-                  label={text.meet_requirements.label}
+                  steps={20}
+                  label={text.work_contribution.label}
+                  messages={text.work_contribution.messages}
+                  
                 />
                 <PercentageSliderField
-                  name="meet_schedule"
+                  name="rate_time_schedule"
                   form={form}
-                  steps={5}
-                  label={text.meet_requirements.label}
+                  steps={20}
+                  label={text.meet_schedule.label}
+                  messages={text.meet_schedule.messages}
+                  
                 />
               </section>
             )}
@@ -217,14 +219,14 @@ export default function BasicEvaluationInfo({
                   type="button"
                   onClick={() => {
                     router.push(
-                      `/project/${projectId}/${userId}/evaluate-team-member`
+                      `/work/${workId}/survey`
                     );
                   }}
                 >
                   {text.next}
                 </Button>
               ) : (
-                <Button variant="primary" size="lg" type="submit">
+                <Button size="lg" type="submit">
                   Save
                 </Button>
               )}

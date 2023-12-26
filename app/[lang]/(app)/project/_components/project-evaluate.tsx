@@ -1,5 +1,6 @@
 "use client";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ProjectMember } from "@/lib/interfaces";
@@ -18,9 +19,8 @@ export default function ProjectMemberEvaluate({
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant={"primary"} size="sm">
-          evaluate
-        </Button>
+      <Badge variant={"accent"}>Evaluate</Badge>
+
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-8 ">
         <div className="flex-col self-stretch gap-6 inline-flex">
@@ -72,7 +72,7 @@ export default function ProjectMemberEvaluate({
             variant={"primary"}
             size="lg"
             onClick={() => {
-                router.push(`/project/${projectMember.project.id}/${projectMember.user.id}`)
+                router.push(`/work/${projectMember.works[0].workId}`)
             }}
           >
             to evaluation
