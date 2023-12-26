@@ -9,22 +9,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-interface Profile {
-  id: string;
-  name: string;
-  role: string;
-  email: string;
-  username: string;
-  avatar: string;
-  organisation: string;
-  image: string;
-  industry: string;
-}
-
-export interface Member {
-  address: string;
-  tokenboundAccount: string;
-}
 export default async function GroupMember({
   address,
   isCreator,

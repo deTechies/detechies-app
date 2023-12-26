@@ -1,5 +1,6 @@
 "use client";
 import MemberCard from "@/components/card/member-card";
+import { Address } from "wagmi";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getAddress } from "viem";
@@ -21,19 +22,26 @@ interface Profile {
 }
 
 export interface Member {
-  address: string;
-  tokenboundAccount: string;
+  memberId: Address,
+  role: string,
+  status: any,
+  created_at: string,
+  verified: boolean,
+  user: any[]
 }
+
 export default function GroupMember({
   address,
   members,
   isCreator,
 }: {
   address: any;
-  members: Member[];
+  members: any[];
   isCreator?: boolean;
 }) {
   const pathName = usePathname();
+
+  console.log(members);
 
   return (
     <div className="overflow-auto max-w-[90vw]">
