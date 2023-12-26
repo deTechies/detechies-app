@@ -111,9 +111,28 @@ export default async function GroupProfileCard({ id }: { id: string }) {
           })}
         </div>
 
-        <Button size="lg" variant="primary" className="max-w-[230px] grow">
-          그룹 가입하기
-        </Button>
+        {/* {
+          groupDetail.userRole == "admin" && (
+          <div className="flex justify-end gap-3 grow">
+            <Button size="lg" variant="primary" className="max-w-[230px] grow">
+              NFT 생성하기
+            </Button>
+
+            <Button size="lg" variant="primary" className="max-w-[230px] grow">
+              멤버 초대하기
+            </Button>
+          </div>
+          )
+        }
+        
+        {
+          groupDetail.userRole == "client" && (
+          <div className="flex justify-end gap-3 grow">
+            <JoinGroup groupId={groupDetail.id}/>
+          </div>
+          )
+        } */}
+        <JoinGroup groupId={groupDetail.id} details={groupDetail} />
       </CardContent>
     </Card>
   );

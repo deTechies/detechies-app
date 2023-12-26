@@ -33,13 +33,13 @@ export default function GroupTaps({
   ];
 
   return (
-    <Card className="flex flex-row gap-0 px-6 py-0 rounded-none">
+    <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 rounded-none">
       {links.map((link: any, index: number) => (
-        <div className="px-4" key={index}>
+        <div className="mr-8" key={index}>
           <Link
             href={`/groups/${details.id}/${link.href}`}
             aria-disabled={link?.disabled}
-            className={`inline-flex items-center border-b-[3px] capitalize py-5 text-subhead_m
+            className={`inline-flex items-center border-b-[3px] capitalize pb-3 text-subhead_m
             ${
               (link.href === "" && !pathname.includes(`/groups/${details.id}/`)) ||
               (link.href !== "" &&

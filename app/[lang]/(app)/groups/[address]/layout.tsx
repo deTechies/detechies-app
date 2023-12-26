@@ -27,7 +27,7 @@ export default async function GroupDetailLayout({
       {/* <div className="flex flex-col w-full col-span-1 gap-4">
         
       </div> */}
-      <Card className="rounded-t-none">
+      <Card className="px-10 pt-8 rounded-t-none">
         <div className="flex flex-col">{children}</div>
       </Card>
     </main>
