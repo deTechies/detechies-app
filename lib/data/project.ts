@@ -128,12 +128,6 @@ export async function inviteProjectMembers(
     }),
   });
 
-  console.log(response.json());
-
-  if (!response.ok) {
-    throw new Error("Failed to invite members");
-  }
-
   return response.json();
 }
 
@@ -278,7 +272,7 @@ export async function getProjectMember(projectId: string, userId: string) {
 
 export async function getProjectWork(id:string){
   const session = await auth();
-  const url = new URL(`${API_URL}/project-work/${id}`);
+  const url = new URL(`${API_URL}/survey-response/surveyByWork/${id}`);
 
   if (!session?.web3?.accessToken) {
     throw new Error("No access token found");
@@ -291,9 +285,6 @@ export async function getProjectWork(id:string){
     },
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch project member");
-  }
 
   return response.json();
 }
