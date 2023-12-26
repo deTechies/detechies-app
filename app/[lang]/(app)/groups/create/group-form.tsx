@@ -126,7 +126,7 @@ export function GroupForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 flex justify-center flex-col "
+        className="flex flex-col justify-center space-y-8 "
       >
         <div className="flex flex-col space-y-8 ">
           <FormField
@@ -138,12 +138,12 @@ export function GroupForm() {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-row space-x-1 flex-wrap"
+                  className="flex flex-row flex-wrap space-x-1"
                 >
                   {Object.values(GROUP_TYPE).map((type) => (
                     <FormItem
                       key={type}
-                      className="flex items-center space-x-3 space-y-0 flex-wrap"
+                      className="flex flex-wrap items-center space-x-3 space-y-0"
                     >
                       <FormControl>
                         <RadioGroupItem value={type} />
@@ -196,6 +196,7 @@ export function GroupForm() {
           <FormInlineItem>
             <FormInlineLabel className="justify-start">Image</FormInlineLabel>
             <MediaUploader
+              name="icon"
               key="icon"
               onFileSelected={selectIcon}
               width={50}
@@ -208,6 +209,7 @@ export function GroupForm() {
               Cover Image
             </FormInlineLabel>
             <MediaUploader
+              name="cover"
               key="cover"
               onFileSelected={selectCover}
               width={256}
@@ -237,12 +239,12 @@ export function GroupForm() {
             />
             
           ))}
-          <div className="justify-right items-end align-end">
+          <div className="items-end justify-right align-end">
           <Button
                  type="button"
                  variant="outline"
                  size="sm"
-                 className="mt-2 justify-end text-right"
+                 className="justify-end mt-2 text-right"
                  onClick={() => append({ value: "" })}
                >
                  Add URL

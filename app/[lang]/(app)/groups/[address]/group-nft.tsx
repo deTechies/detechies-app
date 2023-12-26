@@ -1,9 +1,10 @@
 "use client";
 import MemberCard from "@/components/card/member-card";
+import { NFTItem } from "@/components/card/nft-list-item";
+import DisplayNFT from "@/components/nft/display-nft";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getAddress } from "viem";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -24,50 +25,45 @@ export interface Member {
   address: string;
   tokenboundAccount: string;
 }
-export default function GroupMember({
+export default async function GroupMember({
   address,
-  members,
   isCreator,
+  achievements,
 }: {
   address: any;
-  members: Member[];
   isCreator?: boolean;
+  achievements: NFTItem[];
 }) {
   const pathName = usePathname();
 
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="flex items-center justify-between mb-5">
-        <h3 className="text-subhead_s">최근 가입한 멤버</h3>
-        {/* <h3 className="text-subhead_s">Members ({members?.length})</h3> */}
+        <h3 className="text-subhead_s">최근 생성한 NFT</h3>
 
-        <Link href={pathName + "/members"} passHref>
+        <Link href={pathName + "/nft"} passHref>
           <Button size="sm" variant="secondary">
             전체보기
           </Button>
         </Link>
+
         {/* {
           isCreator && <Link href={pathName + '/members'}>Manage</Link>
         } */}
       </div>
 
-
-      <div className="grid w-full gap-4 md:grid-cols-5">
-        {
-        members &&
-          members.map(
-            (item: Member, index: any) => {
-              if(index > 4) {
-                return ;
-              }
-              return <MemberCard address={item.memberId} info={item.user} key={index} />
-            }
-              
-              // item.tokenboundAccount && (
-              //   <MemberCard address={getAddress(item.address)} key={index} />
-              // )
-          )}
+      <div>
+        {achievements &&
+          achievements.map((item: NFTItem, index: number) => (
+            <DisplayNFT details={item} key={index} />
+          ))}
       </div>
+
+      {achievements && achievements.length < 1 && (
+        <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
+          최근 생성한 NFT가 없습니다.
+        </div>
+      )}
     </div>
   );
 }

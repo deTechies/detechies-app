@@ -27,9 +27,9 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         accent: {
           primary: "var(--accent-primary)",
-          secondary: "hsl(var(--accent-secondary))",
-          "onPrimary": "hsl(var(--accent-on-primary))",
-          onSecondary: "hsl(var(--accent-on-secondary))",
+          secondary: "var(--accent-secondary)",
+          "on-primary": "var(--accent-on-primary)",
+          "on-secondary": "var(--accent-on-secondary)",
         },
         "accent-primary": "var(--accent-primary)",
         "accent-secondary": "var(--accent-secondary)",
@@ -115,9 +115,14 @@ module.exports = {
         sm: ["0.875rem", { lineHeight: "0.875rem" }, { fontWeight: "400" }],
         md: [
           "1rem",
-          { lineHeight: "1.5rem" },
-          { fontWeight: "400" },
+          { lineHeight: "2.125rem" },
+          { fontWeight: "700" },
           { letterSpacing: "0.5px" },
+        ],
+        heading_m: [
+          "1.5rem",
+          { lineHeight: "1.3" },
+          { fontWeight: "700" },
         ],
         heading_s: [
           "1.5rem",
