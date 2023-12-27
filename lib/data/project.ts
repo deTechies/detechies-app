@@ -245,6 +245,23 @@ export async function addMembersWork(
   return response.json();
 }
 
+export async function removeProjectMember(memberId:string){
+  const url = API_URL + '/project-member/' + memberId
+  const session = await getSession();
+
+  // Check for a valid session and required tokens
+  if (!session || !session.web3 || !session.web3.accessToken) {
+    throw new Error("Invalid session or missing access token");
+  }
+  const response = await fetch(url, 
+    {
+      method: "DELETE", 
+      headers: {
+        Authorization: `Bearer ${session.web3.accessToken}`
+      } 
+    })
+}
+
 export async function getProjectMember(projectId: string, userId: string) {
   const session = await auth();
   const url = new URL(`${API_URL}/project-member/single`);

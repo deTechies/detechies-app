@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { submitEvaluationSurvey } from "@/lib/data/survey";
 import { Survey } from "@/lib/interfaces";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export function SurveyForm({
@@ -17,18 +18,19 @@ export function SurveyForm({
   survey: Survey;
 }) {
   const form = useForm<any>({});
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
-    //now we need make sure that we can save this as a survey response.
-    console.log(data);
+
     const result = await submitEvaluationSurvey(data, workId, survey.id);
-    
-    
 
     toast({
       title: "form results",
       description: <pre>{JSON.stringify(result, null, 2)}</pre>,
     });
+    
+    router.push(`/work/${workId}/swot`)
+    
   };
 
   const questionsByCategory = survey.questions.reduce(
@@ -52,18 +54,18 @@ export function SurveyForm({
                 {questionsByCategory[category].map((question: any) => {
                   // Render each question
                   if (question.type === "input") {
-                    return  null;
-                      <FormField
-                        key={question.id}
-                        control={form.control}
-                        name={question.id}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{question.content}</FormLabel>
-                            <Input {...field} />
-                          </FormItem>
-                        )}
-                      />
+                    return null;
+                    <FormField
+                      key={question.id}
+                      control={form.control}
+                      name={question.id}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{question.content}</FormLabel>
+                          <Input {...field} />
+                        </FormItem>
+                      )}
+                    />;
                   } else {
                     return (
                       <PercentageSliderField
@@ -85,7 +87,7 @@ export function SurveyForm({
             <Button type="button" variant={"secondary"}>
               Go Back
             </Button>
-            <Button type="submit">show result</Button>
+            <Button type="submit">Save</Button>
           </Card>
         </form>
       </Form>

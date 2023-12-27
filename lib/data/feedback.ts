@@ -86,9 +86,9 @@ export async function submitVerifyWork(
 }
 
 //Create the swot analysis
-export async function submitSwotAnalysis(data: any, projectWorkId: string) {
+export async function submitSwotAnalysis(data: any, projectWorkId: string, surveyResponseId: string) {
   const session = await getSession();
-  const result = await fetch(`${API_URL}/feedback/swot/create`, {
+  const result = await fetch(`${API_URL}/survey-response/swot/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -97,6 +97,7 @@ export async function submitSwotAnalysis(data: any, projectWorkId: string) {
     body: JSON.stringify({
       ...data,
       projectWorkId: projectWorkId,
+      surveyResponseId: surveyResponseId
     }),
   });
 
