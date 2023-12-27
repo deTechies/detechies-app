@@ -4,7 +4,6 @@ import InviteProjectMember from "@/components/invite-project-member/invite-proje
 
 import JoinProject from "@/components/project/join-project";
 import { getPendingProjectMembers } from "@/lib/data/project";
-import PendingMemberList from "./pending-members-list";
 import ProjectMemberItem from "./project-member-item";
 
 
@@ -36,11 +35,7 @@ export default async function ProjectMembers({
           <h5 className="text-subhead_s text-text-primary ">
             Members ({members.length})
           </h5>
-          {pendingMembers.length > 0 && (
-            <span className="text-xs text-text-secondary">
-              <PendingMemberList projectId={projectId} userRole={userRole} />
-            </span>
-          )}
+
           {userRole == 'none' && <JoinProject lang={lang} address={projectId} />}
           {userRole == 'admin' && <InviteProjectMember lang={lang} projectId={projectId} />}
         </header>
