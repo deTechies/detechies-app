@@ -94,15 +94,15 @@ export default function DisplayNFT({details, showSelect}: {details:NFTItem , sho
         <div className="flex flex-col items-center justify-center space-x-2 space-y-4 my-4">
           <div className="relative aspect-square  rounded-sm object-scale-down w-[20%] bg-gradient-to-b from-state-info to-accent-primary">
             <Image
-              src={`https://ipfs.io/ipfs/${details.metadata.image}`}
-              alt={details.metadata.name}
+              src={details.image ? `https://ipfs.io/ipfs/${details.image}` : ``}
+              alt={details.name}
               fill={true}
               className="rounded-sm shadow-md"
             />
           </div>
           <div className="bg-black-100 rounded-sm p-2 shadow-sm max-w-md">
             {details.metadata &&
-              Object.entries(details.metadata).map(([key, value], index) => (
+              Object.entries(details).map(([key, value], index) => (
                 <dl
                   className="grid grid-cols-4 justify-between p-1 px-2 gap-2 my-2"
                   key={index}

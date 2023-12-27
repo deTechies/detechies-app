@@ -1,4 +1,3 @@
-import { ContributionFormData } from "@/app/[lang]/(app)/project/_components/project-contribution-form";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
@@ -218,7 +217,7 @@ export async function getSessionToken() {
 }
 
 export async function addMembersWork(
-  contributionData: ContributionFormData,
+  contributionData: any,
   projectId: string
 ) {
   const session = await getSession();

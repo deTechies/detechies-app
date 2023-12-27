@@ -1,18 +1,14 @@
-import { ExternalLink } from "lucide-react";
 
 import Image from "next/image";
 
 import { getClub } from "@/lib/data/groups";
-import { truncateMiddle } from "@/lib/utils";
 import Link from "next/link";
+import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
-import { Button } from "../ui/button";
 
 export default async function GroupProfileCard({ id }: { id: string }) {
   const groupDetail = await getClub(id);
-
-  console.log(groupDetail);
 
   const snsLogos = {
     youtube: "/icons/youtube.png",
@@ -111,9 +107,11 @@ export default async function GroupProfileCard({ id }: { id: string }) {
         {
           groupDetail.userRole == "admin" && (
           <div className="flex justify-end gap-3 grow">
+            <Link href={`/groups/${id}/create/nft`}>
             <Button size="lg" variant="primary" className="max-w-[230px] grow">
               NFT 생성하기
             </Button>
+            </Link>
 
             <Button size="lg" variant="primary" className="max-w-[230px] grow">
               멤버 초대하기
