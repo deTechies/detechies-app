@@ -23,13 +23,13 @@ interface BasicEvaluationInfoProps {
   text: any;
   workId: string;
   verified: boolean;
-  defaultValues:  Partial<verifyWorkValues>;
+  defaultValues: Partial<verifyWorkValues>;
 }
 
 const baseInfoSchema = z.object({
   match: z.enum(["100", "80"], {
     required_error: "You need to select a matching performance.",
-  }),
+  }).optional(),
   hourly_rate: z.string().optional(),
   weekly_hours: z.string().optional(),
   reject_letter: z.string().optional(),
@@ -43,9 +43,9 @@ type verifyWorkValues = z.infer<typeof baseInfoSchema>;
 // This can come from your database or API.
 export default function BasicEvaluationInfo({
   text,
-  workId, 
+  workId,
   verified,
-  defaultValues
+  defaultValues,
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
     resolver: zodResolver(baseInfoSchema),
@@ -56,7 +56,7 @@ export default function BasicEvaluationInfo({
 
   async function onSubmit(data: verifyWorkValues) {
     //TODO: build the data object to send to the backend
-    
+
     toast({
       title: "You submitted the following values:",
       description: (
@@ -66,6 +66,15 @@ export default function BasicEvaluationInfo({
       ),
     });
     const result = await submitVerifyWork(data, workId);
+
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
+        </pre>
+      ),
+    });
 
     if (data.match == "80") {
       toast({
@@ -80,7 +89,6 @@ export default function BasicEvaluationInfo({
       });
       router.push(`/project`);
     }
- 
 
     router.push(`/work/${workId}/survey`);
   }
@@ -180,7 +188,7 @@ export default function BasicEvaluationInfo({
                   )}
                 />
               </section>
-            ) }
+            )}
             {form.watch("match") == "100" && (
               <section className="space-y-7">
                 <PercentageSliderField
@@ -196,7 +204,6 @@ export default function BasicEvaluationInfo({
                   steps={20}
                   label={text.work_contribution.label}
                   messages={text.work_contribution.messages}
-                  
                 />
                 <PercentageSliderField
                   name="rate_time_schedule"
@@ -204,7 +211,6 @@ export default function BasicEvaluationInfo({
                   steps={20}
                   label={text.meet_schedule.label}
                   messages={text.meet_schedule.messages}
-                  
                 />
               </section>
             )}
@@ -218,15 +224,15 @@ export default function BasicEvaluationInfo({
                   size="lg"
                   type="button"
                   onClick={() => {
-                    router.push(
-                      `/work/${workId}/survey`
-                    );
+                    router.push(`/work/${workId}/survey`);
                   }}
                 >
                   {text.next}
                 </Button>
               ) : (
-                <Button size="lg" type="submit">
+                <Button size="lg" type="submit"
+                  disabled={!form.formState.isValid}
+                >
                   Save
                 </Button>
               )}
