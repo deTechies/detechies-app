@@ -8,8 +8,8 @@ import { authOptions } from "../helpers/authOptions";
 
 
 export async function getUserProfile(address?: string) {
+  const session = (await getServerSession(authOptions)) as Session;
   if (!address) {
-    const session = (await getServerSession(authOptions)) as Session;
 
     
     if(!session){
@@ -36,7 +36,13 @@ export async function getUserProfile(address?: string) {
     //return session.web3.user;
   }
 
-  const res = await fetch(`${API_URL}/users/${address}`);
+  const res = await fetch(`${API_URL}/users/${address}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3.accessToken}`,
+    },
+  });
   // The return value is *not* serializedå
   // You can return Date, Map, Set, etc.
 

@@ -64,10 +64,14 @@ export default async function ProjectDetailPage({
       <section className="flex flex-col gap-8 min-w-[300px]">
         <ProjectInfo info={data} />
         <ProjectNfts address={data.id} isCreator={data.isCreator} />
-        <PendingMemberList
+        {
+          data.userRole == 'admin' &&
+          <PendingMemberList
           projectId={params.address}
           userRole={data.userRole}
         />
+        }
+   
       </section>
     </main>
   );

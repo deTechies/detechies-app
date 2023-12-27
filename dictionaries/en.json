@@ -105,6 +105,54 @@
         "client": "Client"
       }
     },
+    "evaluate": {
+      "evaluate_performance": "Evaluation Performance",
+      "evaluate_performance_description": "Please evaluate users role and performance in this project",
+      "basic_information": "Basic Information",
+      "billable_hourly_wage": "Billable Hourly Wage",
+      "time_weekly": "Total hour (weekly)",
+      "hourly_wage_team": "Enter hourly wage set for the team member.",
+      "please_evaluate_users_role_and_performance_in_this_project": "Please evaluate users role and performance in this project.",
+      "does_the_work_details_match_the_facts": "Does the work written by the user match the facts?",
+      "more_than_20": "More than 20% of the information stated is different from the facts",
+      "more_than_15": "More than 15% of the information stated is different from the facts",
+      "more_than_10": "More than 10% of the information stated is different from the facts",
+      "more_than_5": "More than 5% of the information stated is different from the facts",
+      "all_match": "Yes, they all match.",
+      "go_back": "Go Back",
+      "next": "Next",
+      "reject": "Reason of rejection",
+      "meet_requirements": {
+        "label": "Did the user meet the requirements?",
+        "messages": [     
+          "20_message percentage message",
+          "40_message User meet the requirements of the project",
+          "60_message User meet the requirements of the project",
+          "80_message User meet the requirements of the project",
+          "100_message User meet the requirements of the project"
+        ]
+      },
+      "meet_schedule": {
+        "label": "Did the users meet the time schedules of the project?",
+        "messages": [     
+          "20_message percentage message",
+          "40_message User meet the requirements of the project",
+          "60_message User meet the requirements of the project",
+          "80_message User meet the requirements of the project",
+          "100_message User meet the requirements of the project"
+        ]
+      },
+      "work_contribution": {
+        "label": "Please tell us about teh contribution to the work.",
+        "messages": [     
+          "20_message percentage message",
+          "40_message User meet the requirements of the project",
+          "60_message User meet the requirements of the project",
+          "80_message User meet the requirements of the project",
+          "100_message User meet the requirements of the project"
+        ]
+      }
+    },
     "member": {
       "evaluate": {
         "evaluate_performance": "Evaluation Performance",
@@ -203,6 +251,13 @@
     }
   },
   "group": {
+    "tabs": {
+      "about": "About",
+      "nft": "NFT certificate",
+      "members": "Members",
+      "mission": "Missions",
+      "manage": "Manage Group"
+    },
     "create": {
       "title": "Create Group", 
       "required_text": "*는 필수입력 사항입니다.", 

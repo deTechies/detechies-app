@@ -9,6 +9,7 @@ export interface Profile {
   email: string;
   display_name: string;
   avatar: string;
+  wallet:string;
   image: string;
   nft: string[];
 }

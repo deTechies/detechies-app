@@ -28,9 +28,11 @@ const defaultValues: Partial<FinalFeedbackValues> = {};
 export default function FinalFeedbackForm({
   text,
   workId,
+  surveyResponseId
 }: {
   text: any;
   workId: any;
+  surveyResponseId: string
 }) {
   const form = useForm<FinalFeedbackValues>({
     resolver: zodResolver(finalFeedbackForm),
@@ -39,7 +41,7 @@ export default function FinalFeedbackForm({
   const router = useRouter();
 
   async function onSubmit(data: FinalFeedbackValues) {
-    const result = await submitSwotAnalysis(data, workId);
+    const result = await submitSwotAnalysis(data, workId, surveyResponseId);
     toast({
       title: "You submitted the following values:",
       description: (

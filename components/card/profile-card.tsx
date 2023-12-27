@@ -11,6 +11,7 @@ interface Profile {
   id: string;
   name: string;
   display_name: string;
+  wallet: string;
   job?: string;
   nft: string[];
 }
@@ -55,7 +56,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
   return (
     <section
       className="rounded-sm shadow-custom bg-background-layer-1 p-0 hover:shadow-lg cursor-pointer flex flex-col justify-center gap-2 "
-      onClick={() => router.push(`/profile/${profile.id}`)}
+      onClick={() => router.push(`/profiles/${profile.wallet}`)}
     >
       <div className="w-full aspect-square relative  rounded-t-sm m-0">
         <IPFSImageLayer hashes={profile.nft ? profile.nft : defaultAvatar} className="rounded-b-none" />

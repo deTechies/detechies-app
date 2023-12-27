@@ -60,6 +60,27 @@ export enum GROUP_TYPE {
     EDUCATION = 'education',
   }
   
+  export enum NFT_TYPE{
+    SBT = 'sbt', 
+    ERC721 = 'erc721'
+  }
+  
+  export enum AVATAR_TYPE {
+    CLOTHES = 'clothes', 
+    BACKGROUND = 'background',
+    ACCESSORY = 'accessory'
+  }
+  
+  export enum SBT_TYPE{
+    EDU = 'edu', 
+    AWARDS = 'awards'
+  }
+  export enum NFT_IMAGE_TYPE{
+    AVATAR = 'avatar', 
+    IMAGE = 'image', 
+    IMAGE_AND_AVATAR = 'avatar+image'
+  }
+  
   export enum ProjectType {
     COMPANY = 'company',
     FREELANCE = 'freelance',

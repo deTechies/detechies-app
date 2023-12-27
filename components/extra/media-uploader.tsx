@@ -20,11 +20,13 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
 }) => {
   const [mediaSource, setMediaSource] = useState<string | null>(null);
   const [mediaType, setMediaType] = useState<"image" | "video" | null>(null);
+  const random = Math.random()
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
+    
     console.log(width, height);
     if (file) {
       const fileType = file.type.split("/")[0];
@@ -51,7 +53,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
     <div className="flex gap-4">
       <div
         className="media-uploader relative rounded-sm bg-background-layer-2 flex items-center justify-center border border-dashed cursor-pointer hover:bg-background-layer-1"
-        onClick={() => document.getElementById("media-input")?.click()}
+        onClick={() => document.getElementById(random.toString())?.click()}
       >
         <div
           className={`aspect-[${
@@ -80,9 +82,9 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
             </video>
           )}
           {!mediaSource && (
-            <div className="m-4 flex flex-col gap-4 text-text-secondary justify-center  items-center ">
+            <div className={`flex flex-col gap-4 text-text-secondary py-3 px-4 text-xs justify-center items-center w-full   aspect-square`}>
               <ImagePlus
-                size={64}
+                size={24}
                 className="text-text-secondary font-light"
                 strokeWidth={1.5}
               />
@@ -90,7 +92,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
             </div>
           )}
           <input
-            id="media-input"
+            id={random.toString()}
             type="file"
             accept="image/*,video/*"
             onChange={handleFileChange}
@@ -105,10 +107,24 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
         <span className="text-body_s text-text-secondary">
           Recommended size: {width} x {height}
         </span>
+        <div className="flex gap-4">
         <Button
           size="sm"
           variant={"secondary"}
           type="button"
+          className="text-xs"
+          onClick={() => {
+            document.getElementById(random.toString())?.click()
+          }}
+        >
+          Upload Image
+          </Button>
+        <Button
+          size="sm"
+          variant={"secondary"}
+          type="button"
+          className="text-xs"
+          disabled={mediaSource == null}
           onClick={() => {
             setMediaSource(null);
             setMediaType(null);
@@ -119,6 +135,8 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
         >
           Delete Image
         </Button>
+        
+        </div>
       </div>
     </div>
   );

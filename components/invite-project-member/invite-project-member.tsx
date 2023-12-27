@@ -9,7 +9,6 @@ import { Plus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import PersonItem from "../extra/add-member-item";
 import Search from "../extra/search";
-import { Badge } from "../ui/badge";
 import {
   Dialog,
   DialogClose,
