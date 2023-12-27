@@ -251,6 +251,13 @@
     }
   },
   "group": {
+    "tabs": {
+      "about": "About",
+      "nft": "NFT certificate",
+      "members": "Members",
+      "mission": "Missions",
+      "manage": "Manage Group"
+    },
     "create": {
       "title": "Create Group", 
       "required_text": "*는 필수입력 사항입니다.", 
