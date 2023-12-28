@@ -129,7 +129,6 @@ export default async function GroupProfileCard({ id }: { id: string }) {
           </div>
           )
         }
-        {/* <JoinGroup groupId={groupDetail.id} details={groupDetail} /> */}
       </CardContent>
     </Card>
   );
