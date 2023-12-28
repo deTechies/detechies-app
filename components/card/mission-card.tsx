@@ -14,7 +14,7 @@ export default function MemberCard({
 }: {
   address: string;
   info?: any;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   const router = useRouter();
 

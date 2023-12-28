@@ -11,7 +11,7 @@ import { toast } from "../ui/use-toast";
 import { formatDate } from "@/lib/utils";
 import { useState } from "react";
 
-export default function invitingMemberListItem({
+export default function InvitingMemberListItem({
   profile,
   contract,
 }: {
