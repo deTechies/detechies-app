@@ -111,9 +111,10 @@ export enum GROUP_TYPE {
     OTHER = 'other'
   }
   export enum QuestionCategory {
-    TECHNICAL = 'technical',
+    TECHNICAL = '기술 전문성',
+    BUSINESS = '업무 지식', 
+    COMMUNICATION = '협업 및 커뮤니케이션',
     OTHER = 'other',
-    COMMUNICATION = 'communication',
     DELIVERY = 'delivery'
   }
   
