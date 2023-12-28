@@ -14,6 +14,7 @@ import { MoreVertical } from "lucide-react";
 import ProjectContribution from "../../_components/project-contribution";
 import ProjectMemberEvaluate from "../../_components/project-evaluate";
 import ProjectWorkDetail, { BlurredProjectWorkDetail } from "../../_components/project-work-detail";
+
 import DeleteMember from "./modals/delete-member";
 import RequestEvaluation from "./modals/request-evaluation";
 

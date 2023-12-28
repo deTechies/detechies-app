@@ -27,15 +27,17 @@ interface BasicEvaluationInfoProps {
 }
 
 const baseInfoSchema = z.object({
-  match: z.enum(["100", "80"], {
-    required_error: "You need to select a matching performance.",
-  }).optional(),
+  match: z
+    .enum(["100", "80"], {
+      required_error: "You need to select a matching performance.",
+    })
+    .optional(),
   hourly_rate: z.string().optional(),
   weekly_hours: z.string().optional(),
   reject_letter: z.string().optional(),
-  rate_contributions: z.number().min(0).max(100).optional(),
-  rate_requirements: z.number().min(0).max(100).optional(),
-  rate_time_schedule: z.number().min(0).max(100).optional(),
+  rate_contributions: z.number().optional(),
+  rate_requirements: z.number().optional(),
+  rate_time_schedule: z.number().optional(),
 });
 
 type verifyWorkValues = z.infer<typeof baseInfoSchema>;
@@ -55,42 +57,46 @@ export default function BasicEvaluationInfo({
   const router = useRouter();
 
   async function onSubmit(data: verifyWorkValues) {
-    //TODO: build the data object to send to the backend
+    if (!workId) {
+      toast({
+        title: "No idea being found",
+      });
 
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+      return;
+    }
+
     const result = await submitVerifyWork(data, workId);
 
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
-        </pre>
-      ),
-    });
+    if (result.status == "500") {
+
+      toast({
+        title: "Oops something went wrong",
+        description:  <pre>{JSON.stringify(result, null,2)}</pre>
+      });
+      return;
+    } else {
+      router.push(`/work/${workId}/survey`);
+      toast({
+        title: "Submitted succesfully",
+        description: (
+          <span className="text-white">
+            Thank your evaluating the user, please find more things.
+          </span>
+        ),
+      });
+    }
 
     if (data.match == "80") {
       toast({
         title: "You submitted the following values:",
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(result, null, 2)}
-            </code>
+            <code className="text-white">Email has been send</code>
           </pre>
         ),
       });
       router.push(`/project`);
     }
-
-    router.push(`/work/${workId}/survey`);
   }
 
   return (
@@ -214,29 +220,28 @@ export default function BasicEvaluationInfo({
                 />
               </section>
             )}
-            <section className="flex justify-between">
-              <Button variant="secondary" size="lg" type="button">
-                {text.go_back}
-              </Button>
-              {verified ? (
-                <Button
-                  variant="primary"
-                  size="lg"
-                  type="button"
-                  onClick={() => {
-                    router.push(`/work/${workId}/survey`);
-                  }}
-                >
-                  {text.next}
+              <section className="flex justify-between">
+                <Button variant="secondary" size="lg" type="button">
+                  {text.go_back}
                 </Button>
-              ) : (
-                <Button size="lg" type="submit"
-                  disabled={!form.formState.isValid}
-                >
-                  Save
-                </Button>
-              )}
-            </section>
+                {verified ? (
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    type="button"
+                    onClick={() => {
+                      router.push(`/work/${workId}/survey`);
+                    }}
+                  >
+                    {text.next}
+                  </Button>
+                ) : (
+                  <Button size="lg" type="submit">
+                    Save
+                  </Button>
+                )}
+              </section>
+
           </Card>
         </form>
       </Form>
