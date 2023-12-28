@@ -196,7 +196,6 @@ export function GroupForm() {
           <FormInlineItem>
             <FormInlineLabel className="justify-start">Image</FormInlineLabel>
             <MediaUploader
-              name="icon"
               key="icon"
               onFileSelected={selectIcon}
               width={50}
@@ -209,7 +208,6 @@ export function GroupForm() {
               Cover Image
             </FormInlineLabel>
             <MediaUploader
-              name="cover"
               key="cover"
               onFileSelected={selectCover}
               width={256}
