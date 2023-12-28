@@ -5,13 +5,16 @@ import { Card } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import React from "react";
 
 export default function MemberCard({
   address,
   info,
+  children,
 }: {
-  address: Address;
+  address: string;
   info?: any;
+  children: React.ReactNode;
 }) {
   const router = useRouter();
 
@@ -19,9 +22,9 @@ export default function MemberCard({
     const today = new Date();
     const endDate = new Date(dateEndString);
     const timeDiff = endDate.getTime() - today.getTime();
-  
+
     const daysUntilEnd = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-  
+
     if (daysUntilEnd > 0) {
       return `미션 종료 ${daysUntilEnd}일 전`;
     } else if (daysUntilEnd === 0) {
@@ -29,8 +32,35 @@ export default function MemberCard({
     } else {
       return "미션 종료";
     }
-  }
-  
+  };
+
+  const content = children || (
+    <div>
+      {info.chips.length <= 3 ? (
+        <div className="flex flex-wrap gap-2 text-title_m">
+          {info.chips.map((chip: string, index: number) => {
+            return (
+              <Badge variant={"info"} className="rounded-[5px]" key={index}>
+                {chip}
+              </Badge>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex flex-wrap gap-2 text-title_m">
+          {info.chips.slice(0, 2).map((chip: string, index: number) => {
+            return (
+              <Badge variant={"info"} className="rounded-[5px]" key={index}>
+                {chip}
+              </Badge>
+            );
+          })}
+
+          <Badge className="rounded-[5px]">+{info.chips.length - 2}</Badge>
+        </div>
+      )}
+    </div>
+  );
 
   if (!info) return <div>no data</div>;
 
@@ -51,36 +81,8 @@ export default function MemberCard({
 
       <div className="flex flex-col gap-3 p-5">
         <h5 className="text-title_l">{info.title}</h5>
-
-        <div className="text-label_l">
-          {getDaysUntilEnd(info.end_date)}
-        </div>
-
-        {info.chips.length <= 3 ? (
-          <div className="flex flex-wrap gap-2 text-title_m">
-            {info.chips.map((chip: string, index: number) => {
-              return (
-                <Badge variant={"info"} className="rounded-[5px]" key={index}>
-                  {chip}
-                </Badge>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="flex flex-wrap gap-2 text-title_m">
-            {info.chips.slice(0, 2).map((chip: string, index: number) => {
-              return (
-                <Badge variant={"info"} className="rounded-[5px]" key={index}>
-                  {chip}
-                </Badge>
-              );
-            })}
-            
-            <Badge className="rounded-[5px]">
-              +{info.chips.length - 2}
-            </Badge>
-          </div>
-        )}
+        <div className="text-label_l">{getDaysUntilEnd(info.end_date)}</div>
+        {content}
       </div>
     </Card>
   );

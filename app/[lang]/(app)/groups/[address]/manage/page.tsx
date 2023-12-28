@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/tabs2";
 import ManageMember from "./manage-member";
 import ManageNft from "./manage-nft";
+import ManageMission from "./manage-mission";
 import { getClub } from "@/lib/data/groups";
 
 export default async function GroupDetailManageLayout({
@@ -35,11 +36,16 @@ export default async function GroupDetailManageLayout({
           ></ManageMember>
         </TabsContent>
         
-        <TabsContent value="missions">missions</TabsContent>
         <TabsContent value="nft">
           <ManageNft
             details={data}
           ></ManageNft>
+        </TabsContent>
+
+        <TabsContent value="missions">
+          <ManageMission
+            details={data}
+          ></ManageMission>
         </TabsContent>
         <TabsContent value="info">info</TabsContent>
       </Tabs>

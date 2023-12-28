@@ -92,7 +92,7 @@ export default function DisplayNFT({
   };
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="min-w-[150px] w-full grow max-w-[229px]">
         <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-8 max-w-[504px]">
