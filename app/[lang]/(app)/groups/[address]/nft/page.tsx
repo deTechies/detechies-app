@@ -16,7 +16,7 @@ export default async function GroupAchievements({
 }) {
   const achievements = await getGroupAchievements(params.address);
 
-  console.log(achievements);
+  // console.log(achievements);
 
   return (
     <div>

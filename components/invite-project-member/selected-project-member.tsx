@@ -7,6 +7,7 @@ import PersonItem from "../extra/add-member-item";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { toast } from "../ui/use-toast";
 
 export default function SelectedProjectMember({
   user,
@@ -23,6 +24,14 @@ export default function SelectedProjectMember({
 
   async function inviteMember() {
     const result = await inviteProjectMembers([user.id], role, projectId);
+    
+    
+    toast({
+      title: "invited team member",
+      description: <pre>
+        {JSON.stringify(result, null, 2)}
+      </pre>
+    })
   }
 
   return (

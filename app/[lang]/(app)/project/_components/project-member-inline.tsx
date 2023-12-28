@@ -14,7 +14,7 @@ export default function ProjectMemberInline({projectMember, projectWork}: {proje
         />
       </div>
       <div className="grow shrink basis-0 flex-col gap-4 inline-flex">
-        <h5 className="text-title_m">{projectMember.user.display_name} | {projectMember.role} | 팀원</h5>
+        <h5 className="text-title_m">{projectMember?.user?.display_name} | {projectMember?.role} | 팀원</h5>
         <div className="flex-col gap-2 flex">
           <div className="self-stretch gap-2 inline-flex">
             <span className="text-text-secondary text-label_m">
@@ -22,7 +22,7 @@ export default function ProjectMemberInline({projectMember, projectWork}: {proje
             </span>
 
             <span className="text-text-secondary text-label_m">
-              | 기여도 {projectMember.percentage}%
+              | 기여도 {projectMember?.percentage}%
             </span>
           </div>
           <div className="self-stretch gap-2 inline-flex">
@@ -31,7 +31,7 @@ export default function ProjectMemberInline({projectMember, projectWork}: {proje
             </div>
 
             <div className="text-text-secondary text-label_m tracking-wide">
-              {projectWork && beginEndDates(projectWork.begin_date, projectWork.end_date)}
+              {projectWork && beginEndDates(projectWork?.begin_date, projectWork?.end_date)}
             </div>
           </div>
         </div>

@@ -128,12 +128,6 @@ export async function inviteProjectMembers(
     }),
   });
 
-  console.log(response.json());
-
-  if (!response.ok) {
-    throw new Error("Failed to invite members");
-  }
-
   return response.json();
 }
 
@@ -251,6 +245,23 @@ export async function addMembersWork(
   return response.json();
 }
 
+export async function removeProjectMember(memberId:string){
+  const url = API_URL + '/project-member/' + memberId
+  const session = await getSession();
+
+  // Check for a valid session and required tokens
+  if (!session || !session.web3 || !session.web3.accessToken) {
+    throw new Error("Invalid session or missing access token");
+  }
+  const response = await fetch(url, 
+    {
+      method: "DELETE", 
+      headers: {
+        Authorization: `Bearer ${session.web3.accessToken}`
+      } 
+    })
+}
+
 export async function getProjectMember(projectId: string, userId: string) {
   const session = await auth();
   const url = new URL(`${API_URL}/project-member/single`);
@@ -278,7 +289,7 @@ export async function getProjectMember(projectId: string, userId: string) {
 
 export async function getProjectWork(id:string){
   const session = await auth();
-  const url = new URL(`${API_URL}/project-work/${id}`);
+  const url = new URL(`${API_URL}/survey-response/surveyByWork/${id}`);
 
   if (!session?.web3?.accessToken) {
     throw new Error("No access token found");
@@ -291,9 +302,6 @@ export async function getProjectWork(id:string){
     },
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch project member");
-  }
 
   return response.json();
 }

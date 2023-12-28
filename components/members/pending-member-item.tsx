@@ -31,7 +31,7 @@ export default function PendingMemberItem({
     }
   }
   return (
-    <div className="flex gap-5 py-4 border-b ">
+    <div className="flex gap-5 py-4 border-b shrink-0">
       <div className="shrink-0">
         <Image
           height="80"
@@ -42,9 +42,9 @@ export default function PendingMemberItem({
         />
       </div>
 
-      <div className="flex gap-4 grow items-center">
+      <div className="flex gap-4 grow shrink-0 items-center">
         <Dialog>
-          <DialogTrigger className="flex flex-col gap-2 items-start">
+          <DialogTrigger className="flex flex-col gap-2 text-lect items-start">
             <span className="text-title_m ">{name}</span>
             <span className="text-label_m text-text-secondary">
               {status}: {role}
@@ -55,12 +55,22 @@ export default function PendingMemberItem({
           </DialogContent>
         </Dialog>
         <div className="flex gap-3 items-center flex-wrap justify-end">
-          <Button size="sm" variant="secondary">
+          {status == 'joined' && (
+            <>
+            <Button size="sm" variant="secondary">
             Reject
           </Button>
           <Button size="sm" variant={"primary"} onClick={acceptMember}>
             Accept
-          </Button>
+          </Button></>
+          )}
+          {
+            status == 'invited' && (
+              <Button size="sm" variant="destructive" className="text-state-error-secondary">
+                Remove
+              </Button>
+            )
+          }
         </div>
       </div>
     </div>

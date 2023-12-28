@@ -10,12 +10,13 @@ export default async function ProfileDashboard({params}: {params: {lang: Locale}
   const dictionary = await getDictionary(params.lang) as any;
   
   const profile = await getUserProfile();
-  console.log(profile)
+  // console.log(profile)
+  
   return (
     <main className="m-10">
       <div className="absolute bg-[url('/landing/background-card.png')] object-scale-down top-[64px] left-0  z-[-10] min-h-[20vh] min-w-full" />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 grid-cols-1 gap-8 align-center relative">
-        <div className="col-span-1  flex flex-col gap-4">
+      <div className="relative grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 align-center">
+        <div className="flex flex-col col-span-1 gap-4">
           {profile && profile.TBA && (
             <ProfileDetailCard
             lang={dictionary.profile_detail_card}

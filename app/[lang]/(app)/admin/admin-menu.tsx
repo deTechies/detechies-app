@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 export default function AdminMenu() {
   const pathName = usePathname();
-  console.log(pathName);
+  // console.log(pathName);
 
   const menuItems = [
     {
@@ -25,7 +25,7 @@ export default function AdminMenu() {
     },
   ];
   return (
-    <div className="bg-background-layer-1 rounded-sm grid items-center">
+    <div className="grid items-center rounded-sm bg-background-layer-1">
       {menuItems.map((item) => {
         return (
           <Link

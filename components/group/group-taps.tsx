@@ -44,9 +44,10 @@ export default function GroupTaps({
   return (
     <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 rounded-none">
       {links.map((link: any, index: number) => {
-        // if(!link.role.includes(details.userRole)){
-        //   return;
-        // }
+
+        if(!link.role.includes(details.userRole)){
+          return;
+        }
 
         return (
           <div className="mr-8" key={index}>

@@ -2,17 +2,26 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
+import { removeProjectMember } from "@/lib/data/project";
 import { } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
 
 export default function DeleteMember({
   memberId,
 }: {
   memberId: string;
 }) {
+  const router = useRouter();
   async function deleteMember() {
+    
+    const result = await removeProjectMember(memberId)
     toast({
-      description: "Succesfully requested evaluation to: " + memberId,
+      description: <pre>
+        {JSON.stringify(result, null, 3)}
+      </pre>
     });
+    
+    router.refresh()
   }
   return (
     <Dialog>

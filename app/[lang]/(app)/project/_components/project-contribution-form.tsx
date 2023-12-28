@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Textarea } from "@/components/ui/textarea";
@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
@@ -31,7 +32,7 @@ import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
 import { addMembersWork } from "@/lib/data/project";
 import { ContributionType } from "@/lib/interfaces";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const contributionFormSchema = z.object({
   begin_date: z.string(),
@@ -43,7 +44,7 @@ const contributionFormSchema = z.object({
   }),
   present: z.boolean().default(false),
   valid: z.boolean().optional(),
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).optional(),
 });
 
 export type ContributionFormData = z.infer<typeof contributionFormSchema>;
@@ -67,37 +68,47 @@ export default function ProjectContributionForm({
     mode: "onChange",
   });
   const messageValue = form.watch("description", "");
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
   const currentPercentage = form.watch("percentage", [0]);
+  const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
 
   const [loading, setLoading] = useState(false);
 
   const handleKeyDown = (e: any) => {
-    if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
-      e.preventDefault(); // Prevent form submit
-
-      const newTag = e.currentTarget.value.trim(); // Get the current value of the input
-      const currentTags = form.watch("tags");
-
-      if (Array.isArray(currentTags)) {
-        form.setValue("tags", [...currentTags, newTag], {
-          shouldValidate: true,
-        });
-      } else {
-        form.setValue("tags", [newTag], { shouldValidate: true });
-      }
-
-      e.currentTarget.value = ""; // Clear the input field
+    if (e.key === "Enter" && newTag.trim() !== "") {
+      e.preventDefault();
+      const currentTags = form.getValues("tags") || [];
+      form.setValue("tags", [...currentTags, newTag.trim()], {
+        shouldValidate: true,
+      });
+      setNewTag(""); // Clear the input field for new tag
     }
+  };
+
+  const handleNewTagChange = (e: any) => {
+    setNewTag(e.target.value);
   };
 
   const onSubmit = async (values: ContributionFormData) => {
     console.log(values);
-    const result = await addMembersWork(values, projectId);
 
-    toast({
-      title: "Success",
-      description: "Your contribution has been added.",
-    });
+    try {
+      const result = await addMembersWork(values, projectId);
+
+      toast({
+        title: "Success",
+        description: "Your contribution has been added.",
+      });
+
+      if (closeButtonRef.current) {
+        closeButtonRef.current.click();
+      }
+    } catch (error) {
+      toast({
+        title: "error",
+      });
+    }
   };
 
   return (
@@ -182,32 +193,32 @@ export default function ProjectContributionForm({
               </div>
             </div>
 
-            <Controller
-              name="tags"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>상세 업무 종류</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)"
-                      {...field}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </FormControl>
-                  <div>
-                    {/*                       {form.watch("tags").map((tag, index) => (
-                        <span
-                          key={index}
-                          className="bg-gray-100 px-2 py-1 rounded-full text-xs mr-2"
-                        >
-                          {tag}
-                        </span>
-                      ))} */}
-                  </div>
-                </FormItem>
-              )}
-            />
+            <FormItem>
+              <FormLabel>Tags</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Type and press enter"
+                  value={newTag}
+                  onChange={handleNewTagChange}
+                  onKeyDown={handleKeyDown}
+                />
+              </FormControl>
+              <div>
+                {form.watch("tags")?.map((tag:any, index) => (
+                  <Badge
+                    key={index}
+                    className="bg-background-layer-1 border border-accent-primary px-3 py-2 rounded-full text-xs mr-2"
+                    onClick={() => {
+                      const currentTags = form.getValues("tags") || [];
+                      const newTags = currentTags.filter((t) => t !== tag);
+                      form.setValue("tags", newTags, { shouldValidate: true });
+                    }}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </FormItem>
 
             <FormField
               control={form.control}
@@ -265,7 +276,13 @@ export default function ProjectContributionForm({
 
         <div className="flex items-center justify-center gap-2">
           <DialogClose asChild>
-            <Button variant={"secondary"} className="grow max-w-[212px]">나중에 할게요</Button>
+            <Button
+              variant={"secondary"}
+              className="grow max-w-[212px]"
+              ref={closeButtonRef}
+            >
+              나중에 할게요
+            </Button>
           </DialogClose>
           <Button
             type="submit"
