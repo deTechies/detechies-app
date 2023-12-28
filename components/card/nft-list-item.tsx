@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -14,12 +14,12 @@ export interface NFTItem {
     tokenId: number;
     group: {
       id: any;
-      addr:string;
+      addr: string;
     };
-  }
+  };
   group: {
     id: any;
-    addr:string;
+    addr: string;
   };
   metadata: {
     name: string;
@@ -42,7 +42,7 @@ interface NftListItemProps {
 export default function NftListItem({
   showSelect,
   selected,
-  item
+  item,
 }: NftListItemProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -60,39 +60,68 @@ export default function NftListItem({
   );
 
   function removeIPFSPrefix(url: string): string {
-    return url.startsWith(DEFAULT_IPFS_URL) ? url.substring(DEFAULT_IPFS_URL.length) : url;
+    return url.startsWith(DEFAULT_IPFS_URL)
+      ? url.substring(DEFAULT_IPFS_URL.length)
+      : url;
   }
 
-  const avatarAttribute = item.metadata.attributes?.find(attr => attr.trait_type === "avatar");
+  const avatarAttribute = item.metadata.attributes?.find(
+    (attr) => attr.trait_type === "avatar"
+  );
 
   return (
-    <section className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[150px] max-w-[200px] border">
-      <div className="w-full aspect-square relative m-0 object-scale-down ">
+    <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
+      <div className="relative object-scale-down w-full m-0 aspect-square ">
         {showSelect && avatarAttribute && (
           <Switch
-            className="absolute top-5 right-5 z-10 text-white hover:text-text-primary cursor-pointer"
+            className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
             checked={selected}
             onCheckedChange={() => {
-              router.push(pathname + '?' + createQueryString(avatarAttribute.value, removeIPFSPrefix(item.metadata.image)));
+              router.push(
+                pathname +
+                  "?" +
+                  createQueryString(
+                    avatarAttribute.value,
+                    removeIPFSPrefix(item.metadata.image)
+                  )
+              );
             }}
           />
         )}
         <Image
-          src={item.metadata.image ? DEFAULT_IPFS_URL + item.metadata.image : DEFAULT_IPFS_URL + "bafkreigodckc2cne7l6kcirr7hzzcpa7q7yes7xj72wl7t4lb44xfx4r7e"}
+          src={
+            item.metadata.image
+              ? DEFAULT_IPFS_URL + item.metadata.image
+              : DEFAULT_IPFS_URL +
+                "bafkreigodckc2cne7l6kcirr7hzzcpa7q7yes7xj72wl7t4lb44xfx4r7e"
+          }
           alt="nft_list_item"
           className="object-scale-down rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
           fill={true}
           priority={true}
         />
       </div>
-      <div className="flex flex-col gap-2 p-4">
-        <Link 
-          className="truncate text-text-primary font-medium text-center capitalize text-ellipsis hover:text-green-800 " 
+
+      <div className="flex flex-col gap-3 p-5">
+        <div className="text-left text-title_l">
+          {item.metadata.name || "undefined"}
+        </div>
+
+        {/* <Link 
+          className="font-medium text-center capitalize truncate text-text-primary text-ellipsis hover:text-green-800 " 
           href={`/nft/${item.achievement ? item.achievement?.group?.addr : item.group.id}/${item.achievement ? item.achievement.tokenId.toString() : item.tokenId.toString()}`}
           >
           {item.metadata.name || "undefined"}
-        </Link>
-        <Badge variant="info" className="flex justify-center text-sm py-2 text-center capitalize">{item.metadata.category || "not found"}</Badge>
+        </Link> */}
+
+        <div className="flex">
+          <Badge
+            variant="info"
+            className="flex justify-center px-2.5 py-2 rounded-[5px] capitalize"
+          >
+            {item.metadata.category || "not found"}
+          </Badge>
+        </div>
       </div>
     </section>
   );

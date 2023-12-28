@@ -74,7 +74,6 @@ export default async function ManageNft({ details }: { details: any }) {
 
       <div className="overflow-auto max-w-[90vw]">
         <div className="flex flex-wrap gap-4">
-              <DisplayNFT details={dummy_nft_item} />
           {/* {details.achievements &&
             details.achievements.map((item: NFTItem, index: number) => (
               <DisplayNFT details={item} key={index} />

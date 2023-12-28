@@ -29,13 +29,13 @@ export default async function ProjectDetailPage({
 
   if (!data)
     return (
-      <main className="grid md:grid-cols-3 my-12 mx-5 gap-6">
-        <section className="md:col-span-2 flex flex-col gap-8">
-          <Skeleton className="h-96 w-full" />
-          <Skeleton className="h-96 w-full" />
+      <main className="grid gap-6 mx-5 my-12 md:grid-cols-3">
+        <section className="flex flex-col gap-8 md:col-span-2">
+          <Skeleton className="w-full h-96" />
+          <Skeleton className="w-full h-96" />
         </section>
 
-        <section className="col-span-1 flex flex-col gap-8">
+        <section className="flex flex-col col-span-1 gap-8">
           <Skeleton className="h-[25vh] w-[20vw] animate-pulse" />
           <Skeleton className="h-[25vh] w-full animate-pulse" />
         </section>
@@ -46,8 +46,8 @@ export default async function ProjectDetailPage({
   if (data.userRole == "invited") return <AcceptInvitation image={data.image} projectId={data.id} />
 
   return (
-    <main className="flex md:flex-row flex-col my-12 mx-5 gap-7">
-      <section className="flex flex-col grow gap-5">
+    <main className="flex flex-col mx-5 my-12 md:flex-row gap-7">
+      <section className="flex flex-col gap-5 grow">
         <ProjectDetail 
           details={data} 
           userRole={data.userRole}
@@ -71,7 +71,6 @@ export default async function ProjectDetailPage({
           userRole={data.userRole}
         />
         }
-   
       </section>
     </main>
   );
