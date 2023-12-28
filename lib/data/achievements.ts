@@ -2,7 +2,7 @@
 import { Session, getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
-import { authOptions } from "../helpers/authOptions";
+import { auth, authOptions } from "../helpers/authOptions";
 
 export async function getUserAchievements(address?:string) {
   //getting profile session
@@ -19,7 +19,16 @@ export async function getUserAchievements(address?:string) {
   }
   
   export async function getGroupAchievements(address:string){
-    return [];
+    const session = await auth();
+    
+    //getting all the achievemnts
+    const response = await fetch(`${API_URL}/achievements/club/${address}`, {
+      method: 'GET', 
+      headers: {
+        Authorization: `Bearer ${session?.web3.accessToken}`
+      }
+    })
+    return response.json();
   }
   
   

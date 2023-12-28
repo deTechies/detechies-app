@@ -23,16 +23,17 @@ const finalFeedbackForm = z.object({
 type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
 
 // This can come from your database or API.
-const defaultValues: Partial<FinalFeedbackValues> = {};
 
 export default function FinalFeedbackForm({
   text,
   workId,
-  surveyResponseId
+  surveyResponseId,
+  defaultValues,
 }: {
   text: any;
   workId: any;
-  surveyResponseId: string
+  surveyResponseId: string;
+  defaultValues: Partial<FinalFeedbackValues>;
 }) {
   const form = useForm<FinalFeedbackValues>({
     resolver: zodResolver(finalFeedbackForm),
@@ -52,7 +53,7 @@ export default function FinalFeedbackForm({
       ),
     });
 
-    //router.push('/mypage/evaluation')
+    router.push(`/work/${workId}/result`);
   }
   return (
     <Form {...form}>
@@ -105,9 +106,18 @@ export default function FinalFeedbackForm({
           >
             {text.go_back}
           </Button>
-          <Button type="submit" variant={"primary"} size="lg">
-            {text.next}
-          </Button>
+          {defaultValues ? (
+            <Button
+              type="button"
+              onClick={() => router.push(`/work/${workId}/result`)}
+            >
+              {text.next}
+            </Button>
+          ) : (
+            <Button type="submit" variant={"primary"} size="lg">
+              {text.next}
+            </Button>
+          )}
         </section>
       </form>
     </Form>

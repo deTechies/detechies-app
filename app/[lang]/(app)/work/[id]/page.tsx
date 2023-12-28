@@ -26,8 +26,8 @@ export default async function ProjectMemberEvaluation({
     )
   }
   
-  if(details.evaluator.user.role != 'admin'){
-    redirect(`/work/${params.id}/survey`)
+  if(details.evaluator.role != 'admin'){
+    redirect(`/work/${params.id}/feedback`)
   }
   
   return (
@@ -41,12 +41,13 @@ export default async function ProjectMemberEvaluation({
 
       {/* RIGHT SIDE */}
       <section className="flex grow shrink">
+
         <div className="space-y-8 grow">
           <BasicEvaluationInfo
             text={dictionary.project.evaluate}
             workId={params.id}
-            verified={details.work_verified != null}
-            defaultValues={details.work_verified}
+            verified={details.matching != null}
+            defaultValues={details.matching}
           />
         </div>
       </section>

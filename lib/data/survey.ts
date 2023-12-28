@@ -5,12 +5,12 @@ import { auth } from "../helpers/authOptions";
 export async function submitEvaluationSurvey(
   questions: any,
   workId: string,
-  surveyId: string
+  surveyResponseId: string
 ) {
   const session = await getSession();
 
   const formattedData = {
-    surveyId: surveyId, // ID of the survey
+    surveyResponseId: surveyResponseId, // ID of the survey
     projectWorkId: workId, // ID of the project work
     evaluatorId: session?.web3.address, // ID of the project member who is the evaluator
     answers: transformToAnswerDto(questions),
@@ -110,8 +110,8 @@ export async function getEvaluationSurvey(id: string) {
   return response.json();
 }
 
-function transformToAnswerDto(data: { [key: string]: [number] }): any[] {
-  return Object.entries(data).map(([questionId, [response]]) => ({
+function transformToAnswerDto(data: { [key: string]: number }): any[] {
+  return Object.entries(data).map(([questionId, response]) => ({
     questionId,
     response: response.toString(), // Assuming response is always a number and needs to be a string in AnswerDto
   }));
