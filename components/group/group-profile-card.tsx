@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
+import InviteMember from "../invite-member/invite-member";
 
 export default async function GroupProfileCard({ id }: { id: string }) {
   const groupDetail = await getClub(id);
@@ -113,9 +114,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
             </Button>
             </Link>
 
-            <Button size="lg" variant="primary" className="max-w-[230px] grow">
-              멤버 초대하기
-            </Button>
+            <InviteMember id={id}></InviteMember>
           </div>
           )
         }

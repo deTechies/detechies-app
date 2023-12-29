@@ -16,6 +16,12 @@ export default function MemberCard({
 }) {
   const router = useRouter();
 
+  const onClickCard = () => {
+    // console.log(router.query);
+    // console.log(`/en/groups/${address}/missions/${info.seq}`);
+    router.push(`/en/groups/${address}/missions/${info.seq}`);
+  }
+
   const getDaysUntilEnd = (dateEndString: string): string => {
     const today = new Date();
     const endDate = new Date(dateEndString);
@@ -65,7 +71,7 @@ export default function MemberCard({
   return (
     <Card
       className="gap-1 p-0 border rounded-md overflow-hidden cursor-pointer border-border-div bg-background-layer-1 hover:shadow-lg max-w-[288px]"
-      onClick={() => {}}
+      onClick={onClickCard}
     >
       <div className="relative m-0 rounded-t-sm bg-accent-secondary">
         <Image
