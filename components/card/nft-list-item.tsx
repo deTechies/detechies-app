@@ -12,6 +12,8 @@ export interface NFTItem {
   tokenId: number;
   name:string;
   image: string;
+  description:string;
+  category:string;
   nft_type:string;
   achievement: {
     tokenId: number;

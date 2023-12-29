@@ -65,7 +65,7 @@ export default function MemberCard({
   return (
     <Card
       className="gap-1 p-0 border rounded-md overflow-hidden cursor-pointer border-border-div bg-background-layer-1 hover:shadow-lg max-w-[288px]"
-      onClick={() => {}}
+      onClick={() => {router.push(`/groups/${address}/mission/12`)}}
     >
       <div className="relative m-0 rounded-t-sm bg-accent-secondary">
         <Image
