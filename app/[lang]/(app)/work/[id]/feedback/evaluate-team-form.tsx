@@ -29,7 +29,7 @@ const criteria: Criterion[] = [
   },
   {
     id: "2",
-    name: "Criterion 1",
+    name: "내향적 vs 외향적",
     ranks: 5,
     minText: "내향적",
     maxText: "외향적",

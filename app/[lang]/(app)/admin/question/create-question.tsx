@@ -30,7 +30,6 @@ import {
 } from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
-import { MultiSelectFormField } from "@/components/ui/select-multiple";
 import { createQuestion } from "@/lib/data/feedback";
 import { QuestionCategory, QuestionType } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
@@ -197,7 +196,7 @@ export default function CreateQuestion() {
                       </FormItem>
                     )}
                   />
-                  <FormField
+                {/*   <FormField
                     control={form.control}
                     name="roles" // Update the name to match the field name in your form
                     render={({ field }) => (
@@ -220,7 +219,7 @@ export default function CreateQuestion() {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                  /> */}
                 </div>
 
                 <FormField
