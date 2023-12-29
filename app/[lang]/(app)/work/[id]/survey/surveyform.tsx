@@ -26,9 +26,7 @@ export function SurveyForm({
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
-
     const result = await submitEvaluationSurvey(data, workId, responseId);
-
     toast({
       title: "form results",
       description: <span>Thank you for filling in the form. </span>,
