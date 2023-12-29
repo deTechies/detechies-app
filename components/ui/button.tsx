@@ -2,7 +2,6 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
 
 const buttonVariants = cva(
@@ -12,6 +11,7 @@ const buttonVariants = cva(
       variant: {
         primary: "bg-accent-secondary text-accent-primary",
         default: "bg-accent-secondary text-accent-primary",
+        success: "bg-accent-primary text-background-layer-1",
         destructive: "bg-state-error text-state-error-secondary  hover:bg-destructive/20",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-background-layer-2 text-[#3B414B] hover:bg-gray-100 cursor:pointer",
