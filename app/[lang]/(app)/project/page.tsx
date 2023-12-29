@@ -48,11 +48,11 @@ export default async function ProjectListPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
-    <main className="flex flex-col gap-6 w-full my-4 p-4 mx-auto">
-      <Card className="flex gap-5 justify-between pt-7 px-8 pb-8">
+    <main className="flex flex-col w-full gap-6 p-4 mx-auto my-4">
+      <Card className="flex justify-between gap-5 px-8 pb-8 pt-7">
         <h1 className="text-subhead_s">{dictionary.project.list.projects}</h1>
-        <div className="flex justify-between sm:flex-row flex-col">
-          <div className="flex gap-5 items-center sm:flex-row flex-col">
+        <div className="flex flex-col justify-between sm:flex-row">
+          <div className="flex flex-col items-center gap-5 sm:flex-row">
             <Select>
               <SelectTrigger className="w-[180px] px-3 py-3.5">
                 <SelectValue
@@ -94,7 +94,7 @@ export default async function ProjectListPage({
             </div>
           </div>
           <Link href="/project/create" role="link"
-            className="px-5 py-2 bg-accent-secondary text-accent-primary rounded-full text-title_m flex items-center justify-center"
+            className="flex items-center justify-center px-5 py-2 rounded-full bg-accent-secondary text-accent-primary text-title_m"
           >
             {dictionary.project.list.create_project}
           </Link>
@@ -102,7 +102,7 @@ export default async function ProjectListPage({
       </Card>
 
       <Suspense fallback={<div>Loading...</div>}>
-        <section className="w-full grid md:grid-cols-2 gap-4">
+        <section className="grid w-full gap-4 md:grid-cols-2">
           {filteredData.length > 0 ? (
             filteredData.map((item: Project) => (
               <ProjectItem key={item.id} details={item} lang={dictionary.project.list}/>

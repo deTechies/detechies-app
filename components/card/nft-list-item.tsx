@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -12,17 +12,19 @@ export interface NFTItem {
   tokenId: number;
   name:string;
   image: string;
+  description:string;
+  category:string;
   nft_type:string;
   achievement: {
     tokenId: number;
     group: {
       id: any;
-      addr:string;
+      addr: string;
     };
-  }
+  };
   group: {
     id: any;
-    addr:string;
+    addr: string;
   };
   metadata: {
     name: string;
@@ -45,7 +47,7 @@ interface NftListItemProps {
 export default function NftListItem({
   showSelect,
   selected,
-  item
+  item,
 }: NftListItemProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -63,17 +65,19 @@ export default function NftListItem({
   );
 
   function removeIPFSPrefix(url: string): string {
-    return url.startsWith(DEFAULT_IPFS_URL) ? url.substring(DEFAULT_IPFS_URL.length) : url;
+    return url.startsWith(DEFAULT_IPFS_URL)
+      ? url.substring(DEFAULT_IPFS_URL.length)
+      : url;
   }
 
   const avatarAttribute = item.metadata?.attributes?.find(attr => attr.trait_type === "avatar");
 
   return (
-    <section className="rounded-sm shadow-custom bg-background-layer-1 p-0 min-w-[150px] max-w-[200px] border">
-      <div className="w-full aspect-square relative m-0 object-scale-down ">
+    <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
+      <div className="relative object-scale-down w-full m-0 aspect-square ">
         {showSelect && avatarAttribute && (
           <Switch
-            className="absolute top-5 right-5 z-10 text-white hover:text-text-primary cursor-pointer"
+            className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
             checked={selected}
             onCheckedChange={() => {
               router.push(pathname + '?' + createQueryString(avatarAttribute.value, removeIPFSPrefix(item.image)));

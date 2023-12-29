@@ -22,12 +22,12 @@ interface Profile {
 }
 
 export interface Member {
-  memberId: Address,
-  role: string,
-  status: any,
-  created_at: string,
-  verified: boolean,
-  user: any[]
+  memberId: Address;
+  role: string;
+  status: any;
+  created_at: string;
+  verified: boolean;
+  user: any[];
 }
 
 export default function GroupMember({
@@ -41,7 +41,7 @@ export default function GroupMember({
 }) {
   const pathName = usePathname();
 
-  console.log(members);
+  // console.log(members);
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -59,21 +59,25 @@ export default function GroupMember({
         } */}
       </div>
 
-
       <div className="grid w-full gap-4 md:grid-cols-5">
-        {
-        members &&
+        {members &&
           members.map(
             (item: Member, index: any) => {
-              if(index > 4) {
-                return ;
+              if (index > 4) {
+                return;
               }
-              return <MemberCard address={item.memberId} info={item.user} key={index} />
+              return (
+                <MemberCard
+                  address={item.memberId}
+                  info={item.user}
+                  key={index}
+                />
+              );
             }
-              
-              // item.tokenboundAccount && (
-              //   <MemberCard address={getAddress(item.address)} key={index} />
-              // )
+
+            // item.tokenboundAccount && (
+            //   <MemberCard address={getAddress(item.address)} key={index} />
+            // )
           )}
       </div>
     </div>

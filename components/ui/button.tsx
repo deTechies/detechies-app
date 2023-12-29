@@ -2,7 +2,6 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
 
 const buttonVariants = cva(
@@ -12,6 +11,7 @@ const buttonVariants = cva(
       variant: {
         primary: "bg-accent-secondary text-accent-primary",
         default: "bg-accent-secondary text-accent-primary",
+        success: "bg-accent-primary text-background-layer-1",
         destructive: "bg-state-error text-state-error-secondary  hover:bg-destructive/20",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-background-layer-2 text-[#3B414B] hover:bg-gray-100 cursor:pointer",
@@ -20,8 +20,8 @@ const buttonVariants = cva(
       },
       size: {
         default: "px-6 py-4 rounded-full",
-        sm: "rounded-md px-3 py-2",
-        lg: "py-[15.5px] rounded-full px-[78px] font-600",
+        sm: "rounded-md px-3 py-2 text-title_s",
+        lg: "py-[15.5px] rounded-full",
         icon: "h-10 w-10",
       },
     },
@@ -43,7 +43,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const content = loading ? (
-      <button className="flex gap-4 items-center ">
+      <button className="flex items-center gap-4 ">
         {/* Replace with your spinning icon component */}
         <Loader2 size={16} className="animate-spin" />
         Loading...

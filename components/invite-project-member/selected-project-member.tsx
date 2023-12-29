@@ -2,6 +2,7 @@ import { User } from "@/lib/interfaces";
 
 import { inviteProjectMembers } from "@/lib/data/project";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import PersonItem from "../extra/add-member-item";
 import { Button } from "../ui/button";
@@ -13,7 +14,7 @@ export default function SelectedProjectMember({
   user,
   projectId,
   onSelectValue,
-  lang
+  lang,
 }: {
   user: User;
   projectId: string;
@@ -21,17 +22,20 @@ export default function SelectedProjectMember({
   lang: any;
 }) {
   const [role, setRole] = useState<string>("member");
-
+  const router = useRouter();
   async function inviteMember() {
     const result = await inviteProjectMembers([user.id], role, projectId);
-    
-    
+
     toast({
-      title: "invited team member",
-      description: <pre>
-        {JSON.stringify(result, null, 2)}
-      </pre>
-    })
+      title: "Invited team member",
+      description: (
+        <span>
+          You succesfully invited your team member, please wait for the member
+          to accept the invitation.
+        </span>
+      ),
+    });
+    router.refresh();
   }
 
   return (
@@ -62,16 +66,17 @@ export default function SelectedProjectMember({
           <Label>{lang.details.role_type.admin}</Label>
         </div>
         <div className="flex gap-3 items-center">
-          <RadioGroupItem value="client"/>
+          <RadioGroupItem value="client" />
           <Label>{lang.details.role_type.client}</Label>
         </div>
       </RadioGroup>
 
-      {
-        role == "admin" && <div className="mb-6 text-state-error">
-        상대방을 관리자로 초대할 경우, 나의 관리자 권한은 소멸됩니다. 초대를 진행할까요?
-      </div>
-      }
+      {role == "admin" && (
+        <div className="mb-6 text-state-error">
+          상대방을 관리자로 초대할 경우, 나의 관리자 권한은 소멸됩니다. 초대를
+          진행할까요?
+        </div>
+      )}
 
       <div className="flex justify-center w-full gap-2">
         <DialogClose asChild>
@@ -84,7 +89,11 @@ export default function SelectedProjectMember({
           </Button>
         </DialogClose>
 
-        <Button onClick={inviteMember} size="lg" className="max-w-[212px] grow px-0">
+        <Button
+          onClick={inviteMember}
+          size="lg"
+          className="max-w-[212px] grow px-0"
+        >
           {lang.details.invite_member.invite}
         </Button>
       </div>
