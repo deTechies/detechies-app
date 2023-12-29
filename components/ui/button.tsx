@@ -20,8 +20,8 @@ const buttonVariants = cva(
       },
       size: {
         default: "px-6 py-4 rounded-full",
-        sm: "rounded-md px-3 py-2",
-        lg: "py-[15.5px] rounded-full px-[78px] font-600",
+        sm: "rounded-md px-3 py-2 text-title_s",
+        lg: "py-[15.5px] rounded-full",
         icon: "h-10 w-10",
       },
     },
@@ -43,7 +43,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const content = loading ? (
-      <button className="flex gap-4 items-center ">
+      <button className="flex items-center gap-4 ">
         {/* Replace with your spinning icon component */}
         <Loader2 size={16} className="animate-spin" />
         Loading...

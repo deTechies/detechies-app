@@ -19,9 +19,9 @@ export default function ProjectItem({
   return (
     <Link
       href={`/project/${details.id}`}
-      className="flex flex-row gap-5 bg-background-layer-1 rounded-md pt-7 px-7 pb-8 items-start hover:shadow-lg "
+      className="flex flex-row items-start gap-5 pb-8 rounded-md bg-background-layer-1 pt-7 px-7 hover:shadow-lg "
     >
-      <figure className="relative w-32  aspect-square rounded-sm bg-accent-secondary object-scale-down">
+      <figure className="relative object-scale-down w-32 rounded-sm aspect-square bg-accent-secondary">
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
@@ -30,8 +30,8 @@ export default function ProjectItem({
         />
       </figure>
 
-      <section className="grow flex gap-4 flex-col w-full">
-        <header className="flex justify-between items-center capitalize">
+      <section className="flex flex-col w-full gap-4 grow">
+        <header className="flex items-center justify-between capitalize">
           <h5 className="text-title_m text-text-primary">{details.name}</h5>
 
           {details.scope === "private" ? (
@@ -51,7 +51,7 @@ export default function ProjectItem({
 
         <div>
           <p
-            className="text-text-secondary  text-body_s line-clamp-2"
+            className="text-text-secondary text-body_s line-clamp-2"
             dangerouslySetInnerHTML={{
               __html: details.description
                 ? details.description
