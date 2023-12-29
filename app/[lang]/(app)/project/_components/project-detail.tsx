@@ -46,9 +46,6 @@ export default function ProjectDetail({
           {/* category */}
           <div className="flex flex-col gap-2">
             <div className="flex gap-4 items-center text-label_l text-text-secondary ">
-              <span className="text-label_l">{details?.category}</span>
-              <span>|</span>
-              <span>{lang.list.project_type[details.type]}</span>
             </div>
 
             <div className="flex gap-1 items-center text-label_l text-text-secondary">

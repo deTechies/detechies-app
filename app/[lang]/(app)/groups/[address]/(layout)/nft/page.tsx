@@ -2,11 +2,10 @@ import { NFTItem } from "@/components/card/nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
 import {
   Tabs,
-  TabsContent,
   TabsList,
-  TabsTrigger,
+  TabsTrigger
 } from "@/components/ui/tabs2";
-import { getGroupAchievements } from "@/lib/data/achievements";
+import { getClub } from "@/lib/data/groups";
 // import AchievementLink from "./achievement-link";
 
 export default async function GroupAchievements({
@@ -14,9 +13,8 @@ export default async function GroupAchievements({
 }: {
   params: { address: string };
 }) {
-  const achievements = await getGroupAchievements(params.address);
+  const details = await getClub(params.address);
 
-  // console.log(achievements);
 
   return (
     <div>
@@ -30,13 +28,13 @@ export default async function GroupAchievements({
           </TabsList>
 
           <div>
-            {achievements &&
-              achievements.map((item: NFTItem, index: number) => (
+            {details.achievements &&
+              details.achievements.map((item: NFTItem, index: number) => (
                 <DisplayNFT details={item} key={index} />
               ))}
           </div>
 
-          {achievements.length < 1 && (
+          {details.achievements.length < 1 && (
             <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
               최근 생성한 NFT가 없습니다.
             </div>

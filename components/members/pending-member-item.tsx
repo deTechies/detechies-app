@@ -31,7 +31,7 @@ export default function PendingMemberItem({
     }
   }
   return (
-    <div className="flex gap-5 py-4 border-b shrink-0">
+    <div className="flex gap-5 py-4 border-b ">
       <div className="shrink-0">
         <Image
           height="80"
@@ -42,7 +42,7 @@ export default function PendingMemberItem({
         />
       </div>
 
-      <div className="flex gap-4 grow shrink-0 items-center">
+      <div className="flex gap-2 grow  items-center flex-wrap">
         <Dialog>
           <DialogTrigger className="flex flex-col gap-2 text-lect items-start">
             <span className="text-title_m ">{name}</span>
@@ -66,7 +66,7 @@ export default function PendingMemberItem({
           )}
           {
             status == 'invited' && (
-              <Button size="sm" variant="destructive" className="text-state-error-secondary">
+              <Button size="sm" variant="destructive" className="text-state-error-secondary text-xs">
                 Remove
               </Button>
             )

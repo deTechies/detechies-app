@@ -32,6 +32,22 @@ export async function getSurveys() {
   return result.json();
 }
 
+export async function submitFeedback(data:any, workId:string){
+  const session = await getSession();
+  const result = await fetch(`${API_URL}/survey-response/update/${workId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    body: JSON.stringify({
+      assessment: data,
+    }),
+  });
+
+  return result.json();
+}
+
 export async function createQuestion(data: any) {
   const session = await getSession();
   const result = await fetch(`${API_URL}/question`, {
@@ -47,6 +63,20 @@ export async function createQuestion(data: any) {
 
   return result.json();
 }
+
+export async function sendRequestEvaluaton(id: string) {
+  const session = await getSession();
+  const result = await fetch(`${API_URL}/survey-response/request/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  return result.json();
+}
+
 
 export async function createSurvey(data: any) {
   const session = await getSession();

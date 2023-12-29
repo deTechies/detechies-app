@@ -1,10 +1,7 @@
 import { getClub } from "@/lib/data/groups";
-import GroupAchievements from "./group-achievements";
 import GroupDetails from "./group-details";
-import GroupNft from "./group-nft";
 import GroupMember, { Member } from "./group-member";
-import Link from "next/link";
-import { Card } from "@/components/ui/card";
+import GroupNft from "./group-nft";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";

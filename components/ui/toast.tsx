@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 const ToastProvider = ToastPrimitives.Provider
 
 // Define success and destructive icons
-const SuccessIcon = () => <CheckCircle className="h-6 w-6 text-accent-primary" />;
+const SuccessIcon = () => <CheckCircle className="h-6 w-6 text-white" />;
 const DestructiveIcon = () => <XCircle className="h-6 w-6 text-state" />;
 
 
@@ -32,7 +32,7 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: "  text-white text-title_m",
+        default: "  text-white ",
         success: "text-accent-onPrimary",
         destructive:
           "destructive group  bg-destructive text-white",

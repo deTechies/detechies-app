@@ -45,6 +45,20 @@ export async function createGroup(formData: CreateClub) {
   return data;
 }
 
+export async function joinGroup(clubId:string, role:string){
+  const session = await getSession();
+  const response = await fetch(`${API_URL}/members`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    body: JSON.stringify({ userId: session?.web3?.address, clubId: clubId, role: role }),
+  });
+  const data = await response.json();
+  return data;
+}
+
 /* export async function getGroupDetail(address: string) {
   const response = await fetch(`${API_URL}/group/single/${address}`, {
     next: { revalidate: 60 },

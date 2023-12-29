@@ -10,6 +10,9 @@ export interface NFTItem {
   contract: string;
   id: string;
   tokenId: number;
+  name:string;
+  image: string;
+  nft_type:string;
   achievement: {
     tokenId: number;
     group: {
@@ -65,9 +68,7 @@ export default function NftListItem({
       : url;
   }
 
-  const avatarAttribute = item.metadata.attributes?.find(
-    (attr) => attr.trait_type === "avatar"
-  );
+  const avatarAttribute = item.metadata?.attributes?.find(attr => attr.trait_type === "avatar");
 
   return (
     <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
@@ -77,51 +78,26 @@ export default function NftListItem({
             className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
             checked={selected}
             onCheckedChange={() => {
-              router.push(
-                pathname +
-                  "?" +
-                  createQueryString(
-                    avatarAttribute.value,
-                    removeIPFSPrefix(item.metadata.image)
-                  )
-              );
+              router.push(pathname + '?' + createQueryString(avatarAttribute.value, removeIPFSPrefix(item.image)));
             }}
           />
         )}
         <Image
-          src={
-            item.metadata.image
-              ? DEFAULT_IPFS_URL + item.metadata.image
-              : DEFAULT_IPFS_URL +
-                "bafkreigodckc2cne7l6kcirr7hzzcpa7q7yes7xj72wl7t4lb44xfx4r7e"
-          }
+          src={item.image ? DEFAULT_IPFS_URL + item.image : DEFAULT_IPFS_URL + "bafkreigodckc2cne7l6kcirr7hzzcpa7q7yes7xj72wl7t4lb44xfx4r7e"}
           alt="nft_list_item"
           className="object-scale-down rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
           fill={true}
           priority={true}
         />
       </div>
-
-      <div className="flex flex-col gap-3 p-5">
-        <div className="text-left text-title_l">
-          {item.metadata.name || "undefined"}
-        </div>
-
-        {/* <Link 
-          className="font-medium text-center capitalize truncate text-text-primary text-ellipsis hover:text-green-800 " 
-          href={`/nft/${item.achievement ? item.achievement?.group?.addr : item.group.id}/${item.achievement ? item.achievement.tokenId.toString() : item.tokenId.toString()}`}
+      <div className="flex flex-col gap-2 p-4">
+        <Link 
+          className="truncate text-text-primary font-medium text-center capitalize text-ellipsis hover:text-green-800 " 
+          href="#"
           >
-          {item.metadata.name || "undefined"}
-        </Link> */}
-
-        <div className="flex">
-          <Badge
-            variant="info"
-            className="flex justify-center px-2.5 py-2 rounded-[5px] capitalize"
-          >
-            {item.metadata.category || "not found"}
-          </Badge>
-        </div>
+          {item?.name || "undefined"}
+        </Link>
+        <Badge variant="info" className="flex justify-center text-sm py-2 text-center uppercase">{item.nft_type || "not found"}</Badge>
       </div>
     </section>
   );

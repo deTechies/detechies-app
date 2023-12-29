@@ -7,9 +7,9 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Address, useAccount, useContractWrite } from "wagmi";
 import NftListItem, { NFTItem } from "../card/nft-list-item";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
-import { Badge } from "../ui/badge";
 export default function DisplayNFT({
   details,
   showSelect,
@@ -96,24 +96,27 @@ export default function DisplayNFT({
         <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-8 max-w-[504px]">
-        <div className="text-subhead_m">{details.metadata.name}</div>
+        <div className="text-subhead_m">{details.name}</div>
 
         <div className="flex flex-col gap-4">
           <div className="relative object-scale-down w-full rounded-sm aspect-square bg-gradient-to-b from-state-info to-accent-primary">
             <Image
-              src={`https://ipfs.io/ipfs/${details.metadata.image}`}
-              alt={details.metadata.name}
+              src={details.image ? `https://ipfs.io/ipfs/${details.image}` : ``}
+              alt={details.name}
               fill={true}
               className="rounded-sm"
             />
           </div>
-
-          <div className="border rounded-sm border-border-div">
-            {details.metadata && (
-              <>
-                <dl className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 my-2 border-b border-border-div">
-                  <dd className="capitalize text-label_l text-text-secondary">
-                    NFT 유형
+          <div className="bg-black-100 rounded-sm p-2 shadow-sm max-w-md">
+            {details.metadata &&
+              Object.entries(details).map(([key, value], index) => (
+                <>
+                <dl
+                  className="grid grid-cols-4 justify-between p-1 px-2 gap-2 my-2"
+                  key={index}
+                >
+                  <dd className="text-text-secondary font-light text-sm capitalize">
+                    {key}
                   </dd>
 
                   <dd className="flex gap-2 overflow-auto text-right text-primary text-clip">
@@ -134,7 +137,7 @@ export default function DisplayNFT({
                   </dd>
 
                   <dd className="overflow-auto text-right text-primary text-clip text-title_l">
-                    {details.metadata.category}
+                    {details.category}
                   </dd>
                 </dl>
 
@@ -144,17 +147,17 @@ export default function DisplayNFT({
                   </dd>
 
                   <dd className="overflow-auto text-right text-primary text-clip text-title_l">
-                    {details.group.id}
+                    {details.group?.id}
                   </dd>
                 </dl>
               </>
-            )}
+            ))}
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
             <h4 className="mb-4 text-title_m">NFT 설명</h4>
 
-            <p className="text-body_m">{details.metadata.description}</p>
+            <p className="text-body_m">{details.description}</p>
           </div>
         </div>
 

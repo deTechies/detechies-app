@@ -1,11 +1,9 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { Address } from "wagmi";
-import { Card } from "../ui/card";
-import { Skeleton } from "../ui/skeleton";
-import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { Badge } from "../ui/badge";
+import { Card } from "../ui/card";
 
 export default function MemberCard({
   address,
