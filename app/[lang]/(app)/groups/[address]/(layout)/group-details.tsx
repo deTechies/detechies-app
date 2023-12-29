@@ -1,8 +1,8 @@
-import Links from "@/app/[lang]/(app)/project/[address]/links";
 
 export default function GroupDetails({ details }: { details: any }) {
   return (
     <div className="mb-20">
+     
       <p
         dangerouslySetInnerHTML={{
           __html: details.description ? details.description : "No description",

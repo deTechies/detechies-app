@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { getProjectWork } from "@/lib/data/project";
 import { getEvaluationSurvey } from "@/lib/data/survey";
+import { redirect } from "next/navigation";
 import { SurveyForm } from "./surveyform";
 
 export default async function EvaluateAsTeamLead({ params }: { params: any }) {
@@ -12,7 +13,9 @@ export default async function EvaluateAsTeamLead({ params }: { params: any }) {
   const details = await getProjectWork(params.id);
 
   
-  
+  if(details.answers.length > 3){
+    redirect(`/work/${params.id}/feedback`)
+  }
 
   return (
     <div className="flex flex-col gap-4 mb-20 max-w-3xl mx-auto">
@@ -22,7 +25,9 @@ export default async function EvaluateAsTeamLead({ params }: { params: any }) {
         following form: {surveyData.name}
       </Card>
 
-      <SurveyForm workId={params.id} survey={surveyData} />
+      <SurveyForm workId={params.id} responseId={details.id} survey={surveyData}
+        defaultValues={details.answers}
+      />
     </div>
   );
 }

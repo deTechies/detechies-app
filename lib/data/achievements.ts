@@ -1,7 +1,8 @@
 
 import { Session, getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
-import { authOptions } from "../helpers/authOptions";
+import { auth, authOptions } from "../helpers/authOptions";
 
 export async function getUserAchievements(address?:string) {
   //getting profile session
@@ -18,7 +19,16 @@ export async function getUserAchievements(address?:string) {
   }
   
   export async function getGroupAchievements(address:string){
-    return [];
+    const session = await auth();
+    
+    //getting all the achievemnts
+    const response = await fetch(`${API_URL}/achievements/club/${address}`, {
+      method: 'GET', 
+      headers: {
+        Authorization: `Bearer ${session?.web3.accessToken}`
+      }
+    })
+    return response.json();
   }
   
   
@@ -30,6 +40,28 @@ export async function getUserAchievements(address?:string) {
     }
     
     return res.json()
+  }
+  
+  export async function uploadAchievement(data:any){
+    const session = await getSession();
+
+    // Check for a valid session and required tokens
+    if (!session || !session.web3 || !session.web3.accessToken) {
+      throw new Error("Invalid session or missing access token");
+    }
+  
+    const response = await fetch(`${API_URL}/achievement`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.web3.accessToken}`,
+      },
+      body: JSON.stringify(data),
+    });
+  
+    return response.json();
+
+    
   }
 
   

@@ -1,11 +1,9 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { Address } from "wagmi";
-import { Card } from "../ui/card";
-import { Skeleton } from "../ui/skeleton";
-import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { Badge } from "../ui/badge";
+import { Card } from "../ui/card";
 
 export default function MemberCard({
   address,
@@ -17,6 +15,12 @@ export default function MemberCard({
   children?: React.ReactNode;
 }) {
   const router = useRouter();
+
+  const onClickCard = () => {
+    // console.log(router.query);
+    // console.log(`/en/groups/${address}/missions/${info.seq}`);
+    router.push(`/en/groups/${address}/missions/${info.seq}`);
+  }
 
   const getDaysUntilEnd = (dateEndString: string): string => {
     const today = new Date();
@@ -67,7 +71,7 @@ export default function MemberCard({
   return (
     <Card
       className="gap-1 p-0 border rounded-md overflow-hidden cursor-pointer border-border-div bg-background-layer-1 hover:shadow-lg max-w-[288px]"
-      onClick={() => {}}
+      onClick={() => {router.push(`/groups/${address}/mission/12`)}}
     >
       <div className="relative m-0 rounded-t-sm bg-accent-secondary">
         <Image

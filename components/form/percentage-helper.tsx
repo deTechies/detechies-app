@@ -17,7 +17,7 @@ interface PercentageProps {
 }
 
 const PercentageSliderField = ({ form, name, label, messages, steps }: PercentageProps) => {
-  const percentage = form.watch(name, [0]);
+  const percentage = form.watch(name, 0);
 
   // Determine alert variant and message based on percentage
   const getAlertDetails = () => {
@@ -59,6 +59,13 @@ const PercentageSliderField = ({ form, name, label, messages, steps }: Percentag
 
   const alertDetails = getAlertDetails();
 
+
+  const handleSliderChange = (valueArray:Array<number>) => {
+    // Assuming the slider's value is an array with a single element
+    const value = valueArray[0];
+    form.setValue(name, value); // Update the form with the single number value
+  };
+
   return (
     <FormField
       control={form.control}
@@ -70,9 +77,10 @@ const PercentageSliderField = ({ form, name, label, messages, steps }: Percentag
             <Slider
               {...field}
               step={steps}
+              value={[field.value ?? percentage]} // Pass as an array
               className="grow shrink"
               color={alertDetails?.color}
-              onValueChange={field.onChange}
+              onValueChange={handleSliderChange}
               aria-label="Percentage"
             />
           </FormControl>

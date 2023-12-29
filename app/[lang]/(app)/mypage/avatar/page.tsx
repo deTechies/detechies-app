@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserProfile } from "@/lib/data/user";
 import NftOwned from "../../profile/select/nft-owned";
 
+
 export default async function Avatars() {
   const profile = await getUserProfile();
 

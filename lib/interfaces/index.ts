@@ -60,6 +60,27 @@ export enum GROUP_TYPE {
     EDUCATION = 'education',
   }
   
+  export enum NFT_TYPE{
+    SBT = 'sbt', 
+    ERC721 = 'erc721'
+  }
+  
+  export enum AVATAR_TYPE {
+    CLOTHES = 'clothes', 
+    BACKGROUND = 'background',
+    ACCESSORY = 'accessory'
+  }
+  
+  export enum SBT_TYPE{
+    EDU = 'edu', 
+    AWARDS = 'awards'
+  }
+  export enum NFT_IMAGE_TYPE{
+    AVATAR = 'avatar', 
+    IMAGE = 'image', 
+    IMAGE_AND_AVATAR = 'avatar+image'
+  }
+  
   export enum ProjectType {
     COMPANY = 'company',
     FREELANCE = 'freelance',
@@ -90,9 +111,10 @@ export enum GROUP_TYPE {
     OTHER = 'other'
   }
   export enum QuestionCategory {
-    TECHNICAL = 'technical',
+    TECHNICAL = '기술 전문성',
+    BUSINESS = '업무 지식', 
+    COMMUNICATION = '협업 및 커뮤니케이션',
     OTHER = 'other',
-    COMMUNICATION = 'communication',
     DELIVERY = 'delivery'
   }
   

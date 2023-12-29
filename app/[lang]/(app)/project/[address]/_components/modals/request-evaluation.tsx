@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
+import { sendRequestEvaluaton } from "@/lib/data/feedback";
 import { } from "@radix-ui/react-dialog";
 
 export default function RequestEvaluation({
@@ -10,6 +11,8 @@ export default function RequestEvaluation({
   memberId: string;
 }) {
   async function requestEvaluation() {
+    await sendRequestEvaluaton(memberId)
+    
     toast({
       description: "Succesfully requested evaluation to: " + memberId,
       variant: "success"

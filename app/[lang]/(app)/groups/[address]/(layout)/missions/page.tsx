@@ -1,8 +1,4 @@
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs2";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs2";
 import { getGroupAchievements } from "@/lib/data/achievements";
 // import AchievementLink from "./achievement-link";
 import { getClub } from "@/lib/data/groups";
@@ -15,18 +11,19 @@ export default async function GroupAchievements({
 }) {
   const data = await getClub(params.address);
 
-  
   const missions = [
     {
+      seq: "1",
       image: "",
       title: "시니어 미션",
-      end_date: '2024-01-06T20:20:29.280Z',
+      end_date: "2024-01-06T20:20:29.280Z",
       chips: ["수상", "학위증", "교육 수료증"],
     },
     {
+      seq: "2",
       image: "",
       title: "졸업시즌 과제 미션",
-      end_date: '2024-01-06T20:20:29.280Z',
+      end_date: "2024-01-06T20:20:29.280Z",
       chips: ["한정판 NFT", "학위증", "교육 수료증", "뀨"],
     },
   ];
@@ -43,7 +40,11 @@ export default async function GroupAchievements({
           <div className="flex gap-5">
             {missions &&
               missions.map((item: any, index: number) => (
-                <MissionCard address={params.address.toString()} info={item} key={index} />
+                <MissionCard
+                  address={params.address.toString()}
+                  info={item}
+                  key={index}
+                />
               ))}
           </div>
 

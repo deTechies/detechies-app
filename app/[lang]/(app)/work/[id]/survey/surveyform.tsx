@@ -10,26 +10,29 @@ import { Survey } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
+
 export function SurveyForm({
   workId,
+  responseId, 
   survey,
+  defaultValues
 }: {
   workId: string;
+  responseId:string, 
   survey: Survey;
+  defaultValues: any;
 }) {
   const form = useForm<any>({});
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
-
-    const result = await submitEvaluationSurvey(data, workId, survey.id);
-
+    const result = await submitEvaluationSurvey(data, workId, responseId);
     toast({
       title: "form results",
-      description: <pre>{JSON.stringify(result, null, 2)}</pre>,
+      description: <span>Thank you for filling in the form. </span>,
     });
     
-    router.push(`/work/${workId}/swot`)
+    router.push(`/work/${workId}/feedback`)
     
   };
 

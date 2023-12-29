@@ -108,7 +108,7 @@ export default function ProfileDetails({ showModal }: any) {
               Sign out
             </Button>
             <Link
-              href={`/profile`}
+              href={`/mypage`}
               className="bg-accent-secondary text-accent-primary hover:bg-accent-secondary/50 w-full rounded-md flex items-center justify-center"
             >
                 Visit Profile
