@@ -1,3 +1,5 @@
+"use client";
+
 import { getDictionary } from "@/get-dictionary";
 // import { Locale } from "@/i18n.config";
 
@@ -5,10 +7,14 @@ import MissionCard from "@/components/card/mission-card";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Plus } from "lucide-react";
+import React from "react";
+import { useRouter } from "next/navigation";
 
-export default async function ManageNft({ details }: { details: any }) {
+export default async function ManageNft({ details, address }: { details: any, address: string }) {
   // const dictionary = await getDictionary(params.lang);
 
+  const router = useRouter();
+  
   const missions = [
     {
       image: "",
@@ -48,6 +54,15 @@ export default async function ManageNft({ details }: { details: any }) {
     },
   ];
 
+  const onClickMissionEvaluate = (_e: React.MouseEvent<HTMLButtonElement>) => {
+    _e.stopPropagation();
+
+    // console.log(searchParams);
+    // router.push("")
+    router.push(`/en/groups/${address}/mission/12`);
+
+  };
+
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="overflow-auto max-w-[90vw]">
@@ -57,7 +72,9 @@ export default async function ManageNft({ details }: { details: any }) {
               <Plus className="w-10 h-10"></Plus>
             </div>
 
-            <div className="text-text-secondary text-subhead_m">새로운 미션 생성하기</div>
+            <div className="text-text-secondary text-subhead_m">
+              새로운 미션 생성하기
+            </div>
           </Card>
 
           {missions &&
@@ -68,7 +85,11 @@ export default async function ManageNft({ details }: { details: any }) {
                     강제종료
                   </Button>
 
-                  <Button size="lg" className="grow">
+                  <Button
+                    size="lg"
+                    className="grow"
+                    onClick={onClickMissionEvaluate}
+                  >
                     수행평가
                   </Button>
                 </div>

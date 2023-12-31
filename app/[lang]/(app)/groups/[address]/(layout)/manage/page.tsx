@@ -45,6 +45,7 @@ export default async function GroupDetailManageLayout({
         <TabsContent value="missions">
           <ManageMission
             details={data}
+            address={params.address}
           ></ManageMission>
         </TabsContent>
         <TabsContent value="info">info</TabsContent>
