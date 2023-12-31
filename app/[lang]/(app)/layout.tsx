@@ -9,9 +9,26 @@ import Navbar from "./nav-bar";
 
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
-  src: "../pretendard.woff2",
-  display: "swap",
-}); 
+  src: [
+    {
+      path: '../pretendard-regular.woff2',
+      weight: '400', // Regular
+      style: 'normal',
+    },
+    {
+      path: '../pretendard-semibold.woff2',
+      weight: '600', // SemiBold
+      style: 'normal',
+    },
+    {
+      path: '../pretendard-bold.woff2',
+      weight: '700', // Bold
+      style: 'normal',
+    }
+  ],
+  display: 'swap',
+});
+
 
 export const metadata: Metadata = {
   title: "Careerzen - Build you career profile and grow with valuable insights",
