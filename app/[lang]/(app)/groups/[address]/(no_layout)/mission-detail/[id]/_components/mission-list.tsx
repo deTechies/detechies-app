@@ -68,7 +68,7 @@ export default function MissionList({
               <Card className="flex-row items-center px-8 py-7" key={index}>
                 <div
                   className={`w-[50px] h-[50px] flex justify-center items-center rounded-full ${
-                    false
+                    item.completed
                       ? "bg-accent-primary text-accent-on-primary"
                       : "bg-background-layer-2 text-text-placeholder"
                   }`}
@@ -88,7 +88,7 @@ export default function MissionList({
   
                 <div
                   className={`p-3 text-center rounded-full text-title_l grow max-w-[140px] ${
-                    item.mission.essential
+                    item.completed
                       ? "bg-accent-secondary"
                       : "bg-background-layer-2 text-text-secondary"
                   }`}
