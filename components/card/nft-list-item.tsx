@@ -92,14 +92,14 @@ export default function NftListItem({
           priority={true}
         />
       </div>
-      <div className="flex flex-col gap-2 p-4">
+      <div className="flex flex-col items-start justify-start gap-3 p-5">
         <Link 
-          className="truncate text-text-primary font-medium text-center capitalize text-ellipsis hover:text-green-800 " 
+          className="capitalize truncate text-title_l" 
           href="#"
-          >
+        >
           {item?.name || "undefined"}
         </Link>
-        <Badge variant="info" className="flex justify-center text-sm py-2 text-center uppercase">{item.nft_type || "not found"}</Badge>
+        <Badge variant="info" className="flex justify-center py-2 uppercase">{item.nft_type || "not found"}</Badge>
       </div>
     </section>
   );
