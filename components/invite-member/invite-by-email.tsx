@@ -5,8 +5,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,7 +17,6 @@ import { toast } from "@/components/ui/use-toast";
 import { inviteByEmail } from "@/lib/data/project";
 import { useState } from "react";
 import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 const projectFormSchema = z.object({
   name: z
@@ -120,7 +118,7 @@ export default function InviteByEmail({
             />
           </div>
 
-          <Label>"email"</Label>
+          <Label>Email</Label>
 
           <FormField
             control={form.control}

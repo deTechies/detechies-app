@@ -64,8 +64,6 @@ export default function InviteMember({
               <>
                 <Search
                   placeholder="사용자 닉네임을 입력해주세요"
-                  text={text}
-                  setText={setText}
                 />
 
                 <div className="rounded-sm max-h-[30vh] overflow-x-auto">

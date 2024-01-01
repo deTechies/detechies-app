@@ -6,15 +6,12 @@ import { Input } from "../ui/input";
 
 export default function Search({
   placeholder,
-  text,
-  setText,
+
 }: {
   placeholder: string;
-  text: string;
-  setText: Function;
 }) {
   const router = useRouter();
-  // const [text, setText] = useState("");
+   const [text, setText] = useState("");
   const query = useDebounce(text, 500);
   const pathname = usePathname();
 

@@ -1,15 +1,12 @@
 // import PendingProfileCard from "@/components/card/pending-profile-card";
-import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
-import PendingMemberListItem from "@/components/group/pending-member-list-item";
 import InvitingMemberListItem from "@/components/group/inviting-member-list-item";
+import PendingMemberListItem from "@/components/group/pending-member-list-item";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { getDictionary } from "@/get-dictionary";
 // import { Locale } from "@/i18n.config";
 
-import { getPendingMembers } from "@/lib/data/groups";
-import Search from "@/components/extra/search";
 import MemberCard from "@/components/card/member-card";
+import OnlySearch from "@/components/extra/only-search";
+import { getPendingMembers } from "@/lib/data/groups";
 import { Member } from "../members/page";
 
 export default async function ManageMember({
@@ -85,7 +82,7 @@ export default async function ManageMember({
 
       <div className="overflow-auto max-w-[90vw]">
         <div className="max-w-[434px] mb-3">
-          <Search placeholder="닉네임 또는 직업을 검색해보세요." />
+          <OnlySearch placeholder="닉네임 또는 직업을 검색해보세요." />
         </div>
 
         <div className="flex flex-wrap gap-4">
