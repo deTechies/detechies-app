@@ -107,18 +107,11 @@ export default function DisplayNFT({
               className="rounded-sm"
             />
           </div>
-          <div className="bg-black-100 rounded-sm p-2 shadow-sm max-w-md">
-            {details.metadata &&
-              Object.entries(details).map(([key, value], index) => (
-                <>
-                <dl
-                  className="grid grid-cols-4 justify-between p-1 px-2 gap-2 my-2"
-                  key={index}
-                >
-                  <dd className="text-text-secondary font-light text-sm capitalize">
-                    {key}
-                  </dd>
+          <div className="bg-black-100 rounded-sm p-2 shadow-sm ">
+            {details && 
 
+                <>
+                <dl>
                   <dd className="flex gap-2 overflow-auto text-right text-primary text-clip">
                     {/* need data about nft type */}
                     <span className="text-title_l">
@@ -151,7 +144,8 @@ export default function DisplayNFT({
                   </dd>
                 </dl>
               </>
-            ))}
+            }
+            
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
