@@ -1,32 +1,14 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs2";
-import { getGroupAchievements } from "@/lib/data/achievements";
 // import AchievementLink from "./achievement-link";
-import { getClub } from "@/lib/data/groups";
 import MissionCard from "@/components/card/mission-card";
+import { getClubMissions } from "@/lib/data/mission";
 
 export default async function GroupAchievements({
   params,
 }: {
   params: { address: string };
 }) {
-  const data = await getClub(params.address);
-
-  const missions = [
-    {
-      seq: "1",
-      image: "",
-      title: "시니어 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["수상", "학위증", "교육 수료증"],
-    },
-    {
-      seq: "2",
-      image: "",
-      title: "졸업시즌 과제 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["한정판 NFT", "학위증", "교육 수료증", "뀨"],
-    },
-  ];
+  const data = await getClubMissions(params.address);
 
   return (
     <div>
@@ -38,8 +20,8 @@ export default async function GroupAchievements({
           </TabsList>
 
           <div className="flex gap-5">
-            {missions &&
-              missions.map((item: any, index: number) => (
+            {data &&
+              data.map((item: any, index: number) => (
                 <MissionCard
                   address={params.address.toString()}
                   info={item}
@@ -48,7 +30,7 @@ export default async function GroupAchievements({
               ))}
           </div>
 
-          {missions.length < 1 && (
+          {data.length < 1 && (
             <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
               현재 미션이 없습니다.
             </div>

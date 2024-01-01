@@ -242,3 +242,29 @@ export interface Survey {
   questions: Question[];
   created_at: Date;
 }
+
+export interface MissionDetails {
+  campaignId:string;
+  name:string;
+  description: string;
+  begin_date: string;
+  end_date: string;
+  missions: Mission[];
+  created_at: Date;
+  userProgress: UserProgress[];
+}
+
+export interface Mission {
+  missionId: string;
+  name: string;
+  score:number;
+  essential: boolean;
+}
+
+export interface UserProgress {
+  id: string;
+  user: User;
+  mission: Mission;
+  completed: boolean;
+  created_at: Date;
+}
