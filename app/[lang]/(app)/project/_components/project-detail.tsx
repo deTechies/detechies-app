@@ -27,8 +27,8 @@ export default function ProjectDetail({
   console.log(details);
 
   return (
-    <Card className="w-full pt-8 px-8 gap-8 pb-5">
-      <header className="flex gap-9 items-start ">
+    <Card className="w-full gap-8 px-8 pt-8 pb-5">
+      <header className="flex items-start gap-9 ">
         <Image
           src={`${
             details.image
@@ -45,17 +45,17 @@ export default function ProjectDetail({
 
           {/* category */}
           <div className="flex flex-col gap-2">
-            <div className="flex gap-4 items-center text-label_l text-text-secondary ">
+            <div className="flex items-center gap-4 text-label_l text-text-secondary ">
             </div>
 
-            <div className="flex gap-1 items-center text-label_l text-text-secondary">
+            <div className="flex items-center gap-1 text-label_l text-text-secondary">
               <span>{details?.begin_date}</span>
               <span> ~ </span>
               <span>{details.end_date}</span>
             </div>
           </div>
 
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex flex-wrap gap-3">
             {details.tags &&
             details.tags?.map((tag) => (
               <Badge
@@ -67,19 +67,19 @@ export default function ProjectDetail({
             ))}
           </div>
         </div>
-        {
+        {/* {
           details.userRole == 'admin' && (
-            <Link href={`/project/${details.id}/edit`} className=" items-end flex-end right-0">
+            <Link href={`/project/${details.id}/edit`} className="right-0 items-end  flex-end">
               <Badge>
                   Edit
               </Badge>
             </Link>
           )
-        }
+        } */}
       </header>
 
-      <div className="w-full flex flex-col gap-5">
-        <div className="flex justify-between items-center">
+      <div className="flex flex-col w-full gap-5">
+        <div className="flex items-center justify-between">
           <h3 className="text-subhead_l ">
             {lang.details.project_description}
           </h3>
@@ -97,7 +97,7 @@ export default function ProjectDetail({
             onClick={() => {
               setShowFull(!showFull);
             }}
-            className="text-label_m text-text-secondary flex gap-2 items-center w-fit mx-auto"
+            className="flex items-center gap-2 mx-auto text-label_m text-text-secondary w-fit"
           >
             {showFull ? lang.details.hide : lang.details.show_more}
             {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
+import InviteMember from "../invite-member/invite-member";
 
 export default async function GroupProfileCard({ id }: { id: string }) {
   const groupDetail = await getClub(id);
@@ -107,15 +108,13 @@ export default async function GroupProfileCard({ id }: { id: string }) {
         {
           groupDetail.userRole == "admin" && (
           <div className="flex justify-end gap-3 grow">
-            <Link href={`/groups/${id}/create/nft`}>
-            <Button size="lg" variant="primary" className="max-w-[230px] grow">
-              NFT 생성하기
-            </Button>
+            <Link href={`/groups/${id}/create/nft`} className="max-w-[230px] grow rounded-full">
+              <Button size="lg" variant="primary" className="w-full">
+                NFT 생성하기
+              </Button>
             </Link>
 
-            <Button size="lg" variant="primary" className="max-w-[230px] grow">
-              멤버 초대하기
-            </Button>
+            <InviteMember id={id}></InviteMember>
           </div>
           )
         }

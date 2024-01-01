@@ -1,3 +1,5 @@
+
+
 // import { Locale } from "@/i18n.config";
 
 import MissionCard from "@/components/card/mission-card";
@@ -5,51 +7,19 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getClubMissions } from "@/lib/data/mission";
 import { Plus } from "lucide-react";
+
 import Link from "next/link";
 
-export default async function ManageNft({ details }: { details: any }) {
+
+
+export default async function ManageNft({ details, address }: { details: any, address: string }) {
   // const dictionary = await getDictionary(params.lang);
   
   const missions = await getClubMissions(details.id);
 
-  const missions2 = [
-    {
-      image: "",
-      title: "시니어 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["수상", "학위증", "교육 수료증"],
-    },
-    {
-      image: "",
-      title: "졸업시즌 과제 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["한정판 NFT", "학위증", "교육 수료증", "뀨"],
-    },
-    {
-      image: "",
-      title: "시니어 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["수상", "학위증", "교육 수료증"],
-    },
-    {
-      image: "",
-      title: "졸업시즌 과제 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["한정판 NFT", "학위증", "교육 수료증", "뀨"],
-    },
-    {
-      image: "",
-      title: "시니어 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["수상", "학위증", "교육 수료증"],
-    },
-    {
-      image: "",
-      title: "졸업시즌 과제 미션",
-      end_date: "2024-01-06T20:20:29.280Z",
-      chips: ["한정판 NFT", "학위증", "교육 수료증", "뀨"],
-    },
-  ];
+  
+
+
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -61,7 +31,9 @@ export default async function ManageNft({ details }: { details: any }) {
               <Plus className="w-10 h-10"></Plus>
             </div>
 
-            <div className="text-text-secondary text-subhead_m">새로운 미션 생성하기</div>
+            <div className="text-text-secondary text-subhead_m">
+              새로운 미션 생성하기
+            </div>
           </Card>
           </Link>
 
@@ -73,7 +45,11 @@ export default async function ManageNft({ details }: { details: any }) {
                     강제종료
                   </Button>
 
-                  <Button size="sm" className="grow">
+
+                  <Button
+                    size="sm"
+                    className="grow"
+                  >
                     수행평가
                   </Button>
                 </div>
