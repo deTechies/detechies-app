@@ -20,6 +20,7 @@ export default function DisplayNFT({
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const [showFull, setShowFull] = useState(false);
+  const [showingImage, setShowingImage] = useState("");
 
   const { address } = useAccount();
 
@@ -32,6 +33,21 @@ export default function DisplayNFT({
 
   const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
 
+  useEffect(() => {
+    details.image
+      ? setShowingImage(details.image)
+      : setShowingImage(details.avatar);
+  }, [details]);
+
+  const onClickChangeImage = () => {
+    if (!details.avatar || !details.image) {
+      return;
+    }
+
+    showingImage == details.image
+      ? setShowingImage(details.avatar)
+      : setShowingImage(details.image);
+  };
 
   const handleMint = async () => {
     //@ts-ignore
@@ -97,6 +113,8 @@ export default function DisplayNFT({
     setRequesting(false);
   };
 
+  // console.log(details);
+
   return (
     <Dialog>
       <DialogTrigger className="min-w-[150px] w-full grow max-w-[229px]">
@@ -108,21 +126,18 @@ export default function DisplayNFT({
         <div className="flex flex-col gap-4">
           <div className="relative object-scale-down w-full rounded-sm aspect-square bg-gradient-to-b from-state-info to-accent-primary">
             <Image
-              src={
-                details.image
-                  ? DEFAULT_IPFS_URL + details.image
-                  : DEFAULT_IPFS_URL + details.avatar
-              }
+              src={DEFAULT_IPFS_URL + showingImage}
               alt={details.name}
               fill={true}
               className="rounded-sm"
             />
 
-            {/* <Button
+            <Button
               className="absolute w-12 h-12 bottom-2 right-2"
+              onClick={onClickChangeImage}
             >
               Hi!
-            </Button> */}
+            </Button>
           </div>
 
           <div className="max-w-md p-0 border rounded-sm border-border-div">
