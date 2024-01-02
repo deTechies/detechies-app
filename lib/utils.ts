@@ -3,12 +3,52 @@ import { clsx, type ClassValue } from "clsx";
 import { getWalletClient } from '@wagmi/core';
 import { providers } from "ethers";
 import * as React from 'react';
-import { twMerge } from "tailwind-merge";
+import { twMerge, extendTailwindMerge } from "tailwind-merge";
 import { WalletClient } from "viem";
 import { useWalletClient } from 'wagmi';
 
+const customTwMerge = extendTailwindMerge({
+  classGroups: {
+    // FontSize group
+    'font-size': [
+      'text-heading_l',
+      'text-heading_m',
+      'text-heading_s',
+      'text-subhead_l',
+      'text-subhead_m',
+      'text-subhead_s',
+      'text-title_l',
+      'text-title_m',
+      'text-title_s',
+      'text-label_l',
+      'text-label_m',
+      'text-label_s',
+      'text-body_l',
+      'text-body_m',
+      'text-body_s',
+    ],
+    // Color group
+    'text-color': [
+      'text-accent-primary',
+      'text-accent-secondary',
+      'text-accent-on-primary',
+      'text-accent-on-secondary',
+      'text-text-primary',
+      'text-text-secondary',
+      'text-text-placeholder',
+      'text-icon-primary',
+      'text-icon-secondary',
+      'text-state-error',
+      'text-state-success',
+      'text-state-warning',
+      'text-state-info',
+      ],
+  },
+});
+
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return customTwMerge(clsx(inputs))
+  // return twMerge(clsx(inputs))
 }
 
 export const formatBalance = (rawBalance: string) => {
