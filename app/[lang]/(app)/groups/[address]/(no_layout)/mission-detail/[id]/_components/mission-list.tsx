@@ -20,20 +20,17 @@ export default function MissionList({
     (accumulator, currentItem) => accumulator + currentItem.score,
     0
   );
-  
-  
 
-  
-  const checkedPoints = Array.isArray(userProgress) ? userProgress?.reduce((accumulator:any, currentItem:UserProgress) => {
-    if (currentItem.completed) {
-      return accumulator + currentItem.mission.score;
-    }
-    return accumulator;
-  }, 0) : 0;
+  const checkedPoints = Array.isArray(userProgress)
+    ? userProgress?.reduce((accumulator: any, currentItem: UserProgress) => {
+        if (currentItem.completed) {
+          return accumulator + currentItem.mission.score;
+        }
+        return accumulator;
+      }, 0)
+    : 0;
 
   const startCampaign = async () => {
-    
-
     const result = await startMissionCampaign(mission.campaignId);
     console.log(result);
 
@@ -42,26 +39,26 @@ export default function MissionList({
         title: "Success",
         description: "Succesfully started missoin campaign.",
       });
-      
+
       router.refresh();
     }
   };
 
-  if(userProgress.length > 0){
+  if (userProgress.length > 0) {
     return (
       <div className="flex flex-col gap-3">
         <Card className="flex flex-row items-center justify-between px-8 py-7">
-            <>
-              <span className="text-subhead_s">
-                총 미션 ({userProgress.length})
-              </span>
-  
-              <div className="p-3 text-center rounded-full text-title_l grow max-w-[140px] border-2 border-icon-primary">
-                {checkedPoints}/{totalPoints}
-              </div>
-            </>
+          <>
+            <span className="text-subhead_s">
+              총 미션 ({userProgress.length})
+            </span>
+
+            <div className="p-3 text-center rounded-full text-title_l grow max-w-[140px] border-2 border-icon-primary">
+              {checkedPoints}/{totalPoints}
+            </div>
+          </>
         </Card>
-  
+
         {userProgress &&
           userProgress.map((item: UserProgress, index: number) => {
             return (
@@ -75,17 +72,17 @@ export default function MissionList({
                 >
                   <Check className="w-8 h-8" />
                 </div>
-  
+
                 <div className="flex flex-col items-start gap-3 grow">
                   <span className="text-title_l">{item.mission.name}</span>
-  
+
                   {item.mission.essential ? (
                     <Badge variant="success" className="px-1.5">
                       필수 미션
                     </Badge>
                   ) : null}
                 </div>
-  
+
                 <div
                   className={`p-3 text-center rounded-full text-title_l grow max-w-[140px] ${
                     item.completed
@@ -93,7 +90,8 @@ export default function MissionList({
                       : "bg-background-layer-2 text-text-secondary"
                   }`}
                 >
-                  {item.mission.score}점 {item.mission.essential ? " 획득!" : null}
+                  {item.mission.score}점{" "}
+                  {item.mission.essential ? " 획득!" : null}
                 </div>
               </Card>
             );
@@ -101,8 +99,6 @@ export default function MissionList({
       </div>
     );
   }
-  
-  
 
   return (
     <div className="flex flex-col gap-3">
@@ -148,6 +144,4 @@ export default function MissionList({
         })}
     </div>
   );
-
-
 }

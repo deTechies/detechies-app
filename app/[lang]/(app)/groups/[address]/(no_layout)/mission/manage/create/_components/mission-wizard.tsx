@@ -24,7 +24,7 @@ interface FormData {
   end_date: string;
   missions: Mission[];
   selectedAchievements: Array<{
-    id: string;
+    achievementId: string;
     min_score: number | "";
     min_required_missions: number | "";
   }>;
@@ -48,33 +48,35 @@ export const Wizard = ({
     selectedAchievements: [],
   });
 
-  const [selectedAchievements, setSelectedAchievements] = useState<
-    Array<{
-      id: string;
-      min_score: number | "";
-      min_required_missions: number | "";
-    }>
-  >([]);
 
   const handleSelectAchievement = (achievement: Achievement) => {
-    if (selectedAchievements.some((a) => a.id === achievement.id)) {
+    if (formData.selectedAchievements.some((a) => a.achievementId === achievement.id)) {
       // Remove the achievement if it's already selected
-      setSelectedAchievements(
-        selectedAchievements.filter((a) => a.id !== achievement.id)
-      );
+      setFormData({
+        ...formData,
+        selectedAchievements: formData.selectedAchievements.filter(
+          (a) => a.achievementId !== achievement.id
+        ),
+      });
     } else {
       // Add the achievement if it's not already selected
-      setSelectedAchievements([
-        ...selectedAchievements,
-        { id: achievement.id, min_score: "", min_required_missions: "" },
-      ]);
+      setFormData({
+        ...formData,
+        selectedAchievements: [
+          ...formData.selectedAchievements,
+          { achievementId: achievement.id, min_score: "", min_required_missions: "" },
+        ],
+      });
     }
   };
 
   const handleRemoveAchievement = (id: string) => {
-    setSelectedAchievements(
-      selectedAchievements.filter((achievement) => achievement.id !== id)
-    );
+    setFormData({
+      ...formData,
+      selectedAchievements: formData.selectedAchievements.filter(
+        (a) => a.achievementId !== id
+      ),
+    });
   };
 
   const handleInputChange = (
@@ -82,11 +84,12 @@ export const Wizard = ({
     field: "min_score" | "min_required_missions",
     value: number
   ) => {
-    setSelectedAchievements(
-      selectedAchievements.map((achievement) =>
-        achievement.id === id ? { ...achievement, [field]: value } : achievement
-      )
-    );
+    setFormData({
+      ...formData,
+      selectedAchievements: formData.selectedAchievements.map((achievement) =>
+        achievement.achievementId === id ? { ...achievement, [field]: value } : achievement
+      ),
+    });
   };
 
   const nextStep = () => setCurrentStep(currentStep + 1);
@@ -95,10 +98,6 @@ export const Wizard = ({
   const onInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const addMission = (mission: any) => {
-    setFormData({ ...formData, missions: [...formData.missions, mission] });
   };
 
   const submitForm = async () => {
@@ -123,16 +122,6 @@ export const Wizard = ({
         ...prevFormData.missions.slice(index + 1),
       ],
     }));
-  };
-
-  const updateSelectedAchievements = (
-    selected: Array<{
-      id: string;
-      min_score: number | "";
-      min_required_missions: number | "";
-    }>
-  ) => {
-    setFormData({ ...formData, selectedAchievements: selected });
   };
 
   const removeMission = (index: number) => {
@@ -170,7 +159,7 @@ export const Wizard = ({
         {currentStep === 3 && (
           <RewardForm
             achievements={achievements}
-            selectedAchievements={selectedAchievements}
+            selectedAchievements={formData.selectedAchievements}
             onSelectAchievement={handleSelectAchievement}
             onRemoveAchievement={handleRemoveAchievement}
             onInputChange={handleInputChange}

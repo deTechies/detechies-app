@@ -17,7 +17,7 @@ const RewardForm = ({
 }: {
   achievements: Achievement[];
   selectedAchievements: Array<{
-    id: string;
+    achievementId: string;
     min_score: number | "";
     min_required_missions: number | "";
   }>;
@@ -49,8 +49,9 @@ const RewardForm = ({
                   key={achievement.id}
                   className={` flex items-center gap-4 border py-6 px-4 rounded-sm 
                 ${
-                  selectedAchievements.some((a) => a.id === achievement.id) &&
-                  "bg-accent-secondary border-accent-primary"
+                  selectedAchievements.some(
+                    (a) => a.achievementId === achievement.id
+                  ) && "bg-accent-secondary border-accent-primary"
                 }
                 `}
                   onClick={() => onSelectAchievement(achievement)}
@@ -83,7 +84,8 @@ const RewardForm = ({
                 <Image
                   src={
                     "https://ipfs.io/ipfs/" +
-                    achievements.find((a) => a.id === achievement.id)?.image
+                    achievements.find((a) => a.id === achievement.achievementId)
+                      ?.image
                   }
                   alt="image_of_achievement"
                   width={32}
@@ -93,15 +95,20 @@ const RewardForm = ({
                 <dl className="spacing-y-4">
                   <dd className="text-title_m">
                     {" "}
-                    {achievements.find((a) => a.id === achievement.id)?.name}
+                    {
+                      achievements.find(
+                        (a) => a.id === achievement.achievementId
+                      )?.name
+                    }
                   </dd>
                   <dd>
                     {" "}
                     <Badge variant="info">
                       {" "}
                       {
-                        achievements.find((a) => a.id === achievement.id)
-                          ?.nft_type
+                        achievements.find(
+                          (a) => a.id === achievement.achievementId
+                        )?.nft_type
                       }
                     </Badge>
                   </dd>
@@ -110,7 +117,7 @@ const RewardForm = ({
               <Button
                 variant="secondary"
                 size="icon"
-                onClick={() => onRemoveAchievement(achievement.id)}
+                onClick={() => onRemoveAchievement(achievement.achievementId)}
               >
                 <X />
               </Button>
@@ -124,7 +131,7 @@ const RewardForm = ({
                 value={achievement.min_score}
                 onChange={(e) =>
                   onInputChange(
-                    achievement.id,
+                    achievement.achievementId,
                     "min_score",
                     Number(e.target.value)
                   )
@@ -137,7 +144,7 @@ const RewardForm = ({
                 value={achievement.min_required_missions}
                 onChange={(e) =>
                   onInputChange(
-                    achievement.id,
+                    achievement.achievementId,
                     "min_required_missions",
                     Number(e.target.value)
                   )

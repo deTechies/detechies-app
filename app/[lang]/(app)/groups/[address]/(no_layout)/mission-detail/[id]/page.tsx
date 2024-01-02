@@ -26,7 +26,7 @@ export default async function MissionDetailPage({
       </section>
       
       <section>
-        <MissionReward></MissionReward>
+        <MissionReward achievements={missionDetails.achievements}></MissionReward>
       </section>
     </main>
   );

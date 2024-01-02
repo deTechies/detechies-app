@@ -1,9 +1,12 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { NFTItem } from "@/components/card/nft-list-item";
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import Image from "next/image";
 
-export default async function MissionReward({}: {}) {
+export default async function MissionReward({
+  achievements,
+}: {
+  achievements: any[];
+}) {
   const list = [
     {
       points: 40,
@@ -32,7 +35,7 @@ export default async function MissionReward({}: {}) {
           name: "시니어 수료증",
           image: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
           category: "교육 수료증",
-        }, // NFTItem
+        },
       },
     },
   ];
@@ -44,15 +47,15 @@ export default async function MissionReward({}: {}) {
       </CardHeader>
 
       <CardContent>
-        {list &&
-          list.map((item: any, index: number) => {
+        {achievements &&
+          achievements.map((item: any, index: number) => {
             return (
               <>
                 <div className="flex gap-5">
                   <div className="w-[120px] h-[120px] relative bg-background-layer-2">
                     <Image
-                      src={`https://ipfs.io/ipfs/${item.nft.metadata.image}`}
-                      alt={item.nft.metadata.name}
+                      src={`https://ipfs.io/ipfs/${item.achievement.image}`}
+                      alt={item.achievement.name}
                       fill={true}
                       className="rounded-sm"
                     />
@@ -60,21 +63,21 @@ export default async function MissionReward({}: {}) {
 
                   <div className="flex flex-col items-start justify-center">
                     <div className="mb-1 text-title_m text-state-success">
-                      {item.points}점 이상 획득하면
+                      {item.min_score}점 이상 획득하면
                     </div>
                     <div className="mb-4 text-title_m">
-                      {item.nft.metadata.name}
+                      {item.achievement.name}
                     </div>
                     <Badge
                       variant="default"
                       className="text-state-info rounded-[5px] px-2.5 py-1"
                     >
-                      {item.nft.metadata.category}
+                      {item.achievement.nft_type}
                     </Badge>
                   </div>
                 </div>
 
-                {index != list.length - 1 && <hr className="my-6" />}
+                {index != achievements.length - 1 && <hr className="my-6" />}
               </>
             );
           })}

@@ -254,7 +254,17 @@ export interface MissionDetails {
   end_date: string;
   missions: Mission[];
   created_at: Date;
+  achievements: MissionAchievement[];
   userProgress: UserProgress[];
+}
+
+export interface MissionAchievement {
+  id: string;
+  min_score: number;
+  min_required: number;
+  campaign?: MissionDetails
+  achievement: Achievement;
+  created_at: Date;
 }
 
 export interface Mission {
