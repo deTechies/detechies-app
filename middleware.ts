@@ -24,10 +24,10 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export  function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  
-/*   const session = await getServerSession(authOptions);
+
+  /*   const session = await getServerSession(authOptions);
 
   if (session?.web3.user?.TBA && !isAddress(session?.web3?.user?.TBA)) {
     return NextResponse.redirect("/onboard/mint");
@@ -37,7 +37,7 @@ export  function middleware(request: NextRequest) {
     (locale: any) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
-  
+
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
@@ -52,5 +52,7 @@ export  function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images|public|icons|parts).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|images|public|icons|parts).*)",
+  ],
 };
