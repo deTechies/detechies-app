@@ -48,7 +48,7 @@ export default function InviteMember({
   return (
     <>
       <Dialog>
-        <DialogTrigger className="max-w-[230px] grow">
+        <DialogTrigger className="max-w-[230px] grow rounded-full">
           <Button size="lg" variant="primary" className="w-full">
             멤버 초대하기
           </Button>
@@ -64,8 +64,6 @@ export default function InviteMember({
               <>
                 <Search
                   placeholder="사용자 닉네임을 입력해주세요"
-                  text={text}
-                  setText={setText}
                 />
 
                 <div className="rounded-sm max-h-[30vh] overflow-x-auto">

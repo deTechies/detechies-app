@@ -1,10 +1,8 @@
 "use client";
-import { Card } from "@/components/ui/card";
-import { Check, ChevronDown, ChevronUp } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
-import { beginEndDates } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Check } from "lucide-react";
+import { useState } from "react";
 
 export default function MissionSummary({}: {}) {
   const [showFull, setShowFull] = useState(false);
@@ -61,7 +59,7 @@ export default function MissionSummary({}: {}) {
       {list &&
         list.map((item: any, index: number) => {
           return (
-            <Card className="flex-row items-center px-8 py-7">
+            <Card className="flex-row items-center px-8 py-7" key={index}>
               <div
                 className={`w-[50px] h-[50px] flex justify-center items-center rounded-full ${
                   item.isChecked

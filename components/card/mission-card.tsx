@@ -17,9 +17,9 @@ export default function MemberCard({
   const router = useRouter();
 
   const onClickCard = () => {
-    // console.log(router.query);
-    // console.log(`/en/groups/${address}/missions/${info.seq}`);
-    router.push(`/en/groups/${address}/missions/${info.seq}`);
+    // router.push(`/groups/${address}/mission/12`);
+    // router.push(`/en/groups/${address}/missions/${info.seq}`);
+    router.push(`/groups/${address}/mission/manage/${info.id}`);
   }
 
   const getDaysUntilEnd = (dateEndString: string): string => {
@@ -44,7 +44,7 @@ export default function MemberCard({
         <div className="flex flex-wrap gap-2 text-title_m">
           {info.chips.map((chip: string, index: number) => {
             return (
-              <Badge variant={"info"} className="rounded-[5px]" key={index}>
+              <Badge variant={"info"} shape="category" key={index}>
                 {chip}
               </Badge>
             );
@@ -70,8 +70,8 @@ export default function MemberCard({
 
   return (
     <Card
-      className="gap-1 p-0 border rounded-md overflow-hidden cursor-pointer border-border-div bg-background-layer-1 hover:shadow-lg max-w-[288px]"
-      onClick={() => {router.push(`/groups/${address}/mission/12`)}}
+      className="gap-1 p-0 border rounded-md overflow-hidden cursor-pointer border-border-div bg-bacound-layer-1 hover:shadow-lg max-w-[288px]"
+      onClick={onClickCard}
     >
       <div className="relative m-0 rounded-t-sm bg-accent-secondary">
         <Image
@@ -84,7 +84,7 @@ export default function MemberCard({
       </div>
 
       <div className="flex flex-col gap-3 p-5">
-        <h5 className="text-title_l">{info.title}</h5>
+        <h5 className="text-title_l">{info.name}</h5>
         <div className="text-label_l">{getDaysUntilEnd(info.end_date)}</div>
         {content}
       </div>
