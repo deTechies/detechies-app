@@ -150,8 +150,11 @@ export enum GROUP_TYPE {
   export interface Achievement {
     id: string;
     contract: string;
+    nft_type: string;
+    image: string;
+    description:string;
+    on_chain: boolean;
     name: string;
-    club: Club;
     verified: boolean;
     created_at: Date;
   }
@@ -251,7 +254,17 @@ export interface MissionDetails {
   end_date: string;
   missions: Mission[];
   created_at: Date;
+  achievements: MissionAchievement[];
   userProgress: UserProgress[];
+}
+
+export interface MissionAchievement {
+  id: string;
+  min_score: number;
+  min_required: number;
+  campaign?: MissionDetails
+  achievement: Achievement;
+  created_at: Date;
 }
 
 export interface Mission {
