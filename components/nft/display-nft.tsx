@@ -4,12 +4,13 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ABI, API_URL } from "@/lib/constants";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Address, useAccount, useContractWrite } from "wagmi";
 import NftListItem, { NFTItem } from "../card/nft-list-item";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
+import { ChevronDown, ChevronUp } from "lucide-react";
 export default function DisplayNFT({
   details,
   showSelect,
@@ -18,6 +19,9 @@ export default function DisplayNFT({
   showSelect?: boolean;
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
+  const [showFull, setShowFull] = useState(false);
+  const [showingImage, setShowingImage] = useState("");
+
   const { address } = useAccount();
 
   const { address: contract } = useParams();
@@ -26,6 +30,24 @@ export default function DisplayNFT({
     abi: ABI.group,
     functionName: "distributeAchievement",
   });
+
+  const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
+
+  useEffect(() => {
+    details.image
+      ? setShowingImage(details.image)
+      : setShowingImage(details.avatar);
+  }, [details]);
+
+  const onClickChangeImage = () => {
+    if (!details.avatar || !details.image) {
+      return;
+    }
+
+    showingImage == details.image
+      ? setShowingImage(details.avatar)
+      : setShowingImage(details.image);
+  };
 
   const handleMint = async () => {
     //@ts-ignore
@@ -90,6 +112,9 @@ export default function DisplayNFT({
 
     setRequesting(false);
   };
+
+  // console.log(details);
+
   return (
     <Dialog>
       <DialogTrigger className="min-w-[150px] w-full grow max-w-[229px]">
@@ -101,57 +126,76 @@ export default function DisplayNFT({
         <div className="flex flex-col gap-4">
           <div className="relative object-scale-down w-full rounded-sm aspect-square bg-gradient-to-b from-state-info to-accent-primary">
             <Image
-              src={details.image ? `https://ipfs.io/ipfs/${details.image}` : ``}
+              src={DEFAULT_IPFS_URL + showingImage}
               alt={details.name}
               fill={true}
               className="rounded-sm"
             />
+
+            <Button
+              className="absolute w-12 h-12 bottom-2 right-2"
+              onClick={onClickChangeImage}
+            >
+              Hi!
+            </Button>
           </div>
-          <div className="bg-black-100 rounded-sm p-2 shadow-sm ">
-            {details && 
+          <div className="max-w-md p-0 border rounded-sm border-border-div">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
+              <div className="text-label_m text-text-secondary ">NFT 유형</div>
 
-                <>
-                <dl>
-                  <dd className="flex gap-2 overflow-auto text-right text-primary text-clip">
-                    {/* need data about nft type */}
-                    <span className="text-title_l">
-                      커리어
-                    </span>
-                    
-                    <Badge className="rounded-[5px] text-state-info text-title_s px-2.5">
-                      언어 인증서
-                    </Badge>
-                  </dd>
-                </dl>
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">
+                  {details.nft_type == "sbt" ? "커리어" : "한정판"}
+                </span>
 
-                <dl className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 my-2 border-b border-border-div">
-                  <dd className="capitalize text-label_l text-text-secondary">
-                    NFT 속성
-                  </dd>
+                {/* <Badge variant="info" shape="category">
+                  언어 인증서
+                </Badge> */}
+              </div>
+            </div>
 
-                  <dd className="overflow-auto text-right text-primary text-clip text-title_l">
-                    {details.category}
-                  </dd>
-                </dl>
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
+              <div className="text-label_m text-text-secondary ">NFT 속성</div>
 
-                <dl className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 my-2">
-                  <dd className="capitalize text-label_l text-text-secondary">
-                    발행자
-                  </dd>
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">
+                  {details.avatar && details.image
+                    ? "아바타 + 증명서"
+                    : details.avatar
+                    ? "아바타"
+                    : "증명서"}
+                </span>
+              </div>
+            </div>
 
-                  <dd className="overflow-auto text-right text-primary text-clip text-title_l">
-                    {details.group?.id}
-                  </dd>
-                </dl>
-              </>
-            }
-            
+            <div className="flex items-center justify-between px-4 py-3">
+              <div className="text-label_m text-text-secondary ">발행자</div>
+
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">그룹 이름</span>
+              </div>
+            </div>
+
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
-            <h4 className="mb-4 text-title_m">NFT 설명</h4>
+            <div className="flex justify-between">
+              <span className="mb-4 text-title_m">NFT 설명</span>
 
-            <p className="text-body_m">{details.description}</p>
+              <button
+                onClick={() => {
+                  setShowFull(!showFull);
+                }}
+                className="flex items-center gap-2 p-0 text-label_m text-text-secondary w-fit h-fit"
+              >
+                {showFull ? "hide" : "show_more"}
+                {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
+              </button>
+            </div>
+
+            <p className={`text-body_m ${!showFull && "line-clamp-2"}`}>
+              {details.description}
+            </p>
           </div>
         </div>
 

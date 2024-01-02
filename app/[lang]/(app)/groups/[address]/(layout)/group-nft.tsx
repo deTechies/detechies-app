@@ -20,6 +20,8 @@ export default function GroupMember({
 }) {
   const pathName = usePathname();
 
+  // console.log(achievements);
+
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="flex items-center justify-between mb-5">
@@ -36,7 +38,7 @@ export default function GroupMember({
         } */}
       </div>
 
-      <div>
+      <div className="flex flex-wrap gap-4">
         {achievements &&
           achievements.map((item: NFTItem, index: number) => (
             <DisplayNFT details={item} key={index} />

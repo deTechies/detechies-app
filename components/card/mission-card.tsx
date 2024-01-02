@@ -51,7 +51,7 @@ export default function MemberCard({
         <div className="flex flex-wrap gap-2 text-title_m">
           {info.chips?.map((chip: string, index: number) => {
             return (
-              <Badge variant={"info"} className="rounded-[5px]" key={index}>
+              <Badge variant={"info"} shape="category" key={index}>
                 {chip}
               </Badge>
             );
