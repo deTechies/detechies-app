@@ -22,7 +22,7 @@ export async function getUserAchievements(address?:string) {
     const session = await auth();
     
     //getting all the achievemnts
-    const response = await fetch(`${API_URL}/achievements/club/${address}`, {
+    const response = await fetch(`${API_URL}/achievement/club/${address}`, {
       method: 'GET', 
       headers: {
         Authorization: `Bearer ${session?.web3.accessToken}`

@@ -1,7 +1,9 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { createMissionCampaign } from "@/lib/data/mission";
+import { Achievement } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { StepOne } from "./campaign-form";
@@ -21,9 +23,20 @@ interface FormData {
   description: string;
   end_date: string;
   missions: Mission[];
+  selectedAchievements: Array<{
+    id: string;
+    min_score: number | "";
+    min_required_missions: number | "";
+  }>;
 }
 
-export const Wizard = ({ clubId }: { clubId: string }) => {
+export const Wizard = ({
+  clubId,
+  achievements,
+}: {
+  clubId: string;
+  achievements: Achievement[];
+}) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
@@ -32,7 +45,49 @@ export const Wizard = ({ clubId }: { clubId: string }) => {
     end_date: "",
     description: "",
     missions: [],
+    selectedAchievements: [],
   });
+
+  const [selectedAchievements, setSelectedAchievements] = useState<
+    Array<{
+      id: string;
+      min_score: number | "";
+      min_required_missions: number | "";
+    }>
+  >([]);
+
+  const handleSelectAchievement = (achievement: Achievement) => {
+    if (selectedAchievements.some((a) => a.id === achievement.id)) {
+      // Remove the achievement if it's already selected
+      setSelectedAchievements(
+        selectedAchievements.filter((a) => a.id !== achievement.id)
+      );
+    } else {
+      // Add the achievement if it's not already selected
+      setSelectedAchievements([
+        ...selectedAchievements,
+        { id: achievement.id, min_score: "", min_required_missions: "" },
+      ]);
+    }
+  };
+
+  const handleRemoveAchievement = (id: string) => {
+    setSelectedAchievements(
+      selectedAchievements.filter((achievement) => achievement.id !== id)
+    );
+  };
+
+  const handleInputChange = (
+    id: string,
+    field: "min_score" | "min_required_missions",
+    value: number
+  ) => {
+    setSelectedAchievements(
+      selectedAchievements.map((achievement) =>
+        achievement.id === id ? { ...achievement, [field]: value } : achievement
+      )
+    );
+  };
 
   const nextStep = () => setCurrentStep(currentStep + 1);
   const prevStep = () => setCurrentStep(currentStep - 1);
@@ -53,9 +108,9 @@ export const Wizard = ({ clubId }: { clubId: string }) => {
     const result = await createMissionCampaign(formData, clubId);
     toast({
       title: "Success",
-      description: "Succesfully created missoin campaign."
+      description: "Succesfully created missoin campaign.",
     });
-    
+
     router.push(`/groups/${clubId}/missions`);
   };
 
@@ -70,15 +125,25 @@ export const Wizard = ({ clubId }: { clubId: string }) => {
     }));
   };
 
+  const updateSelectedAchievements = (
+    selected: Array<{
+      id: string;
+      min_score: number | "";
+      min_required_missions: number | "";
+    }>
+  ) => {
+    setFormData({ ...formData, selectedAchievements: selected });
+  };
+
   const removeMission = (index: number) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       missions: prevFormData.missions.filter((_, i) => i !== index),
     }));
   };
-  
+
   const calculateTotalPoints = (): number => {
-    return formData.missions.reduce((total:number, mission) => {
+    return formData.missions.reduce((total: number, mission) => {
       return total + parseInt(mission.score.toString());
     }, 0);
   };
@@ -102,23 +167,30 @@ export const Wizard = ({ clubId }: { clubId: string }) => {
             missions={formData.missions}
           />
         )}
-        
-        {
-          currentStep > 1 && 
+        {currentStep === 3 && (
+          <RewardForm
+            achievements={achievements}
+            selectedAchievements={selectedAchievements}
+            onSelectAchievement={handleSelectAchievement}
+            onRemoveAchievement={handleRemoveAchievement}
+            onInputChange={handleInputChange}
+          />
+        )}
+        {currentStep > 1 && (
           <section className="flex justify-between text-subhead_s">
-          <span>
-            달성한 미션 ( {formData.missions.length} / {formData.missions.length} )
-          </span>
-          <div>
-            총 획득 점수{" "}
-            <span className="text-accent-primary text-subhead_l">
-              {calculateTotalPoints()}
-            </span>{" "}
-            점
-          </div>
-        </section>
-        }
-        {currentStep === 3 && <RewardForm />}
+            <span>
+              달성한 미션 ( {formData.missions.length} /{" "}
+              {formData.missions.length} )
+            </span>
+            <div>
+              총 획득 점수{" "}
+              <span className="text-accent-primary text-subhead_l">
+                {calculateTotalPoints()}
+              </span>{" "}
+              점
+            </div>
+          </section>
+        )}
 
         <div className="flex justify-between w-full my-4">
           <div>

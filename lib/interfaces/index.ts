@@ -150,8 +150,11 @@ export enum GROUP_TYPE {
   export interface Achievement {
     id: string;
     contract: string;
+    nft_type: string;
+    image: string;
+    description:string;
+    on_chain: boolean;
     name: string;
-    club: Club;
     verified: boolean;
     created_at: Date;
   }
