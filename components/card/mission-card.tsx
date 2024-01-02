@@ -8,18 +8,25 @@ import { Card } from "../ui/card";
 export default function MemberCard({
   address,
   info,
+  manage=false,
   children,
 }: {
   address: string;
+  manage?: boolean
   info?: any;
   children?: React.ReactNode;
 }) {
   const router = useRouter();
 
-  const onClickCard = () => {
+  const onClickCard = (e:any) => {
     // router.push(`/groups/${address}/mission/12`);
     // router.push(`/en/groups/${address}/missions/${info.seq}`);
-    router.push(`/groups/${address}/mission/manage/${info.id}`);
+    
+    if(manage){
+      router.push(`/groups/${address}/mission/manage/${info.campaignId}`);
+      return;
+    }
+    router.push(`/groups/${address}/mission-detail/${info.campaignId}`);
   }
 
   const getDaysUntilEnd = (dateEndString: string): string => {
@@ -40,9 +47,9 @@ export default function MemberCard({
 
   const content = children || (
     <div>
-      {info.chips.length <= 3 ? (
+      {info.chips && info.chips?.length <= 3 ? (
         <div className="flex flex-wrap gap-2 text-title_m">
-          {info.chips.map((chip: string, index: number) => {
+          {info.chips?.map((chip: string, index: number) => {
             return (
               <Badge variant={"info"} shape="category" key={index}>
                 {chip}
@@ -52,7 +59,7 @@ export default function MemberCard({
         </div>
       ) : (
         <div className="flex flex-wrap gap-2 text-title_m">
-          {info.chips.slice(0, 2).map((chip: string, index: number) => {
+          {info.chips?.slice(0, 2).map((chip: string, index: number) => {
             return (
               <Badge variant={"info"} className="rounded-[5px]" key={index}>
                 {chip}
@@ -60,7 +67,9 @@ export default function MemberCard({
             );
           })}
 
-          <Badge className="rounded-[5px]">+{info.chips.length - 2}</Badge>
+          <Badge className="rounded-[5px]">+{
+          //info.chips?.length - 2
+          }</Badge>
         </div>
       )}
     </div>

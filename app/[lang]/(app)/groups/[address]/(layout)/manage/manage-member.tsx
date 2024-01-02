@@ -5,7 +5,7 @@ import PendingMemberListItem from "@/components/group/pending-member-list-item";
 // import { Locale } from "@/i18n.config";
 
 import MemberCard from "@/components/card/member-card";
-import OnlySearch from "@/components/extra/only-search";
+import Search from "@/components/extra/search";
 import { getPendingMembers } from "@/lib/data/groups";
 import { Member } from "../members/page";
 
@@ -82,7 +82,7 @@ export default async function ManageMember({
 
       <div className="overflow-auto max-w-[90vw]">
         <div className="max-w-[434px] mb-3">
-          <OnlySearch placeholder="닉네임 또는 직업을 검색해보세요." />
+          <Search placeholder="닉네임 또는 직업을 검색해보세요." />
         </div>
 
         <div className="flex flex-wrap gap-4">

@@ -7,10 +7,11 @@ interface MemberListDetails {
     memberId:string; 
     display_name: string;
     avatar?: string[];
-    role: string;
+    role?: string;
+    active?: boolean;
 }
 
-export default async function InlineMemberItem({avatar, display_name, role}: MemberListDetails) {
+export default async function InlineMemberItem({avatar, display_name, role, active=false}: MemberListDetails) {
     
     
     if(!display_name) return (
@@ -33,7 +34,7 @@ export default async function InlineMemberItem({avatar, display_name, role}: Mem
         )
     
   return (
-    <div className="flex items-center hover:bg-accent-secondary py-4">
+    <div className={`flex items-center hover:bg-accent-secondary rounded-[4px] px-2 py-4 ${active && 'bg-accent-secondary'}`}>
     <Avatar className="h-10 w-10 bg-background-layer-2">
         <IPFSImageLayer hashes={avatar ? avatar : defaultAvatar} />
     </Avatar>
@@ -41,7 +42,7 @@ export default async function InlineMemberItem({avatar, display_name, role}: Mem
       <span className="text-title_m font-medium leading-none">{display_name}</span>
       <Badge
         variant={"ghost"}
-        >{role}</Badge>
+        >{role && role}</Badge>
     </div>
   </div>
   )

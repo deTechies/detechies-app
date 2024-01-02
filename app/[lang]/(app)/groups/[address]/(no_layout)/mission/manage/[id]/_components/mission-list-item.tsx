@@ -2,10 +2,9 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Mission } from "@/lib/interfaces";
 import { Check } from "lucide-react";
-import { Mission } from "./mission-detail";
 
-  
   interface MissionItemProps {
     mission: Mission;
     onSelect: () => void;
@@ -26,14 +25,19 @@ export const MissionItem: React.FC<MissionItemProps> = ({
         onClick={onSelect}
       >
         <div className="flex flex-col gap-2.5 items-start">
-          <h3 className="text-title_l">주니어 세션 1회 진행</h3>
-          <Badge variant={"accent"} className="w-content text-sm">
-            필수 미션
-          </Badge>
+          <h3 className="text-title_l">{mission.name}</h3>
+          {
+            mission.essential ? (
+            <Badge variant={"accent"} className="w-content text-sm">
+              필수 미션
+            </Badge>
+            ) : null
+          }
+          
         </div>
         <div className="flex gap-5">
           <Button size="sm" className="text-text-primary px-8">
-            20점
+            {mission.score}점
           </Button>
           {isActive ? (
             <Button size="icon" variant={"success"} className="rounded-full">
