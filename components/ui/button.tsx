@@ -23,6 +23,7 @@ const buttonVariants = cva(
         sm: "rounded-md px-3 py-2 text-title_s",
         lg: "py-[15.5px] px-[78px] rounded-full",
         icon: "h-10 w-10 rounded-full p-2",
+        image: "h-fit w-fit p-0 bg-transparent hover:shadow-none"
       },
     },
     defaultVariants: {
