@@ -63,7 +63,7 @@ export default function InviteMember({
             {!byEmail && selected == null && (
               <>
                 <Search
-                  placeholder="사용자 닉네임을 입력해주세요"
+                placeholder="search email"
                 />
 
                 <div className="rounded-sm max-h-[30vh] overflow-x-auto">

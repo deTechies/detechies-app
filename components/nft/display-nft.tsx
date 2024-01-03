@@ -167,7 +167,6 @@ export default function DisplayNFT({
               </Button>
             )}
           </div>
-
           <div className="max-w-md p-0 border rounded-sm border-border-div">
             <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
               <div className="text-label_m text-text-secondary ">NFT 유형</div>
@@ -204,6 +203,7 @@ export default function DisplayNFT({
                 <span className="text-title_m">그룹 이름</span>
               </div>
             </div>
+
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
