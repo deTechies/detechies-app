@@ -7,6 +7,7 @@ import { getClubMissions } from "@/lib/data/mission";
 import { Plus } from "lucide-react";
 
 import Link from "next/link";
+import QuitMission from "./_components/quit-mission";
 
 export default async function ManageNft({
   details,
@@ -44,9 +45,9 @@ export default async function ManageNft({
                 manage={true}
               >
                 <div className="flex gap-2">
-                  <Button variant="secondary" size="lg" className="grow">
-                    강제종료
-                  </Button>
+                  <QuitMission
+                    campaignId={details.campaignId}
+                  ></QuitMission>
 
                   <Link
                     href={`/groups/${details.id}/mission/manage/${item.campaignId}`}

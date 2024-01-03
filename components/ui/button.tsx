@@ -12,6 +12,7 @@ const buttonVariants = cva(
         primary: "bg-accent-secondary text-accent-primary",
         default: "bg-accent-secondary text-accent-primary",
         success: "bg-accent-primary text-background-layer-1",
+        error: "bg-state-error-secondary text-state-error",
         destructive: "bg-state-error text-state-error-secondary  hover:bg-destructive/20",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-background-layer-2 text-[#3B414B] hover:bg-gray-100 cursor:pointer",
