@@ -79,16 +79,16 @@ export default function MemberCard({
 
   return (
     <Card
-      className="gap-1 p-0 border rounded-md overflow-hidden cursor-pointer border-border-div bg-bacound-layer-1 hover:shadow-lg max-w-[288px]"
+      className="gap-1 p-0 overflow-hidden border rounded-md cursor-pointer border-border-div bg-bacound-layer-1 hover:shadow-lg"
       onClick={onClickCard}
     >
-      <div className="relative m-0 rounded-t-sm bg-accent-secondary">
+      <div className="relative w-full m-0 rounded-t-sm bg-accent-secondary">
         <Image
           src="/images/mission.png"
           alt="mission"
-          className="object-cover"
-          width={288}
-          height={234}
+          objectFit="cover"
+          width="999"
+          height="999"
         ></Image>
       </div>
 

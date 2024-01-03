@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { Address, useAccount, useContractWrite } from "wagmi";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 import Image from "next/image";
@@ -125,7 +125,7 @@ export default function DisplayNFT({
 
   return (
     <Dialog>
-      <DialogTrigger className="min-w-[150px] w-full grow max-w-[229px]">
+      <DialogTrigger className="min-w-[150px] w-full grow">
         <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
 
@@ -228,7 +228,10 @@ export default function DisplayNFT({
         </div>
 
         <div className="grid grid-cols-2 gap-2">
-          <Button variant={"secondary"}>다음에 할래요</Button>
+          <DialogClose asChild>
+            <Button variant={"secondary"}>다음에 할래요</Button>
+          </DialogClose>
+          
           <Button onClick={handleMint}>발행 요청</Button>
         </div>
       </DialogContent>

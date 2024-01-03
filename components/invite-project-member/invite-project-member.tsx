@@ -33,7 +33,7 @@ export default function InviteProjectMember({
   const [byEmail, setByEmail] = useState<boolean>(false);
   const { data: members, loading, error } = useFetchData<any[]>("/users");
 
-  if (loading) return <Skeleton className="h-3 w-10 animate-pulse" />;
+  if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
   if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
 
@@ -48,7 +48,7 @@ export default function InviteProjectMember({
       <DialogTrigger>
         <Button
           variant="secondary"
-          className="cursor-pointer text-sm font-normal py-2 px-4"
+          size="sm"
         >
           {lang.details.invite_member.invite}
           <Plus size={16} className="inline-block ml-2" />
@@ -87,7 +87,7 @@ export default function InviteProjectMember({
 
               <button
                 onClick={() => setByEmail(true)}
-                className="flex gap-2 text-center mx-auto"
+                className="flex gap-2 mx-auto text-center"
               >
                 <span>{lang.details.invite_member.can_not_find}</span>
                 <span className="text-accent-primary">{lang.details.invite_member.invite_by_email}</span>
