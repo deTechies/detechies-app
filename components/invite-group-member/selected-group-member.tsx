@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { toast } from "../ui/use-toast";
 import { Textarea } from "../ui/textarea";
 
-export default function SelectedProjectMember({
+export default function SelectedGroupMember({
   user,
   id,
   onSelectValue,
@@ -23,7 +23,7 @@ export default function SelectedProjectMember({
   onSelectValue: (value: string) => void;
   // lang: any;
 }) {
-  const [text, setText] = useState("");
+  const [message, setMessage] = useState("");
 
   async function inviteMember() {
     // const result = await inviteProjectMembers([user.id], id);
@@ -50,14 +50,14 @@ export default function SelectedProjectMember({
         placeholder="안녕하세요. ㅇㅇ대학교 입니다."
         className="resize-none"
         onChange={(e) => {
-          if (setText) {
-            setText(e.target.value);
+          if (setMessage) {
+            setMessage(e.target.value);
           }
         }}
       />
       <div className="mb-6 text-right text-label_s">
-        <span className={`${text.length > 100 && "text-state-error"}`}>
-          {text.length}
+        <span className={`${message.length > 100 && "text-state-error"}`}>
+          {message.length}
         </span>
         /100
       </div>
@@ -77,7 +77,7 @@ export default function SelectedProjectMember({
           onClick={inviteMember}
           size="lg"
           className="max-w-[212px] grow px-0"
-          disabled={text.length > 100}
+          disabled={message.length > 100}
         >
           초대하기
         </Button>

@@ -92,7 +92,7 @@ const FormInlineItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-x-2", className, 'flex items-center ')} {...props} />
+      <div ref={ref} className={cn("space-x-2 flex items-center", className)} {...props} />
     </FormItemContext.Provider>
   )
 })

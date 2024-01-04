@@ -59,7 +59,7 @@ export default function GroupMember({
         } */}
       </div>
 
-      <div className="grid w-full gap-4 md:grid-cols-5">
+      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {members &&
           members.map(
             (item: Member, index: any) => {
