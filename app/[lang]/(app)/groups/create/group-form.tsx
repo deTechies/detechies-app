@@ -26,6 +26,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { createGroup } from "@/lib/data/groups";
 import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const profileFormSchema = z.object({
@@ -64,6 +65,7 @@ export function GroupForm() {
   const [icon, setIcon] = useState<File | null>(null);
   const [cover, setCover] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const { fields, append } = useFieldArray({
     control: form.control,
@@ -104,7 +106,7 @@ export function GroupForm() {
 
     const urls = data.urls.map((url) => url.value);
 
-    await createGroup({
+    const result = await createGroup({
       image: image,
       name: data.name,
       description: data.description,
@@ -112,7 +114,17 @@ export function GroupForm() {
       urls: urls,
     });
 
-    setIsLoading(false);
+    if (!result.id) {
+      toast({
+        title: "Error",
+        description: "Something went wrong",
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
+    router.push(`/groups/${result.id}`);
   }
 
   const selectIcon = (file: File | null, base64: string | null) => {
@@ -153,6 +165,36 @@ export function GroupForm() {
                       </FormLabel>
                     </FormItem>
                   ))}
+                  <FormItem
+                    key="school"
+                    className="flex flex-wrap items-center space-x-3 space-y-0"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="school" disabled />
+                    </FormControl>
+                    <FormLabel className="font-normal capitalize">
+                      School
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem
+                    key="authority"
+                    className="flex flex-wrap items-center space-x-3 space-y-0"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="authority" disabled />
+                    </FormControl>
+                    <FormLabel className="font-normal capitalize">
+                      Authority
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem className="flex flex-wrap items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="company" disabled />
+                    </FormControl>
+                    <FormLabel className="font-normal capitalize">
+                      Company
+                    </FormLabel>
+                  </FormItem>
                 </RadioGroup>
 
                 <FormMessage />
@@ -232,23 +274,20 @@ export function GroupForm() {
                   </FormControl>
                   <FormMessage />
                 </FormInlineItem>
-               
               )}
             />
-            
           ))}
           <div className="items-end justify-right align-end">
-          <Button
-                 type="button"
-                 variant="outline"
-                 size="sm"
-                 className="justify-end mt-2 text-right"
-                 onClick={() => append({ value: "" })}
-               >
-                 Add URL
-               </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="justify-end mt-2 text-right"
+              onClick={() => append({ value: "" })}
+            >
+              Add URL
+            </Button>
           </div>
-
         </div>
 
         <div className="flex items-center justify-end gap-8">
