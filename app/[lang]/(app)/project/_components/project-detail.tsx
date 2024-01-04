@@ -1,12 +1,13 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Project } from "@/lib/interfaces";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, PenSquare, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import { beginEndDates } from "@/lib/utils";
 
 export default function ProjectDetail({
   details,
@@ -22,9 +23,6 @@ export default function ProjectDetail({
     name: details.name,
   });
   const [showFull, setShowFull] = useState(false);
-
-  console.log("TEST!");
-  console.log(details);
 
   return (
     <Card className="w-full gap-8 px-8 pt-8 pb-5">
@@ -42,40 +40,46 @@ export default function ProjectDetail({
         />
         <div className="flex flex-col gap-4">
           <h1 className="text-heading_s">{data.name}</h1>
-
-          {/* category */}
           <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-4 text-label_l text-text-secondary ">
+            <div className="flex items-center gap-4 text-label_l text-text-secondary">
+              {details.type}
             </div>
 
             <div className="flex items-center gap-1 text-label_l text-text-secondary">
-              <span>{details?.begin_date}</span>
-              <span> ~ </span>
-              <span>{details.end_date}</span>
+              {beginEndDates(details.begin_date, details?.end_date)}
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            {details.tags &&
-            details.tags?.map((tag) => (
-              <Badge
-                key={tag}
-                className="bg-transparent border border-accent-primary text-accent-primary py-2 px-2.5"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
+          {details.tags && details.tags.length > 0 && (
+            <div className="flex flex-wrap gap-3">
+              {details.tags &&
+                details.tags?.map((tag) => (
+                  <Badge
+                    key={tag}
+                    shape="outline"
+                    variant="accent"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+            </div>
+          )}
         </div>
-        {/* {
+
+        {
           details.userRole == 'admin' && (
-            <Link href={`/project/${details.id}/edit`} className="right-0 items-end  flex-end">
-              <Badge>
-                  Edit
-              </Badge>
+
+            <Link href={`/project/${details.id}/edit`} className="ml-auto">
+              <Button
+                variant="secondary"
+                className="cursor-pointer text-sm font-normal py-2 px-4"
+              >
+                Edit
+                <PenSquare size={16} className="inline-block ml-2" />
+              </Button>
             </Link>
           )
-        } */}
+        }
       </header>
 
       <div className="flex flex-col w-full gap-5">

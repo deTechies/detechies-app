@@ -15,6 +15,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +36,8 @@ import { createGroup } from "@/lib/data/groups";
 import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useState } from "react";
+import { CrossIcon, PlusIcon, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const profileFormSchema = z.object({
   name: z
@@ -50,7 +61,8 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
-  description: "I am writing something unique about myself.",
+  type: GROUP_TYPE.COMMUNITY,
+  description: "",
   urls: [{ value: "https://" }],
 };
 
@@ -64,6 +76,8 @@ export function GroupForm() {
   const [icon, setIcon] = useState<File | null>(null);
   const [cover, setCover] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const { fields, append } = useFieldArray({
     control: form.control,
@@ -113,6 +127,8 @@ export function GroupForm() {
     });
 
     setIsLoading(false);
+
+    router.push(`/groups/`);
   }
 
   const selectIcon = (file: File | null, base64: string | null) => {
@@ -122,23 +138,50 @@ export function GroupForm() {
     setCover(file);
   };
 
+  const clickAddLinks = (
+    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    _event.preventDefault();
+    append({ value: "" });
+  };
+
+  const clickDelLinks =
+    (index: number) =>
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault();
+    };
+
+  const channelList = [
+    {
+      value: "facebook",
+      url: "https://facebook.com/",
+    },
+    {
+      value: "instagram",
+      url: "https://instagram.com/",
+    },
+  ]
+  
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col justify-center space-y-8 "
+        className="flex flex-col justify-center space-y-8"
       >
         <div className="flex flex-col space-y-8 ">
           <FormField
             control={form.control}
             name="type"
             render={({ field }) => (
-              <FormInlineItem>
-                <FormInlineLabel>Type</FormInlineLabel>
+              <FormInlineItem className="h-12">
+                <FormInlineLabel>
+                  Type
+                  <span className="ml-1 text-state-error">*</span>
+                </FormInlineLabel>
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-row flex-wrap space-x-1"
+                  className="flex flex-row flex-wrap gap-6"
                 >
                   {Object.values(GROUP_TYPE).map((type) => (
                     <FormItem
@@ -146,8 +189,12 @@ export function GroupForm() {
                       className="flex flex-wrap items-center space-x-3 space-y-0"
                     >
                       <FormControl>
-                        <RadioGroupItem value={type} />
+                        <RadioGroupItem
+                          value={type}
+                          disabled={type !== "community"}
+                        />
                       </FormControl>
+
                       <FormLabel className="font-normal capitalize">
                         {type}
                       </FormLabel>
@@ -164,46 +211,70 @@ export function GroupForm() {
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormInlineItem>
-                <FormInlineLabel>Name</FormInlineLabel>
-                <FormControl>
-                  <Input placeholder="Enter your name" {...field} />
-                </FormControl>
-                <FormMessage />
+              <FormInlineItem className="items-start">
+                <FormInlineLabel className="mt-5">
+                  Group Name
+                  <span className="ml-1 text-state-error">*</span>
+                </FormInlineLabel>
+
+                <div className="grow">
+                  <FormControl className="h-[60px] mb-2">
+                    <Input placeholder="Enter group name" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </div>
               </FormInlineItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="description"
             render={({ field }) => (
-              <FormInlineItem>
-                <FormInlineLabel className="items-start">
+              <FormInlineItem className="items-start">
+                <FormInlineLabel>
                   Description
+                  <span className="ml-1 text-state-error">*</span>
                 </FormInlineLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Tell us a little bit about your group here"
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
+
+                <div className="grow">
+                  <FormControl className="mb-1">
+                    <Textarea
+                      placeholder="Tell us a little bit about your group here"
+                      className="p-4 resize-none min-h-[132px]"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </div>
               </FormInlineItem>
             )}
           />
 
-          <FormInlineItem>
+          <FormInlineItem className="items-start">
             <FormInlineLabel className="justify-start">Image</FormInlineLabel>
+
             <MediaUploader
               key="icon"
               onFileSelected={selectIcon}
-              width={50}
-              height={50}
-            />
+              width={140}
+              height={140}
+            >
+              <div>
+                <div className="mb-1 text-title_s text-text-secondary">
+                  이미지 가이드
+                </div>
+
+                <div className="text-text-placeholder text-label_s">
+                  <span className="mr-1">▪</span>
+                  <span>1:1 비율 권장</span>
+                </div>
+              </div>
+            </MediaUploader>
           </FormInlineItem>
 
-          <FormInlineItem>
+          <FormInlineItem className="items-start">
             <FormInlineLabel className="items-start">
               Cover Image
             </FormInlineLabel>
@@ -212,50 +283,135 @@ export function GroupForm() {
               onFileSelected={selectCover}
               width={256}
               height={192}
-            />
+            >
+              <div>
+                <div className="mb-1 text-title_s text-text-secondary">
+                  이미지 가이드
+                </div>
+
+                <div className="text-text-placeholder text-label_s">
+                  <span className="mr-1">▪</span>
+                  <span>4:3 비율 권장</span>
+                </div>
+
+                <div className="text-text-placeholder text-label_s">
+                  <span className="mr-1">▪</span>
+                  <span>그룹 목록과 그룹상세보기에서 확인 가능합니다.</span>
+                </div>
+              </div>
+            </MediaUploader>
           </FormInlineItem>
         </div>
 
         <div className="flex flex-col gap-2">
-          {fields.map((field, index) => (
-            <FormField
-              control={form.control}
-              key={field.id}
-              name={`urls.${index}.value`}
-              render={({ field }) => (
-                <FormInlineItem>
-                  <FormInlineLabel className={cn(index !== 0 && "sr-only")}>
-                    Links
-                  </FormInlineLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormInlineItem>
-               
-              )}
-            />
-            
-          ))}
-          <div className="items-end justify-right align-end">
-          <Button
-                 type="button"
-                 variant="outline"
-                 size="sm"
-                 className="justify-end mt-2 text-right"
-                 onClick={() => append({ value: "" })}
-               >
-                 Add URL
-               </Button>
-          </div>
+          {[...fields].reverse().map((field, index) => {
+            const reversedIndex = fields.length - 1 - index;
 
+            const handleSelectChange = (selectedValue: string) => {
+
+              form.setValue(`urls.${reversedIndex}.value`, selectedValue);
+            };
+
+            return (
+              <FormField
+                control={form.control}
+                key={field.id}
+                name={`urls.${reversedIndex}.value`}
+                render={({ field }) => (
+                  <FormInlineItem>
+                    <FormInlineLabel>
+                      <div className={cn(index !== 0 && "sr-only")}>
+                        <span>Links</span>
+                        <span className="ml-1 text-state-error">*</span>
+                      </div>
+                    </FormInlineLabel>
+
+                    <div className="grow">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Select
+                          onValueChange={handleSelectChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="h-[60px] max-w-[150px]">
+                              <SelectValue placeholder="Channel" />
+                            </SelectTrigger>
+                          </FormControl>
+                          
+                          <SelectContent>
+                            {channelList.map((type) => (
+                              <SelectItem key={type.value} value={type.url}>
+                                {type.value}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+
+                        <FormControl className="h-[60px]">
+                          <Input {...field} />
+                        </FormControl>
+
+                        {fields.length == reversedIndex + 1 && (
+                          <Button
+                            size="icon"
+                            className="rounded-md w-14 h-14 shrink-0"
+                            onClick={clickAddLinks}
+                          >
+                            <PlusIcon></PlusIcon>
+                          </Button>
+                        )}
+
+                        {fields.length != reversedIndex + 1 && (
+                          <Button
+                            size="icon"
+                            variant="secondary"
+                            className="rounded-md w-14 h-14 shrink-0"
+                            onClick={clickDelLinks(reversedIndex)}
+                          >
+                            <X></X>
+                          </Button>
+                        )}
+                      </div>
+
+                      <FormMessage />
+                    </div>
+                  </FormInlineItem>
+                )}
+              />
+            );
+          })}
+
+          {/* <div className="items-end justify-right align-end">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="justify-end mt-2 text-right"
+              onClick={() => append({ value: "" })}
+            >
+              Add URL
+            </Button>
+          </div> */}
         </div>
 
-        <div className="flex items-center justify-end gap-8">
-          <Button type="button" variant="secondary">
+        <div className="flex items-center justify-end gap-2">
+          <Button
+            type="button"
+            size="lg"
+            variant="secondary"
+            className="max-w-[212px] grow"
+            onClick={() => router.back()}
+          >
             Cancel
           </Button>
-          <Button type="submit" loading={isLoading} disabled={isLoading}>
+
+          <Button
+            type="submit"
+            size="lg"
+            loading={isLoading}
+            disabled={isLoading}
+            className="max-w-[212px] grow"
+          >
             Create Group
           </Button>
         </div>
