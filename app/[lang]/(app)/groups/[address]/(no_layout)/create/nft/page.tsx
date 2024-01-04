@@ -5,7 +5,7 @@ export default function CreateNFT({
     params
 }: {params: any}) {
   return (
-    <main className="max-w-2xl mx-auto m-8 w-full">
+    <main className="w-full max-w-2xl m-8 mx-auto">
         <CreateNFTForm groupId={params.address} />
     </main>
   )

@@ -3,7 +3,7 @@
 import { User } from "@/lib/interfaces";
 
 import { inviteProjectMembers } from "@/lib/data/project";
-import { DialogClose } from "@radix-ui/react-dialog";
+// import { DialogClose } from "@radix-ui/react-dialog";
 import { useState } from "react";
 import PersonItem from "../extra/add-member-item";
 import { Button } from "../ui/button";
@@ -16,11 +16,15 @@ export default function SelectedGroupMember({
   user,
   id,
   onSelectValue,
+  onClickBack,
+  onCompleteInvite
 }: // lang
 {
   user: User;
   id: string;
   onSelectValue: (value: string) => void;
+  onClickBack: () => void;
+  onCompleteInvite: () => void;
   // lang: any;
 }) {
   const [message, setMessage] = useState("");
@@ -33,6 +37,9 @@ export default function SelectedGroupMember({
     //     {JSON.stringify(result, null, 2)}
     //   </pre>
     // })
+
+
+    onCompleteInvite();
   }
 
   return (
@@ -63,15 +70,16 @@ export default function SelectedGroupMember({
       </div>
 
       <div className="flex justify-center w-full gap-2">
-        <DialogClose asChild>
+        {/* <DialogClose asChild> */}
           <Button
             variant={"secondary"}
             size="lg"
             className="max-w-[212px] grow px-0"
+            onClick={onClickBack}
           >
             뒤로가기
           </Button>
-        </DialogClose>
+        {/* </DialogClose> */}
 
         <Button
           onClick={inviteMember}

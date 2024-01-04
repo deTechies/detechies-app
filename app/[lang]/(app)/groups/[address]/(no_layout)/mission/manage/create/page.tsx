@@ -20,7 +20,7 @@ export default async function CreateMissionPage({ params }: { params: any }) {
   const achievements = await getGroupAchievements(params.address);
 
   return (
-    <main className="m-8  w-full max-w-2xl flex">
+    <main className="m-8  w-full max-w-[60rem] flex">
       <Wizard clubId={params.address} achievements={achievements}/>
     </main>
   );

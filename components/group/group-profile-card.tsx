@@ -114,7 +114,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
               </Button>
             </Link>
 
-            <InviteGroupMember id={id}></InviteGroupMember>
+            <InviteGroupMember groupId={id}></InviteGroupMember>
           </div>
           )
         }

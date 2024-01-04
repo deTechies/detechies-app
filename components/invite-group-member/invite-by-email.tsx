@@ -83,7 +83,7 @@ export default function InviteByEmail({
     <main className="flex flex-col gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          <Label>name</Label>
+          <Label>Name</Label>
 
           <div className="flex gap-4 mb-2">
             <FormField
@@ -91,7 +91,7 @@ export default function InviteByEmail({
               name="name"
               render={({ field }) => (
                 <FormItem className="grow">
-                  <FormControl>
+                  <FormControl className="h-[60px]">
                     <Input
                       placeholder="first_name"
                       {...field}
@@ -106,7 +106,7 @@ export default function InviteByEmail({
               name="last_name"
               render={({ field }) => (
                 <FormItem className="grow">
-                  <FormControl>
+                  <FormControl className="h-[60px]">
                     <Input
                       placeholder="last_name"
                       {...field}
@@ -126,7 +126,7 @@ export default function InviteByEmail({
             
             render={({ field }) => (
               <FormItem className="mb-2">
-                <FormControl>
+                <FormControl className="h-[60px]">
                   <Input placeholder="user1234@gmail.com" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -134,7 +134,7 @@ export default function InviteByEmail({
             )}
           />
 
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-2">
             <Button
               variant="secondary"
               size="lg"

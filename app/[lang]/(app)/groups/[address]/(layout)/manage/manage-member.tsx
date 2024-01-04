@@ -24,7 +24,7 @@ export default async function ManageMember({
   let filteredData = details.members?.filter((item: any) => {
     if (!searchItem) return true;
 
-    return item.display_name?.toLowerCase().includes(searchItem.toLowerCase());
+    return item.user.display_name?.toLowerCase().includes(searchItem.toLowerCase());
   });
 
   return (
