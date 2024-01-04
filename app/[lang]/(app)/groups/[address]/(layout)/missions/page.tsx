@@ -10,7 +10,7 @@ export default async function GroupAchievements({
 }) {
   const data = await getClubMissions(params.address);
 
-  console.log(data[1]);
+  console.log(data[3].achievements);
 
   return (
     <div>

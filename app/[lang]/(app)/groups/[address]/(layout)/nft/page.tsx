@@ -16,7 +16,7 @@ export default async function GroupAchievements({
 }) {
   const details = await getClub(params.address);
 
-  console.log(details);
+  // console.log(details);
   return (
     <div>
       <div className="flex flex-col gap-2">

@@ -54,10 +54,10 @@ export interface User {
   }
   
 export enum GROUP_TYPE {
-    COMMUNITY = 'community',
+    EDUCATION = 'education',
     COMPANY = 'company',
     AGENCY = 'agency',
-    EDUCATION = 'education',
+    COMMUNITY = 'community',
   }
   
   export enum NFT_TYPE{

@@ -70,6 +70,16 @@ module.exports = {
           status: "var(--state-status-primary)",
           "status-secondary": "var(--state-status-secondary)",
         },
+        type: {
+          purple: {
+            primary: "var(--type-purple-primary)",
+            secondary: "var(--type-purple-secondary)",
+          },
+          yellow: {
+            primary: "var(--type-yellow-primary)",
+            secondary: "var(--type-yellow-secondary)",
+          },
+        },
         black: {
           DEFAULT: "#101113",
           800: "#101113",
