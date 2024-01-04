@@ -83,7 +83,7 @@ export default function CreateProject() {
     }
 
     const image = await uploadContent(file);
-    console.log(image);
+    console.log(file);
 
     if (!image) {
       toast({
@@ -133,6 +133,8 @@ export default function CreateProject() {
 
     setLoading(false);
   }
+
+
 
   const selectFile = (file: File | null) => {
     setFile(file);

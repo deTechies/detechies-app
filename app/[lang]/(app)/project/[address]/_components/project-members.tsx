@@ -36,7 +36,7 @@ export default async function ProjectMembers({
           <h5 className="text-subhead_s text-text-primary ">
             Members ({members.length})
           </h5>
-
+          
           {userRole == 'none' && <JoinProject lang={lang} address={projectId} />}
           {userRole == 'admin' && <InviteProjectMember lang={lang} projectId={projectId} />}
         </header>
