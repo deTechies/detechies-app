@@ -10,12 +10,13 @@ export default async function CreateGroup({
   
   const text = dictionary?.group?.create;
   return (
-    <Card className="w-full max-w-2xl gap-0 mx-auto my-8">
-      <header className="mb-10 flex flex-col">
-      <h4 className="text-heading_s mb-2">
+    // Temporarily insert fixed values ​​(to work with grid later)
+    <Card className="w-full max-w-[1113px] gap-0 mx-auto my-8">
+      <header className="flex flex-col mb-10">
+      <h4 className="mb-3 text-heading_s">
         {text.title}
       </h4>
-      <span className="text-body_s text-state-error mb-1">
+      <span className="mb-1 text-body_s text-state-error">
       *는 필수입력 사항입니다.
       </span>
       <span  className="text-label_s text-text-secondary ">

@@ -46,8 +46,8 @@ export default async function ProjectDetailPage({
   if (data.userRole == "invited") return <AcceptInvitation image={data.image} projectId={data.id} />
 
   return (
-    <main className="flex flex-col mx-5 my-12 md:flex-row gap-7">
-      <section className="flex flex-col gap-5 grow">
+    <main className="grid w-full gap-6 mx-8 my-10 md:grid-cols-3">
+      <section className="flex flex-col col-span-2 gap-5">
         <ProjectDetail 
           details={data} 
           userRole={data.userRole}

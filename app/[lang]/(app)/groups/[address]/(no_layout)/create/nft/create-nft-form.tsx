@@ -6,14 +6,14 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormInlineItem,
-    FormInlineLabel,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormInlineItem,
+  FormInlineLabel,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
@@ -25,10 +25,10 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { uploadAchievement } from "@/lib/data/achievements";
 import {
-    AVATAR_TYPE,
-    NFT_IMAGE_TYPE,
-    NFT_TYPE,
-    SBT_TYPE,
+  AVATAR_TYPE,
+  NFT_IMAGE_TYPE,
+  NFT_TYPE,
+  SBT_TYPE,
 } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useState } from "react";
@@ -65,7 +65,7 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
     onSubmit,
   } = useCreateNFTForm(groupId);
 
-  if (completed) return <CompletedSuccess />;
+  if (completed) return <CompletedSuccess groupId={groupId}/>;
 
   return (
     <main>

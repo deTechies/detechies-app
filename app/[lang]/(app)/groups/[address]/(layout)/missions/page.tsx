@@ -10,6 +10,8 @@ export default async function GroupAchievements({
 }) {
   const data = await getClubMissions(params.address);
 
+  console.log(data[3].achievements);
+
   return (
     <div>
       <div className="flex flex-col gap-2">
@@ -19,7 +21,7 @@ export default async function GroupAchievements({
             <TabsTrigger value="career">나의 미션</TabsTrigger>
           </TabsList>
 
-          <div className="flex gap-5">
+          <div className="grid items-stretch gap-5 grid-cols:2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {data &&
               data.map((item: any, index: number) => (
                 <MissionCard

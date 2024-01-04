@@ -22,6 +22,7 @@ const ABI = {
 }
 
 export const API_URL = process.env.NEXT_PUBLIC_API || 'http://localhost:4000'
+// export const API_URL = process.env.NEXT_PUBLIC_API || 'http://192.168.0.3:4000'
 
 
 export const defaultAvatar = [

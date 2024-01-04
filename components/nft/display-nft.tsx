@@ -1,13 +1,12 @@
 "use client";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
-import { ABI, API_URL } from "@/lib/constants";
+import { requestAchievement } from "@/lib/data/achievements";
+import { truncateMiddle } from "@/lib/utils";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-import { Address, useAccount, useContractWrite } from "wagmi";
+import { useEffect, useState } from "react";
 import NftListItem, { NFTItem } from "../card/nft-list-item";
-import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 export default function DisplayNFT({
@@ -18,146 +17,155 @@ export default function DisplayNFT({
   showSelect?: boolean;
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
-  const { address } = useAccount();
+  const [showFull, setShowFull] = useState(false);
+  const [showingImage, setShowingImage] = useState("");
 
-  const { address: contract } = useParams();
-  const { write, isLoading, error, data } = useContractWrite({
-    address: details.contract as Address,
-    abi: ABI.group,
-    functionName: "distributeAchievement",
-  });
+  const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
 
-  const handleMint = async () => {
-    //@ts-ignore
-    setRequesting(true);
-    const submitData = {
-      contract: contract,
-      tokenId: details.id,
-      type: "individual",
-      data: [""],
-      requester: address,
-      tokenbound: address,
-    };
+  useEffect(() => {
+    details.image
+      ? setShowingImage(details.image)
+      : setShowingImage(details.avatar);
+  }, [details]);
 
-    if (
-      !submitData.contract ||
-      !submitData.tokenId ||
-      !submitData.data ||
-      !submitData.requester ||
-      !submitData.tokenbound
-    ) {
-      toast({
-        title: "Something went wrong with submitting the data",
-        description:
-          "Please contact the admins to see if there is an issue with the contract",
-      });
-      console.log(submitData);
-
+  const onClickChangeImage = () => {
+    if (!details.avatar || !details.image) {
       return;
     }
 
-    await fetch(`${API_URL}/achievement/request`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(submitData),
+    showingImage == details.image
+      ? setShowingImage(details.avatar)
+      : setShowingImage(details.image);
+  };
+
+  const onClickContract = () => {
+    //
+  }
+
+  const handleRequestNFT = async () => {
+    //@ts-ignore
+    setRequesting(true);
+    
+    const result = await requestAchievement(details.id);
+    
+    //TODO: update message
+    toast({
+      title: 'requesting nft', 
+      description: <pre>
+        {JSON.stringify(result, null, 2)}
+      </pre>
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status) {
-          toast({
-            title: "Success",
-            description: "Your request has been submitted",
-          });
-        } else {
-          console.error("Error creating profile:", data.message);
-          toast({
-            title: "Something went wrong with submitting the data",
-            description:
-              "Please contact the admins to see if there is an issue with the contract",
-          });
-        }
-      })
-      .catch((error) => {
-        console.error("Error creating profile:", error);
-        toast({
-          title: "Something went wrong with submitting the data",
-          description:
-            "Please contact the admins to see if there is an issue with the contract",
-        });
-      });
 
     setRequesting(false);
   };
+
   return (
     <Dialog>
-      <DialogTrigger className="min-w-[150px] w-full grow max-w-[229px]">
+      <DialogTrigger className="min-w-[150px] w-full grow">
         <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
+
       <DialogContent className="flex flex-col gap-8 max-w-[504px]">
-        <div className="text-subhead_m">{details.name}</div>
+        <div className="flex justify-between">
+          <span className="text-subhead_m">{details.name}</span>
+
+          <Button variant="secondary" size="sm" onClick={onClickContract}>
+            {/* details.contract */}
+            {truncateMiddle("aaaaaaaaaaaaaaaaaaa", 13)}
+          </Button>
+        </div>
 
         <div className="flex flex-col gap-4">
           <div className="relative object-scale-down w-full rounded-sm aspect-square bg-gradient-to-b from-state-info to-accent-primary">
             <Image
-              src={details.image ? `https://ipfs.io/ipfs/${details.image}` : ``}
+              src={DEFAULT_IPFS_URL + showingImage}
               alt={details.name}
               fill={true}
               className="rounded-sm"
             />
+
+            {details.avatar && details.image && (
+              <Button
+                className="absolute w-12 h-12 bottom-2 right-2"
+                onClick={onClickChangeImage}
+                size="image"
+              >
+                <Image
+                  src={
+                    showingImage == details.avatar
+                      ? "/icons/certificate.png"
+                      : "/icons/avatar.png"
+                  }
+                  alt="avatar"
+                  width="48"
+                  height="48"
+                ></Image>
+              </Button>
+            )}
           </div>
-          <div className="bg-black-100 rounded-sm p-2 shadow-sm ">
-            {details && 
+          <div className="max-w-md p-0 border rounded-sm border-border-div">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
+              <div className="text-label_m text-text-secondary ">NFT 유형</div>
 
-                <>
-                <dl>
-                  <dd className="flex gap-2 overflow-auto text-right text-primary text-clip">
-                    {/* need data about nft type */}
-                    <span className="text-title_l">
-                      커리어
-                    </span>
-                    
-                    <Badge className="rounded-[5px] text-state-info text-title_s px-2.5">
-                      언어 인증서
-                    </Badge>
-                  </dd>
-                </dl>
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">
+                  {details.nft_type == "sbt" ? "커리어" : "한정판"}
+                </span>
 
-                <dl className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 my-2 border-b border-border-div">
-                  <dd className="capitalize text-label_l text-text-secondary">
-                    NFT 속성
-                  </dd>
+                {/* <Badge variant="info" shape="category">
+                  언어 인증서
+                </Badge> */}
+              </div>
+            </div>
 
-                  <dd className="overflow-auto text-right text-primary text-clip text-title_l">
-                    {details.category}
-                  </dd>
-                </dl>
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
+              <div className="text-label_m text-text-secondary ">NFT 속성</div>
 
-                <dl className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 my-2">
-                  <dd className="capitalize text-label_l text-text-secondary">
-                    발행자
-                  </dd>
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">
+                  {details.avatar && details.image
+                    ? "아바타 + 증명서"
+                    : details.avatar
+                    ? "아바타"
+                    : "증명서"}
+                </span>
+              </div>
+            </div>
 
-                  <dd className="overflow-auto text-right text-primary text-clip text-title_l">
-                    {details.group?.id}
-                  </dd>
-                </dl>
-              </>
-            }
-            
+            <div className="flex items-center justify-between px-4 py-3">
+              <div className="text-label_m text-text-secondary ">발행자</div>
+
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">그룹 이름</span>
+              </div>
+            </div>
+
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
-            <h4 className="mb-4 text-title_m">NFT 설명</h4>
+            <div className="flex justify-between">
+              <span className="mb-4 text-title_m">NFT 설명</span>
 
-            <p className="text-body_m">{details.description}</p>
+              <button
+                onClick={() => {
+                  setShowFull(!showFull);
+                }}
+                className="flex items-center gap-2 p-0 text-label_m text-text-secondary w-fit h-fit"
+              >
+                {showFull ? "hide" : "show_more"}
+                {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
+              </button>
+            </div>
+
+            <p className={`text-body_m ${!showFull && "line-clamp-2"}`}>
+              {details.description}
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2">
           <Button variant={"secondary"}>다음에 할래요</Button>
-          <Button onClick={handleMint}>발행 요청</Button>
+          <Button onClick={handleRequestNFT}>발행 요청</Button>
         </div>
       </DialogContent>
     </Dialog>

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-export default function GroupMember({
+export default function GroupNFT({
   address,
   isCreator,
   achievements,
@@ -19,6 +19,8 @@ export default function GroupMember({
   achievements: NFTItem[];
 }) {
   const pathName = usePathname();
+
+  // console.log(achievements);
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -36,7 +38,7 @@ export default function GroupMember({
         } */}
       </div>
 
-      <div>
+      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {achievements &&
           achievements.map((item: NFTItem, index: number) => (
             <DisplayNFT details={item} key={index} />

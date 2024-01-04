@@ -55,9 +55,7 @@ export interface User {
   
 export enum GROUP_TYPE {
     COMMUNITY = 'community',
-    COMPANY = 'company',
     AGENCY = 'agency',
-    EDUCATION = 'education',
   }
   
   export enum NFT_TYPE{

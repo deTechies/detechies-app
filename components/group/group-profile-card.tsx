@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
-import InviteMember from "../invite-member/invite-member";
+import InviteGroupMember from "../invite-group-member/invite-group-member";
 
 export default async function GroupProfileCard({ id }: { id: string }) {
   const groupDetail = await getClub(id);
@@ -114,7 +114,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
               </Button>
             </Link>
 
-            <InviteMember id={id}></InviteMember>
+            <InviteGroupMember id={id}></InviteGroupMember>
           </div>
           )
         }
