@@ -47,6 +47,7 @@ export default function PendingMemberListItem({
     }
     //also update the status of this employee into the company.
     const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
+    
     await fetch(`${url}/polybase/nft/accepted/${profile.profile.id}`, {})
       .then((res) => {
         console.log(res);

@@ -116,6 +116,7 @@ export default function CreateProjectForm() {
   }
 
   const selectFile = (file: any) => {
+    console.log(file)
     setFile(file);
   };
 

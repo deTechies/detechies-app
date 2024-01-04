@@ -3,7 +3,6 @@ import { Project } from "@/lib/interfaces";
 import { Locale } from "@/i18n.config";
 import Image from "next/image";
 import Link from "next/link";
-
 export default function ProjectItem({
   details,
   lang,
@@ -11,6 +10,7 @@ export default function ProjectItem({
   details: Project;
   lang: any;
 }) {
+ 
   const truncateText = (text: string, maxLength: number): string => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
@@ -59,7 +59,7 @@ export default function ProjectItem({
             }}
           ></p>
         </div>
-
+       
         <div className="flex gap-3 justify-self-end">
           {details.tags &&
             details.tags?.map((tag) => (
@@ -67,6 +67,7 @@ export default function ProjectItem({
                 key={tag}
                 className="bg-transparent border-border-input border text-text-placeholder py-2 px-2.5"
               >
+               
                 {tag}
               </Badge>
             ))}

@@ -30,6 +30,7 @@ export async function getSingleProject(id: string) {
 
 export async function updateProject(data: any) {
   const session = await getSession();
+
   const response = await fetch(`${API_URL}/projects/${data.id}`, {
     method: "PATCH",
     headers: {
@@ -38,10 +39,13 @@ export async function updateProject(data: any) {
     },
     body: JSON.stringify({ ...data, owner: session?.web3?.address }),
   });
+  
 
   if (!response.ok) {
     throw new Error("Failed to update project");
   }
+
+  // console.log(await response.json())
 
   return response.json();
 }

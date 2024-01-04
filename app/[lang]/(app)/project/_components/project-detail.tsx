@@ -1,8 +1,9 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Project } from "@/lib/interfaces";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, PenSquare, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -42,7 +43,6 @@ export default function ProjectDetail({
         />
         <div className="flex flex-col gap-4">
           <h1 className="text-heading_s">{data.name}</h1>
-
           {/* category */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-4 text-label_l text-text-secondary ">
@@ -67,15 +67,20 @@ export default function ProjectDetail({
             ))}
           </div>
         </div>
-        {/* {
+
+        {
           details.userRole == 'admin' && (
-            <Link href={`/project/${details.id}/edit`} className="right-0 items-end  flex-end">
-              <Badge>
-                  Edit
-              </Badge>
+            <Link href={`/project/${details.id}/edit`} className="ml-auto">
+              <Button
+                variant="secondary"
+                className="cursor-pointer text-sm font-normal py-2 px-4"
+              >
+                Edit
+                <PenSquare size={16} className="inline-block ml-2" />
+              </Button>
             </Link>
           )
-        } */}
+        }
       </header>
 
       <div className="flex flex-col w-full gap-5">
