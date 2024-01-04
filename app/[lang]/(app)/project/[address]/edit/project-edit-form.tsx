@@ -33,6 +33,9 @@ import { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { updateProject } from "@/lib/data/project";
 import Image from "next/image";
+import Link from "next/link";
+
+
 
 const projectFormSchema = z.object({
   name: z
@@ -52,7 +55,9 @@ const projectFormSchema = z.object({
   type: z.nativeEnum(ProjectType, {
     required_error: "You need to select a  type.",
   }),
+  id: z.string()
 });
+
 
 type ProfileFormValues = z.infer<typeof projectFormSchema>;
 
@@ -74,6 +79,10 @@ export default function ProjectEditForm({
 
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
 
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+
+
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
       e.preventDefault();
@@ -89,12 +98,15 @@ export default function ProjectEditForm({
     setNewTag(e.target.value);
   };
 
+
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
 
     if(file){
       data.image = await uploadContent(file)
     }
+
+
 
 
     const result = await updateProject({
@@ -106,16 +118,17 @@ export default function ProjectEditForm({
       tags: data.tags,
       scope: data.scope,
       type: data.type,
+      id: data.id
     });
 
-    console.log(result);
 
-    if (result.id) {
+   
+    if (result.affected) {
       toast({
         title: "Success",
-        description: "Project created successfully",
+        description: "Project Edit successfully",
       });
-      router.push(`/project/${result.id}`);
+      router.push(`/project/${data.id}`);
     }
 
     setLoading(false);
@@ -125,10 +138,18 @@ export default function ProjectEditForm({
     setFile(file);
   };
 
+  const uploadImage = (e:any) => {
+    if (e.target.files && e.target.files[0]) {
+      const i = e.target.files[0];
+
+      setFile(i);
+
+    }
+  };
+
   return (
     <Card>
-      <h3 className="text-heading_s font-medium mb-4">Create Project</h3>
-
+      <h3 className="text-heading_s font-medium mb-4">Edit Project</h3>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormElement label="Project Name">
@@ -239,9 +260,14 @@ export default function ProjectEditForm({
                 <span className="text-body_s text-text-secondary">
                   Recommended size: 300x300
                 </span>
-                <Button size="sm" variant={"secondary"} type="button">
+                {/* <Button size="sm" variant={"secondary"} type="button">
                   Change Image
-                </Button>
+                </Button> */}
+                <label className="block bg-gray-100 px-3 py-2  border-slate-300 rounded-md text-title_s text-xs cursor-pointer
+                  hover:shadow-inner items-center justify-center ring-offset-background transition-colors " htmlFor="fileUpload">Change Image
+                  <input   className="hidden" type="file" onChange={uploadImage} id="fileUpload"/>
+                </label>
+                
               </div>
             </div>
           </FormElement>
@@ -299,9 +325,11 @@ export default function ProjectEditForm({
           </FormElement>
 
           <div className="flex items-center justify-end gap-8">
-            <Button variant="secondary" type="reset" size="lg">
-              Reset
-            </Button>
+            <Link href={`/project/${defaultValues?.id}`}>
+              <Button variant="secondary" type="reset" size="lg">
+                Close
+              </Button>
+            </Link>
             <Button
               type="submit"
               size="lg"
