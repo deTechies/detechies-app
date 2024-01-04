@@ -86,6 +86,7 @@ export default async function ProjectListPage({
             </Select>
 
             <Search placeholder={dictionary.project.list.search} />
+            
             <div className="flex items-center gap-3">
               <Checkbox />
               <Label className="text-title_m">

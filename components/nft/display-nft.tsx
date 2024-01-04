@@ -2,6 +2,7 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { requestAchievement } from "@/lib/data/achievements";
+import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -37,6 +38,10 @@ export default function DisplayNFT({
       : setShowingImage(details.image);
   };
 
+  const onClickContract = () => {
+    //
+  }
+
   const handleRequestNFT = async () => {
     //@ts-ignore
     setRequesting(true);
@@ -56,11 +61,19 @@ export default function DisplayNFT({
 
   return (
     <Dialog>
-      <DialogTrigger className="min-w-[150px] w-full grow max-w-[229px]">
+      <DialogTrigger className="min-w-[150px] w-full grow">
         <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
+
       <DialogContent className="flex flex-col gap-8 max-w-[504px]">
-        <div className="text-subhead_m">{details.name}</div>
+        <div className="flex justify-between">
+          <span className="text-subhead_m">{details.name}</span>
+
+          <Button variant="secondary" size="sm" onClick={onClickContract}>
+            {/* details.contract */}
+            {truncateMiddle("aaaaaaaaaaaaaaaaaaa", 13)}
+          </Button>
+        </div>
 
         <div className="flex flex-col gap-4">
           <div className="relative object-scale-down w-full rounded-sm aspect-square bg-gradient-to-b from-state-info to-accent-primary">
@@ -71,12 +84,24 @@ export default function DisplayNFT({
               className="rounded-sm"
             />
 
-            <Button
-              className="absolute w-12 h-12 bottom-2 right-2"
-              onClick={onClickChangeImage}
-            >
-              Hi!
-            </Button>
+            {details.avatar && details.image && (
+              <Button
+                className="absolute w-12 h-12 bottom-2 right-2"
+                onClick={onClickChangeImage}
+                size="image"
+              >
+                <Image
+                  src={
+                    showingImage == details.avatar
+                      ? "/icons/certificate.png"
+                      : "/icons/avatar.png"
+                  }
+                  alt="avatar"
+                  width="48"
+                  height="48"
+                ></Image>
+              </Button>
+            )}
           </div>
           <div className="max-w-md p-0 border rounded-sm border-border-div">
             <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">

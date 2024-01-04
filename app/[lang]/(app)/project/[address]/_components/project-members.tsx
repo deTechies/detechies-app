@@ -20,13 +20,14 @@ export default async function ProjectMembers({
 }) {
   //getting all the members and holders of this project NFT.
 
+  
+
   let pendingMembers: any[] = [];
   if (userRole == "admin") {
     pendingMembers = await getPendingProjectMembers(projectId);
   }
   
-
-  
+  console.log(members[0].works);
 
   return (
     <section className="flex flex-col gap-4">
@@ -35,7 +36,7 @@ export default async function ProjectMembers({
           <h5 className="text-subhead_s text-text-primary ">
             Members ({members.length})
           </h5>
-
+          
           {userRole == 'none' && <JoinProject lang={lang} address={projectId} />}
           {userRole == 'admin' && <InviteProjectMember lang={lang} projectId={projectId} />}
         </header>

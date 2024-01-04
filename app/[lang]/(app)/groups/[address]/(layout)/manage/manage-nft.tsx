@@ -1,4 +1,3 @@
-
 import { getDictionary } from "@/get-dictionary";
 // import { Locale } from "@/i18n.config";
 
@@ -30,11 +29,8 @@ export default async function ManageNft({ details }: { details: any }) {
       image: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
       category: "avatar",
       description: "this descrip",
-      attributes: [
-        {trait_type: "hat",
-        value: "test",}
-      ]
-    }
+      attributes: [{ trait_type: "hat", value: "test" }],
+    },
   } as NFTItem;
 
   return (
@@ -42,9 +38,7 @@ export default async function ManageNft({ details }: { details: any }) {
       <div className="flex justify-between mb-4">
         <h3 className="text-subhead_s">NFT 발행 대기 중 ()</h3>
 
-        <Button size="sm">
-          모두 승인하기
-        </Button>
+        <Button size="sm">모두 승인하기</Button>
       </div>
 
       <div className="flex flex-col gap-3 mb-8">
@@ -73,18 +67,18 @@ export default async function ManageNft({ details }: { details: any }) {
       </h3>
 
       <div className="overflow-auto max-w-[90vw]">
-        <div className="flex flex-wrap gap-4">
-          {/* {details.achievements &&
+        <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+          {details.achievements &&
             details.achievements.map((item: NFTItem, index: number) => (
               <DisplayNFT details={item} key={index} />
-            ))} */}
-
-          {details.achievements && details.achievements.length < 1 && (
-            <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-              최근 생성한 NFT가 없습니다.
-            </div>
-          )}
+            ))}
         </div>
+
+        {details.achievements && details.achievements.length < 1 && (
+          <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
+            최근 생성한 NFT가 없습니다.
+          </div>
+        )}
       </div>
     </div>
   );

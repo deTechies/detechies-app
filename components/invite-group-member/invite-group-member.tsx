@@ -16,9 +16,9 @@ import {
 } from "../ui/dialog";
 import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
-import SelectedMember from "./selected-member";
+import SelectedGroupMember from "./selected-group-member";
 
-export default function InviteMember({
+export default function InviteGroupMember({
   id,
 }: // lang,
 {
@@ -39,11 +39,7 @@ export default function InviteMember({
   // console.log(members);
 
   const filteredData = members.filter((member: any) => {
-    if (text == "") {
-      return false;
-    }
-
-    return member.display_name.toLowerCase().includes(text.toLowerCase());
+    return member.display_name.toLowerCase().includes("");
   });
 
   return (
@@ -106,7 +102,7 @@ export default function InviteMember({
               </>
             )}
             {selected && (
-              <SelectedMember
+              <SelectedGroupMember
                 id={id}
                 user={selected}
                 onSelectValue={() => setSelected(null)}
