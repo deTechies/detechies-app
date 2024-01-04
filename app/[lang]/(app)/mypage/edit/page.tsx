@@ -13,9 +13,9 @@ export default async function EditProfilePage({
   const profile = await getUserProfile();
   
   //split fullname to first and last name
-  const fullname = profile.profile_details.full_name.split(" ");
-  profile.profile_details.first_name = fullname[0];
-  profile.profile_details.last_name = fullname[1];
+  const fullname = profile.profile_details?.full_name?.split(" ");
+  profile.profile_details.first_name = fullname[0] || "";
+  profile.profile_details.last_name = fullname[1] || "";
   return (
     <>
       <EditProfile

@@ -2,15 +2,13 @@
 
 import { User } from "@/lib/interfaces";
 
-import { inviteProjectMembers } from "@/lib/data/project";
+import { inviteGroupMember } from "@/lib/data/groups";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useState } from "react";
 import PersonItem from "../extra/add-member-item";
 import { Button } from "../ui/button";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { toast } from "../ui/use-toast";
 import { Textarea } from "../ui/textarea";
+import { toast } from "../ui/use-toast";
 
 export default function SelectedProjectMember({
   user,
@@ -26,13 +24,18 @@ export default function SelectedProjectMember({
   const [text, setText] = useState("");
 
   async function inviteMember() {
-    // const result = await inviteProjectMembers([user.id], id);
-    // toast({
-    //   title: "invited team member",
-    //   description: <pre>
-    //     {JSON.stringify(result, null, 2)}
-    //   </pre>
-    // })
+    const result = await inviteGroupMember(
+      user.id, 
+      text,
+      id,
+    );
+    
+    console.log(result);
+
+     toast({
+       title: "invited team member",
+       description: "Your team members has received an email with your invitiation"
+     })
   }
 
   return (

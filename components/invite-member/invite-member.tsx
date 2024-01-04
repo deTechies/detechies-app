@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 
 import { User } from "@/lib/interfaces";
 import useFetchData from "@/lib/useFetchData";
+import { useSearchParams } from "next/navigation";
 import PersonItem from "../extra/add-member-item";
 import Search from "../extra/search";
 import {
@@ -24,11 +25,11 @@ export default function InviteMember({
   id: string;
   // lang: any;
 }) {
-  const [text, setText] = useState("");
-
+  const searchParams = useSearchParams();
+  const text = searchParams.get("search") || "";
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
-  const { data: members, loading, error } = useFetchData<any[]>("/users");
+  const { data: members, loading, error } = useFetchData<any[]>(`/users`);
 
   if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
@@ -63,7 +64,7 @@ export default function InviteMember({
             {!byEmail && selected == null && (
               <>
                 <Search
-                placeholder="search email"
+                placeholder="search name"
                 />
 
                 <div className="rounded-sm max-h-[30vh] overflow-x-auto">
