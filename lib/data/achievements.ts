@@ -88,7 +88,15 @@ export async function getUserAchievements(address?:string) {
 
   
   export async function getPendingAchievements(address:string){
+    
+    const session = await auth();
+    const response = await fetch(`${API_URL}/achievement-rewards/${address}/pending`, {
+      method: 'GET', 
+      headers: {
+        Authorization: `Bearer ${session?.web3.accessToken}`
+      }
+    })
 
-   return [];
+   return response.json();
   }
    

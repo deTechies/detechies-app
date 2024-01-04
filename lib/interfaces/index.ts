@@ -150,6 +150,7 @@ export enum GROUP_TYPE {
     contract: string;
     nft_type: string;
     image: string;
+    avatar?: string;
     description:string;
     on_chain: boolean;
     name: string;
