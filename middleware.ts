@@ -3,6 +3,8 @@ import Negotiator from "negotiator";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { i18n } from "./i18n.config";
+export { default } from "next-auth/middleware";
+
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -24,20 +26,16 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export  function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-/*   const session = await getServerSession(authOptions);
 
-  if (session?.web3.user?.TBA && !isAddress(session?.web3?.user?.TBA)) {
-    return NextResponse.redirect("/onboard/mint");
-  }
-   */
+  
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale: any) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
-  
+
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
@@ -52,5 +50,7 @@ export  function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images|public|icons|parts).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|images|public|icons|parts).*)",
+  ],
 };
