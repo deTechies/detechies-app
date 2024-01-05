@@ -1,7 +1,7 @@
 "use client";
 
 import { polygonMumbai } from "@/helpers/mumbai";
-import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
@@ -56,6 +56,7 @@ export default function Login() {
 
   if (session?.web3?.address != address) {
     //sign message 
+    signOut();
     return null
   }
   if (!isConnecting && address == session?.web3?.address) {
