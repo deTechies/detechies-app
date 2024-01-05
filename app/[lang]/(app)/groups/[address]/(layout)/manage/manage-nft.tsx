@@ -17,7 +17,11 @@ export default async function ManageNft({ details }: { details: any }) {
       <div className="flex justify-between mb-4">
         <h3 className="text-subhead_s">NFT 발행 대기 중 ({pendingAchievements.length})</h3>
 
-        <Button size="sm">모두 승인하기</Button>
+
+        <Button size="sm">
+          {/* Approve All */}
+          모두 승인하기
+        </Button>
       </div>
 
       <div className="flex flex-col gap-3 mb-8">

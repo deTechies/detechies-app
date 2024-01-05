@@ -5,7 +5,9 @@ export default function CreateNFT({
     params
 }: {params: any}) {
   return (
-    <main className="max-w-2xl mx-auto m-8 w-full">
+    // Temporarily insert fixed values ​​(to work with grid later)
+
+    <main className="w-full max-w-[60rem] m-8 mx-auto">
         <CreateNFTForm groupId={params.address} />
     </main>
   )

@@ -99,7 +99,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
           )}
           {!mediaSource && (
             <div
-              className={`flex flex-col gap-4 text-text-secondary py-3 px-4 text-xs justify-center items-center w-full`}
+              className={`flex flex-col gap-4 text-text-secondary py-3 px-4 text-center text-xs justify-center items-center w-full`}
             >
               <ImagePlus
                 size={24}

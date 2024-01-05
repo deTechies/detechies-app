@@ -17,8 +17,6 @@ export default function GroupNFT({
 }) {
   const pathName = usePathname();
 
-  // console.log(achievements);
-
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="flex items-center justify-between mb-5">
@@ -30,9 +28,6 @@ export default function GroupNFT({
           </Button>
         </Link>
 
-        {/* {
-          isCreator && <Link href={pathName + '/members'}>Manage</Link>
-        } */}
       </div>
 
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
