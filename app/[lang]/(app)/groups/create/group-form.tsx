@@ -160,8 +160,8 @@ export function GroupForm() {
       value: "instagram",
       url: "https://instagram.com/",
     },
-  ]
-  
+  ];
+
   return (
     <Form {...form}>
       <form
@@ -218,7 +218,7 @@ export function GroupForm() {
                 </FormInlineLabel>
 
                 <div className="grow">
-                  <FormControl className="h-[60px] mb-2">
+                  <FormControl className="mb-2">
                     <Input placeholder="Enter group name" {...field} />
                   </FormControl>
 
@@ -266,10 +266,9 @@ export function GroupForm() {
                   이미지 가이드
                 </div>
 
-                <div className="text-text-placeholder text-label_s">
-                  <span className="mr-1">▪</span>
-                  <span>1:1 비율 권장</span>
-                </div>
+                <li className="mb-1 text-text-placeholder text-label_s">
+                  1:1 비율 권장
+                </li>
               </div>
             </MediaUploader>
           </FormInlineItem>
@@ -289,15 +288,13 @@ export function GroupForm() {
                   이미지 가이드
                 </div>
 
-                <div className="text-text-placeholder text-label_s">
-                  <span className="mr-1">▪</span>
-                  <span>4:3 비율 권장</span>
-                </div>
+                <li className="text-text-placeholder text-label_s">
+                  4:3 비율 권장
+                </li>
 
-                <div className="text-text-placeholder text-label_s">
-                  <span className="mr-1">▪</span>
-                  <span>그룹 목록과 그룹상세보기에서 확인 가능합니다.</span>
-                </div>
+                <li className="text-text-placeholder text-label_s">
+                  그룹 목록과 그룹상세보기에서 확인 가능합니다.
+                </li>
               </div>
             </MediaUploader>
           </FormInlineItem>
@@ -308,7 +305,6 @@ export function GroupForm() {
             const reversedIndex = fields.length - 1 - index;
 
             const handleSelectChange = (selectedValue: string) => {
-
               form.setValue(`urls.${reversedIndex}.value`, selectedValue);
             };
 
@@ -337,7 +333,7 @@ export function GroupForm() {
                               <SelectValue placeholder="Channel" />
                             </SelectTrigger>
                           </FormControl>
-                          
+
                           <SelectContent>
                             {channelList.map((type) => (
                               <SelectItem key={type.value} value={type.url}>
