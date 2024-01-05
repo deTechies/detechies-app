@@ -46,7 +46,7 @@ export default async function RootLayout({
   const dictionary = (await getDictionary(params.lang)) as any;
   
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="kr" suppressHydrationWarning>
       <body
         className={`${pretendard.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >

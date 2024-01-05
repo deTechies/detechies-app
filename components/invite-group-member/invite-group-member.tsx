@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 
 import { User } from "@/lib/interfaces";
 import useFetchData from "@/lib/useFetchData";
+import { useSearchParams } from "next/navigation";
 import PersonItem from "../extra/add-member-item";
 import Search from "../extra/search";
 import {
@@ -25,6 +26,8 @@ export default function InviteGroupMember({
   groupId: string;
   // lang: any;
 }) {
+  const searchParams = useSearchParams();
+  const text = searchParams.get("search") || "";
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
   const [completeInviting, setCompleteInviting] = useState<boolean>(false);
@@ -85,6 +88,7 @@ export default function InviteGroupMember({
             {!byEmail && selected == null && !completeInviting && (
               <>
                 <Search placeholder="search email" />
+
 
                 <div className="rounded-sm max-h-[30vh] overflow-x-auto">
                   {filteredData &&

@@ -20,17 +20,27 @@ export default async function ManageMember({
   // const dictionary = await getDictionary(params.lang);
 
   const searchItem = searchParams.search as string;
+  
+  const joined = pendingData?.filter((item: any) => {
+    return item.status === "joined";
+  });
+  
+  const invited = pendingData?.filter((item: any) => {
+    return item.status === "invited";
+  });
 
   let filteredData = details.members?.filter((item: any) => {
     if (!searchItem) return true;
 
     return item.user.display_name?.toLowerCase().includes(searchItem.toLowerCase());
   });
+  
+  
 
   return (
     <div className="overflow-auto max-w-[90vw]">
       <h3 className="mb-4 text-subhead_s">
-        그룹 가입 대기 중 ({pendingData?.length})
+        그룹 가입 대기 중 ({joined?.length})
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">
@@ -41,8 +51,8 @@ export default async function ManageMember({
           <div className="text-center ">승인 여부</div>
         </div>
 
-        {details.members.length > 0 &&
-          details.members.map((item: any, index: number) => {
+        {joined.length > 0 &&
+          joined.map((item: any, index: number) => {
             return (
               <PendingMemberListItem
                 profile={item}
@@ -54,7 +64,7 @@ export default async function ManageMember({
       </div>
 
       <h3 className="mb-4 text-subhead_s">
-        초대 승인 대기 중 ({pendingData?.length})
+        초대 승인 대기 중 ({invited?.length})
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">
@@ -65,7 +75,7 @@ export default async function ManageMember({
         </div>
 
         {details.members.length > 0 &&
-          details.members.map((item: any, index: number) => {
+          invited.map((item: any, index: number) => {
             return (
               <InvitingMemberListItem
                 profile={item}

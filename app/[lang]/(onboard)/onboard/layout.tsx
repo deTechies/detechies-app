@@ -49,7 +49,7 @@ export default async function RootLayout({
 
   
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="kr" suppressHydrationWarning>
       <body
         className={`${pretendard.className} bg-background-layer-1 text-text-primary min-h-[100vh] `}
 

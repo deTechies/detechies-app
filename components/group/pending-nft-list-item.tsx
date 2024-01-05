@@ -1,17 +1,12 @@
 "use client";
-import { formatDate } from "@/lib/utils";
 import IPFSImageLayer from "@/components/ui/layer";
-import useFetchData from "@/lib/useFetchData";
+import { defaultAvatar } from "@/lib/constants";
+import { formatDate } from "@/lib/utils";
+import { Check, X } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Skeleton } from "../ui/skeleton";
-import { Card } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { Check, X } from "lucide-react";
-import { Address, useContractWrite } from "wagmi";
-import { ABI, defaultAvatar } from "@/lib/constants";
-import { toast } from "../ui/use-toast";
-import Image from "next/image";
 
 export default function PendingMemberListItem({
   profile,
@@ -21,19 +16,6 @@ export default function PendingMemberListItem({
   contract: string;
 }) {
   const router = useRouter();
-
-  // if (error) return <div>{JSON.stringify(error)}</div>;
-
-  // if (loading)
-  //   return <Skeleton className="h-[200px] w-[100px] animate-pulse" />;
-
-  // if (!data) return <div>no data</div>;
-
-  const { write, isLoading, error, data } = useContractWrite({
-    address: contract as Address,
-    abi: ABI.group,
-    functionName: "createMember",
-  });
 
   const acceptEmployee = async () => {
     //
