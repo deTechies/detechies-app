@@ -6,6 +6,7 @@ import { getUserProfile } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
 import ProfileDetails from "../../mypage/_components/profile-details";
 import ProfileProjects from "../../mypage/_components/profile-projects";
+import ProfileClubs from "../../mypage/_components/profile-clubs";
 import Profile from "../../mypage/profile";
 
 export default async function Dashboard({
@@ -31,6 +32,10 @@ export default async function Dashboard({
           <ProfileProjects
             projects={profile.projects}
             text={dictionary.mypage.project}
+          />
+          <ProfileClubs
+            clubs={profile.clubs}
+            text={dictionary.mypage.club}
           />
         </main>
         {/* <EditProfile /> */}

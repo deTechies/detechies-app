@@ -205,6 +205,12 @@
     }
   },
   "mypage": {
+    "club":{
+      "clubs": "Clubs",
+      "new_club": "New club",
+      "group_name": "Group type",
+      "date_joined": "Date joined"
+    },
     "profile": {
       "following": "following",
       "followers": "followers",
