@@ -1,7 +1,7 @@
 "use client";
 
 import { polygonMumbai } from "@/helpers/mumbai";
-import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
@@ -59,7 +59,13 @@ export default function Login() {
     return (
       <div className="flex rounded-md  items-center gap-2">
 
-      <Button>
+      <Button
+        size="sm"
+        className="text-md"
+        onClick={() => {
+           signOut();
+        }}
+      >
         Change Account
       </Button>  
       </div>
