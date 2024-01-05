@@ -47,7 +47,7 @@ export default function InviteGroupMember({
   return (
     <>
       <Dialog>
-        <DialogTrigger className="max-w-[230px] grow rounded-full">
+        <DialogTrigger className="max-w-[212px] grow rounded-full">
           <Button size="lg" variant="primary" className="w-full">
             멤버 초대하기
           </Button>
