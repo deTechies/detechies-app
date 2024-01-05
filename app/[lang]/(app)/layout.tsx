@@ -50,6 +50,11 @@ export default async function RootLayout({
   const dictionary = (await getDictionary(params.lang)) as any;
   
   const session = await auth();
+  
+  if(!session){
+
+    redirect("/onboard");
+  }
   if(!session?.web3?.user?.verified) {
     signOut();
     redirect("/onboard");
