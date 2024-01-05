@@ -1,5 +1,5 @@
 "use client";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogClose } from "@/components/ui/dialog";
 
 import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import NftListItem from "../card/nft-list-item";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
+import { Badge } from "../ui/badge";
 export default function DisplayNFT({
   details,
   showSelect,
@@ -41,7 +42,7 @@ export default function DisplayNFT({
 
   const onClickContract = () => {
     //
-  }
+  };
 
   const handleRequestNFT = async () => {
     setRequesting(true);
@@ -64,9 +65,9 @@ export default function DisplayNFT({
         <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
 
-      <DialogContent className="flex flex-col gap-8 max-w-[504px]">
-        <div className="flex justify-between">
-          <span className="text-subhead_m">{details.name}</span>
+      <DialogContent className="flex flex-col gap-6 max-w-[504px] pt-6">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-subhead_s">{details.name}</span>
 
           <Button variant="secondary" size="sm" onClick={onClickContract}>
             {truncateMiddle("aaaaaaaaaaaaaaaaaaa", 13)}
@@ -110,9 +111,13 @@ export default function DisplayNFT({
                   {details.nft_type == "sbt" ? "커리어" : "한정판"}
                 </span>
 
-                {/* <Badge variant="info" shape="category">
-                  언어 인증서
-                </Badge> */}
+                {details.nft_type == "sbt" && (
+                  <Badge variant="info" shape="category">
+                    {
+                      details.type == "awards" ? "수상":"교육 수료증"
+                    }
+                  </Badge>
+                )}
               </div>
             </div>
 
@@ -137,7 +142,6 @@ export default function DisplayNFT({
                 <span className="text-title_m">그룹 이름</span>
               </div>
             </div>
-
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
@@ -162,7 +166,10 @@ export default function DisplayNFT({
         </div>
 
         <div className="grid grid-cols-2 gap-2">
-          <Button variant={"secondary"}>다음에 할래요</Button>
+          <DialogClose asChild>
+            <Button variant={"secondary"}>다음에 할래요</Button>
+          </DialogClose>
+          
           <Button onClick={handleRequestNFT}>발행 요청</Button>
         </div>
       </DialogContent>

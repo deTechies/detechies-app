@@ -13,7 +13,7 @@ export default async function GroupsPage() {
     <main className="flex flex-col w-full max-w-[97rem] gap-6 m-12">
      <GroupListHeader />
 
-      {groups?.length > 0 ? <GroupList groups={groups} profileId={profile.id} /> : null}
+      {groups?.length > 0 ? <GroupList groups={groups} profileWallet={profile.wallet} /> : null}
     </main>
   );
 }
