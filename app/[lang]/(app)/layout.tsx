@@ -4,6 +4,7 @@ import { Locale } from "@/i18n.config";
 import { auth } from "@/lib/helpers/authOptions";
 import type { Metadata } from "next";
 
+import { signOut } from "next-auth/react";
 import localFont from 'next/font/local';
 import { redirect } from "next/navigation";
 import App from "../app";
@@ -49,7 +50,8 @@ export default async function RootLayout({
   const dictionary = (await getDictionary(params.lang)) as any;
   
   const session = await auth();
-  if(!session?.web3?.user) {
+  if(!session?.web3?.user?.verified) {
+    signOut();
     redirect("/onboard");
   }
   
