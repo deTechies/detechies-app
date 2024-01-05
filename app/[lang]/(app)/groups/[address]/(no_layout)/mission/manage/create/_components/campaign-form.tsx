@@ -25,7 +25,7 @@ export const StepOne = ({ onInputChange, formData }: any) => {
         placeholder="Campaign Name"
         value={formData.name}
         onChange={onInputChange}
-        className="flex grow h-[60px]"
+        className="flex grow"
       />
     </div>
     <div className="flex items-start gap-4">
@@ -89,7 +89,7 @@ export const StepOne = ({ onInputChange, formData }: any) => {
             type="date"
             name="begin_date"
             placeholder="Begin Date"
-            className="flex grow h-[60px]"
+            className="flex grow"
             value={formData.begin_date}
             onChange={onInputChange}
             min={today}
@@ -98,7 +98,7 @@ export const StepOne = ({ onInputChange, formData }: any) => {
           <Input
             type="date"
             name="end_date"
-            className="grow h-[60px]"
+            className="grow"
             placeholder="End Date"
             value={formData.end_date}
             onChange={onInputChange}

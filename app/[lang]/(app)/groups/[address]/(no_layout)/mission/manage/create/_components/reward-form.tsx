@@ -112,7 +112,7 @@ const RewardForm = ({
                 </Label>
                 <Input
                   type="number"
-                  className="w-16 text-center h-[60px]"
+                  className="w-16 text-center"
                   placeholder="100"
                   value={achievement.min_score}
                   onChange={(e) =>
@@ -126,7 +126,7 @@ const RewardForm = ({
                 <Label className="text-title_m">최소 필수미션 달성 수</Label>
                 <Input
                   type="number"
-                  className="w-16 text-center h-[60px]"
+                  className="w-16 text-center"
                   value={achievement.min_required_missions}
                   onChange={(e) =>
                     onInputChange(

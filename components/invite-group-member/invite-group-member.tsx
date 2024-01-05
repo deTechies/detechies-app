@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 
 import { User } from "@/lib/interfaces";
 import useFetchData from "@/lib/useFetchData";
-import { useSearchParams } from "next/navigation";
 import PersonItem from "../extra/add-member-item";
 import Search from "../extra/search";
 import {
@@ -33,8 +32,6 @@ export default function InviteGroupMember({
   const [completeInviting, setCompleteInviting] = useState<boolean>(false);
   const { data: members, loading, error } = useFetchData<any[]>("/users");
 
-  const searchParams = useSearchParams();
-  const search = searchParams.get("search");
 
   const router = useRouter();
 
@@ -44,7 +41,7 @@ export default function InviteGroupMember({
   if (!members) return <div>no_members_found</div>;
 
   const filteredData = members.filter((member: any) => {
-    return member.display_name.toLowerCase().includes(search || "");
+    return member.display_name.toLowerCase().includes(text || "");
   });
 
   return (

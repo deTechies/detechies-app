@@ -6,14 +6,14 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormInlineItem,
-    FormInlineLabel,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormInlineItem,
+  FormInlineLabel,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
@@ -25,10 +25,10 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { uploadAchievement } from "@/lib/data/achievements";
 import {
-    AVATAR_TYPE,
-    NFT_IMAGE_TYPE,
-    NFT_TYPE,
-    SBT_TYPE,
+  AVATAR_TYPE,
+  NFT_IMAGE_TYPE,
+  NFT_TYPE,
+  SBT_TYPE,
 } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useState } from "react";
@@ -74,17 +74,26 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col justify-center space-y-8 "
         >
-          <Card>
+          <Card className="gap-6 py-10 px-14">
             <CardHeader>
-              <h2 className="text-heading_s">새로운 NFT 생성하기</h2>
+              <div>
+                <h2 className="mb-3 text-heading_s">새로운 NFT 생성하기</h2>
+
+                <span className="mb-1 text-body_s text-state-error">
+                  *는 필수입력 사항입니다.
+                </span>
+              </div>
             </CardHeader>
-            <CardContent className="flex flex-col gap-8 mt-3">
+
+            <CardContent className="flex flex-col gap-6">
               <FormField
                 control={form.control}
                 name="nft_type"
                 render={({ field }) => (
-                  <FormInlineItem>
-                    <FormInlineLabel>NFT 유형 *</FormInlineLabel>
+                  <FormInlineItem className="h-12">
+                    <FormInlineLabel>
+                      NFT 유형 <span className="ml-1 text-state-error">*</span>
+                    </FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -113,8 +122,10 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
                 control={form.control}
                 name="image_type"
                 render={({ field }) => (
-                  <FormInlineItem>
-                    <FormInlineLabel>NFT 속성 *</FormInlineLabel>
+                  <FormInlineItem className="h-12">
+                    <FormInlineLabel>
+                      NFT 속성 <span className="ml-1 text-state-error">*</span>
+                    </FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -139,8 +150,11 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
               />
             </CardContent>
           </Card>
-          <Card>
-            <h2 className="text-subhead_s">한정판 NFT</h2>
+
+          <Card className="py-10 px-14">
+            <h2 className="text-subhead_s">
+              {form.watch("nft_type") == "sbt" ? "커리어 NFT" : "한정판 NFT"}
+            </h2>
             <div className="flex flex-col space-y-8 ">
               {form.watch("nft_type") == "sbt" && (
                 <FormField
@@ -349,8 +363,7 @@ const useCreateNFTForm = (groupId: string) => {
         </pre>
       ),
     });
-    
-    
+
     const result = await uploadAchievement(uploadData);
 
     console.log(result);
@@ -362,9 +375,9 @@ const useCreateNFTForm = (groupId: string) => {
         </pre>
       ),
     });
-    
-    if(result){
-        setCompleted(true)
+
+    if (result) {
+      setCompleted(true);
     }
     setIsLoading(false);
   }

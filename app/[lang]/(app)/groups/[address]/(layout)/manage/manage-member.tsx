@@ -20,11 +20,11 @@ export default async function ManageMember({
   // const dictionary = await getDictionary(params.lang);
 
   const searchItem = searchParams.search as string;
-  
+
   const joined = pendingData?.filter((item: any) => {
     return item.status === "joined";
   });
-  
+
   const invited = pendingData?.filter((item: any) => {
     return item.status === "invited";
   });
@@ -32,10 +32,10 @@ export default async function ManageMember({
   let filteredData = details.members?.filter((item: any) => {
     if (!searchItem) return true;
 
-    return item.user.display_name?.toLowerCase().includes(searchItem.toLowerCase());
+    return item.user.display_name
+      ?.toLowerCase()
+      .includes(searchItem.toLowerCase());
   });
-  
-  
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -51,7 +51,7 @@ export default async function ManageMember({
           <div className="text-center ">승인 여부</div>
         </div>
 
-        {joined.length > 0 &&
+        {joined.length > 0 ? (
           joined.map((item: any, index: number) => {
             return (
               <PendingMemberListItem
@@ -60,7 +60,12 @@ export default async function ManageMember({
                 contract={details.id}
               ></PendingMemberListItem>
             );
-          })}
+          })
+        ) : (
+          <div className="text-center text-label_m text-text-secondary pb-7">
+            아직 그룹 가입 요청내역이 없어요.
+          </div>
+        )}
       </div>
 
       <h3 className="mb-4 text-subhead_s">
@@ -74,7 +79,7 @@ export default async function ManageMember({
           <div className="text-center ">승인 여부</div>
         </div>
 
-        {details.members.length > 0 &&
+        {details.members.length > 0 ? (
           invited.map((item: any, index: number) => {
             return (
               <InvitingMemberListItem
@@ -83,7 +88,12 @@ export default async function ManageMember({
                 contract={details.id}
               ></InvitingMemberListItem>
             );
-          })}
+          })
+        ) : (
+          <div className="text-center text-label_m text-text-secondary pb-7">
+            아직 초대한 유저가 없어요.
+          </div>
+        )}
       </div>
 
       <h3 className="mb-4 text-subhead_s">
@@ -95,7 +105,7 @@ export default async function ManageMember({
           <Search placeholder="닉네임 또는 직업을 검색해보세요." />
         </div>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {filteredData &&
             filteredData.map((item: Member, index: any) => {
               if (index > 4) {
