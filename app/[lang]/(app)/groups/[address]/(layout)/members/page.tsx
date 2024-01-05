@@ -39,10 +39,8 @@ export default async function GroupMember({
   let filteredData = data.members?.filter((item: any) => {
     if (!searchItem) return true;
 
-    return item.display_name?.toLowerCase().includes(searchItem.toLowerCase());
+    return item.user.display_name?.toLowerCase().includes(searchItem.toLowerCase());
   });
-
-  // console.log(data.group);
 
   return (
     <div className="overflow-auto max-w-[90vw]">

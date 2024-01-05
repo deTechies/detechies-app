@@ -215,4 +215,12 @@ html {
     -webkit-appearance: none;
     margin: 0;
   }
+
+  li {
+    list-style: none;
+  }
+  li::marker {
+    content: '•';
+    margin-right: 4px; /* 간격 조정 */
+  }
 }

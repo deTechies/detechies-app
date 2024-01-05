@@ -107,7 +107,7 @@ const FormInlineLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className, 'min-w-[165px]')}
+      className={cn(error && "text-destructive", 'min-w-[165px] text-title_m', className, )}
       htmlFor={formItemId}
       {...props}
     />

@@ -85,7 +85,7 @@ export default function PendingMemberListItem({
         <div>
           <div className="mb-2 text-title_l">{profile.user.display_name}</div>
 
-          <Badge variant={"outline"}>
+          <Badge variant="info" shape="outline">
             {profile.role ? profile.role : "미설정"}
           </Badge>
         </div>
