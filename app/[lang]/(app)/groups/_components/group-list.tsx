@@ -7,18 +7,20 @@ import { ArrowRight } from "lucide-react";
 //TODO: Add type dependency
 export default function GroupList({
   groups,
-  profileId,
+  profileWallet,
 }: {
   groups: any[];
-  profileId: string;
+  profileWallet: string;
 }) {
   //const { search: searchValue } = searchParams as { [key: string]: string };
 
   //const resultsText = products.length > 1 ? 'results' : 'result';
 
-  const filterGroupsById = groups.filter((group) =>
-    group.members.some((_member: any) => _member.user.id === profileId)
+  const filterJoinedGroups = groups.filter((group) =>
+    group.members.some((_member: any) => _member.user.wallet === profileWallet)
   );
+
+  const filterCreatedGroups = groups.filter((group) => group.owner === profileWallet);
 
   return (
     <Tabs defaultValue="all">
@@ -50,15 +52,15 @@ export default function GroupList({
 
       <TabsContent value="joined" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterGroupsById].reverse().map((group: any, key: number) => {
+          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={key} details={group} />;
           })}
         </div>
       </TabsContent>
 
       <TabsContent value="created" className="mx-0 mt-0 mb-16">
-        <div className="grid items-stretch w-full gap-5 md:grid-cols-3">
-          {[...filterGroupsById].reverse().map((group: any, key: number) => {
+        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={key} details={group} />;
           })}
         </div>
@@ -81,7 +83,6 @@ export default function GroupList({
 
           <div className="flex items-center gap-1 text-title_m">
             그룹 만들러 가기
-            {/* <Plus></Plus> */}
             <ArrowRight className="w-4 h-4"></ArrowRight>
           </div>
         </div>

@@ -40,8 +40,8 @@ const profileFormSchema = z.object({
     .min(2, {
       message: "Please choose a name that is at least 2 characters.",
     })
-    .max(30, {
-      message: "The name must not be longer than 30 characters.",
+    .max(20, {
+      message: "The name must not be longer than 20 characters.",
     }),
   type: z.nativeEnum(SBT_TYPE).optional(),
   nft_type: z.nativeEnum(NFT_TYPE),

@@ -16,6 +16,7 @@ export interface NFTItem {
   description: string;
   category: string;
   nft_type: string;
+  type?: "awards" | "edu";
   achievement: {
     tokenId: number;
     group: {
@@ -110,7 +111,7 @@ export default function NftListItem({
       </div>
 
       <div className="flex flex-col items-start justify-start gap-3 p-5">
-        <div className="flex justify-between">
+        <div className="flex justify-between w-full">
           <span className="capitalize truncate text-title_l">
             {item?.name || "undefined"}
           </span>

@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
+import { getClub } from "@/lib/data/groups";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,11 +17,12 @@ interface ProjectItemProps {
   type: string;
   members: any[];
 }
-export default function GroupListItem({
+export default async function GroupListItem({
   details,
 }: {
   details: ProjectItemProps;
 }) {
+  const group = await getClub(details.id);
 
   return (
     <Link href={`/groups/${details.id}`}>
@@ -38,7 +40,9 @@ export default function GroupListItem({
             </AvatarFallback>
           </Avatar>
 
-          <h5 className="max-w-full mb-1 truncate text-heading_s">{details.name}</h5>
+          <h5 className="max-w-full mb-1 truncate text-heading_s">
+            {details.name}
+          </h5>
           <div className="text-title_m mb-[46px]">{details.type}</div>
 
           <div className="flex divide-x">
@@ -49,9 +53,7 @@ export default function GroupListItem({
 
             <div className="px-4 text-center">
               <div className="mb-1 text-label_s">NFTS</div>
-              <div className="text-title_m">
-                {details.achievements?.length}
-              </div>
+              <div className="text-title_m">{group.achievements.length}</div>
             </div>
           </div>
         </section>

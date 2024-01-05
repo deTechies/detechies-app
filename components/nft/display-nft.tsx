@@ -5,7 +5,12 @@ import { useParams } from "next/navigation";
 import { Address, useAccount, useContractWrite } from "wagmi";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 import Image from "next/image";
@@ -14,6 +19,7 @@ import { truncateMiddle } from "@/lib/utils";
 import { ABI, API_URL } from "@/lib/constants";
 
 import NftListItem, { NFTItem } from "../card/nft-list-item";
+import { Badge } from "../ui/badge";
 
 export default function DisplayNFT({
   details,
@@ -55,7 +61,7 @@ export default function DisplayNFT({
 
   const onClickContract = () => {
     //
-  }
+  };
 
   const handleMint = async () => {
     //@ts-ignore
@@ -121,17 +127,15 @@ export default function DisplayNFT({
     setRequesting(false);
   };
 
-  // console.log(details);
-
   return (
     <Dialog>
       <DialogTrigger className="min-w-[150px] w-full grow">
         <NftListItem item={details} showSelect={showSelect} />
       </DialogTrigger>
 
-      <DialogContent className="flex flex-col gap-8 max-w-[504px]">
-        <div className="flex justify-between">
-          <span className="text-subhead_m">{details.name}</span>
+      <DialogContent className="flex flex-col gap-6 max-w-[504px] pt-6">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-subhead_s">{details.name}</span>
 
           <Button variant="secondary" size="sm" onClick={onClickContract}>
             {/* details.contract */}
@@ -176,9 +180,13 @@ export default function DisplayNFT({
                   {details.nft_type == "sbt" ? "커리어" : "한정판"}
                 </span>
 
-                {/* <Badge variant="info" shape="category">
-                  언어 인증서
-                </Badge> */}
+                {details.nft_type == "sbt" && (
+                  <Badge variant="info" shape="category">
+                    {
+                      details.type == "awards" ? "수상":"교육 수료증"
+                    }
+                  </Badge>
+                )}
               </div>
             </div>
 
@@ -203,7 +211,6 @@ export default function DisplayNFT({
                 <span className="text-title_m">그룹 이름</span>
               </div>
             </div>
-
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
@@ -231,7 +238,7 @@ export default function DisplayNFT({
           <DialogClose asChild>
             <Button variant={"secondary"}>다음에 할래요</Button>
           </DialogClose>
-          
+
           <Button onClick={handleMint}>발행 요청</Button>
         </div>
       </DialogContent>
