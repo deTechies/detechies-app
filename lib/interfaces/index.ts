@@ -8,6 +8,8 @@ export interface User {
     nft: string[];
     avatar: string;
     verified: boolean;
+    projects: ProjectMember[];
+    clubs: Member[];
     login_method: 'metamask'|'web3auth'
   }
   
@@ -128,6 +130,7 @@ export enum GROUP_TYPE {
     role: string;
     joined_at: Date;
     verified: boolean;
+    club: Club;
   }
   
   export interface File {
