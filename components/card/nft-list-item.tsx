@@ -1,48 +1,17 @@
 "use client";
+import { Achievement } from "@/lib/interfaces";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Badge } from "../ui/badge";
 import { Switch } from "../ui/switch";
 
-export interface NFTItem {
-  contract: string;
-  id: string;
-  tokenId: number;
-  name: string;
-  image: string;
-  avatar: string;
-  description: string;
-  category: string;
-  nft_type: string;
-  achievement: {
-    tokenId: number;
-    group: {
-      id: any;
-      addr: string;
-    };
-  };
-  group: {
-    id: any;
-    addr: string;
-  };
-  metadata: {
-    name: string;
-    image: string;
-    category: string;
-    description: string;
-    attributes: {
-      trait_type: string;
-      value: string;
-    }[];
-  };
-}
+
 
 interface NftListItemProps {
   showSelect?: boolean;
   selected?: boolean;
-  item: NFTItem;
+  item: Achievement;
 }
 
 export default function NftListItem({
@@ -71,16 +40,15 @@ export default function NftListItem({
       : url;
   }
 
-  const avatarAttribute = item.metadata?.attributes?.find(
-    (attr) => attr.trait_type === "avatar"
-  );
+
+  
 
   // console.log(item);
 
   return (
     <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
       <div className="relative object-scale-down w-full m-0 aspect-square ">
-        {showSelect && avatarAttribute && (
+        {showSelect && item.avatar_type && (
           <Switch
             className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
             checked={selected}
@@ -89,8 +57,8 @@ export default function NftListItem({
                 pathname +
                   "?" +
                   createQueryString(
-                    avatarAttribute.value,
-                    removeIPFSPrefix(item.image)
+                    item.avatar_type ? item.avatar_type : "",
+                    removeIPFSPrefix(item.avatar)
                   )
               );
             }}

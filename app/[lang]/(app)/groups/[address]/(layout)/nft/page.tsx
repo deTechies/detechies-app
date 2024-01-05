@@ -1,7 +1,8 @@
-import { NFTItem } from "@/components/card/nft-list-item";
+
 import DisplayNFT from "@/components/nft/display-nft";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getClub } from "@/lib/data/groups";
+import { Achievement } from "@/lib/interfaces";
 // import AchievementLink from "./achievement-link";
 
 export default async function GroupAchievements({
@@ -11,7 +12,8 @@ export default async function GroupAchievements({
 }) {
   const details = await getClub(params.address);
 
-  // console.log(details);
+  // console.log(details)
+
   return (
     <div>
       <div className="flex flex-col gap-2">
@@ -34,7 +36,7 @@ export default async function GroupAchievements({
           <TabsContent value="all">
             <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
               {details.achievements &&
-                details.achievements.map((item: NFTItem, index: number) => (
+                details.achievements.map((item: Achievement, index: number) => (
                   <DisplayNFT details={item} key={index} />
                 ))}
             </div>
@@ -43,10 +45,10 @@ export default async function GroupAchievements({
             <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
               {details.achievements &&
                 details.achievements
-                  .filter((item: NFTItem) => {
+                  .filter((item: Achievement) => {
                     return item.nft_type == "sbt";
                   })
-                  .map((item: NFTItem, index: number) => (
+                  .map((item: Achievement, index: number) => (
                     <DisplayNFT details={item} key={index} />
                   ))}
             </div>
@@ -55,10 +57,10 @@ export default async function GroupAchievements({
             <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
               {details.achievements &&
                 details.achievements
-                  .filter((item: NFTItem) => {
+                  .filter((item: Achievement) => {
                     return item.nft_type == "erc721";
                   })
-                  .map((item: NFTItem, index: number) => (
+                  .map((item: Achievement, index: number) => (
                     <DisplayNFT details={item} key={index} />
                   ))}
             </div>
@@ -67,10 +69,10 @@ export default async function GroupAchievements({
             <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
               {details.achievements &&
                 details.achievements
-                  .filter((item: NFTItem) => {
+                  .filter((item: Achievement) => {
                     return item.avatar;
                   })
-                  .map((item: NFTItem, index: number) => (
+                  .map((item: Achievement, index: number) => (
                     <DisplayNFT details={item} key={index} />
                   ))}
             </div>

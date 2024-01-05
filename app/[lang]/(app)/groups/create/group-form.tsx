@@ -16,13 +16,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -32,12 +25,13 @@ import { toast } from "@/components/ui/use-toast";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createGroup } from "@/lib/data/groups";
 import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
-import { useState } from "react";
-import { CrossIcon, PlusIcon, X } from "lucide-react";
+import { PlusIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const profileFormSchema = z.object({
   name: z
@@ -76,8 +70,8 @@ export function GroupForm() {
   const [icon, setIcon] = useState<File | null>(null);
   const [cover, setCover] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
+
 
   const { fields, append } = useFieldArray({
     control: form.control,
@@ -118,7 +112,7 @@ export function GroupForm() {
 
     const urls = data.urls.map((url) => url.value);
 
-    await createGroup({
+    const result = await createGroup({
       image: image,
       name: data.name,
       description: data.description,
@@ -126,9 +120,17 @@ export function GroupForm() {
       urls: urls,
     });
 
-    setIsLoading(false);
+    if (!result.id) {
+      toast({
+        title: "Error",
+        description: "Something went wrong",
+      });
 
-    router.push(`/groups/`);
+      setIsLoading(false);
+      return;
+    }
+
+    router.push(`/groups/${result.id}`);
   }
 
   const selectIcon = (file: File | null, base64: string | null) => {
@@ -200,6 +202,36 @@ export function GroupForm() {
                       </FormLabel>
                     </FormItem>
                   ))}
+                  <FormItem
+                    key="school"
+                    className="flex flex-wrap items-center space-x-3 space-y-0"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="school" disabled />
+                    </FormControl>
+                    <FormLabel className="font-normal capitalize">
+                      School
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem
+                    key="authority"
+                    className="flex flex-wrap items-center space-x-3 space-y-0"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value="authority" disabled />
+                    </FormControl>
+                    <FormLabel className="font-normal capitalize">
+                      Authority
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem className="flex flex-wrap items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="company" disabled />
+                    </FormControl>
+                    <FormLabel className="font-normal capitalize">
+                      Company
+                    </FormLabel>
+                  </FormItem>
                 </RadioGroup>
 
                 <FormMessage />
@@ -364,7 +396,7 @@ export function GroupForm() {
                             className="rounded-md w-14 h-14 shrink-0"
                             onClick={clickDelLinks(reversedIndex)}
                           >
-                            <X></X>
+                            <X />
                           </Button>
                         )}
                       </div>

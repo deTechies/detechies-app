@@ -1,3 +1,5 @@
+"use client"
+import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
 import OnlySearch from "@/components/extra/only-search";
 import Link from "next/link";
@@ -15,6 +17,7 @@ export default function GroupList({
   //const { search: searchValue } = searchParams as { [key: string]: string };
 
   //const resultsText = products.length > 1 ? 'results' : 'result';
+
 
   const filterGroupsById = groups.filter((group) =>
     group.members.some((_member: any) => _member.user.id === profileId)
