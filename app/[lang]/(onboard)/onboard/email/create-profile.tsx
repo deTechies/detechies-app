@@ -97,7 +97,6 @@ export default function CreateProfile({ text }: { text: any }) {
       toast({
         title: "Error",
         description: errorData.message,
-        variant: "destructive",
       });
       setIsLoading(false)
       return;
