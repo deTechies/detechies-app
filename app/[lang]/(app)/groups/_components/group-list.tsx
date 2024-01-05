@@ -1,3 +1,5 @@
+"use client"
+import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
 import OnlySearch from "@/components/extra/only-search";
 import Link from "next/link";

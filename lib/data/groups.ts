@@ -42,8 +42,7 @@ export async function createGroup(formData: CreateClub) {
     },
     body: JSON.stringify({ ...formData, owner: session?.web3?.address }),
   });
-  const data = await response.json();
-  return data;
+  return response.json();
 }
 
 export async function joinGroup(data: joinGroupDto){
