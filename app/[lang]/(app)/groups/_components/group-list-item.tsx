@@ -22,7 +22,7 @@ export default async function GroupListItem({
 }: {
   details: ProjectItemProps;
 }) {
-  const group = await getClub(details.id);
+  // const group = await getClub(details.id);
 
   return (
     <Link href={`/groups/${details.id}`}>
@@ -53,7 +53,8 @@ export default async function GroupListItem({
 
             <div className="px-4 text-center">
               <div className="mb-1 text-label_s">NFTS</div>
-              <div className="text-title_m">{group.achievements.length}</div>
+              <div className="text-title_m">0</div>
+              {/* <div className="text-title_m">{group.achievements.length}</div> */}
             </div>
           </div>
         </section>
