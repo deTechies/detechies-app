@@ -10,8 +10,6 @@ export default async function GroupAchievements({
 }) {
   const data = await getClubMissions(params.address);
 
-  console.log(data[3].achievements);
-
   return (
     <div>
       <div className="flex flex-col gap-2">

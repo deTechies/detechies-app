@@ -14,16 +14,21 @@ export default function SelectedGroupMember({
   user,
   id,
   onSelectValue,
+  onClickBack,
+  onCompleteInvite
 }: // lang
 {
   user: User;
   id: string;
   onSelectValue: (value: string) => void;
+  onClickBack: () => void;
+  onCompleteInvite: () => void;
   // lang: any;
 }) {
   const [message, setMessage] = useState("");
 
   async function inviteMember() {
+
     const result = await inviteGroupMember(
       user.id, 
       message,
@@ -66,15 +71,16 @@ export default function SelectedGroupMember({
       </div>
 
       <div className="flex justify-center w-full gap-2">
-        <DialogClose asChild>
+        {/* <DialogClose asChild> */}
           <Button
             variant={"secondary"}
             size="lg"
             className="max-w-[212px] grow px-0"
+            onClick={onClickBack}
           >
             뒤로가기
           </Button>
-        </DialogClose>
+        {/* </DialogClose> */}
 
         <Button
           onClick={inviteMember}

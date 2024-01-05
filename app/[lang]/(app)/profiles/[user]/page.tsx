@@ -22,9 +22,12 @@ export default async function Dashboard({
       {/* main */}
       <div className="grow">
         <main className="flex flex-col gap-8">
+          <pre>
+            {JSON.stringify(profile, null, 2)}
+          </pre>
           <ProfileDetails profile={profile} text={dictionary.mypage.main} />
           <ProfileProjects
-            projects={profile.projectMembers}
+            projects={profile.projects}
             text={dictionary.mypage.project}
           />
         </main>
