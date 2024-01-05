@@ -1,11 +1,6 @@
 import { NFTItem } from "@/components/card/nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs2";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { getClub } from "@/lib/data/groups";
 // import AchievementLink from "./achievement-link";
 
@@ -21,11 +16,19 @@ export default async function GroupAchievements({
     <div>
       <div className="flex flex-col gap-2">
         <Tabs defaultValue="all">
-          <TabsList className="mb-4">
-            <TabsTrigger value="all">전체보기</TabsTrigger>
-            <TabsTrigger value="career">커리어 NFT</TabsTrigger>
-            <TabsTrigger value="limited">한정판 NFT</TabsTrigger>
-            <TabsTrigger value="avatar">아바타 NFT</TabsTrigger>
+          <TabsList className="mb-4" variant="button1">
+            <TabsTrigger value="all" variant="button1">
+              전체보기
+            </TabsTrigger>
+            <TabsTrigger value="career" variant="button1">
+              커리어 NFT
+            </TabsTrigger>
+            <TabsTrigger value="limited" variant="button1">
+              한정판 NFT
+            </TabsTrigger>
+            <TabsTrigger value="avatar" variant="button1">
+              아바타 NFT
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="all">
