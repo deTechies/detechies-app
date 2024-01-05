@@ -156,6 +156,7 @@ export enum GROUP_TYPE {
     avatar: string;
     description:string;
     avatar_type: string | null;
+    type: string;
     on_chain: boolean;
     name: string;
     verified: boolean;

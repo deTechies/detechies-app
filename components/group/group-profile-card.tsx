@@ -108,7 +108,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
         {
           groupDetail.userRole == "admin" && (
           <div className="flex justify-end gap-3 grow">
-            <Link href={`/groups/${id}/create/nft`} className="max-w-[230px] grow rounded-full">
+            <Link href={`/groups/${id}/create/nft`} className="max-w-[212px] grow rounded-full">
               <Button size="lg" variant="primary" className="w-full">
                 NFT 생성하기
               </Button>
