@@ -25,7 +25,7 @@ const badgeVariants = cva(
       shape: {
         default: "text-label_s rounded-md px-3 py-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
         md: "py-2 px-2.5 rounded-md text-title_s",
-        category: "py-2 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
+        category: "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
         outline: "py-2 px-2.5 border rounded-md bg-background-transparent text-title_s",
       },
     },

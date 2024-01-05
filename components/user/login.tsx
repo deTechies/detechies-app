@@ -55,8 +55,16 @@ export default function Login() {
   }
 
   if (session?.web3?.address != address) {
-    //sign message 
-    return null
+    //sign message
+    return (
+      <div className="flex rounded-md  items-center gap-2">
+
+      <Button>
+        Change Account
+      </Button>  
+      </div>
+    )
+    
   }
   if (!isConnecting && address == session?.web3?.address) {
     return (

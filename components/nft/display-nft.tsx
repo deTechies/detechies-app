@@ -2,18 +2,19 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { requestAchievement } from "@/lib/data/achievements";
+import { Achievement } from "@/lib/interfaces";
 import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import NftListItem, { NFTItem } from "../card/nft-list-item";
+import NftListItem from "../card/nft-list-item";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 export default function DisplayNFT({
   details,
   showSelect,
 }: {
-  details: NFTItem;
+  details: Achievement;
   showSelect?: boolean;
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
@@ -43,12 +44,10 @@ export default function DisplayNFT({
   }
 
   const handleRequestNFT = async () => {
-    //@ts-ignore
     setRequesting(true);
-    
+
     const result = await requestAchievement(details.id);
     
-    //TODO: update message
     toast({
       title: 'requesting nft', 
       description: <pre>
@@ -70,7 +69,6 @@ export default function DisplayNFT({
           <span className="text-subhead_m">{details.name}</span>
 
           <Button variant="secondary" size="sm" onClick={onClickContract}>
-            {/* details.contract */}
             {truncateMiddle("aaaaaaaaaaaaaaaaaaa", 13)}
           </Button>
         </div>

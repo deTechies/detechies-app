@@ -20,9 +20,8 @@ export default function InvitingMemberListItem({
 }) {
   const router = useRouter();
 
-  // need data for invitation status 
+  // need data for invitation status
   const invitationStatus = "waiting"; // temp
-
 
   // if (error) return <div>{JSON.stringify(error)}</div>;
 
@@ -31,6 +30,14 @@ export default function InvitingMemberListItem({
 
   // if (!data) return <div>no data</div>;
 
+  const sendInvitationNotif = () => {
+    //
+  };
+
+  const deleteInvitingMember = () => {
+    //
+  };
+  
   return (
     <div
       className="grid grid-cols-[1fr_90px_124px] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center"
@@ -46,7 +53,7 @@ export default function InvitingMemberListItem({
         <div>
           <div className="mb-2 text-title_l">{profile.user.display_name}</div>
 
-          <Badge variant={"outline"}>
+          <Badge variant="info" shape="outline">
             {profile.user.role ? profile.user.role : "미설정"}
           </Badge>
         </div>
@@ -63,15 +70,21 @@ export default function InvitingMemberListItem({
       </div>
 
       <div className="flex flex-col items-center justify-center gap-3">
-        <span>{invitationStatus === "waiting" ? "대기 중" : "거절함"}</span>
+        <span className="text-title_s">
+          {invitationStatus === "waiting" ? "대기 중" : "거절함"}
+        </span>
 
-        <Button
-          variant="secondary"
-          size="sm"
-          disabled={invitationStatus === "waiting"}
-        >
-          삭제하기
-        </Button>
+        {invitationStatus === "waiting" ? (
+          <Button variant="primary" size="sm" onClick={sendInvitationNotif}>
+            {/* Send invitation notifications */}
+            초대 알리기
+          </Button>
+        ) : (
+          <Button variant="secondary" size="sm" onClick={deleteInvitingMember}>
+            {/* Delete */}
+            삭제하기
+          </Button>
+        )}
       </div>
     </div>
   );
