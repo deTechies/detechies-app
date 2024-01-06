@@ -210,7 +210,13 @@
       "new_club": "New club",
       "group_type": "Club type",
       "date_joined": "Date joined",
-      "training_certificate": "Certificate"
+      "training_certificate": "Certificate",
+      "certificate":{
+        "certificate_type": "NFT Type",
+        "certificate_attribute": "NFT Attribute",
+        "certificate_issuer":"Issuer",
+        "certificate_description": "NFT Description"
+      }
     },
     "profile": {
       "following": "following",
