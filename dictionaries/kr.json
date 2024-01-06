@@ -264,8 +264,9 @@
     "club":{
       "clubs": "교육",
       "new_club": "추가하기",
-      "group_name": "발행자",
-      "date_joined": "발행일자"
+      "group_type": "발행자",
+      "date_joined": "발행일자",
+      "training_certificate": "교육 수료증"
     },
     "profile": {
       "following": "팔로잉", 

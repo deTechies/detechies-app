@@ -208,8 +208,9 @@
     "club":{
       "clubs": "Clubs",
       "new_club": "New club",
-      "group_name": "Group type",
-      "date_joined": "Date joined"
+      "group_type": "Club type",
+      "date_joined": "Date joined",
+      "training_certificate": "Certificate"
     },
     "profile": {
       "following": "following",
