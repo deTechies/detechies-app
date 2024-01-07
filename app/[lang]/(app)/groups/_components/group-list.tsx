@@ -18,11 +18,17 @@ export default function GroupList({
 
   //const resultsText = products.length > 1 ? 'results' : 'result';
 
-  const filterJoinedGroups = groups.filter((group) =>
-    group.members.some((_member: any) => _member.user.wallet === profileWallet)
-  );
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
 
-  const filterCreatedGroups = groups.filter((group) => group.owner === profileWallet);
+  const filteredData = groups.filter((group: any) => {
+    return group.name.toLowerCase().includes((search as string).toLowerCase() || "");
+  });
+
+  const filterJoinedGroups = filteredData.filter((group) => group.isUserMember);
+  const filterCreatedGroups = filteredData.filter(
+    (group) => group.owner === profileWallet
+  );
 
   return (
     <Tabs defaultValue="all">
@@ -46,7 +52,7 @@ export default function GroupList({
 
       <TabsContent value="all" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...groups].reverse().map((group: any, key: number) => {
+          {[...filteredData].reverse().map((group: any, key: number) => {
             return <GroupListItem key={key} details={group} />;
           })}
         </div>
