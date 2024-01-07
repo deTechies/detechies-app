@@ -1,3 +1,5 @@
+import { Session } from 'next-auth';
+import { getSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 // Define a generic type for the hook, allowing users of the hook
@@ -11,9 +13,17 @@ function useFetchData<T>(path: string) {
     const fetchAll = async () => {
       try {
         setLoading(true);
+        const session = await getSession() as Session;
         const baseURL = process.env.NEXT_PUBLIC_API || "http://localhost:4000";
         const url = `${baseURL}${path}`;
-        const result = await fetch(url).then(res => res.json());
+        const result = await fetch(url, 
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${session?.web3.accessToken}`,
+            },
+          }).then(res => res.json());
         
         // Handle any errors that occurred during fetch
         if (result.error) {
