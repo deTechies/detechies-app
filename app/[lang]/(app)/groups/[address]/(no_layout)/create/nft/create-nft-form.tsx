@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -16,10 +17,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { uploadAchievement } from "@/lib/data/achievements";
@@ -30,9 +30,9 @@ import {
   SBT_TYPE,
 } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CompletedSuccess from "./completed-success";
-import { useRouter } from "next/navigation";
 
 const profileFormSchema = z.object({
   name: z
@@ -455,27 +455,13 @@ const useCreateNFTForm = (groupId: string) => {
     }
 
     const uploadData = { ...data, avatar, image, clubId: groupId };
-    toast({
-      title: "You are uploading this..:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify(uploadData, null, 2)}
-          </code>
-        </pre>
-      ),
-    });
 
     const result = await uploadAchievement(uploadData);
 
     console.log(result);
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
-        </pre>
-      ),
+      title: "Congratulations on your first nft!",
+      description: "Succesfully create an nft. ",
     });
 
     if (result) {
