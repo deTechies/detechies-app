@@ -31,7 +31,7 @@ export default function CompletedSuccess({ groupId }: any) {
             </Button>
           </Link>
 
-          <Link href={`/groups/${groupId}/achievements`} passHref>
+          <Link href={`/groups/${groupId}/nft`} passHref>
             <Button size="lg">NFT 증명서 바로가기</Button>
           </Link>
         </section>
