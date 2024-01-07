@@ -6,7 +6,6 @@ import ProjectContributionForm, {
 } from "./project-contribution-form";
 import ProjectSwitcher from "./project-switcher";
 import { Button } from "@/components/ui/button";
-import ProjectContributionInvite from "./project-contribution-invite";
 import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
 import { useState } from "react";
 import ProjectContributionInviteForm from "./project-contribution-invite-form";

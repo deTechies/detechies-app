@@ -69,7 +69,8 @@ export default async function ProjectMemberItem({
               <>
                 {/* {userRole} */}
                 {details.works.length < 1 && (
-                  <ProjectContributionInvite project={details.project} lang={lang}/>
+                  // <ProjectContributionInvite project={details.project} lang={lang}/>
+                  <ProjectContribution project={details.project}/>
                 )}
                 {details.works.length > 0 && (
                   <ProjectMemberEvaluate projectMember={details} />
