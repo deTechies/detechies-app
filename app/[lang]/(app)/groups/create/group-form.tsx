@@ -427,7 +427,6 @@ export function GroupForm() {
             type="button"
             size="lg"
             variant="secondary"
-            className="max-w-[212px] grow"
             onClick={() => router.back()}
           >
             Cancel
@@ -438,7 +437,6 @@ export function GroupForm() {
             size="lg"
             loading={isLoading}
             disabled={isLoading}
-            className="max-w-[212px] grow"
           >
             Create Group
           </Button>
