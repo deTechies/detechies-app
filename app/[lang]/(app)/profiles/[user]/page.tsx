@@ -34,7 +34,7 @@ export default async function Dashboard({
             text={dictionary.mypage.project}
           />
           <ProfileClubs
-            clubs={profile.clubs}
+            clubMemberships={profile.clubs}
             text={dictionary.mypage.club}
           />
         </main>

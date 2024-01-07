@@ -18,7 +18,7 @@ export default async function Dashboard({
     <main className='flex flex-col gap-8'>
         <ProfileDetails profile={profile} text={dictionary.mypage.main}/>
         <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} />
-        <ProfileClubs clubs={profile.clubs} text={dictionary.mypage.club}/>
+        <ProfileClubs clubMemberships={profile.clubs} text={dictionary.mypage.club}/>
     </main>
   );
 }
