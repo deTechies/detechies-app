@@ -1,10 +1,12 @@
 import GroupProfileCard from "@/components/group/group-profile-card";
 import GroupTabs from "@/components/group/group-taps";
 
+import { Card } from "@/components/ui/card";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getClub } from "@/lib/data/groups";
-import { Card } from "@/components/ui/card";
+import AcceptInvitation from "../../_components/accept-group-invitation";
+
 
 
 
@@ -18,6 +20,13 @@ export default async function GroupDetailLayout({
 
   const dictionary = (await getDictionary(params.lang)) as any;
   const data = await getClub(params.address);
+  
+  
+  if(data.userRole === 'invited') return (
+    <main className="w-full m-8">
+      <AcceptInvitation id={params.address} image={data.image} />
+    </main>
+  );
 
   return (
     <main className="w-full m-8">

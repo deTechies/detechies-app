@@ -31,6 +31,21 @@ export async function getClub(clubId: string) {
   return response.json();
 }
 
+export async function acceptGroupInvitations(projectMemberId: string){
+  const session = await getSession();
+
+  const response = await fetch(`${API_URL}/members/accept/invite/${projectMemberId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  
+  return response.json();
+}
+
 //get the interface for the group
 export async function createGroup(formData: CreateClub) {
   const session = await getSession();
@@ -71,7 +86,7 @@ export async function inviteGroupMember(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
-    },
+    }, 
     body: JSON.stringify({
       userId: userId,
       clubId: clubId,
