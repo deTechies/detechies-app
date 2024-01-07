@@ -10,6 +10,7 @@ interface MediaUploaderProps {
   width: number;
   height: number;
   deleteFile?: boolean;
+  children?: React.ReactNode;
 }
 
 const MediaUploader: React.FC<MediaUploaderProps> = ({
@@ -17,16 +18,17 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
   deleteFile,
   width,
   height,
+  children,
 }) => {
   const [mediaSource, setMediaSource] = useState<string | null>(null);
   const [mediaType, setMediaType] = useState<"image" | "video" | null>(null);
-  const random = Math.random()
+  const random = Math.random();
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
-    
+
     console.log(width, height);
     if (file) {
       const fileType = file.type.split("/")[0];
@@ -49,16 +51,30 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
     }
   };
 
+  const content = children || (
+    <>
+      <p className="text-sm text-text-secondary">
+        Upload a image for your project
+      </p>
+      <span className="text-body_s text-text-secondary">
+        Recommended size: {width} x {height}
+      </span>
+    </>
+  );
+
   return (
     <div className="flex gap-4">
       <div
-        className="media-uploader relative rounded-sm bg-background-layer-2 flex items-center justify-center border border-dashed cursor-pointer hover:bg-background-layer-1"
+        className="relative flex items-center justify-center overflow-hidden border-2 border-dashed rounded-sm cursor-pointer border-border-input media-uploader bg-background-layer-2 hover:bg-background-layer-1"
         onClick={() => document.getElementById(random.toString())?.click()}
       >
         <div
-          className={`aspect-[${
-            width / height
-          }] w-[${width}] h-[${height}] flex items-center justify-center`}
+          className={`flex items-center justify-center`}
+          style={{
+            aspectRatio: width + "/" + height,
+            width: width + "px",
+            height: height + "px",
+          }}
         >
           {mediaType === "image" && mediaSource && (
             <Image
@@ -66,7 +82,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               alt="Uploaded Content"
               width={width}
               height={height}
-              className={`w-${width} h-${height} block object-scale-down rounded-md`}
+              className={`block object-scale-down`}
             />
           )}
           {mediaType === "video" && mediaSource && (
@@ -75,17 +91,19 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               autoPlay
               loop
               muted
-              className="max-w-full max-h-full block"
+              className="block max-w-full max-h-full"
             >
               <source src={mediaSource} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           )}
           {!mediaSource && (
-            <div className={`flex flex-col gap-4 text-text-secondary py-3 px-4 text-xs justify-center items-center w-full   aspect-square`}>
+            <div
+              className={`flex flex-col gap-4 text-text-secondary py-3 px-4 text-center text-xs justify-center items-center w-full`}
+            >
               <ImagePlus
                 size={24}
-                className="text-text-secondary font-light"
+                className="font-light text-text-secondary"
                 strokeWidth={1.5}
               />
               Click to upload
@@ -100,42 +118,37 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
           />
         </div>
       </div>
-      <div className="flex flex-col gap-4 items-start justify-end">
-        <p className="text-sm text-text-secondary">
-          Upload a image for your project
-        </p>
-        <span className="text-body_s text-text-secondary">
-          Recommended size: {width} x {height}
-        </span>
-        <div className="flex gap-4">
-        <Button
-          size="sm"
-          variant={"secondary"}
-          type="button"
-          className="text-xs"
-          onClick={() => {
-            document.getElementById(random.toString())?.click()
-          }}
-        >
-          Upload Image
+      <div className="flex flex-col items-start justify-end gap-5">
+        {content}
+
+        <div className="flex gap-1">
+          <Button
+            size="sm"
+            variant={"secondary"}
+            type="button"
+            className="text-xs"
+            onClick={() => {
+              document.getElementById(random.toString())?.click();
+            }}
+          >
+            Upload Image
           </Button>
-        <Button
-          size="sm"
-          variant={"secondary"}
-          type="button"
-          className="text-xs"
-          disabled={mediaSource == null}
-          onClick={() => {
-            setMediaSource(null);
-            setMediaType(null);
-            if (onFileSelected) {
-              onFileSelected(null, null);
-            }
-          }}
-        >
-          Delete Image
-        </Button>
-        
+          <Button
+            size="sm"
+            variant={"secondary"}
+            type="button"
+            className="text-xs"
+            disabled={mediaSource == null}
+            onClick={() => {
+              setMediaSource(null);
+              setMediaType(null);
+              if (onFileSelected) {
+                onFileSelected(null, null);
+              }
+            }}
+          >
+            Delete Image
+          </Button>
         </div>
       </div>
     </div>

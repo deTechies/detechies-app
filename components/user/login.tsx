@@ -9,7 +9,6 @@ import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
-import AuthenticateButton from "./authenticate-button";
 import ModalLayout from "./modal-layout";
 import ProfileDetails from "./profile-details";
 
@@ -57,9 +56,7 @@ export default function Login() {
 
   if (session?.web3?.address != address) {
     //sign message 
-    return (
-     <AuthenticateButton />
-    );
+    return null
   }
   if (!isConnecting && address == session?.web3?.address) {
     return (

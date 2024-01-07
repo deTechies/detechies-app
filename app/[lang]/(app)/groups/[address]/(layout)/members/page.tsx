@@ -39,10 +39,8 @@ export default async function GroupMember({
   let filteredData = data.members?.filter((item: any) => {
     if (!searchItem) return true;
 
-    return item.display_name?.toLowerCase().includes(searchItem.toLowerCase());
+    return item.user.display_name?.toLowerCase().includes(searchItem.toLowerCase());
   });
-
-  // console.log(data.group);
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -50,7 +48,7 @@ export default async function GroupMember({
         <Search placeholder="닉네임 또는 직업을 검색해보세요." />
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {filteredData &&
           filteredData.map((item: Member, index: any) => {
             if (index > 4) {

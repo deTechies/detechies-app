@@ -11,7 +11,23 @@ import App from "../../app";
  
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
-  src: '../../pretendard.woff2',
+  src: [
+    {
+      path: '../../pretendard-regular.woff2',
+      weight: '400', // Regular
+      style: 'normal',
+    },
+    {
+      path: '../../pretendard-semibold.woff2',
+      weight: '600', // SemiBold
+      style: 'normal',
+    },
+    {
+      path: '../../pretendard-bold.woff2',
+      weight: '700', // Bold
+      style: 'normal',
+    }
+  ],
   display: 'swap',
 })
 
@@ -33,7 +49,7 @@ export default async function RootLayout({
 
   
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="kr" suppressHydrationWarning>
       <body
         className={`${pretendard.className} bg-background-layer-1 text-text-primary min-h-[100vh] `}
 

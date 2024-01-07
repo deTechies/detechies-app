@@ -4,27 +4,34 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center text-sm font-normal rounded-md border px-3 py-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center whitespace-nowrap ",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-background-layer-2 text-text-primary text-label_m hover:border hover:border-border-div",
-        info: "border-transparent bg-state-info-secondary text-state-info hover:bg-info/80",
-        accent: "border-transparent bg-accent-secondary text-accent-primary hover:bg-accent/80",
-        success: "border-transparent bg-state-success-secondary text-state-success",
+          "bg-background-layer-2 text-text-primary text-label_m",
+        info: "border-state-info bg-state-info-secondary text-state-info hover:bg-info/80",
+        accent: "border-accent-primary bg-accent-secondary text-accent-primary hover:bg-accent/80",
+        success: "border-state-success bg-state-success-secondary text-state-success",
+        warning: "border-state-warning bg-state-warning-secondary text-state-warning",
         secondary:
-          "border-transparent bg-accent-secondary text-accent-on-secondary",
-        tertiary: "border-transparent text-purple-600 bg-purple-100 hover:bg-purple-600/80",
+          "bg-accent-secondary text-accent-on-secondary",
+        tertiary: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
         destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
         ghost: "text-text-primary hover:bg-background-layer-2/80",
-
+      },
+      shape: {
+        default: "text-label_s rounded-md px-3 py-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+        md: "py-2 px-2.5 rounded-md text-title_s",
+        category: "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
+        outline: "py-2 px-2.5 border rounded-md bg-background-transparent text-title_s",
       },
     },
     defaultVariants: {
       variant: "default",
+      shape: "default",
     },
   }
 )
@@ -33,9 +40,9 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, shape, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div className={cn(badgeVariants({ variant, shape }), className)} {...props} />
   )
 }
 

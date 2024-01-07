@@ -284,8 +284,12 @@ export default function CreateProjectForm() {
             </FormElement>
 
             <div className="flex items-center justify-end gap-8">
-              <Button variant="secondary" type="reset" size="lg">
-                Reset
+              <Button variant="secondary" type="button" size="lg"
+                onClick={() => {
+                  router.back();
+                }}
+              >
+                Back
               </Button>
               <Button
                 type="submit"
