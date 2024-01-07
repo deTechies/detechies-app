@@ -8,6 +8,7 @@ import { getClub } from "@/lib/data/groups";
 import ManageMember from "./manage-member";
 import ManageMission from "./manage-mission";
 import ManageNft from "./manage-nft";
+import ManageContracts from "./onchain-group";
 
 export default async function GroupDetailManageLayout({
   params,
@@ -27,6 +28,7 @@ export default async function GroupDetailManageLayout({
           <TabsTrigger value="members">멤버</TabsTrigger>
           <TabsTrigger value="missions">미션</TabsTrigger>
           <TabsTrigger value="info">그룹 정보</TabsTrigger>
+          <TabsTrigger value="blockchain">blockchain</TabsTrigger>
         </TabsList>
 
         <TabsContent value="members">
@@ -49,6 +51,9 @@ export default async function GroupDetailManageLayout({
           ></ManageMission>
         </TabsContent>
         <TabsContent value="info">info</TabsContent>
+        <TabsContent value="blockchain">
+          <ManageContracts />
+        </TabsContent>
       </Tabs>
       {/* 현재 탭에 해당하는 컴포넌트 */}
     </div>
