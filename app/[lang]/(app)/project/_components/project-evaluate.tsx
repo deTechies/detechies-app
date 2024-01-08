@@ -1,6 +1,5 @@
 "use client";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ProjectMember } from "@/lib/interfaces";
@@ -19,11 +18,10 @@ export default function ProjectMemberEvaluate({
   return (
     <Dialog>
       <DialogTrigger>
-      <Badge variant={"accent"}>Evaluate</Badge>
-
+        <Button size="sm" variant="primary">평가하기</Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col gap-8 ">
-        <div className="flex-col self-stretch gap-6 inline-flex">
+        <div className="inline-flex flex-col self-stretch gap-6">
           <div className="flex flex-col gap-4 ">
             <h1 className="text-xl font-semibold leading-7">
               업무/성과 평가하기
@@ -43,20 +41,20 @@ export default function ProjectMemberEvaluate({
             </AlertDescription>
           </Alert>
 
-          <div className="self-stretch flex-col gap-4 flex">
+          <div className="flex flex-col self-stretch gap-4">
             <h3 className="text-title_m">프로젝트</h3>
             <ProjectSwitcher project={projectMember.project} />
           </div>
-          <div className="self-stretch flex-col gap-4 flex">
+          <div className="flex flex-col self-stretch gap-4">
             <h3 className="text-title_m">평가받는 사람</h3>
             <ProjectMemberInline projectMember={projectMember} />
           </div>
-          <div className="self-stretch flex-col gap-4 flex">
-            <div className="text-neutral-900 text-base font-semibold leading-tight tracking-tight">
+          <div className="flex flex-col self-stretch gap-4">
+            <div className="text-base font-semibold leading-tight tracking-tight text-neutral-900">
               업무 내용
             </div>
           </div>
-          <div className="self-stretch p-5 rounded-md border border-border-div gap-5 inline-flex">
+          <div className="inline-flex self-stretch gap-5 p-5 border rounded-md border-border-div">
             <div className="text-body_m">
               {projectMember.works[0].description}
             </div>

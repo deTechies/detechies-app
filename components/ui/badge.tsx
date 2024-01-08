@@ -15,7 +15,7 @@ const badgeVariants = cva(
         success: "border-state-success bg-state-success-secondary text-state-success",
         warning: "border-state-warning bg-state-warning-secondary text-state-warning",
         secondary:
-          "bg-accent-secondary text-accent-on-secondary",
+          "bg-text-secondary",
         tertiary: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/80",

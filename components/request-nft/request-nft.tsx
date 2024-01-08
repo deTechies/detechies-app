@@ -173,8 +173,8 @@ export default async function RequestNFTModal({ groups }: { groups: any[] }) {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Badge variant="accent">Add</Badge>
+      <DialogTrigger className="ml-auto">
+        <Button size="sm" variant="secondary">요청하기</Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-[500px] gap-0">

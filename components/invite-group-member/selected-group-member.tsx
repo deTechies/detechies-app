@@ -9,6 +9,7 @@ import PersonItem from "../extra/add-member-item";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { toast } from "../ui/use-toast";
+import { useRouter } from "next/navigation";
 
 export default function SelectedGroupMember({
   user,
@@ -26,9 +27,12 @@ export default function SelectedGroupMember({
   // lang: any;
 }) {
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   async function inviteMember() {
-
+    setLoading(true);
     const result = await inviteGroupMember(
       user.id, 
       message,
@@ -37,10 +41,14 @@ export default function SelectedGroupMember({
     
     console.log(result);
 
-     toast({
-       title: "invited team member",
-       description: "Your team members has received an email with your invitiation"
-     })
+    setLoading(false);
+    onCompleteInvite();
+    router.refresh();
+    
+    toast({
+      title: "invited team member",
+      description: "Your team members has received an email with your invitiation"
+    })
   }
 
   return (
@@ -86,7 +94,7 @@ export default function SelectedGroupMember({
           onClick={inviteMember}
           size="lg"
           className="max-w-[212px] grow px-0"
-          disabled={message.length > 100}
+          disabled={message.length > 100 || loading}
         >
           초대하기
         </Button>

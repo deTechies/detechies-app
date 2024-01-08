@@ -4,12 +4,14 @@ import { formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
   if (!data) return null;
+
+  console.log(data);
   return (
     <>
-      <div className="justify-start items-start gap-4 inline-flex text-text-secondary flex-wrap">
-        <div className="flex-col justify-start items-start gap-2 inline-flex">
+      <div className="inline-flex flex-wrap items-start justify-start gap-4 text-text-secondary">
+        <div className="inline-flex flex-col items-start justify-start gap-2">
           <div className="divide-x">
-            <span className="text-label_m capitalize pr-2">{data.name}</span>
+            <span className="pr-2 capitalize text-label_m">{data.name}</span>
             <span className="pl-2 text-label_m">{data.percentage} %</span>
           </div>
           <span className="text-label_m">
@@ -19,17 +21,28 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
         </div>
 
         <div className="self-stretch grow shrink basis-0 line-clamp-2">
-          <span className="text-label_m">{data.description}{data.description}{data.description}{data.description}{data.description}{data.description}</span>
+          <span className="text-label_m">
+            {data.description}
+            {data.description}
+            {data.description}
+            {data.description}
+            {data.description}
+            {data.description}
+          </span>
         </div>
       </div>
 
-      <div className="justify-start items-start gap-2 inline-flex flex-wrap">
-        <Badge className="px-2.5 py-1.5" variant="ghost">Dev Ops</Badge>
-        <Badge className="px-2.5 py-1.5" variant="ghost">Backend</Badge>
-        <Badge className="px-2.5 py-1.5" variant="ghost">Fullstack</Badge>
-        <Badge className="px-2.5 py-1.5" variant="ghost">Dev Ops</Badge>
-        <Badge className="px-2.5 py-1.5" variant="ghost">Backend</Badge>
-        <Badge className="px-2.5 py-1.5" variant="ghost">Fullstack</Badge>
+      <div className="inline-flex flex-wrap items-start justify-start gap-2">
+        {data.tags.length > 0 &&
+          data.tags.map((tag: string, index: number) => (
+            <Badge
+              variant="secondary"
+              shape="outline"
+              key={index}
+            >
+              {tag}
+            </Badge>
+          ))}
       </div>
     </>
   );
@@ -37,10 +50,10 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
 
 export function BlurredProjectWorkDetail() {
   return (
-    <main className="flex gap-6 text-text-secondary my-2">
+    <main className="flex gap-6 my-2 text-text-secondary">
       <div className="flex flex-col gap-2">
         <div className="divide-x">
-          <span className="text-label_m capitalize pr-2 blur">Development</span>
+          <span className="pr-2 capitalize text-label_m blur">Development</span>
           <span className="pl-2 text-label_m blur">50 %</span>
         </div>
         <span className="text-label_m blur">
