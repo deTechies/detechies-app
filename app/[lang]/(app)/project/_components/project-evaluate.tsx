@@ -66,9 +66,9 @@ export default function ProjectMemberEvaluate({
           </div>
 
           {projectMember.works.length > 0 &&
-            projectMember.works.map((work) => {
+            projectMember.works.map((work, index: number) => {
               return (
-                <div className="p-5 border rounded-md border-border-div">
+                <div className="p-5 border rounded-md border-border-div" key={index}>
                   <div className="flex gap-2 mb-5">
                     {work.tags.length > 0 &&
                       work.tags.map((tag: string, index: number) => (

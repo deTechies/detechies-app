@@ -34,7 +34,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export default async function RequestNFTModal({ groups }: { groups: any[] }) {
+export default function RequestNFTModal({ groups }: { groups: any[] }) {
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
