@@ -22,7 +22,7 @@ export default function GroupList({
   const search = searchParams.get("search");
 
   const filteredData = groups.filter((group: any) => {
-    return group.name.toLowerCase().includes((search as string).toLowerCase() || "");
+    return group.name.toLowerCase().includes(search ? search.toLowerCase() : "");
   });
 
   const filterJoinedGroups = filteredData.filter((group) => group.isUserMember);

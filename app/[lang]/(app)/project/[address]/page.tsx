@@ -48,7 +48,7 @@ export default async function ProjectDetailPage({
   return (
     <main className="grid w-full gap-6 mx-8 my-10 md:grid-cols-3">
       <section className="flex flex-col col-span-2 gap-5">
-        <ProjectDetail 
+        {/* <ProjectDetail 
           details={data} 
           userRole={data.userRole}
           lang={dictionary.project}
@@ -58,19 +58,19 @@ export default async function ProjectDetailPage({
           userRole={data.userRole}
           projectId={params.address}
           lang={dictionary.project}
-        />
+        /> */}
       </section>
       
       <section className="flex flex-col gap-8 min-w-[300px]">
-        <ProjectInfo info={data} />
+        {/* <ProjectInfo info={data} /> */}
         <ProjectNfts address={data.id} isCreator={data.isCreator} />
-        {
+        {/* {
           data.userRole == 'admin' &&
           <PendingMemberList
           projectId={params.address}
           userRole={data.userRole}
         />
-        }
+        } */}
       </section>
     </main>
   );
