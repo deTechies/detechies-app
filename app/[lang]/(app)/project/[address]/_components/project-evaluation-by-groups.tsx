@@ -19,47 +19,47 @@ export default async function ProjectEvaluationByGroups({
 
   if (!groups) return null;
 
-  const dummy_nfts = [
-    {
-      id: "314fec38-e683-44e7-af35-a5cd82130ea2",
-      contract: null,
-      name: "JiyongNFT",
-      description: "내가 하사하는 NFT이니 영광으로 아시오",
-      nft_type: "sbt",
-      image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: "awards",
-      onchain: false,
-      created_at: "2023-12-30T22:32:41.165Z",
-    },
-    {
-      id: "734dd6ae-c5d6-4273-8174-c998bc29ad91",
-      contract: null,
-      name: "AvatarImage",
-      description: "AvatarImage test",
-      nft_type: "erc721",
-      image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: null,
-      onchain: false,
-      created_at: "2024-01-02T00:03:47.120Z",
-    },
-    {
-      id: "0dcd09a0-dbb4-4ecd-80f0-93c70daa52d2",
-      contract: null,
-      name: "test",
-      description: "test",
-      nft_type: "erc721",
-      image: "bafkreiexoszjqguxd3azoasc37gfgermejm54erpo7u4qj6wcpymhwoe4m",
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: null,
-      onchain: false,
-      created_at: "2024-01-02T00:10:47.462Z",
-    },
-  ];
+  // const dummy_nfts = [
+  //   {
+  //     id: "314fec38-e683-44e7-af35-a5cd82130ea2",
+  //     contract: null,
+  //     name: "JiyongNFT",
+  //     description: "내가 하사하는 NFT이니 영광으로 아시오",
+  //     nft_type: "sbt",
+  //     image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
+  //     avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
+  //     avatar_type: "clothes",
+  //     type: "awards",
+  //     onchain: false,
+  //     created_at: "2023-12-30T22:32:41.165Z",
+  //   },
+  //   {
+  //     id: "734dd6ae-c5d6-4273-8174-c998bc29ad91",
+  //     contract: null,
+  //     name: "AvatarImage",
+  //     description: "AvatarImage test",
+  //     nft_type: "erc721",
+  //     image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
+  //     avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
+  //     avatar_type: "clothes",
+  //     type: null,
+  //     onchain: false,
+  //     created_at: "2024-01-02T00:03:47.120Z",
+  //   },
+  //   {
+  //     id: "0dcd09a0-dbb4-4ecd-80f0-93c70daa52d2",
+  //     contract: null,
+  //     name: "test",
+  //     description: "test",
+  //     nft_type: "erc721",
+  //     image: "bafkreiexoszjqguxd3azoasc37gfgermejm54erpo7u4qj6wcpymhwoe4m",
+  //     avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
+  //     avatar_type: "clothes",
+  //     type: null,
+  //     onchain: false,
+  //     created_at: "2024-01-02T00:10:47.462Z",
+  //   },
+  // ];
 
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">
@@ -76,10 +76,10 @@ export default async function ProjectEvaluationByGroups({
 
       <CardContent>
         <div className="flex flex-col gap-5">
-          {/* {details && details.achievements.length > 0 ? (
-          details.achievements?.map((achievement, index) => ( */}
-          {dummy_nfts.length > 0 ? (
-            dummy_nfts.map((achievement, index: number) => (
+          {details.achievements && details.achievements.length > 0 ? (
+          details.achievements?.map((achievement: any, index: number) => (
+          // {dummy_nfts.length > 0 ? (
+          //   dummy_nfts.map((achievement: any, index: number) => (
               <div className="flex gap-5 truncate" key={index}>
                 <div className="w-20 h-20 overflow-hidden rounded-sm bg-background-layer-2 shrink-0">
                   <Image

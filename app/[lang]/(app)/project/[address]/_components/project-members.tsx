@@ -18,7 +18,7 @@ export default async function ProjectMembers({
 }) {
   //getting all the members and holders of this project NFT.
 
-  console.log(details.members);
+  // console.log(details.members);
 
   return (
     <section className="flex flex-col gap-4">

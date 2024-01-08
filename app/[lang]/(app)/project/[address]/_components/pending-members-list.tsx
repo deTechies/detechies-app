@@ -11,7 +11,6 @@ export default async function PendingMemberList({
 }) {
   let pendingMembers: any[] = [];
 
-  
   if (userRole == "admin") {
     pendingMembers = await getPendingProjectMembers(projectId);
   }
@@ -28,11 +27,14 @@ export default async function PendingMemberList({
       <div className="flex flex-col gap-3">
         {!!pendingMembers.length &&
           pendingMembers.map((member: any, index: number) => (
-            <PendingMemberItem
-              key={index}
-              member={member}
-            />
+            <PendingMemberItem key={index} member={member} />
           ))}
+
+        {(!pendingMembers.length || pendingMembers.length < 1) && (
+          <p className="text-center text-label_m text-text-secondary">
+            참여 대기중인 사람이 없어요.
+          </p>
+        )}
       </div>
     </Card>
   );
