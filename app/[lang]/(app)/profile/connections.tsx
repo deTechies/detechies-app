@@ -89,9 +89,6 @@ export default async function Connections({
           </div>
         </div>
       ))}
-      <span className="text-xs tracking-wider text-text-secondary col-span-3 font-light  text-right">
-        Last updated: Never
-      </span>
     </section>
   );
 }
