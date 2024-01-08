@@ -17,6 +17,7 @@ import ProjectWorkDetail, { BlurredProjectWorkDetail } from "../../_components/p
 
 import DeleteMember from "./modals/delete-member";
 import RequestEvaluation from "./modals/request-evaluation";
+import ProjectContributionInvite from "../../_components/project-contribution-invite";
 
 
 
@@ -66,9 +67,12 @@ export default async function ProjectMemberItem({
           <div className="flex flex-col items-end justify-start h-full gap-3">
             {session?.web3.address == details.user.wallet ? (
               <>
-                {userRole}
-                {/* {details.works.length < 1 && (
-                  <ProjectContribution project={details.project} />
+
+                {/* {userRole} */}
+                {details.works.length < 1 && (
+                  // <ProjectContributionInvite project={details.project} lang={lang}/>
+                  <ProjectContribution project={details.project}/>
+
                 )}
                 {details.works.length > 0 && (
                   <ProjectMemberEvaluate projectMember={details} />
