@@ -1,5 +1,5 @@
 "use client";
-import { Dialog, DialogContent, DialogTrigger, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
@@ -8,9 +8,9 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import NftListItem from "../card/nft-list-item";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
-import { Badge } from "../ui/badge";
 export default function DisplayNFT({
   details,
   showSelect,
@@ -50,10 +50,8 @@ export default function DisplayNFT({
     const result = await requestAchievement(details.id);
     
     toast({
-      title: 'requesting nft', 
-      description: <pre>
-        {JSON.stringify(result, null, 2)}
-      </pre>
+      title: 'Congratulations!', 
+      description: 'Please wait for the administrator to accept your nft request!',
     })
 
     setRequesting(false);

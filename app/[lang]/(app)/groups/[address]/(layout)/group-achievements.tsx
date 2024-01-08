@@ -5,7 +5,8 @@ import {
   getPendingAchievements,
 } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
-import { CreateAchievement } from "./create-achievement";
+import Link from "next/link";
+
 
 export default async function GroupAchievements({
   address,
@@ -21,7 +22,7 @@ export default async function GroupAchievements({
     <Card>
       <CardHeader className="flex items-center justify-between">
         Achievements
-        {isCreator && <CreateAchievement  />}
+        {isCreator &&  <Link href={`/groups/${address}/create/achievement`}> Create </Link>}
       </CardHeader>
 
       <CardContent className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
