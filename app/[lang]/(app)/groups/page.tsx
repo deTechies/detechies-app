@@ -4,8 +4,7 @@ import GroupListHeader from "./_components/group-list-header";
 
 export default async function GroupsPage() {
   const groups = await getGroups();
-
-  console.log(groups);
+  
   return (
     <main className="flex flex-col gap-8 w-full max-w-6xl m-12">
      <GroupListHeader />

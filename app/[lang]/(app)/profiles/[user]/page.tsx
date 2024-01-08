@@ -6,7 +6,7 @@ import { getUserProfile } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
 import ProfileDetails from "../../mypage/_components/profile-details";
 import ProfileProjects from "../../mypage/_components/profile-projects";
-import ProfileClubs from "../../mypage/_components/profile-clubs";
+import ProfileClubs from "../../mypage/_components/profile-certificates";
 import Profile from "../../mypage/profile";
 
 export default async function Dashboard({

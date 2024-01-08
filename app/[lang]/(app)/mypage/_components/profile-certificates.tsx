@@ -9,6 +9,7 @@ import Image from "next/image";
 
 import { Member } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
+import DisplayNFT from "@/components/nft/display-nft";
 
 import {
   Dialog,
@@ -37,7 +38,7 @@ interface IClubCertificateProps{
   clubImageSrc: string;
 }
 
-export default function ProfileClubs({
+export default function ProfileCertificates({
   clubMemberships,
   text,
 }: IProfileClubsProps) {
@@ -57,6 +58,7 @@ export default function ProfileClubs({
       
       {clubMemberships &&
         clubMemberships.map((membership: Member) => {
+          console.log(membership.club);
           return (
             <Card key={membership.id} className="flex inline-flex flex-row items-start">
               <div className="w-[68px] h-[68px] relative aspect-square rounded-sm ">
