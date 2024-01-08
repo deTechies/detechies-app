@@ -22,7 +22,7 @@ export default async function RequestNFTModal({
       }`}
       onClick={() => (onClick ? onClick() : {})}
     >
-      <div className="w-[52px] h-[52px] mr-4 overflow-hidden rounded-full shrink-0">
+      <div className="w-[52px] h-[52px] mr-4 overflow-hidden rounded-sm shrink-0">
         <Image
           height="52"
           width="52"

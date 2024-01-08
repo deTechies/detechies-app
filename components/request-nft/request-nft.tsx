@@ -62,7 +62,7 @@ export default async function RequestNFTModal({ groups }: { groups: any[] }) {
 
 
   const onClickGroupItem = (_group: any) => {
-    console.log(_group);
+    // console.log(_group);
     setSelectedGroup(_group);
   };
 
