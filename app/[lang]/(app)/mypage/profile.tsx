@@ -5,8 +5,9 @@ import { getUserProfile } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
 import Image from "next/image";
 
-export default async function Profile({ text }: { text: any }) {
-  const profile: User = await getUserProfile();
+export default async function Profile({ text, profile }: { text: any, profile: User }) {
+  
+
   return (
     <Card className="flex flex-col gap-5 w-[400px]">
       <div className="flex">
