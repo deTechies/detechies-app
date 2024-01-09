@@ -23,11 +23,6 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
         <div className="self-stretch grow shrink basis-0 line-clamp-2">
           <span className="text-label_m">
             {data.description}
-            {data.description}
-            {data.description}
-            {data.description}
-            {data.description}
-            {data.description}
           </span>
         </div>
       </div>

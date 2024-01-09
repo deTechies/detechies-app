@@ -33,6 +33,8 @@ export default function InviteProjectMember({
   const [byEmail, setByEmail] = useState<boolean>(false);
   const { data: members, loading, error } = useFetchData<any[]>("/users");
 
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
   if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
@@ -43,8 +45,10 @@ export default function InviteProjectMember({
     return member.display_name.toLowerCase().includes(search.toLowerCase());
   }); */
 
+
+
   return (
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger>
         <Button
           variant="secondary"
@@ -120,6 +124,7 @@ export default function InviteProjectMember({
               user={selected}
               onSelectValue={() => setSelected(null)}
               lang={lang}
+              onInvite={() => setDialogOpen(false)}
             />
           )}
           {byEmail && (

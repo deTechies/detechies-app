@@ -198,7 +198,11 @@ export default function UploadWorks({ type }: { type?: string }) {
           />
         </div>
 
-        <Button loading={loading || isLoading} onClick={uploadWorks}>
+        <Button
+          loading={loading || isLoading}
+          onClick={uploadWorks}
+          disabled={loading}
+        >
           Upload works
         </Button>
       </DialogContent>

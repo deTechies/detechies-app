@@ -15,15 +15,21 @@ export default function SelectedProjectMember({
   projectId,
   onSelectValue,
   lang,
+  onInvite,
 }: {
   user: User;
   projectId: string;
   onSelectValue: (value: string) => void;
   lang: any;
+  onInvite?: Function,
 }) {
   const [role, setRole] = useState<string>("member");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   async function inviteMember() {
+    setLoading(true);
+
     const result = await inviteProjectMembers([user.id], role, projectId);
 
     toast({
@@ -36,11 +42,17 @@ export default function SelectedProjectMember({
       ),
     });
     router.refresh();
+
+    setLoading(false);
+
+    if(onInvite) {
+      onInvite();
+    }
   }
 
   return (
     <section className="flex flex-col items-center justify-center">
-      <div className="mb-5 w-full">
+      <div className="w-full mb-5">
         <PersonItem
           member={user}
           returnValue={() => onSelectValue("leave")}
@@ -51,21 +63,21 @@ export default function SelectedProjectMember({
       <Label className="mb-3">{lang.details.invite_member.member_type}</Label>
 
       <RadioGroup
-        className="flex gap-9 py-4 mb-6"
+        className="flex py-4 mb-6 gap-9"
         onValueChange={(value) => {
           setRole(value);
         }}
         defaultValue="member"
       >
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center gap-3">
           <RadioGroupItem value="member" />
           <Label>{lang.details.role_type.member}</Label>
         </div>
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center gap-3">
           <RadioGroupItem value="admin" />
           <Label>{lang.details.role_type.admin}</Label>
         </div>
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center gap-3">
           <RadioGroupItem value="client" />
           <Label>{lang.details.role_type.client}</Label>
         </div>
@@ -93,6 +105,8 @@ export default function SelectedProjectMember({
           onClick={inviteMember}
           size="lg"
           className="max-w-[212px] grow px-0"
+          disabled={loading}
+          loading={loading}
         >
           {lang.details.invite_member.invite}
         </Button>
