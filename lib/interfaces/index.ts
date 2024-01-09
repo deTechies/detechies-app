@@ -162,6 +162,7 @@ export enum GROUP_TYPE {
     type: string;
     on_chain: boolean;
     name: string;
+    tokenId: string;
     verified: boolean;
     created_at: Date;
   }
