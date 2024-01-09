@@ -307,6 +307,144 @@
     }
   },
   "group": {
+    "list": {
+      "message": "커뮤니티에 가입하고",
+      "message2": "나만의 커리어 증명 NFT을 소유하세요!",
+
+      "all": "전체보기",
+      "created": "참여중인 그룹",
+      "joined": "내가 만든 그룹",
+
+      "search_placeholder": "그룹명을 검색해보세요.",
+
+      "agency": "기업 인증 완료",
+      "authority": "기관 인증 완료",
+      "education": "학교 인증 완료",
+      "community": "커뮤니티",
+
+      "members": "멤버수",
+      "nfts": "받을 수 있는 NFT",
+
+      "banner": "직접 그룹을 만들고",
+      "banner2": "프로젝트와 개인에게 NFT를 부여하고 영향력 있는 그룹으로 활동해보세요!",
+      "banner3": "그룹 만들러 가기"
+    },
+
+    "create": {
+      "title": "그룹 만들기", 
+      "required_text": "*는 필수입력 사항입니다.", 
+      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
+      "form": {
+        "type": "그룹 카테고리 *", 
+        "help_text": "해당 그룹은 조직 대표 이메일 인증이 필요해요. 대표 메일을 입력하고 인증코드를 확인해주세요."
+      }
+    },
+
+    "details": {
+      "profile_card": {
+        "create_nft": "NFT 생성하기",
+        
+        "invite": {
+          "invite_member": "멤버 초대하기",
+          "sended": "초대 메시지를 전송했습니다!",
+          "sended_desc": "메세지를 받은 유저가 초대를 승인하면 새로운 멤버로 추가됩니다. 초대 승인여부는 멤버관리에서 확인이 가능합니다.",
+          "go_manage": "멤버 관리로 이동하기",
+          "invite_group_member": "그룹 멤버 초대하기",
+          "search_placeholder": "이메일을 검색하세요",
+          "no_name_found": "닉네임을 찾을 수 없어요.",
+          "invite_by_email": "이메일로 초대하기",
+          "message": "초대 메시지",
+          "message_placeholder": "안녕하세요. ㅇㅇ대학교 입니다.",
+          "back": "뒤로가기",
+          "invite": "초대하기",
+          "name": "이름",
+          "email": "이메일"
+        },
+
+        "join": {
+          "join_group": "그롭 가입하기",
+          "join_group_desc": "해당 그룹의 리더에게 가입 요청 메세지를 보내세요. 리더가 승인하면 그룹 멤버가 될 수 있어요.",
+          "message": "요청 메시지",
+          "message_placeholder": "안녕하세요. 프론트엔드 개발자 홍길동 입니다.",
+          "back": "뒤로가기",
+          "send": "가입 요청하기"
+        }
+      },
+
+      "about": {
+        "all": "전체보기",
+        "latest_nft": "최근 생성한 NFT",
+        "no_nft": "최근 생성한 NFT가 없습니다.",
+        "latest_member": "최근 가입한 멤버"
+      },
+
+      "nft": {
+        "all": "전체보기",
+        "career": "커리어 NFT",
+        "limited": "한정판 NFT",
+        "avatar": "아바타 NFT",
+        "no_nft": "최근 생성한 NFT가 없습니다."
+      },
+      
+      "members": {
+        "search_placeholder": "닉네임 또는 직업을 검색해보세요"
+      },
+      
+      "missions": {
+        "all": "전체보기",
+        "my_mission": "나의 미션",
+        "no_mission": "현재 미션이 없습니다."
+      },
+
+      "manage": {
+        "tab": {
+          "member": "멤버",
+          "mission": "미션",
+          "info": "그룹 정보"
+        },
+
+        "nft": {
+          "waiting": "NFT 발행 대기 중",
+          "published": "생성된 NFT",
+          "no_published": "최근 생성한 NFT가 없습니다.",
+          "user_project": "유저 / 프로젝트",
+          "request_nft": "요청한 NFT",
+          "request_date": "요청한 날짜",
+          "actions": "승인 여부",
+          "all_accept": "모두 승인하기"
+        },
+
+        "member": {
+          "waiting_join": "그룹 가입 대기 중",
+          "no_waiting_join": "아직 그룹 가입 요청내역이 없어요.",
+          "waiting_invite": "초대 승인 대기 중",
+          "no_waiting_invite": "아직 초대한 유저가 없어요.",
+          "all_members": "전체 멤버",
+          "user_info": "유저 정보",
+          "message": "요청 메시지",
+          "request_date": "요청한 날짜",
+          "actions": "승인 여부",
+          "all_accept": "모두 승인하기",
+          "announce_invite": "초대 알리기",
+          "search": "닉네임 또는 직업을 검색해보세요.",
+          "no_result": "검색 결과가 없습니다.",
+          "waiting": "대기 중",
+          "rejected": "거절함",
+          "delete": "삭제하기"
+        },
+
+        "mission": {
+          "create": "새로운 미션 생성하기",
+          "quit": "강제종료",
+          "eval": "수행평가",
+          "quit_title": "미션을 강제 종료 시킬까요?",
+          "quit_desc": "미션을 강제 종료시킬 경우, 더 이상 미션 달성여부를 업데이트할 수 없으며 멤버들은 NFT 보상을 수령할 수 없어요.",
+          "back": "뒤로가기",
+          "mission_quit": "미션 강제종료"
+        }
+      }
+    },
+
     "tabs": {
       "about": "그룹 소개",
       "nft": "NFT 증명서",
@@ -314,14 +452,57 @@
       "mission": "미션",
       "manage": "그룹관리"
     },
-    "create": {
-      "title": "Create Group", 
-      "required_text": "*는 필수입력 사항입니다.", 
-      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
-      "form": {
-        "type": "그룹 카테고리 *", 
-        "help_text": "해당 그룹은 조직 대표 이메일 인증이 필요해요. 대표 메일을 입력하고 인증코드를 확인해주세요."
-      }
+
+    "member": {
+      "leader": "그룹 리더"
+    }
+  },
+  
+
+  "mission": {
+    "card": {
+      "end_date_1": "미션 종료",
+      "end_date_2": "일 전",
+      "end": "미션 종료일",
+      "before_end": "미션 종료"
+    }
+  },
+
+  "achievement": {
+    "display_nft": {
+      "nft_type": "NFT 유형",
+      "nft_prop": "NFT 속성",
+      "publisher": "발행자",
+      "group_name": "그룹 이름",
+      "nft_desc": "NFT 설명",
+      "show_more": "더 보기",
+      "hide": "숨기기",
+      "close": "다음에 할래요",
+      "send_request": "발행 요청"
+    }
+  },
+  "interface": {
+    "group_type": {
+      "agency": "기업",
+      "education": "학교",
+      "community": "커뮤니티",
+      "authority": "기관"
+    },
+
+    "nft_type": {
+      "sbt": "커리어",
+      "erc721": "한정판"
+    },
+
+    "nft_image_type": {
+      "avatar": "아바타",
+      "image": "증명서",
+      "avatar+image": "아바타 + 증명서"
+    },
+
+    "sbt_type": {
+      "edu": "교육수료증",
+      "awards": "수상"
     }
   }
 }

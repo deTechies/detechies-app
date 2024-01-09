@@ -14,17 +14,18 @@ import { useRouter } from "next/navigation";
 export default function SelectedGroupMember({
   user,
   id,
+  lang,
   onSelectValue,
   onClickBack,
   onCompleteInvite
-}: // lang
+}: 
 {
   user: User;
   id: string;
+  lang: any;
   onSelectValue: (value: string) => void;
   onClickBack: () => void;
   onCompleteInvite: () => void;
-  // lang: any;
 }) {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -61,9 +62,12 @@ export default function SelectedGroupMember({
         />
       </div>
 
-      <div className="mb-3 text-title_s text-state-">초대 메세지</div>
+      <div className="mb-3 text-title_s text-state-">
+        {lang.details.profile_card.invite.message}
+      </div>
+
       <Textarea
-        placeholder="안녕하세요. ㅇㅇ대학교 입니다."
+        placeholder={lang.details.profile_card.invite.message_placeholder}
         className="resize-none"
         onChange={(e) => {
           if (setMessage) {
@@ -86,7 +90,7 @@ export default function SelectedGroupMember({
             className="max-w-[212px] grow px-0"
             onClick={onClickBack}
           >
-            뒤로가기
+            {lang.details.profile_card.invite.back}
           </Button>
         {/* </DialogClose> */}
 
@@ -96,7 +100,7 @@ export default function SelectedGroupMember({
           className="max-w-[212px] grow px-0"
           disabled={message.length > 100 || loading}
         >
-          초대하기
+          {lang.details.profile_card.invite.invite}
         </Button>
       </div>
     </section>

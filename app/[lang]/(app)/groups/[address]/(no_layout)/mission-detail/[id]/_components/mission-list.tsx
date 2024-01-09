@@ -32,7 +32,7 @@ export default function MissionList({
 
   const startCampaign = async () => {
     const result = await startMissionCampaign(mission.campaignId);
-    console.log(result);
+    // console.log(result);
 
     if (result) {
       toast({

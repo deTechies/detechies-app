@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 
 import { getClub } from "@/lib/data/groups";
@@ -8,8 +7,15 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
 import InviteGroupMember from "../invite-group-member/invite-group-member";
 
-export default async function GroupProfileCard({ id }: { id: string }) {
+export default async function GroupProfileCard({
+  id,
+  lang,
+}: {
+  id: string;
+  lang: any;
+}) {
   const groupDetail = await getClub(id);
+  // console.log(groupDetail);
 
   const snsLogos = {
     youtube: "/icons/youtube.png",
@@ -76,56 +82,57 @@ export default async function GroupProfileCard({ id }: { id: string }) {
 
       <CardContent className="flex flex-wrap items-end justify-between">
         <div className="flex flex-col flex-wrap mb-9 max-h-[110px] gap-x-2">
-          {urls.map((url, index) => {
-            if (index > 5) {
-              return;
-            }
+          {groupDetail.links &&
+            groupDetail.links.length &&
+            groupDetail.links.map((url: string, index: number) => {
+              if (index > 5) {
+                return;
+              }
 
-            return (
-              <Link
-                href={url}
-                className="flex items-center gap-3 rounded-md px-1.5 py-1.5"
-                target="_blank"
-                key={index}
-              >
-                <Image
-                  src={getSnsLogo(url)}
-                  alt={`sns logo image`}
-                  className="object-scale-down aspect-square"
-                  width={24}
-                  height={24}
-                ></Image>
-                {/* {url && truncateMiddle(url, 12)} */}
+              return (
+                <Link
+                  href={url}
+                  className="flex items-center gap-3 rounded-md px-1.5 py-1.5"
+                  target="_blank"
+                  key={index}
+                >
+                  <Image
+                    src={getSnsLogo(url)}
+                    alt={`sns logo image`}
+                    className="object-scale-down aspect-square"
+                    width={24}
+                    height={24}
+                  ></Image>
+                  {/* {url && truncateMiddle(url, 12)} */}
 
-                <span className="text-label_s text-accent-on-primary">
-                  {url}
-                </span>
-              </Link>
-            );
-          })}
+                  <span className="text-label_s text-accent-on-primary">
+                    {url}
+                  </span>
+                </Link>
+              );
+            })}
         </div>
 
-        {
-          groupDetail.userRole == "admin" && (
+        {groupDetail.userRole == "admin" && (
           <div className="flex justify-end gap-3 grow">
-            <Link href={`/groups/${id}/create/nft`} className="max-w-[212px] grow rounded-full">
+            <Link
+              href={`/groups/${id}/create/nft`}
+              className="max-w-[212px] grow rounded-full"
+            >
               <Button size="lg" variant="primary" className="w-full">
-                NFT 생성하기
+                {lang.details.profile_card.create_nft}
               </Button>
             </Link>
 
-            <InviteGroupMember groupId={id}></InviteGroupMember>
+            <InviteGroupMember groupId={id} lang={lang}></InviteGroupMember>
           </div>
-          )
-        }
-        
-        {
-          groupDetail.userRole == "none" && (
+        )}
+
+        {groupDetail.userRole == "none" && (
           <div className="flex justify-end gap-3 grow">
-            <JoinGroup groupId={groupDetail.id} details={groupDetail}/>
+            <JoinGroup groupId={groupDetail.id} details={groupDetail} />
           </div>
-          )
-        }
+        )}
       </CardContent>
     </Card>
   );

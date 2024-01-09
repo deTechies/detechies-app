@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 
 export default function GroupTaps({
   details,
@@ -12,6 +12,7 @@ export default function GroupTaps({
   lang: any;
 }) {
   const pathname = usePathname();
+  const params = useParams();
 
   const links = [
     {
@@ -52,7 +53,7 @@ export default function GroupTaps({
         return (
           <div className="mr-8" key={index}>
             <Link
-              href={`/groups/${details.id}/${link.href}`}
+              href={`/${params.lang}/groups/${details.id}/${link.href}`}
               aria-disabled={link?.disabled}
               className={`inline-flex items-center border-b-[3px] capitalize pb-3 text-subhead_m
             ${

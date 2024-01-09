@@ -38,11 +38,16 @@ export default async function GroupProfile({
       <GroupNft
         address={params.address.toString()}
         achievements={data.achievements}
+        lang={dictionary}
       ></GroupNft>
 
       <hr className="my-8 solid h-[1px] bg-border-div"></hr>
 
-      <GroupMember address={params.address.toString()} members={data.members} />
+      <GroupMember
+        address={params.address.toString()}
+        members={data.members}
+        lang={dictionary}
+      />
     </div>
   );
 }

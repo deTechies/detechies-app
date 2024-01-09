@@ -4,15 +4,18 @@ import ManageMember from "./manage-member";
 import ManageMission from "./manage-mission";
 import ManageNft from "./manage-nft";
 import ManageContracts from "./onchain-group";
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 
 export default async function GroupDetailManageLayout({
   params,
   searchParams,
 }: {
-  params: { address: string };
+  params: { address: string; lang: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const data = await getClub(params.address);
+  const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
     <div>
@@ -23,13 +26,13 @@ export default async function GroupDetailManageLayout({
             NFT
           </TabsTrigger>
           <TabsTrigger value="members" variant="button1">
-            멤버
+            {dictionary.group.details.manage.tab.member}
           </TabsTrigger>
           <TabsTrigger value="missions" variant="button1">
-            미션
+            {dictionary.group.details.manage.tab.mission}
           </TabsTrigger>
           <TabsTrigger value="info" variant="button1">
-            그룹 정보
+            {dictionary.group.details.manage.tab.info}
           </TabsTrigger>
         </TabsList>
 
@@ -37,17 +40,22 @@ export default async function GroupDetailManageLayout({
           <ManageMember
             details={data}
             searchParams={searchParams}
+            lang={dictionary}
           ></ManageMember>
         </TabsContent>
 
         <TabsContent value="nft">
-          <ManageNft details={data}></ManageNft>
+          <ManageNft
+            details={data}
+            lang={dictionary}
+          ></ManageNft>
         </TabsContent>
 
         <TabsContent value="missions">
           <ManageMission
             details={data}
             address={params.address}
+            lang={dictionary}
           ></ManageMission>
         </TabsContent>
         <TabsContent value="info">info</TabsContent>

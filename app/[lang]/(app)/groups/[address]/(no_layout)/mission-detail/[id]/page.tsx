@@ -13,10 +13,7 @@ export default async function MissionDetailPage({
   const userProgress = await getUsersMissionProgress(params.id)
   const missionDetails = await getMissionDetails(params.id)
 
-  console.log("TEST");
-  // console.log(userProgress)
-  console.log(missionDetails)
-
+  // console.log(missionDetails)
   
   return (
     <main className="grid w-full gap-6 mx-8 my-10 md:grid-cols-3">

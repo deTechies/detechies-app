@@ -10,7 +10,13 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
-export default function QuitMission({ campaignId }: { campaignId: string }) {
+export default function QuitMission({
+  campaignId,
+  lang,
+}: {
+  campaignId: string;
+  lang: any;
+}) {
   const [loading, setLoading] = useState(false);
 
   async function onClickQuit() {
@@ -45,22 +51,23 @@ export default function QuitMission({ campaignId }: { campaignId: string }) {
     <Dialog>
       <DialogTrigger className="grow" onClick={onClickTrigger}>
         <Button variant="secondary" size="lg" className="w-full">
-          강제종료
+          {lang.group.details.manage.mission.quit}
         </Button>
       </DialogTrigger>
 
       <DialogContent onClick={onClickContent}>
-        <h3 className="mb-4 text-subhead_s">미션을 강제 종료 시킬까요?</h3>
+        <h3 className="mb-4 text-subhead_s">
+          {lang.group.details.manage.mission.quit_title}
+        </h3>
 
         <div className="mb-6 text-body_m">
-          미션을 강제 종료시킬 경우, 더 이상 미션 달성여부를 업데이트할 수
-          없으며 멤버들은 NFT 보상을 수령할 수 없어요.
+          {lang.group.details.manage.mission.quit_desc}
         </div>
 
         <div className="flex justify-center gap-2">
           <DialogClose className="grow max-w-[212px]">
             <Button size="lg" variant="secondary" className="w-full">
-              뒤로가기
+              {lang.group.details.manage.mission.back}
             </Button>
           </DialogClose>
 
@@ -70,7 +77,7 @@ export default function QuitMission({ campaignId }: { campaignId: string }) {
             className="grow max-w-[212px]"
             onClick={onClickQuit}
           >
-            미션 강제종료
+            {lang.group.details.manage.mission.mission_quit}
           </Button>
         </div>
       </DialogContent>

@@ -11,9 +11,13 @@ import { Badge } from "../ui/badge";
 export default function MemberCard({
   address,
   info,
+  lang,
+  isOwner,
 }: {
   address: Address;
   info?: any;
+  lang?: any;
+  isOwner?: boolean;
 }) {
   const router = useRouter();
   // const { data, loading, error } = useFetchData<any>(`/polybase/${address}`);
@@ -30,24 +34,19 @@ export default function MemberCard({
       onClick={() => router.push(`/profiles/${info.id}`)}
     >
       <div className="relative w-full m-0 rounded-t-sm aspect-square bg-accent-secondary">
-        <IPFSImageLayer
-          hashes={info.nft ? info.nft : defaultAvatar}
-        />
+        <IPFSImageLayer hashes={info.nft ? info.nft : defaultAvatar} />
       </div>
 
       <div className="flex flex-col p-5">
-        <h5 className="mb-3 text-title_l">
-          {info.display_name}
-        </h5>
+        <h5 className="mb-3 text-title_l">{info.display_name}</h5>
 
         <div className="flex gap-1">
-          {/* {
-            info.leader == info.name && (
-              <Badge className="bg-text-secondary text-accent-on-primary">그룹 리더</Badge>
-            )
-          } */}
-          <Badge className="bg-text-secondary text-accent-on-primary" shape="md">그룹 리더</Badge>
-          
+          {isOwner && (
+            <Badge className="bg-text-secondary text-accent-on-primary">
+              {lang && lang.group.member.leader}
+            </Badge>
+          )}
+
           <Badge variant={"info"} shape="outline">
             {/* needs role (PM, designer, developer, ) */}
             {info.role ? info.role : "미설정"}

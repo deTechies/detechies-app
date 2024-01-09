@@ -58,6 +58,8 @@ export interface User {
 export enum GROUP_TYPE {
     COMMUNITY = 'community',
     AGENCY = 'agency',
+    ADUCATION = 'education',
+    AUTHORITY = 'authority',
   }
   
   export enum NFT_TYPE{
@@ -100,7 +102,6 @@ export enum GROUP_TYPE {
     MANAGEMENT = 'management',
     MARKETING = 'marketing',
     OTHER = 'other'
-    
   }
 
   export enum ProjectCategory {
