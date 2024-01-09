@@ -6,13 +6,12 @@ import { ABI, MUMBAI } from "@/lib/constants";
 import { createGroupContract } from "@/lib/data/groups";
 import { Club } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
-import { GitPullRequest } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
 
 export default function CreateGroupContract({ group }: { group: Club }) {
-  const { write, data, isLoading, error } = useContractWrite({
+  const { write, data, isLoading } = useContractWrite({
     address: MUMBAI.groupRegistry,
     abi: ABI.groupRegistry,
     functionName: "createGroup",
@@ -32,11 +31,12 @@ export default function CreateGroupContract({ group }: { group: Club }) {
           description: "Group contract created successfully",
         });
       }
+
+      refresh();
     };
 
     if (isFetched) {
       submitGroup();
-      refresh();
     }
   }, [isFetched, group.id, refresh]);
 
@@ -63,14 +63,13 @@ export default function CreateGroupContract({ group }: { group: Club }) {
         <CardHeader>
           <h1 className="text-title_l">Create Group Contract</h1>
         </CardHeader>
-        <CardContent>
+        <CardContent className="text-center">
           {data && data.hash}
           <p>
             This is a one time action. You can only create the group contract
             once. If you want to change the group details you can do it from the
             group page.
           </p>
-          <GitPullRequest size={"64"} className="animate-pulse" />
           <Button className="mt-4" onClick={createGroup} loading={isLoading}>
             Create Group Contract
           </Button>
