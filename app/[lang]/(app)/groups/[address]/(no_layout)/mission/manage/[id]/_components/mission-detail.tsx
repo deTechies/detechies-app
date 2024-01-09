@@ -114,23 +114,27 @@ export default function MissionDetail({
     for (const achievement of details.achievements) {
       if (missionState.totalPoints >= achievement.min_score) {
         console.log(
-          achievement.achievement.tokenId,
           getUser.id,
-          1,
-          club.contract
+          achievement.achievement.id,
+          achievement.achievement.tokenId,
+          "hash"
         );
-       /*  await distributeAchievement({
-          args: [achievement.achievement.tokenId, getUser.wallet, 1],
-        }); */
-        
-        console.log(getUser.id, achievement.achievement.id, achievement.achievement.tokenId, "hash")
-        const result= await rewardMissionNFT(getUser.id, achievement.achievement.id, achievement.achievement.tokenId, "hash")
+        const result = await rewardMissionNFT(
+          getUser.id,
+          achievement.achievement.id,
+          achievement.achievement.tokenId,
+          "hash"
+        );
+
+        if (result.ok) {
+          await distributeAchievement({
+            args: [achievement.achievement.tokenId, getUser.wallet, 1],
+          });
+        }
         toast({
           title: "Success",
-          description: <pre>
-            {JSON.stringify(result, null, 2)}
-          </pre>
-        })
+          description: <pre>{JSON.stringify(result, null, 2)}</pre>,
+        });
       }
     }
 

@@ -31,7 +31,7 @@ const profileFormSchema = z.object({
     .optional(),
   profession: z.string().optional(),
   description: z.string().optional(),
-  skills: z.array(z.string()).optional(),
+  skills: z.array(z.string().optional()).optional(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;

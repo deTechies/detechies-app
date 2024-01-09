@@ -121,6 +121,7 @@ export default function ProfileDetails({ showModal }: any) {
               disconnect()
               signOut()
               router.push('/onboard')
+
             }} variant="destructive">
               Sign out
             </Button>
