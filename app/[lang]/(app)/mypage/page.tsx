@@ -4,8 +4,8 @@ import { getUserProfile } from "@/lib/data/user";
 import ProfileDetails from "./_components/profile-details";
 import ProfileProjects from "./_components/profile-projects";
 import ProfileCertificates from "./_components/profile-certificates";
+import ProfileAwards from "./_components/profile-awards";
 import { User, Member } from "@/lib/interfaces";
-
 export default async function Dashboard({
   params,
 }: {
@@ -18,7 +18,8 @@ export default async function Dashboard({
     <main className='flex flex-col gap-8'>
         <ProfileDetails profile={profile} text={dictionary.mypage.main}/>
         <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} />
-        <ProfileCertificates clubMemberships={profile.clubs} text={dictionary.mypage.club}/>
+        <ProfileCertificates achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.education}/>
+        <ProfileAwards achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.awards}/>
     </main>
   );
 }

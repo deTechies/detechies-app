@@ -205,6 +205,11 @@
     }
   },
   "mypage": {
+    "awards": {
+      "awards": "Awards",
+      "issuer": "Issuer",
+      "issue_date": "Issue Date"
+    },
     "club":{
       "clubs": "Clubs",
       "new_club": "New club",
@@ -217,6 +222,11 @@
         "certificate_issuer":"Issuer",
         "certificate_description": "NFT Description"
       }
+    },
+    "education":{
+      "education": "Education",
+      "issuer": "Issuer",
+      "issue_date": "Issue Date"
     },
     "profile": {
       "following": "following",
