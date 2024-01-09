@@ -4,18 +4,15 @@ import { Session, getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { API_URL } from "../constants";
-import { authOptions } from "../helpers/authOptions";
-
+import { auth, authOptions } from "../helpers/authOptions";
 
 export async function getUserProfile(address?: string) {
   const session = (await getServerSession(authOptions)) as Session;
   if (!address) {
-
-    
-    if(!session){
+    if (!session) {
       redirect("/onboard");
     }
-    
+
     const user = await fetch(`${API_URL}/users/${session?.web3.address}`, {
       method: "GET",
       headers: {
@@ -88,6 +85,29 @@ export async function getUserSession() {
     redirect("/onboard");
   }
   return session.web3;
+}
+
+export async function getUserById(id: string) {
+  const session = await auth();
+  const res = await fetch(
+    `${API_URL}/users/profile/${id}`,
+
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.web3?.accessToken}`,
+      },
+    }
+  );
+  
+  const result = await res.json();
+  console.log(result)
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+  return result
 }
 
 export async function getUserConnections(address: string) {

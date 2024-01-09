@@ -11,7 +11,8 @@ export interface User {
     profile_details: ProfileDetails;
     projects: ProjectMember[];
     clubs: Member[];
-    login_method: 'metamask'|'web3auth'
+    achievement_rewards: AchievementReward[];
+    login_method: 'metamask'|'web3auth';
   }
   
   export interface ProfileDetails {
@@ -161,6 +162,7 @@ export enum GROUP_TYPE {
     type: string;
     on_chain: boolean;
     name: string;
+    tokenId: string;
     verified: boolean;
     created_at: Date;
   }
@@ -170,7 +172,7 @@ export enum GROUP_TYPE {
     achievement: Achievement;
     data: string;
     collected: boolean;
-    status: 'open' | 'closed' | 'pending';
+    status: 'open' | 'closed' | 'pending' | 'granted' | 'requested';
     distributed: boolean;
     created_at: Date;
   }

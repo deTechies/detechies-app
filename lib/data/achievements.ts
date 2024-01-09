@@ -123,4 +123,28 @@ export async function getUserAchievements(address?:string) {
 
    return response.json();
   }
+  
+  export async function rewardMissionNFT(userId:string, achievementId:string, tokenId:string,  data?:string){
+    const session = await getSession();
+
+    // Check for a valid session and required tokens
+    if (!session || !session.web3 || !session.web3.accessToken) {
+      throw new Error("Invalid session or missing access token");
+    }
+  
+    const response = await fetch(`${API_URL}/achievement-rewards/nft-reward`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.web3.accessToken}`,
+      },
+      body: JSON.stringify({
+        userId: userId,
+        achievementId: achievementId,
+        tokenId: tokenId,
+      }),
+    });
+  
+    return response.json();
+  }
    
