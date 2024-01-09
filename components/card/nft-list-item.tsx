@@ -6,8 +6,6 @@ import { useCallback } from "react";
 import { Badge } from "../ui/badge";
 import { Switch } from "../ui/switch";
 
-
-
 interface NftListItemProps {
   showSelect?: boolean;
   selected?: boolean;
@@ -78,7 +76,7 @@ export default function NftListItem({
       </div>
 
       <div className="flex flex-col items-start justify-start gap-3 p-5">
-        <div className="flex justify-between">
+        <div className="flex justify-between w-full">
           <span className="capitalize truncate text-title_l">
             {item?.name || "undefined"}
           </span>

@@ -8,6 +8,7 @@ export interface User {
     nft: string[];
     avatar: string;
     verified: boolean;
+    profile_details: ProfileDetails;
     projects: ProjectMember[];
     clubs: Member[];
     login_method: 'metamask'|'web3auth'
@@ -48,6 +49,7 @@ export interface User {
   export interface Club extends CreateClub{
     id: string;
     owner: string;
+    contract: string;
     blockchain_address?: string;
     files?: File[];
     members?: Member[];
@@ -156,6 +158,7 @@ export enum GROUP_TYPE {
     avatar: string;
     description:string;
     avatar_type: string | null;
+    type: string;
     on_chain: boolean;
     name: string;
     verified: boolean;
@@ -197,11 +200,12 @@ export enum GROUP_TYPE {
     members: ProjectMember[]
     files: File[]
     achievements: Achievement[]
-    created_at: string;
-    updated_at: string;
+    created_at: Date;
+    updated_at: Date;
   }
   
   export interface ProjectMember {
+    created_at: Date;
     memberId: string;
     user: User;
     percentage: number;

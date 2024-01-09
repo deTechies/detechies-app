@@ -114,7 +114,9 @@ const ConnectGithub = () => {
 
   return (
     <Link href="https://github.com/login/oauth/authorize?client_id=a9b9ed7176cb97a46f24&scope=gist">
-      <Badge>Connect Github</Badge>
+      <div className="bg-slate-300 text-slate-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-md dark:bg-slate-800 dark:text-slate-400">
+        Connect Github
+      </div>
     </Link>
   );
 };

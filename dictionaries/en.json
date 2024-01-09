@@ -222,8 +222,9 @@
       "following": "following",
       "followers": "followers",
       "token": "token",
-      "avatar_settings": "avatar settings",
-      "name": "name"
+      "avatar_settings": "Set avatar",
+      "name": "name",
+      "address": "Wallet Address"
     },
     "edit_profile": {
       "edit_profile": "edit profile",
@@ -252,7 +253,7 @@
     },
     "main": {
       "profile": "profile",
-      "edit": "edit",
+      "edit": "Edit",
       "description": "description"
     },
     "menu": {

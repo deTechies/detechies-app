@@ -39,7 +39,7 @@ export default async function ManageNft({ details }: { details: any }) {
               <PendingNftListItem
                 nft={item}
                 key={index}
-                contract={details.id}
+                contract={details.contract}
               ></PendingNftListItem>
             );
           })}

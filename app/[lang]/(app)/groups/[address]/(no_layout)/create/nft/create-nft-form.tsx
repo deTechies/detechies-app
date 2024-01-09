@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -16,23 +17,25 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import MediaUploader from "@/components/extra/media-uploader";
+import { ABI } from "@/lib/constants";
 import { uploadAchievement } from "@/lib/data/achievements";
 import {
   AVATAR_TYPE,
+  Club,
   NFT_IMAGE_TYPE,
   NFT_TYPE,
   SBT_TYPE,
 } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
-import { useState } from "react";
-import CompletedSuccess from "./completed-success";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Address, useContractWrite } from "wagmi";
+import CompletedSuccess from "./completed-success";
 
 const profileFormSchema = z.object({
   name: z
@@ -40,8 +43,8 @@ const profileFormSchema = z.object({
     .min(2, {
       message: "Please choose a name that is at least 2 characters.",
     })
-    .max(30, {
-      message: "The name must not be longer than 30 characters.",
+    .max(20, {
+      message: "The name must not be longer than 20 characters.",
     }),
   type: z.nativeEnum(SBT_TYPE).optional(),
   nft_type: z.nativeEnum(NFT_TYPE),
@@ -60,7 +63,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   avatar_type: AVATAR_TYPE.CLOTHES,
 };
 
-export function CreateNFTForm({ groupId }: { groupId: string }) {
+export function CreateNFTForm({ group }: { group: Club }) {
   const {
     form,
     setUploadedImage,
@@ -70,15 +73,11 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
     isLoading,
     completed,
     onSubmit,
-  } = useCreateNFTForm(groupId);
+  } = useCreateNFTForm(group.id, group);
 
 
   const router = useRouter();
-
-
-  if (completed) return <CompletedSuccess groupId={groupId}/>;
-
-
+  if (completed) return <CompletedSuccess groupId={group.id}/>;
   const onClickCancel = () => {
     router.back();
   };
@@ -401,7 +400,7 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
   );
 }
 
-const useCreateNFTForm = (groupId: string) => {
+const useCreateNFTForm = (groupId: string, group: Club) => {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -412,6 +411,12 @@ const useCreateNFTForm = (groupId: string) => {
   const [uploadedAvatar, setUploadedAvatar] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
+  
+  const { write, error } = useContractWrite({
+    address: group.contract as Address,
+    abi: ABI.group,
+    functionName: "addAchievement",
+  });
 
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
@@ -455,27 +460,32 @@ const useCreateNFTForm = (groupId: string) => {
     }
 
     const uploadData = { ...data, avatar, image, clubId: groupId };
-    toast({
-      title: "You are uploading this..:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify(uploadData, null, 2)}
-          </code>
-        </pre>
-      ),
-    });
+    
+    //upload nft data 
+    const metadata = await uploadContent(JSON.stringify({
+      image: 'https://ipfs.io/ipfs/' + uploadData.image,
+      name: uploadData.name,
+      description: uploadData.description,
+      attributes: {
+        type: uploadData.type,
+        avatar_type: uploadData.avatar_type,
+        image_type: uploadData.image_type,
+        nft_type: uploadData.nft_type,  
+      }
+    }));
+    
+    const tradeable = NFT_TYPE.SBT == uploadData.nft_type ? false : true;
+    
+    await write({
+      args: [metadata, tradeable],
+    })
 
     const result = await uploadAchievement(uploadData);
 
     console.log(result);
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(result, null, 2)}</code>
-        </pre>
-      ),
+      title: "Congratulations on your first nft!",
+      description: "Succesfully create an nft. ",
     });
 
     if (result) {

@@ -279,7 +279,8 @@
       "followers": "팔로워", 
       "token": "토큰", 
       "avatar_settings": "아바타 설정",
-      "name": "이름"
+      "name": "이름",
+      "address":"블록체인 계정주소"
     },
     "main": {
       "profile": "프로필", 

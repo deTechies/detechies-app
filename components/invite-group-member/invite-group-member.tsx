@@ -32,7 +32,6 @@ export default function InviteGroupMember({
   const [completeInviting, setCompleteInviting] = useState<boolean>(false);
   const { data: members, loading, error } = useFetchData<any[]>("/users");
 
-
   const router = useRouter();
 
   if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
@@ -44,10 +43,15 @@ export default function InviteGroupMember({
     return member.display_name.toLowerCase().includes(text || "");
   });
 
+  const onClickGoManage = () => {
+    router.push(`/groups/${groupId}/manage`);
+    setSelected(null);
+    setCompleteInviting(false);
+  }
+
   return (
-    <>
       <Dialog>
-        <DialogTrigger className="max-w-[230px] grow rounded-full">
+        <DialogTrigger className="max-w-[212px] grow rounded-full">
           <Button size="lg" variant="primary" className="w-full">
             멤버 초대하기
           </Button>
@@ -69,8 +73,7 @@ export default function InviteGroupMember({
                 <DialogClose>
                   <Button
                     size="lg"
-                    variant={"secondary"}
-                    onClick={() => router.push(`manage`)}
+                    onClick={onClickGoManage}
                   >
                     멤버 관리로 이동하기
                   </Button>
@@ -149,6 +152,5 @@ export default function InviteGroupMember({
           </section>
         </DialogContent>
       </Dialog>
-    </>
   );
 }

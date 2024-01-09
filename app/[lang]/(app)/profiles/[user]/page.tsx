@@ -16,20 +16,19 @@ export default async function Dashboard({
 }) {
   const profile = await getUserProfile(params.user) as User;
   const dictionary = (await getDictionary(params.lang)) as any;
+
   return (
     <div className="flex sm:flex-row flex-col m-8 gap-20">
       {/* LeftSide */}
       <div className="min-w-[330px] flex flex-col gap-8">
-        <Profile text={dictionary.mypage.profile} />
+        <Profile text={dictionary.mypage.profile} profile={profile}/>
       </div>
       {/* main */}
       <div className="grow">
         <main className="flex flex-col gap-8">
-          <pre>
-            {JSON.stringify(profile, null, 2)}
-          </pre>
+
           <ProfileDetails profile={profile} text={dictionary.mypage.main} />
-          <ProfileProjects
+          {/* <ProfileProjects
             projects={profile.projects}
             text={dictionary.mypage.project}
           />
@@ -37,7 +36,9 @@ export default async function Dashboard({
             clubMemberships={profile.clubs}
             text={dictionary.mypage.club}
           />
+          */}
         </main>
+        
         {/* <EditProfile /> */}
       </div>
     </div>
