@@ -14,6 +14,7 @@ export default async function Dashboard({
   const dictionary = (await getDictionary(params.lang)) as any;
   return (
     <main className='flex flex-col gap-8'>
+
         <ProfileDetails profile={profile} text={dictionary.mypage.main}/>
         <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} />
     </main>

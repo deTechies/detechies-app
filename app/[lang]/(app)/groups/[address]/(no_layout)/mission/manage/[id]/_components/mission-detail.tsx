@@ -2,28 +2,40 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
+import { ABI } from "@/lib/constants";
 import { uploadMissionChanges } from "@/lib/data/mission";
-import { Mission, MissionDetails } from "@/lib/interfaces";
+import { Club, Mission, MissionDetails } from "@/lib/interfaces";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Address, useContractWrite } from "wagmi";
+import ManageMissionReward from "./manage-mission-reward";
 import { MissionList } from "./mission-list";
 
 export default function MissionDetail({
   details,
+  club,
 }: {
   details: MissionDetails;
+  club: Club;
 }) {
   const [initialSelectedMissions, setInitialSelectedMissions] = useState<
     Mission[]
   >([]);
 
   const [selectedMissions, setSelectedMissions] = useState<Mission[]>([]);
-  const [totalPoints, setTotalPoints] = useState<number>(0);
 
-  //check the user and see if he has selected some of the missions
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    write: distributeAchievement,
+  } = useContractWrite({
+    address: club.contract as Address,
+    abi: ABI.group,
+    functionName: "distributeAchievement",
+  });
 
   const searchParams = useSearchParams();
-
   const selectedMember = searchParams.get("memberId");
 
   useEffect(() => {
@@ -40,16 +52,11 @@ export default function MissionDetail({
     setSelectedMissions(missionIds);
   }, [selectedMember, details.userProgress]);
 
-  useEffect(() => {
-    const calculateTotalPoints = (): number => {
-      return selectedMissions.reduce((total, missionId) => {
-        const mission = details.missions.find((m: Mission) => m === missionId);
-        return total + (mission ? mission.score : 0);
-      }, 0);
-    };
-
-    const result = calculateTotalPoints();
-    setTotalPoints(result);
+  const totalPoints = useMemo(() => {
+    return selectedMissions.reduce((total, missionId) => {
+      const mission = details.missions.find((m: Mission) => m === missionId);
+      return total + (mission ? mission.score : 0);
+    }, 0);
   }, [selectedMissions, details.missions]);
 
   // Function to handle mission selection
@@ -96,46 +103,62 @@ export default function MissionDetail({
       selectedMember
     );
 
+    //distribute
+
+    for (const achievement of details.achievements) {
+      if (totalPoints >= achievement.min_score) {
+        await distributeAchievement({
+          args: [achievement.achievement.tokenId, selectedMember, 1],
+        });
+      }
+    }
+
     toast(result);
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <h2 className="text-subhead_m">보상 수여하기 </h2>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-7 mt-7">
-        <MissionList
-          missions={details.missions}
-          onMissionSelect={handleMissionSelect}
-          selectedMissions={selectedMissions}
-        />
-        <section className="flex justify-between text-subhead_s">
-          <span>
-            달성한 미션 ( {selectedMissions.length} / {details.missions.length}{" "}
-            )
-          </span>
-          <div>
-            총 획득 점수{" "}
-            <span className="text-accent-primary text-subhead_l">
-              {totalPoints}
-            </span>{" "}
-            점
-          </div>
-        </section>
-        <section className="flex justify-between">
-          <Button size="lg" variant="secondary">
-            Go Back
-          </Button>
-          <Button
-            size="lg"
-            onClick={uploadSelectedMissions}
-            disabled={!selectedMember}
-          >
-            Upload Missions
-          </Button>
-        </section>
-      </CardContent>
-    </Card>
+    <div className="flex gap-4 flex-col">
+      <ManageMissionReward
+        achievements={details.achievements}
+        totalPoints={totalPoints}
+      />
+      <Card>
+        <CardHeader>
+          <h2 className="text-subhead_m">보상 수여하기 </h2>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-7 mt-7">
+          <MissionList
+            missions={details.missions}
+            onMissionSelect={handleMissionSelect}
+            selectedMissions={selectedMissions}
+          />
+          <section className="flex justify-between text-subhead_s">
+            <span>
+              달성한 미션 ( {selectedMissions.length} /{" "}
+              {details.missions.length} )
+            </span>
+            <div>
+              총 획득 점수{" "}
+              <span className="text-accent-primary text-subhead_l">
+                {totalPoints}
+              </span>{" "}
+              점
+            </div>
+          </section>
+          <section className="flex justify-between">
+            <Button size="lg" variant="secondary">
+              Go Back
+            </Button>
+            <Button
+              size="lg"
+              onClick={uploadSelectedMissions}
+              disabled={!selectedMember}
+            >
+              Save Progress
+            </Button>
+          </section>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
