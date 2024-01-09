@@ -19,7 +19,10 @@ export default function ProjectContribution({
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant={"primary"} size={"lg"} className={"px-6"}>Add Work</Button>
+        <Button variant={"primary"} size={"lg"} className={"px-6"}>
+          {/* Add Work */}
+          내 성과 등록하기
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="flex flex-col gap-6 px-8">
@@ -32,12 +35,12 @@ export default function ProjectContribution({
         </header>
 
         <section>
-          <h4 className="text-subhead_s mb-5">Project</h4>
+          <h4 className="mb-5 text-subhead_s">Project</h4>
           <ProjectSwitcher project={project} />
         </section>
 
         <section>
-          <h4 className="text-subhead_s mb-5">Contribution</h4>
+          <h4 className="mb-5 text-subhead_s">Contribution</h4>
 
           {project?.id && <ProjectContributionForm projectId={project.id} />}
         </section>

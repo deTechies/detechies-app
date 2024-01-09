@@ -5,27 +5,30 @@ import Link from "next/link";
 const Links = ({ links }: { links: string[] }) => {
   if (!links) return <></>;
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col">
       {links &&
         links.map((link, index) => {
           const site = getSiteFromLink(link);
           return (
             <Link
               key={index}
-              className="flex gap-4 items-center border-b-2 border-border-div pb-4 hover:text-accent-primary"
+              className="flex items-center gap-4 py-4 border-b-2 border-border-div hover:text-accent-primary"
               href={link}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="rounded-full bg-background-layer-2 h-8 w-8 items-center">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-background-layer-2">
                 <Avatar>
-                  <AvatarImage src={`/icons/${site}.png`} className="scale-down h-7 w-7 p-1"/>
+                  <AvatarImage src={`/icons/${site}.png`} className="p-1 scale-down h-7 w-7"/>
                   <AvatarFallback>
                     <ExternalLink size="16" />
                   </AvatarFallback>
                 </Avatar>
               </div>
-              {link}
+
+              <div className="truncate text-title_s">
+                {link}
+              </div>
             </Link>
           );
         })}

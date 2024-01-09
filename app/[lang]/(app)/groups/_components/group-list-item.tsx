@@ -17,7 +17,7 @@ interface ProjectItemProps {
   type: string;
   members: any[];
 }
-export default async function GroupListItem({
+export default function GroupListItem({
   details,
 }: {
   details: ProjectItemProps;

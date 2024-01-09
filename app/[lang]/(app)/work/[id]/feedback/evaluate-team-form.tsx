@@ -59,23 +59,6 @@ const criteria: Criterion[] = [
     maxText: "눈치를 안 보는 편",
     category: "일반적인 성향",
   },
-
-  {
-    id: "6",
-    name: " 시간에 둔감 vs 시간 중시",
-    ranks: 5,
-    minText: "원칙을 중시",
-    maxText: "원칙을",
-    category: "업무성향",
-  },
-  {
-    id: "7",
-    name: " 의견이 적은 편 vs 의견이 많은 편",
-    ranks: 5,
-    minText: "원칙을 중시",
-    maxText: "의견이 많은 편",
-    category: "업무성향",
-  },
   {
     id: "8",
     name: "고집이 없는 편 vs 고집이 많은 편",

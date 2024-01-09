@@ -1,7 +1,7 @@
 "use client";
 
 import { polygonMumbai } from "@/helpers/mumbai";
-import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
@@ -55,8 +55,22 @@ export default function Login() {
   }
 
   if (session?.web3?.address != address) {
-    //sign message 
-    return null
+    //sign message
+    return (
+      <div className="flex rounded-md  items-center gap-2">
+
+      <Button
+        size="sm"
+        className="text-md"
+        onClick={() => {
+           signOut();
+        }}
+      >
+        Change Account
+      </Button>  
+      </div>
+    )
+    
   }
   if (!isConnecting && address == session?.web3?.address) {
     return (

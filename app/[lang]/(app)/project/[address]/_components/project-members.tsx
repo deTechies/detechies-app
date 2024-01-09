@@ -8,49 +8,39 @@ import ProjectMemberItem from "./project-member-item";
 
 
 export default async function ProjectMembers({
-  members,
-  userRole,
+  details,
   projectId,
   lang,
 }: {
-  members: any[];
+  details: any;
   projectId: string;
-  userRole: string;
   lang: any
 }) {
   //getting all the members and holders of this project NFT.
 
-  
-
-  let pendingMembers: any[] = [];
-  if (userRole == "admin") {
-    pendingMembers = await getPendingProjectMembers(projectId);
-  }
-  
-  console.log(members[0].works);
+  // console.log(details.members);
 
   return (
     <section className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-4 p-4 px-6">
+      <Card className="flex flex-col gap-4 p-6">
         <header className="flex items-center justify-between">
           <h5 className="text-subhead_s text-text-primary ">
-            Members ({members.length})
+            Members ({details.members.length})
           </h5>
           
-          {userRole == 'none' && <JoinProject lang={lang} address={projectId} />}
-          {userRole == 'admin' && <InviteProjectMember lang={lang} projectId={projectId} />}
+          {details.userRole == 'none' && <JoinProject lang={lang} address={projectId} />}
+          {details.userRole == 'admin' && <InviteProjectMember lang={lang} projectId={projectId} />}
         </header>
       </Card>
 
       <div className="flex flex-col gap-4">
-        {members.length > 0 &&
-          members.map((member, index) => (
+        {details.members.length > 0 &&
+          details.members.map((member: any, index: number) => (
             <ProjectMemberItem
               projectId={projectId}
               key={index}
-              userRole={userRole}
+              userRole={details.userRole}
               lang={lang}
-              access={userRole != 'none'}
               details={member}
             />
           ))}
