@@ -29,7 +29,7 @@ export default async function ProfileDetails({
           </div>
           {profile.profile_details?.skills.map((skill:string)=>{
             return(
-              <div className="border-[1px] border-[#00D41D] text-[#00D41D] text-xs font-medium me-2 px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-green-900 dark:text-green-300">
+              <div className="border-[1px] border-[#00D41D] text-[#00D41D] text-xs font-medium me-2 px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-green-900 dark:text-green-300" key={skill}>
                 {skill}
               </div>
             )
