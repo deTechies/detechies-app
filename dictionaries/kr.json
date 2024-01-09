@@ -261,6 +261,29 @@
     }
   },
   "mypage": {
+    "awards": {
+      "awards": "수상이력",
+      "issuer": "발행자",
+      "issue_date": "발행일자"
+    },
+    "club":{
+      "clubs": "교육",
+      "new_club": "추가하기",
+      "group_type": "발행자",
+      "date_joined": "발행일자",
+      "training_certificate": "교육 수료증",
+      "certificate":{
+        "certificate_type": "NFT 유형",
+        "certificate_attribute": "NFT 속성",
+        "certificate_issuer":"발행자",
+        "certificate_description": "NFT 설명"
+      }
+    },
+    "education":{
+      "education": "교육",
+      "issuer": "발행자",
+      "issue_date": "발행일자"
+    },
     "profile": {
       "following": "팔로잉", 
       "followers": "팔로워", 
