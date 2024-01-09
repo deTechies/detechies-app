@@ -22,7 +22,7 @@ export default async function ManageMissionReward({
           achievements.map((item: any, index: number) => {
             return (
               <div key={index}>
-                <div className={`flex gap-5 rounded-sm border ${totalPoints >= item.min_score && 'border-accent-primary'}`}>
+                <div className={`flex gap-5 rounded-sm border p-5 ${totalPoints >= item.min_score && 'border-accent-primary'}`}>
                   <div className="w-[120px] h-[120px] relative bg-background-layer-2 rounded-sm">
                     <Image
                       src={`https://ipfs.io/ipfs/${item.achievement.image}`}

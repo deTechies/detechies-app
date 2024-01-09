@@ -1,7 +1,7 @@
 "use client";
 
 import { polygonMumbai } from "@/helpers/mumbai";
-import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
@@ -61,7 +61,7 @@ export default function Login() {
           size="sm"
           variant={"destructive"}
           className="text-md"
-          onClick={() => setShowModal(!showModal)}
+          onClick={() => signOut()}
 
         >
           Change Account

@@ -3,10 +3,10 @@ import Image from "next/image";
 
 import { getClub } from "@/lib/data/groups";
 import Link from "next/link";
+import InviteGroupMember from "../invite-group-member/invite-group-member";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
-import InviteGroupMember from "../invite-group-member/invite-group-member";
 
 export default async function GroupProfileCard({ id }: { id: string }) {
   const groupDetail = await getClub(id);
@@ -76,7 +76,7 @@ export default async function GroupProfileCard({ id }: { id: string }) {
 
       <CardContent className="flex flex-wrap items-end justify-between">
         <div className="flex flex-col flex-wrap mb-9 max-h-[110px] gap-x-2">
-          {urls.map((url, index) => {
+          {groupDetail.url && groupDetail.urls.map((url:string, index:number) => {
             if (index > 5) {
               return;
             }
