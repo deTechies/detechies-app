@@ -85,6 +85,30 @@ export async function getUserAchievements(address?:string) {
   
     return response.json();
   }
+  
+  export async function updateNFTRequest(achievementId:string, status: string, transactionHash?: string){
+    const session = await getSession();
+
+    // Check for a valid session and required tokens
+    if (!session || !session.web3 || !session.web3.accessToken) {
+      throw new Error("Invalid session or missing access token");
+    }
+  
+    const response = await fetch(`${API_URL}/achievement-rewards/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.web3.accessToken}`,
+      },
+      body: JSON.stringify({
+        achievementId: achievementId,
+        status: status, 
+        data: transactionHash,
+      }),
+    });
+  
+    return response.json();
+  }
 
   
   export async function getPendingAchievements(address:string){

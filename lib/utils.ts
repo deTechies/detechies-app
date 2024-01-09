@@ -80,7 +80,7 @@ export function truncateMiddle(input: string, maxLength: number): string {
 
 //convert a date into a format of 01.01.2023 for me 
 
-export function formatDate(stringDate: string):string {
+export function formatDate(stringDate: string | Date):string {
   const date = new Date(stringDate);
 
   const day = date.getDate()
@@ -89,7 +89,7 @@ export function formatDate(stringDate: string):string {
   return `${day}.${month}.${year}`
 }
 
-export function beginEndDates(beginDate: string, endDate?: string):string {
+export function beginEndDates(beginDate: string | Date, endDate?: string | Date):string {
   return endDate ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}` : `${formatDate(beginDate)} - ongoing`
 }
 

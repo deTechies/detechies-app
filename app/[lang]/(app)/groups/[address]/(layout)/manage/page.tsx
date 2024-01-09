@@ -41,7 +41,8 @@ export default async function GroupDetailManageLayout({
         </TabsContent>
 
         <TabsContent value="nft">
-          <ManageNft details={data}></ManageNft>
+          <ManageNft details={data}
+          ></ManageNft>
         </TabsContent>
 
         <TabsContent value="missions">

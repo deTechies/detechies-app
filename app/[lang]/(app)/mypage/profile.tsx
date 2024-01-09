@@ -1,12 +1,15 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getUserProfile } from "@/lib/data/user";
+import { User } from "@/lib/interfaces";
 import Image from "next/image";
 
-export default async function Profile({ text }: { text: any }) {
-  const profile = await getUserProfile();
+export default async function Profile({ text, profile }: { text: any, profile: User }) {
+  
+
   return (
-    <Card className="flex flex-col gap-5">
+    <Card className="flex flex-col gap-5 w-[400px]">
       <div className="flex">
         <div>
           <Image
@@ -25,9 +28,9 @@ export default async function Profile({ text }: { text: any }) {
         <div className="flex flex-col justify-between basis-auto ml-4">
           <div className="flex flex-col gap-3">
             <p className="text-title_l"># {profile.display_name}</p>
-            <span className="text-title_m">{profile.profile_details?.full_name}</span>
+            <span className="text-title_m mb-4">{profile.profile_details?.full_name ? ("Name: " + profile.profile_details?.full_name): ("Name: Not Set")}</span>
           </div>
-          <Button variant={"secondary"} size="sm">{text?.avatar_settings}</Button>
+          <Button disabled variant={"secondary"} size="sm">{text?.avatar_settings}</Button>
         </div>
       </div>
 
@@ -50,20 +53,12 @@ export default async function Profile({ text }: { text: any }) {
 
       <div className="grid border rounded-sm border-border-div">
         <div className="flex justify-between p-5 items-center">
-          <div className="flex items-center">
-            <figure className="flex items-center justify-center w-8 h-8 mr-2 bg-background-layer-2 rounded-full">
-              <Image
-                src={"/icons/token.png"}
-                width={20}
-                height={20}
-                className="aspect-square"
-                alt={"eth"}
-              />
-            </figure>
-            <h4 className="text-title_m"> CZN {text?.token}</h4>
-            
+          <div className="flex items-center mr-4 text-nowrap">
+            {text?.address}
           </div>
-          <h5 className="text-title_m mr-4 ">{profile?.credits }</h5>
+          <a href={`https://polygonscan.com/address/${profile.wallet}`} target="_blank" rel="noopener noreferrer">
+            <Badge>{profile.wallet.slice(0,5) + "..." + profile.wallet.slice(-4)}</Badge>
+          </a>
         </div>
       </div>
     </Card>

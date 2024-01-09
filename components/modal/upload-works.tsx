@@ -92,9 +92,8 @@ export default function UploadWorks({ type }: { type?: string }) {
     setLoading(true);
 
     const work = await prepareWorkData();
-    
+
     const uploadedContent = await uploadContent(work);
-    
 
     if (!name || !uploadedContent) {
       toast({
@@ -103,21 +102,23 @@ export default function UploadWorks({ type }: { type?: string }) {
       });
       return;
     }
-    
 
     setLoading(false);
   };
 
   return (
     <Dialog>
-      <DialogTrigger className="">
-        <Badge variant="secondary" className="text-title_s">UPLOAD</Badge>
+      <DialogTrigger>
+        <Button size="sm" variant="secondary">
+          {/* UPLOAD */}
+          등록하기
+        </Button>
       </DialogTrigger>
 
       <DialogContent>
         <h3 className="text-subhead_m">Upload you work</h3>
-        <section className="my-4 flex flex-col gap-3">
-          <header className="flex justify-between  items-center">
+        <section className="flex flex-col gap-3 my-4">
+          <header className="flex items-center justify-between">
             <h6 className="text-title_m">Files of works</h6>
             <Button size="sm" onClick={openFileDialog}>
               <PlusIcon size="1rem" />
@@ -127,11 +128,11 @@ export default function UploadWorks({ type }: { type?: string }) {
           {files.map((file, index) => (
             <Badge
               key={index}
-              className="text-accent-on-secondary flex justify-between"
+              className="flex justify-between text-accent-on-secondary"
             >
               {file.name}
               <X
-                className="hover:text-state-error text-text-secondary ml-2 cursor-pointer"
+                className="ml-2 cursor-pointer hover:text-state-error text-text-secondary"
                 onClick={() => removeFile(index)}
                 size="1.25rem"
               />
@@ -147,13 +148,13 @@ export default function UploadWorks({ type }: { type?: string }) {
           />
         </section>
 
-        <section className="my-4 flex flex-col gap-2">
+        <section className="flex flex-col gap-2 my-4">
           <header className="flex justify-between">
             <h6 className="text-title_m">Links of works</h6>
           </header>
 
           {links.map((link, index) => (
-            <div key={index} className="flex justify-between items-center my-2">
+            <div key={index} className="flex items-center justify-between my-2">
               <a
                 href={link}
                 target="_blank"
@@ -201,8 +202,6 @@ export default function UploadWorks({ type }: { type?: string }) {
           Upload works
         </Button>
       </DialogContent>
-
-
     </Dialog>
   );
 }
