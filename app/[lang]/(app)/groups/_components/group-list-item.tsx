@@ -24,7 +24,7 @@ const GroupListItem = React.memo(
     // const group = await getClub(details.id);
 
     return (
-      <Link href={`/groups/${details.id}`}>
+      <Link href={`groups/${details.id}`}>
         <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] pb-6 px-6 gap-0">
           <section className="flex flex-col items-center justify-center max-w-full text-center">
             <Avatar className="w-24 h-24 aspect-square bg-[#C7E2FF] mb-2">
