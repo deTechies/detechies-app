@@ -7,7 +7,7 @@ import profile from "./abi/profile.abi.json";
 import project from "./abi/project.abi.json";
 import projectRegistry from "./abi/projectRegistry.abi.json";
 const MUMBAI = {
-    groupRegistry: "0x81552b688eeE0b1daBeEc3e9b6a45ff2FF062e05" as Address,
+    groupRegistry: "0xbdb946fd58e083abed65ccfddc8d2bdb3662a1a7" as Address,
     projectRegistry: "0x1Cf9a47f91DccA1D18184203C73B0f3988b38e3c" as Address,
     profile: "0xee044eC69DEFAc105376ee55C0BE458B5D843045" as Address,
 }

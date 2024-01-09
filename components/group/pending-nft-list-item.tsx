@@ -1,10 +1,13 @@
 "use client";
 import IPFSImageLayer from "@/components/ui/layer";
-import { defaultAvatar } from "@/lib/constants";
+import { ABI, defaultAvatar } from "@/lib/constants";
+import { updateNFTRequest } from "@/lib/data/achievements";
 import { formatDate } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Address, useContractWrite, useWaitForTransaction } from "wagmi";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
@@ -18,26 +21,58 @@ export default function PendingMemberListItem({
 }) {
   const router = useRouter();
 
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    write: distributeAchievement,
+  } = useContractWrite({
+    address: contract as Address,
+    abi: ABI.group,
+    functionName: "distributeAchievement",
+  });
+
+  const { isFetched } = useWaitForTransaction(data);
+
+  useEffect(() => {
+    const submitNFT = async () => {
+      const result = await updateNFTRequest(nft.id, "accepted", data?.hash);
+      toast({
+        title: "Success",
+        description: "succesfully distirbuted the nft. ",
+      });
+    };
+
+    if (isFetched) {
+      submitNFT();
+      router.refresh();
+    }
+  }, [isFetched, data, nft.id, router]);
+
   const acceptNFT = async () => {
-    toast({
-      title: "Accepting NFT",
-      description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
-    })
+    if (!nft.achievement.tokenId || !nft.user.wallet || !contract) {
+      toast({
+        title: "Error",
+        description: "Failed to accept NFT",
+      });
+    }
+    await distributeAchievement({
+      args: [nft.achievement.tokenId, nft.user.wallet, 1],
+    });
+
+    //make sure that it works correct so we can update the nft data.
   };
-  const rejectEmployee = async () => {
+  const rejectNFT = async () => {
     //
     toast({
-      title: "Accepting NFT",
+      title: "rejecting NFT",
       description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
-    })
+    });
   };
 
   const dummy_nft = {
-    hash: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-    name: "default_blanket",
-    chips: ["limited", "avatar"],
+    chips: ["채용", "인증", "채용"],
   };
-
   return (
     <div
       className="grid grid-cols-[262px_1fr_90px_auto] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center"
@@ -63,7 +98,7 @@ export default function PendingMemberListItem({
         <div className="relative w-20 h-20 bg-background-layer-2">
           <Image
             src={`https://ipfs.io/ipfs/${nft.achievement.image}`}
-            alt={dummy_nft.name}
+            alt="achievement_image"
             fill={true}
             className="rounded-sm"
           />
@@ -97,16 +132,17 @@ export default function PendingMemberListItem({
 
       <div className="flex gap-3">
         <Button
-          onClick={acceptNFT}
+          onClick={rejectNFT}
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
+          loading={isLoading}
         >
           <X className="w-6 h-6"></X>
         </Button>
 
         <Button
-          onClick={rejectEmployee}
+          onClick={acceptNFT}
           className="p-2 rounded-md w-14 h-14"
           size="icon"
         >

@@ -31,18 +31,20 @@ export async function getClub(clubId: string) {
   return response.json();
 }
 
-export async function acceptGroupInvitations(projectMemberId: string){
+export async function acceptGroupInvitations(projectMemberId: string) {
   const session = await getSession();
 
-  const response = await fetch(`${API_URL}/members/accept/invite/${projectMemberId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${session?.web3?.accessToken}`,
-    },
-  });
+  const response = await fetch(
+    `${API_URL}/members/accept/invite/${projectMemberId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.web3?.accessToken}`,
+      },
+    }
+  );
 
-  
   return response.json();
 }
 
@@ -60,7 +62,21 @@ export async function createGroup(formData: CreateClub) {
   return response.json();
 }
 
-export async function joinGroup(data: joinGroupDto){
+//get the interface for the group
+export async function createGroupContract(id: string, contract: string) {
+  const session = await getSession();
+  const response = await fetch(`${API_URL}/clubs/add-contract/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    body: JSON.stringify({ contract: contract }),
+  });
+  return response.json();
+}
+
+export async function joinGroup(data: joinGroupDto) {
   const session = await getSession();
   const response = await fetch(`${API_URL}/members/join`, {
     method: "POST",
@@ -68,16 +84,14 @@ export async function joinGroup(data: joinGroupDto){
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-    body: JSON.stringify({...data, userId: session?.web3?.address}),
+    body: JSON.stringify({ ...data, userId: session?.web3?.address }),
   });
   return await response.json();
-
 }
-
 
 export async function inviteGroupMember(
   userId: string,
-  message:string,
+  message: string,
   clubId: string
 ) {
   const session = await getSession();
@@ -86,7 +100,7 @@ export async function inviteGroupMember(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
-    }, 
+    },
     body: JSON.stringify({
       userId: userId,
       clubId: clubId,
@@ -98,7 +112,7 @@ export async function inviteGroupMember(
   return response.json();
 }
 
-export async function acceptClubMember(memberId: string){
+export async function acceptClubMember(memberId: string) {
   const session = await getSession();
 
   const response = await fetch(`${API_URL}/members/accept/member/${memberId}`, {
@@ -108,10 +122,9 @@ export async function acceptClubMember(memberId: string){
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
   });
-  
+
   return response.json();
 }
-
 
 /* export async function getGroupDetail(address: string) {
   const response = await fetch(`${API_URL}/group/single/${address}`, {
@@ -132,9 +145,8 @@ export async function acceptClubMember(memberId: string){
 export async function getPendingMembers(address: string) {
   const session = await auth();
   const response = await fetch(`${API_URL}/members/invites/${address}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
