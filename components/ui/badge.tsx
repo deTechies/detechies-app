@@ -4,7 +4,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center whitespace-nowrap ",
+  "inline-flex items-center whitespace-nowrap",
   {
     variants: {
       variant: {
