@@ -34,7 +34,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export default async function RequestNFTModal({ groups }: { groups: any[] }) {
+export default function RequestNFTModal({ groups }: { groups: any[] }) {
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
@@ -173,8 +173,8 @@ export default async function RequestNFTModal({ groups }: { groups: any[] }) {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Badge variant="accent">Add</Badge>
+      <DialogTrigger className="ml-auto">
+        <Button size="sm" variant="secondary">요청하기</Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-[500px] gap-0">

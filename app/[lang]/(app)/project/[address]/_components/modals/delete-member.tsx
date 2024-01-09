@@ -28,21 +28,23 @@ export default function DeleteMember({
       <DialogTrigger>
         내보내기
       </DialogTrigger>
-      <DialogContent className="flex flex-col">
-        <h4 className="text-title_m">
+      <DialogContent className="flex flex-col gap-0 px-8 py-7">
+        <h4 className="mb-4 text-subhead_s">
             선택한 구성원을 프로젝트에서 내보낼까요?
         </h4>
-        <p className="text-body_s">
+        <p className="mb-6 text-body_m">
             내보낼 경우 멤버의 프로젝트 활동 정보가 모두 삭제돼요. 정말로 내보낼까요?
         </p>
-        <div className="flex justify-center gap-4">
-          <DialogClose>
-            <Button size="lg" variant="secondary">
+
+        <div className="flex justify-center gap-2">
+          <DialogClose className="w-full max-w-[212px]">
+            <Button size="lg" variant="secondary" className="w-full">
               뒤로가기
             </Button>
           </DialogClose>
+          
           <Button size="lg" variant="destructive" onClick={deleteMember}>
-            평가 요청하기
+            내보내기
           </Button>
         </div>
       </DialogContent>

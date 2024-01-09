@@ -25,7 +25,7 @@ export default function CompletedSuccess({ groupId }: any) {
         </h5>
 
         <section className="flex justify-center gap-2 mt-4 shrink-0">
-          <Link href={`/groups/${groupId}`} passHref>
+          <Link href={`/groups/${groupId}/manage`} passHref>
             <Button variant="secondary" size="lg">
               그룹 관리 바로가기
             </Button>
