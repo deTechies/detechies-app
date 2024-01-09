@@ -115,6 +115,7 @@ export default function ProfileDetails({ showModal }: any) {
               />
             ))}
           </div>
+          
           <div className="grid grid-cols-2 gap-4">
             <Button onClick={() => {
               disconnect()
