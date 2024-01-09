@@ -1,15 +1,47 @@
 "use client";
-import { Achievement } from "@/lib/interfaces";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Badge } from "../ui/badge";
 import { Switch } from "../ui/switch";
 
+export interface NFTItem {
+  contract: string;
+  id: string;
+  tokenId: number;
+  name:string;
+  image: string;
+  description:string;
+  category:string;
+  nft_type:string;
+  achievement: {
+    tokenId: number;
+    group: {
+      id: any;
+      addr: string;
+    };
+  };
+  group: {
+    id: any;
+    addr: string;
+  };
+  metadata: {
+    name: string;
+    image: string;
+    category: string;
+    description: string;
+    attributes: {
+      trait_type: string;
+      value: string;
+    }[];
+  };
+}
+
 interface NftListItemProps {
   showSelect?: boolean;
   selected?: boolean;
-  item: Achievement;
+  item: NFTItem;
 }
 
 export default function NftListItem({
@@ -38,66 +70,36 @@ export default function NftListItem({
       : url;
   }
 
-
-  
-
-  // console.log(item);
+  const avatarAttribute = item.metadata?.attributes?.find(attr => attr.trait_type === "avatar");
 
   return (
     <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
       <div className="relative object-scale-down w-full m-0 aspect-square ">
-        {showSelect && item.avatar_type && (
+        {showSelect && avatarAttribute && (
           <Switch
             className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
             checked={selected}
             onCheckedChange={() => {
-              router.push(
-                pathname +
-                  "?" +
-                  createQueryString(
-                    item.avatar_type ? item.avatar_type : "",
-                    removeIPFSPrefix(item.avatar)
-                  )
-              );
+              router.push(pathname + '?' + createQueryString(avatarAttribute.value, removeIPFSPrefix(item.image)));
             }}
           />
         )}
         <Image
-          src={
-            item.image
-              ? DEFAULT_IPFS_URL + item.image
-              : DEFAULT_IPFS_URL + item.avatar
-          }
+          src={item.image ? DEFAULT_IPFS_URL + item.image : DEFAULT_IPFS_URL + "bafkreigodckc2cne7l6kcirr7hzzcpa7q7yes7xj72wl7t4lb44xfx4r7e"}
           alt="nft_list_item"
           className="object-scale-down rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
           fill={true}
           priority={true}
         />
       </div>
-
       <div className="flex flex-col items-start justify-start gap-3 p-5">
-        <div className="flex justify-between w-full">
-          <span className="capitalize truncate text-title_l">
-            {item?.name || "undefined"}
-          </span>
-        </div>
-        {/* <Link className="capitalize truncate text-title_l" href="#">
+        <Link 
+          className="capitalize truncate text-title_l" 
+          href="#"
+        >
           {item?.name || "undefined"}
-        </Link> */}
-
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="info" shape="category">
-            {item.nft_type == "sbt"
-              ? "커리어 NFT"
-              : item.nft_type == "erc721"
-              ? "한정판 NFT"
-              : "not found"}
-          </Badge>
-
-          {
-            item?.avatar && <Badge variant="warning" shape="category">아바타</Badge>
-          }
-        </div>
+        </Link>
+        <Badge variant="info" className="flex justify-center py-2 uppercase">{item.nft_type || "not found"}</Badge>
       </div>
     </section>
   );

@@ -1,15 +1,16 @@
 "use client";
-import { ABI, defaultAvatar } from "@/lib/constants";
-import { acceptClubMember } from "@/lib/data/groups";
-import { formatDate } from "@/lib/utils";
-import { Check, X } from "lucide-react";
+import useFetchData from "@/lib/useFetchData";
 import { useRouter } from "next/navigation";
-import { Address, useContractWrite } from "wagmi";
+import IPFSImageLayer from "../ui/layer";
+import { Skeleton } from "../ui/skeleton";
+import { Card } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import IPFSImageLayer from "../ui/layer";
+import { Check, X } from "lucide-react";
+import { Address, useContractWrite } from "wagmi";
+import { ABI, defaultAvatar } from "@/lib/constants";
 import { toast } from "../ui/use-toast";
+import { formatDate } from "@/lib/utils"
 
 export default function PendingMemberListItem({
   profile,
@@ -35,8 +36,8 @@ export default function PendingMemberListItem({
 
   const acceptEmployee = async () => {
     //in here we want to have the profile.id
-    if(!profile.id){
-        
+
+    if (!profile.profile.id) {
       toast({
         title: "Error minting ",
         description:
@@ -44,18 +45,16 @@ export default function PendingMemberListItem({
         variant: "destructive",
       });
     }
-      
-      const result = await acceptClubMember(profile.id);
-      
-      toast({
-        title: "Success",
-        description: "Succesfully accepted member.",
+    //also update the status of this employee into the company.
+    const url = process.env.NEXT_PUBLIC_API || `http://localhost:4000`;
+    
+    await fetch(`${url}/polybase/nft/accepted/${profile.profile.id}`, {})
+      .then((res) => {
+        console.log(res);
       })
-      
-      router.refresh()
+      .catch((err: Error) => console.log(err));
 
-      console.log(result)
-
+    await write({ args: [profile.profile.id] });
 
     //await write();
   };
@@ -85,8 +84,8 @@ export default function PendingMemberListItem({
         <div>
           <div className="mb-2 text-title_l">{profile.user.display_name}</div>
 
-          <Badge variant="info" shape="outline">
-            {profile.role ? profile.role : "미설정"}
+          <Badge variant={"outline"}>
+            {profile.user.role ? profile.user.role : "미설정"}
           </Badge>
         </div>
       </div>
@@ -96,9 +95,8 @@ export default function PendingMemberListItem({
           {/*
             message 
           */}
-          {
-            profile.message
-          }
+          안녕하세요. QA엔지니어 홍길동 입니다. 그룹에 가입하고자 합니다. 승인
+          부탁드립니다!
         </span>
       </Card>
 
@@ -108,13 +106,13 @@ export default function PendingMemberListItem({
             The create time must be changed to the application time.
             가입시간을 신청시간으로 바꿔야함 
           */}
-          {formatDate(profile.created_at)}
+          {formatDate(profile.user.created_at)}
         </span>
       </div>
 
       <div className="flex gap-3">
         <Button
-          onClick={rejectEmployee}
+          onClick={acceptEmployee}
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
@@ -123,7 +121,7 @@ export default function PendingMemberListItem({
         </Button>
 
         <Button
-          onClick={acceptEmployee}
+          onClick={rejectEmployee}
           className="p-2 rounded-md w-14 h-14"
           size="icon"
         >

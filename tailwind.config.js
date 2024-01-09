@@ -70,16 +70,6 @@ module.exports = {
           status: "var(--state-status-primary)",
           "status-secondary": "var(--state-status-secondary)",
         },
-        type: {
-          purple: {
-            primary: "var(--type-purple-primary)",
-            secondary: "var(--type-purple-secondary)",
-          },
-          yellow: {
-            primary: "var(--type-yellow-primary)",
-            secondary: "var(--type-yellow-secondary)",
-          },
-        },
         black: {
           DEFAULT: "#101113",
           800: "#101113",
@@ -127,131 +117,99 @@ module.exports = {
         sm: ["0.875rem", { lineHeight: "0.875rem" }, { fontWeight: "400" }],
         md: [
           "1rem",
-          { 
-            lineHeight: "2.125rem",
-            fontWeight: "700",
-            letterSpacing: "0.5px" 
-          },
+          { lineHeight: "2.125rem" },
+          { fontWeight: "700" },
+          { letterSpacing: "0.5px" },
         ],
         heading_l: [
           "3rem", // 
-          { 
-            lineHeight: 1.3,
-            fontWeight: "700",
-            letterSpacing: "0px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "700" },
+          { letterSpacing: "0px" },
         ],
         heading_m: [ // 34px 1.3 0px 700
           "2.125rem", 
-          { 
-            lineHeight: 1.3,
-            fontWeight: "700",
-            letterSpacing: "0px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "700" },
+          { letterSpacing: "0px" },
         ],
         heading_s: [ // 28px 1.3 0 700
           "1.75rem",  
-          { 
-            lineHeight: 1.3,
-            fontWeight: "700",
-            letterSpacing: "0px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "700" },
+          { letterSpacing: "0px" },
         ],
         subhead_l: [ // 26px 1.3 0 600
           "1.625rem",
-          { 
-            lineHeight: 1.3,
-            fontWeight: "600",
-            letterSpacing: "0px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "600" },
+          { letterSpacing: "0px" },
         ],
         subhead_m: [ // 24px 1.3 0 600
           "1.5rem",
-          { 
-            lineHeight: 1.3,
-            fontWeight: "600",
-            letterSpacing: "0px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "600" },
+          { letterSpacing: "0px" },
         ],
         subhead_s: [ // 20px 1.3 0 600
           "1.25rem", 
-          { 
-            lineHeight: 1.3,
-            fontWeight: "600",
-            letterSpacing: "0px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "600" },
+          { letterSpacing: "0px" },
         ],
         title_l: [ // 18px 1.3 0.1px 600
           "1.125rem",
-          { 
-            lineHeight: 1.3,
-            fontWeight: "600",
-            letterSpacing: "0.1px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "600" },
+          { letterSpacing: "0.1px" },
         ],
         title_m: [ // 16 1.3 0.15px 600
           "1rem",
-          { 
-            lineHeight: 1.3,
-            fontWeight: "600",
-            letterSpacing: "0.15px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "600" },
+          { letterSpacing: "0.15px" },
         ],
         title_s: [ // 14px 1.4 0.15px 600
           "0.875rem",
-          { 
-            lineHeight: "1.4",
-            fontWeight: "600",
-            letterSpacing: "0.15px" 
-          },
+          { lineHeight: "1.4" },
+          { fontWeight: "600" },
+          { letterSpacing: "0.15px" },
         ],
         label_l: [ // 16px 1.3 0.4px 400
           "1rem",
-          { 
-            lineHeight: 1.3,
-            fontWeight: "400",
-            letterSpacing: "0.4px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "400" },
+          { letterSpacing: "0.4px" },
         ],
         label_m: [ // 14px 1.3 0.4px 400
           "0.875rem",
-          { 
-            lineHeight: 1.3,
-            fontWeight: "400",
-            letterSpacing: "0.4px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "400" },
+          { letterSpacing: "0.4px" },
         ],
         label_s: [ // 12px 1.3 0.4px 400
           "0.75rem",
-          { 
-            lineHeight: 1.3,
-            fontWeight: "400",
-            letterSpacing: "0.4px" 
-          },
+          { lineHeight: 1.3 },
+          { fontWeight: "400" },
+          { letterSpacing: "0.4px" },
         ],
         body_l: [ // 18px 1.5 0.4px 400
           "1.125rem",
-          { 
-            lineHeight: 1.5,
-            fontWeight: "400",
-            letterSpacing: "0.4px" 
-          },
+          { lineHeight: 1.5 },
+          { fontWeight: "400" },
+          { letterSpacing: "0.4px" },
         ],
         body_m: [ // 16px 1.5 0.5px 400
           "1rem",
-          { 
-            lineHeight: 1.5,
-            fontWeight: "400",
-            letterSpacing: "0.5px" 
-          },
+          { lineHeight: 1.5 },
+          { fontWeight: "400" },
+          { letterSpacing: "0.5px" },
         ],
         body_s: [ // 14px 1.5 0.5px 400
           "0.875rem",
-          { 
-            lineHeight: 1.5,
-            fontWeight: "400",
-            letterSpacing: "0.5px" 
-          },
+          { lineHeight: 1.5 },
+          { fontWeight: "400" },
+          { letterSpacing: "0.5px" },
         ],
       },
       fontFamily: {

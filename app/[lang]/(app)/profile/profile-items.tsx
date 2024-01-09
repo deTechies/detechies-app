@@ -1,9 +1,8 @@
 
-import NftListItem from "@/components/card/nft-list-item";
+import NftListItem, { NFTItem } from "@/components/card/nft-list-item";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getUserAchievements } from "@/lib/data/achievements";
-import { Achievement } from "@/lib/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +12,7 @@ export default async function ProfileItems({address}:{address?:string}) {
 
 
   
-  const items:Achievement[] = await getUserAchievements(address);
+  const items:NFTItem[] = await getUserAchievements(address);
   
 
   return (
@@ -27,8 +26,8 @@ export default async function ProfileItems({address}:{address?:string}) {
       <CardContent className="flex flex-col gap-4">
         {items && items.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {items.map((item: Achievement, index: number) => (
-              <NftListItem key={index} item={item} showSelect={!address}  />
+            {items.map((item: any, index: number) => (
+              <NftListItem key={index} item={item.achievement} showSelect={!address}  />
             ))}
           </div>
         ) : (

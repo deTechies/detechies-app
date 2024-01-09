@@ -58,7 +58,7 @@ export const authOptions = {
     }),
   ],
   pages: {
-    signIn: "/onboard",
+    signIn: "/auth/signin",
     signOut: "/auth/signout",
     error: "/auth/error", // Error code passed in query string as ?error=
   },

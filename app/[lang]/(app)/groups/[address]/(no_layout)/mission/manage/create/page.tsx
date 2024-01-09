@@ -20,8 +20,7 @@ export default async function CreateMissionPage({ params }: { params: any }) {
   const achievements = await getGroupAchievements(params.address);
 
   return (
-    // Temporarily insert fixed values ​​(to work with grid later)
-    <main className="m-8  w-full max-w-[60rem] flex">
+    <main className="m-8  w-full max-w-2xl flex">
       <Wizard clubId={params.address} achievements={achievements}/>
     </main>
   );

@@ -1,12 +1,17 @@
+import { NFTItem } from "@/components/card/nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   getGroupAchievements,
   getPendingAchievements,
 } from "@/lib/data/achievements";
+<<<<<<< HEAD
 import { Achievement } from "@/lib/interfaces";
 import Link from "next/link";
 
+=======
+import { CreateAchievement } from "./create-achievement";
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
 
 export default async function GroupAchievements({
   address,
@@ -27,7 +32,7 @@ export default async function GroupAchievements({
 
       <CardContent className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {achievements &&
-          achievements.map((item: Achievement, index: number) => (
+          achievements.map((item: NFTItem, index: number) => (
             <DisplayNFT details={item}  key={index} />
           ))}
       </CardContent>

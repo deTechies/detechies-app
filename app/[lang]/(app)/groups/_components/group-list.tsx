@@ -1,22 +1,14 @@
-"use client"
-import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
-import OnlySearch from "@/components/extra/only-search";
-import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowRight } from "lucide-react";
 
 //TODO: Add type dependency
 export default function GroupList({
-  groups,
-  profileWallet,
-}: {
-  groups: any[];
-  profileWallet: string;
-}) {
+  groups} : {groups: any[]}) {
+  
   //const { search: searchValue } = searchParams as { [key: string]: string };
 
+
   //const resultsText = products.length > 1 ? 'results' : 'result';
+<<<<<<< HEAD
 
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
@@ -97,4 +89,15 @@ export default function GroupList({
       </Link>
     </Tabs>
   );
+=======
+  
+  return <div className="w-full grid md:grid-cols-3 gap-5 items-stretch">
+    { 
+      groups.map((group: any, key:number) => {
+        return <GroupListItem key={key} details={group} />
+      })
+    }
+  </div>;
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
 }
+

@@ -1,25 +1,48 @@
+
+import { getDictionary } from "@/get-dictionary";
 // import { Locale } from "@/i18n.config";
 
-import PendingNftListItem from "@/components/group/pending-nft-list-item";
+import { NFTItem } from "@/components/card/nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
+import PendingNftListItem from "@/components/group/pending-nft-list-item";
 import { Button } from "@/components/ui/button";
-import { getPendingAchievements } from "@/lib/data/achievements";
-import { Achievement } from "@/lib/interfaces";
 
 export default async function ManageNft({ details }: { details: any }) {
   // const dictionary = await getDictionary(params.lang);
-  
-  //getting all the pending achievements 
-  
-  const pendingAchievements = await getPendingAchievements(details.id);
+
+  const dummy_nft_item = {
+    contract: "test",
+    id: "asdfasdfasdf",
+    tokenId: 0,
+    achievement: {
+      tokenId: 0,
+      group: {
+        id: "38aa53bd-8a2f-4efc-9d73-c6621f7012b4",
+        addr: "38aa53bd-8a2f-4efc-9d73-c6621f7012b4",
+      },
+    },
+    group: {
+      id: "38aa53bd-8a2f-4efc-9d73-c6621f7012b4",
+      addr: "38aa53bd-8a2f-4efc-9d73-c6621f7012b4",
+    },
+    metadata: {
+      name: "name",
+      image: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
+      category: "avatar",
+      description: "this descrip",
+      attributes: [
+        {trait_type: "hat",
+        value: "test",}
+      ]
+    }
+  } as NFTItem;
+
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="flex justify-between mb-4">
-        <h3 className="text-subhead_s">NFT 발행 대기 중 ({pendingAchievements.length})</h3>
-
+        <h3 className="text-subhead_s">NFT 발행 대기 중 ()</h3>
 
         <Button size="sm">
-          {/* Approve All */}
           모두 승인하기
         </Button>
       </div>
@@ -33,11 +56,11 @@ export default async function ManageNft({ details }: { details: any }) {
         </div>
 
         {/* temp */}
-        {pendingAchievements.length > 0 &&
-          pendingAchievements.map((item: any, index: number) => {
+        {details.members.length > 0 &&
+          details.members.map((item: any, index: number) => {
             return (
               <PendingNftListItem
-                nft={item}
+                profile={item}
                 key={index}
                 contract={details.id}
               ></PendingNftListItem>
@@ -50,18 +73,18 @@ export default async function ManageNft({ details }: { details: any }) {
       </h3>
 
       <div className="overflow-auto max-w-[90vw]">
-        <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-          {details.achievements &&
-            details.achievements.map((item: Achievement, index: number) => (
+        <div className="flex flex-wrap gap-4">
+          {/* {details.achievements &&
+            details.achievements.map((item: NFTItem, index: number) => (
               <DisplayNFT details={item} key={index} />
-            ))}
-        </div>
+            ))} */}
 
-        {details.achievements && details.achievements.length < 1 && (
-          <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-            최근 생성한 NFT가 없습니다.
-          </div>
-        )}
+          {details.achievements && details.achievements.length < 1 && (
+            <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
+              최근 생성한 NFT가 없습니다.
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
 import { auth, authOptions } from "../helpers/authOptions";
 import { CreateClub } from "../interfaces";
-import { joinGroupDto } from "../interfaces/dto";
 
 export async function getGroups(search?: string) {
   const session = (await getServerSession(authOptions)) as any;
@@ -57,23 +56,25 @@ export async function createGroup(formData: CreateClub) {
     },
     body: JSON.stringify({ ...formData, owner: session?.web3?.address }),
   });
-  return response.json();
+  const data = await response.json();
+  return data;
 }
 
-export async function joinGroup(data: joinGroupDto){
+export async function joinGroup(clubId:string, role:string){
   const session = await getSession();
-  const response = await fetch(`${API_URL}/members/join`, {
+  const response = await fetch(`${API_URL}/members`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-    body: JSON.stringify({...data, userId: session?.web3?.address}),
+    body: JSON.stringify({ userId: session?.web3?.address, clubId: clubId, role: role }),
   });
-  return await response.json();
-
+  const data = await response.json();
+  return data;
 }
 
+<<<<<<< HEAD
 
 export async function inviteGroupMember(
   userId: string,
@@ -113,6 +114,8 @@ export async function acceptClubMember(memberId: string){
 }
 
 
+=======
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
 /* export async function getGroupDetail(address: string) {
   const response = await fetch(`${API_URL}/group/single/${address}`, {
     next: { revalidate: 60 },
@@ -131,10 +134,8 @@ export async function acceptClubMember(memberId: string){
 
 export async function getPendingMembers(address: string) {
   const session = await auth();
-  const response = await fetch(`${API_URL}/members/invites/${address}`, {
-    method: 'GET',
+  const response = await fetch(`${API_URL}/project/${address}`, {
     headers: {
-      
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },

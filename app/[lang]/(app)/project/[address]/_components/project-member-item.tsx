@@ -21,6 +21,12 @@ import DeleteMember from "./modals/delete-member";
 import RequestEvaluation from "./modals/request-evaluation";
 import ProjectContributionInvite from "../../_components/project-contribution-invite";
 import { Button } from "@/components/ui/button";
+<<<<<<< HEAD
+=======
+import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
+
+
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
 
 export default async function ProjectMemberItem({
   details,
@@ -36,8 +42,13 @@ export default async function ProjectMemberItem({
   const session = await auth();
 
   return (
+<<<<<<< HEAD
     <Card className="flex flex-row gap-5 p-6 flex-start">
       <div className="flex flex-wrap w-full gap-5">
+=======
+    <Card className="flex flex-row flex-start gap-5 px-8 pb-8 pt-7">
+      <div className="flex w-full gap-5 ">
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
         <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
           <IPFSImageLayer
             hashes={details?.user?.nft ? details.user?.nft : defaultAvatar}
@@ -45,9 +56,15 @@ export default async function ProjectMemberItem({
           />
         </figure>
 
+<<<<<<< HEAD
         <div className="flex items-start gap-4 grow basis-0">
           <div className="flex flex-col h-full gap-4 grow shrink">
             <header className="flex items-center justify-between h-full gap-3">
+=======
+        <div className="grow w-full basis-0 gap-4 justify-start items-center flex">
+          <div className="flex-col grow shrink gap-4 flex">
+            <header className="flex gap-3 items-center">
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
               <h5 className="text-title_m">
                 {details.user?.display_name} |{" "}
                 {lang.details.role_type[details.role]}
@@ -58,12 +75,24 @@ export default async function ProjectMemberItem({
                 )}
               </h5>
 
+<<<<<<< HEAD
               <div className="flex items-center gap-3 shrink-0">
                 {session?.web3.address == details.user.wallet ? (
                   <>
                     {userRole != "client" && details.works.length < 1 && (
                       // <ProjectContributionInvite project={details.project} lang={lang}/>
                       <ProjectContribution project={details.project} />
+=======
+              <Badge>{lang.details.members.unregistered}</Badge>
+              <div className="flex flex-col justify-start items-end gap-3 h-full ml-auto">
+                {session?.web3.address == details.user.wallet ? (
+                  <>
+                  
+                    {userRole != "client" && details.works.length < 1 && (
+                    
+                      <ProjectContributionInvite project={details.project} lang={lang}/>
+                      // <ProjectContribution project={details.project} />
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
                     )}
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
@@ -102,6 +131,7 @@ export default async function ProjectMemberItem({
                 )}
               </div>
             </header>
+<<<<<<< HEAD
 
             {userRole != "none" ? (
               <ProjectWorkDetail data={details.works[0]} />
@@ -109,6 +139,18 @@ export default async function ProjectMemberItem({
               <BlurredProjectWorkDetail />
             )}
           </div>
+=======
+            <>
+              {access ? (
+                <ProjectWorkDetail data={details.works[0]} />
+              ) : (
+                <BlurredProjectWorkDetail />
+              )}
+            </>
+          </div>
+
+         
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
         </div>
       </div>
     </Card>

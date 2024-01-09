@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
-import { getClub } from "@/lib/data/groups";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,7 +13,7 @@ interface ProjectItemProps {
   location: string;
   addr: string;
   creator: string;
-  type: string;
+  type:string;
   members: any[];
 }
 export default function GroupListItem({
@@ -22,42 +21,35 @@ export default function GroupListItem({
 }: {
   details: ProjectItemProps;
 }) {
-  // const group = await getClub(details.id);
-
   return (
     <Link href={`/groups/${details.id}`}>
-      <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] pb-6 px-6 gap-0">
-        <section className="flex flex-col items-center justify-center max-w-full text-center">
-          <Avatar className="w-24 h-24 aspect-square bg-[#C7E2FF] mb-2">
+      <Card className="flex flex-col items-center bg-black-700 text-[#FEFEFE]">
+        <section className="flex flex-col gap-2 my-12 justify-center items-center text-center">
+          <Avatar className="w-24 h-24 aspect-square bg-[#C7E2FF]">
             <AvatarImage
               src={`https://ipfs.io/ipfs/${details.image}`}
               alt={details.name}
               className="rounded-full"
             />
-
             <AvatarFallback className="relative">
               <Image src="/images/careerzen.png" alt="no-item" fill={true} />
             </AvatarFallback>
           </Avatar>
-
-          <h5 className="max-w-full mb-1 truncate text-heading_s">
-            {details.name}
-          </h5>
-          <div className="text-title_m mb-[46px]">{details.type}</div>
-
-          <div className="flex divide-x">
-            <div className="px-4">
-              <div className="mb-1 text-label_s">멤버수</div>
-              <div className="text-title_m">{details.members?.length}</div>
-            </div>
-
-            <div className="px-4 text-center">
-              <div className="mb-1 text-label_s">NFTS</div>
-              <div className="text-title_m">0</div>
-              {/* <div className="text-title_m">{group.achievements.length}</div> */}
-            </div>
-          </div>
+          <header className="flex flex-col gap-2">
+            <h5 className="text-heading_s ">{details.name}</h5>
+            <span className="text-title_m">{details.type}</span>
+          </header>
         </section>
+        <div className="flex gap-2 divide-x text-center">
+          <div>
+            <span className="text-label_s">멤버수</span>
+            <span className="text-title_m">{details.members?.length}</span>
+          </div>
+          <div className="pl-2 text-center">
+            <span className="text-label_s">NFTS</span>
+            <span className="text-title_m">{details.achievements?.length}</span>
+          </div>
+        </div>
       </Card>
     </Link>
   );

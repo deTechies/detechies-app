@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs2";
 // import AchievementLink from "./achievement-link";
 import MissionCard from "@/components/card/mission-card";
 import { getClubMissions } from "@/lib/data/mission";
@@ -14,16 +14,12 @@ export default async function GroupAchievements({
     <div>
       <div className="flex flex-col gap-2">
         <Tabs defaultValue="all">
-          <TabsList className="mb-4" variant="button1">
-            <TabsTrigger value="all" variant="button1">
-              전체보기
-            </TabsTrigger>
-            <TabsTrigger value="career" variant="button1">
-              나의 미션
-            </TabsTrigger>
+          <TabsList className="mb-4">
+            <TabsTrigger value="all">전체보기</TabsTrigger>
+            <TabsTrigger value="career">나의 미션</TabsTrigger>
           </TabsList>
 
-          <div className="grid items-stretch gap-5 grid-cols:2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="flex gap-5">
             {data &&
               data.map((item: any, index: number) => (
                 <MissionCard

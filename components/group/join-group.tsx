@@ -1,8 +1,8 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -23,12 +23,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { useSession } from "next-auth/react";
+import { API_URL } from "@/lib/constants";
 import { toast } from "../ui/use-toast";
+import { useSession } from "next-auth/react";
 
-import { joinGroup } from "@/lib/data/groups";
-import Image from "next/image";
 import { Card } from "../ui/card";
+import Image from "next/image";
 import { Textarea } from "../ui/textarea";
 
 export default function InviteProjectMember({
@@ -53,24 +53,57 @@ export default function InviteProjectMember({
   const [loading, setLoading] = useState<boolean>(false);
   const { data: session } = useSession();
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+  const join = async () => {
     //@ts-ignore
     setLoading(true);
-    //implement the logic for joina project here..
-    const result = await joinGroup({
-      clubId: groupId,
-      message: data.message,
-    });
+    //TODO: still need to implement the tokenbound account here.
+    const submitData = {
+      contract: details.id,
+      tokenId: "0",
+      data: [""],
+      requester: session?.web3.address,
+      tokenbound: session?.web3.user.TBA,
+    };
 
-    if (result) {
-      toast({
-        title: "Successfully requested to join project",
-        description: "The project leader will review your request",
+    fetch(`${API_URL}/polybase/requestMint`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(submitData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status) {
+          toast({
+            title: "You made a request to join",
+            description:
+              "You request is under review and you will be notified once it is done.",
+          });
+        } else {
+          toast({
+            title: "Already joined the company",
+            description: data.message,
+            variant: "destructive",
+          });
+        }
       });
-    }
 
     setLoading(false);
   };
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
+
+    join();
+  }
 
   return (
     <Dialog>

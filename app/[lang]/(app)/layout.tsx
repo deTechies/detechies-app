@@ -3,8 +3,8 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { auth } from "@/lib/helpers/authOptions";
 import type { Metadata } from "next";
-
 import { signOut } from "next-auth/react";
+
 import localFont from 'next/font/local';
 import { redirect } from "next/navigation";
 import App from "../app";
@@ -13,26 +13,9 @@ import Navbar from "./nav-bar";
 
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
-  src: [
-    {
-      path: '../pretendard-regular.woff2',
-      weight: '400', // Regular
-      style: 'normal',
-    },
-    {
-      path: '../pretendard-semibold.woff2',
-      weight: '600', // SemiBold
-      style: 'normal',
-    },
-    {
-      path: '../pretendard-bold.woff2',
-      weight: '700', // Bold
-      style: 'normal',
-    }
-  ],
-  display: 'swap',
-});
-
+  src: "../pretendard.woff2",
+  display: "swap",
+}); 
 
 export const metadata: Metadata = {
   title: "Careerzen - Build you career profile and grow with valuable insights",
@@ -60,7 +43,7 @@ export default async function RootLayout({
   }
   
   return (
-    <html lang="kr" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${pretendard.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >

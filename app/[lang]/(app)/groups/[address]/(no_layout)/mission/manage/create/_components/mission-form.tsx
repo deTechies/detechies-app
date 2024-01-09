@@ -1,10 +1,9 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, XIcon } from "lucide-react";
 import { ChangeEvent } from "react";
-import { useEffect } from "react";
+
 
 interface StepTwoProps {
   updateMission: (index: number, mission: Mission) => void;
@@ -12,11 +11,11 @@ interface StepTwoProps {
   missions: Mission[];
 }
 interface Mission {
-  name: string;
-  description: string;
-  score: number;
-  essential: boolean;
-}
+    name: string;
+    description: string;
+    score: number;
+    essential: boolean;
+  }
 
 export const StepTwo: React.FC<StepTwoProps> = ({
   updateMission,
@@ -44,99 +43,56 @@ export const StepTwo: React.FC<StepTwoProps> = ({
     });
   };
 
-  const calculateTotalPoints = (): number => {
-    return missions.reduce((total: number, mission) => {
-      return total + parseInt(mission.score.toString() || "0");
-    }, 0);
-  };
-
   return (
-    <section>
-      <div className="flex flex-col gap-3 mb-6">
-        {missions.map((mission, index) => (
-          <div
-            key={index}
-            className="flex items-center gap-5 p-6 border rounded-md border-border-input"
+    <section className="flex flex-col gap-5 my-4">
+      {missions.map((mission, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-2 border rounded-sm px-3 py-2"
+        >
+          <Label className="shrink-0 text-xs">미션{index + 1} *</Label>
+          <Input
+            type="text"
+            name="name"
+            placeholder="Mission Name"
+            value={mission.name}
+            onChange={(e) => handleMissionInputChange(index, e)}
+            className="flex grow"
+          />
+          <Label className="shrink-0 text-xs">점수 *</Label>
+          <Input
+            type="number"
+            name="score"
+            placeholder="0"
+            value={mission.score}
+            onChange={(e) => handleMissionInputChange(index, e)}
+            className="w-16 text-center"
+            min={0}
+            max={100}
+            maxLength={3}
+          />
+
+          <Input
+            type="checkbox"
+            name="essential"
+            checked={mission.essential}
+            className="rounded-[4px] h-8 w-8 border-2 border-border-primary"
+            onChange={(e) => handleMissionInputChange(index, e)}
+          />
+          <Label className="shrink-0 text-xs">필수미션</Label>
+          <Button
+            size="icon"
+            variant="secondary"
+            onClick={() => removeMission(index)}
           >
-            <Label className="text-title_m shrink-0">
-              미션{index + 1} <span className="ml-1 text-state-error">*</span>
-            </Label>
-
-            <Input
-              type="text"
-              name="name"
-              placeholder="Mission Name"
-              value={mission.name}
-              onChange={(e) => handleMissionInputChange(index, e)}
-              className="flex grow h-[60px]"
-            />
-
-            <Label className="text-title_m shrink-0">
-              점수 <span className="ml-1 text-state-error">*</span>
-            </Label>
-
-            <Input
-              type="number"
-              name="score"
-              placeholder="0"
-              value={mission.score}
-              onChange={(e) => handleMissionInputChange(index, e)}
-              className="w-16 text-center h-[60px]"
-              min={0}
-              max={100}
-              maxLength={3}
-            />
-
-            <div className="flex items-center gap-1 shrink-0">
-              <Input
-                type="checkbox"
-                name="essential"
-                checked={mission.essential}
-                className="rounded-[4px] h-5 w-5 border-2 border-border-primary"
-                onChange={(e) => handleMissionInputChange(index, e)}
-              />
-
-              <Label className="text-label_s shrink-0">필수미션</Label>
-            </div>
-
-            <div className="w-12 shrink-0">
-              {index != 0 && (
-                <Button
-                  size="icon"
-                  variant="secondary"
-                  onClick={() => removeMission(index)}
-                >
-                  <XIcon />
-                </Button>
-              )}
-            </div>
-          </div>
-        ))}
-        <Button onClick={handleAddMission} size="lg">
-          <Plus className="mr-2 text-accent-primary" />
-          <div className="-mb-1">미션 추가</div>
-        </Button>
-      </div>
-
-      <div className="flex items-center justify-between py-7 px-9">
-        <span className="text-subhead_s">
-          총 미션 수 ( {missions.length} )
-        </span>
-
-        <div className="flex items-center">
-          <span className="mr-3 text-subhead_s">
-            총 점수
-          </span>
-          
-          <span className="text-accent-primary text-subhead_l mr-0.5">
-            {calculateTotalPoints()}
-          </span>
-          
-          <span className="text-subhead_l">
-            점
-          </span>
+            <XIcon />
+          </Button>
         </div>
-      </div>
+      ))}
+      <Button onClick={handleAddMission}>
+        <Plus className="mr-4 text-accent-primary" />
+        Add Another Mission
+      </Button>
     </section>
   );
 };

@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { useState } from "react";
 
 import {
@@ -72,8 +72,6 @@ export default function CreateProfile({ text }: { text: any }) {
         description: "Please login to your account account. ",
         variant: "destructive",
       });
-      setIsLoading(false)
-
       return;
     }
 
@@ -211,12 +209,7 @@ export default function CreateProfile({ text }: { text: any }) {
        
 
         <div className="flex items-center gap-8 w-full">
-          <Button type="button" variant="secondary" className="w-full"
-          onClick={() => {
-            signOut();
-            refresh();
-          }}
-          >
+          <Button type="button" variant="secondary" className="w-full">
             Cancel
           </Button>
           <Button

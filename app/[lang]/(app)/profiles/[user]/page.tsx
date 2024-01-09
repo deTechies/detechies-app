@@ -24,10 +24,13 @@ export default async function Dashboard({
       {/* main */}
       <div className="grow">
         <main className="flex flex-col gap-8">
+<<<<<<< HEAD
 
+=======
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
           <ProfileDetails profile={profile} text={dictionary.mypage.main} />
           <ProfileProjects
-            projects={profile.projects}
+            projects={profile.projectMembers}
             text={dictionary.mypage.project}
           />
         </main>

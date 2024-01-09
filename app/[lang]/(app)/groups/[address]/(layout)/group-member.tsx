@@ -2,10 +2,12 @@
 import MemberCard from "@/components/card/member-card";
 import { Address } from "wagmi";
 
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { getAddress } from "viem";
 
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 interface Profile {
   id: string;
@@ -46,6 +48,7 @@ export default function GroupMember({
       <div className="flex items-center justify-between mb-5">
         <h3 className="text-subhead_s">최근 가입한 멤버</h3>
         {/* <h3 className="text-subhead_s">Members ({members?.length})</h3> */}
+
         <Link href={pathName + "/members"} passHref>
           <Button size="sm" variant="secondary">
             전체보기
@@ -56,7 +59,7 @@ export default function GroupMember({
         } */}
       </div>
 
-      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid w-full gap-4 md:grid-cols-5">
         {members &&
           members.map(
             (item: Member, index: any) => {

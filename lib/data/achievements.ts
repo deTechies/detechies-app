@@ -60,43 +60,13 @@ export async function getUserAchievements(address?:string) {
     });
   
     return response.json();
-    
-  }
-  
-  export async function requestAchievement(achievementId:string){
-    const session = await getSession();
 
-    // Check for a valid session and required tokens
-    if (!session || !session.web3 || !session.web3.accessToken) {
-      throw new Error("Invalid session or missing access token");
-    }
-  
-    const response = await fetch(`${API_URL}/achievement-rewards`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session.web3.accessToken}`,
-      },
-      body: JSON.stringify({
-        achievementId: achievementId,
-        userId: session.web3.user.id,
-      }),
-    });
-  
-    return response.json();
+    
   }
 
   
   export async function getPendingAchievements(address:string){
-    
-    const session = await auth();
-    const response = await fetch(`${API_URL}/achievement-rewards/${address}/pending`, {
-      method: 'GET', 
-      headers: {
-        Authorization: `Bearer ${session?.web3.accessToken}`
-      }
-    })
 
-   return response.json();
+   return [];
   }
    

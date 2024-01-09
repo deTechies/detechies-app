@@ -57,7 +57,9 @@ export interface User {
   
 export enum GROUP_TYPE {
     COMMUNITY = 'community',
+    COMPANY = 'company',
     AGENCY = 'agency',
+    EDUCATION = 'education',
   }
   
   export enum NFT_TYPE{
@@ -153,10 +155,7 @@ export enum GROUP_TYPE {
     contract: string;
     nft_type: string;
     image: string;
-    avatar: string;
     description:string;
-    avatar_type: string | null;
-    type: string;
     on_chain: boolean;
     name: string;
     verified: boolean;
@@ -178,7 +177,6 @@ export enum GROUP_TYPE {
     description: string;
     image: string;
     creator?: string;
-    avatar_type?: string;
     scope?: string;
     type: string;
     tags?: string[];

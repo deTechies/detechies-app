@@ -21,26 +21,16 @@ export default async function ManageMember({
 
   const searchItem = searchParams.search as string;
 
-  const joined = pendingData?.filter((item: any) => {
-    return item.status === "joined";
-  });
-
-  const invited = pendingData?.filter((item: any) => {
-    return item.status === "invited";
-  });
-
   let filteredData = details.members?.filter((item: any) => {
     if (!searchItem) return true;
 
-    return item.user.display_name
-      ?.toLowerCase()
-      .includes(searchItem.toLowerCase());
+    return item.display_name?.toLowerCase().includes(searchItem.toLowerCase());
   });
 
   return (
     <div className="overflow-auto max-w-[90vw]">
       <h3 className="mb-4 text-subhead_s">
-        그룹 가입 대기 중 ({joined?.length})
+        그룹 가입 대기 중 ({pendingData?.length})
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">
@@ -51,8 +41,8 @@ export default async function ManageMember({
           <div className="text-center ">승인 여부</div>
         </div>
 
-        {joined.length > 0 ? (
-          joined.map((item: any, index: number) => {
+        {details.members.length > 0 &&
+          details.members.map((item: any, index: number) => {
             return (
               <PendingMemberListItem
                 profile={item}
@@ -60,16 +50,11 @@ export default async function ManageMember({
                 contract={details.id}
               ></PendingMemberListItem>
             );
-          })
-        ) : (
-          <div className="text-center text-label_m text-text-secondary pb-7">
-            아직 그룹 가입 요청내역이 없어요.
-          </div>
-        )}
+          })}
       </div>
 
       <h3 className="mb-4 text-subhead_s">
-        초대 승인 대기 중 ({invited?.length})
+        초대 승인 대기 중 ({pendingData?.length})
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">
@@ -79,8 +64,8 @@ export default async function ManageMember({
           <div className="text-center ">승인 여부</div>
         </div>
 
-        {details.members.length > 0 ? (
-          invited.map((item: any, index: number) => {
+        {details.members.length > 0 &&
+          details.members.map((item: any, index: number) => {
             return (
               <InvitingMemberListItem
                 profile={item}
@@ -88,12 +73,7 @@ export default async function ManageMember({
                 contract={details.id}
               ></InvitingMemberListItem>
             );
-          })
-        ) : (
-          <div className="text-center text-label_m text-text-secondary pb-7">
-            아직 초대한 유저가 없어요.
-          </div>
-        )}
+          })}
       </div>
 
       <h3 className="mb-4 text-subhead_s">
@@ -105,7 +85,7 @@ export default async function ManageMember({
           <Search placeholder="닉네임 또는 직업을 검색해보세요." />
         </div>
 
-        <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="flex flex-wrap gap-4">
           {filteredData &&
             filteredData.map((item: Member, index: any) => {
               if (index > 4) {

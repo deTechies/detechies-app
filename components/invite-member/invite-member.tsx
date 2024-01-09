@@ -15,32 +15,39 @@ import {
 } from "../ui/dialog";
 import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
-import SelectedGroupMember from "./selected-group-member";
-import { useRouter, useSearchParams } from "next/navigation";
+import SelectedMember from "./selected-member";
 
-export default function InviteGroupMember({
-  groupId,
+export default function InviteMember({
+  id,
 }: // lang,
 {
-  groupId: string;
+  id: string;
   // lang: any;
 }) {
-  const searchParams = useSearchParams();
-  const text = searchParams.get("search") || "";
+  const [text, setText] = useState("");
+
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
-  const [completeInviting, setCompleteInviting] = useState<boolean>(false);
   const { data: members, loading, error } = useFetchData<any[]>("/users");
 
+<<<<<<< HEAD:components/invite-group-member/invite-group-member.tsx
   const router = useRouter();
 
+=======
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0:components/invite-member/invite-member.tsx
   if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
   // if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
   if (!members) return <div>no_members_found</div>;
 
+  // console.log(members);
+
   const filteredData = members.filter((member: any) => {
-    return member.display_name.toLowerCase().includes(text || "");
+    if (text == "") {
+      return false;
+    }
+
+    return member.display_name.toLowerCase().includes(text.toLowerCase());
   });
 
   const onClickGoManage = () => {
@@ -51,14 +58,15 @@ export default function InviteGroupMember({
 
   return (
       <Dialog>
-        <DialogTrigger className="max-w-[212px] grow rounded-full">
+        <DialogTrigger className="max-w-[230px] grow rounded-full">
           <Button size="lg" variant="primary" className="w-full">
             멤버 초대하기
           </Button>
         </DialogTrigger>
 
-        <DialogContent className="gap-0">
+        <DialogContent className="gap-6">
           <div className="flex flex-col gap-4">
+<<<<<<< HEAD:components/invite-group-member/invite-group-member.tsx
             {completeInviting ? (
               <div className="flex flex-col items-center">
                 <h5 className="mb-4 text-subhead_s">
@@ -82,13 +90,17 @@ export default function InviteGroupMember({
             ) : (
               <h5 className="mb-6 text-subhead_m">그룹 멤버 초대하기</h5>
             )}
+=======
+            <h5 className="text-subhead_m">그룹 멤버 초대하기</h5>
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0:components/invite-member/invite-member.tsx
           </div>
 
           <section className="flex flex-col gap-6">
-            {!byEmail && selected == null && !completeInviting && (
+            {!byEmail && selected == null && (
               <>
-                <Search placeholder="search email" />
-
+                <Search
+                placeholder="search email"
+                />
 
                 <div className="rounded-sm max-h-[30vh] overflow-x-auto">
                   {filteredData &&
@@ -122,29 +134,23 @@ export default function InviteGroupMember({
                     </Button>
                   </DialogClose>
 
-                  <Button
-                    size="lg"
-                    className="max-w-[212px] grow px-0"
-                    disabled
-                  >
+                  <Button size="lg" className="max-w-[212px] grow px-0" disabled>
                     초대하기
                   </Button>
                 </div>
               </>
             )}
-            {selected && !completeInviting && (
-              <SelectedGroupMember
-                id={groupId}
+            {selected && (
+              <SelectedMember
+                id={id}
                 user={selected}
                 onSelectValue={() => setSelected(null)}
-                onClickBack={() => setSelected(null)}
-                onCompleteInvite={() => setCompleteInviting(true)}
                 // lang={lang}
               />
             )}
-            {byEmail && !completeInviting && (
+            {byEmail && (
               <InviteByEmail
-                id={groupId}
+                id={id}
                 cancelByEmail={() => setByEmail(false)}
                 // lang={lang}
               />

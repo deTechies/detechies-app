@@ -1,35 +1,45 @@
 "use client";
-import IPFSImageLayer from "@/components/ui/layer";
-import { defaultAvatar } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
-import { Check, X } from "lucide-react";
-import Image from "next/image";
+import IPFSImageLayer from "@/components/ui/layer";
+import useFetchData from "@/lib/useFetchData";
 import { useRouter } from "next/navigation";
+import { Skeleton } from "../ui/skeleton";
+import { Card } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { Check, X } from "lucide-react";
+import { Address, useContractWrite } from "wagmi";
+import { ABI, defaultAvatar } from "@/lib/constants";
 import { toast } from "../ui/use-toast";
+import Image from "next/image";
 
 export default function PendingMemberListItem({
-  nft,
+  profile,
   contract,
 }: {
-  nft: any;
+  profile: any;
   contract: string;
 }) {
   const router = useRouter();
 
-  const acceptNFT = async () => {
-    toast({
-      title: "Accepting NFT",
-      description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
-    })
+  // if (error) return <div>{JSON.stringify(error)}</div>;
+
+  // if (loading)
+  //   return <Skeleton className="h-[200px] w-[100px] animate-pulse" />;
+
+  // if (!data) return <div>no data</div>;
+
+  const { write, isLoading, error, data } = useContractWrite({
+    address: contract as Address,
+    abi: ABI.group,
+    functionName: "createMember",
+  });
+
+  const acceptEmployee = async () => {
+    //
   };
   const rejectEmployee = async () => {
     //
-    toast({
-      title: "Accepting NFT",
-      description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
-    })
   };
 
   const dummy_nft = {
@@ -41,20 +51,20 @@ export default function PendingMemberListItem({
   return (
     <div
       className="grid grid-cols-[262px_1fr_90px_auto] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center"
-      // onClick={() => router.push(`/nfts/${nft.user.id}`)}
+      // onClick={() => router.push(`/profiles/${profile.user.id}`)}
     >
       <div className="flex items-center gap-3">
         <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
           <IPFSImageLayer
-            hashes={nft.user?.avatar ? nft.user.avatar : defaultAvatar}
+            hashes={profile.user.nft ? profile.user.nft : defaultAvatar}
           />
         </div>
 
         <div>
-          <div className="mb-2 text-title_l">{nft.user.display_name}</div>
+          <div className="mb-2 text-title_l">{profile.user.display_name}</div>
 
           <Badge variant={"outline"}>
-            {nft.user.role ? nft.user.role : "미설정"}
+            {profile.user.role ? profile.user.role : "미설정"}
           </Badge>
         </div>
       </div>
@@ -62,7 +72,7 @@ export default function PendingMemberListItem({
       <div className="flex items-center gap-3">
         <div className="relative w-20 h-20 bg-background-layer-2">
           <Image
-            src={`https://ipfs.io/ipfs/${nft.achievement.image}`}
+            src={`https://ipfs.io/ipfs/${dummy_nft.hash}`}
             alt={dummy_nft.name}
             fill={true}
             className="rounded-sm"
@@ -70,7 +80,7 @@ export default function PendingMemberListItem({
         </div>
 
         <div>
-          <div className="mb-2 text-title_l">{nft.achievement.name}</div>
+          <div className="mb-2 text-title_l">{dummy_nft.name}</div>
 
           <div className="flex gap-1">
             {dummy_nft.chips &&
@@ -91,13 +101,13 @@ export default function PendingMemberListItem({
             The create time must be changed to the application time.
             가입시간을 신청시간으로 바꿔야함 
           */}
-          {formatDate(nft.created_at)}
+          {formatDate(profile.user.created_at)}
         </span>
       </div>
 
       <div className="flex gap-3">
         <Button
-          onClick={acceptNFT}
+          onClick={acceptEmployee}
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"

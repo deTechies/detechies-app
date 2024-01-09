@@ -13,8 +13,7 @@ export default async function MissionDetailPage({
   const userProgress = await getUsersMissionProgress(params.id)
   const missionDetails = await getMissionDetails(params.id)
 
-  console.log("TEST");
-  // console.log(userProgress)
+  console.log(userProgress)
   console.log(missionDetails)
 
   

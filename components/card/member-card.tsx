@@ -26,7 +26,7 @@ export default function MemberCard({
   // if (!data) return <div>no data</div>;
   return (
     <Card
-      className="gap-1 rounded-sm shadow-md border border-border-div bg-background-layer-1 p-0 min-w-[100px] hover:shadow-lg cursor-pointer"
+      className="gap-1 rounded-sm shadow-md border border-border-div bg-background-layer-1 p-0 min-w-[100px] max-w-[250px] hover:shadow-lg cursor-pointer"
       onClick={() => router.push(`/profiles/${info.id}`)}
     >
       <div className="relative w-full m-0 rounded-t-sm aspect-square bg-accent-secondary">
@@ -46,10 +46,9 @@ export default function MemberCard({
               <Badge className="bg-text-secondary text-accent-on-primary">그룹 리더</Badge>
             )
           } */}
-          <Badge className="bg-text-secondary text-accent-on-primary" shape="md">그룹 리더</Badge>
+          <Badge className="bg-text-secondary text-accent-on-primary">그룹 리더</Badge>
           
-          <Badge variant={"info"} shape="outline">
-            {/* needs role (PM, designer, developer, ) */}
+          <Badge variant={"outline"}>
             {info.role ? info.role : "미설정"}
           </Badge>
         </div>

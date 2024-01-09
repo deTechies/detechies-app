@@ -16,7 +16,7 @@ import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
 
 import { inviteByEmail } from "@/lib/data/project";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
@@ -58,7 +58,7 @@ export default function InviteByEmail({
 
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState<string>("member");
-
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
 
@@ -71,6 +71,10 @@ export default function InviteByEmail({
         title: "Success",
         description: "Project created successfully",
       });
+
+      if (closeButtonRef.current) {
+        closeButtonRef.current.click();
+      }
     }
 
     toast({

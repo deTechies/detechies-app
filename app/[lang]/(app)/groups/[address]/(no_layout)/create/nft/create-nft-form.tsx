@@ -7,27 +7,33 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormInlineItem,
-  FormInlineLabel,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormInlineItem,
+    FormInlineLabel,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+<<<<<<< HEAD
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+=======
+
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import MediaUploader from "@/components/extra/media-uploader";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { uploadAchievement } from "@/lib/data/achievements";
 import {
-  AVATAR_TYPE,
-  NFT_IMAGE_TYPE,
-  NFT_TYPE,
-  SBT_TYPE,
+    AVATAR_TYPE,
+    NFT_IMAGE_TYPE,
+    NFT_TYPE,
+    SBT_TYPE,
 } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
@@ -40,8 +46,8 @@ const profileFormSchema = z.object({
     .min(2, {
       message: "Please choose a name that is at least 2 characters.",
     })
-    .max(20, {
-      message: "The name must not be longer than 20 characters.",
+    .max(30, {
+      message: "The name must not be longer than 30 characters.",
     }),
   type: z.nativeEnum(SBT_TYPE).optional(),
   nft_type: z.nativeEnum(NFT_TYPE),
@@ -53,55 +59,19 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-  nft_type: NFT_TYPE.SBT,
-  image_type: NFT_IMAGE_TYPE.AVATAR,
-  type: SBT_TYPE.EDU,
-  avatar_type: AVATAR_TYPE.CLOTHES,
-};
+const defaultValues: Partial<ProfileFormValues> = {};
 
 export function CreateNFTForm({ groupId }: { groupId: string }) {
   const {
     form,
     setUploadedImage,
     setUploadedAvatar,
-    uploadedImage,
-    uploadedAvatar,
     isLoading,
     completed,
     onSubmit,
   } = useCreateNFTForm(groupId);
 
-
-  const router = useRouter();
-
-
-  if (completed) return <CompletedSuccess groupId={groupId}/>;
-
-
-  const onClickCancel = () => {
-    router.back();
-  };
-
-  const createDisabled = (): boolean => {
-    if (!form.watch("name") || !form.watch("description")) {
-      return true;
-    }
-
-    if (form.watch("image_type") == NFT_IMAGE_TYPE.AVATAR) {
-      return !uploadedAvatar;
-    }
-
-    if (form.watch("image_type") == NFT_IMAGE_TYPE.IMAGE) {
-      return !uploadedImage;
-    }
-
-    if (form.watch("image_type") == NFT_IMAGE_TYPE.IMAGE_AND_AVATAR) {
-      return !uploadedImage || !uploadedAvatar;
-    }
-
-    return false;
-  };
+  if (completed) return <CompletedSuccess />;
 
   return (
     <main>
@@ -110,26 +80,17 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col justify-center space-y-8 "
         >
-          <Card className="gap-6 py-10 px-14">
+          <Card>
             <CardHeader>
-              <div>
-                <h2 className="mb-3 text-heading_s">새로운 NFT 생성하기</h2>
-
-                <span className="mb-1 text-body_s text-state-error">
-                  *는 필수입력 사항입니다.
-                </span>
-              </div>
+              <h2 className="text-heading_s">새로운 NFT 생성하기</h2>
             </CardHeader>
-
-            <CardContent className="flex flex-col gap-6">
+            <CardContent className="flex flex-col gap-8 mt-3">
               <FormField
                 control={form.control}
                 name="nft_type"
                 render={({ field }) => (
-                  <FormInlineItem className="h-12">
-                    <FormInlineLabel>
-                      NFT 유형 <span className="ml-1 text-state-error">*</span>
-                    </FormInlineLabel>
+                  <FormInlineItem>
+                    <FormInlineLabel>NFT 유형 *</FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -158,10 +119,8 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
                 control={form.control}
                 name="image_type"
                 render={({ field }) => (
-                  <FormInlineItem className="h-12">
-                    <FormInlineLabel>
-                      NFT 속성 <span className="ml-1 text-state-error">*</span>
-                    </FormInlineLabel>
+                  <FormInlineItem>
+                    <FormInlineLabel>NFT 속성 *</FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -186,29 +145,16 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
               />
             </CardContent>
           </Card>
-
-          <Card className="gap-6 py-10 px-14">
-            <div>
-              <h2 className="mb-3 text-subhead_m">
-                {form.watch("nft_type") == "sbt" ? "커리어 NFT" : "한정판 NFT"}
-              </h2>
-              <span className="mb-1 text-body_s text-state-error">
-                *는 필수입력 사항입니다.
-              </span>
-            </div>
-
-            <div className="flex flex-col gap-8">
+          <Card>
+            <h2 className="text-subhead_s">한정판 NFT</h2>
+            <div className="flex flex-col space-y-8 ">
               {form.watch("nft_type") == "sbt" && (
                 <FormField
                   control={form.control}
                   name="type"
                   render={({ field }) => (
-                    <FormInlineItem className="h-12">
-                      <FormInlineLabel>
-                        {/* Type */}
-                        증명서 타입
-                        <span className="ml-1 text-state-error">*</span>
-                      </FormInlineLabel>
+                    <FormInlineItem>
+                      <FormInlineLabel>Type</FormInlineLabel>
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -239,19 +185,12 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
                 control={form.control}
                 name="name"
                 render={({ field }) => (
-                  <FormInlineItem className="items-start">
-                    <FormInlineLabel className="mt-5">
-                      {/* Name */}
-                      증명서 이름
-                      <span className="ml-1 text-state-error">*</span>
-                    </FormInlineLabel>
-                    
-                    <div className="grow">
-                      <FormControl className="mb-2">
-                        <Input placeholder="Enter your name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </div>
+                  <FormInlineItem>
+                    <FormInlineLabel>Name</FormInlineLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
                   </FormInlineItem>
                 )}
               />
@@ -259,11 +198,9 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
                 control={form.control}
                 name="description"
                 render={({ field }) => (
-                  <FormInlineItem className="items-start">
-                    <FormInlineLabel>
-                      {/* Description */}
-                      증명서 설명
-                      <span className="ml-1 text-state-error">*</span>
+                  <FormInlineItem>
+                    <FormInlineLabel className="items-start">
+                      Description
                     </FormInlineLabel>
                     <FormControl>
                       <div className="flex flex-col w-full gap-2">
@@ -285,12 +222,8 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
                     control={form.control}
                     name="avatar_type"
                     render={({ field }) => (
-                      <FormInlineItem className="h-12">
-                        <FormInlineLabel>
-                          {/* Avatar Type */}
-                          아바타 타입
-                          <span className="ml-1 text-state-error">*</span>
-                        </FormInlineLabel>
+                      <FormInlineItem>
+                        <FormInlineLabel>Avatar Type</FormInlineLabel>
                         <RadioGroup
                           onValueChange={field.onChange}
                           defaultValue={field.value}
@@ -315,82 +248,39 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
                       </FormInlineItem>
                     )}
                   />
-                  <FormInlineItem className="items-start">
-                    <FormInlineLabel>
-                      {/* Avatar */}
-                      아바타 이미지
-                      <span className="ml-1 text-state-error">*</span>
+                  <FormInlineItem>
+                    <FormInlineLabel className="justify-start">
+                      Avatar
                     </FormInlineLabel>
                     <MediaUploader
                       key="unique_avatar"
                       onFileSelected={setUploadedAvatar}
-                      width={192}
-                      height={192}
-                    >
-                      <div>
-                        <div className="mb-1 text-title_s text-text-secondary">
-                          이미지 가이드
-                        </div>
-
-                        <li className="mb-1 text-text-placeholder text-label_s">
-                          1:1 비율 권장
-                        </li>
-
-                        <li className="mb-1 text-text-placeholder text-label_s">
-                          배경이 없는 PNG 형식의 이미지 권장
-                        </li>
-
-                        <li className="mb-1 text-text-placeholder text-label_s">
-                          NFT 증명서 페이지에서 확인 가능합니다.
-                        </li>
-                      </div>
-                    </MediaUploader>
+                      width={100}
+                      height={100}
+                    />
                   </FormInlineItem>
                 </>
               )}
               {form.watch("image_type") != "avatar" && (
-                <FormInlineItem className="items-start">
-                  <FormInlineLabel>
-                    {/* Image */}
-                    증명서 이미지
-                    <span className="ml-1 text-state-error">*</span>
+                <FormInlineItem>
+                  <FormInlineLabel className="items-start">
+                    Image
                   </FormInlineLabel>
                   <MediaUploader
                     key="unique_cover"
                     onFileSelected={setUploadedImage}
-                    width={192}
-                    height={192}
-                  >
-                    <div>
-                      <div className="mb-1 text-title_s text-text-secondary">
-                        이미지 가이드
-                      </div>
-
-                      <li className="mb-1 text-text-placeholder text-label_s">
-                        NFT 증명서 페이지에서 확인 가능합니다.
-                      </li>
-                    </div>
-                  </MediaUploader>
+                    width={100}
+                    height={100}
+                  />
                 </FormInlineItem>
               )}
             </div>
 
-            <div className="flex items-center justify-end gap-2 mt-4">
-              <Button
-                type="button"
-                size="lg"
-                variant="secondary"
-                onClick={onClickCancel}
-              >
+            <div className="flex items-center justify-end gap-8 mt-8">
+              <Button type="button" variant="secondary">
                 Cancel
               </Button>
-
-              <Button
-                type="submit"
-                loading={isLoading}
-                size="lg"
-                disabled={createDisabled()}
-              >
+              <Button type="submit" loading={isLoading} size="lg">
                 Create NFT
               </Button>
             </div>
@@ -455,7 +345,22 @@ const useCreateNFTForm = (groupId: string) => {
     }
 
     const uploadData = { ...data, avatar, image, clubId: groupId };
+<<<<<<< HEAD
 
+=======
+    toast({
+      title: "You are uploading this..:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">
+            {JSON.stringify(uploadData, null, 2)}
+          </code>
+        </pre>
+      ),
+    });
+    
+    
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
     const result = await uploadAchievement(uploadData);
 
     console.log(result);
@@ -463,9 +368,9 @@ const useCreateNFTForm = (groupId: string) => {
       title: "Congratulations on your first nft!",
       description: "Succesfully create an nft. ",
     });
-
-    if (result) {
-      setCompleted(true);
+    
+    if(result){
+        setCompleted(true)
     }
     setIsLoading(false);
   }

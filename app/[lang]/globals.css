@@ -43,6 +43,10 @@
     --accent-secondary: #DEFFD9;
     --accent-on-secondary: #00D41D;
 
+    /* temp */
+    --accent-tertiary: #F8F4FF;
+    --accent-on-tertiary: #A454F5;
+
     --background-base: #F2F3F5;
     --background-layer-1: #FEFEFE;
     --background-layer-2: #F6F7F8;
@@ -79,10 +83,7 @@
     --state-status-primary: #FFEB39;
     --state-status-secondary: #FFFBDC;
     
-    --type-purple-primary: #A454F5;
-    --type-purple-secondary: ##F8F4FF;
-    --type-yellow-primary: #FFEB39;
-    --type-yellow-secondary: #FFFBDC;
+    
  
     --radius: 0.5rem;
   }
@@ -124,6 +125,10 @@
     --accent-secondary: #0B5700;
     --accent-on-secondary: #00C71B;
     
+    /* temp */
+    --accent-tertiary: #F8F4FF;
+    --accent-on-tertiary: #A454F5;
+
     --background-base: #000000;
     --background-layer-1: #101113;
     --background-layer-2: #1F2226;
@@ -158,11 +163,6 @@
     
     --state-status-primary: #FFEB39;
     --state-status-secondary: #FFFBDC;
-
-    --type-purple-primary: #A454F5;
-    --type-purple-secondary: ##F8F4FF;
-    --type-yellow-primary: #FFEB39;
-    --type-yellow-secondary: #FFFBDC;
   }
   
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -214,13 +214,5 @@ html {
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-
-  li {
-    list-style: none;
-  }
-  li::marker {
-    content: '•';
-    margin-right: 4px; /* 간격 조정 */
   }
 }

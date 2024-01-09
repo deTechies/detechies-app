@@ -48,10 +48,18 @@ export default async function ProjectDetailPage({
     return <AcceptInvitation image={data.image} projectId={data.id} />;
 
   return (
+<<<<<<< HEAD
     <main className="grid w-full gap-6 px-4 my-10 md:grid-cols-3">
       <section className="flex flex-col gap-5 md:col-span-2">
         <ProjectDetail
           details={data}
+=======
+    <main className="flex flex-col mx-5 my-12 md:flex-row gap-7">
+      <section className="flex flex-col gap-5 grow">
+        <ProjectDetail 
+          details={data} 
+          userRole={data.userRole}
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
           lang={dictionary.project}
         />
         <ProjectMembers

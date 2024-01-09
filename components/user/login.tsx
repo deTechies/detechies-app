@@ -9,6 +9,7 @@ import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
+import AuthenticateButton from "./authenticate-button";
 import ModalLayout from "./modal-layout";
 import ProfileDetails from "./profile-details";
 
@@ -55,6 +56,7 @@ export default function Login() {
   }
 
   if (session?.web3?.address != address) {
+<<<<<<< HEAD
     //sign message
     return (
       <div className="flex rounded-md  items-center gap-2">
@@ -71,6 +73,12 @@ export default function Login() {
       </div>
     )
     
+=======
+    //sign message 
+    return (
+     <AuthenticateButton />
+    );
+>>>>>>> ffa0e7705dbc1fe13b69655d5f4927ddde057fe0
   }
   if (!isConnecting && address == session?.web3?.address) {
     return (

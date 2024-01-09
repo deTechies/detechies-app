@@ -1,19 +1,22 @@
 "use client";
+import MemberCard from "@/components/card/member-card";
+import { NFTItem } from "@/components/card/nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
 
-import { Button } from "@/components/ui/button";
-import { Achievement } from "@/lib/interfaces";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { getAddress } from "viem";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
-export default function GroupNFT({
+export default function GroupMember({
   address,
   isCreator,
   achievements,
 }: {
   address: any;
   isCreator?: boolean;
-  achievements: Achievement[];
+  achievements: NFTItem[];
 }) {
   const pathName = usePathname();
 
@@ -28,11 +31,14 @@ export default function GroupNFT({
           </Button>
         </Link>
 
+        {/* {
+          isCreator && <Link href={pathName + '/members'}>Manage</Link>
+        } */}
       </div>
 
-      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div>
         {achievements &&
-          achievements.map((item: Achievement, index: number) => (
+          achievements.map((item: NFTItem, index: number) => (
             <DisplayNFT details={item} key={index} />
           ))}
       </div>

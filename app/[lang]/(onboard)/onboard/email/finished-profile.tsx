@@ -16,7 +16,7 @@ export default function FinishedProfile() {
       icon: <UserCircle className="h-9 w-9" />,
       title: "전문가",
       description: "내 커리어 인증하기",
-      link: "/mypage/edit",
+      link: "/profile",
     },
     {
       icon: <SearchCheck size="32" />,
