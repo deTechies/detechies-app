@@ -48,6 +48,7 @@ export interface User {
   export interface Club extends CreateClub{
     id: string;
     owner: string;
+    contract: string;
     blockchain_address?: string;
     files?: File[];
     members?: Member[];
