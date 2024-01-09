@@ -13,7 +13,7 @@ export default async function Dashboard({
 }) {
   const profile = await getUserProfile() as User;
   const dictionary = (await getDictionary(params.lang)) as any;
-  console.log(profile);
+  console.log("Profile: ", profile);
   return (
     <main className='flex flex-col gap-8'>
         <ProfileDetails profile={profile} text={dictionary.mypage.main}/>
