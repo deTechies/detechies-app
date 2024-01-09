@@ -10,27 +10,32 @@ export default async function PendingMemberList({
   userRole: string;
 }) {
   let pendingMembers: any[] = [];
+
   if (userRole == "admin") {
     pendingMembers = await getPendingProjectMembers(projectId);
-    
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <h4 className="text-subhead_s">Waiting list</h4>
+    <Card className="gap-0 px-6 pt-6 pb-7">
+      <CardHeader className="mb-6">
+        <h4 className="text-subhead_s">
+          {/* Waiting list */}
+          참여 승인 대기중
+        </h4>
       </CardHeader>
-      {!!pendingMembers.length &&
-        pendingMembers.map((member:any, index: number) => (
-          <PendingMemberItem
-            key={index}
-            name={member.user.display_name}
-            id={member.id}
-            status={member.status}
-            image="https://ipfs.io/ipfs/bafybeidutyodk6auwqx26rieisxwmnen6tgfcyqmj4s5bwlg3omehjrke4"
-            role={member.role}
-          />
-        ))}
+
+      <div className="flex flex-col gap-3">
+        {!!pendingMembers.length &&
+          pendingMembers.map((member: any, index: number) => (
+            <PendingMemberItem key={index} member={member} />
+          ))}
+
+        {(!pendingMembers.length || pendingMembers.length < 1) && (
+          <p className="text-center text-label_m text-text-secondary">
+            참여 대기중인 사람이 없어요.
+          </p>
+        )}
+      </div>
     </Card>
   );
 }
