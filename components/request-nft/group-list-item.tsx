@@ -3,7 +3,7 @@
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-export default async function RequestNFTModal({
+export default function RequestNFTModal({
   _group,
   onClick,
   type,
@@ -14,6 +14,7 @@ export default async function RequestNFTModal({
 }) {
   return (
     <div
+      key={_group.id}
       className={`flex items-center py-4 ${
         type == "click" ? "cursor-pointer hover:bg-background-layer-2" : "border px-5 rounded-md"
       }`}

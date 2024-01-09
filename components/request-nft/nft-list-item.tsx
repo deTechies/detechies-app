@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
 
-export default async function RequestNFTModal({
+export default function RequestNFTModal({
   achievement,
   onClick,
   type,

@@ -8,6 +8,7 @@ export interface User {
     nft: string[];
     avatar: string;
     verified: boolean;
+    profile_details: ProfileDetails;
     projects: ProjectMember[];
     clubs: Member[];
     login_method: 'metamask'|'web3auth'
