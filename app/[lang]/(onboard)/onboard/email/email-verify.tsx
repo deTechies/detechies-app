@@ -76,7 +76,6 @@ export default function EmailVerification({
         title: "Invalid code",
         description:
           "Something went wrong with verifying your email, please check if you email is correct. ",
-        variant: "destructive",
       });
     }
   }

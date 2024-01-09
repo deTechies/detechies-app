@@ -21,9 +21,9 @@ export default async function ManageMissionReward({
         {achievements &&
           achievements.map((item: any, index: number) => {
             return (
-              <>
-                <div className={`flex gap-5 rounded-sm border`}>
-                  <div className="w-[120px] h-[120px] relative bg-background-layer-2">
+              <div key={index}>
+                <div className={`flex gap-5 rounded-sm border ${totalPoints >= item.min_score && 'border-accent-primary'}`}>
+                  <div className="w-[120px] h-[120px] relative bg-background-layer-2 rounded-sm">
                     <Image
                       src={`https://ipfs.io/ipfs/${item.achievement.image}`}
                       alt={item.achievement.name}
@@ -49,7 +49,7 @@ export default async function ManageMissionReward({
                 </div>
 
                 {index != achievements.length - 1 && <hr className="my-6" />}
-              </>
+              </div>
             );
           })}
       </CardContent>

@@ -3,13 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { ABI } from "@/lib/constants";
+import { rewardMissionNFT } from "@/lib/data/achievements";
 import { uploadMissionChanges } from "@/lib/data/mission";
+import { getUserById } from "@/lib/data/user";
 import { Club, Mission, MissionDetails } from "@/lib/interfaces";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Address, useContractWrite } from "wagmi";
 import ManageMissionReward from "./manage-mission-reward";
-import { MissionList } from "./mission-list";
+import MissionList from "./mission-list";
 
 export default function MissionDetail({
   details,
@@ -22,19 +24,16 @@ export default function MissionDetail({
     Mission[]
   >([]);
 
-  const [selectedMissions, setSelectedMissions] = useState<Mission[]>([]);
+  const [missionState, setMissionState] = useState({
+    selectedMissions: [] as Mission[],
+    totalPoints: 0,
+  });
 
-  const {
-    data,
-    isLoading,
-    isSuccess,
-    write: distributeAchievement,
-  } = useContractWrite({
+  const { write: distributeAchievement, data } = useContractWrite({
     address: club.contract as Address,
     abi: ABI.group,
     functionName: "distributeAchievement",
   });
-
   const searchParams = useSearchParams();
   const selectedMember = searchParams.get("memberId");
 
@@ -44,43 +43,48 @@ export default function MissionDetail({
     const completedMissions = details.userProgress?.filter(
       (item) => item.completed && item.user.id === selectedMember
     );
-    console.log(completedMissions);
+
     const missionIds: Mission[] =
       completedMissions?.map((item) => item.mission as Mission) || [];
 
+    const totalPoints = missionIds.reduce(
+      (accumulator, currentItem) => accumulator + currentItem.score,
+      0
+    );
+
     setInitialSelectedMissions(missionIds);
-    setSelectedMissions(missionIds);
+    setMissionState({ selectedMissions: missionIds, totalPoints: totalPoints });
   }, [selectedMember, details.userProgress]);
 
-  const totalPoints = useMemo(() => {
-    return selectedMissions.reduce((total, missionId) => {
-      const mission = details.missions.find((m: Mission) => m === missionId);
-      return total + (mission ? mission.score : 0);
-    }, 0);
-  }, [selectedMissions, details.missions]);
-
   // Function to handle mission selection
-  const handleMissionSelect = (mission: Mission) => {
-    setSelectedMissions((prevSelected) => {
-      // Check if the mission is already selected based on missionId
-      const isAlreadySelected = prevSelected.some(
-        (selected) => selected.missionId === mission.missionId
+  const handleMissionSelect = useCallback((mission: Mission) => {
+    setMissionState((prevState: any) => {
+      const isAlreadySelected = prevState.selectedMissions.some(
+        (selected: Mission) => selected.missionId === mission.missionId
       );
 
-      if (isAlreadySelected) {
-        return prevSelected.filter(
-          (selected) => selected.missionId !== mission.missionId
-        );
-      } else {
-        return [...prevSelected, mission];
-      }
-    });
-  };
+      const newSelectedMissions = isAlreadySelected
+        ? prevState.selectedMissions.filter(
+            (selected: Mission) => selected.missionId !== mission.missionId
+          )
+        : [...prevState.selectedMissions, mission];
 
-  // Function to upload selected missions to backend
+      const newTotalPoints = newSelectedMissions.reduce(
+        (total: number, mission: Mission) => {
+          return total + mission.score;
+        },
+        0
+      );
+
+      return {
+        selectedMissions: newSelectedMissions,
+        totalPoints: newTotalPoints,
+      };
+    });
+  }, []);
+
   async function uploadSelectedMissions() {
-    //now we only need to make sure that upload this list of items with the selected and change it
-    const addedMissionsIds = selectedMissions
+    const addedMissionsIds = missionState.selectedMissions
       .filter(
         (mission) =>
           !initialSelectedMissions
@@ -92,7 +96,9 @@ export default function MissionDetail({
     const removedMissionsIds = initialSelectedMissions
       .filter(
         (mission) =>
-          !selectedMissions.map((m) => m.missionId).includes(mission.missionId)
+          !missionState.selectedMissions
+            .map((m: Mission) => m.missionId)
+            .includes(mission.missionId)
       )
       .map((mission) => mission.missionId);
 
@@ -103,13 +109,28 @@ export default function MissionDetail({
       selectedMember
     );
 
-    //distribute
-
+    //get the wallet of the selected member.
+    const getUser = await getUserById(selectedMember);
     for (const achievement of details.achievements) {
-      if (totalPoints >= achievement.min_score) {
-        await distributeAchievement({
-          args: [achievement.achievement.tokenId, selectedMember, 1],
-        });
+      if (missionState.totalPoints >= achievement.min_score) {
+        console.log(
+          achievement.achievement.tokenId,
+          getUser.id,
+          1,
+          club.contract
+        );
+       /*  await distributeAchievement({
+          args: [achievement.achievement.tokenId, getUser.wallet, 1],
+        }); */
+        
+        console.log(getUser.id, achievement.achievement.id, achievement.achievement.tokenId, "hash")
+        const result= await rewardMissionNFT(getUser.id, achievement.achievement.id, achievement.achievement.tokenId, "hash")
+        toast({
+          title: "Success",
+          description: <pre>
+            {JSON.stringify(result, null, 2)}
+          </pre>
+        })
       }
     }
 
@@ -120,7 +141,7 @@ export default function MissionDetail({
     <div className="flex gap-4 flex-col">
       <ManageMissionReward
         achievements={details.achievements}
-        totalPoints={totalPoints}
+        totalPoints={missionState.totalPoints}
       />
       <Card>
         <CardHeader>
@@ -129,18 +150,18 @@ export default function MissionDetail({
         <CardContent className="flex flex-col gap-7 mt-7">
           <MissionList
             missions={details.missions}
-            onMissionSelect={handleMissionSelect}
-            selectedMissions={selectedMissions}
+            onMissionSelect={(mission) => handleMissionSelect(mission)}
+            selectedMissions={missionState.selectedMissions}
           />
           <section className="flex justify-between text-subhead_s">
             <span>
-              달성한 미션 ( {selectedMissions.length} /{" "}
+              달성한 미션 ( {missionState.selectedMissions.length} /{" "}
               {details.missions.length} )
             </span>
             <div>
               총 획득 점수{" "}
               <span className="text-accent-primary text-subhead_l">
-                {totalPoints}
+                {missionState.totalPoints}
               </span>{" "}
               점
             </div>
@@ -149,11 +170,7 @@ export default function MissionDetail({
             <Button size="lg" variant="secondary">
               Go Back
             </Button>
-            <Button
-              size="lg"
-              onClick={uploadSelectedMissions}
-              disabled={!selectedMember}
-            >
+            <Button size="lg" onClick={uploadSelectedMissions}>
               Save Progress
             </Button>
           </section>

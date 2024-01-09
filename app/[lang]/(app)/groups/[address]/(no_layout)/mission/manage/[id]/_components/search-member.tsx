@@ -36,7 +36,7 @@ const dummyMembers: any[] = [
 export default function SearchMember({ membersList }: { membersList: any[] }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams()!
   
   const createQueryString = useCallback(
     (name: string, value: string) => {
