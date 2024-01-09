@@ -17,7 +17,7 @@ export default function ProjectMemberEvaluate({
 }: ProjectContributionProps) {
   const router = useRouter();
 
-  console.log(projectMember);
+  // console.log(projectMember);
   return (
     <Dialog>
       <DialogTrigger>

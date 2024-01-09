@@ -6,28 +6,30 @@ import { BellRing, Menu, Send, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams  } from "next/navigation";
+
 
 export default function Navbar({ lang }: { lang: any }) {
   //check if the current one is active
   const pathname = usePathname();
+  const params = useParams();
 
   const links = [
     {
       name: lang.find_expert,
-      href: "/profiles",
+      href: `/${params.lang}/profiles`,
     },
     {
       name: lang.project,
-      href: "/project",
+      href: `/${params.lang}/project`,
     },
     {
       name: lang.groups,
-      href: "/groups",
+      href: `/${params.lang}/groups`,
     },
     {
       name: lang.my_profile,
-      href: "/mypage",
+      href: `/${params.lang}/mypage`,
     },
   ];
 
@@ -38,7 +40,7 @@ export default function Navbar({ lang }: { lang: any }) {
       {({ open }) => (
         <>
           <div className="px-6 lg:px-8 bg-background-layer-1 max-w-[1920px] mx-auto ">
-            <div className="flex h-16 justify-between">
+            <div className="flex justify-between h-16">
 
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">

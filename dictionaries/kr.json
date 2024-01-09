@@ -1,9 +1,9 @@
 {
   "nav": {
-    "find_expert": "Experts",
-    "project": "Projects",
-    "groups": "Groups",
-    "my_profile": "Me"
+    "find_expert": "전문가 찾기",
+    "project": "프로젝트",
+    "groups": "그룹",
+    "my_profile": "내 프로필"
   },
   "user": {
     "details": {
