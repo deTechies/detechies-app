@@ -43,8 +43,8 @@ export default function ProfileCertificates({
   text,
 }: IProfileClubsProps) {
   const router = useRouter();
-
-  return (
+  
+  return (  
     <div className="flex flex-col gap-2">
       <Card className="flex flex-row justify-between items-center">
         <h5 className="text-subhead_s">{text?.clubs}</h5>
