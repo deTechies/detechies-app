@@ -105,16 +105,6 @@ export const authOptions = {
 
           token.web3 = session;
           
-          console.log("twitter account")
-          console.log(account)
-          
-          console.log("twitter user") 
-          console.log(user)
-          
-          console.log("twitter token")
-          console.log(token)
-
-          
           token.twitter = {
             user: user, 
             account: account,

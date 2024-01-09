@@ -8,9 +8,11 @@ export interface User {
     nft: string[];
     avatar: string;
     verified: boolean;
+    profile_details: ProfileDetails;
     projects: ProjectMember[];
     clubs: Member[];
-    login_method: 'metamask'|'web3auth'
+    achievement_rewards: AchievementReward[];
+    login_method: 'metamask'|'web3auth';
   }
   
   export interface ProfileDetails {
@@ -48,6 +50,7 @@ export interface User {
   export interface Club extends CreateClub{
     id: string;
     owner: string;
+    contract: string;
     blockchain_address?: string;
     files?: File[];
     members?: Member[];
@@ -160,6 +163,8 @@ export enum GROUP_TYPE {
     type: string;
     on_chain: boolean;
     name: string;
+    club: Club;
+    tokenId: string;
     verified: boolean;
     created_at: Date;
   }
@@ -169,7 +174,7 @@ export enum GROUP_TYPE {
     achievement: Achievement;
     data: string;
     collected: boolean;
-    status: 'open' | 'closed' | 'pending';
+    status: 'open' | 'closed' | 'pending' | 'granted' | 'requested';
     distributed: boolean;
     created_at: Date;
   }

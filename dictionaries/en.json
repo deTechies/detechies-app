@@ -205,12 +205,36 @@
     }
   },
   "mypage": {
+    "awards": {
+      "awards": "Awards",
+      "issuer": "Issuer",
+      "issue_date": "Issue Date"
+    },
+    "club":{
+      "clubs": "Clubs",
+      "new_club": "New club",
+      "group_type": "Club type",
+      "date_joined": "Date joined",
+      "training_certificate": "Certificate",
+      "certificate":{
+        "certificate_type": "NFT Type",
+        "certificate_attribute": "NFT Attribute",
+        "certificate_issuer":"Issuer",
+        "certificate_description": "NFT Description"
+      }
+    },
+    "education":{
+      "education": "Education",
+      "issuer": "Issuer",
+      "issue_date": "Issue Date"
+    },
     "profile": {
       "following": "following",
       "followers": "followers",
       "token": "token",
-      "avatar_settings": "avatar settings",
-      "name": "name"
+      "avatar_settings": "Set avatar",
+      "name": "name",
+      "address": "Wallet Address"
     },
     "edit_profile": {
       "edit_profile": "edit profile",
@@ -239,7 +263,7 @@
     },
     "main": {
       "profile": "profile",
-      "edit": "edit",
+      "edit": "Edit",
       "description": "description"
     },
     "menu": {

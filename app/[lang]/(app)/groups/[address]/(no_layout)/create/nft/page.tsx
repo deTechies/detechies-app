@@ -9,7 +9,7 @@ export default async function CreateNFT({
   
   const group = await getClub(params.address);
   
-  if(!group.contract_address){
+  if(!group.contract){
     return (
       <CreateGroupContract group={group}/>
     )
@@ -18,7 +18,7 @@ export default async function CreateNFT({
     
 
     <main className="w-full max-w-[60rem] m-8 mx-auto">
-        <CreateNFTForm groupId={params.address} />
+        <CreateNFTForm group={group} />
     </main>
   )
 }

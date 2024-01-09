@@ -13,6 +13,10 @@ declare module "next-auth" {
         id: string;
         email: string;
         verified: boolean;
+        user_settings: {
+          language: string;
+          theme: string;
+        }
       };
     };
     github?: {

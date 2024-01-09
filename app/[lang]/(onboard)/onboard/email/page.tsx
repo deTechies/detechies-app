@@ -17,13 +17,12 @@ export default async function EmailVerify({
 
   const user = await getUserProfile();
 
-
   return (
     <div>
       <section className="my-2">
         {!user.email && <CreateProfile text={text} />}
         {user && !user.verified && user.email && (
-          <EmailVerification text={text} user={user}/>
+          <EmailVerification text={text} user={user} />
         )}
         {user && user.verified && <FinishedProfile />}
       </section>

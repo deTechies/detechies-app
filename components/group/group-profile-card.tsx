@@ -2,10 +2,10 @@ import Image from "next/image";
 
 import { getClub } from "@/lib/data/groups";
 import Link from "next/link";
+import InviteGroupMember from "../invite-group-member/invite-group-member";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import JoinGroup from "./join-group";
-import InviteGroupMember from "../invite-group-member/invite-group-member";
 
 export default async function GroupProfileCard({
   id,
