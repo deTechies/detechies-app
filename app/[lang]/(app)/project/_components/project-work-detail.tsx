@@ -5,7 +5,6 @@ import { formatDate } from "@/lib/utils";
 export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
   if (!data) return null;
 
-  // console.log(data);
   return (
     <>
       <div className="inline-flex flex-wrap items-start justify-start gap-4 text-text-secondary">

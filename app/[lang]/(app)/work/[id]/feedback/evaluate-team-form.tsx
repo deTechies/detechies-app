@@ -206,13 +206,11 @@ export default function EvaluateTeamForm({
       ...selectedRanks,
       [criterionId]: { ...selectedRanks[criterionId], rank: rank },
     });
-    console.log(`Selected Rank for ${criterionId}: ${rank}`);
+
   };
 
   const submitResult = async () => {
     const result = await submitFeedback(selectedRanks, surveyId);
-
-    console.log(result);
 
     toast({
       title: "You submitted the following values:",

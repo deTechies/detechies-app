@@ -24,11 +24,11 @@ export default function PushProvider({ children }: { children: any }) {
   const initializeUser = useCallback(async () => {
     if(!signer) return;
     try {
-      console.log("initializing user");
+
       const initializedUser = await PushAPI.initialize(signer, {
         env: ENV.STAGING,
       });
-      console.log(initializedUser)
+
       setUser(initializedUser);
     } catch(err) {
       console.log(err);

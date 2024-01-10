@@ -38,13 +38,8 @@ export default function FinishedProfile() {
   ];
 
   useEffect(() => {
-    //update the session with the new data.
-
     const updateUserSession = async () => {
       const user = await getUserProfile();
-
-      console.log("update profile");
-      //here we want to update the profile
 
       if (!data || !data.web3.user) {
         return;

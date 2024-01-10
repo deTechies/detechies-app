@@ -133,7 +133,6 @@ export async function acceptClubMember(memberId: string) {
   const data = await response.json();
   const session = (await getServerSession(authOptions)) as any;
 
-  console.log(data);
 
   const isMember = data.members.find(
     (member: any) => member.address === session?.web3?.address.toLowerCase()

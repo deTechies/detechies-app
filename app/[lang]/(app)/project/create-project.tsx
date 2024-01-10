@@ -83,7 +83,7 @@ export default function CreateProject() {
     }
 
     const image = await uploadContent(file);
-    console.log(file);
+
 
     if (!image) {
       toast({
@@ -121,7 +121,6 @@ export default function CreateProject() {
       type: data.type,
     });
     
-    console.log(result);
 
     if (result.id) {
       toast({

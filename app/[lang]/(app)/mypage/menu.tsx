@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 export default function Menu({ links }: { links: any }) {
   const pathName = usePathname();
-  console.log(pathName);
+
   
   const menuItems = [
     {

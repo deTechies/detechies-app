@@ -47,7 +47,6 @@ const ConnectGithub = () => {
       })
       .catch((err: Error) => console.log(err));
 
-      console.log(result)
       setVerify(result);
     setLoading(false);
   };

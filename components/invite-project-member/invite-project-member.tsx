@@ -39,7 +39,6 @@ export default function InviteProjectMember({
   if (error) return <div>{JSON.stringify(error)}</div>;
   if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
 
-  // console.log(members);
 
   /*   const filteredData = members.filter((member: any) => {
     return member.display_name.toLowerCase().includes(search.toLowerCase());
