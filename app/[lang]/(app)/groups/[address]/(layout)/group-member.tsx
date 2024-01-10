@@ -41,7 +41,6 @@ export default function GroupMember({
 }) {
   const pathName = usePathname();
 
-  console.log(members);
 
   return (
     <div className="overflow-auto max-w-[90vw]">

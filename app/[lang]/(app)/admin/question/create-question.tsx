@@ -73,8 +73,6 @@ export default function CreateQuestion() {
 
     const result = await createQuestion(data);
 
-    console.log(result);
-
     if (result.id) {
       toast({
         title: "Success",

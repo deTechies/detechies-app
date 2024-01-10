@@ -68,7 +68,6 @@ export default function CreateProfile({ text }: { text: any }) {
   if (connector?.id == "web3auth") {
     const getInfo = async () => {
       const result = await web3AuthInstance?.getUserInfo();
-      console.log(result);
 
       if (result?.email) {
         form.setValue("email", result.email);

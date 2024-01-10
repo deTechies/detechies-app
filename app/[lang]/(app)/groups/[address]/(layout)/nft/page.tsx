@@ -1,5 +1,5 @@
 import DisplayNFT from "@/components/nft/display-nft";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getClub } from "@/lib/data/groups";
 import { Achievement } from "@/lib/interfaces";
 // import AchievementLink from "./achievement-link";
@@ -14,8 +14,6 @@ export default async function GroupAchievements({
   const details = await getClub(params.address);
 
   const dictionary = (await getDictionary(params.lang)) as any;
-
-  // console.log(details)
 
   return (
     <div>

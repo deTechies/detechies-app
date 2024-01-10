@@ -7,7 +7,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
 export default function QuitMission({
@@ -21,17 +20,6 @@ export default function QuitMission({
 
   async function onClickQuit() {
     setLoading(true);
-
-    //   const result = await -------(campaignId);
-
-    //   console.log(result);
-
-    //   if (result.id) {
-    //     toast({
-    //       title: "Success",
-    //       description: "Quit successfully",
-    //     });
-    //   }
 
     setLoading(false);
   }

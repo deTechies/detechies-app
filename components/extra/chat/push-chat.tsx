@@ -50,7 +50,6 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
       }
       
       await chatter.user.chat.history(newChat).then((chatFeed) => {
-        console.log(chatFeed);
         setChats(chatFeed);
       });
       
@@ -84,7 +83,7 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
         type: "Text",
       })
       .then((response) => {
-        console.log("Message sent successfully:", response);
+
         toast({
           title: "Message sent",
         });

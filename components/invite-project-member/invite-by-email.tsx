@@ -5,8 +5,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,7 +63,6 @@ export default function InviteByEmail({
 
     const result = await inviteByEmail(data.name, data.email, projectId);
 
-    console.log(result);
 
     if (result) {
       toast({

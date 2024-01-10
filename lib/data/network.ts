@@ -38,7 +38,7 @@ export async function getFollowersList(address?: string) {
       Authorization: `Bearer ${session.web3.accessToken}`,
     },
   });
-  console.log(response);
+
 
   if (!response.ok) {
     throw new Error("Failed to fetch followers list");
@@ -57,7 +57,7 @@ export async function startFollow(address: string) {
     },
     body: JSON.stringify({following: address, follower: session.web3.address }),
   });
-  console.log(response);
+
   if (!response.ok) {
     throw new Error("Failed to start following");
   }

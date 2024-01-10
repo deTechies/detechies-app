@@ -29,7 +29,6 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
   ) => {
     const file = event.target.files?.[0];
 
-    console.log(width, height);
     if (file) {
       const fileType = file.type.split("/")[0];
       if (fileType === "image" || fileType === "video") {

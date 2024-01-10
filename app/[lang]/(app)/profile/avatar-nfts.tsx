@@ -5,7 +5,6 @@ import Image from 'next/image';
 export default function AvatarNFTs({nfts}: {nfts: string[]}) {
     
     if(!nfts) return null;
-    console.log(nfts)
   return (
     <Card>
         <CardHeader>

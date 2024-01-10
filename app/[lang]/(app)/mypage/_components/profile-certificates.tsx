@@ -1,27 +1,13 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
-import { PlusIcon } from "lucide-react";
 import Image from "next/image";
 
 import { Achievement, AchievementReward } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
-import DisplayNFT from "@/components/nft/display-nft";
 
-import {
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
-import { DialogContent } from "@radix-ui/react-dialog";
 
 interface IProfileClubsProps{
   achievement_rewards: AchievementReward[];
@@ -52,7 +38,6 @@ export default function ProfileCertificates({
       
       {achievement_rewards &&
         achievement_rewards.map((achievement_reward: AchievementReward) => {
-          console.log("Achievement: ", achievement_reward.achievement)
 
           if(achievement_reward.status == 'granted'){
             return (

@@ -3,13 +3,12 @@
 import { User } from "@/lib/interfaces";
 
 import { inviteGroupMember } from "@/lib/data/groups";
-import { DialogClose } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import PersonItem from "../extra/add-member-item";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { toast } from "../ui/use-toast";
-import { useRouter } from "next/navigation";
 
 export default function SelectedGroupMember({
   user,
@@ -40,7 +39,6 @@ export default function SelectedGroupMember({
       id,
     );
     
-    console.log(result);
 
     setLoading(false);
     onCompleteInvite();

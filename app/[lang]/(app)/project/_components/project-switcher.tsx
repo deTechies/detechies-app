@@ -1,6 +1,5 @@
-import { Badge } from "@/components/ui/badge";
 import { Project } from "@/lib/interfaces";
-import { beginEndDates, formatDate } from "@/lib/utils";
+import { beginEndDates } from "@/lib/utils";
 import { FolderArchiveIcon } from "lucide-react";
 import Image from "next/image";
 
@@ -20,7 +19,6 @@ export default function ProjectSwitcher({ project }: ProjectSwitcherProps) {
 }
 
 const ProjectDisplay = ({project}:{project:Project}) => {
-  // console.log(project);
 
   return (
     <div className="flex items-start gap-6 p-5 border rounded-md bg-background-layer-1 border-border-div">
