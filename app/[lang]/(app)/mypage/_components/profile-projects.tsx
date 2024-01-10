@@ -3,10 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
-import { ChevronRight, PlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import ProjectWorkDetail from "../../project/_components/project-work-detail";
 import { useRouter } from "next/navigation";
 
 
@@ -33,12 +32,12 @@ export default function ProfileProjects({
       </Card>
         
       {projects &&
-        projects.map((project: any) => {
-          console.log("Project: ", project)
-          console.log("Project.project: ", project.project)
+        projects.map((project: any, index:number) => {
+
           return (
             <Link
             href={`/project/${project.project.id}`}
+            key={index}
             >
               <Card key={project.id} className="flex flex-row">
                   {/* Image on the left */}
