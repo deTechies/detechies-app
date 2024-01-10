@@ -61,8 +61,8 @@ export interface User {
   
 export enum GROUP_TYPE {
     COMMUNITY = 'community',
-    AGENCY = 'agency',
-    ADUCATION = 'education',
+    COMPANY = 'company',
+    SCHOOL = 'school',
     AUTHORITY = 'authority',
   }
   

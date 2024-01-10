@@ -43,16 +43,17 @@ const GroupListItem = React.memo(
               {details.name}
             </h5>
             <div className="text-title_m mb-[46px] flex items-center gap-1">
-              {details.type != "community" && (
+              {/* {details.type != "community" && (
                 <Image
                   height={20}
                   width={20}
                   alt="certified"
                   src={`/icons/certified_${details.type}.png`}
                 ></Image>
-              )}
+              )} */}
 
-              {lang.group.list[details.type]}
+              {/* {lang.group.list[details.type]} */}
+              {lang.interface.group_type[details.type]}
             </div>
 
             <div className="flex divide-x">

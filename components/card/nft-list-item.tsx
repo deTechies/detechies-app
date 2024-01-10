@@ -25,6 +25,9 @@ export default function NftListItem({
 
   const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
 
+  
+  const isSelected = item.avatar_type ? searchParams.get(item?.avatar_type) === item.avatar : false;
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
@@ -48,7 +51,7 @@ export default function NftListItem({
         {showSelect && item.avatar_type && (
           <Switch
             className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
-            checked={selected}
+            checked={isSelected}
             onCheckedChange={() => {
               router.push(
                 pathname +

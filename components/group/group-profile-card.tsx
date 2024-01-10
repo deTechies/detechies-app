@@ -65,17 +65,17 @@ export default async function GroupProfileCard({
           />
         </div>
 
-        <div className="flex gap-0.5 items-center">
+        <div className="flex gap-0.5 items-center truncate">
           <h3 className="truncate text-heading_m text-accent-on-primary">
             {groupDetail?.name ? groupDetail?.name : "Name not found"}
           </h3>
 
-          <Image
+          {/* <Image
             src="/icons/certified.png"
             alt="certified"
             width={20}
             height={20}
-          />
+          /> */}
         </div>
       </CardHeader>
 
@@ -129,7 +129,11 @@ export default async function GroupProfileCard({
 
         {groupDetail.userRole == "none" && (
           <div className="flex justify-end gap-3 grow">
-            <JoinGroup groupId={groupDetail.id} details={groupDetail} />
+            <JoinGroup
+              groupId={groupDetail.id}
+              details={groupDetail}
+              lang={lang}
+            />
           </div>
         )}
       </CardContent>
