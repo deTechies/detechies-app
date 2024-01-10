@@ -13,6 +13,7 @@ declare module "next-auth" {
         id: string;
         email: string;
         verified: boolean;
+        avatar: string[];
         user_settings: {
           language: string;
           theme: string;
