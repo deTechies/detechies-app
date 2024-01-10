@@ -5,7 +5,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,11 +43,11 @@ type ProfileFormValues = z.infer<typeof projectFormSchema>;
 export default function InviteByEmail({
   id,
   cancelByEmail,
-  // lang,
+  lang,
 }: {
   id: string;
   cancelByEmail: () => void;
-  // lang: any;
+  lang: any;
 }) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(projectFormSchema),
@@ -82,8 +82,11 @@ export default function InviteByEmail({
   return (
     <main className="flex flex-col gap-4">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          <Label>Name</Label>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-3"
+        >
+          <Label>{lang.details.profile_card.invite.name}</Label>
 
           <div className="flex gap-4 mb-2">
             <FormField
@@ -92,10 +95,7 @@ export default function InviteByEmail({
               render={({ field }) => (
                 <FormItem className="grow">
                   <FormControl className="h-[60px]">
-                    <Input
-                      placeholder="first_name"
-                      {...field}
-                    />
+                    <Input placeholder="first_name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -107,10 +107,7 @@ export default function InviteByEmail({
               render={({ field }) => (
                 <FormItem className="grow">
                   <FormControl className="h-[60px]">
-                    <Input
-                      placeholder="last_name"
-                      {...field}
-                    />
+                    <Input placeholder="last_name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -118,12 +115,13 @@ export default function InviteByEmail({
             />
           </div>
 
-          <Label>Email</Label>
+          <Label>
+            {lang.details.profile_card.invite.email}
+          </Label>
 
           <FormField
             control={form.control}
-            name="email"
-            
+            name={lang.details.profile_card.invite.email}
             render={({ field }) => (
               <FormItem className="mb-2">
                 <FormControl className="h-[60px]">
@@ -141,7 +139,7 @@ export default function InviteByEmail({
               className="max-w-[212px] grow px-0"
               onClick={() => cancelByEmail()}
             >
-              Back
+              {lang.details.profile_card.invite.back}
             </Button>
             <Button
               type="submit"
@@ -150,7 +148,7 @@ export default function InviteByEmail({
               disabled={loading || !form.formState.isValid}
               loading={loading}
             >
-              Invite
+              {lang.details.profile_card.invite.invite}
             </Button>
           </div>
         </form>

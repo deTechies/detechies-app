@@ -2,8 +2,6 @@
 import InvitingMemberListItem from "@/components/group/inviting-member-list-item";
 import PendingMemberListItem from "@/components/group/pending-member-list-item";
 
-// import { Locale } from "@/i18n.config";
-
 import MemberCard from "@/components/card/member-card";
 import Search from "@/components/extra/search";
 import { getPendingMembers } from "@/lib/data/groups";
@@ -12,12 +10,13 @@ import { Member } from "../members/page";
 export default async function ManageMember({
   details,
   searchParams,
+  lang,
 }: {
   details: any;
   searchParams: { [key: string]: string | string[] | undefined };
+  lang: any;
 }) {
   const pendingData = await getPendingMembers(details.id);
-  // const dictionary = await getDictionary(params.lang);
 
   const searchItem = searchParams.search as string;
 
@@ -40,15 +39,19 @@ export default async function ManageMember({
   return (
     <div className="overflow-auto max-w-[90vw]">
       <h3 className="mb-4 text-subhead_s">
-        그룹 가입 대기 중 ({joined?.length})
+        {lang.group.details.manage.member.waiting_join} ({joined?.length})
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">
         <div className="grid grid-cols-[282px_1fr_90px_144px] gap-4 text-text-placeholder text-title_s">
-          <div>유저 정보</div>
-          <div>요청 메세지</div>
-          <div className="text-center ">요청한 날짜</div>
-          <div className="text-center ">승인 여부</div>
+          <div>{lang.group.details.manage.member.user_info}</div>
+          <div>{lang.group.details.manage.member.message}</div>
+          <div className="text-center ">
+            {lang.group.details.manage.member.request_date}
+          </div>
+          <div className="text-center ">
+            {lang.group.details.manage.member.actions}
+          </div>
         </div>
 
         {joined.length > 0 ? (
@@ -58,25 +61,26 @@ export default async function ManageMember({
                 profile={item}
                 key={index}
                 contract={details.id}
+                lang={lang}
               ></PendingMemberListItem>
             );
           })
         ) : (
           <div className="text-center text-label_m text-text-secondary pb-7">
-            아직 그룹 가입 요청내역이 없어요.
+            {lang.group.details.manage.member.waiting_join}
           </div>
         )}
       </div>
 
       <h3 className="mb-4 text-subhead_s">
-        초대 승인 대기 중 ({invited?.length})
+      {lang.group.details.manage.member.waiting_invite} ({invited?.length})
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">
         <div className="grid grid-cols-[1fr_90px_144px] gap-4 text-text-placeholder text-title_s">
-          <div>유저 정보</div>
-          <div className="text-center ">요청한 날짜</div>
-          <div className="text-center ">승인 여부</div>
+          <div>{lang.group.details.manage.member.user_info}</div>
+          <div className="text-center ">{lang.group.details.manage.member.request_date}</div>
+          <div className="text-center ">{lang.group.details.manage.member.actions}</div>
         </div>
 
         {details.members.length > 0 ? (
@@ -86,23 +90,24 @@ export default async function ManageMember({
                 profile={item}
                 key={index}
                 contract={details.id}
+                lang={lang}
               ></InvitingMemberListItem>
             );
           })
         ) : (
           <div className="text-center text-label_m text-text-secondary pb-7">
-            아직 초대한 유저가 없어요.
+            {lang.group.details.manage.member.no_waiting_invite}
           </div>
         )}
       </div>
 
       <h3 className="mb-4 text-subhead_s">
-        전체 멤버 ({details.members.length})
+      {lang.group.details.manage.member.all_members} ({details.members.length})
       </h3>
 
       <div className="overflow-auto max-w-[90vw]">
         <div className="max-w-[434px] mb-3">
-          <Search placeholder="닉네임 또는 직업을 검색해보세요." />
+          <Search placeholder={lang.group.details.manage.member.search} />
         </div>
 
         <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
@@ -116,12 +121,13 @@ export default async function ManageMember({
                   address={item.memberId}
                   info={item.user}
                   key={index}
+                  lang={lang}
                 />
               );
             })}
           {filteredData < 1 && (
             <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-              검색 결과가 없습니다.
+              {lang.group.details.manage.member.no_result}
             </div>
           )}
         </div>

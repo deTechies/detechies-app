@@ -14,9 +14,11 @@ import { toast } from "../ui/use-toast";
 export default function PendingMemberListItem({
   profile,
   contract,
+  lang,
 }: {
   profile: any;
   contract: string;
+  lang: any;
 }) {
   const router = useRouter();
 

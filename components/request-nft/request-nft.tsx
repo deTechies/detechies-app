@@ -35,6 +35,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function RequestNFTModal({ groups }: { groups: any[] }) {
+
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 

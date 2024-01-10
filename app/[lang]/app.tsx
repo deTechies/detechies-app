@@ -15,7 +15,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [publicProvider()]
 );
 
-const web3AuthInstance =
+export const web3AuthInstance =
   typeof window !== "undefined"
     ? new Web3Auth({
         clientId:

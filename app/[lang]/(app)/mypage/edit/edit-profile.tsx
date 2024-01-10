@@ -95,7 +95,7 @@ export default function EditProfile({text, username, currentValues}: EditProfile
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <section className="mb-8">
-              <h1 className="mb-6 text-primary text-subhead_m capitalize">
+              <h1 className="mb-6 capitalize text-primary text-subhead_m">
                 {text.edit_profile}
               </h1>
             </section>
@@ -104,7 +104,7 @@ export default function EditProfile({text, username, currentValues}: EditProfile
 
                   <div className="w-full">
                     <Label className="">{text?.full_name}</Label>
-                    <div className="flex gap-2 items-center mt-2">
+                    <div className="flex items-center gap-2 mt-2">
                       <FormField
                         control={form.control}
                         name="first_name"
@@ -132,7 +132,7 @@ export default function EditProfile({text, username, currentValues}: EditProfile
                
 
                 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid gap-4 md:grid-cols-2">
                   <div>
                   <Label className="">{text?.profession}</Label>
                       <FormField
@@ -171,7 +171,7 @@ export default function EditProfile({text, username, currentValues}: EditProfile
               {form.watch("skills")?.map((tag, index) => (
                 <Badge 
                 key={index} 
-                className="bg-background-layer-1 border border-accent-primary px-3 py-2 rounded-full text-xs mr-2"
+                className="px-3 py-2 mr-2 text-xs border rounded-full bg-background-layer-1 border-accent-primary"
                 onClick={() => {
                   const currentTags = form.getValues("skills") || [];
                   const newTags = currentTags.filter((t) => t !== tag);
@@ -210,8 +210,9 @@ export default function EditProfile({text, username, currentValues}: EditProfile
 
             <div className="flex items-center w-full mt-10">
               <Button
-                className="w-full  text-1xl"
+                className="w-full text-1xl"
                 type="submit"
+                disabled={loading}
                 loading={loading}
               >
                 {text?.save_changes}
