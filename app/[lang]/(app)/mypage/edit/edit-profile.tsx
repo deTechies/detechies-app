@@ -25,14 +25,14 @@ import * as z from "zod";
 const profileFormSchema = z.object({
   first_name: z
     .string()
-    .min(2, {
+    .min(1, {
       message: "Your first name must be at least 2 characters.",
     })
     .optional(),
   last_name: z
     .string()
-    .min(2, {
-      message: "Your last name must be at least 2 characters.",
+    .min(1, {
+      message: "Your last name must be at least 1 characters.",
     })
     .optional(),
   profession: z.string().optional(),

@@ -94,7 +94,7 @@ export default function ProfileProjects({
                       </div>
                     </div>
                     <div className="inline-flex items-start gap-[12px] relative">
-                      {project.project?.tags.map((tag: string, index: number)=>{
+                      {project.project?.tags && project.project?.tags.map((tag: string, index: number)=>{
                         return(
                           <div className="inline-flex relative h-[32px] py-[8px] px-[10px] justify-center items-center rounded-[20px] border-[1px] border-[#BEC3CA]" key={index}>
                             <span className="text-[#A2A9B3] text-[12px]">{tag}</span>
