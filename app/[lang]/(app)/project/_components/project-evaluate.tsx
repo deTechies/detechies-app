@@ -1,5 +1,6 @@
 "use client";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ProjectMember } from "@/lib/interfaces";
@@ -7,7 +8,6 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import ProjectMemberInline from "./project-member-inline";
 import ProjectSwitcher from "./project-switcher";
-import { Badge } from "@/components/ui/badge";
 
 type ProjectContributionProps = {
   projectMember: ProjectMember;
@@ -17,7 +17,6 @@ export default function ProjectMemberEvaluate({
 }: ProjectContributionProps) {
   const router = useRouter();
 
-  console.log(projectMember);
   return (
     <Dialog>
       <DialogTrigger>

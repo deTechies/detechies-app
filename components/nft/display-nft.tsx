@@ -1,5 +1,10 @@
 "use client";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
@@ -14,9 +19,11 @@ import { toast } from "../ui/use-toast";
 export default function DisplayNFT({
   details,
   showSelect,
+  lang,
 }: {
   details: Achievement;
   showSelect?: boolean;
+  lang?: any;
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const [showFull, setShowFull] = useState(false);
@@ -48,11 +55,12 @@ export default function DisplayNFT({
     setRequesting(true);
 
     const result = await requestAchievement(details.id);
-    
+
     toast({
-      title: 'Congratulations!', 
-      description: 'Please wait for the administrator to accept your nft request!',
-    })
+      title: "Congratulations!",
+      description:
+        "Please wait for the administrator to accept your nft request!",
+    });
 
     setRequesting(false);
   };
@@ -60,7 +68,7 @@ export default function DisplayNFT({
   return (
     <Dialog>
       <DialogTrigger className="min-w-[150px] w-full grow">
-        <NftListItem item={details} showSelect={showSelect} />
+        <NftListItem item={details} showSelect={showSelect} lang={lang} />
       </DialogTrigger>
 
       <DialogContent className="flex flex-col gap-6 max-w-[504px] pt-6">
@@ -102,49 +110,57 @@ export default function DisplayNFT({
           </div>
           <div className="max-w-md p-0 border rounded-sm border-border-div">
             <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
-              <div className="text-label_m text-text-secondary ">NFT 유형</div>
+              <div className="text-label_m text-text-secondary ">
+                {lang.achievement.display_nft.nft_type}
+              </div>
 
               <div className="flex items-center gap-2 overflow-auto text-right">
                 <span className="text-title_m">
-                  {details.nft_type == "sbt" ? "커리어" : "한정판"}
+                  {lang.interface.nft_type[details.nft_type]}
                 </span>
 
                 {details.nft_type == "sbt" && (
                   <Badge variant="info" shape="category">
-                    {
-                      details.type == "awards" ? "수상":"교육 수료증"
-                    }
+                    {lang.interface.sbt_type[details.type]}
                   </Badge>
                 )}
               </div>
             </div>
 
             <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
-              <div className="text-label_m text-text-secondary ">NFT 속성</div>
+              <div className="text-label_m text-text-secondary ">
+                {lang.achievement.display_nft.nft_prop}
+              </div>
 
               <div className="flex items-center gap-2 overflow-auto text-right">
                 <span className="text-title_m">
                   {details.avatar && details.image
-                    ? "아바타 + 증명서"
+                    ? lang.interface.nft_image_type["avatar+image"]
                     : details.avatar
-                    ? "아바타"
-                    : "증명서"}
+                    ? lang.interface.nft_image_type.avatar
+                    : lang.interface.nft_image_type.image}
                 </span>
               </div>
             </div>
 
             <div className="flex items-center justify-between px-4 py-3">
-              <div className="text-label_m text-text-secondary ">발행자</div>
+              <div className="text-label_m text-text-secondary ">
+                {lang.achievement.display_nft.publisher}
+              </div>
 
               <div className="flex items-center gap-2 overflow-auto text-right">
-                <span className="text-title_m">그룹 이름</span>
+                <span className="text-title_m">
+                  {lang.achievement.display_nft.group_name}
+                </span>
               </div>
             </div>
           </div>
 
           <div className="p-4 rounded-sm bg-background-layer-2">
             <div className="flex justify-between">
-              <span className="mb-4 text-title_m">NFT 설명</span>
+              <span className="mb-4 text-title_m">
+                {lang.achievement.display_nft.nft_desc}
+              </span>
 
               <button
                 onClick={() => {
@@ -152,12 +168,18 @@ export default function DisplayNFT({
                 }}
                 className="flex items-center gap-2 p-0 text-label_m text-text-secondary w-fit h-fit"
               >
-                {showFull ? "hide" : "show_more"}
+                {showFull
+                  ? lang.achievement.display_nft.hide
+                  : lang.achievement.display_nft.show_more}
                 {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
               </button>
             </div>
 
-            <p className={`text-body_m ${!showFull && "line-clamp-2"}`}>
+            <p
+              className={`text-body_m break-words ${
+                !showFull && "line-clamp-2"
+              }`}
+            >
               {details.description}
             </p>
           </div>
@@ -165,10 +187,14 @@ export default function DisplayNFT({
 
         <div className="grid grid-cols-2 gap-2">
           <DialogClose asChild>
-            <Button variant={"secondary"}>다음에 할래요</Button>
+            <Button variant={"secondary"}>
+              {lang.achievement.display_nft.close}
+            </Button>
           </DialogClose>
-          
-          <Button onClick={handleRequestNFT}>발행 요청</Button>
+
+          <Button onClick={handleRequestNFT}>
+            {lang.achievement.display_nft.send_request}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

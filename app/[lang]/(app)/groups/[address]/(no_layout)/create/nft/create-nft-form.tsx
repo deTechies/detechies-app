@@ -22,9 +22,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import MediaUploader from "@/components/extra/media-uploader";
+import { ABI } from "@/lib/constants";
 import { uploadAchievement } from "@/lib/data/achievements";
 import {
   AVATAR_TYPE,
+  Club,
   NFT_IMAGE_TYPE,
   NFT_TYPE,
   SBT_TYPE,
@@ -32,6 +34,7 @@ import {
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Address, useContractWrite } from "wagmi";
 import CompletedSuccess from "./completed-success";
 
 const profileFormSchema = z.object({
@@ -60,7 +63,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   avatar_type: AVATAR_TYPE.CLOTHES,
 };
 
-export function CreateNFTForm({ groupId }: { groupId: string }) {
+export function CreateNFTForm({ group }: { group: Club }) {
   const {
     form,
     setUploadedImage,
@@ -70,15 +73,14 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
     isLoading,
     completed,
     onSubmit,
-  } = useCreateNFTForm(groupId);
+  } = useCreateNFTForm(group.id, group);
 
 
   const router = useRouter();
-
-
-  if (completed) return <CompletedSuccess groupId={groupId}/>;
-
-
+  
+  
+  if (completed) return <CompletedSuccess groupId={group.id} />;
+  
   const onClickCancel = () => {
     router.back();
   };
@@ -401,7 +403,7 @@ export function CreateNFTForm({ groupId }: { groupId: string }) {
   );
 }
 
-const useCreateNFTForm = (groupId: string) => {
+const useCreateNFTForm = (groupId: string, group: Club) => {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -412,11 +414,15 @@ const useCreateNFTForm = (groupId: string) => {
   const [uploadedAvatar, setUploadedAvatar] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
+  
+  const { write, error } = useContractWrite({
+    address: group.contract as Address,
+    abi: ABI.group,
+    functionName: "addAchievement",
+  });
 
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
-    //const image = await uploadContent(icon);
-    //console.log(image);
     let avatar = null;
     let image = null;
 
@@ -455,10 +461,28 @@ const useCreateNFTForm = (groupId: string) => {
     }
 
     const uploadData = { ...data, avatar, image, clubId: groupId };
+    
+    //upload nft data 
+    const metadata = await uploadContent(JSON.stringify({
+      image: 'https://ipfs.io/ipfs/' + uploadData.image,
+      name: uploadData.name,
+      description: uploadData.description,
+      attributes: {
+        type: uploadData.type,
+        avatar_type: uploadData.avatar_type,
+        image_type: uploadData.image_type,
+        nft_type: uploadData.nft_type,  
+      }
+    }));
+    
+    const tradeable = NFT_TYPE.SBT == uploadData.nft_type ? false : true;
+    
+    await write({
+      args: [metadata, tradeable],
+    })
 
     const result = await uploadAchievement(uploadData);
 
-    console.log(result);
     toast({
       title: "Congratulations on your first nft!",
       description: "Succesfully create an nft. ",

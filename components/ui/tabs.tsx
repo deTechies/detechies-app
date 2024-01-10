@@ -1,7 +1,7 @@
 "use client";
 
-import { cva, type VariantProps } from "class-variance-authority";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { cva } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -18,7 +18,7 @@ const TabsListVariants = cva("items-center", {
   variants: {
     variant: {
       default:
-        "inline-flex border-b border-border-field justify-center text-label_l p-1 text-muted-foreground",
+        "flex border-b border-border-field justify-center p-1 text-text-secondary",
       button1: "flex justify-start gap-2",
       button2: "flex justify-start gap-2",
     },
@@ -48,8 +48,8 @@ TabsList.displayName = TabsPrimitive.List.displayName;
 const TabsTriggerVariants = cva("", {
   variants: {
     variant: {
-      default:
-        "inline-flex items-center justify-center whitespace-nowrap  px-2 py-2 text-label_  ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-text-primary data-[state=active]:border-accent-primary data-[state=active]:border-b-2",
+      default:`justify-center p-2 text-title_m disabled:pointer-events-none 
+      disabled:opacity-50 data-[state=active]:text-text-primary data-[state=active]:border-accent-primary `,
       button1: "p-3 rounded-full text-title_m data-[state=active]:bg-background-base",
       button2: "p-3 rounded-full text-title_s text-text-secondary bg-background-layer-1 data-[state=active]:bg-accent-secondary data-[state=active]:text-accent-primary",
     },

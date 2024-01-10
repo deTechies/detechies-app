@@ -66,7 +66,7 @@ export default function ProfileDetailCard({ lang, profile, image }: ProfileProps
       `${API_URL}/polybase/follow/${id}/${address}`,
       {}
     ).then((res) => res.json());
-    console.log(follow);
+
 
     toast({
       title: "Start following " + profile.username,
@@ -80,7 +80,7 @@ export default function ProfileDetailCard({ lang, profile, image }: ProfileProps
       `${API_URL}/polybase/unfollow/${id}/${address}`,
       {}
     ).then((res) => res.json());
-    console.log(follow);
+
 
     toast({
       title: "Unfollowed " + profile.username,
@@ -120,7 +120,7 @@ export default function ProfileDetailCard({ lang, profile, image }: ProfileProps
         return data; // or process the returned data as needed
     } catch (error) {
         toast({title:"There was a problem with the fetch operation:"});
-        console.log(error)
+
     }
     
     setRefresh(false);

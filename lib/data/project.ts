@@ -45,7 +45,7 @@ export async function updateProject(data: any) {
     throw new Error("Failed to update project");
   }
 
-  // console.log(await response.json())
+
 
   return response.json();
 }
@@ -79,8 +79,7 @@ export async function createProject(formData: any) {
   });
 
   if (!response.ok) {
-    // console.log(response);
-    // console.log(response.json());
+
     throw new Error("Failed to create project");
   }
 
@@ -150,8 +149,6 @@ export async function getPendingProjectMembers(address: string) {
     }
   );
   const data = await response.json();
-
-  // console.log(data);
 
   return data;
 }

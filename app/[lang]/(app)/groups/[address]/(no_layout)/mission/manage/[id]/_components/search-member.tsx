@@ -36,7 +36,7 @@ const dummyMembers: any[] = [
 export default function SearchMember({ membersList }: { membersList: any[] }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams()!
   
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -70,7 +70,7 @@ export default function SearchMember({ membersList }: { membersList: any[] }) {
             <button key={index} onClick={() => {onSelectUser(details.user.id)}}>
               <InlineMemberItem
                 active={selectedMember === details.user.id}
-                avatar={details.user.avatar}
+                avatar={details.user.avatar_link}
                 display_name={details.user.display_name}
                 memberId={details.user.wallet}
               />

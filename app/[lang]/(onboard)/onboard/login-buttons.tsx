@@ -65,10 +65,13 @@ export default function LoginButtons({ text }: { text?: any }) {
           title: "Error",
           description: response.error,
         });
-        console.log("Error occured:", response.error);
+
       }
-    } catch (error) {
-      console.log("Error Occured", error);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+      });
     }
     
     setSigning(false)

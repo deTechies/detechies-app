@@ -124,7 +124,7 @@ export const Wizard = ({
   };
 
   const submitForm = async () => {
-    console.log("Submitting Form Data:", JSON.stringify(formData, null, 2));
+
 
     // we can create hte missions here
     const result = await createMissionCampaign(formData, clubId);
@@ -255,7 +255,7 @@ export const Wizard = ({
                   size="lg"
                   className="w-full"
                   onClick={submitForm}
-                  disabled={nextDisabled()}
+                  disabled={nextDisabled() || formData.selectedAchievements.length < 1 || formData.missions.length < 1 }
                 >
                   Submit
                 </Button>

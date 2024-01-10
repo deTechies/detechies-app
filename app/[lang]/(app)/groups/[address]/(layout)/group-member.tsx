@@ -32,23 +32,26 @@ export default function GroupMember({
   address,
   members,
   isCreator,
+  lang,
 }: {
   address: any;
   members: any[];
   isCreator?: boolean;
+  lang: any;
 }) {
   const pathName = usePathname();
 
-  // console.log(members);
 
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="flex items-center justify-between mb-5">
-        <h3 className="text-subhead_s">최근 가입한 멤버</h3>
+        <h3 className="text-subhead_s">
+          {lang.group.details.about.latest_member}
+        </h3>
         {/* <h3 className="text-subhead_s">Members ({members?.length})</h3> */}
         <Link href={pathName + "/members"} passHref>
           <Button size="sm" variant="secondary">
-            전체보기
+            {lang.group.details.about.all}
           </Button>
         </Link>
         {/* {
@@ -68,6 +71,7 @@ export default function GroupMember({
                   address={item.memberId}
                   info={item.user}
                   key={index}
+                  lang={lang}
                 />
               );
             }

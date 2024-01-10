@@ -4,41 +4,12 @@ import Image from "next/image";
 
 export default async function MissionReward({
   achievements,
+  totalPoints, 
 }: {
   achievements: any[];
+  totalPoints?: number;
 }) {
-  const list = [
-    {
-      points: 40,
-      nft: {
-        metadata: {
-          name: "시니어 수료증",
-          image: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-          category: "교육 수료증",
-        }, // NFTItem
-      },
-    },
-    {
-      points: 60,
-      nft: {
-        metadata: {
-          name: "시니어 수료증",
-          image: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-          category: "교육 수료증",
-        }, // NFTItem
-      },
-    },
-    {
-      points: 80,
-      nft: {
-        metadata: {
-          name: "시니어 수료증",
-          image: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-          category: "교육 수료증",
-        },
-      },
-    },
-  ];
+
 
   return (
     <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-2">
@@ -51,7 +22,7 @@ export default async function MissionReward({
           achievements.map((item: any, index: number) => {
             return (
               <>
-                <div className="flex gap-5">
+                <div className={`flex gap-5 ${totalPoints && totalPoints >= item.min_score && 'border border-accent-primary' }`}>
                   <div className="w-[120px] h-[120px] relative bg-background-layer-2">
                     <Image
                       src={`https://ipfs.io/ipfs/${item.achievement.image}`}

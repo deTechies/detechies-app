@@ -10,12 +10,14 @@ interface NftListItemProps {
   showSelect?: boolean;
   selected?: boolean;
   item: Achievement;
+  lang?: any;
 }
 
 export default function NftListItem({
   showSelect,
   selected,
   item,
+  lang,
 }: NftListItemProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -37,9 +39,6 @@ export default function NftListItem({
       ? url.substring(DEFAULT_IPFS_URL.length)
       : url;
   }
-
-
-  
 
   // console.log(item);
 
@@ -87,16 +86,16 @@ export default function NftListItem({
 
         <div className="flex flex-wrap gap-2">
           <Badge variant="info" shape="category">
-            {item.nft_type == "sbt"
-              ? "커리어 NFT"
-              : item.nft_type == "erc721"
-              ? "한정판 NFT"
-              : "not found"}
+            {lang && item.nft_type
+              ? lang.interface.nft_type[item.nft_type]
+              : "No Type"}
           </Badge>
 
-          {
-            item?.avatar && <Badge variant="warning" shape="category">아바타</Badge>
-          }
+          {item?.avatar && (
+            <Badge variant="warning" shape="category">
+              {lang.interface.nft_image_type.avatar}
+            </Badge>
+          )}
         </div>
       </div>
     </section>

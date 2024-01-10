@@ -5,6 +5,7 @@ import Connections from "./connections";
 export default async function ProfileDetails() {
 
   const profile = await getUserProfile();
+  
   return (
     <Card>
       <CardContent className="flex flex-col gap-8">

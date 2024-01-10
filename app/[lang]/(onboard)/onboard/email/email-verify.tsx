@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { sendVerifyEmail } from "@/lib/data/user";
+import { useSession } from "next-auth/react";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ export default function EmailVerification({
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathName = usePathname();
-
+  const { data, update } = useSession();
   const code = searchParams.get("code") as string;
 
   const [isValid, setIsValid] = useState<boolean | null>(null);
@@ -49,13 +50,16 @@ export default function EmailVerification({
         description: "Email verified",
       });
       
+      
+
+      
+
       router.refresh();
     } else {
       toast({
         title: "Invalid code",
         description:
           "Something went wrong with verifying your email, please check if you email is correct. ",
-        variant: "destructive",
       });
     }
   }

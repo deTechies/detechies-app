@@ -40,13 +40,12 @@ export default function Login() {
     connect({ connector: connectors as any });
   }, [connect, connectors, isDisconnected]);
 
-
   if (isConnecting || isReconnecting) {
     return (
       <Button
         size="sm"
         variant={"secondary"}
-        className="text-md"
+        className="text-md animate-pulse"
         disabled={true}
       >
         Connect
@@ -58,39 +57,46 @@ export default function Login() {
     //sign message
     return (
       <div className="flex rounded-md  items-center gap-2">
+        <Button
+          size="sm"
+          variant={"destructive"}
+          className="text-md"
+          onClick={() => signOut()}
 
-      <Button
-        size="sm"
-        className="text-md"
-        onClick={() => {
-           signOut();
-        }}
-      >
-        Change Account
-      </Button>  
+        >
+          Change Account
+        
+        </Button>
+        {showModal && (
+          <ProfileDetails
+            address={address}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        )}
       </div>
-    )
-    
+    );
   }
   if (!isConnecting && address == session?.web3?.address) {
     return (
       <div className="flex rounded-md  items-center gap-2">
-
-          <Avatar className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:outline hover:outline-accent-primary"
+        <Avatar
+          className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:outline hover:outline-accent-primary"
           onClick={() => setShowModal(!showModal)}
-          >
-            <IPFSImageLayer hashes={session?.web3?.user?.nft ? session.web3.user.nft : []} />
-            <AvatarFallback>CZ</AvatarFallback>
-          </Avatar>
+        >
+          <IPFSImageLayer
+            hashes={session?.web3?.user?.avatar ? session.web3.user.avatar : []}
+          />
+          <AvatarFallback>CZ</AvatarFallback>
+        </Avatar>
 
-
-          {showModal && (
-            <ProfileDetails
-              address={address}
-              showModal={showModal}
-              setShowModal={setShowModal}
-            />
-          )}
+        {showModal && (
+          <ProfileDetails
+            address={address}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        )}
 
         {chain?.id != 314159 && chain?.id != 80001 && (
           <Button
@@ -181,7 +187,6 @@ const ConnectModal = ({
         By connecting a wallet, you agree to Careerzen’s Terms of Service
       </span>
       <div className="flex flex-col gap-2 my-4">
-
         {!isConnected && (
           <>
             <div className="flex flex-col space-y-1 gap-4">
@@ -232,5 +237,3 @@ const ConnectModal = ({
     </ModalLayout>
   );
 };
-
-

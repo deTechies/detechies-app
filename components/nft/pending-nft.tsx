@@ -48,7 +48,6 @@ export default function PendingNFT({ details }: any) {
       const workersAddresses = details.issuer.members.map((worker: any) =>
         getAddress(worker.address)
       );
-      console.log(workersAddresses);
 
     /*   await batchDistributeAchievement({
         args: [details.tokenId, workersAddresses],

@@ -17,11 +17,11 @@ function getLocale(request: NextRequest): string | undefined {
   const locales: string[] = i18n.locales;
 
   // Use negotiator and intl-localematcher to get best locale
-  let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
+   let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
     locales
-  );
+  ); 
 
-  const locale = matchLocale(languages, locales, i18n.defaultLocale);
+  const locale = matchLocale(['kr'], locales, i18n.defaultLocale);
 
   return locale;
 }

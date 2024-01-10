@@ -9,9 +9,9 @@ import AcceptInvitation from "./_components/accept-invitation";
 import PendingMemberList from "./_components/pending-members-list";
 
 import ProjectDetail from "./_components/project-detail";
+import ProjectEvaluation from "./_components/project-evaluation-by-groups";
 import ProjectLinks from "./_components/project-links";
 import ProjectMembers from "./_components/project-members";
-import ProjectEvaluation from "./_components/project-evaluation-by-groups";
 
 export default async function ProjectDetailPage({
   params,
@@ -24,9 +24,6 @@ export default async function ProjectDetailPage({
   ); */
 
   const data: Project = await getSingleProject(params.address);
-  //check if we can fetch this without doing it on the client side.
-
-  // console.log(data);
 
   if (!data)
     return (
@@ -50,10 +47,7 @@ export default async function ProjectDetailPage({
   return (
     <main className="grid w-full gap-6 px-4 my-10 md:grid-cols-3">
       <section className="flex flex-col gap-5 md:col-span-2">
-        <ProjectDetail
-          details={data}
-          lang={dictionary.project}
-        />
+        <ProjectDetail details={data} lang={dictionary.project} />
         <ProjectMembers
           details={data}
           projectId={params.address}
@@ -64,7 +58,7 @@ export default async function ProjectDetailPage({
       <section className="flex flex-col gap-5 truncate">
         <ProjectLinks details={data} />
         <ProjectEvaluation details={data} />
-        {data.userRole == "admin" && (
+        {data?.userRole === "admin" && (
           <PendingMemberList
             projectId={params.address}
             userRole={data.userRole}

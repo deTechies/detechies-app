@@ -81,16 +81,10 @@ export function GroupForm() {
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
     const image = await uploadContent(icon);
-    console.log(image);
+
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify({ ...data, image: image }, null, 2)}
-          </code>
-        </pre>
-      ),
+      title: "Succesfully uploaded the content",
+
     });
 
     if (!icon) {

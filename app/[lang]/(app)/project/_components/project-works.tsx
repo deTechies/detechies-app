@@ -107,7 +107,7 @@ const WorkItem = ({
 
       {isCreator && status === "PENDING" && (
         <div className="flex gap-1">
-          <Button size="icon" variant="default" onClick={() => console.log(id)}>
+          <Button size="icon" variant="default" >
             <Check size={16} />
           </Button>
           <Button

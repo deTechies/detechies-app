@@ -46,8 +46,7 @@ export const authOptions = {
         });
 
         const user = await res.json();
-        console.log("whowe the reuslt");
-        console.log(user);
+
 
         if (res.ok && user) {
           return Promise.resolve(user);
@@ -93,7 +92,7 @@ export const authOptions = {
 
           token.web3 = session;
           
-          console.log(account, user, token);
+
           token.linkedin = {
             id: account.providerAccountId,
             accessToken: account.access_token,
@@ -104,16 +103,6 @@ export const authOptions = {
           const session = await getUserSession();
 
           token.web3 = session;
-          
-          console.log("twitter account")
-          console.log(account)
-          
-          console.log("twitter user") 
-          console.log(user)
-          
-          console.log("twitter token")
-          console.log(token)
-
           
           token.twitter = {
             user: user, 
@@ -126,7 +115,7 @@ export const authOptions = {
           const session = await getUserSession();
 
           token.web3 = session;
-          console.log(account, user, token);
+
           token.github = {
             id: account.providerAccountId,
             accessToken: account.access_token,
@@ -144,7 +133,6 @@ export const authOptions = {
         }
       }
 
-      console.log(trigger);
 
       if (trigger === "update") {
         token.web3 = session.web3;

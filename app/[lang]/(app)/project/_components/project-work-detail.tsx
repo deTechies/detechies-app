@@ -5,7 +5,6 @@ import { formatDate } from "@/lib/utils";
 export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
   if (!data) return null;
 
-  // console.log(data);
   return (
     <>
       <div className="inline-flex flex-wrap items-start justify-start gap-4 text-text-secondary">
@@ -23,17 +22,12 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
         <div className="self-stretch grow shrink basis-0 line-clamp-2">
           <span className="text-label_m">
             {data.description}
-            {data.description}
-            {data.description}
-            {data.description}
-            {data.description}
-            {data.description}
           </span>
         </div>
       </div>
 
       <div className="inline-flex flex-wrap items-start justify-start gap-2">
-        {data.tags.length > 0 &&
+        {data.tags?.length > 0 &&
           data.tags.map((tag: string, index: number) => (
             <Badge
               variant="secondary"

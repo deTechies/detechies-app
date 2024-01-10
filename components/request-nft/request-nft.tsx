@@ -6,20 +6,16 @@ import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
 import NftListItem from "./nft-list-item";
 
-import { Achievement } from "@/lib/interfaces";
-import { getGroupAchievements } from "@/lib/data/achievements";
 
 import Search from "@/components/extra/search";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogTrigger,
-  DialogClose,
 } from "@/components/ui/dialog";
 
 import {
@@ -30,11 +26,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function RequestNFTModal({ groups }: { groups: any[] }) {
+
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
@@ -62,12 +59,12 @@ export default function RequestNFTModal({ groups }: { groups: any[] }) {
 
 
   const onClickGroupItem = (_group: any) => {
-    // console.log(_group);
+
     setSelectedGroup(_group);
   };
 
   const onClickNftItem = (_nft: any) => {
-    console.log(_nft);
+
     setSelectedAchievement(_nft);
   };
 

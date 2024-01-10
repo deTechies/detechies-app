@@ -5,7 +5,7 @@ import { useAccount, useDisconnect, useNetwork } from "wagmi";
 
 import { Address, createPublicClient, http } from "viem";
 
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
@@ -22,10 +22,12 @@ export default function ProfileDetails({ showModal }: any) {
   const [balances, setBalances] = useState<any>([]);
 
   const { address: account, isConnected } = useAccount();
+  
+  const {data:session} = useSession();
 
   useEffect(() => {
     async function getBalances() {
-      console.log(chain);
+
       for (let i = 0; i < chains.length; i++) {
         const client = createPublicClient({
           chain: chains[i],
@@ -78,17 +80,31 @@ export default function ProfileDetails({ showModal }: any) {
             id="username"
             className="text-md bg-background-layer-2 rounded-md p-4"
           >
-            <span className="text-text-secondary">Wallet Address</span>
-            <div className="flex gap-2 items-center">
-              <span className="text-sm">{account && account}</span>
-              <Button variant="secondary" size="sm" onClick={copyAddress}>
-                Copy
-              </Button>
+            <span className="text-text-secondary text-label_m">내 암호화 계정 주소</span>
+            <div className="flex gap-2 items-center justify-between flex-wrap">
+              <span className="text-xs flex-wrap">{account && account}</span>
+              
+              {
+                session?.web3?.address != account ? (
+                  <Button
+                    size="sm"
+                    variant={"destructive"}
+                    className="text-md shrink-0"
+                    onClick={() => signOut()}
+                  >
+                    Change Account
+                  </Button>
+                ) : (
+                  <Button variant="secondary" size="sm" className="shrink-0" onClick={copyAddress}>
+                  복사하기  
+                </Button>)
+              }
+             
             </div>
           </div>
 
           <div id="balances" className="grid grid-cols-1 py-4 my-4 gap-4">
-            <h1>Select Network</h1>
+            <h1 className="text-title_m">블록체인 네트워크</h1>
             {balances.map((balance: any, key: number) => (
               <ProfileBalance
                 key={key}
@@ -99,11 +115,13 @@ export default function ProfileDetails({ showModal }: any) {
               />
             ))}
           </div>
+          
           <div className="grid grid-cols-2 gap-4">
             <Button onClick={() => {
               disconnect()
               signOut()
               router.push('/onboard')
+
             }} variant="destructive">
               Sign out
             </Button>
