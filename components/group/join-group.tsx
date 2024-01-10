@@ -34,11 +34,11 @@ import { Textarea } from "../ui/textarea";
 export default function InviteProjectMember({
   groupId,
   details,
-}: // lang,
-{
+  lang,
+}: {
   groupId: string;
   details: any;
-  // lang: any;
+  lang: any;
 }) {
   const FormSchema = z.object({
     message: z.string().max(100, {
@@ -76,17 +76,18 @@ export default function InviteProjectMember({
     <Dialog>
       <DialogTrigger className="max-w-[230px] grow">
         <Button size="lg" variant="primary" className="w-full">
-          그룹 가입하기
+          {lang.details.profile_card.join_group.title}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="gap-6">
         <div className="flex flex-col gap-4">
-          <h5 className="text-subhead_m">그룹 가입하기</h5>
+          <h5 className="text-subhead_m">
+            {lang.details.profile_card.join_group.title}
+          </h5>
 
           <p className="text-body_m">
-            해당 그룹의 리더에게 가입 요청 메세지를 보내세요. 리더가 승인하면
-            그룹 멤버가 될 수 있어요.
+            {lang.details.profile_card.join_group.desc}
           </p>
         </div>
 
@@ -126,10 +127,15 @@ export default function InviteProjectMember({
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mb-3">요청 메세지</FormLabel>
+                  <FormLabel className="mb-3">
+                    {lang.details.profile_card.join_group.message}
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="안녕하세요. 프론트엔드 개발자 홍길동 입니다."
+                      placeholder={
+                        lang.details.profile_card.join_group
+                          .message_placeholder
+                      }
                       className="resize-none"
                       {...field}
                     />
@@ -146,7 +152,7 @@ export default function InviteProjectMember({
                   size="lg"
                   className="max-w-[212px] grow px-0"
                 >
-                  뒤로가기
+                  {lang.details.profile_card.join_group.back}
                 </Button>
               </DialogClose>
 
@@ -156,7 +162,7 @@ export default function InviteProjectMember({
                 disabled={loading}
                 loading={loading}
               >
-                가입 요청하기
+                {lang.details.profile_card.join_group.send}
               </Button>
             </div>
           </form>

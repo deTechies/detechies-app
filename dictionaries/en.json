@@ -300,18 +300,36 @@
     },
 
     "create": {
-      "title": "Create Group", 
-      "required_text": "*는 필수입력 사항입니다.", 
-      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
+      "title": "Create Group",
+      "required_text": "* indicates required fields.",
+      "description": "Schools, companies, and institutions can create groups after verifying their official email.",
       "form": {
-        "type": "그룹 카테고리 *", 
-        "help_text": "해당 그룹은 조직 대표 이메일 인증이 필요해요. 대표 메일을 입력하고 인증코드를 확인해주세요."
+        "type": "Category",
+        "name": "Group Name",
+        "desc": "Description",
+        "image": "Image",
+        "image_guide": "Image Guide",
+        "guird": "1:1 ratio recommended",
+        "cover_image": "Cover Image",
+        "rect": "4:3 ratio recommended",
+        "check": "Can be checked in the group list and group detail view.",
+        "links": "Official Website",
+        "cancel": "Cancel",
+        "create_group": "Create"
       }
     },
 
     "details": {
       "profile_card": {
         "create_nft": "Create NFT",
+        "join_group": {
+          "title": "Join Group",
+          "desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
+          "message": "Request Message",
+          "message_placeholder": "Hello, I am Hong Gil-dong, a front-end developer.",
+          "back": "Go Back",
+          "send": "Request to Join"
+        },
   
         "invite": {
           "invite_member": "Invite Member",
@@ -448,13 +466,78 @@
       "end_date_2": "Days Before Mission Ends",
       "end": "Mission End Date",
       "before_end": "Mission Ending"
+    },
+
+    "detail": {
+      "all_mission": "Total Missions",
+      "get_points": "Points Earned!",
+      "point": "Points",
+      "required": "Required",
+      "get_reward": "Earn points and get rewards!",
+      "if_get": "If you earn more than ",
+      "if_get2": " points",
+      "start": "Start My Mission"
+    },
+
+    "create": {
+      "title": "Create Mission",
+      "mission_info": "Enter Mission Information",
+      "detail_info": "Register Detailed Mission",
+      "reward_info": "Register Reward Information",
+      "required": "* indicates required fields.",
+      "previous": "Previous",
+      "next": "Next",
+      "submit": "Submit",
+      "name": "Name",
+      "desc": "Description",
+      "date": "Duration",
+      "begin_date": "Start Date",
+      "end_date": "End Date",
+      "start_now": "Start Immediately",
+      "no_end": "No End Date",
+      "mission": "Mission",
+      "point": "Points",
+      "required_mission": "Required Mission",
+      "add_mission": "Add Mission",
+      "total_point": "Total",
+      "total_mission": "Total Number of Missions",
+      "points": "Points",
+      "reward": "Reward",
+      "reward_stand": "Reward Standard Points",
+      "reward_at_least": "Minimum Required Mission Achievements",
+      "add_reward": "Add Reward",
+      "select_nft": "Select Reward NFT",
+      "select_nft_desc": "Please select the NFT to be awarded upon achieving the reward criteria.",
+      "search_placeholder": "Search for NFTs.",
+      "close": "Close",
+      "done": "Selection Done",
+      "total_reward": "Total Number of Rewards",
+      "points_at_least": "Minimum Reward Criteria Points"
+    },
+
+    "manage": {
+      "select_member": "Select Member for Evaluation",
+      "search_placeholder": "Search by Nickname or Profession",
+      "no_member": "No Members Found",
+  
+      "give_reward": "Award Reward",
+      "cleard_mission": "Achieved Missions",
+      "total_points": "Total Points Earned",
+      "points": "Points",
+      "back": "Go Back",
+      "save": "Save",
+
+      "get_reward": "Earn points and receive rewards!",
+      "if_get": "If you earn more than points",
+      
+      "evalu": "Evaluate mission performance"
     }
   },
 
   "interface": {
     "group_type": {
-      "agency": "Corporation",
-      "education": "School",
+      "company": "Company",
+      "school": "School",
       "community": "Community",
       "authority": "Authority"
     },

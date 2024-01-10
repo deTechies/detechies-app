@@ -76,7 +76,7 @@ export async function sendVerifyEmail(code: string) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session.web3.accessToken}`,
     },
-  });
+  })
 
   if (!res.ok) {
     return null;

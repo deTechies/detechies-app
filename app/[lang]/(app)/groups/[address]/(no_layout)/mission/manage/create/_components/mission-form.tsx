@@ -10,6 +10,7 @@ interface StepTwoProps {
   updateMission: (index: number, mission: Mission) => void;
   removeMission: (index: number) => void; // Function to remove a mission
   missions: Mission[];
+  lang: any;
 }
 interface Mission {
   name: string;
@@ -22,6 +23,7 @@ export const StepTwo: React.FC<StepTwoProps> = ({
   updateMission,
   removeMission,
   missions,
+  lang,
 }) => {
   const handleMissionInputChange = (
     index: number,
@@ -59,7 +61,8 @@ export const StepTwo: React.FC<StepTwoProps> = ({
             className="flex items-center gap-5 p-6 border rounded-md border-border-input"
           >
             <Label className="text-title_m shrink-0">
-              미션{index + 1} <span className="ml-1 text-state-error">*</span>
+              {lang.mission.create.mission} {index + 1}{" "}
+              <span className="ml-1 text-state-error">*</span>
             </Label>
 
             <Input
@@ -72,7 +75,8 @@ export const StepTwo: React.FC<StepTwoProps> = ({
             />
 
             <Label className="text-title_m shrink-0">
-              점수 <span className="ml-1 text-state-error">*</span>
+              {lang.mission.create.point}{" "}
+              <span className="ml-1 text-state-error">*</span>
             </Label>
 
             <Input
@@ -96,7 +100,9 @@ export const StepTwo: React.FC<StepTwoProps> = ({
                 onChange={(e) => handleMissionInputChange(index, e)}
               />
 
-              <Label className="text-label_s shrink-0">필수미션</Label>
+              <Label className="text-label_s shrink-0">
+                {lang.mission.create.required_mission}
+              </Label>
             </div>
 
             <div className="w-12 shrink-0">
@@ -112,29 +118,27 @@ export const StepTwo: React.FC<StepTwoProps> = ({
             </div>
           </div>
         ))}
-        <Button onClick={handleAddMission} size="lg">
+        <Button onClick={handleAddMission} size="lg" className="max-w-full">
           <Plus className="mr-2 text-accent-primary" />
-          <div className="-mb-1">미션 추가</div>
+          <div className="-mb-1">{lang.mission.create.add_mission}</div>
         </Button>
       </div>
 
       <div className="flex items-center justify-between py-7 px-9">
         <span className="text-subhead_s">
-          총 미션 수 ( {missions.length} )
+          {lang.mission.create.total_mission} ( {missions.length} )
         </span>
 
         <div className="flex items-center">
           <span className="mr-3 text-subhead_s">
-            총 점수
+            {lang.mission.create.total_point}
           </span>
-          
+
           <span className="text-accent-primary text-subhead_l mr-0.5">
             {calculateTotalPoints()}
           </span>
-          
-          <span className="text-subhead_l">
-            점
-          </span>
+
+          <span className="text-subhead_l">{lang.mission.create.points}</span>
         </div>
       </div>
     </section>

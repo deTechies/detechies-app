@@ -1,15 +1,21 @@
 import { Mission } from "@/lib/interfaces"; // or your path to Mission type
-import React from 'react';
+import React from "react";
 import { MissionItem } from "./mission-list-item";
 
 interface MissionListProps {
   missions: Mission[];
   onMissionSelect: (mission: Mission) => void;
   selectedMissions: Mission[];
+  lang: any;
 }
 
 // Define the component with a named function
-function MissionListComponent({ missions, onMissionSelect, selectedMissions }: MissionListProps) {
+function MissionListComponent({
+  missions,
+  onMissionSelect,
+  selectedMissions,
+  lang,
+}: MissionListProps) {
   return (
     <div className="flex flex-col gap-4">
       {missions.map((mission) => (
@@ -18,8 +24,9 @@ function MissionListComponent({ missions, onMissionSelect, selectedMissions }: M
           mission={mission}
           onSelect={() => onMissionSelect(mission)}
           isActive={selectedMissions.some(
-            selectedMission => selectedMission.missionId === mission.missionId
+            (selectedMission) => selectedMission.missionId === mission.missionId
           )}
+          lang={lang}
         />
       ))}
     </div>
