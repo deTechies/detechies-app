@@ -14,7 +14,7 @@ export default async function Dashboard({
   const profile = await getUserProfile() as User;
   const dictionary = (await getDictionary(params.lang)) as any;
   return (
-    <main className='flex flex-col gap-8'>
+    <main className='flex flex-col gap-6'>
         <ProfileDetails profile={profile} text={dictionary.mypage.main}/>
         <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} />
         <ProfileCertificates achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.education}/>

@@ -1,3 +1,4 @@
+"use client"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,6 +7,8 @@ import { ChevronRight, PlusIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ProjectWorkDetail from "../../project/_components/project-work-detail";
+import { useRouter } from "next/navigation";
+
 
 export default function ProfileProjects({
   projects,
@@ -15,12 +18,15 @@ export default function ProfileProjects({
   text: any;
 }) {
   //get all the projects the user the user is part of
+  const router = useRouter();
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-3">
       <Card className="flex flex-row justify-between items-center">
         <h5 className="text-subhead_s">{text?.projects}</h5>
-        <Button size="sm" variant="secondary">
+        <Button size="sm" variant="secondary" onClick={()=>{
+          router.push("/project/create")
+        }}>
           {text?.new_project}{" "}
           <PlusIcon size="16" className="text-text-secondary ml-2" />
         </Button>
@@ -29,7 +35,7 @@ export default function ProfileProjects({
       {projects &&
         projects.map((project: any) => {
           return (
-            <Card key={project.id} className="inline-flex flex-row my-2">
+            <Card key={project.id} className="inline-flex flex-row">
               <div className="w-[68px] h-[68px] relative aspect-square rounded-sm">
                 <Image
                   src={`https://ipfs.io/ipfs/${project.project.image}`}
