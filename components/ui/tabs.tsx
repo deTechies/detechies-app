@@ -18,7 +18,7 @@ const TabsListVariants = cva("items-center", {
   variants: {
     variant: {
       default:
-        "flex border-b border-border-field justify-center p-1",
+        "flex border-b border-border-field justify-center p-1 text-text-secondary",
       button1: "flex justify-start gap-2",
       button2: "flex justify-start gap-2",
     },

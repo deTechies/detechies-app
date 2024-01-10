@@ -85,7 +85,7 @@ export default function Login() {
           onClick={() => setShowModal(!showModal)}
         >
           <IPFSImageLayer
-            hashes={session?.web3?.user?.nft ? session.web3.user.nft : []}
+            hashes={session?.web3?.user?.avatar ? session.web3.user.avatar : []}
           />
           <AvatarFallback>CZ</AvatarFallback>
         </Avatar>

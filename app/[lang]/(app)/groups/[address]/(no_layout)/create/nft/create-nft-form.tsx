@@ -77,7 +77,10 @@ export function CreateNFTForm({ group }: { group: Club }) {
 
 
   const router = useRouter();
-  if (completed) return <CompletedSuccess groupId={group.id}/>;
+  
+  
+  if (completed) return <CompletedSuccess groupId={group.id} />;
+  
   const onClickCancel = () => {
     router.back();
   };

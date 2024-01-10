@@ -175,3 +175,21 @@ export async function updateTBA(tba: any): Promise<any> {
   }).then((res) => res.json());
   return result;
 }
+
+export async function updateUserAvatar (avatar: string[]) {
+
+  const session = await auth();
+
+  const result = 
+    await fetch(`${API_URL}/users/save-avatar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.web3?.accessToken}`,
+      },
+      body: JSON.stringify({avatar: avatar}),
+    });
+    
+    return result.json();
+};
+
