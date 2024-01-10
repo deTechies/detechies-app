@@ -7,6 +7,7 @@ import { startMissionCampaign } from "@/lib/data/mission";
 import { Mission, MissionDetails, UserProgress } from "@/lib/interfaces";
 import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function MissionList({
   mission,
@@ -16,6 +17,8 @@ export default function MissionList({
   userProgress: UserProgress[] | [];
 }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const totalPoints = mission.missions.reduce(
     (accumulator, currentItem) => accumulator + currentItem.score,
     0
@@ -31,6 +34,7 @@ export default function MissionList({
     : 0;
 
   const startCampaign = async () => {
+    setLoading(true);
     const result = await startMissionCampaign(mission.campaignId);
     // console.log(result);
 
@@ -42,6 +46,8 @@ export default function MissionList({
 
       router.refresh();
     }
+
+    setLoading(false);
   };
 
   if (userProgress.length > 0) {
@@ -103,7 +109,9 @@ export default function MissionList({
   return (
     <div className="flex flex-col gap-3">
       <Card className="flex flex-row items-center justify-between px-8 py-7">
-        <Button onClick={startCampaign}>Start my mission</Button>
+        <Button onClick={startCampaign} loading={loading} disabled={loading || userProgress.length > 0}>
+          Start my mission
+        </Button>
       </Card>
 
       {mission.missions &&

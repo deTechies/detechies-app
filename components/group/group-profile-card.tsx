@@ -66,17 +66,17 @@ export default async function GroupProfileCard({
           />
         </div>
 
-        <div className="flex gap-0.5 items-center">
+        <div className="flex gap-0.5 items-center truncate">
           <h3 className="truncate text-heading_m text-accent-on-primary">
             {groupDetail?.name ? groupDetail?.name : "Name not found"}
           </h3>
 
-          <Image
+          {/* <Image
             src="/icons/certified.png"
             alt="certified"
             width={20}
             height={20}
-          />
+          /> */}
         </div>
       </CardHeader>
 
