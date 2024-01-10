@@ -119,13 +119,13 @@ export default function Profile({
       <div className="grid px-5 py-3  border rounded-sm border-border-div">
         <div className="flex p-1">
           <div className="basis-1/2 gap-2">
-            <p className="text-subhead_s font-semibold">2,334</p>
+            <p className="text-subhead_s font-semibold">0</p>
             <p className="text-title_m text-text-secondary capitalize">
               {text?.following}
             </p>
           </div>
           <div className="basis-1/2">
-            <p className="text-subhead_s font-semibold">15</p>
+            <p className="text-subhead_s font-semibold">0</p>
             <p className="text-title_m text-text-secondary capitalize">
               {text?.followers}
             </p>
