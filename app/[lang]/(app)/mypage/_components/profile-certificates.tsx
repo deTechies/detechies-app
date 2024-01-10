@@ -1,27 +1,13 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
-import { PlusIcon } from "lucide-react";
 import Image from "next/image";
 
 import { Achievement, AchievementReward } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
-import DisplayNFT from "@/components/nft/display-nft";
 
-import {
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
-import { DialogContent } from "@radix-ui/react-dialog";
 
 interface IProfileClubsProps{
   achievement_rewards: AchievementReward[];
@@ -52,11 +38,10 @@ export default function ProfileCertificates({
       
       {achievement_rewards &&
         achievement_rewards.map((achievement_reward: AchievementReward) => {
-          console.log("Achievement: ", achievement_reward.achievement)
 
           if(achievement_reward.status == 'granted'){
             return (
-              <Card key={achievement_reward.id} className="flex inline-flex flex-row items-start">
+              <Card key={achievement_reward.id} className="flex flex-row items-start">
                 <div className="w-[68px] h-[68px] relative aspect-square rounded-sm ">
                   <Image
                     src={`https://ipfs.io/ipfs/${achievement_reward.achievement.image ? achievement_reward.achievement.image : achievement_reward.achievement.avatar}`}
@@ -80,7 +65,7 @@ export default function ProfileCertificates({
                       </span>
                     </div>
                     <div className="flex flex-col basis-3/4">
-                      <span className="text-text-secondary text-label_m">{achievement_reward.achievement.description}</span>
+                      <span className="text-text-secondary text-label_m">{achievement_reward.achievement?.description}</span>
                     </div>
                   </div>
                 </div>

@@ -27,7 +27,7 @@ export default function ProfileDetails({ showModal }: any) {
 
   useEffect(() => {
     async function getBalances() {
-      console.log(chain);
+
       for (let i = 0; i < chains.length; i++) {
         const client = createPublicClient({
           chain: chains[i],

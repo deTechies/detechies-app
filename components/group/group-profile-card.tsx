@@ -15,7 +15,6 @@ export default async function GroupProfileCard({
   lang: any;
 }) {
   const groupDetail = await getClub(id);
-  // console.log(groupDetail);
 
   const snsLogos = {
     youtube: "/icons/youtube.png",

@@ -81,7 +81,7 @@ export function GroupForm() {
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
     const image = await uploadContent(icon);
-    console.log(image);
+
     toast({
       title: "Succesfully uploaded the content",
 

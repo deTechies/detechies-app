@@ -33,8 +33,6 @@ import { toast } from "@/components/ui/use-toast";
 import { addMembersWork } from "@/lib/data/project";
 import { ContributionType } from "@/lib/interfaces";
 import { useRef, useState } from "react";
-import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
-import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
 const contributionFormSchema = z.object({
   begin_date: z.string(),
   end_date: z.string().optional(),
@@ -61,7 +59,7 @@ export default function ProjectContributionInviteForm({
 }: {
     projectId:string;
     lang:any;
-    setInvite: (invite:false) => void;
+    setInvite: () => void;
 }) {
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
@@ -100,30 +98,33 @@ export default function ProjectContributionInviteForm({
 
 
 
-//   const onSubmit = async (values: ContributionFormData) => {
-//     console.log(values);
 
-//     try {
-//       const result = await addMembersWork(values, projectId);
+  const onSubmit = async (values: ContributionFormData) => {
+    console.log(values);
 
-//       toast({
-//         title: "Success",
-//         description: "Your contribution has been added.",
-//       });
 
-//       if (closeButtonRef.current) {
-//         closeButtonRef.current.click();
-//       }
-//     } catch (error) {
-//       toast({
-//         title: "error",
-//       });
-//     }
-//   };
+    try {
+      const result = await addMembersWork(values, projectId);
+
+      toast({
+        title: "Success",
+        description: "Your contribution has been added.",
+      });
+
+      if (closeButtonRef.current) {
+        // closeButtonRef.current.click();
+        setInvite()
+      }
+    } catch (error) {
+      toast({
+        title: "error",
+      });
+    }
+  };
 
   return (
     <Form {...form}>
-      <form className="spaxe-y-8 ">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="spaxe-y-8 ">
         <main className="border p-5 rounded-sm space-y-8 mb-6">
           
           <section className="flex flex-col gap-5">
@@ -296,8 +297,9 @@ export default function ProjectContributionInviteForm({
             </Button>
           </DialogClose>
           <Button
-            type="button"
-            // onClick={()=>setInvite(true)}
+            type="submit"
+            disabled={loading || !form.formState.isValid}
+            loading={loading}
             variant="default"
             className="grow max-w-[212px]"
           >

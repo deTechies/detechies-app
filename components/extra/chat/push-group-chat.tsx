@@ -71,7 +71,7 @@ export default function PushGroupChat({
       await chatter.user.chat.group
         .info(chatId)
         .then((result) => {
-          console.log(result)
+
           setChatInfo(result);
          /*  const isMemberOf = result.members?.some((member: any) => {
             return didToAddress(member.wallet) == currentUser;
@@ -128,7 +128,6 @@ export default function PushGroupChat({
           title: "Message succesfully sent",
           description: response.toString(),
         });
-        console.log(response)
         setChats([...chats, {
           cid: response.cid,
           messageContent: inputValue,

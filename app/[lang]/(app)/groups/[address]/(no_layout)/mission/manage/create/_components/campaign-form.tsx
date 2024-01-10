@@ -48,7 +48,7 @@ export const StepOne = ({ onInputChange, formData }: any) => {
           <Checkbox
             id="start_now"
             onCheckedChange={(value) => {
-              console.log(value);
+
             }}
             className="mr-1"
           />
@@ -65,7 +65,7 @@ export const StepOne = ({ onInputChange, formData }: any) => {
           <Checkbox
             id="no_end_date"
             onCheckedChange={(value) => {
-              console.log(value);
+              
             }}
             className="mr-1"
           />

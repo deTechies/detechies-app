@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
@@ -23,7 +23,6 @@ export default function DeleteProject({
   //TODO: add a delete project function here.
 
   async function confirmDelete() {
-    console.log("deleting project");
 
     const result = await deleteProject(projectData.id);
 

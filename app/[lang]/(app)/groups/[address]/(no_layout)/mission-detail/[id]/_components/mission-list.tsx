@@ -36,7 +36,6 @@ export default function MissionList({
   const startCampaign = async () => {
     setLoading(true);
     const result = await startMissionCampaign(mission.campaignId);
-    // console.log(result);
 
     if (result) {
       toast({

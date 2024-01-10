@@ -139,7 +139,6 @@ export async function uploadMissionChanges(addedMissions: string[], removedMissi
       })
     });
     
-    console.log(response)
     
     
 

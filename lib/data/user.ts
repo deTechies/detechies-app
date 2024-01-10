@@ -102,7 +102,7 @@ export async function getUserById(id: string) {
   );
   
   const result = await res.json();
-  console.log(result)
+
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -162,7 +162,6 @@ export async function updateTBA(tba: any): Promise<any> {
     redirect("/onboard");
   }
 
-  console.log(tba);
   const address = session.web3.user.id;
   const result = await fetch(`${API_URL}/polybase/update/tba`, {
     method: "POST",
@@ -176,3 +175,21 @@ export async function updateTBA(tba: any): Promise<any> {
   }).then((res) => res.json());
   return result;
 }
+
+export async function updateUserAvatar (avatar: string[]) {
+
+  const session = await auth();
+
+  const result = 
+    await fetch(`${API_URL}/users/save-avatar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.web3?.accessToken}`,
+      },
+      body: JSON.stringify({avatar: avatar}),
+    });
+    
+    return result.json();
+};
+

@@ -39,7 +39,7 @@ export default function ProfileAwards({
 
             if(achievement_reward.status == 'granted' && achievement_reward.achievement.type == 'award'){
                 return (
-                    <Card key={achievement_reward.id} className="flex inline-flex flex-row items-start">
+                    <Card key={achievement_reward.id} className=" inline-flex flex-row items-start">
                       <div className="w-[68px] h-[68px] relative aspect-square rounded-sm ">
                         <Image
                           src={`https://ipfs.io/ipfs/${achievement_reward.achievement.image ? achievement_reward.achievement.image : achievement_reward.achievement.avatar}`}
@@ -50,20 +50,20 @@ export default function ProfileAwards({
                       </div>
                       <div className="flex flex-col gap-4 grow shrink flex-wrap">
                         <header className="flex gap-2 items-center">
-                          <h5 className="text-subhead_s">{achievement_reward.achievement.name}</h5>
+                          <h5 className="text-subhead_s">{achievement_reward.achievement?.name}</h5>
                         </header>
                         <div className="flex gap-4 items-start">
                           <div className="flex flex-col gap-2 basis-1/4">
                             <span className="text-text-secondary text-label_m">
                               {text?.issuer}:{" "}
-                              <span className="capitalize">{achievement_reward.achievement.club.name}</span>
+                              <span className="capitalize">{achievement_reward.achievement?.club?.name}</span>
                             </span>
                             <span className="text-text-secondary text-label_m ">
                               {text?.issue_date}: {" "} {formatDate(achievement_reward?.created_at.toString())}
                             </span>
                           </div>
                           <div className="flex flex-col basis-3/4">
-                            <span className="text-text-secondary text-label_m">{achievement_reward.achievement.description}</span>
+                            <span className="text-text-secondary text-label_m">{achievement_reward.achievement?.description}</span>
                           </div>
                         </div>
                       </div>
