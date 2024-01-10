@@ -62,7 +62,7 @@ export async function uploadAchievement(data: any) {
   return response.json();
 }
 
-export async function requestAchievement(achievementId: string) {
+export async function requestAchievement(achievementId: string, projectId?: string) {
   const session = await getSession();
 
   // Check for a valid session and required tokens
@@ -79,6 +79,7 @@ export async function requestAchievement(achievementId: string) {
     body: JSON.stringify({
       achievementId: achievementId,
       userId: session.web3.user.id,
+      projectId: projectId,
     }),
   });
 
