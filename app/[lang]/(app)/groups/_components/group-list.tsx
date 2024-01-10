@@ -79,7 +79,7 @@ export default function GroupList({
       </TabsContent>
 
       <Link
-        href="/groups/create"
+        href="groups/create"
         className="px-10 py-10 max-w-[1028px] h-[217px] flex mx-auto bg-[url('/images/banner-create-group.png')]"
       >
         <div className="max-w-[430px]">

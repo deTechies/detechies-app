@@ -300,12 +300,22 @@
     },
 
     "create": {
-      "title": "Create Group", 
-      "required_text": "*는 필수입력 사항입니다.", 
-      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
+      "title": "Create Group",
+      "required_text": "* indicates required fields.",
+      "description": "Schools, companies, and institutions can create groups after verifying their official email.",
       "form": {
-        "type": "그룹 카테고리 *", 
-        "help_text": "해당 그룹은 조직 대표 이메일 인증이 필요해요. 대표 메일을 입력하고 인증코드를 확인해주세요."
+        "type": "Category",
+        "name": "Group Name",
+        "desc": "Description",
+        "image": "Image",
+        "image_guide": "Image Guide",
+        "guird": "1:1 ratio recommended",
+        "cover_image": "Cover Image",
+        "rect": "4:3 ratio recommended",
+        "check": "Can be checked in the group list and group detail view.",
+        "links": "Official Website",
+        "cancel": "Cancel",
+        "create_group": "Create"
       }
     },
 
@@ -526,8 +536,8 @@
 
   "interface": {
     "group_type": {
-      "agency": "Corporation",
-      "education": "School",
+      "company": "Company",
+      "school": "School",
       "community": "Community",
       "authority": "Authority"
     },

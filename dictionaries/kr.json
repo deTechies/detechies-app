@@ -359,8 +359,18 @@
       "required_text": "*는 필수입력 사항입니다.", 
       "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
       "form": {
-        "type": "그룹 카테고리 *", 
-        "help_text": "해당 그룹은 조직 대표 이메일 인증이 필요해요. 대표 메일을 입력하고 인증코드를 확인해주세요."
+        "type": "카테고리", 
+        "name": "그룹명",
+        "desc": "설명",
+        "image": "이미지",
+        "image_guide": "이미지 가이드",
+        "guird": "1:1 비율 권장",
+        "cover_image": "커버 이미지",
+        "rect": "4:3 비율 권장",
+        "check": "그룹 목록과 그룹상세보기에서 확인 가능합니다.",
+        "links": "대표 사이트",
+        "cancel": "취소",
+        "create_group": "만들기"
       }
     },
 
@@ -580,8 +590,8 @@
   },
   "interface": {
     "group_type": {
-      "agency": "기업",
-      "education": "학교",
+      "company": "기업",
+      "school": "학교",
       "community": "커뮤니티",
       "authority": "기관"
     },
