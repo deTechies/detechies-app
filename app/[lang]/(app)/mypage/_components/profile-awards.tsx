@@ -1,27 +1,11 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
-import { PlusIcon } from "lucide-react";
 import Image from "next/image";
 
 import { Achievement, AchievementReward } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
-import DisplayNFT from "@/components/nft/display-nft";
-
-import {
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-
-import { DialogContent } from "@radix-ui/react-dialog";
 
 interface IProfileAwardsProps{
   achievement_rewards: AchievementReward[];

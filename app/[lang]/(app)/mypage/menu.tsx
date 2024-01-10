@@ -25,7 +25,7 @@ export default function Menu({ links }: { links: any }) {
     }, 
     {
       name: links.career_avatar,
-      link: "#",
+      link: "/mypage/avatar",
     }, 
   ]
   return (

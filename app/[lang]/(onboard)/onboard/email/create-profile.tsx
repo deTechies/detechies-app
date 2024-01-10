@@ -19,10 +19,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
 
+import { web3AuthInstance } from "@/app/[lang]/app";
 import { Label } from "@radix-ui/react-label";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useAccount } from "wagmi";
 import * as z from "zod";
 
 const profileFormSchema = z.object({
@@ -44,6 +46,7 @@ const profileFormSchema = z.object({
     message: "You must agree to the privacy policy.",
   }),
   email_policy: z.boolean().optional(),
+  verified: z.boolean().default(false),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -60,11 +63,25 @@ export default function CreateProfile({ text }: { text: any }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const { refresh } = useRouter();
+  const { connector } = useAccount();
+
+  if (connector?.id == "web3auth") {
+    const getInfo = async () => {
+      const result = await web3AuthInstance?.getUserInfo();
+      console.log(result);
+
+      if (result?.email) {
+        form.setValue("email", result.email);
+        form.setValue("verified", true);
+      }
+    };
+
+    getInfo();
+  }
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
     const session = await getSession();
-    console.log(session);
 
     if (!session) {
       toast({
@@ -72,7 +89,7 @@ export default function CreateProfile({ text }: { text: any }) {
         description: "Please login to your account account. ",
         variant: "destructive",
       });
-      setIsLoading(false)
+      setIsLoading(false);
 
       return;
     }
@@ -80,7 +97,9 @@ export default function CreateProfile({ text }: { text: any }) {
     const credentials = {
       email: data.email,
       display_name: data.display_name,
+      verified: data.verified,
       wallet: session.web3.address,
+      login_method: connector?.id == "web3auth" ? "web3auth" : "metamask",
     };
 
     const response = await fetch(`${API_URL}/users`, {
@@ -98,14 +117,14 @@ export default function CreateProfile({ text }: { text: any }) {
         title: "Error",
         description: errorData.message,
       });
-      setIsLoading(false)
+      setIsLoading(false);
       return;
     }
-    
+
     toast({
-        title: "Succesfully created the account",
-        description: "Please check your email for the verification link",
-    })
+      title: "Succesfully created the account",
+      description: "Please check your email for the verification link",
+    });
 
     refresh();
     setIsLoading(false);
@@ -119,7 +138,6 @@ export default function CreateProfile({ text }: { text: any }) {
       >
         <h1 className="text-heading_s mb-6 text-primary">{text.title}</h1>
         <h4 className="text-text-secondary text-body_s">{text.body}</h4>
-
         <FormField
           control={form.control}
           name="display_name"
@@ -140,7 +158,11 @@ export default function CreateProfile({ text }: { text: any }) {
             <FormItem>
               <FormLabel className="capitalize">{text.email}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter email" {...field} />
+                <Input
+                  placeholder="Enter email"
+                  {...field}
+                  disabled={connector?.id == "web3auth"}
+                />
               </FormControl>
               <FormDescription className="font-light">
                 We will send the verification email to this address
@@ -150,72 +172,79 @@ export default function CreateProfile({ text }: { text: any }) {
           )}
         />
         <section className="flex flex-col">
-        <FormField
-          control={form.control}
-          name="terms_of_service"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-center  space-x-3 space-y-0 py-3 border-b border-border-div ">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none w-full">
-                <Label className="text-title_m">{text.accordion.terms_of_services}</Label>
-              </div>
-              <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="privacy_policy"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-center space-x-3 py-3 space-y-0 border-b border-border-div">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  className="my-auto"
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none w-full">
-                <Label className="text-title_m flex-stretch">{text.accordion.privacy_policy}</Label>
-              </div>
-              <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email_policy"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-center space-x-3 space-y-0 py-3 border-b border-border-div">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  className="my-auto"
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none flex-stretch w-full">
-                <FormLabel className="text-title_m">{text.accordion.reward_notification}</FormLabel>
-              </div>
-              <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer"  />
-              
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="terms_of_service"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center  space-x-3 space-y-0 py-3 border-b border-border-div ">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none w-full">
+                  <Label className="text-title_m">
+                    {text.accordion.terms_of_services}
+                  </Label>
+                </div>
+                <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="privacy_policy"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center space-x-3 py-3 space-y-0 border-b border-border-div">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    className="my-auto"
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none w-full">
+                  <Label className="text-title_m flex-stretch">
+                    {text.accordion.privacy_policy}
+                  </Label>
+                </div>
+                <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email_policy"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center space-x-3 space-y-0 py-3 border-b border-border-div">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    className="my-auto"
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none flex-stretch w-full">
+                  <FormLabel className="text-title_m">
+                    {text.accordion.reward_notification}
+                  </FormLabel>
+                </div>
+                <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer" />
+              </FormItem>
+            )}
+          />
         </section>
-       
 
         <div className="flex items-center gap-8 w-full">
-          <Button type="button" variant="secondary" className="w-full"
-          onClick={() => {
-            signOut();
-            refresh();
-          }}
+          <Button
+            type="button"
+            variant="secondary"
+            className="w-full"
+            onClick={() => {
+              signOut();
+              refresh();
+            }}
           >
             Cancel
           </Button>

@@ -1,7 +1,11 @@
+"use client";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
+import { getUserProfile } from "@/lib/data/user";
 import { Building2, ChevronRight, SearchCheck, UserCircle } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 type Item = {
   icon: JSX.Element;
@@ -11,6 +15,7 @@ type Item = {
 };
 
 export default function FinishedProfile() {
+  const { data, update } = useSession();
   const items = [
     {
       icon: <UserCircle className="h-9 w-9" />,
@@ -31,6 +36,33 @@ export default function FinishedProfile() {
       link: "/groups",
     },
   ];
+
+  useEffect(() => {
+    //update the session with the new data.
+
+    const updateUserSession = async () => {
+      const user = await getUserProfile();
+
+      console.log("update profile");
+      //here we want to update the profile
+
+      if (!data || !data.web3.user) {
+        return;
+      }
+      await update({
+        ...data,
+        web3: {
+          ...data.web3,
+          user: {
+            ...data?.web3?.user,
+            ...user,
+          },
+        },
+      });
+    };
+    updateUserSession();
+  }, [data, update]);
+
   return (
     <section className="flex flex-col gap-8 max-w-sm">
       <header>
