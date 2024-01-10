@@ -41,7 +41,7 @@ export default function ProfileCertificates({
 
           if(achievement_reward.status == 'granted'){
             return (
-              <Card key={achievement_reward.id} className="flex inline-flex flex-row items-start">
+              <Card key={achievement_reward.id} className="flex flex-row items-start">
                 <div className="w-[68px] h-[68px] relative aspect-square rounded-sm ">
                   <Image
                     src={`https://ipfs.io/ipfs/${achievement_reward.achievement.image ? achievement_reward.achievement.image : achievement_reward.achievement.avatar}`}
@@ -65,7 +65,7 @@ export default function ProfileCertificates({
                       </span>
                     </div>
                     <div className="flex flex-col basis-3/4">
-                      <span className="text-text-secondary text-label_m">{achievement_reward.achievement.description}</span>
+                      <span className="text-text-secondary text-label_m">{achievement_reward.achievement?.description}</span>
                     </div>
                   </div>
                 </div>
