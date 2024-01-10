@@ -7,7 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { updateUserAvatar } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
 import Image from "next/image";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Profile({
@@ -21,6 +21,7 @@ export default function Profile({
   const searchParams = useSearchParams()!;
   const [refresh, setRefresh] = useState<boolean>(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const clothes = searchParams.get("clothes") || profile.avatar[0];
   const face = searchParams.get("face") || profile.avatar[1];
@@ -57,6 +58,10 @@ export default function Profile({
     setRefresh(false);
   };
 
+  const reset = () => {
+    router.replace(pathName);
+  };
+
   if (pathName.includes("/mypage/avatar")) {
     return (
       <Card className="flex flex-col gap-5 w-[400px]">
@@ -64,12 +69,12 @@ export default function Profile({
           <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
         <div className="flex gap-4 ">
-          <Button size="lg" variant="secondary">
+          <Button size="lg" variant="secondary"
+            onClick={reset}
+            >
             Reset
           </Button>
-          <Button size="lg" onClick={updateAvatar}
-            loading={refresh}
-          >
+          <Button size="lg" onClick={updateAvatar} loading={refresh}>
             Save
           </Button>
         </div>
