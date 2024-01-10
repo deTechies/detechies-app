@@ -255,7 +255,7 @@ export const Wizard = ({
                   size="lg"
                   className="w-full"
                   onClick={submitForm}
-                  disabled={nextDisabled()}
+                  disabled={nextDisabled() || formData.selectedAchievements.length < 1 || formData.missions.length < 1 }
                 >
                   Submit
                 </Button>
