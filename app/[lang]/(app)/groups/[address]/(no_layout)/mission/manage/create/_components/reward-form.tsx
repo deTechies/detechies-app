@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Search from "@/components/extra/search";
 import { Badge } from "@/components/ui/badge";
@@ -13,13 +13,13 @@ import { ListPlus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-
 const RewardForm = ({
   achievements,
   selectedAchievements,
   onSelectAchievement,
   onRemoveAchievement,
   onInputChange,
+  lang,
 }: {
   achievements: Achievement[];
   selectedAchievements: Array<{
@@ -30,8 +30,8 @@ const RewardForm = ({
   onSelectAchievement: Function;
   onRemoveAchievement: Function;
   onInputChange: Function;
+  lang: any;
 }) => {
-
   const findSmallestMinScore = () => {
     let smallestScore = Infinity;
 
@@ -49,7 +49,7 @@ const RewardForm = ({
 
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
-  
+
   const filteredData = achievements.filter((achievement: any) => {
     return achievement.name.toLowerCase().includes(search || "");
   });
@@ -66,7 +66,7 @@ const RewardForm = ({
             <div className="flex flex-col gap-4 grow">
               <div className="flex items-center justify-between gap-5">
                 <div className="text-title_m">
-                  보상 {index + 1}
+                  {lang.mission.create.reward} {index + 1}
                   <span className="ml-1 text-state-error">*</span>
                 </div>
 
@@ -107,7 +107,7 @@ const RewardForm = ({
 
               <div className="flex items-center justify-end gap-5">
                 <Label className="text-title_m">
-                  <span>보상 기준점수</span>
+                  <span>{lang.mission.create.reward_stand}</span>
                   <span className="ml-1 text-state-error">*</span>
                 </Label>
                 <Input
@@ -123,7 +123,9 @@ const RewardForm = ({
                     )
                   }
                 />
-                <Label className="text-title_m">최소 필수미션 달성 수</Label>
+                <Label className="text-title_m">
+                  {lang.mission.create.reward_at_least}
+                </Label>
                 <Input
                   type="number"
                   className="w-16 text-center"
@@ -156,21 +158,23 @@ const RewardForm = ({
       <div className="flex items-center gap-4">
         <Dialog>
           <DialogTrigger className="grow">
-            <Button variant="primary" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="max-w-full">
               <Plus className="w-5 h-5 mr-2"></Plus>
-              <span className="-mb-1">보상 추가</span>
+              <span className="-mb-1">{lang.mission.create.add_reward}</span>
             </Button>
           </DialogTrigger>
 
           <DialogContent className="gap-6">
             <div>
-              <h2 className="mb-4 text-subhead_s">보상 NFT 선택하기</h2>
+              <h2 className="mb-4 text-subhead_s">
+                {lang.mission.create.select_nft}
+              </h2>
               <h5 className="text-body_m">
-                보상 기준 달성 시, 수여할 NFT를 선택해주세요.
+                {lang.mission.create.select_nft_desc}
               </h5>
             </div>
 
-            <Search placeholder="NFT를 검색해보세요." />
+            <Search placeholder={lang.mission.create.search_placeholder} />
 
             <div className="flex flex-col gap-3 max-h-[418px] overflow-y-auto">
               {filteredData.map((achievement) => (
@@ -206,33 +210,35 @@ const RewardForm = ({
             <div className="flex justify-center gap-2">
               <DialogClose className="grow max-w-[212px]">
                 <Button size="lg" className="w-full" variant="secondary">
-                  닫기
+                  {lang.mission.create.close}
                 </Button>
               </DialogClose>
 
               <DialogClose className="grow max-w-[212px]">
                 <Button size="lg" className="w-full">
-                  선택 완료
+                  {lang.mission.create.done}
                 </Button>
               </DialogClose>
             </div>
           </DialogContent>
         </Dialog>
       </div>
-      
+
       <div className="flex items-center justify-between py-7 px-9">
         <span className="text-subhead_s">
-          총 보상 수 ( {selectedAchievements.length} )
+          {lang.mission.create.total_reward} ( {selectedAchievements.length} )
         </span>
 
         <div className="flex items-center">
-          <span className="mr-3 text-subhead_s">최소 보상 기준점수</span>
+          <span className="mr-3 text-subhead_s">
+            {lang.mission.create.points_at_least}
+          </span>
 
           <span className="text-accent-primary text-subhead_l mr-0.5">
             {findSmallestMinScore() || 0}
           </span>
 
-          <span className="text-subhead_l">점</span>
+          <span className="text-subhead_l">{lang.mission.create.points}</span>
         </div>
       </div>
     </div>

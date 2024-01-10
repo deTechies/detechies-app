@@ -5,16 +5,20 @@ import Image from "next/image";
 export default async function MissionReward({
   achievements,
   totalPoints, 
+  lang,
 }: {
   achievements: any[];
   totalPoints?: number;
+  lang: any;
 }) {
 
 
   return (
     <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-2">
       <CardHeader className="flex items-center justify-between">
-        <h3 className="text-subhead_s">점수를 획득하고 보상받아요!</h3>
+        <h3 className="text-subhead_s">
+          {lang.mission.detail.get_reward}
+        </h3>
       </CardHeader>
 
       <CardContent>
@@ -34,7 +38,9 @@ export default async function MissionReward({
 
                   <div className="flex flex-col items-start justify-center">
                     <div className="mb-1 text-title_m text-state-success">
-                      {item.min_score}점 이상 획득하면
+                      {lang.mission.detail.if_get}
+                      {item.min_score}
+                      {lang.mission.detail.if_get2}
                     </div>
                     <div className="mb-4 text-title_m">
                       {item.achievement.name}

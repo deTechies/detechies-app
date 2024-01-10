@@ -7,15 +7,20 @@ import { startMissionCampaign } from "@/lib/data/mission";
 import { Mission, MissionDetails, UserProgress } from "@/lib/interfaces";
 import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function MissionList({
   mission,
   userProgress,
+  lang,
 }: {
   mission: MissionDetails;
   userProgress: UserProgress[] | [];
+  lang: any;
 }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const totalPoints = mission.missions.reduce(
     (accumulator, currentItem) => accumulator + currentItem.score,
     0
@@ -31,6 +36,7 @@ export default function MissionList({
     : 0;
 
   const startCampaign = async () => {
+    setLoading(true);
     const result = await startMissionCampaign(mission.campaignId);
 
     if (result) {
@@ -41,6 +47,8 @@ export default function MissionList({
 
       router.refresh();
     }
+
+    setLoading(false);
   };
 
   if (userProgress.length > 0) {
@@ -49,7 +57,7 @@ export default function MissionList({
         <Card className="flex flex-row items-center justify-between px-8 py-7">
           <>
             <span className="text-subhead_s">
-              총 미션 ({userProgress.length})
+              {lang.mission.detail.all_mission} ({userProgress.length})
             </span>
 
             <div className="p-3 text-center rounded-full text-title_l grow max-w-[140px] border-2 border-icon-primary">
@@ -77,7 +85,7 @@ export default function MissionList({
 
                   {item.mission.essential ? (
                     <Badge variant="success" className="px-1.5">
-                      필수 미션
+                      {lang.mission.detail.required}
                     </Badge>
                   ) : null}
                 </div>
@@ -89,8 +97,9 @@ export default function MissionList({
                       : "bg-background-layer-2 text-text-secondary"
                   }`}
                 >
-                  {item.mission.score}점{" "}
-                  {item.mission.essential ? " 획득!" : null}
+                  {item.mission.essential
+                    ? `${item.mission.score} ${lang.mission.detail.get_points}`
+                    : `${item.mission.score} ${lang.mission.detail.point}`}
                 </div>
               </Card>
             );
@@ -102,7 +111,13 @@ export default function MissionList({
   return (
     <div className="flex flex-col gap-3">
       <Card className="flex flex-row items-center justify-between px-8 py-7">
-        <Button onClick={startCampaign}>Start my mission</Button>
+        <Button
+          onClick={startCampaign}
+          loading={loading}
+          disabled={loading || userProgress.length > 0}
+        >
+          {lang.mission.detail.start}
+        </Button>
       </Card>
 
       {mission.missions &&
@@ -124,7 +139,7 @@ export default function MissionList({
 
                 {item.essential ? (
                   <Badge variant="success" className="px-1.5">
-                    필수 미션
+                    {lang.mission.detail.required}
                   </Badge>
                 ) : null}
               </div>
@@ -136,7 +151,10 @@ export default function MissionList({
                     : "bg-background-layer-2 text-text-secondary"
                 }`}
               >
-                {item.score}점 {item.essential ? " 획득!" : null}
+                {item.essential
+                  ? `${item.score} ${lang.mission.detail.get_points}`
+                  : `${item.score} ${lang.mission.detail.point}`}
+                {/* {item.score}점 {item.essential ? " 획득!" : null} */}
               </div>
             </Card>
           );

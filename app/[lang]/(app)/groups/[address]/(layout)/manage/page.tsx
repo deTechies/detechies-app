@@ -6,6 +6,7 @@ import ManageNft from "./manage-nft";
 import ManageContracts from "./onchain-group";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { getClubMissions } from "@/lib/data/mission";
 
 export default async function GroupDetailManageLayout({
   params,
@@ -15,6 +16,7 @@ export default async function GroupDetailManageLayout({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const data = await getClub(params.address);
+  const missions = await getClubMissions(data.id);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
@@ -54,11 +56,13 @@ export default async function GroupDetailManageLayout({
         <TabsContent value="missions">
           <ManageMission
             details={data}
-            address={params.address}
+            missions={missions}
             lang={dictionary}
           ></ManageMission>
         </TabsContent>
+
         <TabsContent value="info">info</TabsContent>
+        
         <TabsContent value="blockchain">
           <ManageContracts />
         </TabsContent>
