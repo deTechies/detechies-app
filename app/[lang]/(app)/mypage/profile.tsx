@@ -6,7 +6,6 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { useToast } from "@/components/ui/use-toast";
 import { updateUserAvatar } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
-import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -52,7 +51,7 @@ export default function Profile({
 
     toast({
       title: "Avatar updated",
-      description: <pre>{JSON.stringify(result, null, 2)}</pre>,
+      description: "settings avatar"
     });
 
     setRefresh(false);
@@ -85,18 +84,8 @@ export default function Profile({
   return (
     <Card className="flex flex-col gap-5 w-[400px]">
       <div className="flex">
-        <div>
-          <Image
-            src={
-              profile?.avatar_link
-                ? profile.avatar_link
-                : "https://ipfs.io/ipfs/bafybeiaw4okk76pbpihg4tyfnrufkizy4f6y2g3xlbisvq6zk5xxuhrrju"
-            }
-            width={120}
-            height={120}
-            className=" rounded-sm bg-background-layer-2"
-            alt={"avatar"}
-          />
+        <div className="relative w-[120px] aspect-square rounded-md bg-background-layer-2">
+        <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
         <div className="flex flex-col justify-between basis-auto ml-4">
           <div className="flex flex-col gap-3">

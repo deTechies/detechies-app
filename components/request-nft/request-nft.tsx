@@ -2,7 +2,7 @@
 import { useState } from "react";
 // import { RequestNftForm } from "@/components/form/request-nft-form";
 
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
 import NftListItem from "./nft-list-item";
 
@@ -26,14 +26,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { requestAchievement } from "@/lib/data/achievements";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { toast } from "../ui/use-toast";
 
 export default function RequestNFTModal({ groups }: { groups: any[] }) {
 
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
+  
+  const params = useParams();
 
   const FormSchema = z.object({
     message: z.string().max(100, {
@@ -71,18 +75,21 @@ export default function RequestNFTModal({ groups }: { groups: any[] }) {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setLoading(true);
 
+    const result = await requestAchievement(selectedAchievement.id, params.address.toString() );
+    
+    
     // const result = await ------({
     //   group: selectedGroup,
     //   achievement: selectedAchievement,
     //   message: data.message,
     // });
 
-    // if (result) {
-    //   toast({
-    //     title: "Successfully requested to nft",
-    //     description: "The group leader will review your request",
-    //   });
-    // }
+     if (result) {
+       toast({
+         title: "Successfully requested to nft",
+         description: "The group leader will review your request",
+       });
+     }
 
     setLoading(false);
   };
