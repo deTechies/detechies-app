@@ -77,7 +77,10 @@ export function CreateNFTForm({ group }: { group: Club }) {
 
 
   const router = useRouter();
-  if (completed) return <CompletedSuccess groupId={group.id}/>;
+  
+  
+  if (completed) return <CompletedSuccess groupId={group.id} />;
+  
   const onClickCancel = () => {
     router.back();
   };
@@ -420,8 +423,6 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
 
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
-    //const image = await uploadContent(icon);
-    //console.log(image);
     let avatar = null;
     let image = null;
 
@@ -482,7 +483,6 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
 
     const result = await uploadAchievement(uploadData);
 
-    console.log(result);
     toast({
       title: "Congratulations on your first nft!",
       description: "Succesfully create an nft. ",

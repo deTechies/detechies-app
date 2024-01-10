@@ -3,7 +3,7 @@ import { API_URL } from "../constants";
 import { auth } from "../helpers/authOptions";
 
 export async function getQuestions() {
-  console.log("testing if it works");
+
   const session = await auth();
 
   const result = await fetch(`${API_URL}/question`, {
@@ -18,7 +18,7 @@ export async function getQuestions() {
 }
 
 export async function getSurveys() {
-  console.log("testing if it works");
+
   const session = await auth();
 
   const result = await fetch(`${API_URL}/survey`, {

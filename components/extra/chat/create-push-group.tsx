@@ -110,7 +110,7 @@ const [groupChatName, setGroupChatName] = useState(`Group chat of ${address}`)
           }),
         })
           .then((result) => {
-            console.log(result);
+
             toast({
               title: "Succesfully Created",
             });
@@ -123,7 +123,7 @@ const [groupChatName, setGroupChatName] = useState(`Group chat of ${address}`)
           });
       }
     } catch (err) {
-      console.log(err);
+      setLoading(false);
     }
 
     setLoading(false);

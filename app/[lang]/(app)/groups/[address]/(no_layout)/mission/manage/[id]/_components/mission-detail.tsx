@@ -113,12 +113,7 @@ export default function MissionDetail({
     const getUser = await getUserById(selectedMember);
     for (const achievement of details.achievements) {
       if (missionState.totalPoints >= achievement.min_score) {
-        console.log(
-          getUser.id,
-          achievement.achievement.id,
-          achievement.achievement.tokenId,
-          "hash"
-        );
+
         const result = await rewardMissionNFT(
           getUser.id,
           achievement.achievement.id,

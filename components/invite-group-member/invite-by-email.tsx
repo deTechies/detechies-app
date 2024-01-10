@@ -61,7 +61,6 @@ export default function InviteByEmail({
 
     const result = await inviteByEmail(data.name, data.email, id);
 
-    console.log(result);
 
     if (result) {
       toast({

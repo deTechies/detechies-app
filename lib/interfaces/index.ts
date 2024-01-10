@@ -6,7 +6,8 @@ export interface User {
     credits: number;
     display_name: string;
     nft: string[];
-    avatar: string;
+    avatar: string[];
+    avatar_link: string;
     verified: boolean;
     profile_details: ProfileDetails;
     projects: ProjectMember[];

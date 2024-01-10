@@ -102,7 +102,6 @@ export default function CreateProjectForm() {
       type: data.type,
     });
 
-    console.log(result);
 
     if (result.id) {
       toast({
@@ -116,7 +115,6 @@ export default function CreateProjectForm() {
   }
 
   const selectFile = (file: any) => {
-    console.log(file)
     setFile(file);
   };
 

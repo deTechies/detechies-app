@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
 import { useState } from "react";
 import ProjectContributionInviteForm from "./project-contribution-invite-form";
+import useFetchData from "@/lib/useFetchData";
 const newContribution = {
   valid: false,
 } as ContributionFormData;
@@ -26,6 +27,9 @@ export default function ProjectContributionInvite({
 }) {
 
   const [invite, setInvite] = useState<boolean>(false);
+
+
+  
   return (
     <Dialog>
       <DialogTrigger>
@@ -51,23 +55,14 @@ export default function ProjectContributionInvite({
         <section>
           <h4 className="text-subhead_s mb-5">Contribution</h4>
 
-          {project?.id && <ProjectContributionInviteForm projectId={project.id} lang={lang} setInvite={setInvite}/> }
+          {project?.id && <ProjectContributionInviteForm projectId={project.id} lang={lang} setInvite={()=>setInvite(true)}/> }
         </section>
         </>
         )}
         {invite && (
           <>
-            <header className="flex flex-col gap-4">
-            <div className="flex flex-col gap-4">
-            <h5 className="text-subhead_m">{lang.details.invite_member.title}</h5>
-
-            <p className="text-body_m">
-              {lang.details.invite_member.body}
-            </p>
-            </div>
-            </header>
     
-            <InviteContributionMember projectId={project.id} lang={lang}/>
+            {project?.id && <InviteContributionMember projectId={project.id} lang={lang} />}
           </>
         )}
         

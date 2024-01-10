@@ -56,9 +56,6 @@ export default function PendingMemberListItem({
       
       router.refresh()
 
-      console.log(result)
-
-
     //await write();
   };
   const rejectEmployee = async () => {

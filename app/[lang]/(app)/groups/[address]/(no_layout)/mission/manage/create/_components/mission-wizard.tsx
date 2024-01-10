@@ -39,6 +39,7 @@ export const Wizard = ({
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     begin_date: "",
@@ -124,7 +125,8 @@ export const Wizard = ({
   };
 
   const submitForm = async () => {
-    console.log("Submitting Form Data:", JSON.stringify(formData, null, 2));
+    setLoading(true)
+
 
     // we can create hte missions here
     const result = await createMissionCampaign(formData, clubId);
@@ -133,6 +135,7 @@ export const Wizard = ({
       description: "Succesfully created missoin campaign.",
     });
 
+    setLoading(false)
     router.push(`/groups/${clubId}/missions`);
   };
 
@@ -255,7 +258,7 @@ export const Wizard = ({
                   size="lg"
                   className="w-full"
                   onClick={submitForm}
-                  disabled={nextDisabled()}
+                  disabled={nextDisabled() || formData.selectedAchievements.length < 1 || formData.missions.length < 1 || loading }
                 >
                   Submit
                 </Button>

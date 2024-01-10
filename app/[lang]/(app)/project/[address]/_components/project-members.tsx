@@ -3,7 +3,6 @@ import { Card } from "@/components/ui/card";
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 
 import JoinProject from "@/components/project/join-project";
-import { getPendingProjectMembers } from "@/lib/data/project";
 import ProjectMemberItem from "./project-member-item";
 
 
@@ -16,9 +15,6 @@ export default async function ProjectMembers({
   projectId: string;
   lang: any
 }) {
-  //getting all the members and holders of this project NFT.
-
-  // console.log(details.members);
 
   return (
     <section className="flex flex-col gap-4">

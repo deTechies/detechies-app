@@ -17,7 +17,6 @@ export async function submitEvaluationSurvey(
     // Any other fields required for a survey response
   };
 
-  console.log(formattedData);
 
   const url = new URL(`${API_URL}/survey-response`);
 

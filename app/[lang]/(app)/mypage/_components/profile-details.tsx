@@ -1,18 +1,17 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Edit } from "lucide-react";
 import Link from "next/link";
-import Connections from "../../profile/connections";
+import Connections from "./connections";
 
 interface ProfileDetailsProps {
-    profile: any;
-    text: any;
+  profile: any;
+  text: any;
 }
 
-
 export default async function ProfileDetails({
-    profile, text
+  profile,
+  text,
 }: ProfileDetailsProps) {
-
   return (
     <Card className="pt-[28px] px-[36px] pb-[36px] gap-[20px]">
         <header className="flex justify-between items-center">
@@ -44,16 +43,17 @@ export default async function ProfileDetails({
 
       {/* Contact info & Intro */}
       <CardContent className="flex flex-col gap-8">
-        <Connections github={profile?.github} address={profile?.id}/>
+        <Connections github={profile?.github} address={profile?.id} />
+
         {profile?.profile_details?.description && (
           <section className="border border-border-div rounded-sm flex flex-col p-[16px] gap-[16px]">
             <h5 className="text-title_m capitalize">{text?.description}</h5>
-            <p className="text-body_m">{profile?.profile_details?.description}</p>
+            <p className="text-body_m">
+              {profile?.profile_details?.description}
+            </p>
           </section>
         )}
       </CardContent>
     </Card>
   );
 }
-
-
