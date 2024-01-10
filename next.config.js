@@ -19,7 +19,13 @@ const nextConfig = {
             hostname: 'images.unsplash.com',
             port: '',
             pathname: '/**',
-          }
+          },
+          {
+            protocol: 'https',
+            hostname: 'cloudflare-ipfs.com',
+            port: '',
+            pathname: '/ipfs/**',
+          },
         ],
       },
       logging: {
