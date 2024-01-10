@@ -11,13 +11,13 @@ import { defaultAvatar } from "@/lib/constants";
 import { auth } from "@/lib/helpers/authOptions";
 import { ProjectMember } from "@/lib/interfaces";
 import { MoreVertical } from "lucide-react";
-import ProjectContribution from "../../_components/project-contribution";
 import ProjectMemberEvaluate from "../../_components/project-evaluate";
 import ProjectWorkDetail, {
   BlurredProjectWorkDetail,
 } from "../../_components/project-work-detail";
 
 import { Button } from "@/components/ui/button";
+import ProjectContributionInvite from "../../_components/project-contribution-invite";
 import DeleteMember from "./modals/delete-member";
 import RequestEvaluation from "./modals/request-evaluation";
 
@@ -63,8 +63,8 @@ export default async function ProjectMemberItem({
                 {session?.web3.address == details.user.wallet ? (
                   <>
                     {userRole != "client" && details.works.length < 1 && (
-                      // <ProjectContributionInvite project={details.project} lang={lang}/>
-                      <ProjectContribution project={details.project} />
+                      <ProjectContributionInvite project={details.project} lang={lang}/>
+                      // <ProjectContribution project={details.project} />
                     )}
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
