@@ -53,7 +53,13 @@ export async function getUserProfile(address?: string) {
 }
 
 export async function getUsers() {
-  const res = await fetch(`${API_URL}/users`, { cache: "no-store" });
+  const session = await auth();
+  const res = await fetch(`${API_URL}/users`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3.accessToken}`,
+    },
+    cache: "no-store" });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
