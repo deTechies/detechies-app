@@ -29,6 +29,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { toast } from "@/components/ui/use-toast";
+import { addMembersWork } from "@/lib/data/project";
 import { ContributionType } from "@/lib/interfaces";
 import { useRef, useState } from "react";
 const contributionFormSchema = z.object({
