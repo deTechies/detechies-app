@@ -28,13 +28,13 @@ export default async function ProfileDetails({
         {/* SECOND ROW FOR OCCUPATION &  SKILLS BADGES*/}
         <div className="inline-flex items-start gap-[8px] relative">
           {profile.profile_details?.profession ?(
-            <div className="!flex-[0_0_auto] inline-flex relative border-[1px] border-[#0099FF] text-[#2E94FF] text-xs font-medium me-2 px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-blue-900 dark:text-blue-300">
+            <div className="!flex-[0_0_auto] inline-flex relative border-[1px] border-[#0099FF] text-[#2E94FF] text-xs font-medium px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-blue-900 dark:text-blue-300">
               {profile.profile_details?.profession as string}
             </div>
           ) : null}
           {profile.profile_details?.skills.map((skill:string)=>{
             return(
-              <div className="!flex-[0_0_auto] border-[1px] border-[#00D41D] text-[#00D41D] text-xs font-medium me-2 px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-green-900 dark:text-green-300" key={skill}>
+              <div className="!flex-[0_0_auto] border-[1px] border-[#00D41D] text-[#00D41D] text-xs font-medium px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-green-900 dark:text-green-300" key={skill}>
                 {skill}
               </div>
             )
