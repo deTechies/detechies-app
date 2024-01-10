@@ -33,9 +33,11 @@ interface FormData {
 export const Wizard = ({
   clubId,
   achievements,
+  lang,
 }: {
   clubId: string;
   achievements: Achievement[];
+  lang: any;
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const router = useRouter();
@@ -124,8 +126,6 @@ export const Wizard = ({
   };
 
   const submitForm = async () => {
-
-
     // we can create hte missions here
     const result = await createMissionCampaign(formData, clubId);
     toast({
@@ -173,7 +173,7 @@ export const Wizard = ({
 
     if (currentStep == 3) {
       return formData.selectedAchievements.some(
-        (achievement) => !achievement.min_score || achievement.min_score < 1 
+        (achievement) => !achievement.min_score || achievement.min_score < 1
       );
     }
 
@@ -183,7 +183,9 @@ export const Wizard = ({
   return (
     <div className="flex flex-col w-full">
       <div className="mb-10">
-        <h2 className="text-center text-heading_s">미션 생성하기</h2>
+        <h2 className="text-center text-heading_s">
+          {lang.mission.create.title}
+        </h2>
 
         {/* progress tabs */}
       </div>
@@ -191,28 +193,39 @@ export const Wizard = ({
       <Card className="w-full gap-6 py-10 px-14">
         <CardHeader className="flex-col items-start gap-3">
           {currentStep === 1 && (
-            <h3 className="text-subhead_s">미션 정보 입력</h3>
+            <h3 className="text-subhead_s">
+              {lang.mission.create.mission_info}
+            </h3>
           )}
           {currentStep === 2 && (
-            <h3 className="text-subhead_s">상세 미션 등록</h3>
+            <h3 className="text-subhead_s">
+              {lang.mission.create.detail_info}
+            </h3>
           )}
           {currentStep === 3 && (
-            <h3 className="text-subhead_s">보상 정보 등록</h3>
+            <h3 className="text-subhead_s">
+              {lang.mission.create.reward_info}
+            </h3>
           )}
           <span className="mb-1 text-body_s text-state-error">
-            *는 필수입력 사항입니다.
+            {lang.mission.create.required}
           </span>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-10">
           {currentStep === 1 && (
-            <StepOne onInputChange={onInputChange} formData={formData} />
+            <StepOne
+              onInputChange={onInputChange}
+              formData={formData}
+              lang={lang}
+            />
           )}
           {currentStep === 2 && (
             <StepTwo
               updateMission={updateMission}
               removeMission={removeMission}
               missions={formData.missions}
+              lang={lang}
             />
           )}
           {currentStep === 3 && (
@@ -222,6 +235,7 @@ export const Wizard = ({
               onSelectAchievement={handleSelectAchievement}
               onRemoveAchievement={handleRemoveAchievement}
               onInputChange={handleInputChange}
+              lang={lang}
             />
           )}
 
@@ -234,7 +248,7 @@ export const Wizard = ({
                   className="w-full"
                   onClick={prevStep}
                 >
-                  Previous
+                  {lang.mission.create.previous}
                 </Button>
               }
             </div>
@@ -247,7 +261,7 @@ export const Wizard = ({
                   onClick={nextStep}
                   disabled={nextDisabled()}
                 >
-                  Next
+                  {lang.mission.create.next}
                 </Button>
               )}
               {currentStep === 3 && (
@@ -255,9 +269,13 @@ export const Wizard = ({
                   size="lg"
                   className="w-full"
                   onClick={submitForm}
-                  disabled={nextDisabled() || formData.selectedAchievements.length < 1 || formData.missions.length < 1 }
+                  disabled={
+                    nextDisabled() ||
+                    formData.selectedAchievements.length < 1 ||
+                    formData.missions.length < 1
+                  }
                 >
-                  Submit
+                  {lang.mission.create.submit}
                 </Button>
               )}
             </div>

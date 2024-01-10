@@ -129,7 +129,11 @@ export default async function GroupProfileCard({
 
         {groupDetail.userRole == "none" && (
           <div className="flex justify-end gap-3 grow">
-            <JoinGroup groupId={groupDetail.id} details={groupDetail} />
+            <JoinGroup
+              groupId={groupDetail.id}
+              details={groupDetail}
+              lang={lang}
+            />
           </div>
         )}
       </CardContent>

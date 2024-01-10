@@ -367,7 +367,15 @@
     "details": {
       "profile_card": {
         "create_nft": "NFT 생성하기",
-        
+        "join_group": {
+          "title": "그룹 가입하기",
+          "desc": "해당 그룹의 리더에게 가입 요청 메세지를 보내세요. 리더가 승인하면 그룹 멤버가 될 수 있어요.",
+          "message": "요청 메세지",
+          "message_placeholder": "안녕하세요. 프론트엔드 개발자 홍길동 입니다.",
+          "back": "뒤로가기",
+          "send": "가입 요청하기"
+        },
+
         "invite": {
           "invite_member": "멤버 초대하기",
           "sended": "초대 메시지를 전송했습니다!",
@@ -489,6 +497,71 @@
       "end_date_2": "일 전",
       "end": "미션 종료일",
       "before_end": "미션 종료"
+    },
+
+    "detail": {
+      "all_mission": "총 미션",
+      "get_points": "점 확득!",
+      "point": "점",
+      "required": "필수 미션",
+      "get_reward": "점수를 획득하고 보상받아요!",
+      "if_get": "",
+      "if_get2": "점 이상 획득하면",
+      "start": "내 미션 시작하기"
+    },
+
+    "create": {
+      "title": "미션 생성하기",
+      "mission_info": "미션 정보 입력",
+      "detail_info": "상세 미션 등록",
+      "reward_info": "보상 정보 등록",
+      "required": "*는 필수 입력 사항입니다.",
+      "previous": "이전",
+      "next": "다음",
+      "submit": "제출",
+      "name": "이름",
+      "desc": "설명",
+      "date": "기간",
+      "begin_date": "시작 날짜",
+      "end_date": "종료 날짜",
+      "start_now": "즉시 시작",
+      "no_end": "종료 일 없음",
+      "mission": "미션",
+      "point": "점수",
+      "required_mission": "필수미션",
+      "add_mission": "미션 추가",
+      "total_point": "총 점수",
+      "total_mission": "총 미션 수",
+      "points": "점",
+      "reward": "보상",
+      "reward_stand": "보상 기준 점수",
+      "reward_at_least": "최소 필수미션 달성 수",
+      "add_reward": "보상 추가",
+      "select_nft": "보상 NFT 선택하기",
+      "select_nft_desc": "보상 기준 달성 시, 수여할 NFT를 선택해주세요.",
+      "search_placeholder": "NFT를 검색해보세요.",
+      "close": "닫기",
+      "done": "선택 완료",
+      "total_reward": "총 보상 수",
+      "points_at_least": "최소 보상 기준점수"
+    },
+
+    "manage": {
+      "select_member": "평가할 멤버 선택하기",
+      "search_placeholder": "닉네임 또는 직업을 검색해보세요.",
+      "no_member": "멤버가 없습니다.",
+
+      "give_reward": "보상 수여하기",
+      "cleard_mission": "달성한 미션",
+      "total_points": "총 획득 점수",
+      "points": "점",
+      "back": "뒤로가기",
+      "save": "저장하기",
+
+      "get_reward": "점수를 획득하고 보상받아요!",
+      "if_get": "점 이상 획득하면",
+
+      "evalu": "미션 수행 평가하기"
     }
   },
 

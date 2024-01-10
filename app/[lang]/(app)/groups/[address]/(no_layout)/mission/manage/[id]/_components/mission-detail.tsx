@@ -16,9 +16,11 @@ import MissionList from "./mission-list";
 export default function MissionDetail({
   details,
   club,
+  lang,
 }: {
   details: MissionDetails;
   club: Club;
+  lang: any;
 }) {
   const [initialSelectedMissions, setInitialSelectedMissions] = useState<
     Mission[]
@@ -113,7 +115,6 @@ export default function MissionDetail({
     const getUser = await getUserById(selectedMember);
     for (const achievement of details.achievements) {
       if (missionState.totalPoints >= achievement.min_score) {
-
         const result = await rewardMissionNFT(
           getUser.id,
           achievement.achievement.id,
@@ -141,36 +142,40 @@ export default function MissionDetail({
       <ManageMissionReward
         achievements={details.achievements}
         totalPoints={missionState.totalPoints}
+        lang={lang}
       />
+
       <Card>
         <CardHeader>
-          <h2 className="text-subhead_m">보상 수여하기 </h2>
+          <h2 className="text-subhead_m">{lang.mission.manage.evalu}</h2>
         </CardHeader>
         <CardContent className="flex flex-col gap-7 mt-7">
           <MissionList
             missions={details.missions}
             onMissionSelect={(mission) => handleMissionSelect(mission)}
             selectedMissions={missionState.selectedMissions}
+            lang={lang}
           />
           <section className="flex justify-between text-subhead_s">
             <span>
-              달성한 미션 ( {missionState.selectedMissions.length} /{" "}
-              {details.missions.length} )
+              {lang.mission.manage.cleard_mission} ({" "}
+              {missionState.selectedMissions.length} / {details.missions.length}{" "}
+              )
             </span>
             <div>
-              총 획득 점수{" "}
+              {lang.mission.manage.total_points}{" "}
               <span className="text-accent-primary text-subhead_l">
                 {missionState.totalPoints}
               </span>{" "}
-              점
+              {lang.mission.manage.points}
             </div>
           </section>
           <section className="flex justify-between">
             <Button size="lg" variant="secondary">
-              Go Back
+              {lang.mission.manage.back}
             </Button>
             <Button size="lg" onClick={uploadSelectedMissions}>
-              Save Progress
+              {lang.mission.manage.save}
             </Button>
           </section>
         </CardContent>
