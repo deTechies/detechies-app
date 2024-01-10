@@ -62,8 +62,8 @@ export default async function ProjectMemberItem({
                 {session?.web3.address == details.user.wallet ? (
                   <>
                     {userRole != "client" && details.works.length < 1 && (
-                      // <ProjectContributionInvite project={details.project} lang={lang}/>
-                      <ProjectContribution project={details.project} />
+                      <ProjectContributionInvite project={details.project} lang={lang}/>
+                      // <ProjectContribution project={details.project} />
                     )}
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
