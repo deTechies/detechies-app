@@ -6,6 +6,7 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { useToast } from "@/components/ui/use-toast";
 import { updateUserAvatar } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
+import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -21,6 +22,7 @@ export default function Profile({
   const [refresh, setRefresh] = useState<boolean>(false);
   const { toast } = useToast();
   const router = useRouter();
+  const { data, update } = useSession();
 
   const clothes = searchParams.get("clothes") || profile.avatar[0];
   const face = searchParams.get("face") || profile.avatar[1];
@@ -51,7 +53,21 @@ export default function Profile({
 
     toast({
       title: "Avatar updated",
-      description: "settings avatar"
+      description: "settings avatar",
+    });
+
+    if (!data || !data.web3.user) {
+      return;
+    }
+    await update({
+      ...data,
+      web3: {
+        ...data.web3,
+        user: {
+          ...data?.web3?.user,
+          avatar: avatar,
+        },
+      },
     });
 
     setRefresh(false);
@@ -68,9 +84,7 @@ export default function Profile({
           <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
         <div className="flex gap-4 ">
-          <Button size="lg" variant="secondary"
-            onClick={reset}
-            >
+          <Button size="lg" variant="secondary" onClick={reset}>
             Reset
           </Button>
           <Button size="lg" onClick={updateAvatar} loading={refresh}>
@@ -85,7 +99,7 @@ export default function Profile({
     <Card className="flex flex-col gap-5 w-[400px]">
       <div className="flex">
         <div className="relative w-[120px] aspect-square rounded-md bg-background-layer-2">
-        <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
+          <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
         <div className="flex flex-col justify-between basis-auto ml-4">
           <div className="flex flex-col gap-3">
