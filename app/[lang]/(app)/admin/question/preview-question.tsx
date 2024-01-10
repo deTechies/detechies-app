@@ -29,7 +29,7 @@ export default function PreviewQuestion({ question }: PreviewQuestionProps) {
   });
 
   const onSubmit = (data: verifyWorkValues) => {
-    console.log(data);
+    window.alert(JSON.stringify(data));
   };
   return (
     <Dialog>

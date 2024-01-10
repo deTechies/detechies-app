@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { getUserProfile } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
 import Image from "next/image";
 

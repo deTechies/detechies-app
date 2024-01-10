@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 
 export default function AdminMenu() {
   const pathName = usePathname();
-  // console.log(pathName);
 
   const menuItems = [
     {
