@@ -65,6 +65,10 @@ export default function DisplayNFT({
     setRequesting(false);
   };
 
+  if(showSelect){
+    return <NftListItem item={details} showSelect={showSelect} lang={lang} />
+      
+  }
   return (
     <Dialog>
       <DialogTrigger className="min-w-[150px] w-full grow">
