@@ -20,7 +20,7 @@ const badgeVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
-        ghost: "text-text-primary hover:bg-background-layer-2/80",
+        ghost: "text-text-primary border border-text-secondary hover:bg-background-layer-2/80",
       },
       shape: {
         default: "text-label_s rounded-md px-3 py-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
