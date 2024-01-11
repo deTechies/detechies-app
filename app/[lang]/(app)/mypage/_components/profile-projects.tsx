@@ -18,7 +18,7 @@ export default function ProfileProjects({
 }) {
   //get all the projects the user the user is part of
   const router = useRouter();
-
+  
   return (
     <div className="flex flex-col gap-3">
       <Card className="flex flex-row justify-between items-center">
@@ -33,7 +33,8 @@ export default function ProfileProjects({
         
       {projects &&
         projects.map((project: any, index:number) => {
-
+          console.log("HERE: ")
+          console.log("Image: ", project.project.image)
           return (
             <Link
             href={`/project/${project.project.id}`}
@@ -74,13 +75,13 @@ export default function ProfileProjects({
                           ? formatDate(project.project.end_date)
                           : text?.present}{" "}</span>
                             </div>
-                            <div className="flex gap-[8px] self-stretch w-full flex[0_0_auto] items-start relative">
+                            <div className="flex flex-col gap-[8px]">
                               {project.works.map((work: any)=>{
                                 return(
-                                  <>
+                                  <div className="flex flex-row gap-[8px] self-stretch w-full flex[0_0_auto] items-start relative">
                                     <span className="text-[#6B7684] text-sm">{work.name}</span>
                                     <span className="text-[#6B7684] text-sm">{"| "} {work.percentage} %</span>
-                                  </>
+                                  </div>
                                 )
 
                               })}
