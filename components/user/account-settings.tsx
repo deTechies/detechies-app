@@ -118,41 +118,48 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
   return (
     <ModalLayout title={text_my_account.my_account_title} showModal={showModal}>
       {isConnected ? (
-        <div className="flex flex-col divide-solid">
+        <div className="flex flex-col gap-[20px]  !pt-[20px]">
           {/* Address */}
           <div
             id="username"
-            className="text-md bg-background-layer-2 rounded-md p-4"
-          >
-            <span className="text-text-secondary text-label_m">
-              {text_my_account.my_encrypted_account_address}
-            </span>
-            <div className="flex gap-2 items-center justify-between flex-wrap">
-              <span className="text-xs flex-wrap">{account && account}</span>
-
-              {session?.web3?.address != account ? (
-                <Button
-                  size="sm"
-                  variant={"destructive"}
-                  className="text-md shrink-0"
-                  onClick={() => signOut()}
-                >
-                  {text_my_account.change_account}
-                </Button>
-              ) : (
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="shrink-0"
-                  onClick={copyAddress}
-                >
-                  {text_my_account.copy_label}
-                </Button>
-              )}
+            className="flex flex-col w-full items-start gap-[12px] p-[16px] relative bg-background-layer-2 rounded-[12px] "
+          > 
+            <div className="flex-col self-stretch w-full flex[0_0_auto] flex items-start gap-[12px] relative">
+              <div className="relative w-fit mt-[-1.00px] text-[#6B7684] text-[14px]">
+                {text_my_account.my_encrypted_account_address}
+              </div>
+            </div>
+            <div className="flex gap-[12px] items-start relative self-stretch grow w-full">
+              <div className="flex-1 w-5/6 break-all text-[16px]">
+                  <span className="text-[#00d41d]">{account && account.slice(0,6)}</span>
+                  <span className="">{account && account.slice(5,37)}</span>
+                  <span className="text-[#00d41d]">{account && account.slice(-5)}</span>
+              </div>
+              <div className="w-1/6">
+                {session?.web3?.address != account ? (
+                  <Button
+                    size="sm"
+                    variant={"destructive"}
+                    className="shrink-0 !dark: border-[1px] border-[#3B414B] !px-[10px] !pt-[4px] !pb-[6px] !text-[14px]"
+                    onClick={() => signOut()}
+                  >
+                    {text_my_account.change_account}
+                  </Button>
+                ) :   (
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="shrink-0 !dark: border-[1px] border-[#3B414B] !px-[10px] !pt-[4px] !pb-[6px] !text-[14px]"
+                    onClick={copyAddress}
+                  >
+                    {text_my_account.copy_label}
+                  </Button>
+                )}
+              </div> 
             </div>
           </div>
           {/* Balances */}
-          <div id="balances" className="grid grid-cols-1 py-4 my-4 gap-4">
+          <div id="balances" className="flex flex-col items-start gap-[16px] w-full relative">
             <h1 className="text-title_m">{text_my_account.blockchain_network}</h1>
             {balances.map((balance: any, key: number) => (
               <ProfileBalance
@@ -161,17 +168,16 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
                 token={balance.chain}
                 balance={balance.balance}
                 active={balance.active}
-
               />
             ))}
           </div>
           {/* Language and theme settings */}
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between">
             <Select
               onValueChange={(value) => changeLanguage(value)}
               defaultValue={params}
             >
-              <SelectTrigger className="w-[105px] bg-background-layer-1 border">
+              <SelectTrigger className="w-fit text-[14px] bg-background-layer-1 border rounded-[5px] !p-[8px]">
                 <SelectValue placeholder={text_my_account.language.placeholder} />
               </SelectTrigger>
               <SelectContent>
@@ -183,7 +189,7 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
             <ThemeToggle text={text_my_account.theme}/>
           </div>
           {/* Buttons at the bottom  */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 mt-[12px]">
             <Button
               onClick={() => {
                 disconnect();
@@ -191,12 +197,13 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
                 router.push("/onboard");
               }}
               variant="destructive"
+              className="!py-[15.5px] rounded-[40px]"
             >
               {text_my_account.sign_out}
             </Button>
             <Link
               href={`/mypage`}
-              className="bg-accent-secondary text-accent-primary hover:bg-accent-secondary/50 w-full rounded-md flex items-center justify-center"
+              className="bg-accent-secondary text-accent-primary hover:bg-accent-secondary/50 w-full rounded-full flex items-center !py-[15.5px] justify-center"
             >
               {text_my_account.my_profile}
             </Link>
