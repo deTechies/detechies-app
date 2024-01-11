@@ -35,7 +35,7 @@ export default function ProfileAccounts() {
           className={`flex w-[209px] border border-border-div rounded-sm mt-2 mr-4`}
         >
           <div className="flex justify-center m-4">
-            <Image src={logo.src} width={50} height={50} alt={logo.alt} />
+            <Image src={logo.src} width={50} height={50} alt={logo.alt} className="aspect-square"/>
           </div>
           <div className="flex flex-col justify-center m-2">
             <p className="text-md">{logo.text}</p>
