@@ -1,11 +1,11 @@
 // "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getGroups } from "@/lib/data/groups";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import RequestNFTModal from "@/components/request-nft/request-nft";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { serverApi } from "@/lib/data/general";
+import { AchievementReward } from "@/lib/interfaces";
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
 
 export default async function ProjectEvaluationByGroups({
   details,
@@ -17,6 +17,11 @@ export default async function ProjectEvaluationByGroups({
 
   const groups = await getGroups();
 
+  const rewardedAchievements = (await serverApi(
+    `/achievement-rewards/project-rewards/${details.id}`
+  )) as AchievementReward[];
+  
+  console.log(rewardedAchievements)
   if (!groups) return null;
 
   // const dummy_nfts = [
@@ -76,51 +81,55 @@ export default async function ProjectEvaluationByGroups({
 
       <CardContent>
         <div className="flex flex-col gap-5">
-          {details.achievements && details.achievements.length > 0 ? (
-          details.achievements?.map((achievement: any, index: number) => (
-          // {dummy_nfts.length > 0 ? (
-          //   dummy_nfts.map((achievement: any, index: number) => (
-              <div className="flex gap-5 truncate" key={index}>
-                <div className="w-20 h-20 overflow-hidden rounded-sm bg-background-layer-2 shrink-0">
-                  <Image
-                    width="80"
-                    height="80"
-                    alt={achievement.name}
-                    src={`https://ipfs.io/ipfs/${
-                      achievement.image ? achievement.image : achievement.avatar
-                    }`}
-                  ></Image>
-                </div>
+          {rewardedAchievements.length && rewardedAchievements.length > 0 ? (
+            rewardedAchievements.map(
+              (achievementReward: AchievementReward, index: number) => (
+                <div className="flex gap-5 truncate" key={index}>
+                  <div className="w-20 h-20 overflow-hidden rounded-sm bg-background-layer-2 shrink-0">
+                    <Image
+                      width="80"
+                      height="80"
+                      alt={achievementReward.achievement.name}
+                      src={`https://ipfs.io/ipfs/${
+                        achievementReward.achievement.image
+                          ? achievementReward.achievement.image
+                          : achievementReward.achievement.avatar
+                      }`}
+                    ></Image>
+                  </div>
 
-                <div className="truncate border-b border-border-div">
-                  <div className="mb-4 text-title_m">
-                    <div className="mr-3 truncate">{achievement.name}</div>
+                  <div className="truncate border-b border-border-div">
+                    <div className="mb-4 text-title_m">
+                      <div className="mr-3 truncate">
+                        {achievementReward.achievement.name}
+                      </div>
 
-                    {/* <Badge variant="details" shape="category">
-                    {achievement.type == "awards" ? "수상" : "교육 수료증"}
+                      {/* <Badge variant="details" shape="category">
+                    {achievementReward.achievement.type == "awards" ? "수상" : "교육 수료증"}
                   </Badge> */}
-                  </div>
+                    </div>
 
-                  <div className="mb-2 truncate text-label_m text-text-secondary">
-                    asdfas asdfasdf asdfas asdfasdfasdfas asdfasdfasdfas
-                    asdfasdfasdfas asdfasdfasdfas asdfasdf
-                  </div>
+                    <div className="mb-2 truncate text-label_m text-text-secondary">
+                      asdfas asdfasdf asdfas asdfasdfasdfas asdfasdfasdfas
+                      asdfasdfasdfas asdfasdfasdfas asdfasdf
+                    </div>
 
-                  <div className="mb-5 truncate text-label_m text-text-secondary">
-                    asdfas asdfasdf asdfas asdfasdfasdfas asdfasdfasdfas
-                    asdfasdfasdfas asdfasdfasdfas asdfasdf
+                    <div className="mb-5 truncate text-label_m text-text-secondary">
+                      asdfas asdfasdf asdfas asdfasdfasdfas asdfasdfasdfas
+                      asdfasdfasdfas asdfasdfasdfas asdfasdf
+                    </div>
                   </div>
                 </div>
-              </div>
-              // <Avatar key={index}>
-              //   <AvatarImage
-              //     src={`https://ipfs.io/ipfs/${nft.metadata?.image}`}
-              //     alt={nft.metadata?.name}
-              //     className="border border-border-div"
-              //   />
-              //   <AvatarFallback> NO</AvatarFallback>
-              // </Avatar>
-            ))
+                // <Avatar key={index}>
+                //   <AvatarImage
+                //     src={`https://ipfs.io/ipfs/${nft.metadata?.image}`}
+                //     alt={nft.metadata?.name}
+                //     className="border border-border-div"
+                //   />
+                //   <AvatarFallback> NO</AvatarFallback>
+                // </Avatar>
+              )
+            )
           ) : (
             <h5 className="text-center text-text-secondary text-label_m">
               받은 그룹 평가 또는 NFT 수상이 없어요.
