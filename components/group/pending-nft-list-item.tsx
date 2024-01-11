@@ -92,7 +92,7 @@ export default function PendingMemberListItem({
 
   const acceptNFT = async () => {
     setLoading(true)
-    if (!nft.achievement.tokenId || !nft.user.wallet || !contract) {
+    if (!nft.achievement.tokenId || !contract) {
       toast({
         title: "Error",
         description: "Failed to accept NFT",

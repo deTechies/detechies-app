@@ -92,7 +92,6 @@ export async function requestAchievement(achievementId: string, projectId?: stri
     },
     body: JSON.stringify({
       achievementId: achievementId,
-      userId: session.web3.user.id,
       projectId: projectId,
       message: message,
     }),
