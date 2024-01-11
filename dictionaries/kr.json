@@ -370,6 +370,7 @@
       "profession": "직업", 
       "specialisation": "전문분야", 
       "profile_description": "내 소개",
+      "skills": "스킬",
       "username": "닉네임", 
       "save_changes": "저장하기"
     },

@@ -12,10 +12,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { updateUserProfile } from "@/lib/data/profile";
+import { Professions } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Select } from "@radix-ui/react-select";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -106,6 +109,7 @@ export default function EditProfile({
             </section>
             <section className="my-2">
               <div className="flex flex-col gap-10">
+                <div className="grid gap-4 md:grid-cols-2">
                 <div className="w-full">
                   <Label className="">{text?.full_name}</Label>
                   <div className="flex items-center gap-2 mt-2">
@@ -133,24 +137,8 @@ export default function EditProfile({
                     />
                   </div>
                 </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <Label className="">{text?.profession}</Label>
-                    <FormField
-                      control={form.control}
-                      name="profession"
-                      render={({ field }) => (
-                        <FormItem className="mt-2">
-                          <FormControl>
-                            <Input placeholder={text?.profession} {...field} />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="">
-                    <Label className="mb-2">{text?.username}</Label>
+                <div className="">
+                    <Label className="mb-2 capitalize">{text?.username}</Label>
                     <Input
                       placeholder={username}
                       value={username}
@@ -159,12 +147,45 @@ export default function EditProfile({
                     />
                   </div>
                 </div>
+               
+
+                <div className="grid gap-4 md:grid-cols-1">
+                  <div>
+                    <FormField
+                    control={form.control}
+                    name="profession"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="capitalize">{text?.profession}</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Object.values(Professions).map((type) => (
+                              <SelectItem key={type} value={type}>
+                                {type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  </div>
+ 
+                </div>
               </div>
             </section>
             <section className="my-10">
               <div>
                 <FormItem>
-                  <FormLabel>Skills</FormLabel>
+                  <FormLabel>{text?.skills ? text.skills : 'Skills'}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Type and press enter"
@@ -195,12 +216,12 @@ export default function EditProfile({
             </section>
             <section className="my-10">
               <div>
-                <Label>{text?.profile_description}</Label>
                 <FormField
                   control={form.control}
                   name="description"
                   render={({ field }) => (
                     <FormItem>
+                      <FormLabel className="capitalize">{text?.profile_description}</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다."
