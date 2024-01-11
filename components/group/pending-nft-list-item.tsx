@@ -3,7 +3,7 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { ABI, defaultAvatar } from "@/lib/constants";
 import { rewardProjectNFT, updateNFTRequest } from "@/lib/data/achievements";
 import { AchievementReward } from "@/lib/interfaces";
-import { formatDate } from "@/lib/utils";
+import { formatDate, getNftChips } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -16,9 +16,11 @@ import { toast } from "../ui/use-toast";
 export default function PendingMemberListItem({
   nft,
   contract,
+  lang,
 }: {
   nft: AchievementReward;
   contract: string;
+  lang: any;
 }) {
   const router = useRouter();
 
@@ -122,10 +124,7 @@ export default function PendingMemberListItem({
       description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
     });
   };
-
-  const dummy_nft = {
-    chips: ["채용", "인증", "채용"],
-  };
+  
   return (
     <div
       className={`grid grid-cols-[262px_1fr_90px_auto] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center ${loading && 'animate-pulse'}`}
@@ -150,7 +149,7 @@ export default function PendingMemberListItem({
         <div>
           <div className="mb-2 text-title_l">{nft.project.name ? nft.project.name : nft.user.display_name}</div>
 
-          <Badge variant={"outline"} shape={"outline"} className="text-text-secondary">
+          <Badge shape="outline" variant="info">
             {nft.project ? 'project' : "user"}
           </Badge>
         </div>
@@ -170,11 +169,12 @@ export default function PendingMemberListItem({
           <div className="mb-2 text-title_l">{nft.achievement.name}</div>
 
           <div className="flex gap-1">
-            {dummy_nft.chips &&
-              dummy_nft.chips.map((item, index) => {
+            {getNftChips(nft.achievement) &&
+              getNftChips(nft.achievement).map((item, index) => {
                 return (
-                  <Badge variant={"outline"} key={index}>
-                    {item}
+                  <Badge shape="category" variant={item.variant} key={index}>
+                    {lang.interface.nft_type[item.chip] ||
+                      lang.interface.nft_image_type[item.chip]}
                   </Badge>
                 );
               })}

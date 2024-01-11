@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import App from "../app";
 import "../globals.css";
 import Navbar from "./nav-bar";
+import DictionaryProvider from "@/lib/dictionaryProvider";
 
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
@@ -72,7 +73,9 @@ export default async function RootLayout({
         >
           <App>
             <Navbar lang={dictionary.nav} />
-            <main className="mx-auto max-w-[1920px]">{children}</main>
+            <DictionaryProvider dictionary={dictionary}>
+              <main className="mx-auto max-w-[1920px]">{children}</main>
+            </DictionaryProvider>
           </App>
         </ThemeProvider>
       </body>

@@ -36,4 +36,6 @@ function MissionListComponent({
 // Wrap the named component with React.memo
 const MissionList = React.memo(MissionListComponent);
 
+MissionList.displayName = "MissionList";
+
 export default MissionList;

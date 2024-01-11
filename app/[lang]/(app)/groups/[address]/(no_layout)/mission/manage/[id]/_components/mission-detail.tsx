@@ -149,6 +149,7 @@ export default function MissionDetail({
         <CardHeader>
           <h2 className="text-subhead_m">{lang.mission.manage.evalu}</h2>
         </CardHeader>
+        
         <CardContent className="flex flex-col gap-7 mt-7">
           <MissionList
             missions={details.missions}

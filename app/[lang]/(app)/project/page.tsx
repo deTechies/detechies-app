@@ -97,7 +97,7 @@ export default async function ProjectListPage({
           <Link href="/project/create" role="link"
             className="flex items-center justify-center px-5 py-2 rounded-full bg-accent-secondary text-accent-primary text-title_m"
           >
-            {dictionary.project.list.create_project}
+            {dictionary.project.list.create_project.create}
           </Link>
         </div>
       </Card>
