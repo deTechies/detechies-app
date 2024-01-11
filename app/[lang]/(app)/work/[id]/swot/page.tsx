@@ -16,7 +16,7 @@ export default async function FinalFeedbackPage({
         
   return (
     <Card className="max-w-2xl mx-auto">
-        <FinalFeedbackForm text={dictionary.project.member.evaluate} workId={id} surveyResponseId={details.id}
+        <FinalFeedbackForm text={dictionary} workId={id} surveyResponseId={details.id}
         defaultValues={details.swot}
         />
     </Card>

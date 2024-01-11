@@ -192,8 +192,78 @@
       "next": "Next",
       "reject": "Reason of rejection",
       "meet_requirements": {
+        "label": "Did their deliverables meet your requirements?",
+        "messages": [
+          "More than 20% missing or defective (critical defects or omissions)",
+          "Less than 20% of omissions or defects (level that makes response difficult)",
+          "About 10% of omissions or defects (a level that can be handled)",
+          "Only the essential requirements were met.",
+          "It satisfied all requirements."
+        ]
+      },
+      "meet_schedule": {
+        "label": "Did the users meet the time schedules of the project?",
+        "messages": [
+          "More than +4 days late from the agreed upon task duration",
+          "More than +2 days late from the agreed upon task duration",
+          "More than +1 day late from the agreed upon task duration",
+          "Completed and shared work within the due date",
+          "Worked ahead of milestones and asked for feedback"
+        ]
+      },
+      "work_contribution": {
+        "label": "Please tell us the team member's contribution to the above works?.",
+        "messages": [
+          "User contributed little to the project",
+          "In this work, my contribution is less than that of other team members.",
+          "User shared the work with other team members.",
+          "Shared the work with others, but had the majority of the contribution",
+          "You performed that entire part perfectly."
+        ]
+      },
+      "good_team_player": {
+        "label": "Were you a positive influence on other team members?",
+        "messages": [
+          "Negatively affects teammates",
+          "Negatively affects teammates",
+          "Moderate",
+          "Moderately so",
+          "Very much so"
+        ]
+      },
+      "feedback_times": {
+        "label": "On average, how many days do you incorporate feedback or corrections when they occur?",
+        "messages": [
+          "5 days or more",
+          "4 days or less",
+          "2 days or less",
+          "Within 1 day",
+          "Improve as soon as it happens"
+        ]
+      }
+    }
+  },
+  "member": {
+    "evaluate": {
+      "evaluate_performance": "Evaluation Performance",
+      "evaluate_performance_description": "Please evaluate users role and performance in this project",
+      "basic_information": "Basic Information",
+      "billable_hourly_wage": "Billable Hourly Wage",
+      "time_weekly": "Total hour (weekly)",
+      "hourly_wage_team": "Enter hourly wage set for the team member.",
+      "please_evaluate_users_role_and_performance_in_this_project": "Please evaluate users role and performance in this project.",
+      "does_the_work_details_match_the_facts": "Does the work written by the user match the facts?",
+      "more_than_20": "More than 20% of the information stated is different from the facts",
+      "more_than_15": "More than 15% of the information stated is different from the facts",
+      "more_than_10": "More than 10% of the information stated is different from the facts",
+      "more_than_5": "More than 5% of the information stated is different from the facts",
+      "all_match": "Yes, they all match.",
+      "go_back": "Go Back",
+      "next": "Next",
+      "reject": "Reason of rejection",
+      "meet_requirements": {
         "label": "Did the user meet the requirements?",
-        "messages": [     
+        "messages": [
           "20_message percentage message",
           "40_message User meet the requirements of the project",
           "60_message User meet the requirements of the project",
@@ -203,7 +273,7 @@
       },
       "meet_schedule": {
         "label": "Did the users meet the time schedules of the project?",
-        "messages": [     
+        "messages": [
           "20_message percentage message",
           "40_message User meet the requirements of the project",
           "60_message User meet the requirements of the project",
@@ -213,7 +283,7 @@
       },
       "work_contribution": {
         "label": "Please tell us about teh contribution to the work.",
-        "messages": [     
+        "messages": [
           "20_message percentage message",
           "40_message User meet the requirements of the project",
           "60_message User meet the requirements of the project",
@@ -627,4 +697,327 @@
       "awards": "Awards"
     }
   }
+},
+"mypage": {
+  "awards": {
+    "awards": "Awards",
+    "issuer": "Issuer",
+    "issue_date": "Issue Date"
+  },
+  "club": {
+    "clubs": "Clubs",
+    "new_club": "New club",
+    "group_type": "Club type",
+    "date_joined": "Date joined",
+    "training_certificate": "Certificate",
+    "certificate": {
+      "certificate_type": "NFT Type",
+      "certificate_attribute": "NFT Attribute",
+      "certificate_issuer": "Issuer",
+      "certificate_description": "NFT Description"
+    }
+  },
+  "education": {
+    "education": "Education",
+    "issuer": "Issuer",
+    "issue_date": "Issue Date"
+  },
+  "profile": {
+    "following": "following",
+    "followers": "followers",
+    "token": "token",
+    "avatar_settings": "Set avatar",
+    "name": "name",
+    "address": "Wallet Address"
+  },
+  "edit_profile": {
+    "edit_profile": "edit profile",
+    "full_name": "full name",
+    "first_name": "first name",
+    "last_name": "last name",
+    "profession": "profession",
+    "specialisation": "specialisation",
+    "profile_description": "profile description",
+    "skills": "Skills",
+    "username": "username",
+    "save_changes": "save changes"
+  },
+  "project": {
+    "projects": "Projects",
+    "new_project": "New project",
+    "evaluation": "evaluation",
+    "present": "present",
+    "view_project": "view project"
+  },
+  "evaluations": {
+    "menu": {
+      "evaluation_requested": "Evaluation Requested",
+      "evaluation_requests": "Evaluations Requests",
+      "evaluation_wrote": "Evaluation Written"
+    }
+  },
+  "main": {
+    "profile": "profile",
+    "edit": "Edit",
+    "description": "description"
+  },
+  "menu": {
+    "portfolio": "portfolio",
+    "edit_profile": "edit profile",
+    "evaluation_history": "evaluation history",
+    "reputation_history": "reputation history",
+    "career_avatar": "career avatar"
+  }
+},
+"group": {
+  "list": {
+    "message": "Join a community!",
+    "message2": "Own your own career proof NFT!",
+    "all": "All",
+    "created": "Created",
+    "joined": "Joined",
+    "search_placeholder": "Search for a group name.",
+    "agency": "Corporation Verified",
+    "authority": "Authority Verified",
+    "education": "School Verified",
+    "community": "Community",
+    "members": "Members",
+    "nfts": "NFTs",
+    "banner": "Create your own group and",
+    "banner2": "Award NFTs to projects and individuals and be an influential group!",
+    "banner3": "Go create a group"
+  },
+  "create": {
+    "title": "Create Group",
+    "required_text": "* indicates required fields.",
+    "description": "Schools, companies, and institutions can create groups after verifying their official email.",
+    "form": {
+      "type": "Category",
+      "name": "Group Name",
+      "desc": "Description",
+      "image": "Image",
+      "image_guide": "Image Guide",
+      "guird": "1:1 ratio recommended",
+      "cover_image": "Cover Image",
+      "rect": "4:3 ratio recommended",
+      "check": "Can be checked in the group list and group detail view.",
+      "links": "Official Website",
+      "cancel": "Cancel",
+      "create_group": "Create"
+    }
+  },
+  "details": {
+    "profile_card": {
+      "create_nft": "Create NFT",
+      "join_group": {
+        "title": "Join Group",
+        "desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
+        "message": "Request Message",
+        "message_placeholder": "Hello, I am Hong Gil-dong, a front-end developer.",
+        "back": "Go Back",
+        "send": "Request to Join"
+      },
+      "invite": {
+        "invite_member": "Invite Member",
+        "sended": "Invitation message sent!",
+        "sended_desc": "Once the user receives the message and accepts the invitation, they will be added as a new member. You can check the status of the invitation in member management.",
+        "go_manage": "Go to Member Management",
+        "invite_group_member": "Invite Group Member",
+        "search_placeholder": "Search by email",
+        "no_name_found": "Nickname not found.",
+        "invite_by_email": "Invite by Email",
+        "message": "Message",
+        "message_placeholder": "Hi!",
+        "back": "Go Back",
+        "invite": "Invite",
+        "name": "Name",
+        "email": "E-mail"
+      },
+      "join": {
+        "join_group": "Join Group",
+        "join_group_desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
+        "message": "Request Message",
+        "message_placeholder": "Hello, I am Gil-dong Hong, a front-end developer.",
+        "back": "Go Back",
+        "send": "Request to Join"
+      }
+    },
+    "about": {
+      "all": "View All",
+      "latest_nft": "Recently Created NFT",
+      "no_latest_nft": "No NFT",
+      "latest_member": "Recently Joined Member"
+    },
+    "nft": {
+      "all": "All",
+      "career": "Career",
+      "limited": "Limited",
+      "avatar": "Avatar",
+      "no_nft": "No NFT"
+    },
+    "members": {
+      "search_placeholder": "Search"
+    },
+    "missions": {
+      "all": "All",
+      "my_mission": "My Mission",
+      "no_mission": "No Mission"
+    },
+    "manage": {
+      "tab": {
+        "member": "Member",
+        "mission": "Mission",
+        "info": "Infomation"
+      },
+      "nft": {
+        "waiting": "NFT Issuance Pending",
+        "published": "Created NFT",
+        "no_published": "No NFT",
+        "user_project": "User / Project",
+        "request_nft": "Requested NFT",
+        "request_date": "Request Date",
+        "actions": "Approval Status",
+        "all_accept": "Accept All"
+      },
+      "member": {
+        "waiting_join": "Waiting for Group Joining",
+        "no_waiting_join": "No Waiting for Group Joining",
+        "waiting_invite": "Waiting for Invitation Approval",
+        "no_waiting_invite": "No Waiting for Invitation Approval",
+        "all_members": "All Members",
+        "user_info": "Info",
+        "message": "Message",
+        "request_date": "Date",
+        "actions": "Status",
+        "all_accept": "Accept All",
+        "announce_invite": "Announce",
+        "search": "Search by Nickname or Profession",
+        "no_result": "No result",
+        "waiting": "Waiting",
+        "rejected": "Rejected",
+        "delete": "Delete"
+      },
+      "mission": {
+        "create": "Create New Mission",
+        "quit": "Quit",
+        "eval": "Evaluation",
+        "quit_title": "Do you want to force end the mission?",
+        "quit_desc": "If you force end the mission, you can no longer update the achievement status of the mission, and members will not be able to receive NFT rewards.",
+        "back": "Go Back",
+        "mission_quit": "Force End Mission"
+      }
+    }
+  },
+  "tabs": {
+    "about": "About",
+    "nft": "NFT certificate",
+    "members": "Members",
+    "mission": "Missions",
+    "manage": "Manage Group"
+  },
+  "member": {
+    "leader": "Leader"
+  }
+},
+"achievement": {
+  "display_nft": {
+    "nft_type": "NFT Type",
+    "nft_prop": "NFT Properties",
+    "publisher": "Publisher",
+    "group_name": "Group Name",
+    "nft_desc": "NFT Description",
+    "show_more": "Show More",
+    "hide": "Hide",
+    "close": "Do It Later",
+    "send_request": "Request Issuance"
+  }
+},
+"mission": {
+  "card": {
+    "end_date_1": "",
+    "end_date_2": "Days Before Mission Ends",
+    "end": "Mission End Date",
+    "before_end": "Mission Ending"
+  },
+  "detail": {
+    "all_mission": "Total Missions",
+    "get_points": "Points Earned!",
+    "point": "Points",
+    "required": "Required",
+    "get_reward": "Earn points and get rewards!",
+    "if_get": "If you earn more than ",
+    "if_get2": " points",
+    "start": "Start My Mission"
+  },
+  "create": {
+    "title": "Create Mission",
+    "mission_info": "Enter Mission Information",
+    "detail_info": "Register Detailed Mission",
+    "reward_info": "Register Reward Information",
+    "required": "* indicates required fields.",
+    "previous": "Previous",
+    "next": "Next",
+    "submit": "Submit",
+    "name": "Name",
+    "desc": "Description",
+    "date": "Duration",
+    "begin_date": "Start Date",
+    "end_date": "End Date",
+    "start_now": "Start Immediately",
+    "no_end": "No End Date",
+    "mission": "Mission",
+    "point": "Points",
+    "required_mission": "Required Mission",
+    "add_mission": "Add Mission",
+    "total_point": "Total",
+    "total_mission": "Total Number of Missions",
+    "points": "Points",
+    "reward": "Reward",
+    "reward_stand": "Reward Standard Points",
+    "reward_at_least": "Minimum Required Mission Achievements",
+    "add_reward": "Add Reward",
+    "select_nft": "Select Reward NFT",
+    "select_nft_desc": "Please select the NFT to be awarded upon achieving the reward criteria.",
+    "search_placeholder": "Search for NFTs.",
+    "close": "Close",
+    "done": "Selection Done",
+    "total_reward": "Total Number of Rewards",
+    "points_at_least": "Minimum Reward Criteria Points"
+  },
+  "manage": {
+    "select_member": "Select Member for Evaluation",
+    "search_placeholder": "Search by Nickname or Profession",
+    "no_member": "No Members Found",
+    "give_reward": "Award Reward",
+    "cleard_mission": "Achieved Missions",
+    "total_points": "Total Points Earned",
+    "points": "Points",
+    "back": "Go Back",
+    "save": "Save",
+    "get_reward": "Earn points and receive rewards!",
+    "if_get": "If you earn more than points",
+    "evalu": "Evaluate mission performance"
+  }
+},
+"interface": {
+  "group_type": {
+    "company": "Company",
+    "school": "School",
+    "community": "Community",
+    "authority": "Authority"
+  },
+  "nft_type": {
+    "sbt": "Career",
+    "erc721": "Limited"
+  },
+  "nft_image_type": {
+    "avatar": "Avatar",
+    "image": "Image",
+    "avatar+image": "Avatar + Image"
+  },
+  "sbt_type": {
+    "edu": "Edu",
+    "awards": "Awards"
+  }
+}
 }
