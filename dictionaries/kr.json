@@ -151,33 +151,53 @@
           "next": "다음",
           "reject": "업무내용 사실여부 평가 사유",
           "meet_requirements": {
-            "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
+            "label": "해당 팀원의 결과물은 요구사항을 충족했나요?",
             "messages": [     
-              "20_message percentage message",
-              "40_message User meet the requirements of the project",
-              "60_message User meet the requirements of the project",
-              "80_message User meet the requirements of the project",
-              "100_message User meet the requirements of the project"
+              "누락 또는 하자가 20% 이상 (치명적인 하자 또는 누락)",
+              "누락 또는 하자가 20% 미만 (대응이 어려운 수준)",
+              "누락 또는 하자가 10% 내외 (대응 가능할만한 수준)",
+              "필수 요구사항만 만족시켰어요.",
+              "모든 요구사항을 만족시켰어요."
             ]         
           },
           "meet_schedule": {
-            "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
+            "label": "마일스톤에 따른 작업 일정을 준수했나요?",
             "messages": [     
-              "20_message percentage message",
-              "40_message User meet the requirements of the project",
-              "60_message User meet the requirements of the project",
-              "80_message User meet the requirements of the project",
-              "100_message User meet the requirements of the project"
+              "합의된 작업 기간에서 +4일 이상 지연",
+              "합의된 작업 기간에서 +2일 이상 지연",
+              "합의된 작업 기간에서 +1일 이상 지연",
+              "작업완료 일 내에 완료 및 작업물 공유",
+              "마일스톤보다 빠르게 작업하며, 피드백을 요청함"
             ]
           },
           "work_contribution": {
-            "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
+            "label": "작업완료 일 내에 완료 및 작업물 공유",
             "messages": [     
-              "20_message percentage message",
-              "40_message User meet the requirements of the project",
-              "60_message User meet the requirements of the project",
-              "80_message User meet the requirements of the project",
-              "100_message User meet the requirements of the project"
+              "해당 파트 전체를 완벽하게 수행했어요.",
+              "해당 업무에 있어서, 다른 팀원보다 기여도가 적어요.",
+              "해당 업무를 다른 팀원과 나눠서 작업했어요.",
+              "전부 홍길동님이 작업했으나, 다른 팀원에게 약간의 도움을 받았어요.",
+              "해당 파트 전체를 완벽하게 수행했어요."
+            ]    
+          }, 
+          "good_team_player": {
+            "label": "타 팀원들에게 긍정적인 영향을 미치는 편이었나요?.",
+            "messages": [     
+              "팀원들에게 부정적 영향을 미침",
+              "팀원들에게 부정적 영향을 미침",
+              "보통임",
+              "보통임",
+              "매우 그러함"
+            ]
+          }, 
+          "feedback_times": {
+            "label": "타 팀원들에게 긍정적인 영향을 미치는 편이었나요?.",
+            "messages": [     
+              "5일 이상",
+              "4일 이내", 
+              "2일 이내",
+              "1일 이내",
+              "발생 당시에 바로 개선"
             ]
           }
         }
@@ -350,6 +370,7 @@
       "profession": "직업", 
       "specialisation": "전문분야", 
       "profile_description": "내 소개",
+      "skills": "스킬",
       "username": "닉네임", 
       "save_changes": "저장하기"
     },
