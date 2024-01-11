@@ -51,7 +51,7 @@ const GroupListItem = React.memo(
               )} */}
 
               {/* {lang.group.list[details.type]} */}
-              {lang.interface.group_type[details.type]}
+              {lang.interface.group_type[details.type] || "　"}
             </div>
 
             <div className="flex divide-x">
@@ -64,7 +64,7 @@ const GroupListItem = React.memo(
 
               <div className="px-4 text-center">
                 <div className="mb-1 text-label_s">{lang.group.list.nfts}</div>
-                {/* <div className="text-title_m">0</div> */}
+
                 <div className="text-title_m">
                   {details.achievements?.length}
                 </div>

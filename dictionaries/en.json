@@ -489,7 +489,7 @@
   "mission": {
     "card": {
       "end_date_1": "",
-      "end_date_2": "Days Before Mission Ends",
+      "end_date_2": "d to Mission End",
       "end": "Mission End Date",
       "before_end": "Mission Ending"
     },
@@ -500,8 +500,8 @@
       "point": "Points",
       "required": "Required",
       "get_reward": "Earn points and get rewards!",
-      "if_get": "If you earn more than ",
-      "if_get2": " points",
+      "if_get": "At Least ",
+      "if_get2": " Points",
       "start": "Start My Mission"
     },
 

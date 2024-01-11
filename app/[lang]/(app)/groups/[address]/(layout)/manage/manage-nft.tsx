@@ -47,6 +47,7 @@ export default async function ManageNft({
                 nft={item}
                 key={index}
                 contract={details.contract}
+                lang={lang}
               ></PendingNftListItem>
             );
           })}
