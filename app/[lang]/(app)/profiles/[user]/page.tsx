@@ -5,6 +5,10 @@ import { getUserProfile } from "@/lib/data/user";
 
 import { User } from "@/lib/interfaces";
 import ProfileDetails from "../../mypage/_components/profile-details";
+import ProfileProjects from "../../mypage/_components/profile-projects";
+import ProfileCertificates from "../../mypage/_components/profile-certificates";
+import ProfileAwards from "../../mypage/_components/profile-awards";
+
 import UserProfile from "./_component/user-profile";
 
 export default async function Dashboard({
@@ -23,18 +27,11 @@ export default async function Dashboard({
       </div>
       {/* main */}
       <div className="grow">
-        <main className="flex flex-col gap-8">
-
+        <main className="flex flex-col gap-6">
           <ProfileDetails profile={profile} text={dictionary.mypage.main} />
-          {/* <ProfileProjects
-            projects={profile.projects}
-            text={dictionary.mypage.project}
-          />
-          <ProfileClubs
-            clubMemberships={profile.clubs}
-            text={dictionary.mypage.club}
-          />
-          */}
+          <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} />
+          <ProfileCertificates achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.education}/>
+          <ProfileAwards achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.awards}/>
         </main>
         
         {/* <EditProfile /> */}
