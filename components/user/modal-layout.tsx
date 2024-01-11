@@ -44,7 +44,7 @@ export default function ModalLayout({ title, children, showModal}: { title: stri
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-background-layer-1 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-background-layer-1 px-[32px] pb-[28px] pt-[24px] gap-[20px] text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
               <h2 className='text-xl font-bold mb-4'>{title}</h2>
               <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block ">
               <button

@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 
 import { formatEther } from "viem";
 import { useAccount, useDisconnect, useNetwork } from "wagmi";
-
 import { Address, createPublicClient, http } from "viem";
-
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -20,7 +18,7 @@ import { useToast } from "../ui/use-toast";
 import ModalLayout from "./modal-layout";
 import ProfileBalance from "./profile-balance";
 
-interface IProfileDetailsProps {
+interface IAccountSettingsProps {
     showModal: boolean;
     text_my_account: {
       "my_account_title": string,
@@ -49,7 +47,7 @@ interface IProfileDetailsProps {
   }
 }
 
-export default function ProfileDetails({ showModal, text_my_account }: IProfileDetailsProps) {
+export default function AccountSettings({ showModal, text_my_account }: IAccountSettingsProps) {
   const { toast } = useToast();
   const { disconnect } = useDisconnect();
   const [loading, setLoading] = useState(true);
@@ -116,11 +114,11 @@ export default function ProfileDetails({ showModal, text_my_account }: IProfileD
     router.replace(newPath);
   }
 
-
   return (
     <ModalLayout title={text_my_account.my_account_title} showModal={showModal}>
       {isConnected ? (
         <div className="flex flex-col divide-solid">
+          {/* Address */}
           <div
             id="username"
             className="text-md bg-background-layer-2 rounded-md p-4"
@@ -152,7 +150,7 @@ export default function ProfileDetails({ showModal, text_my_account }: IProfileD
               )}
             </div>
           </div>
-
+          {/* Balances */}
           <div id="balances" className="grid grid-cols-1 py-4 my-4 gap-4">
             <h1 className="text-title_m">{text_my_account.blockchain_network}</h1>
             {balances.map((balance: any, key: number) => (
@@ -162,10 +160,11 @@ export default function ProfileDetails({ showModal, text_my_account }: IProfileD
                 token={balance.chain}
                 balance={balance.balance}
                 active={balance.active}
+
               />
             ))}
           </div>
-
+          {/* Language and theme settings */}
           <div className="flex justify-between mb-4">
             <Select
               onValueChange={(value) => changeLanguage(value)}
@@ -191,7 +190,7 @@ export default function ProfileDetails({ showModal, text_my_account }: IProfileD
               </SelectContent>
             </Select>
           </div>
-
+          {/* Buttons at the bottom  */}
           <div className="grid grid-cols-2 gap-4">
             <Button
               onClick={() => {
