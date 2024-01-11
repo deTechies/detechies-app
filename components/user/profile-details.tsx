@@ -8,6 +8,7 @@ import { Address, createPublicClient, http } from "viem";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { ThemeToggle } from "../extra/theme-toggle";
 import { Button } from "../ui/button";
 import {
   Select,
@@ -151,16 +152,7 @@ export default function ProfileDetails({ showModal }: any) {
               </SelectContent>
             </Select>
 
-            <Select>
-              <SelectTrigger className="w-[100px]  bg-background-layer-1 border">
-                <SelectValue placeholder="Theme" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
-              </SelectContent>
-            </Select>
+            <ThemeToggle />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
