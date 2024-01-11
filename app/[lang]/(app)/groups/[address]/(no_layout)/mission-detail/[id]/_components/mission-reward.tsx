@@ -14,7 +14,7 @@ export default async function MissionReward({
 
 
   return (
-    <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-2">
+    <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-7">
       <CardHeader className="flex items-center justify-between">
         <h3 className="text-subhead_s">
           {lang.mission.detail.get_reward}
@@ -46,10 +46,11 @@ export default async function MissionReward({
                       {item.achievement.name}
                     </div>
                     <Badge
-                      variant="default"
-                      className="text-state-info rounded-[5px] px-2.5 py-1"
+                      variant="info"
+                      shape="category"
                     >
-                      {item.achievement.nft_type}
+                      
+                      {lang.interface.nft_type[item.achievement.nft_type]}
                     </Badge>
                   </div>
                 </div>

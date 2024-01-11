@@ -6,6 +6,7 @@ import { Address, createPublicClient, http } from "viem";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { ThemeToggle } from "../extra/theme-toggle";
 import { Button } from "../ui/button";
 import {
   Select,
@@ -179,16 +180,7 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
               </SelectContent>
             </Select>
 
-            <Select>
-              <SelectTrigger className="w-[100px]  bg-background-layer-1 border">
-                <SelectValue placeholder={text_my_account.theme.placeholder} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">{text_my_account.theme.light}</SelectItem>
-                <SelectItem value="dark">{text_my_account.theme.dark}</SelectItem>
-                <SelectItem value="system">{text_my_account.theme.system}</SelectItem>
-              </SelectContent>
-            </Select>
+            <ThemeToggle text={text_my_account.theme}/>
           </div>
           {/* Buttons at the bottom  */}
           <div className="grid grid-cols-2 gap-4">

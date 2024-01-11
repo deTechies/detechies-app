@@ -1,4 +1,4 @@
-import { getGroups } from "@/lib/data/groups";
+import { getClub, getGroups } from "@/lib/data/groups";
 import { getUserProfile } from "@/lib/data/user";
 
 import { getDictionary } from "@/get-dictionary";
@@ -12,10 +12,21 @@ export default async function GroupsPage({
 }: {
   params: { lang: Locale };
 }) {
-  const groups = await getGroups();
-  const profile = await getUserProfile();
+
+  const enrichGroupsWithDetails = async (groups: any) => {
+    const enrichedGroups = await Promise.all(groups.map(async (group: any) => {
+      const details = await getClub(group.id);
+      return { ...group, achievements : details.achievements };
+    }));
+  
+    return enrichedGroups;
+  }
 
   const dictionary = (await getDictionary(params.lang)) as any;
+  
+  const profile = await getUserProfile();
+  const groups = await getGroups();
+  const groupsWithDetails = await enrichGroupsWithDetails(groups);
 
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
@@ -24,7 +35,7 @@ export default async function GroupsPage({
 
       {groups?.length > 0 ? (
         <GroupList
-          groups={groups}
+          groups={groupsWithDetails}
           profileWallet={profile.wallet}
           lang={dictionary}
         />

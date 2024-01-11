@@ -43,25 +43,51 @@
   },
   "onboard": {
     "welcome": {
-      "title": "Professional career certifications are different!",
-      "body": "If you already have an account, log in to Careerzen using your existing account.",
-      "web3": "Social Wallet",
-      "browser": "Browser Wallet"
+      "title": "전문가들의 커리어 인증은 다르다.",
+      "body": "이미 계정이 있다면 기존 계정을 사용해 Careerzen에 로그인 합니다.",
+      "web3": "소셜 계정으로 계속하기",
+      "browser": "메타마스크 지갑"
     },
     "verify_email": {
-      "title": "Sign up!",
-      "body": "Professional personal members, please make sure to verify your personal email, work emails make it harder to find your account if you leave..",
-      "email": "email",
-      "email_verify": "verify email",
+      "title": "회원가입",
+      "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.",
+      "username": "이름",
+      "username_placeholder": "이름을 입력하세요.",
+      "email": "메일주소",
+      "email_placeholder": "메일주소를 입력하세요.",
+      "email_desc": "메일주소를 입력하세요.",
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
       "accordion": {
-        "terms_of_services": "Terms of Services (required)",
+        "terms_of_services": "서비스 이용약관 (필수)",
         "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
-        "privacy_policy": "Privacy Policy (required)",
+        "privacy_policy": "개인정보처리방침 (필수)",
         "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
-        "reward_notification": "In-app notification (optional)",
+        "reward_notification": "보상 및 이벤트 알림 (선택)",
         "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+      },
+      "cancel": "뒤로가기",
+      "next": "다음",
+
+      "email_verify": {
+        "title": "메일 인증",
+        "desc": "여섯자리 코드가 포함된 이메일을 ",
+        "desc2": " 으로 보내드렸습니다. 이 코드를 사용하여 이메일 주소를 인증할 수 있습니다.",
+        "resend": "재전송",
+        "code": "인증코드",
+        "code_placeholder": "여섯자리 코드"
+      },
+
+      "finished_profile": {
+        "title": "커리어 아바타 생성 완료",
+        "desc": "블록체인 기반의 영구 인증 프로필에 성과, 학력 등을 추가하고 나만의 커리어 아바타를 완성해보세요!",
+        "subtitle": "어떤 것부터 할까요?",
+        "expert": "전문가",
+        "expert_desc": "내 커리어 인증하기",
+        "client": "클라이언트",
+        "client_desc": "우리 프로젝트에 맞는 전문가 찾기",
+        "admin": "기업, 기관, 커뮤니티 운영자",
+        "admin_desc": "우리 조직만의 NFT 생성하기"
       }
     }
   },
@@ -87,7 +113,26 @@
       "my_project": "내 프로젝트",
       "no_projects_found": "검색 결과가 없습니다.",
       "view_more": "더 보기",
-      "create_project": "내 프로젝트 만들기"
+      "create_project" : {
+        "create" : "내 프로젝트 만들기",
+        "name" : "프로젝트명",
+        "type" : "프로젝트 종류",
+        "period" : "기간",
+        "describe" : "프로젝트 설명",
+        "image" : "대표 이미지",
+        "category" : "프로젝트 카테고리",
+        "scope" : "공개 범위",
+        "back" : "뒤로가기",
+        "make" : "생성하기",
+        "name_dsc" : "프리랜서 전용 평판 조회 서비스 - 커리어젠",
+        "type_dsc": "종류 선택",
+        "describe_dsc" : "프로젝트 설명을 입력해 주세요",
+        "category_dsc" : "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
+        "public" : "모든 유저",
+        "private": "프로젝트 멤버",
+        "team" : "그룹멤버"
+      }
+      
     },
     "details": {
       "join_project": {
@@ -536,7 +581,7 @@
 
     "detail": {
       "all_mission": "총 미션",
-      "get_points": "점 확득!",
+      "get_points": "점 획득!",
       "point": "점",
       "required": "필수 미션",
       "get_reward": "점수를 획득하고 보상받아요!",

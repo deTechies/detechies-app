@@ -80,6 +80,7 @@ export default function Login({lang}:ILoginProps) {
       </div>
     );
   }
+  
   if (!isConnecting && address == session?.web3?.address) {
     return (
       <div className="flex rounded-md  items-center gap-2">

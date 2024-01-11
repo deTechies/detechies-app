@@ -66,8 +66,8 @@ export default async function ManageMember({
             );
           })
         ) : (
-          <div className="text-center text-label_m text-text-secondary pb-7">
-            {lang.group.details.manage.member.waiting_join}
+          <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
+            {lang.group.details.manage.member.no_waiting_join}
           </div>
         )}
       </div>
@@ -95,7 +95,7 @@ export default async function ManageMember({
             );
           })
         ) : (
-          <div className="text-center text-label_m text-text-secondary pb-7">
+          <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
             {lang.group.details.manage.member.no_waiting_invite}
           </div>
         )}
