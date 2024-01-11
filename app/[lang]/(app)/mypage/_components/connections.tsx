@@ -42,7 +42,7 @@ export default async function Connections({
 
   const data = await getUserConnections(address);
   return (
-    <section className={`grid  md:grid-cols-3 sm:grid-cols-2 gap-4`}>
+    <section className={`grid  md:grid-cols-3 sm:grid-cols-2 gap-[20px]`}>
       <div className="flex border p-4 border-border-div rounded-sm items-center gap-4 bg-background-layer-1">
         <Image
           src="/icons/github.png"
@@ -72,7 +72,7 @@ export default async function Connections({
       {networks.map((network: any, key: number) => (
         <div
           key={key}
-          className="flex border p-4 border-border-div rounded-sm items-center gap-4 bg-background-layer-1"
+          className="flex border pt-[16px] px-[16px] pb-[16px] border-border-div rounded-sm items-center gap-[10px] bg-background-layer-1"
         >
           <Image
             src={network.image}

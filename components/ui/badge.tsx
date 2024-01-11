@@ -17,16 +17,18 @@ const badgeVariants = cva(
         secondary:
           "bg-text-secondary",
         tertiary: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
+        purple: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
-        ghost: "text-text-primary hover:bg-background-layer-2/80",
+        ghost: "text-text-primary border border-text-secondary hover:bg-background-layer-2/80",
       },
       shape: {
         default: "text-label_s rounded-md px-3 py-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
         md: "py-2 px-2.5 rounded-md text-title_s",
         category: "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
         outline: "py-2 px-2.5 border rounded-md bg-background-transparent text-title_s",
+        outline_sm: "h-[22px] px-2.5 border rounded-full text-label_s",
       },
     },
     defaultVariants: {

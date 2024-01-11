@@ -21,7 +21,7 @@ export default async function MissionDetailPage({
       <div>
         <SearchMember membersList={missionDetails.userProgress} lang={dictionary} />
       </div>
-      <div className="col-span-2">
+      <div className="md:col-span-2">
         {missionDetails && (
           <MissionDetail
             details={missionDetails}

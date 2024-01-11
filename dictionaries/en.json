@@ -26,10 +26,13 @@
     "verify_email": {
       "title": "Sign up!",
       "body": "Professional personal members, please make sure to verify your personal email, work emails make it harder to find your account if you leave..",
+      "username": "Username",
+      "username_placeholder": "Enter username.",
+      "email_desc": "Enter username.",
+      
       "email": "email",
-      "email_verify": "verify email",
-      "alert_title": "완벽한 개인정보 보안",
-      "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
+      "alert_title": "Complete privacy protection",
+      "alert_body": "All personal information is stored encrypted and remains private, and can only be seen by others with your permission.",
       "accordion": {
         "terms_of_services": "Terms of Services (required)",
         "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
@@ -37,6 +40,29 @@
         "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "In-app notification (optional)",
         "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+      },
+      "cancel": "Cancel",
+      "next": "Create Profile",
+
+      "email_verify": {
+        "title": "verify email",
+        "desc": "We have send you an email to",
+        "desc2": "with a 6-digit code. You can use this code to verify your email address.",
+        "resend": "resend",
+        "code": "Verification code",
+        "code_placeholder": "Enter 6-digit code"
+      },
+
+      "finished_profile": {
+        "title": "Career Avatar Creation Completed",
+        "desc": "Add achievements, education, etc. to your blockchain-based permanent certification profile and complete your own career avatar!",
+        "subtitle": "What should we start with?",
+        "expert": "Expert",
+        "expert_desc": "Certify My Career",
+        "client": "Client",
+        "client_desc": "Find experts for our project",
+        "admin": "Enterprise, Institution, Community Operator",
+        "admin_desc": "Create unique NFTs for our organization"
       }
     }
   },
@@ -481,7 +507,7 @@
   "mission": {
     "card": {
       "end_date_1": "",
-      "end_date_2": "Days Before Mission Ends",
+      "end_date_2": "d to Mission End",
       "end": "Mission End Date",
       "before_end": "Mission Ending"
     },
@@ -492,8 +518,8 @@
       "point": "Points",
       "required": "Required",
       "get_reward": "Earn points and get rewards!",
-      "if_get": "If you earn more than ",
-      "if_get2": " points",
+      "if_get": "At Least ",
+      "if_get2": " Points",
       "start": "Start My Mission"
     },
 

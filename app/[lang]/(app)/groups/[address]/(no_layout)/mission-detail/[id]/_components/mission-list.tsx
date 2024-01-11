@@ -51,6 +51,9 @@ export default function MissionList({
     setLoading(false);
   };
 
+  console.log(mission);
+  console.log(userProgress);
+
   if (userProgress.length > 0) {
     return (
       <div className="flex flex-col gap-3">
@@ -61,7 +64,7 @@ export default function MissionList({
             </span>
 
             <div className="p-3 text-center rounded-full text-title_l grow max-w-[140px] border-2 border-icon-primary">
-              {checkedPoints}/{totalPoints}
+              {checkedPoints} / {totalPoints}
             </div>
           </>
         </Card>
@@ -97,9 +100,7 @@ export default function MissionList({
                       : "bg-background-layer-2 text-text-secondary"
                   }`}
                 >
-                  {item.mission.essential
-                    ? `${item.mission.score} ${lang.mission.detail.get_points}`
-                    : `${item.mission.score} ${lang.mission.detail.point}`}
+                  {`${item.mission.score} ${lang.mission.detail.point}`}
                 </div>
               </Card>
             );
@@ -144,16 +145,8 @@ export default function MissionList({
                 ) : null}
               </div>
 
-              <div
-                className={`p-3 text-center rounded-full text-title_l grow max-w-[140px] ${
-                  item.essential
-                    ? "bg-accent-secondary"
-                    : "bg-background-layer-2 text-text-secondary"
-                }`}
-              >
-                {item.essential
-                  ? `${item.score} ${lang.mission.detail.get_points}`
-                  : `${item.score} ${lang.mission.detail.point}`}
+              <div className="p-3 text-center rounded-full text-title_l grow max-w-[140px] bg-background-layer-2 text-text-secondary">
+                {`${item.score} ${lang.mission.detail.point}`}
                 {/* {item.score}점 {item.essential ? " 획득!" : null} */}
               </div>
             </Card>

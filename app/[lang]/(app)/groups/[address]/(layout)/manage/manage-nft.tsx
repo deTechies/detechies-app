@@ -4,7 +4,7 @@ import PendingNftListItem from "@/components/group/pending-nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
 import { Button } from "@/components/ui/button";
 import { getPendingAchievements } from "@/lib/data/achievements";
-import { Achievement } from "@/lib/interfaces";
+import { Achievement, AchievementReward } from "@/lib/interfaces";
 
 export default async function ManageNft({
   details,
@@ -15,7 +15,6 @@ export default async function ManageNft({
 }) {
   // const dictionary = await getDictionary(params.lang);
 
-  //getting all the pending achievements
 
   const pendingAchievements = await getPendingAchievements(details.id);
   return (
@@ -41,12 +40,13 @@ export default async function ManageNft({
         </div>
 
         {pendingAchievements.length > 0 &&
-          pendingAchievements.map((item: any, index: number) => {
+          pendingAchievements.map((item: AchievementReward, index: number) => {
             return (
               <PendingNftListItem
                 nft={item}
                 key={index}
                 contract={details.contract}
+                lang={lang}
               ></PendingNftListItem>
             );
           })}

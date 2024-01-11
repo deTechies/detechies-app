@@ -11,8 +11,11 @@ export default async function ManageMissionReward({
   totalPoints: number;
   lang: any;
 }) {
+
+  // console.log(achievements);  
+
   return (
-    <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-2">
+    <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-7">
       <CardHeader className="flex items-center justify-between">
         <h3 className="text-subhead_s">{lang.mission.manage.give_reward}</h3>
       </CardHeader>
