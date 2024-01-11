@@ -21,8 +21,6 @@ interface ProjectItemProps {
 }
 const GroupListItem = React.memo(
   ({ details, lang }: { details: ProjectItemProps; lang: any }) => {
-    // const group = await getClub(details.id);
-
     return (
       <Link href={`groups/${details.id}`}>
         <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] pb-6 px-6 gap-0">
@@ -66,8 +64,10 @@ const GroupListItem = React.memo(
 
               <div className="px-4 text-center">
                 <div className="mb-1 text-label_s">{lang.group.list.nfts}</div>
-                <div className="text-title_m">0</div>
-                {/* <div className="text-title_m">{group.achievements.length}</div> */}
+                {/* <div className="text-title_m">0</div> */}
+                <div className="text-title_m">
+                  {details.achievements?.length}
+                </div>
               </div>
             </div>
           </section>
@@ -77,6 +77,6 @@ const GroupListItem = React.memo(
   }
 );
 
-GroupListItem.displayName = 'GroupListItem'
+GroupListItem.displayName = "GroupListItem";
 
 export default GroupListItem;
