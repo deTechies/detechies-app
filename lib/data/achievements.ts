@@ -19,6 +19,20 @@ export async function getUserAchievements(address?: string) {
   //TODO: needs implementation
 }
 
+export async function getGroupAchievementsClient(address: string) {
+  const session = await getSession();
+
+  //getting all the achievemnts
+  const response = await fetch(`${API_URL}/achievement/club/${address}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.web3.accessToken}`,
+    },
+  });
+  return response.json();
+}
+
+
 export async function getGroupAchievements(address: string) {
   const session = await auth();
 
@@ -62,7 +76,7 @@ export async function uploadAchievement(data: any) {
   return response.json();
 }
 
-export async function requestAchievement(achievementId: string, projectId?: string) {
+export async function requestAchievement(achievementId: string, projectId?: string, message?: string) {
   const session = await getSession();
 
   // Check for a valid session and required tokens
@@ -80,10 +94,27 @@ export async function requestAchievement(achievementId: string, projectId?: stri
       achievementId: achievementId,
       userId: session.web3.user.id,
       projectId: projectId,
+      message: message,
     }),
   });
 
   return response.json();
+}
+
+export async function rewardProjectNFT(achievementId: string) {
+  //reward project nft to user 
+  const session = await getSession();
+  
+  const response = await fetch(`${API_URL}/achievement-rewards/rewardProject/${achievementId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  return response.json();
+  
 }
 
 export async function updateNFTRequest(

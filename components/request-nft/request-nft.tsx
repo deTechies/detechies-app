@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { RequestNftForm } from "@/components/form/request-nft-form";
 
 import { useParams, useSearchParams } from "next/navigation";
@@ -26,13 +26,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { requestAchievement } from "@/lib/data/achievements";
+import { getGroupAchievementsClient, requestAchievement } from "@/lib/data/achievements";
+import { Achievement, Club } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "../ui/use-toast";
 
-export default function RequestNFTModal({ groups }: { groups: any[] }) {
+export default function RequestNFTModal({ groups }: { groups: Club[] }) {
 
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
@@ -55,7 +56,8 @@ export default function RequestNFTModal({ groups }: { groups: any[] }) {
     return item.name?.toLowerCase().includes(search.toLowerCase());
   });
 
-  const [selectedGroup, setSelectedGroup] = useState<any | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<Club | null>(null);
+  const [groupAchievements, setGroupAchievements] = useState<Achievement[]>([]);
   const [selectedAchievement, setSelectedAchievement] = useState<any | null>(
     null
   );
@@ -72,10 +74,24 @@ export default function RequestNFTModal({ groups }: { groups: any[] }) {
     setSelectedAchievement(_nft);
   };
 
+  useEffect(() => {
+    const getAchievements = async () => {
+      if(!selectedGroup) return;
+      const fetchedGroupAchievement = await getGroupAchievementsClient(selectedGroup.id);
+      setGroupAchievements(fetchedGroupAchievement);
+    }
+    if(selectedGroup) {
+      setSelectedAchievement
+      getAchievements();      
+    }
+  }
+  , [selectedGroup]);
+  
+  
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setLoading(true);
 
-    const result = await requestAchievement(selectedAchievement.id, params.address.toString() );
+    const result = await requestAchievement(selectedAchievement.id, params.address.toString(), data.message);
     
     
     // const result = await ------({
@@ -232,8 +248,8 @@ export default function RequestNFTModal({ groups }: { groups: any[] }) {
             <div className="mb-3 text-title_s">발행 가능한 NFT</div>
 
             <div className="mb-6 max-h-[287px] overflow-y-auto ">
-              {dummy_nfts.length > 0 &&
-                dummy_nfts.map((nft: any, _index: number) => {
+              {groupAchievements.length > 0  &&
+                groupAchievements.map((nft: any, _index: number) => {
                   return (
                     <NftListItem
                       achievement={nft}
@@ -244,7 +260,7 @@ export default function RequestNFTModal({ groups }: { groups: any[] }) {
                   );
                 })}
 
-              {dummy_nfts.length < 1 && <div>No Group Data</div>}
+              {groupAchievements.length < 1 && <div>No Group Data</div>}
             </div>
 
             <Button
