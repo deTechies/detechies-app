@@ -21,7 +21,6 @@ export default async function ProjectEvaluationByGroups({
     `/achievement-rewards/project-rewards/${details.id}`
   )) as AchievementReward[];
   
-  console.log(rewardedAchievements)
   if (!groups) return null;
 
   // const dummy_nfts = [

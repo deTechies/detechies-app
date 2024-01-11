@@ -13,9 +13,7 @@ export default async function ProfileDashboard({params}: {params: {lang: Locale}
 
   return (
     <main className="m-10 max-w-4xl mx-auto">
-
         <ListProfiles users={users} followers={followers} />
-
     </main>
   );
 }

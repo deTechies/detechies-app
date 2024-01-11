@@ -3,7 +3,32 @@
     "find_expert": "Experts",
     "project": "Projects",
     "groups": "Groups",
-    "my_profile": "My Profile"
+    "my_profile": "My Profile",
+    "my_account":{
+      "my_account_title": "My Account",
+      "my_encrypted_account_address": "Encrypted Account Address",
+      "copy_label": "Copy",
+      "change_account": "Switch Account",
+      "blockchain_network": "Blockchain Network",
+      "chains":{
+        "polygon_mainnet": "Polygon Mainnet",
+        "polygon_mumbai": "Polygon Mumbai Testnet"
+      },
+      "language":{
+        "placeholder": "Lang",
+        "english": "English",
+        "korean": "한국어"
+      },
+      "theme":{
+        "placeholder": "theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      },
+      "sign_out": "Sign out",
+      "my_profile": "My Profile",
+      "not_connected": "Not Connected"
+    }
   },
   "user": {
     "details": {

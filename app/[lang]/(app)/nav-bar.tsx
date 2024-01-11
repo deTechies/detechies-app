@@ -96,7 +96,7 @@ export default function Navbar({ lang }: { lang: any }) {
                   <BellRing className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
                 </div>
                 <div className="relative ml-3 cursor-pointer text-text-secondary hover:text-text-primary">
-                  <Login />
+                  <Login lang={lang.my_account}/>
                 </div>
               </div>
               <div className="flex items-center -mr-2 sm:hidden">
@@ -135,7 +135,7 @@ export default function Navbar({ lang }: { lang: any }) {
                 </Disclosure.Button>
               ))}
               <div className="flex justify-center w-full mt-6">
-                <Login />
+                <Login lang={lang.my_account}/>
               </div>
             </div>
           </Disclosure.Panel>
