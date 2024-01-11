@@ -3,7 +3,32 @@
     "find_expert": "전문가 찾기",
     "project": "프로젝트",
     "groups": "그룹",
-    "my_profile": "내 프로필"
+    "my_profile": "내 프로필",
+    "my_account":{
+      "my_account_title": "내 계정",
+      "my_encrypted_account_address": "내 암호화 계정 주소",
+      "copy_label": "복사하기",
+      "change_account": "계정 변경",
+      "blockchain_network": "블록체인 네트워크",
+      "chains":{
+        "polygon_mainnet": "폴리곤 메인 네트워크",
+        "polygon_mumbai": "폴리곤 테스트 네트워크"
+      },
+      "language":{
+        "placeholder":"언어",
+        "english": "English",
+        "korean": "한국어"
+      },
+      "theme":{
+        "placeholder": "주제",
+        "light": "빛",
+        "dark": "어두운",
+        "system": "체계"
+      },
+      "sign_out": "로그아웃",
+      "my_profile": "내 프로필",
+      "not_connected": "연결되지 않은"
+    }
   },
   "user": {
     "details": {

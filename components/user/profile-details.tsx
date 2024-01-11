@@ -20,7 +20,36 @@ import { useToast } from "../ui/use-toast";
 import ModalLayout from "./modal-layout";
 import ProfileBalance from "./profile-balance";
 
-export default function ProfileDetails({ showModal }: any) {
+interface IProfileDetailsProps {
+    showModal: boolean;
+    text_my_account: {
+      "my_account_title": string,
+      "my_encrypted_account_address": string,
+      "change_account": string,
+      "copy_label": string,
+      "blockchain_network": string,
+      "chains":{
+        "polygon_mainnet": string,
+        "polygon_mumbai": string
+      },
+      "language":{
+        "placeholder": string,
+        "english": string,
+        "korean": string
+      },
+      "theme":{
+        "placeholder": string,
+        "light": string,
+        "dark": string,
+        "system":  string
+      },
+      "sign_out": string,
+      "my_profile": string,
+      "not_connected": string
+  }
+}
+
+export default function ProfileDetails({ showModal, text_my_account }: IProfileDetailsProps) {
   const { toast } = useToast();
   const { disconnect } = useDisconnect();
   const [loading, setLoading] = useState(true);
@@ -89,7 +118,7 @@ export default function ProfileDetails({ showModal }: any) {
 
 
   return (
-    <ModalLayout title="My Account" showModal={showModal}>
+    <ModalLayout title={text_my_account.my_account_title} showModal={showModal}>
       {isConnected ? (
         <div className="flex flex-col divide-solid">
           <div
@@ -97,7 +126,7 @@ export default function ProfileDetails({ showModal }: any) {
             className="text-md bg-background-layer-2 rounded-md p-4"
           >
             <span className="text-text-secondary text-label_m">
-              내 암호화 계정 주소
+              {text_my_account.my_encrypted_account_address}
             </span>
             <div className="flex gap-2 items-center justify-between flex-wrap">
               <span className="text-xs flex-wrap">{account && account}</span>
@@ -109,7 +138,7 @@ export default function ProfileDetails({ showModal }: any) {
                   className="text-md shrink-0"
                   onClick={() => signOut()}
                 >
-                  Change Account
+                  {text_my_account.change_account}
                 </Button>
               ) : (
                 <Button
@@ -118,14 +147,14 @@ export default function ProfileDetails({ showModal }: any) {
                   className="shrink-0"
                   onClick={copyAddress}
                 >
-                  복사하기
+                  {text_my_account.copy_label}
                 </Button>
               )}
             </div>
           </div>
 
           <div id="balances" className="grid grid-cols-1 py-4 my-4 gap-4">
-            <h1 className="text-title_m">블록체인 네트워크</h1>
+            <h1 className="text-title_m">{text_my_account.blockchain_network}</h1>
             {balances.map((balance: any, key: number) => (
               <ProfileBalance
                 key={key}
@@ -143,22 +172,22 @@ export default function ProfileDetails({ showModal }: any) {
               defaultValue={params}
             >
               <SelectTrigger className="w-[105px] bg-background-layer-1 border">
-                <SelectValue placeholder="Lang" />
+                <SelectValue placeholder={text_my_account.language.placeholder} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="kr">한국어</SelectItem>
-                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="kr">{text_my_account.language.korean}</SelectItem>
+                <SelectItem value="en">{text_my_account.language.english}</SelectItem>
               </SelectContent>
             </Select>
 
             <Select>
               <SelectTrigger className="w-[100px]  bg-background-layer-1 border">
-                <SelectValue placeholder="Theme" />
+                <SelectValue placeholder={text_my_account.theme.placeholder} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
+                <SelectItem value="light">{text_my_account.theme.light}</SelectItem>
+                <SelectItem value="dark">{text_my_account.theme.dark}</SelectItem>
+                <SelectItem value="system">{text_my_account.theme.system}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -172,18 +201,18 @@ export default function ProfileDetails({ showModal }: any) {
               }}
               variant="destructive"
             >
-              Sign out
+              {text_my_account.sign_out}
             </Button>
             <Link
               href={`/mypage`}
               className="bg-accent-secondary text-accent-primary hover:bg-accent-secondary/50 w-full rounded-md flex items-center justify-center"
             >
-              Visit Profile
+              {text_my_account.my_profile}
             </Link>
           </div>
         </div>
       ) : (
-        <p>Not connected</p>
+        <p>{text_my_account.not_connected}</p>
       )}
     </ModalLayout>
   );
