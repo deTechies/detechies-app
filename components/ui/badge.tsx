@@ -17,6 +17,7 @@ const badgeVariants = cva(
         secondary:
           "bg-text-secondary",
         tertiary: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
+        purple: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
@@ -27,6 +28,7 @@ const badgeVariants = cva(
         md: "py-2 px-2.5 rounded-md text-title_s",
         category: "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
         outline: "py-2 px-2.5 border rounded-md bg-background-transparent text-title_s",
+        outline_sm: "h-[22px] px-2.5 border rounded-full text-label_s",
       },
     },
     defaultVariants: {

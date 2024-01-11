@@ -19,7 +19,7 @@ export default async function MissionDetailPage({
 
   return (
     <main className="grid w-full gap-6 mx-8 my-10 md:grid-cols-3">
-      <section className="flex flex-col col-span-2 gap-5">
+      <section className="flex flex-col md:col-span-2 gap-5">
         <MissionSummary details={missionDetails} lang={dictionary} />
 
         <MissionList

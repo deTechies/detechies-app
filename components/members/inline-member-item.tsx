@@ -23,19 +23,20 @@ export default async function InlineMemberItem({
         <Avatar className="h-10 w-10 bg-background-layer-2">
           <IPFSImageLayer hashes={[]} />
         </Avatar>
+
         <div className="ml-4 space-y-1">
           <p className="text-sm font-medium leading-none">Unknown</p>
           <p className="text-sm text-muted-foreground">Unknown</p>
         </div>
         <div className="ml-auto font-medium">
-          <Badge variant={"info"}>Member</Badge>
+          <Badge variant="outline" shape="outline_sm">Member</Badge>
         </div>
       </div>
     );
 
   return (
     <div
-      className={`flex items-center hover:bg-accent-secondary rounded-[4px] py-4 ${
+      className={`flex items-center hover:bg-accent-secondary hover:text-accent-primary rounded-[4px] py-4 ${
         active && "bg-accent-secondary"
       }`}
     >
@@ -48,7 +49,7 @@ export default async function InlineMemberItem({
           {display_name}
         </span>
         
-        <Badge variant={"outline"}>{role ? role : "미설정"}</Badge>
+        <Badge variant="outline" shape="outline_sm">{role ? role : "미설정"}</Badge>
       </div>
     </div>
   );
