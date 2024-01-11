@@ -20,6 +20,7 @@ export interface User {
     id: number;
     full_name: string;
     country: string;
+    profession: string;
     description: string;
     app_settings: UserSettings;
   }
@@ -173,6 +174,8 @@ export enum GROUP_TYPE {
   export interface AchievementReward {
     id: string;
     achievement: Achievement;
+    project: Project;
+    user: User;
     data: string;
     collected: boolean;
     status: 'open' | 'closed' | 'pending' | 'granted' | 'requested';
