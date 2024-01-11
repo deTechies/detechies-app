@@ -62,7 +62,25 @@
       "my_project": "my project",
       "no_projects_found": "No projects found",
       "view_more": "View More",
-      "create_project": "Create Project"
+      "create_project" : {
+        "create" : "Create Project",
+        "name" : "Project Name",
+        "type" : "Type",
+        "period" : "Period",
+        "describe" : "Description",
+        "image" : "Image",
+        "category" : "Project Categories",
+        "scope" : "Public Scope",
+        "back" : "Back",
+        "make" : "Create Project",
+        "name_dsc":"Enter name of project",
+        "type_dsc": "Select a type",
+        "describe_dsc" : "Tell more about your project",
+        "category_dsc" : "Type and press enter",
+        "public" : "Public",
+        "private": "Private",
+        "team" : "Team"
+      }
     },
     "details": {
       "join_project": {

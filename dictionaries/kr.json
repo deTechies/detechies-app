@@ -62,7 +62,26 @@
       "my_project": "내 프로젝트",
       "no_projects_found": "검색 결과가 없습니다.",
       "view_more": "더 보기",
-      "create_project": "내 프로젝트 만들기"
+      "create_project" : {
+        "create" : "내 프로젝트 만들기",
+        "name" : "프로젝트명",
+        "type" : "프로젝트 종류",
+        "period" : "기간",
+        "describe" : "프로젝트 설명",
+        "image" : "대표 이미지",
+        "category" : "프로젝트 카테고리",
+        "scope" : "공개 범위",
+        "back" : "뒤로가기",
+        "make" : "생성하기",
+        "name_dsc" : "프리랜서 전용 평판 조회 서비스 - 커리어젠",
+        "type_dsc": "종류 선택",
+        "describe_dsc" : "프로젝트 설명을 입력해 주세요",
+        "category_dsc" : "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
+        "public" : "모든 유저",
+        "private": "프로젝트 멤버",
+        "team" : "그룹멤버"
+      }
+      
     },
     "details": {
       "join_project": {
