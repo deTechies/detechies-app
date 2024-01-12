@@ -73,9 +73,9 @@ export default async function RootLayout({
         >
           <App>
             <Navbar lang={dictionary.nav} />
-            <DictionaryProvider dictionary={dictionary}>
-              <main className="mx-auto max-w-[1920px]">{children}</main>
-            </DictionaryProvider>
+            {/* <DictionaryProvider dictionary={dictionary}> */}
+            <main className="mx-auto max-w-[1920px]">{children}</main>
+            {/* </DictionaryProvider> */}
           </App>
         </ThemeProvider>
       </body>

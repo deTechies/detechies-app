@@ -106,6 +106,19 @@
         "public" : "모든 유저",
         "private": "프로젝트 멤버",
         "team" : "그룹멤버"
+      },
+      "edit_project":"프로젝트 수정하기",
+      "edit" : "수정하기",
+      "delete_project":{
+        "delete" : "삭제하기",
+        "delete_confirm" : "프로젝트를 삭제할까요?",
+        "delete_dsc": "삭제할 경우 리더님과 다른 멤버의 프로젝트 활동 정보가 모두 삭제 돼요. 정말로 프로젝트를 삭제하고 싶다면 프로젝트명:",
+        "delete_project_name" : "을 입력해 주세요.",
+        "cancel" : "취소하기"
+
+      },
+      "add_work":{
+        "work":"Add Work"
       }
       
     },

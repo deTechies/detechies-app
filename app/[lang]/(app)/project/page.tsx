@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ProjectItem from "./project-item";
 
+
 export default async function ProjectListPage({
   searchParams,
   params,
@@ -29,6 +30,7 @@ export default async function ProjectListPage({
   params: { lang: Locale };
 }) {
   const projects = await getProjects();
+
 
   const searchItem = searchParams.search as string;
 
@@ -97,7 +99,7 @@ export default async function ProjectListPage({
           <Link href="/project/create" role="link"
             className="flex items-center justify-center px-5 py-2 rounded-full bg-accent-secondary text-accent-primary text-title_m"
           >
-            {dictionary.project.list.create_project.create}
+            {dictionary.project.list.create_project.create}      
           </Link>
         </div>
       </Card>
