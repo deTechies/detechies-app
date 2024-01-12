@@ -102,10 +102,9 @@
         "other": "기타"
       },
       "privacy_type": {
-        "all": "모든 유저",
-        "project": "프로젝트 멤버",
-        "group": "그룹 멤버",
-        "private": "프라이빗"
+        "public": "모든 유저",
+        "private": "프라이빗",
+        "group": "그룹 멤버"
       },
       "search": "키워드를 한글자 이상 입력해주세요.",
       "my_project": "내 프로젝트",
@@ -583,11 +582,10 @@
     },
 
     "project_type": {
-      "client": "외주 프로젝트",
-      "internal": "사내 프로젝트",
-      "side": "사이드 프로젝트",
-      "hackathon": "해커톤",
-      "other": "기타"
+      "all": "전체",
+      "company": "사내 프로젝트",
+      "freelance": "외주 프로젝트",
+      "side": "사이드 프로젝트"
     }
   }
 }

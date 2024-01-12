@@ -26,9 +26,9 @@ export default async function GroupProfile({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   const data = await getClub(params.address);
-  console.log(data);
+  // console.log(data);
   
-  console.log(data.members[0].user.profile_details)
+  // console.log(data.members[0].user.profile_details)
 
   return (
     <div className="flex flex-col">

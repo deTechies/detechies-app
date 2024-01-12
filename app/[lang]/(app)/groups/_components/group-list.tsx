@@ -21,8 +21,6 @@ export default function GroupList({
 
   //const resultsText = products.length > 1 ? 'results' : 'result';
 
-  console.log(groups);
-
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 

@@ -91,7 +91,7 @@
   },
   "project": {
     "list": {
-      "projects": "projects",
+      "projects": "Projects",
       "all_project": "All project",
       "scope_of_disclosure": "Scope",
       "project_type": {
@@ -102,13 +102,12 @@
         "other": "Other"
       },
       "privacy_type": {
-        "all": "All users",
-        "project": "project member",
-        "group": "group member",
-        "private": "private"
+        "public": "All users",
+        "private": "Private",
+        "group": "Group members"
       },
       "search": "Search",
-      "my_project": "my project",
+      "my_project": "My Project",
       "no_projects_found": "No projects found",
       "view_more": "View More",
       "create_project": {
@@ -582,11 +581,10 @@
     },
 
     "project_type": {
-      "client": "Client",
-      "internal": "Internal",
-      "side": "Side",
-      "hackathon": "Hackathon",
-      "other": "Other"
+      "all": "All",
+      "company": "Company",
+      "freelance": "Freelance",
+      "side": "Side"
     }
   }
 }

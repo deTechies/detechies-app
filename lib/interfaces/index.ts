@@ -98,8 +98,8 @@ export enum GROUP_TYPE {
   }
   
   export enum PrivacyType {
-    ALL = 'all',
-    PROJECT = 'project',
+    PUBLIC = 'public',
+    PRIVATE = 'private',
     GROUP = 'group'
   }
 
