@@ -4,6 +4,9 @@ import { Locale } from "@/i18n.config";
 import { auth } from "@/lib/helpers/authOptions";
 import type { Metadata } from "next";
 
+
+import { PopoverEvent } from "@/components/extra/popup-event";
+
 import DictionaryProvider from "@/lib/dictionaryProvider";
 import { signOut } from "next-auth/react";
 import localFont from 'next/font/local';
@@ -75,6 +78,7 @@ export default async function RootLayout({
             <Navbar lang={dictionary.nav} />
             <DictionaryProvider dictionary={dictionary}>
               <main className="mx-auto max-w-[1920px]">{children}</main>
+              <PopoverEvent />
             </DictionaryProvider>
           </App>
         </ThemeProvider>
