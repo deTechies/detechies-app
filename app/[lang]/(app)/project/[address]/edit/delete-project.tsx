@@ -15,8 +15,10 @@ import React from "react";
 
 export default function DeleteProject({
   projectData,
+  lang
 }: {
   projectData: Project;
+  lang:any
 }) {
   const [deleteInput, setDeleteInput] = React.useState<string>("");
   const router = useRouter();
@@ -37,15 +39,13 @@ export default function DeleteProject({
   }
   return (
     <Dialog>
-      <DialogTrigger className="w-full py-4 text-center">Delete Project</DialogTrigger>
+      <DialogTrigger className="w-full py-4 text-center">{lang.project.list.delete_project.delete}</DialogTrigger>
       <DialogContent className="flex flex-col gap-6">
         <header className="flex flex-col gap-4">
-          <h5 className="text-subhead_m">프로젝트를 삭제할까요?</h5>
+          <h5 className="text-subhead_m">{lang.project.list.delete_project.delete_confirm}</h5>
           <p className="text-body_m">
-            If deleted, all project activity information of the leader and other
-            members will be deleted. If you really want to delete the project,
-            please enter the project name: <strong>{projectData.name}</strong>{" "}
-            and click delete
+            {lang.project.list.delete_project.delete_dsc}<strong>{projectData.name}</strong>{" "}
+            {lang.project.list.delete_project.delete_project_name}
           </p>
         </header>
 
@@ -57,7 +57,7 @@ export default function DeleteProject({
         <div className="flex justify-center gap-2">
           <DialogClose>
             <Button size="lg" variant="secondary">
-              Cancel
+            {lang.project.list.delete_project.cancel}
             </Button>
           </DialogClose>
 
@@ -67,7 +67,7 @@ export default function DeleteProject({
             disabled={deleteInput != projectData.name}
             onClick={confirmDelete}
           >
-            Delete
+            {lang.project.list.delete_project.delete}
           </Button>
         </div>
       </DialogContent>
