@@ -6,6 +6,7 @@ import { defaultAvatar } from "@/lib/constants";
 export default function UserProfile({
     profile,
     text,
+
     }: {
     profile: any;
     text: any;

@@ -14,7 +14,7 @@ import { getProjects } from "@/lib/data/project";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
-import { ProjectType, Project, PrivacyType } from "@/lib/interfaces";
+import { PrivacyType, Project, ProjectType } from "@/lib/interfaces";
 import { Suspense } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -114,7 +114,7 @@ export default async function ProjectListPage({
         </section>
 
         {filteredData.length > 0 && (
-          <Button size="lg" variant="secondary">
+          <Button  variant="secondary" className="flex w-full mx-auto">
             {dictionary.project.list.view_more}
           </Button>
         )}
