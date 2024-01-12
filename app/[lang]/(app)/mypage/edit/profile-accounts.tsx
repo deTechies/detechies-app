@@ -2,22 +2,22 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 
 const logos = [
-    { src: "/icons/identity_google.png", alt: "Icon 1", text: "구글 계정" },
-    { src: "/icons/identity_phone.png", alt: "Icon 2", text: "전화번호" },
-    { src: "/icons/identity_telegram.png", alt: "Icon 3", text: "텔레그램" },
-    { src: "/icons/identity_mail.png", alt: "Icon 4", text: "이메일" },
+    { src: "/images/socials/dark/google.png", alt: "Icon 1", text: "구글 계정"  },
+    { src: "/images/socials/dark/bitcoin.png", alt: "Icon 2", text: "전화번호" },
+    { src: "/images/socials/dark/email.png", alt: "Icon 3", text: "텔레그램" },
+    { src: "/images/socials/dark/figma.png", alt: "Icon 4", text: "이메일" },
     {
-      src: "/icons/identity_bitcoin.png",
+      src: "/images/socials/dark/facebook.png",
       alt: "Icon 1",
       text: "탈중앙화 개인지갑",
     },
-    { src: "/icons/identity_github.png", alt: "Icon 2", text: "Github" },
-    { src: "/icons/identity_figma.png", alt: "Icon 3", text: "피그마" },
-    { src: "/icons/identity_pinterest.png", alt: "Icon 4", text: "핀터레스트" },
-    { src: "/icons/identity_youtube.png", alt: "Icon 1", text: "유튜브" },
-    { src: "/icons/identity_linkedIn.png", alt: "Icon 2", text: "링크드인" },
-    { src: "/icons/identity_facebook.png", alt: "Icon 3", text: "페이스북" },
-    { src: "/icons/identity_reddit.png", alt: "Icon 4", text: "레딧" },
+    { src: "/images/socials/dark/github.png", alt: "Icon 2", text: "Github" },
+    { src: "/images/socials/dark/linkedin.png", alt: "Icon 3", text: "피그마" },
+    { src: "/images/socials/dark/phone.png", alt: "Icon 4", text: "핀터레스트" },
+    { src: "/images/socials/dark/pinterest.png", alt: "Icon 1", text: "유튜브" },
+    { src: "/images/socials/dark/reddit.png", alt: "Icon 2", text: "링크드인" },
+    { src: "/images/socials/dark/telegram.png", alt: "Icon 3", text: "페이스북" },
+    { src: "/images/socials/dark/youtube.png", alt: "Icon 4", text: "레딧" },
   ];
 
   
@@ -32,14 +32,14 @@ export default function ProfileAccounts() {
       {logos.map((logo, i) => (
         <div
           key={i}
-          className={`flex w-[209px] border border-border-div rounded-sm mt-2 mr-4`}
+          className={`flex w-[209px] border border-border-div rounded-sm p-4 pb-5 gap-4`}
         >
-          <div className="flex justify-center m-4">
-            <Image src={logo.src} width={50} height={50} alt={logo.alt} />
+          <div className="flex justify-center relative aspect-square w-[48px] h-[48px] rounded-full ">
+            <Image src={logo.src} fill={true} sizes={"48"} alt={logo.alt} className="aspect-square"/>
           </div>
-          <div className="flex flex-col justify-center m-2">
-            <p className="text-md">{logo.text}</p>
-            <p className="text-sm text-gray-400 mt-1">인증하기</p>
+          <div className="flex flex-col justify-center gap-2">
+            <p className="text-title_s">{logo.text}</p>
+            <p className="text-label_s text-text-secondary">인증하기</p>
           </div>
         </div>
       ))}

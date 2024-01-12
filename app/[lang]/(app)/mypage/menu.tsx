@@ -36,6 +36,7 @@ export default function Menu({ links }: { links: any }) {
             <Link
               key={item.name}
               href={item.link}
+              as={item.link}
               className={`
               text-title_m  py-[18px] px-6 first:rounded-t-sm last:rounded-b-sm capitalize
               ${pathName.endsWith(item.link) ? 'bg-accent-secondary text-text-primary' : "text-text-secondary"}

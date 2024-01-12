@@ -103,18 +103,18 @@ export default function FinalFeedbackForm({
               router.back();
             }}
           >
-            {text.go_back}
+       Back
           </Button>
           {defaultValues ? (
             <Button
               type="button"
               onClick={() => router.push(`/work/${workId}/result`)}
             >
-              {text.next}
+             Next
             </Button>
           ) : (
             <Button type="submit" variant={"primary"} size="lg">
-              {text.next}
+             Next
             </Button>
           )}
         </section>
