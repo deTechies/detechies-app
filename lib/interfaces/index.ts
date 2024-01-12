@@ -6,17 +6,21 @@ export interface User {
     credits: number;
     display_name: string;
     nft: string[];
-    avatar: string;
+    avatar: string[];
+    avatar_link: string;
     verified: boolean;
+    profile_details: ProfileDetails;
     projects: ProjectMember[];
     clubs: Member[];
-    login_method: 'metamask'|'web3auth'
+    achievement_rewards: AchievementReward[];
+    login_method: 'metamask'|'web3auth';
   }
   
   export interface ProfileDetails {
     id: number;
     full_name: string;
     country: string;
+    profession: string;
     description: string;
     app_settings: UserSettings;
   }
@@ -48,6 +52,7 @@ export interface User {
   export interface Club extends CreateClub{
     id: string;
     owner: string;
+    contract: string;
     blockchain_address?: string;
     files?: File[];
     members?: Member[];
@@ -57,7 +62,9 @@ export interface User {
   
 export enum GROUP_TYPE {
     COMMUNITY = 'community',
-    AGENCY = 'agency',
+    COMPANY = 'company',
+    SCHOOL = 'school',
+    AUTHORITY = 'authority',
   }
   
   export enum NFT_TYPE{
@@ -100,7 +107,6 @@ export enum GROUP_TYPE {
     MANAGEMENT = 'management',
     MARKETING = 'marketing',
     OTHER = 'other'
-    
   }
 
   export enum ProjectCategory {
@@ -159,6 +165,8 @@ export enum GROUP_TYPE {
     type: string;
     on_chain: boolean;
     name: string;
+    club: Club;
+    tokenId: string;
     verified: boolean;
     created_at: Date;
   }
@@ -166,9 +174,11 @@ export enum GROUP_TYPE {
   export interface AchievementReward {
     id: string;
     achievement: Achievement;
+    project: Project;
+    user: User;
     data: string;
     collected: boolean;
-    status: 'open' | 'closed' | 'pending';
+    status: 'open' | 'closed' | 'pending' | 'granted' | 'requested';
     distributed: boolean;
     created_at: Date;
   }

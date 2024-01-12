@@ -1,7 +1,11 @@
+"use client";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
+import { getUserProfile } from "@/lib/data/user";
 import { Building2, ChevronRight, SearchCheck, UserCircle } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 type Item = {
   icon: JSX.Element;
@@ -10,40 +14,67 @@ type Item = {
   link: string;
 };
 
-export default function FinishedProfile() {
+export default function FinishedProfile({ lang }: { lang: any }) {
+  const { data, update } = useSession();
   const items = [
     {
-      icon: <UserCircle className="h-9 w-9" />,
-      title: "전문가",
-      description: "내 커리어 인증하기",
+      icon: <UserCircle size="32" />,
+      title: lang.onboard.verify_email.finished_profile.expert,
+      description: lang.onboard.verify_email.finished_profile.expert_desc,
       link: "/mypage/edit",
     },
     {
       icon: <SearchCheck size="32" />,
-      title: "클라이언트",
-      description: "우리 프로젝트에 맞는 전문가 찾기.",
+      title: lang.onboard.verify_email.finished_profile.client,
+      description: lang.onboard.verify_email.finished_profile.client_desc,
       link: "/profiles",
     },
     {
       icon: <Building2 size="32" />,
-      title: "기업, 기관, 커뮤니티 운영자",
-      description: "우리 조직만의 NFT 생성하기.",
+      title: lang.onboard.verify_email.finished_profile.admin,
+      description: lang.onboard.verify_email.finished_profile.admin_desc,
       link: "/groups",
     },
   ];
+
+  useEffect(() => {
+    const updateUserSession = async () => {
+      const user = await getUserProfile();
+
+      if (!data || !data.web3.user) {
+        return;
+      }
+      await update({
+        ...data,
+        web3: {
+          ...data.web3,
+          user: {
+            ...data?.web3?.user,
+            ...user,
+          },
+        },
+      });
+    };
+    updateUserSession();
+  }, [data, update]);
+
   return (
     <section className="flex flex-col gap-8 max-w-sm">
       <header>
-        <h1 className="text-heading_s">커리어 아바타 생성 완료</h1>
+        <h1 className="text-heading_s mb-3">
+          {lang.onboard.verify_email.finished_profile.title}
+        </h1>
         <h5 className="text-text-secondary text-body_s">
-          블록체인 기반의 영구 인증 프로필에 성과, 학력 등을 추가하고 나만의
-          커리어 아바타를 완성해보세요!
+          {lang.onboard.verify_email.finished_profile.desc}
         </h5>
       </header>
       <div className="w-[350px] aspect-square relative m-0 z-0 bg-background-layer-2 rounded-md">
         <IPFSImageLayer hashes={defaultAvatar} />
       </div>
-      <h5 className="text-title_s">어떤 것부터 할까요?</h5>
+
+      <h5 className="text-title_s">
+        {lang.onboard.verify_email.finished_profile.subtitle}
+      </h5>
 
       <div className="flex flex-col gap-8">
         {items.map((item: any, index: any) => (
@@ -62,14 +93,16 @@ export function LinkItem({ item }: LinkItemProps) {
   return (
     <Link
       href={item.link}
-      className="flex gap-6 hover:text-accent-primary items-center"
+      className="group flex gap-6 hover:text-accent-primary items-center"
     >
-      {item.icon}
+      <div className="shrink-0">{item.icon}</div>
       <div className="flex flex-col grow text-left">
         <h5 className="text-title_m">{item.title}</h5>
-        <h6 className="text-label_m text-text-secondary">{item.description}</h6>
+        <h6 className="text-label_m group-hover:text-accent-primary">
+          {item.description}
+        </h6>
       </div>
-      <ChevronRight className="h-8  w-8 text-text-secondary" />
+      <ChevronRight className="h-8 shrink-0 w-8 group-hover:text-accent-primary" />
     </Link>
   );
 }

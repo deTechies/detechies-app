@@ -2,13 +2,16 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import AchievementLink from "./achievement-link";
 import MissionCard from "@/components/card/mission-card";
 import { getClubMissions } from "@/lib/data/mission";
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 
 export default async function GroupAchievements({
   params,
 }: {
-  params: { address: string };
+  params: { address: string; lang: Locale; };
 }) {
   const data = await getClubMissions(params.address);
+  const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
     <div>
@@ -16,10 +19,10 @@ export default async function GroupAchievements({
         <Tabs defaultValue="all">
           <TabsList className="mb-4" variant="button1">
             <TabsTrigger value="all" variant="button1">
-              전체보기
+              {dictionary.group.details.missions.all}
             </TabsTrigger>
             <TabsTrigger value="career" variant="button1">
-              나의 미션
+              {dictionary.group.details.missions.my_mission}
             </TabsTrigger>
           </TabsList>
 
@@ -30,13 +33,14 @@ export default async function GroupAchievements({
                   address={params.address.toString()}
                   info={item}
                   key={index}
+                  lang={dictionary}
                 />
               ))}
           </div>
 
           {data.length < 1 && (
             <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-              현재 미션이 없습니다.
+              {dictionary.group.details.missions.no_mission}
             </div>
           )}
         </Tabs>

@@ -16,7 +16,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +24,13 @@ import { toast } from "@/components/ui/use-toast";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { createGroup } from "@/lib/data/groups";
 import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
@@ -60,7 +65,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   urls: [{ value: "https://" }],
 };
 
-export function GroupForm() {
+export const GroupForm = ({ lang }: { lang: any }) => {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -72,7 +77,6 @@ export function GroupForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-
   const { fields, append } = useFieldArray({
     control: form.control,
     name: "urls",
@@ -81,16 +85,9 @@ export function GroupForm() {
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
     const image = await uploadContent(icon);
-    console.log(image);
+
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify({ ...data, image: image }, null, 2)}
-          </code>
-        </pre>
-      ),
+      title: "Succesfully uploaded the content",
     });
 
     if (!icon) {
@@ -177,7 +174,7 @@ export function GroupForm() {
             render={({ field }) => (
               <FormInlineItem className="h-12">
                 <FormInlineLabel>
-                  Type
+                  {lang.group.create.form.type}
                   <span className="ml-1 text-state-error">*</span>
                 </FormInlineLabel>
                 <RadioGroup
@@ -198,40 +195,10 @@ export function GroupForm() {
                       </FormControl>
 
                       <FormLabel className="font-normal capitalize">
-                        {type}
+                        {lang.interface.group_type[type]}
                       </FormLabel>
                     </FormItem>
                   ))}
-                  <FormItem
-                    key="school"
-                    className="flex flex-wrap items-center space-x-3 space-y-0"
-                  >
-                    <FormControl>
-                      <RadioGroupItem value="school" disabled />
-                    </FormControl>
-                    <FormLabel className="font-normal capitalize">
-                      School
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem
-                    key="authority"
-                    className="flex flex-wrap items-center space-x-3 space-y-0"
-                  >
-                    <FormControl>
-                      <RadioGroupItem value="authority" disabled />
-                    </FormControl>
-                    <FormLabel className="font-normal capitalize">
-                      Authority
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex flex-wrap items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="company" disabled />
-                    </FormControl>
-                    <FormLabel className="font-normal capitalize">
-                      Company
-                    </FormLabel>
-                  </FormItem>
                 </RadioGroup>
 
                 <FormMessage />
@@ -245,7 +212,7 @@ export function GroupForm() {
             render={({ field }) => (
               <FormInlineItem className="items-start">
                 <FormInlineLabel className="mt-5">
-                  Group Name
+                  {lang.group.create.form.name}
                   <span className="ml-1 text-state-error">*</span>
                 </FormInlineLabel>
 
@@ -266,7 +233,7 @@ export function GroupForm() {
             render={({ field }) => (
               <FormInlineItem className="items-start">
                 <FormInlineLabel>
-                  Description
+                  {lang.group.create.form.desc}
                   <span className="ml-1 text-state-error">*</span>
                 </FormInlineLabel>
 
@@ -285,7 +252,9 @@ export function GroupForm() {
           />
 
           <FormInlineItem className="items-start">
-            <FormInlineLabel className="justify-start">Image</FormInlineLabel>
+            <FormInlineLabel className="justify-start">
+              {lang.group.create.form.image}
+            </FormInlineLabel>
 
             <MediaUploader
               key="icon"
@@ -295,11 +264,11 @@ export function GroupForm() {
             >
               <div>
                 <div className="mb-1 text-title_s text-text-secondary">
-                  이미지 가이드
+                  {lang.group.create.form.image_guide}
                 </div>
 
                 <li className="mb-1 text-text-placeholder text-label_s">
-                  1:1 비율 권장
+                  {lang.group.create.form.guird}
                 </li>
               </div>
             </MediaUploader>
@@ -307,7 +276,7 @@ export function GroupForm() {
 
           <FormInlineItem className="items-start">
             <FormInlineLabel className="items-start">
-              Cover Image
+              {lang.group.create.form.cover_image}
             </FormInlineLabel>
             <MediaUploader
               key="cover"
@@ -317,15 +286,15 @@ export function GroupForm() {
             >
               <div>
                 <div className="mb-1 text-title_s text-text-secondary">
-                  이미지 가이드
+                  {lang.group.create.form.image_guide}
                 </div>
 
                 <li className="text-text-placeholder text-label_s">
-                  4:3 비율 권장
+                  {lang.group.create.form.rect}
                 </li>
 
                 <li className="text-text-placeholder text-label_s">
-                  그룹 목록과 그룹상세보기에서 확인 가능합니다.
+                  {lang.group.create.form.check}
                 </li>
               </div>
             </MediaUploader>
@@ -349,7 +318,7 @@ export function GroupForm() {
                   <FormInlineItem>
                     <FormInlineLabel>
                       <div className={cn(index !== 0 && "sr-only")}>
-                        <span>Links</span>
+                        <span>{lang.group.create.form.links}</span>
                         <span className="ml-1 text-state-error">*</span>
                       </div>
                     </FormInlineLabel>
@@ -429,7 +398,7 @@ export function GroupForm() {
             variant="secondary"
             onClick={() => router.back()}
           >
-            Cancel
+            {lang.group.create.form.cancel}
           </Button>
 
           <Button
@@ -438,10 +407,10 @@ export function GroupForm() {
             loading={isLoading}
             disabled={isLoading}
           >
-            Create Group
+            {lang.group.create.form.create_group}
           </Button>
         </div>
       </form>
     </Form>
   );
-}
+};

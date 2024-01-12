@@ -9,7 +9,7 @@ const inputVariants = cva(
     variants: {
       variant: {
         default:
-          "text-text-secondary bg-background-layer-2 placeholder:text-text-placeholder file:border-0 file:bg-transparent",
+          "bg-background-layer-2 placeholder:text-text-placeholder file:border-0 file:bg-transparent",
       },
       size: {
         default:

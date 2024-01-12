@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
 import OnlySearch from "@/components/extra/only-search";
@@ -10,9 +10,11 @@ import { ArrowRight } from "lucide-react";
 export default function GroupList({
   groups,
   profileWallet,
+  lang,
 }: {
   groups: any[];
   profileWallet: string;
+  lang: any;
 }) {
   //const { search: searchValue } = searchParams as { [key: string]: string };
 
@@ -22,7 +24,9 @@ export default function GroupList({
   const search = searchParams.get("search");
 
   const filteredData = groups.filter((group: any) => {
-    return group.name.toLowerCase().includes(search ? search.toLowerCase() : "");
+    return group.name
+      .toLowerCase()
+      .includes(search ? search.toLowerCase() : "");
   });
 
   const filterJoinedGroups = filteredData.filter((group) => group.isUserMember);
@@ -34,26 +38,26 @@ export default function GroupList({
     <Tabs defaultValue="all">
       <TabsList className="justify-center" variant="button1">
         <TabsTrigger value="all" variant="button2">
-          all
+          {lang.group.list.all}
         </TabsTrigger>
 
         <TabsTrigger value="joined" variant="button2">
-          joined
+          {lang.group.list.joined}
         </TabsTrigger>
 
         <TabsTrigger value="created" variant="button2">
-          created
+          {lang.group.list.created}
         </TabsTrigger>
       </TabsList>
 
       <div className="w-full my-10 max-w-[27rem] mx-auto">
-        <OnlySearch placeholder="Search for groups" />
+        <OnlySearch placeholder={lang.group.list.search_placeholder} />
       </div>
 
       <TabsContent value="all" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
           {[...filteredData].reverse().map((group: any, key: number) => {
-            return <GroupListItem key={key} details={group} />;
+            return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
       </TabsContent>
@@ -61,7 +65,7 @@ export default function GroupList({
       <TabsContent value="joined" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
           {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
-            return <GroupListItem key={key} details={group} />;
+            return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
       </TabsContent>
@@ -69,28 +73,24 @@ export default function GroupList({
       <TabsContent value="created" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
           {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
-            return <GroupListItem key={key} details={group} />;
+            return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
       </TabsContent>
 
       <Link
-        href="/groups/create"
+        href="groups/create"
         className="px-10 py-10 max-w-[1028px] h-[217px] flex mx-auto bg-[url('/images/banner-create-group.png')]"
       >
-        <div>
+        <div className="max-w-[430px]">
           <div className="mb-1 text-subhead_m text-accent-primary">
-            직접 그룹을 만들고
+            {lang.group.list.banner}
           </div>
 
-          <div className="mb-5 text-subhead_m">
-            프로젝트와 개인에게 NFT를 부여하고
-            <br />
-            영향력 있는 그룹으로 활동해보세요!
-          </div>
+          <div className="mb-5 text-subhead_m">{lang.group.list.banner2}</div>
 
           <div className="flex items-center gap-1 text-title_m">
-            그룹 만들러 가기
+            {lang.group.list.banner3}
             <ArrowRight className="w-4 h-4"></ArrowRight>
           </div>
         </div>

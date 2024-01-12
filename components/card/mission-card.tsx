@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import React from "react";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
@@ -10,23 +10,26 @@ export default function MemberCard({
   info,
   manage = false,
   children,
+  lang,
 }: {
   address: string;
   manage?: boolean;
   info?: any;
   children?: React.ReactNode;
+  lang: any;
 }) {
   const router = useRouter();
+  const params = useParams();
 
   const onClickCard = (e: any) => {
     // router.push(`/groups/${address}/mission/12`);
     // router.push(`/en/groups/${address}/missions/${info.seq}`);
 
     if (manage) {
-      router.push(`/groups/${address}/mission/manage/${info.campaignId}`);
+      router.push(`/${params.lang}/groups/${address}/mission/manage/${info.campaignId}`);
       return;
     }
-    router.push(`/groups/${address}/mission-detail/${info.campaignId}`);
+    router.push(`/${params.lang}/groups/${address}/mission-detail/${info.campaignId}`);
   };
 
   const getDaysUntilEnd = (dateEndString: string): string => {
@@ -37,11 +40,11 @@ export default function MemberCard({
     const daysUntilEnd = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
     if (daysUntilEnd > 0) {
-      return `미션 종료 ${daysUntilEnd}일 전`;
+      return `${lang.mission.card.end_date_1} ${daysUntilEnd} ${lang.mission.card.end_date_2}`;
     } else if (daysUntilEnd === 0) {
-      return "미션 종료일";
+      return lang.mission.card.end;
     } else {
-      return "미션 종료";
+      return lang.mission.card.before_end;
     }
   };
 
@@ -53,20 +56,20 @@ export default function MemberCard({
     data.forEach((item) => {
       // Check for nft_type and type
       if (item.achievement.nft_type) {
-        resultArr.add(item.achievement.nft_type);
+        resultArr.add(lang.interface.nft_type[item.achievement.nft_type]);
       }
       if (item.achievement.type) {
-        resultArr.add(item.achievement.type);
+        resultArr.add(lang.interface.sbt_type[item.achievement.type]);
       }
 
       // Check for image and avatar
       if (item.achievement.image && !hasImage) {
         hasImage = true;
-        resultArr.add("image");
+        resultArr.add(lang.interface.nft_image_type.image);
       }
       if (item.achievement.avatar && !hasAvatar) {
         hasAvatar = true;
-        resultArr.add("avatar");
+        resultArr.add(lang.interface.nft_image_type.avatar);
       }
     });
 
@@ -81,7 +84,6 @@ export default function MemberCard({
           <Badge shape="category">No NFT</Badge>
         )}
 
-      
       {createBadgeArr(info.achievements) &&
       createBadgeArr(info.achievements)?.length <= 3 ? (
         // If there are 3 or less rewards

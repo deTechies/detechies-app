@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 export default function Menu({ links }: { links: any }) {
   const pathName = usePathname();
-  console.log(pathName);
+
   
   const menuItems = [
     {
@@ -25,7 +25,7 @@ export default function Menu({ links }: { links: any }) {
     }, 
     {
       name: links.career_avatar,
-      link: "#",
+      link: "/mypage/avatar",
     }, 
   ]
   return (

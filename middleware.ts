@@ -1,25 +1,15 @@
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
 import { i18n } from "./i18n.config";
 export { default } from "next-auth/middleware";
 
-
-function getLocale(request: NextRequest): string | undefined {
-  // Negotiator expects plain object so we need to transform headers
-  const negotiatorHeaders: Record<string, string> = {};
-  request.headers.forEach(
-    (value: any, key: any) => (negotiatorHeaders[key] = value)
-  );
+function getLocale(request:NextRequest): string | undefined {
+  let headers = { "accept-language": "en-US,en;q=0.5" };
+  let languages = new Negotiator({ headers }).languages();
 
   // @ts-ignore locales are readonly
   const locales: string[] = i18n.locales;
-
-  // Use negotiator and intl-localematcher to get best locale
-  let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
-    locales
-  );
 
   const locale = matchLocale(languages, locales, i18n.defaultLocale);
 
@@ -27,25 +17,18 @@ function getLocale(request: NextRequest): string | undefined {
 }
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-  
-
-  
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale: any) =>
-      !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  // Check if there is any supported locale in the pathname
+  const { pathname } = request.nextUrl;
+  const pathnameHasLocale = i18n.locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
+  if (pathnameHasLocale) return;
 
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-        request.url
-      )
-    );
-  }
+  const locale = getLocale(request);
+  request.nextUrl.pathname = `/${locale}${pathname}`;
+
+  return Response.redirect(request.nextUrl);
 }
 
 export const config = {

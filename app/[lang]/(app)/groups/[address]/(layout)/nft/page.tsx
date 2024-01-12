@@ -1,18 +1,19 @@
-
 import DisplayNFT from "@/components/nft/display-nft";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getClub } from "@/lib/data/groups";
 import { Achievement } from "@/lib/interfaces";
 // import AchievementLink from "./achievement-link";
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 
 export default async function GroupAchievements({
   params,
 }: {
-  params: { address: string };
+  params: { address: string; lang: Locale };
 }) {
   const details = await getClub(params.address);
 
-  // console.log(details)
+  const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
     <div>
@@ -20,16 +21,16 @@ export default async function GroupAchievements({
         <Tabs defaultValue="all">
           <TabsList className="mb-4" variant="button1">
             <TabsTrigger value="all" variant="button1">
-              전체보기
+              {dictionary.group.details.nft.all}
             </TabsTrigger>
             <TabsTrigger value="career" variant="button1">
-              커리어 NFT
+              {dictionary.group.details.nft.career}
             </TabsTrigger>
             <TabsTrigger value="limited" variant="button1">
-              한정판 NFT
+              {dictionary.group.details.nft.limited}
             </TabsTrigger>
             <TabsTrigger value="avatar" variant="button1">
-              아바타 NFT
+              {dictionary.group.details.nft.avatar}
             </TabsTrigger>
           </TabsList>
 
@@ -37,7 +38,7 @@ export default async function GroupAchievements({
             <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
               {details.achievements &&
                 details.achievements.map((item: Achievement, index: number) => (
-                  <DisplayNFT details={item} key={index} />
+                  <DisplayNFT details={item} key={index} lang={dictionary} />
                 ))}
             </div>
           </TabsContent>
@@ -49,7 +50,7 @@ export default async function GroupAchievements({
                     return item.nft_type == "sbt";
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} />
+                    <DisplayNFT details={item} key={index} lang={dictionary} />
                   ))}
             </div>
           </TabsContent>
@@ -61,7 +62,7 @@ export default async function GroupAchievements({
                     return item.nft_type == "erc721";
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} />
+                    <DisplayNFT details={item} key={index} lang={dictionary} />
                   ))}
             </div>
           </TabsContent>
@@ -73,14 +74,14 @@ export default async function GroupAchievements({
                     return item.avatar;
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} />
+                    <DisplayNFT details={item} key={index} lang={dictionary} />
                   ))}
             </div>
           </TabsContent>
 
           {details.achievements.length < 1 && (
             <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-              최근 생성한 NFT가 없습니다.
+              {dictionary.group.details.nft.no_nft}
             </div>
           )}
         </Tabs>

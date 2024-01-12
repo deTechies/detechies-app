@@ -1,26 +1,25 @@
-"use client";
-
+import React from 'react'; // 추가된 부분
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
 
-export default async function RequestNFTModal({
+const NftListItem = React.memo(({ 
   achievement,
   onClick,
   type,
 }: {
-  achievement: any;
-  onClick?: Function;
-  type?: "click" | "default";
-}) {
+  achievement: any,
+  onClick?: Function,
+  type?: string,
+}) => {
   return (
     <div
       className={`flex items-center py-4 ${
-        type == "click"
+        type === "click" 
           ? "cursor-pointer hover:bg-background-layer-2"
           : "border px-5 rounded-md"
       }`}
-      onClick={() => (onClick ? onClick() : {})}
+      onClick={() => onClick?.()} 
     >
       <div className="w-[52px] h-[52px] mr-4 overflow-hidden rounded-sm shrink-0">
         <Image
@@ -38,18 +37,22 @@ export default async function RequestNFTModal({
 
         <div>
           <Badge shape="category" variant="info">
-            {achievement.type == "edu" ? "에듀" : "수상"}
+            {achievement.type === "edu" ? "에듀" : "수상"} 
           </Badge>
         </div>
       </div>
 
       <div className="grow" />
 
-      {type == "click" && (
+      {type === "click" && ( 
         <div>
           <ChevronRight className="text-icon-secondary"></ChevronRight>
         </div>
       )}
     </div>
   );
-}
+});
+
+NftListItem.displayName = 'NftListItem'
+
+export default NftListItem; 

@@ -11,16 +11,15 @@ import { defaultAvatar } from "@/lib/constants";
 import { auth } from "@/lib/helpers/authOptions";
 import { ProjectMember } from "@/lib/interfaces";
 import { MoreVertical } from "lucide-react";
-import ProjectContribution from "../../_components/project-contribution";
 import ProjectMemberEvaluate from "../../_components/project-evaluate";
 import ProjectWorkDetail, {
   BlurredProjectWorkDetail,
 } from "../../_components/project-work-detail";
 
+import { Button } from "@/components/ui/button";
+import ProjectContributionInvite from "../../_components/project-contribution-invite";
 import DeleteMember from "./modals/delete-member";
 import RequestEvaluation from "./modals/request-evaluation";
-import ProjectContributionInvite from "../../_components/project-contribution-invite";
-import { Button } from "@/components/ui/button";
 
 export default async function ProjectMemberItem({
   details,
@@ -50,10 +49,12 @@ export default async function ProjectMemberItem({
             <header className="flex items-center justify-between h-full gap-3">
               <h5 className="text-title_m">
                 {details.user?.display_name} |{" "}
-                {lang.details.role_type[details.role]}
+                {
+                  details.role == 'admin' && details.role
+                }
                 {details.works.length < 1 && (
                   <Badge className="ml-2.5">
-                    {lang.details.members.unregistered}
+                    {lang.details?.members?.unregistered}
                   </Badge>
                 )}
               </h5>

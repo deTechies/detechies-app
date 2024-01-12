@@ -10,18 +10,23 @@ interface NftListItemProps {
   showSelect?: boolean;
   selected?: boolean;
   item: Achievement;
+  lang?: any;
 }
 
 export default function NftListItem({
   showSelect,
   selected,
   item,
+  lang,
 }: NftListItemProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
+
+  
+  const isSelected = item.avatar_type ? searchParams.get(item?.avatar_type) === item.avatar : false;
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -38,9 +43,6 @@ export default function NftListItem({
       : url;
   }
 
-
-  
-
   // console.log(item);
 
   return (
@@ -49,7 +51,7 @@ export default function NftListItem({
         {showSelect && item.avatar_type && (
           <Switch
             className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
-            checked={selected}
+            checked={isSelected}
             onCheckedChange={() => {
               router.push(
                 pathname +
@@ -69,7 +71,7 @@ export default function NftListItem({
               : DEFAULT_IPFS_URL + item.avatar
           }
           alt="nft_list_item"
-          className="object-scale-down rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
+          className="object-cover rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
           fill={true}
           priority={true}
         />
@@ -87,16 +89,16 @@ export default function NftListItem({
 
         <div className="flex flex-wrap gap-2">
           <Badge variant="info" shape="category">
-            {item.nft_type == "sbt"
-              ? "커리어 NFT"
-              : item.nft_type == "erc721"
-              ? "한정판 NFT"
-              : "not found"}
+            {lang && item.nft_type
+              ? lang.interface.nft_type[item.nft_type]
+              : "No Type"}
           </Badge>
 
-          {
-            item?.avatar && <Badge variant="warning" shape="category">아바타</Badge>
-          }
+          {item?.avatar && (
+            <Badge variant="warning" shape="category">
+              {lang.interface.nft_image_type.avatar}
+            </Badge>
+          )}
         </div>
       </div>
     </section>

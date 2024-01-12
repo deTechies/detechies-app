@@ -11,5 +11,4 @@ const dictionaries = {
 }
 
 export const getDictionary = async (locale: Locale) =>
-//@ts-ignore
-  dictionaries[locale]?.() ?? dictionaries.en()
+  dictionaries[locale]?.() ?? dictionaries['kr']() // default to kr if locale is not found

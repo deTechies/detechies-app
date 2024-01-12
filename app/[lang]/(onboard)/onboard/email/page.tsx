@@ -17,15 +17,14 @@ export default async function EmailVerify({
 
   const user = await getUserProfile();
 
-
   return (
     <div>
       <section className="my-2">
-        {!user.email && <CreateProfile text={text} />}
+        {!user.email && <CreateProfile lang={dictionary} />}
         {user && !user.verified && user.email && (
-          <EmailVerification text={text} user={user}/>
+          <EmailVerification lang={dictionary} user={user} />
         )}
-        {user && user.verified && <FinishedProfile />}
+        {user && user.verified && <FinishedProfile lang={dictionary}/>}
       </section>
     </div>
   );

@@ -14,9 +14,11 @@ import { useState } from "react";
 export default function InvitingMemberListItem({
   profile,
   contract,
+  lang,
 }: {
   profile: any;
   contract: string;
+  lang: any;
 }) {
   const router = useRouter();
 
@@ -37,7 +39,7 @@ export default function InvitingMemberListItem({
   const deleteInvitingMember = () => {
     //
   };
-  
+
   return (
     <div
       className="grid grid-cols-[1fr_90px_124px] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center"
@@ -71,18 +73,18 @@ export default function InvitingMemberListItem({
 
       <div className="flex flex-col items-center justify-center gap-3">
         <span className="text-title_s">
-          {invitationStatus === "waiting" ? "대기 중" : "거절함"}
+          {invitationStatus === "waiting"
+            ? lang.group.details.manage.member.waiting
+            : lang.group.details.manage.member.rejected}
         </span>
 
         {invitationStatus === "waiting" ? (
           <Button variant="primary" size="sm" onClick={sendInvitationNotif}>
-            {/* Send invitation notifications */}
-            초대 알리기
+            {lang.group.details.manage.member.announce_invite}
           </Button>
         ) : (
           <Button variant="secondary" size="sm" onClick={deleteInvitingMember}>
-            {/* Delete */}
-            삭제하기
+            {lang.group.details.manage.member.delete}
           </Button>
         )}
       </div>

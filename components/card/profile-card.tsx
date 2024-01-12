@@ -1,23 +1,17 @@
 "use client";
 import { defaultAvatar } from "@/lib/constants";
 import { deleteFollowUser, startFollow } from "@/lib/data/network";
+import { User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
-interface Profile {
-  id: string;
-  name: string;
-  display_name: string;
-  wallet: string;
-  job?: string;
-  nft: string[];
-}
+
 
 interface ProfileProps {
-  profile: Profile;
+  profile: User;
   followed?: boolean;
 }
 
@@ -37,7 +31,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
 
     setIsFollowing(true);
     toast({
-      title: "Start following " + profile.name,
+      title: "Start following " + profile.display_name,
     });
   };
 
@@ -50,7 +44,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
 
 
     toast({
-      title: "Unfollowing " + profile.name,
+      title: "Unfollowing " + profile.display_name,
     });
   };
   return (
@@ -59,7 +53,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
       onClick={() => router.push(`/profiles/${profile.wallet}`)}
     >
       <div className="w-full aspect-square relative  rounded-t-sm m-0">
-        <IPFSImageLayer hashes={profile.nft ? profile.nft : defaultAvatar} className="rounded-b-none" />
+        <IPFSImageLayer hashes={profile.avatar ? profile.avatar : defaultAvatar} className="rounded-b-none" />
       </div>
       <div className="p-2 flex flex-col">
         <h5 className="font-medium tracking-wider text-md capitalize truncate text-center">{profile.display_name? profile.display_name : 'not_found'}</h5>

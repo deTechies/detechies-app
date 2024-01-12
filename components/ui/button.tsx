@@ -20,11 +20,12 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "px-6 py-4 rounded-full",
-        sm: "rounded-md px-3 py-2 text-title_s h-fit",
-        lg: "py-[15.5px] px-4 rounded-full text-title_m max-w-[212px] w-full grow",
-        icon: "h-12 w-12 shrink-0 rounded-md p-2",
-        image: "h-fit w-fit p-0 bg-transparent hover:shadow-none"
+        default: "px-6 py-4 rounded-full truncate",
+        sm: "rounded-md px-3 py-2 text-title_s h-fit truncate",
+        lg: "py-[15.5px] px-4 rounded-full text-title_m max-w-[212px] w-full grow truncate",
+        icon: "h-12 w-12 shrink-0 rounded-md p-2 truncate",
+        icon_circle: "h-12 w-12 shrink-0 rounded-full p-2 truncate",
+        image: "h-fit w-fit p-0 bg-transparent hover:shadow-none truncate"
       },
     },
     defaultVariants: {

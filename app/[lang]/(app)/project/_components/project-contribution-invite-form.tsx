@@ -33,8 +33,6 @@ import { toast } from "@/components/ui/use-toast";
 import { addMembersWork } from "@/lib/data/project";
 import { ContributionType } from "@/lib/interfaces";
 import { useRef, useState } from "react";
-import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
-import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
 const contributionFormSchema = z.object({
   begin_date: z.string(),
   end_date: z.string().optional(),
@@ -100,8 +98,10 @@ export default function ProjectContributionInviteForm({
 
 
 
+
   const onSubmit = async (values: ContributionFormData) => {
     console.log(values);
+
 
     try {
       const result = await addMembersWork(values, projectId);

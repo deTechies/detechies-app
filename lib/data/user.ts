@@ -4,18 +4,15 @@ import { Session, getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { API_URL } from "../constants";
-import { authOptions } from "../helpers/authOptions";
-
+import { auth, authOptions } from "../helpers/authOptions";
 
 export async function getUserProfile(address?: string) {
   const session = (await getServerSession(authOptions)) as Session;
   if (!address) {
-
-    
-    if(!session){
+    if (!session) {
       redirect("/onboard");
     }
-    
+
     const user = await fetch(`${API_URL}/users/${session?.web3.address}`, {
       method: "GET",
       headers: {
@@ -56,7 +53,13 @@ export async function getUserProfile(address?: string) {
 }
 
 export async function getUsers() {
-  const res = await fetch(`${API_URL}/users`, { cache: "no-store" });
+  const session = await auth();
+  const res = await fetch(`${API_URL}/users`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3.accessToken}`,
+    },
+    cache: "no-store" });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -73,7 +76,7 @@ export async function sendVerifyEmail(code: string) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session.web3.accessToken}`,
     },
-  });
+  })
 
   if (!res.ok) {
     return null;
@@ -88,6 +91,29 @@ export async function getUserSession() {
     redirect("/onboard");
   }
   return session.web3;
+}
+
+export async function getUserById(id: string) {
+  const session = await auth();
+  const res = await fetch(
+    `${API_URL}/users/profile/${id}`,
+
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.web3?.accessToken}`,
+      },
+    }
+  );
+  
+  const result = await res.json();
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+  return result
 }
 
 export async function getUserConnections(address: string) {
@@ -142,7 +168,6 @@ export async function updateTBA(tba: any): Promise<any> {
     redirect("/onboard");
   }
 
-  console.log(tba);
   const address = session.web3.user.id;
   const result = await fetch(`${API_URL}/polybase/update/tba`, {
     method: "POST",
@@ -156,3 +181,21 @@ export async function updateTBA(tba: any): Promise<any> {
   }).then((res) => res.json());
   return result;
 }
+
+export async function updateUserAvatar (avatar: string[]) {
+
+  const session = await auth();
+
+  const result = 
+    await fetch(`${API_URL}/users/save-avatar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.web3?.accessToken}`,
+      },
+      body: JSON.stringify({avatar: avatar}),
+    });
+    
+    return result.json();
+};
+
