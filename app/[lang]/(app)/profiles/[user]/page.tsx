@@ -4,10 +4,10 @@ import { getUserProfile } from "@/lib/data/user";
 
 
 import { User } from "@/lib/interfaces";
+import ProfileAwards from "../../mypage/_components/profile-awards";
+import ProfileCertificates from "../../mypage/_components/profile-certificates";
 import ProfileDetails from "../../mypage/_components/profile-details";
 import ProfileProjects from "../../mypage/_components/profile-projects";
-import ProfileCertificates from "../../mypage/_components/profile-certificates";
-import ProfileAwards from "../../mypage/_components/profile-awards";
 
 import UserProfile from "./_component/user-profile";
 
@@ -23,14 +23,14 @@ export default async function Dashboard({
     <div className="flex sm:flex-row flex-col m-8 gap-20">
       {/* LeftSide */}
       <div className="min-w-[330px] flex flex-col gap-8">
-        <UserProfile profile={profile} text={dictionary.mypage.profile} />
+        <UserProfile profile={profile} text={dictionary.mypage.profile}  />
       </div>
       {/* main */}
       <div className="grow">
         <main className="flex flex-col gap-6">
-          <ProfileDetails profile={profile} text={dictionary.mypage.main} />
-          <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} />
-          <ProfileCertificates achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.education}/>
+          <ProfileDetails profile={profile} text={dictionary.mypage.main} visiting={true}/>
+          <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} visiting={true} />
+          <ProfileCertificates achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.education} />
           <ProfileAwards achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.awards}/>
         </main>
         

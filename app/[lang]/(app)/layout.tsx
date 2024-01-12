@@ -4,7 +4,9 @@ import { Locale } from "@/i18n.config";
 import { auth } from "@/lib/helpers/authOptions";
 import type { Metadata } from "next";
 
+
 import { PopoverEvent } from "@/components/extra/popup-event";
+
 import DictionaryProvider from "@/lib/dictionaryProvider";
 import { signOut } from "next-auth/react";
 import localFont from 'next/font/local';
@@ -62,7 +64,7 @@ export default async function RootLayout({
   }
   
   return (
-    <html lang="kr" suppressHydrationWarning>
+    <html lang={params.lang} suppressHydrationWarning>
       <body
         className={`${pretendard.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >
