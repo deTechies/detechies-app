@@ -61,7 +61,7 @@ type ProfileFormValues = z.infer<typeof projectFormSchema>
 
 
 
-export default async function CreateProjectForm({
+export default function CreateProjectForm({
   lang
 }:{ lang:any}) {
   const form = useForm<ProfileFormValues>({
@@ -132,11 +132,11 @@ export default async function CreateProjectForm({
   };
 
   return (
-    <main className="m-8 mx-auto max-w-2xl">
+
       <Card>
-        <h3 className="text-heading_s font-medium mb-4" >{lang.project.list.create_project.create}</h3>
+         <h3 className="text-heading_s my-6 px-6" >{lang.project.list.create_project.create}</h3>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 px-6 ">
             <FormElement label={lang.project.list.create_project.name}>
               <FormField
                 control={form.control}
@@ -313,7 +313,7 @@ export default async function CreateProjectForm({
           </form>
         </Form>
       </Card>
-    </main>
+
   );
 }
 

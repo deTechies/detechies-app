@@ -130,7 +130,7 @@ export default async function ProjectEvaluationByGroups({
               )
             )
           ) : (
-            <h5 className="text-center text-text-secondary text-label_m">
+            <h5 className="text-center text-text-secondary truncate text-label_m">
               받은 그룹 평가 또는 NFT 수상이 없어요.
             </h5>
           )}

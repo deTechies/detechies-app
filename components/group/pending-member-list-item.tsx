@@ -37,8 +37,7 @@ export default function PendingMemberListItem({
 
   const acceptEmployee = async () => {
     //in here we want to have the profile.id
-    if(!profile.id){
-        
+    if (!profile.id) {
       toast({
         title: "Error minting ",
         description:
@@ -46,15 +45,15 @@ export default function PendingMemberListItem({
         variant: "destructive",
       });
     }
-      
-      const result = await acceptClubMember(profile.id);
-      
-      toast({
-        title: "Success",
-        description: "Succesfully accepted member.",
-      })
-      
-      router.refresh()
+
+    const result = await acceptClubMember(profile.id);
+
+    toast({
+      title: "Success",
+      description: "Succesfully accepted member.",
+    });
+
+    router.refresh();
 
     //await write();
   };
@@ -85,7 +84,9 @@ export default function PendingMemberListItem({
           <div className="mb-2 text-title_l">{profile.user.display_name}</div>
 
           <Badge variant="info" shape="outline">
-            {profile.role ? profile.role : "미설정"}
+            {profile.user.profile_details?.profession
+              ? profile.user.profile_details.profession
+              : "미설정"}
           </Badge>
         </div>
       </div>
@@ -95,9 +96,7 @@ export default function PendingMemberListItem({
           {/*
             message 
           */}
-          {
-            profile.message
-          }
+          {profile.message}
         </span>
       </Card>
 
