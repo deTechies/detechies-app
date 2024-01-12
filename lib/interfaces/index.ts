@@ -20,7 +20,7 @@ export interface User {
     id: number;
     full_name: string;
     country: string;
-    profession: string;
+    profession: Professions;
     description: string;
     app_settings: UserSettings;
   }
@@ -52,12 +52,15 @@ export interface User {
   export interface Club extends CreateClub{
     id: string;
     owner: string;
+    verified: boolean;
     contract: string;
     blockchain_address?: string;
     files?: File[];
     members?: Member[];
+    achievements: Achievement[];
     created_at: Date;
     updated_at?: Date;
+    isUserMember?: boolean;
   }
   
 export enum GROUP_TYPE {

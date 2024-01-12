@@ -13,20 +13,10 @@ export default async function GroupsPage({
   params: { lang: Locale };
 }) {
 
-  const enrichGroupsWithDetails = async (groups: any) => {
-    const enrichedGroups = await Promise.all(groups.map(async (group: any) => {
-      const details = await getClub(group.id);
-      return { ...group, achievements : details.achievements };
-    }));
-  
-    return enrichedGroups;
-  }
-
   const dictionary = (await getDictionary(params.lang)) as any;
   
   const profile = await getUserProfile();
   const groups = await getGroups();
-  const groupsWithDetails = await enrichGroupsWithDetails(groups);
 
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
@@ -35,7 +25,7 @@ export default async function GroupsPage({
 
       {groups?.length > 0 ? (
         <GroupList
-          groups={groupsWithDetails}
+          groups={groups}
           profileWallet={profile.wallet}
           lang={dictionary}
         />

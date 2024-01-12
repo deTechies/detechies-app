@@ -1,6 +1,6 @@
 import { getClub } from "@/lib/data/groups";
 import GroupDetails from "./group-details";
-import GroupMember, { Member } from "./group-member";
+import GroupMember from "./group-member";
 import GroupNft from "./group-nft";
 
 import { getDictionary } from "@/get-dictionary";
@@ -10,7 +10,7 @@ export interface GroupDetailProps {
   name: string;
   achievements: any[];
   details: any;
-  members: Member[];
+  members: any[];
   chat: any;
   image: string;
   address: string;

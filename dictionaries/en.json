@@ -53,8 +53,9 @@
       "body": "Professional personal members, please make sure to verify your personal email, work emails make it harder to find your account if you leave..",
       "username": "Username",
       "username_placeholder": "Enter username.",
-      "email_desc": "Enter username.",
       "email": "email",
+      "email_placeholder": "Enter email",
+      "email_desc": "Enter username.",
       "alert_title": "Complete privacy protection",
       "alert_body": "All personal information is stored encrypted and remains private, and can only be seen by others with your permission.",
       "accordion": {
@@ -156,15 +157,6 @@
         "first_name": "First Name",
         "email": "email"
       },
-      "project_description": "Project Description",
-      "hide": "hide",
-      "show_more": "show more",
-      "members": {
-        "project_member": "Project Members",
-        "invite": "invite",
-        "unregistered": "unregistered",
-        "evaluate": "evaluate"
-      },
       "role_type": {
         "admin": "Admin",
         "member": "Member",
@@ -240,106 +232,6 @@
       }
     }
   },
-  "member": {
-    "evaluate": {
-      "evaluate_performance": "Evaluation Performance",
-      "evaluate_performance_description": "Please evaluate users role and performance in this project",
-      "basic_information": "Basic Information",
-      "billable_hourly_wage": "Billable Hourly Wage",
-      "time_weekly": "Total hour (weekly)",
-      "hourly_wage_team": "Enter hourly wage set for the team member.",
-      "please_evaluate_users_role_and_performance_in_this_project": "Please evaluate users role and performance in this project.",
-      "does_the_work_details_match_the_facts": "Does the work written by the user match the facts?",
-      "more_than_20": "More than 20% of the information stated is different from the facts",
-      "more_than_15": "More than 15% of the information stated is different from the facts",
-      "more_than_10": "More than 10% of the information stated is different from the facts",
-      "more_than_5": "More than 5% of the information stated is different from the facts",
-      "all_match": "Yes, they all match.",
-      "go_back": "Go Back",
-      "next": "Next",
-      "reject": "Reason of rejection",
-      "meet_requirements": {
-        "label": "Did the user meet the requirements?",
-        "messages": [
-          "20_message percentage message",
-          "40_message User meet the requirements of the project",
-          "60_message User meet the requirements of the project",
-          "80_message User meet the requirements of the project",
-          "100_message User meet the requirements of the project"
-        ]
-      },
-      "meet_schedule": {
-        "label": "Did the users meet the time schedules of the project?",
-        "messages": [
-          "20_message percentage message",
-          "40_message User meet the requirements of the project",
-          "60_message User meet the requirements of the project",
-          "80_message User meet the requirements of the project",
-          "100_message User meet the requirements of the project"
-        ]
-      },
-      "work_contribution": {
-        "label": "Please tell us about teh contribution to the work.",
-        "messages": [
-          "20_message percentage message",
-          "40_message User meet the requirements of the project",
-          "60_message User meet the requirements of the project",
-          "80_message User meet the requirements of the project",
-          "100_message User meet the requirements of the project"
-        ]
-      }
-    },
-    "member": {
-      "evaluate": {
-        "evaluate_performance": "Evaluation Performance",
-        "evaluate_performance_description": "Please evaluate users role and performance in this project",
-        "basic_information": "Basic Information",
-        "billable_hourly_wage": "Billable Hourly Wage",
-        "time_weekly": "Total hour (weekly)",
-        "hourly_wage_team": "Enter hourly wage set for the team member.",
-        "please_evaluate_users_role_and_performance_in_this_project": "Please evaluate users role and performance in this project.",
-        "does_the_work_details_match_the_facts": "Does the work written by the user match the facts?",
-        "more_than_20": "More than 20% of the information stated is different from the facts",
-        "more_than_15": "More than 15% of the information stated is different from the facts",
-        "more_than_10": "More than 10% of the information stated is different from the facts",
-        "more_than_5": "More than 5% of the information stated is different from the facts",
-        "all_match": "Yes, they all match.",
-        "go_back": "Go Back",
-        "next": "Next",
-        "reject": "Reason of rejection",
-        "meet_requirements": {
-          "label": "Did the user meet the requirements?",
-          "messages": [
-            "20_message percentage message",
-            "40_message User meet the requirements of the project",
-            "60_message User meet the requirements of the project",
-            "80_message User meet the requirements of the project",
-            "100_message User meet the requirements of the project"
-          ]
-        },
-        "meet_schedule": {
-          "label": "Did the users meet the time schedules of the project?",
-          "messages": [
-            "20_message percentage message",
-            "40_message User meet the requirements of the project",
-            "60_message User meet the requirements of the project",
-            "80_message User meet the requirements of the project",
-            "100_message User meet the requirements of the project"
-          ]
-        },
-        "work_contribution": {
-          "label": "Please tell us about teh contribution to the work.",
-          "messages": [
-            "20_message percentage message",
-            "40_message User meet the requirements of the project",
-            "60_message User meet the requirements of the project",
-            "80_message User meet the requirements of the project",
-            "100_message User meet the requirements of the project"
-          ]
-        }
-      }
-    }
-  },
   "mypage": {
     "awards": {
       "awards": "Awards",
@@ -380,6 +272,7 @@
       "profession": "profession",
       "specialisation": "specialisation",
       "profile_description": "profile description",
+      "skills": "skills",
       "username": "username",
       "save_changes": "save changes"
     },
@@ -389,13 +282,6 @@
       "evaluation": "evaluation",
       "present": "present",
       "view_project": "view project"
-    },
-    "evaluations": {
-      "menu": {
-        "evaluation_requested": "Evaluation Requested",
-        "evaluation_requests": "Evaluations Requests",
-        "evaluation_wrote": "Evaluation Written"
-      }
     },
     "main": {
       "profile": "profile",
@@ -408,6 +294,13 @@
       "evaluation_history": "evaluation history",
       "reputation_history": "reputation history",
       "career_avatar": "career avatar"
+    },
+    "evaluations": {
+      "menu": {
+        "evaluation_requested": "Evaluation Requested",
+        "evaluation_requests": "Evaluations Requests",
+        "evaluation_wrote": "Evaluation Written"
+      }
     }
   },
   "group": {
@@ -659,7 +552,21 @@
     "sbt_type": {
       "edu": "Edu",
       "awards": "Awards"
+    },
+    "profession_type": {
+      "Developer": "Developer",
+      "PM": "PM",
+      "QA Engineer": "QA Engineer",
+      "Planner": "Planner",
+      "Designer": "Designer",
+      "Marketer": "Marketer",
+
+      "developer": "Developer",
+      "pm": "PM",
+      "pa_engineer": "QA Engineer",
+      "planner": "Planner",
+      "designer": "Designer",
+      "marketer": "Marketer"
     }
   }
-
 }
