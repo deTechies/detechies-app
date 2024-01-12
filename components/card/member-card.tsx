@@ -7,6 +7,7 @@ import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";
 import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
+import { User } from "@/lib/interfaces";
 
 export default function MemberCard({
   address,
@@ -15,7 +16,7 @@ export default function MemberCard({
   isOwner,
 }: {
   address: Address;
-  info?: any;
+  info: User;
   lang?: any;
   isOwner?: boolean;
 }) {
