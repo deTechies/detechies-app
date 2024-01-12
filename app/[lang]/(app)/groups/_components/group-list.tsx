@@ -1,10 +1,10 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import GroupListItem from "./group-list-item";
 import OnlySearch from "@/components/extra/only-search";
-import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import GroupListItem from "./group-list-item";
 
 //TODO: Add type dependency
 export default function GroupList({
@@ -63,19 +63,20 @@ export default function GroupList({
       </TabsContent>
 
       <TabsContent value="joined" className="mx-0 mt-0 mb-16">
-        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
+      <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
       </TabsContent>
 
       <TabsContent value="created" className="mx-0 mt-0 mb-16">
-        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
+      <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
+      
       </TabsContent>
 
       <Link

@@ -27,6 +27,7 @@ import { uploadContent } from "@/lib/upload";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ProjectType } from "@/lib/interfaces";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -56,7 +57,9 @@ const projectFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof projectFormSchema>;
 
+
 export default function CreateProjectForm() {
+
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(projectFormSchema),
     mode: "onChange",

@@ -21,27 +21,27 @@ const PercentageSliderField = ({ form, name, label, messages, steps }: Percentag
 
   // Determine alert variant and message based on percentage
   const getAlertDetails = () => {
-    if (percentage < 20) {
-      return null;
-    } else if (percentage < 40) {
+    if (percentage == 0) {
+      return null
+    } else if (percentage < 21) {
       return {
         color: "bg-state-error",
         variant: "bg-state-error-secondary border-state-error",
         message: messages?.at(0)
       };
-    } else if (percentage < 60) {
+    } else if (percentage < 41) {
       return {
         color: "bg-state-warning",
         variant: "bg-state-warning-secondary border-state-warning",
         message:messages?.at(1)
       };
-    } else if (percentage < 80) {
+    } else if (percentage < 61) {
       return {
         color: "bg-state-status",
         variant: "bg-state-status-secondary border-state-status",
         message:messages?.at(2)
       };
-    } else if (percentage < 100) {
+    } else if (percentage < 81) {
       return {
         color: "bg-state-info",
         variant: "bg-state-info-secondary border-state-info",

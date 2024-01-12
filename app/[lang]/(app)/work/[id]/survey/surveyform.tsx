@@ -76,7 +76,7 @@ export function SurveyForm({
                         form={form}
                         name={question.id}
                         label={question.content}
-                        steps={100 / question.scale}
+                        steps={100 / 10}
                         messages={question.messages}
                       />
                     );
