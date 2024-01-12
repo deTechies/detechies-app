@@ -116,6 +116,9 @@
         "delete_project_name" : "을 입력해 주세요.",
         "cancel" : "취소하기"
 
+      },
+      "add_work":{
+        "work":"Add Work"
       }
       
     },

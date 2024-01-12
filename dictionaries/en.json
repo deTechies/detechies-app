@@ -115,6 +115,9 @@
         "delete_dsc":" If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",
         "delete_project_name" : "and click delete",
         "cancel" : "Cancel"
+      },
+      "add_work":{
+        "work":"Add Work"
       }
     },
     "details": {
