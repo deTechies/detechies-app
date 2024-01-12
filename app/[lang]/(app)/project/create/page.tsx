@@ -27,8 +27,8 @@ import { uploadContent } from "@/lib/upload";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ProjectType } from "@/lib/interfaces";
-import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -61,7 +61,7 @@ type ProfileFormValues = z.infer<typeof projectFormSchema>
 
 
 
-export default async function CreateProjectForm({
+export default function CreateProjectForm({
   params
 }:{ params:any}) {
   const form = useForm<ProfileFormValues>({

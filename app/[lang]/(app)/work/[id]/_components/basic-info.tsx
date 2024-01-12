@@ -36,6 +36,8 @@ const baseInfoSchema = z.object({
   weekly_hours: z.string().optional(),
   reject_letter: z.string().optional(),
   rate_contributions: z.number().optional(),
+  good_team_player: z.number().optional(),
+  feedback_times: z.number().optional(),
   rate_requirements: z.number().optional(),
   rate_time_schedule: z.number().optional(),
 });
@@ -200,22 +202,36 @@ export default function BasicEvaluationInfo({
                 <PercentageSliderField
                   name="rate_requirements"
                   form={form}
-                  steps={20}
+                  steps={10}
                   label={text.meet_requirements.label}
                   messages={text.meet_requirements.messages}
                 />
                 <PercentageSliderField
                   name="rate_contributions"
                   form={form}
-                  steps={20}
+                  steps={10}
                   label={text.work_contribution.label}
                   messages={text.work_contribution.messages}
                 />
                 <PercentageSliderField
                   name="rate_time_schedule"
                   form={form}
-                  steps={20}
+                  steps={10}
                   label={text.meet_schedule.label}
+                  messages={text.meet_schedule.messages}
+                />
+                 <PercentageSliderField
+                  name="feedback_times"
+                  form={form}
+                  steps={10}
+                  label={text.feedback_times.label}
+                  messages={text.feedback_times.messages}
+                />
+                 <PercentageSliderField
+                  name="good_team_player"
+                  form={form}
+                  steps={10}
+                  label={text.good_team_player.label}
                   messages={text.meet_schedule.messages}
                 />
               </section>

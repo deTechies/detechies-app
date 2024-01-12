@@ -108,6 +108,16 @@ export enum GROUP_TYPE {
     MARKETING = 'marketing',
     OTHER = 'other'
   }
+  
+  export enum Professions {
+    DEVELOPMENT = 'Developer',
+    PM = 'PM',
+    QA_ENGINEER = 'QA Engineer',
+    PLANNER = 'Planner',
+    DESIGNER = 'Designer',
+    MARKETER = 'Marketer'
+  }
+
 
   export enum ProjectCategory {
     WEB = 'web',

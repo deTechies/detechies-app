@@ -5,10 +5,12 @@ import Connections from "./connections";
 
 interface ProfileDetailsProps {
   profile: any;
+  visiting?: boolean;
   text: any;
 }
 
 export default async function ProfileDetails({
+  visiting=false,
   profile,
   text,
 }: ProfileDetailsProps) {
@@ -18,11 +20,15 @@ export default async function ProfileDetails({
             {/* PROFILE LABEL */}
             <h5 className="text-subhead_s capitalize">{text?.profile}</h5>
             {/* EDIT PROFILE BUTTON */}
-            <Link href="/mypage/edit">
+            {
+              !visiting && 
+              <Link href="/mypage/edit">
               <div className="flex bg-[#EFF0F2] text-[#101113] text-xs font-medium me-2 px-[10px] py-[6px] rounded-[20px] dark:bg-slate-100 dark:text-slate-500 capitalize">
                 {text?.edit} <Edit className='ml-2 text-text-secondary' size='12'/>
               </div>
             </Link>
+            }
+         
         </header>
         
         {/* SECOND ROW FOR OCCUPATION &  SKILLS BADGES*/}
