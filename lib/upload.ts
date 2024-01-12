@@ -19,7 +19,7 @@ export async function uploadContent(content: any) {
       title: "Upload complete",
       description: "Your content has been uploaded with cid: " + cid,
     });
-    return cid;
+    return cid as string;
     
   }catch(e){
     console.log(e);
@@ -27,7 +27,7 @@ export async function uploadContent(content: any) {
       title: "Upload failed",
       description: "Your content could not be uploaded",
     });
-    return null;
+    return undefined;
   }
   
 }

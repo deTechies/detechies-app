@@ -147,7 +147,7 @@ export default function PendingMemberListItem({
         </div>
 
         <div>
-          <div className="mb-2 text-title_l">{nft.project.name ? nft.project.name : nft.user.display_name}</div>
+          <div className="mb-2 text-title_l">{nft.project ? nft.project.name : nft.user?.display_name}</div>
 
           <Badge shape="outline" variant="info">
             {nft.project ? 'project' : "user"}

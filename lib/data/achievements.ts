@@ -83,7 +83,7 @@ export async function requestAchievement(achievementId: string, projectId?: stri
   if (!session || !session.web3 || !session.web3.accessToken) {
     throw new Error("Invalid session or missing access token");
   }
-
+  
   const response = await fetch(`${API_URL}/achievement-rewards`, {
     method: "POST",
     headers: {
@@ -93,6 +93,7 @@ export async function requestAchievement(achievementId: string, projectId?: stri
     body: JSON.stringify({
       achievementId: achievementId,
       projectId: projectId,
+      userId: session.web3.user.id,
       message: message,
     }),
   });
