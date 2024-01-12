@@ -16,6 +16,7 @@ export default async function GroupsPage({
   const enrichGroupsWithDetails = async (groups: any) => {
     const enrichedGroups = await Promise.all(groups.map(async (group: any) => {
       const details = await getClub(group.id);
+      
       return { ...group, achievements : details.achievements };
     }));
   
@@ -26,6 +27,7 @@ export default async function GroupsPage({
   
   const profile = await getUserProfile();
   const groups = await getGroups();
+  console.log(groups);
   const groupsWithDetails = await enrichGroupsWithDetails(groups);
 
   return (

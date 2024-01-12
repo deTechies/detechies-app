@@ -120,7 +120,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
     if (!result.id) {
       toast({
         title: "Error",
-        description: "Something went wrong",
+        description: result.message
       });
 
       setIsLoading(false);

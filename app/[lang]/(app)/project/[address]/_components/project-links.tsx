@@ -19,7 +19,7 @@ export default async function ProjectLinks({ details }: { details: Project }) {
         </h3>
         {(details.userRole === "member" ||
           details.userRole === "admin" ||
-          details.userRole === "client") && <UploadWorks />}
+          details.userRole === "client") && <UploadWorks projectId={details.id}/>}
       </CardHeader>
 
       <CardContent>
@@ -32,8 +32,8 @@ export default async function ProjectLinks({ details }: { details: Project }) {
             등록된 작업물이 없어요.
           </p>
         )} */}
-        {details.urls ? (
-          <Links links={details.urls} />
+        {details.links ? (
+          <Links works={details.links} />
         ) : (
           <p className="text-center text-label_m text-text-secondary">
             등록된 작업물이 없어요.
