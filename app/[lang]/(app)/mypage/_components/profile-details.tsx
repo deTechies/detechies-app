@@ -38,7 +38,7 @@ export default async function ProfileDetails({
               {profile.profile_details?.profession as string}
             </div>
           ) : null}
-          {profile.profile_details?.skills.map((skill:string)=>{
+          {profile.profile_details.length > 0 && profile.profile_details?.skills.map((skill:string)=>{
             return(
               <div className="!flex-[0_0_auto] border-[1px] border-[#00D41D] text-[#00D41D] text-xs font-medium px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-green-900 dark:text-green-300" key={skill}>
                 {skill}
