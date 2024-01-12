@@ -128,7 +128,19 @@
         "category_dsc": "Type and press enter",
         "public": "Public",
         "private": "Private",
-        "team": "Team"
+        "team" : "Team"
+      },
+      "edit_project":"Edit Project",
+      "edit" : "Update Project",
+      "delete_project":{
+        "delete" : "Delete Project",
+        "delete_confirm" : "Are you sure delete project?",
+        "delete_dsc":" If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",
+        "delete_project_name" : "and click delete",
+        "cancel" : "Cancel"
+      },
+      "add_work":{
+        "work":"Add Work"
       }
     },
     "details": {

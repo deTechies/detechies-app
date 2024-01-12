@@ -21,9 +21,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
-import { Badge } from "../ui/badge";
 import { toast } from "../ui/use-toast";
-import { PlusIcon } from "lucide-react";
 
 const FormSchema = z.object({
   role: z.enum(["admin", "member", "client"], {
@@ -56,6 +54,13 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
     //@ts-ignore
     setLoading(true);
     //implement the logic for joina project here..
+    if(!data.role){
+      toast({
+        title: "Error",
+        description: "You need to select a role",
+      });
+      return;
+    }
     const result = await joinProject({
       projectId: address,
       message: data.message,

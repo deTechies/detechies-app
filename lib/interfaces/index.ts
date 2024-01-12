@@ -219,10 +219,18 @@ export enum GROUP_TYPE {
     userRole: string;
     urls?: string[];
     members: ProjectMember[]
+    links: ProjectLink[]
     files: File[]
     achievements: Achievement[]
     created_at: Date;
     updated_at: Date;
+  }
+  
+  export interface ProjectLink{
+    id: string;
+    name: string;
+    link: string;
+    created_at: Date;
   }
   
   export interface ProjectMember {

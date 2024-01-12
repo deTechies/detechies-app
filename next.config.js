@@ -22,6 +22,12 @@ const nextConfig = {
           },
           {
             protocol: 'https',
+            hostname: 'nftstorage.link',
+            port: '',
+            pathname: '/**',
+          },
+          {
+            protocol: 'https',
             hostname: 'cloudflare-ipfs.com',
             port: '',
             pathname: '/ipfs/**',

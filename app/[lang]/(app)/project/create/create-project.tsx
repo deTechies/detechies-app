@@ -27,13 +27,14 @@ import { uploadContent } from "@/lib/upload";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ProjectType } from "@/lib/interfaces";
-
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { createProject } from "@/lib/data/project";
+import { useDictionary } from "@/lib/dictionaryProvider";
+
 
 const projectFormSchema = z.object({
   name: z
@@ -55,11 +56,14 @@ const projectFormSchema = z.object({
   }),
 });
 
-type ProfileFormValues = z.infer<typeof projectFormSchema>;
+type ProfileFormValues = z.infer<typeof projectFormSchema>
 
 
-export default function CreateProjectForm() {
 
+
+export default async function CreateProjectForm({
+  lang
+}:{ lang:any}) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(projectFormSchema),
     mode: "onChange",
@@ -67,10 +71,14 @@ export default function CreateProjectForm() {
 
   const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
+  const search = useSearchParams()
   const [loading, setLoading] = useState(false);
   const [present, setPresent] = useState(false);
 
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
+  // const dictionary = useDictionary()
+
+
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
@@ -105,6 +113,7 @@ export default function CreateProjectForm() {
       type: data.type,
     });
 
+    console.log(result);
 
     if (result.id) {
       toast({
@@ -118,31 +127,31 @@ export default function CreateProjectForm() {
   }
 
   const selectFile = (file: any) => {
+    console.log(file)
     setFile(file);
   };
 
   return (
     <main className="m-8 mx-auto max-w-2xl">
       <Card>
-        <h3 className="text-heading_s font-medium mb-4">Create Project</h3>
-
+        <h3 className="text-heading_s font-medium mb-4" >{lang.project.list.create_project.create}</h3>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormElement label="Project Name">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
+            <FormElement label={lang.project.list.create_project.name}>
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem >
                     <FormControl>
-                      <Input placeholder="Enter name of project" {...field} />
+                      <Input placeholder={lang.project.list.create_project.name_dsc} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </FormElement>
-            <FormElement label="Type">
+            <FormElement label={lang.project.list.create_project.type}>
               <FormField
                 control={form.control}
                 name="type"
@@ -154,7 +163,7 @@ export default function CreateProjectForm() {
                     >
                       <FormControl className="max-w-[300px]">
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a type" />
+                          <SelectValue placeholder={lang.project.list.create_project.type_dsc}  />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -170,7 +179,7 @@ export default function CreateProjectForm() {
                 )}
               />
             </FormElement>
-            <FormElement label="Period">
+            <FormElement label={lang.project.list.create_project.period}>
               <div className="flex flex-row gap-2 items-center w-full">
                 <FormField
                   control={form.control}
@@ -204,7 +213,7 @@ export default function CreateProjectForm() {
                 />
               </div>
             </FormElement>
-            <FormElement label="Description" className="flex items-start">
+            <FormElement label={lang.project.list.create_project.describe} className="flex items-start">
               <FormField
                 control={form.control}
                 name="description"
@@ -212,7 +221,7 @@ export default function CreateProjectForm() {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        placeholder="Tell more about your project"
+                        placeholder={lang.project.list.create_project.describe_dsc} 
                         {...field}
                       />
                     </FormControl>
@@ -222,7 +231,7 @@ export default function CreateProjectForm() {
               />
             </FormElement>
 
-            <FormElement label="Image" className="flex items-start">
+            <FormElement label={lang.project.list.create_project.image} className="flex items-start">
               <div className="flex gap-3">
                 <MediaUploader
                   onFileSelected={selectFile}
@@ -231,10 +240,10 @@ export default function CreateProjectForm() {
                 />
               </div>
             </FormElement>
-            <FormElement label="Project Categories">
+            <FormElement label={lang.project.list.create_project.category}>
               <FormControl>
                 <Input
-                  placeholder="Type and press enter"
+                  placeholder={lang.project.list.create_project.category_dsc} 
                   value={newTag}
                   onChange={handleNewTagChange}
                   onKeyDown={handleKeyDown}
@@ -257,7 +266,7 @@ export default function CreateProjectForm() {
                 ))}
               </div>
             </FormElement>
-            <FormElement label="Public Scope">
+            <FormElement label={lang.project.list.create_project.scope}>
               <FormField
                 control={form.control}
                 name="scope"
@@ -269,15 +278,15 @@ export default function CreateProjectForm() {
                   >
                     <div className="flex gap-2 items-center">
                       <RadioGroupItem value="public" />
-                      <Label>Public</Label>
+                      <Label>{lang.project.list.create_project.public}</Label>
                     </div>
                     <div className="flex gap-2 items-center">
                       <RadioGroupItem value="private" />
-                      <Label>Private</Label>
+                      <Label>{lang.project.list.create_project.private}</Label>
                     </div>
                     <div className="flex gap-2 items-center">
                       <RadioGroupItem value="team" />
-                      <Label>Team</Label>
+                      <Label>{lang.project.list.create_project.team}</Label>
                     </div>
                   </RadioGroup>
                 )}
@@ -290,7 +299,7 @@ export default function CreateProjectForm() {
                   router.back();
                 }}
               >
-                Back
+                {lang.project.list.create_project.back}
               </Button>
               <Button
                 type="submit"
@@ -298,7 +307,7 @@ export default function CreateProjectForm() {
                 disabled={loading || !form.formState.isValid}
                 loading={loading}
               >
-                Create Project
+                {lang.project.list.create_project.make}
               </Button>
             </div>
           </form>

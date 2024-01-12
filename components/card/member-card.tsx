@@ -3,10 +3,9 @@ import { defaultAvatar } from "@/lib/constants";
 // import useFetchData from "@/lib/useFetchData";
 import { useRouter } from "next/navigation";
 import { Address } from "wagmi";
+import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";
-import { Skeleton } from "../ui/skeleton";
-import { Badge } from "../ui/badge";
 import { User } from "@/lib/interfaces";
 
 export default function MemberCard({
