@@ -63,8 +63,10 @@ type ProfileFormValues = z.infer<typeof projectFormSchema>;
 
 export default function ProjectEditForm({
   defaultValues,
+  lang
 }: {
   defaultValues?: Partial<ProfileFormValues>;
+  lang:any
 }) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(projectFormSchema),
@@ -149,10 +151,10 @@ export default function ProjectEditForm({
 
   return (
     <Card>
-      <h3 className="text-heading_s font-medium mb-4">Edit Project</h3>
+      <h3 className="text-heading_s font-medium mb-4">{lang.project.list.edit_project}</h3>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormElement label="Project Name">
+          <FormElement label={lang.project.list.create_project.name}>
             <FormField
               control={form.control}
               name="name"
@@ -166,7 +168,7 @@ export default function ProjectEditForm({
               )}
             />
           </FormElement>
-          <FormElement label="Type">
+          <FormElement label={lang.project.list.create_project.type}>
             <FormField
               control={form.control}
               name="type"
@@ -194,7 +196,7 @@ export default function ProjectEditForm({
               )}
             />
           </FormElement>
-          <FormElement label="Period">
+          <FormElement label={lang.project.list.create_project.period}>
             <div className="flex flex-row gap-2 items-center w-full">
               <FormField
                 control={form.control}
@@ -224,7 +226,7 @@ export default function ProjectEditForm({
               />
             </div>
           </FormElement>
-          <FormElement label="Description" className="flex items-start">
+          <FormElement label={lang.project.list.create_project.describe} className="flex items-start">
             <FormField
               control={form.control}
               name="description"
@@ -242,7 +244,7 @@ export default function ProjectEditForm({
             />
           </FormElement>
 
-          <FormElement label="Image" className="flex items-start">
+          <FormElement label={lang.project.list.create_project.image} className="flex items-start">
             <div className="flex gap-3">
               <div className="w-[140px]">
                <Image 
@@ -271,10 +273,10 @@ export default function ProjectEditForm({
               </div>
             </div>
           </FormElement>
-          <FormElement label="Project Categories">
+          <FormElement label={lang.project.list.create_project.category}>
             <FormControl>
               <Input
-                placeholder="Type and press enter"
+                placeholder={lang.project.list.create_project.category_dsc}
                 value={newTag}
                 onChange={handleNewTagChange}
                 onKeyDown={handleKeyDown}
@@ -297,7 +299,7 @@ export default function ProjectEditForm({
               ))}
             </div>
           </FormElement>
-          <FormElement label="Public Scope">
+          <FormElement label={lang.project.list.create_project.scope}>
             <FormField
               control={form.control}
               name="scope"
@@ -309,15 +311,15 @@ export default function ProjectEditForm({
                 >
                   <div className="flex gap-2 items-center">
                     <RadioGroupItem value="public" />
-                    <Label>Public</Label>
+                    <Label>{lang.project.list.create_project.public}</Label>
                   </div>
                   <div className="flex gap-2 items-center">
                     <RadioGroupItem value="private" />
-                    <Label>Private</Label>
+                    <Label>{lang.project.list.create_project.private}</Label>
                   </div>
                   <div className="flex gap-2 items-center">
                     <RadioGroupItem value="team" />
-                    <Label>Team</Label>
+                    <Label>{lang.project.list.create_project.team}</Label>
                   </div>
                 </RadioGroup>
               )}
@@ -327,7 +329,7 @@ export default function ProjectEditForm({
           <div className="flex items-center justify-end gap-8">
             <Link href={`/project/${defaultValues?.id}`}>
               <Button variant="secondary" type="reset" size="lg">
-                Close
+              {lang.project.list.create_project.back}
               </Button>
             </Link>
             <Button
@@ -336,7 +338,7 @@ export default function ProjectEditForm({
               disabled={loading || !form.formState.isValid}
               loading={loading}
             >
-              Update Project
+              {lang.project.list.edit}
             </Button>
           </div>
         </form>
