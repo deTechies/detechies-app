@@ -4,12 +4,15 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { toast } from "../ui/use-toast";
+import IPFSImageLayer from "../ui/layer";
 
 interface PendingMemberItemProps {
   member: any;
 }
 export default function PendingMemberItem({ member }: PendingMemberItemProps) {
   //if accept then we need to put in
+
+  console.log(member);
 
   async function acceptMember() {
     const result = await acceptProjectMember(member.id);
@@ -57,8 +60,10 @@ export default function PendingMemberItem({ member }: PendingMemberItemProps) {
     // <Dialog>
     //   <DialogTrigger className="flex flex-col items-start gap-2 text-lect">
     <div className="flex gap-5 pb-5 border-b">
-      <div className="shrink-0">
-        <Image
+      <div className="shrink-0 relative w-20 h-20 rounded-sm bg-background-layer-2">
+        <IPFSImageLayer hashes={member.user.avatar} />
+
+        {/* <Image
           height="80"
           width="80"
           src={
@@ -67,14 +72,14 @@ export default function PendingMemberItem({ member }: PendingMemberItemProps) {
           }
           alt={member.user.display_name}
           className="rounded-sm bg-background-layer-2 shrink-0"
-        />
+        /> */}
       </div>
 
       <div className="flex flex-wrap grow">
         <div className="w-full">
           <div className="mb-4 text-title_m">{member.user.display_name}</div>
 
-          <div className="flex flex-wrap items-start justify-between">
+          <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <div className="mb-2 text-label_m text-text-secondary">
                 포지션: {member.role || "없음"}

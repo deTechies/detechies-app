@@ -9,6 +9,7 @@ interface MemberListDetails {
   avatar?: string[];
   role?: string;
   active?: boolean;
+  info?: any;
 }
 
 export default async function InlineMemberItem({
@@ -16,7 +17,9 @@ export default async function InlineMemberItem({
   display_name,
   role,
   active = false,
+  info,
 }: MemberListDetails) {
+  console.log(info);
   if (!display_name)
     return (
       <div className="flex items-center py-4">
@@ -29,7 +32,9 @@ export default async function InlineMemberItem({
           <p className="text-sm text-muted-foreground">Unknown</p>
         </div>
         <div className="ml-auto font-medium">
-          <Badge variant="outline" shape="outline_sm">Member</Badge>
+          <Badge variant="outline" shape="outline_sm">
+            Member
+          </Badge>
         </div>
       </div>
     );
@@ -45,11 +50,13 @@ export default async function InlineMemberItem({
       </Avatar>
 
       <div className="ml-4 flex flex-col gap-2">
-        <span className="text-title_s">
-          {display_name}
-        </span>
-        
-        <Badge variant="outline" shape="outline_sm">{role ? role : "미설정"}</Badge>
+        <span className="text-title_s">{display_name}</span>
+
+        <Badge variant="outline" shape="outline_sm">
+          {info.profile_details?.profession
+            ? info.profile_details.profession
+            : "미설정"}
+        </Badge>
       </div>
     </div>
   );
