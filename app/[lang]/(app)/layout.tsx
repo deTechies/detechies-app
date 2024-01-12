@@ -4,6 +4,10 @@ import { Locale } from "@/i18n.config";
 import { auth } from "@/lib/helpers/authOptions";
 import type { Metadata } from "next";
 
+
+import { PopoverEvent } from "@/components/extra/popup-event";
+
+import DictionaryProvider from "@/lib/dictionaryProvider";
 import { signOut } from "next-auth/react";
 import localFont from 'next/font/local';
 import { redirect } from "next/navigation";
@@ -60,7 +64,7 @@ export default async function RootLayout({
   }
   
   return (
-    <html lang="kr" suppressHydrationWarning>
+    <html lang={params.lang} suppressHydrationWarning>
       <body
         className={`${pretendard.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >
@@ -72,7 +76,10 @@ export default async function RootLayout({
         >
           <App>
             <Navbar lang={dictionary.nav} />
-            <main className="mx-auto max-w-[1920px]">{children}</main>
+            <DictionaryProvider dictionary={dictionary}>
+              <main className="mx-auto max-w-[1920px]">{children}</main>
+              <PopoverEvent />
+            </DictionaryProvider>
           </App>
         </ThemeProvider>
       </body>

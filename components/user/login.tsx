@@ -10,9 +10,13 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import ModalLayout from "./modal-layout";
-import ProfileDetails from "./profile-details";
+import AccountSettings from "./account-settings";
 
-export default function Login() {
+interface ILoginProps {
+  lang:any
+}
+
+export default function Login({lang}:ILoginProps) {
   const { connect, connectors } = useConnect();
   const {
     address,
@@ -68,15 +72,15 @@ export default function Login() {
         
         </Button>
         {showModal && (
-          <ProfileDetails
-            address={address}
+          <AccountSettings
             showModal={showModal}
-            setShowModal={setShowModal}
+            text_my_account={lang}
           />
         )}
       </div>
     );
   }
+  
   if (!isConnecting && address == session?.web3?.address) {
     return (
       <div className="flex rounded-md  items-center gap-2">
@@ -91,10 +95,9 @@ export default function Login() {
         </Avatar>
 
         {showModal && (
-          <ProfileDetails
-            address={address}
-            showModal={showModal}
-            setShowModal={setShowModal}
+          <AccountSettings
+          showModal={showModal}
+          text_my_account={lang}
           />
         )}
 

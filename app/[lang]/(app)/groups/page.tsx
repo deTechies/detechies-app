@@ -1,4 +1,4 @@
-import { getGroups } from "@/lib/data/groups";
+import { getClub, getGroups } from "@/lib/data/groups";
 import { getUserProfile } from "@/lib/data/user";
 
 import { getDictionary } from "@/get-dictionary";
@@ -12,10 +12,11 @@ export default async function GroupsPage({
 }: {
   params: { lang: Locale };
 }) {
-  const groups = await getGroups();
-  const profile = await getUserProfile();
 
   const dictionary = (await getDictionary(params.lang)) as any;
+  
+  const profile = await getUserProfile();
+  const groups = await getGroups();
 
   return (
     // Temporarily insert fixed values ​​(to work with grid later)

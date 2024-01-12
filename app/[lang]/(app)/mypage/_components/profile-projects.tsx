@@ -12,34 +12,39 @@ import { useRouter } from "next/navigation";
 export default function ProfileProjects({
   projects,
   text,
+  visiting=false,
 }: {
   projects: any;
   text: any;
+  visiting?:boolean;
 }) {
   //get all the projects the user the user is part of
   const router = useRouter();
-
+  
   return (
     <div className="flex flex-col gap-3">
       <Card className="flex flex-row justify-between items-center">
         <h5 className="text-subhead_s">{text?.projects}</h5>
-        <Button size="sm" variant="secondary" onClick={()=>{
-          router.push("/project/create")
-        }}>
-          {text?.new_project}{" "}
-          <PlusIcon size="16" className="text-text-secondary ml-2" />
-        </Button>
+        {
+          !visiting &&
+          <Button size="sm" variant="secondary" onClick={()=>{
+            router.push("/project/create")
+          }}>
+            {text?.new_project}{" "}
+            <PlusIcon size="16" className="text-text-secondary ml-2" />
+          </Button>
+        }
+       
       </Card>
         
       {projects &&
         projects.map((project: any, index:number) => {
-
           return (
             <Link
             href={`/project/${project.project.id}`}
             key={index}
             >
-              <Card key={project.id} className="flex flex-row">
+              <Card key={index} className="flex flex-row">
                   {/* Image on the left */}
                   <div className="w-[100px] h-[100px] relative aspect-square rounded-[12px] overflow-hidden">
                     <Image
@@ -74,13 +79,13 @@ export default function ProfileProjects({
                           ? formatDate(project.project.end_date)
                           : text?.present}{" "}</span>
                             </div>
-                            <div className="flex gap-[8px] self-stretch w-full flex[0_0_auto] items-start relative">
-                              {project.works.map((work: any)=>{
+                            <div className="flex flex-col gap-[8px]">
+                              {project.works.map((work: any, index: number)=>{
                                 return(
-                                  <>
+                                  <div className="flex flex-row gap-[8px] self-stretch w-full flex[0_0_auto] items-start relative" key={index}>
                                     <span className="text-[#6B7684] text-sm">{work.name}</span>
                                     <span className="text-[#6B7684] text-sm">{"| "} {work.percentage} %</span>
-                                  </>
+                                  </div>
                                 )
 
                               })}

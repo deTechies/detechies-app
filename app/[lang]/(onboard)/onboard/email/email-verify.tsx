@@ -10,10 +10,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function EmailVerification({
-  text,
+  lang,
   user,
 }: {
-  text: any;
+  lang: any;
   user: any;
 }) {
   const searchParams = useSearchParams();
@@ -49,10 +49,6 @@ export default function EmailVerification({
         title: "Email verified",
         description: "Email verified",
       });
-      
-      
-
-      
 
       router.refresh();
     } else {
@@ -74,14 +70,17 @@ export default function EmailVerification({
 
   return (
     <main className="flex flex-col gap-4 max-w-[400px]">
-      <h2 className="text-heading_s">Verify Email</h2>
+      <h2 className="text-heading_s">
+        {lang.onboard.verify_email.email_verify.title}
+      </h2>
       <h5 className="text-body_s text-text-secondary">
-        We have send you an email to <b>{user.email}</b> with a 6-digit code.
-        You can use this code to verify your email address.
+        {lang.onboard.verify_email.email_verify.desc}
+        <b>{user.email}</b>
+        {lang.onboard.verify_email.email_verify.desc2}
       </h5>
       <div className="flex flex-col gap-6">
         <div className="">
-          <Label>Email</Label>
+          <Label> {lang.onboard.verify_email.email}</Label>
           <div className="flex flex-row items-center gap-2">
             <Input
               value={user.email}
@@ -94,17 +93,17 @@ export default function EmailVerification({
               onClick={() => resendEmail()}
               className="rounded-sm"
             >
-              Resend
+              {lang.onboard.verify_email.email_verify.resend}
             </Button>
           </div>
         </div>
         <div className="flex flex-col gap-3">
-          <Label>Verification code</Label>
+          <Label>{lang.onboard.verify_email.email_verify.code}</Label>
           <Input
             value={code}
             onChange={(e) => router.push(pathName + "?code=" + e.target.value)}
             className="border p-2 text-center tracking-widest"
-            placeholder="Enter 6-digit code"
+            placeholder={lang.onboard.verify_email.email_verify.code_placeholder}
           />
         </div>
         <Button
@@ -112,7 +111,7 @@ export default function EmailVerification({
           disabled={!isValid}
           className="py-3 rounded-sm"
         >
-          Verify email
+          {lang.onboard.verify_email.email_verify.title}
         </Button>
       </div>
     </main>

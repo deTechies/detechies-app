@@ -3,7 +3,32 @@
     "find_expert": "전문가 찾기",
     "project": "프로젝트",
     "groups": "그룹",
-    "my_profile": "내 프로필"
+    "my_profile": "내 프로필",
+    "my_account":{
+      "my_account_title": "내 계정",
+      "my_encrypted_account_address": "내 암호화 계정 주소",
+      "copy_label": "복사하기",
+      "change_account": "계정 변경",
+      "blockchain_network": "블록체인 네트워크",
+      "chains":{
+        "polygon_mainnet": "폴리곤 메인 네트워크",
+        "polygon_mumbai": "폴리곤 테스트 네트워크"
+      },
+      "language":{
+        "placeholder":"언어",
+        "english": "English",
+        "korean": "한국어"
+      },
+      "theme":{
+        "placeholder": "주제",
+        "light": "빛",
+        "dark": "어두운",
+        "system": "체계"
+      },
+      "sign_out": "로그아웃",
+      "my_profile": "내 프로필",
+      "not_connected": "연결되지 않은"
+    }
   },
   "user": {
     "details": {
@@ -18,25 +43,49 @@
   },
   "onboard": {
     "welcome": {
-      "title": "Professional career certifications are different!",
-      "body": "If you already have an account, log in to Careerzen using your existing account.",
-      "web3": "Social Wallet",
-      "browser": "Browser Wallet"
+      "title": "전문가들의 커리어 인증은 다르다.",
+      "body": "이미 계정이 있다면 기존 계정을 사용해 Careerzen에 로그인 합니다.",
+      "web3": "소셜 계정으로 계속하기",
+      "browser": "메타마스크 지갑"
     },
     "verify_email": {
-      "title": "Sign up!",
-      "body": "Professional personal members, please make sure to verify your personal email, work emails make it harder to find your account if you leave..",
-      "email": "email",
-      "email_verify": "verify email",
+      "title": "회원가입",
+      "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.",
+      "username": "이름",
+      "username_placeholder": "이름을 입력하세요.",
+      "email": "메일주소",
+      "email_placeholder": "메일주소를 입력하세요.",
+      "email_desc": "메일주소를 입력하세요.",
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
       "accordion": {
-        "terms_of_services": "Terms of Services (required)",
+        "terms_of_services": "서비스 이용약관 (필수)",
         "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
-        "privacy_policy": "Privacy Policy (required)",
+        "privacy_policy": "개인정보처리방침 (필수)",
         "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
-        "reward_notification": "In-app notification (optional)",
+        "reward_notification": "보상 및 이벤트 알림 (선택)",
         "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+      },
+      "cancel": "뒤로가기",
+      "next": "다음",
+      "email_verify": {
+        "title": "메일 인증",
+        "desc": "여섯자리 코드가 포함된 이메일을 ",
+        "desc2": " 으로 보내드렸습니다. 이 코드를 사용하여 이메일 주소를 인증할 수 있습니다.",
+        "resend": "재전송",
+        "code": "인증코드",
+        "code_placeholder": "여섯자리 코드"
+      },
+      "finished_profile": {
+        "title": "커리어 아바타 생성 완료",
+        "desc": "블록체인 기반의 영구 인증 프로필에 성과, 학력 등을 추가하고 나만의 커리어 아바타를 완성해보세요!",
+        "subtitle": "어떤 것부터 할까요?",
+        "expert": "전문가",
+        "expert_desc": "내 커리어 인증하기",
+        "client": "클라이언트",
+        "client_desc": "우리 프로젝트에 맞는 전문가 찾기",
+        "admin": "기업, 기관, 커뮤니티 운영자",
+        "admin_desc": "우리 조직만의 NFT 생성하기"
       }
     }
   },
@@ -53,16 +102,46 @@
         "other": "기타"
       },
       "privacy_type": {
-        "all": "모든 유저",
-        "project": "프로젝트 멤버",
-        "group": "그룹 멤버",
-        "private": "프라이빗"
+        "public": "모든 유저",
+        "private": "프라이빗",
+        "group": "그룹 멤버"
       },
       "search": "키워드를 한글자 이상 입력해주세요.",
       "my_project": "내 프로젝트",
       "no_projects_found": "검색 결과가 없습니다.",
       "view_more": "더 보기",
-      "create_project": "내 프로젝트 만들기"
+      "create_project" : {
+        "create" : "내 프로젝트 만들기",
+        "name" : "프로젝트명",
+        "type" : "프로젝트 종류",
+        "period" : "기간",
+        "describe" : "프로젝트 설명",
+        "image" : "대표 이미지",
+        "category" : "프로젝트 카테고리",
+        "scope" : "공개 범위",
+        "back" : "뒤로가기",
+        "make" : "생성하기",
+        "name_dsc" : "프리랜서 전용 평판 조회 서비스 - 커리어젠",
+        "type_dsc": "종류 선택",
+        "describe_dsc" : "프로젝트 설명을 입력해 주세요",
+        "category_dsc" : "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
+        "public" : "모든 유저",
+        "private": "프로젝트 멤버",
+        "team" : "그룹멤버"
+      },
+      "edit_project":"프로젝트 수정하기",
+      "edit" : "수정하기",
+      "delete_project":{
+        "delete" : "삭제하기",
+        "delete_confirm" : "프로젝트를 삭제할까요?",
+        "delete_dsc": "삭제할 경우 리더님과 다른 멤버의 프로젝트 활동 정보가 모두 삭제 돼요. 정말로 프로젝트를 삭제하고 싶다면 프로젝트명:",
+        "delete_project_name" : "을 입력해 주세요.",
+        "cancel" : "취소하기"
+
+      },
+      "add_work":{
+        "work":"Add Work"
+      }
     },
     "details": {
       "join_project": {
@@ -85,87 +164,10 @@
         "invite": "초대하기",
         "no_members_found": "검색 결과가 없습니다",
         "member_type": "멤버 종류",
-        "name": "이름"
-      },
-      "member": {
-        "evaluate": {
-          "evaluate_performance": "성과 평가하기", 
-          "evaluate_performance_description": "이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
-          "basic_information": "기본 정보",
-          "billable_hourly_wage":  "청구시급", 
-          "time_weekly": "투입시간 (주 평균)", 
-          "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.", 
-          "":"이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
-          "does_the_work_details_match_the_facts": "윤창진님이 기재한 업무내용이 사실과 일치하나요?", 
-          "more_than_20": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
-          "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상", 
-          "more_than_10": "기재한 내용 중 사실과 다른 부분이 10% 이상",
-          "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상", 
-          "all_match": "네, 모두 일치합니다.",
-          "go_back": "뒤로가기",
-          "next": "다음",
-          "reject": "업무내용 사실여부 평가 사유",
-          "meet_requirements": {
-            "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
-            "messages": [     
-              "20_message percentage message",
-              "40_message User meet the requirements of the project",
-              "60_message User meet the requirements of the project",
-              "80_message User meet the requirements of the project",
-              "100_message User meet the requirements of the project"
-            ]         
-          },
-          "meet_schedule": {
-            "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
-            "messages": [     
-              "20_message percentage message",
-              "40_message User meet the requirements of the project",
-              "60_message User meet the requirements of the project",
-              "80_message User meet the requirements of the project",
-              "100_message User meet the requirements of the project"
-            ]
-          },
-          "work_contribution": {
-            "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
-            "messages": [     
-              "20_message percentage message",
-              "40_message User meet the requirements of the project",
-              "60_message User meet the requirements of the project",
-              "80_message User meet the requirements of the project",
-              "100_message User meet the requirements of the project"
-            ]
-          }
-        }
-      }
-    },
-    "mypage": {
-      "profile": {
-        "following": "팔로잉", 
-        "followers": "팔로워", 
-        "token": "토큰", 
-        "avatar_settings": "아바타 설정",
-        "name": "이름"
-      },
-      "main": {
-        "profile": "프로필", 
-        "edit": "수정하기", 
-        "description": "내 소개"
-      },
-      "edit_profile": {
-        "edit_profile": "프로필 수정", 
-        "full_name": "본명 (비공개)", 
+        "name": "이름",
         "last_name": "성",
         "first_name": "이름",
         "email": "이메일"
-      },
-      "project_description": "프로젝트 설명",
-      "hide": "숨기기",
-      "show_more": "자세히 보기",
-      "members": {
-        "project_member": "프로젝트 멤버",
-        "invite": "초대하기",
-        "unregistered": "성과 미등록",
-        "evaluate": "평가하기"
       },
       "role_type": {
         "admin": "관리자",
@@ -182,7 +184,7 @@
       "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.", 
       "":"이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
       "does_the_work_details_match_the_facts": "윤창진님이 기재한 업무내용이 사실과 일치하나요?", 
-      "more_than_20_message": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
+      "more_than_20": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
       "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상", 
       "more_than_10": "기재한 내용 중 사실과 다른 부분이 10% 이상",
       "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상", 
@@ -191,72 +193,54 @@
       "next": "다음",
       "reject": "업무내용 사실여부 평가 사유",
       "meet_requirements": {
-        "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
-        "step_1_message": "20_message percentage message",
-        "step_2_message": "40_message User meet the requirements of the project",
-        "step_3_message": "60_message User meet the requirements of the project",
-        "step_4_message": "80_message User meet the requirements of the project",
-        "step_5_message": "100_message User meet the requirements of the project"            
+        "label": "해당 팀원의 결과물은 요구사항을 충족했나요?",
+        "messages": [     
+          "누락 또는 하자가 20% 이상 (치명적인 하자 또는 누락)",
+          "누락 또는 하자가 20% 미만 (대응이 어려운 수준)",
+          "누락 또는 하자가 10% 내외 (대응 가능할만한 수준)",
+          "필수 요구사항만 만족시켰어요.",
+          "모든 요구사항을 만족시켰어요."
+        ]         
       },
       "meet_schedule": {
-        "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
-        "step_1_message": "20_message percentage message",
-        "step_2_message": "40_message User meet the requirements of the project",
-        "step_3_message": "60_message User meet the requirements of the project",
-        "step_4_message": "80_message User meet the requirements of the project",
-        "step_5_message": "100_message User meet the requirements of the project"
+        "label": "마일스톤에 따른 작업 일정을 준수했나요?",
+        "messages": [     
+          "합의된 작업 기간에서 +4일 이상 지연",
+          "합의된 작업 기간에서 +2일 이상 지연",
+          "합의된 작업 기간에서 +1일 이상 지연",
+          "작업완료 일 내에 완료 및 작업물 공유",
+          "마일스톤보다 빠르게 작업하며, 피드백을 요청함"
+        ]
       },
       "work_contribution": {
-        "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
-        "step_1_message": "20_message percentage message",
-        "step_2_message": "40_message User meet the requirements of the project",
-        "step_3_message": "60_message User meet the requirements of the project",
-        "step_4_message": "80_message User meet the requirements of the project",
-        "step_5_message": "100_message User meet the requirements of the project"   
-      }
-    },
-    "member": {
-      "evaluate": {
-        "evaluate_performance": "성과 평가하기", 
-        "evaluate_performance_description": "이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
-        "basic_information": "기본 정보",
-        "billable_hourly_wage":  "청구시급", 
-        "time_weekly": "투입시간 (주 평균)", 
-        "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.", 
-        "":"이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.", 
-        "does_the_work_details_match_the_facts": "윤창진님이 기재한 업무내용이 사실과 일치하나요?", 
-        "more_than_20_message": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
-        "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상", 
-        "more_than_10": "기재한 내용 중 사실과 다른 부분이 10% 이상",
-        "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상", 
-        "all_match": "네, 모두 일치합니다.",
-        "go_back": "뒤로가기",
-        "next": "다음",
-        "reject": "업무내용 사실여부 평가 사유",
-        "meet_requirements": {
-          "label": "해당 프로젝트에서 윤창진님의 일정 준수율은 어땠나요?",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"            
-        },
-        "meet_schedule": {
-          "label": "윤창진님의 작업물이 요구사항을 충족했나요?",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"
-        },
-        "work_contribution": {
-          "label": "UXUI 디자인 업무에 대한 윤창진님의 기여도를 알려주세요.",
-          "step_1_message": "20_message percentage message",
-          "step_2_message": "40_message User meet the requirements of the project",
-          "step_3_message": "60_message User meet the requirements of the project",
-          "step_4_message": "80_message User meet the requirements of the project",
-          "step_5_message": "100_message User meet the requirements of the project"   
-        }
+        "label": "작업완료 일 내에 완료 및 작업물 공유",
+        "messages": [     
+          "해당 파트 전체를 완벽하게 수행했어요.",
+          "해당 업무에 있어서, 다른 팀원보다 기여도가 적어요.",
+          "해당 업무를 다른 팀원과 나눠서 작업했어요.",
+          "전부 홍길동님이 작업했으나, 다른 팀원에게 약간의 도움을 받았어요.",
+          "해당 파트 전체를 완벽하게 수행했어요."
+        ]    
+      }, 
+      "good_team_player": {
+        "label": "타 팀원들에게 긍정적인 영향을 미치는 편이었나요?.",
+        "messages": [     
+          "팀원들에게 부정적 영향을 미침",
+          "팀원들에게 부정적 영향을 미침",
+          "보통임",
+          "보통임",
+          "매우 그러함"
+        ]
+      }, 
+      "feedback_times": {
+        "label": "타 팀원들에게 긍정적인 영향을 미치는 편이었나요?.",
+        "messages": [     
+          "5일 이상",
+          "4일 이내", 
+          "2일 이내",
+          "1일 이내",
+          "발생 당시에 바로 개선"
+        ]
       }
     }
   },
@@ -292,11 +276,6 @@
       "name": "이름",
       "address":"블록체인 계정주소"
     },
-    "main": {
-      "profile": "프로필", 
-      "edit": "수정하기", 
-      "description": "내 소개"
-    },
     "edit_profile": {
       "edit_profile": "프로필 수정", 
       "full_name": "본명 (비공개)", 
@@ -305,6 +284,7 @@
       "profession": "직업", 
       "specialisation": "전문분야", 
       "profile_description": "내 소개",
+      "skills": "스킬",
       "username": "닉네임", 
       "save_changes": "저장하기"
     },
@@ -314,6 +294,11 @@
       "evaluation": "성과 평가 ", 
       "present": "present",
       "view_project": "자세히 보기 "
+    },
+    "main": {
+      "profile": "프로필",
+      "edit": "수정하기",
+      "description": "설명"
     },
     "menu": {
       "portfolio": "포트폴리오",
@@ -334,26 +319,20 @@
     "list": {
       "message": "커뮤니티에 가입하고",
       "message2": "나만의 커리어 증명 NFT을 소유하세요!",
-
       "all": "전체보기",
       "created": "참여중인 그룹",
       "joined": "내가 만든 그룹",
-
       "search_placeholder": "그룹명을 검색해보세요.",
-
       "agency": "기업 인증 완료",
       "authority": "기관 인증 완료",
       "education": "학교 인증 완료",
       "community": "커뮤니티",
-
       "members": "멤버수",
       "nfts": "받을 수 있는 NFT",
-
       "banner": "직접 그룹을 만들고",
       "banner2": "프로젝트와 개인에게 NFT를 부여하고 영향력 있는 그룹으로 활동해보세요!",
       "banner3": "그룹 만들러 가기"
     },
-
     "create": {
       "title": "그룹 만들기", 
       "required_text": "*는 필수입력 사항입니다.", 
@@ -373,7 +352,6 @@
         "create_group": "만들기"
       }
     },
-
     "details": {
       "profile_card": {
         "create_nft": "NFT 생성하기",
@@ -385,7 +363,6 @@
           "back": "뒤로가기",
           "send": "가입 요청하기"
         },
-
         "invite": {
           "invite_member": "멤버 초대하기",
           "sended": "초대 메시지를 전송했습니다!",
@@ -402,7 +379,6 @@
           "name": "이름",
           "email": "이메일"
         },
-
         "join": {
           "join_group": "그롭 가입하기",
           "join_group_desc": "해당 그룹의 리더에게 가입 요청 메세지를 보내세요. 리더가 승인하면 그룹 멤버가 될 수 있어요.",
@@ -412,14 +388,12 @@
           "send": "가입 요청하기"
         }
       },
-
       "about": {
         "all": "전체보기",
         "latest_nft": "최근 생성한 NFT",
         "no_nft": "최근 생성한 NFT가 없습니다.",
         "latest_member": "최근 가입한 멤버"
       },
-
       "nft": {
         "all": "전체보기",
         "career": "커리어 NFT",
@@ -427,24 +401,20 @@
         "avatar": "아바타 NFT",
         "no_nft": "최근 생성한 NFT가 없습니다."
       },
-      
       "members": {
         "search_placeholder": "닉네임 또는 직업을 검색해보세요"
       },
-      
       "missions": {
         "all": "전체보기",
         "my_mission": "나의 미션",
         "no_mission": "현재 미션이 없습니다."
       },
-
       "manage": {
         "tab": {
           "member": "멤버",
           "mission": "미션",
           "info": "그룹 정보"
         },
-
         "nft": {
           "waiting": "NFT 발행 대기 중",
           "published": "생성된 NFT",
@@ -455,7 +425,6 @@
           "actions": "승인 여부",
           "all_accept": "모두 승인하기"
         },
-
         "member": {
           "waiting_join": "그룹 가입 대기 중",
           "no_waiting_join": "아직 그룹 가입 요청내역이 없어요.",
@@ -474,7 +443,6 @@
           "rejected": "거절함",
           "delete": "삭제하기"
         },
-
         "mission": {
           "create": "새로운 미션 생성하기",
           "quit": "강제종료",
@@ -486,7 +454,6 @@
         }
       }
     },
-
     "tabs": {
       "about": "그룹 소개",
       "nft": "NFT 증명서",
@@ -494,13 +461,23 @@
       "mission": "미션",
       "manage": "그룹관리"
     },
-
     "member": {
       "leader": "그룹 리더"
     }
   },
-  
-
+  "achievement": {
+    "display_nft": {
+      "nft_type": "NFT 유형",
+      "nft_prop": "NFT 속성",
+      "publisher": "발행자",
+      "group_name": "그룹 이름",
+      "nft_desc": "NFT 설명",
+      "show_more": "더 보기",
+      "hide": "숨기기",
+      "close": "다음에 할래요",
+      "send_request": "발행 요청"
+    }
+  },
   "mission": {
     "card": {
       "end_date_1": "미션 종료",
@@ -508,10 +485,9 @@
       "end": "미션 종료일",
       "before_end": "미션 종료"
     },
-
     "detail": {
       "all_mission": "총 미션",
-      "get_points": "점 확득!",
+      "get_points": "점 획득!",
       "point": "점",
       "required": "필수 미션",
       "get_reward": "점수를 획득하고 보상받아요!",
@@ -519,7 +495,6 @@
       "if_get2": "점 이상 획득하면",
       "start": "내 미션 시작하기"
     },
-
     "create": {
       "title": "미션 생성하기",
       "mission_info": "미션 정보 입력",
@@ -555,37 +530,19 @@
       "total_reward": "총 보상 수",
       "points_at_least": "최소 보상 기준점수"
     },
-
     "manage": {
       "select_member": "평가할 멤버 선택하기",
       "search_placeholder": "닉네임 또는 직업을 검색해보세요.",
       "no_member": "멤버가 없습니다.",
-
       "give_reward": "보상 수여하기",
       "cleard_mission": "달성한 미션",
       "total_points": "총 획득 점수",
       "points": "점",
       "back": "뒤로가기",
       "save": "저장하기",
-
       "get_reward": "점수를 획득하고 보상받아요!",
       "if_get": "점 이상 획득하면",
-
       "evalu": "미션 수행 평가하기"
-    }
-  },
-
-  "achievement": {
-    "display_nft": {
-      "nft_type": "NFT 유형",
-      "nft_prop": "NFT 속성",
-      "publisher": "발행자",
-      "group_name": "그룹 이름",
-      "nft_desc": "NFT 설명",
-      "show_more": "더 보기",
-      "hide": "숨기기",
-      "close": "다음에 할래요",
-      "send_request": "발행 요청"
     }
   },
   "interface": {
@@ -595,21 +552,46 @@
       "community": "커뮤니티",
       "authority": "기관"
     },
-
     "nft_type": {
       "sbt": "커리어",
       "erc721": "한정판"
     },
-
     "nft_image_type": {
       "avatar": "아바타",
       "image": "증명서",
       "avatar+image": "아바타 + 증명서"
     },
-
     "sbt_type": {
       "edu": "교육수료증",
       "awards": "수상"
+    },
+    "profession_type": {
+      "Developer": "개발자",
+      "PM": "PM",
+      "QA Engineer": "QA 엔지니어",
+      "Planner": "기획자",
+      "Designer": "디자이너",
+      "Marketer": "마케팅",
+
+      "developer": "개발자",
+      "pm": "PM",
+      "pa_engineer": "QA 엔지니어",
+      "planner": "기획자",
+      "designer": "디자이너",
+      "marketer": "마케팅"
+    },
+
+    "project_type": {
+      "all": "전체",
+      "company": "사내 프로젝트",
+      "freelance": "외주 프로젝트",
+      "side": "사이드 프로젝트"
+    },
+    
+    "role_type": {
+      "admin": "관리자",
+      "member": "팀원",
+      "client": "클라이언트"
     }
   }
 }

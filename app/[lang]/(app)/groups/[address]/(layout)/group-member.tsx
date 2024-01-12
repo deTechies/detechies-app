@@ -1,32 +1,9 @@
 "use client";
 import MemberCard from "@/components/card/member-card";
 import { Address } from "wagmi";
-
-
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-interface Profile {
-  id: string;
-  name: string;
-  role: string;
-  email: string;
-  username: string;
-  avatar: string;
-  organisation: string;
-  image: string;
-  industry: string;
-}
-
-export interface Member {
-  memberId: Address;
-  role: string;
-  status: any;
-  created_at: string;
-  verified: boolean;
-  user: any[];
-}
 
 export default function GroupMember({
   address,
@@ -40,7 +17,6 @@ export default function GroupMember({
   lang: any;
 }) {
   const pathName = usePathname();
-
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -62,7 +38,7 @@ export default function GroupMember({
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {members &&
           members.map(
-            (item: Member, index: any) => {
+            (item: any, index: any) => {
               if (index > 4) {
                 return;
               }

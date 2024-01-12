@@ -6,9 +6,10 @@ import { Input } from "../ui/input";
 
 export default function Search({
   placeholder,
-
+  size,
 }: {
   placeholder: string;
+  size?: "default" | "md" | undefined;
 }) {
   const router = useRouter();
    const [text, setText] = useState("");
@@ -27,6 +28,7 @@ export default function Search({
     <div className="relative flex-grow rounded-sm">
       <Input
         value={text}
+        size={size || "default"}
         type="Search"
         placeholder={placeholder}
         onChange={(e) => {

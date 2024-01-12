@@ -6,19 +6,29 @@ const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
 export async function uploadContent(content: any) {
   toast({
-    title: "Uploading...",
-    description: "Please wait while we upload your content",
+    title: "Uploading content",
+    description: "Your content is being uploaded",
   });
-
   const imageFile = new File([content], content.fileName, {
     type: content.type,
   });
-  const cid = await client.storeBlob(imageFile);
   
-  toast({
-    title: "Upload complete",
-    description: "Your content has been uploaded",
-  });
-  return cid;
+  try{
+    const cid = await client.storeBlob(imageFile);
+    toast({
+      title: "Upload complete",
+      description: "Your content has been uploaded with cid: " + cid,
+    });
+    return cid as string;
+    
+  }catch(e){
+    console.log(e);
+    toast({
+      title: "Upload failed",
+      description: "Your content could not be uploaded",
+    });
+    return undefined;
+  }
+  
 }
 

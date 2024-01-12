@@ -15,7 +15,7 @@ const buttonVariants = cva(
         error: "bg-state-error-secondary text-state-error",
         destructive: "bg-state-error-secondary text-state-error hover:bg-destructive/20",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-background-layer-2 text-[#3B414B] hover:bg-gray-100 cursor:pointer",
+        secondary: "bg-button-secondary",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -24,6 +24,7 @@ const buttonVariants = cva(
         sm: "rounded-md px-3 py-2 text-title_s h-fit truncate",
         lg: "py-[15.5px] px-4 rounded-full text-title_m max-w-[212px] w-full grow truncate",
         icon: "h-12 w-12 shrink-0 rounded-md p-2 truncate",
+        icon_circle: "h-12 w-12 shrink-0 rounded-full p-2 truncate",
         image: "h-fit w-fit p-0 bg-transparent hover:shadow-none truncate"
       },
     },

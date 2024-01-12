@@ -3,38 +3,32 @@
 
 import { useTheme } from "next-themes"
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoonIcon, SunIcon } from "lucide-react"
-import { Button } from "../ui/button"
+import { Select } from "@radix-ui/react-select"
+import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 
-export function ThemeToggle() {
-  const { setTheme } = useTheme()
+interface IThemeToggleProps {
+  text: any
+}
+
+export function ThemeToggle({text}: IThemeToggleProps) {
+  const { setTheme, theme } = useTheme()
+  
+
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="secondary"  className="w-9 rounded-sm px-0 ">
-          <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Select
+    onValueChange={(value) => setTheme(value)}
+    defaultValue={theme}
+  > 
+    <SelectTrigger className="w-fit text-[14px] bg-background-layer-1 border rounded-[5px] !p-[8px]">
+      <SelectValue placeholder={text.placeholder} />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="light">{text.light}</SelectItem>
+      <SelectItem value="dark">{text.dark}</SelectItem>
+      <SelectItem value="system">{text.system}</SelectItem>
+    </SelectContent>
+  </Select>
+
   )
 }

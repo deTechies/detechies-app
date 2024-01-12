@@ -5,24 +5,10 @@ import { getClub } from "@/lib/data/groups";
 import { BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Club } from "@/lib/interfaces";
 
-interface ProjectItemProps {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  status: string;
-  achievements: any[];
-  location: string;
-  addr: string;
-  creator: string;
-  type: string;
-  members: any[];
-}
 const GroupListItem = React.memo(
-  ({ details, lang }: { details: ProjectItemProps; lang: any }) => {
-    // const group = await getClub(details.id);
-
+  ({ details, lang }: { details: Club; lang: any }) => {
     return (
       <Link href={`groups/${details.id}`}>
         <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] pb-6 px-6 gap-0">
@@ -53,7 +39,7 @@ const GroupListItem = React.memo(
               )} */}
 
               {/* {lang.group.list[details.type]} */}
-              {lang.interface.group_type[details.type]}
+              {lang.interface.group_type[details.type] || "　"}
             </div>
 
             <div className="flex divide-x">
@@ -66,8 +52,10 @@ const GroupListItem = React.memo(
 
               <div className="px-4 text-center">
                 <div className="mb-1 text-label_s">{lang.group.list.nfts}</div>
-                <div className="text-title_m">0</div>
-                {/* <div className="text-title_m">{group.achievements.length}</div> */}
+
+                <div className="text-title_m">
+                  {details.achievements?.length}
+                </div>
               </div>
             </div>
           </section>
@@ -77,6 +65,6 @@ const GroupListItem = React.memo(
   }
 );
 
-GroupListItem.displayName = 'GroupListItem'
+GroupListItem.displayName = "GroupListItem";
 
 export default GroupListItem;

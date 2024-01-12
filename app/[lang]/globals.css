@@ -80,7 +80,7 @@
     --state-status-secondary: #FFFBDC;
     
     --type-purple-primary: #A454F5;
-    --type-purple-secondary: ##F8F4FF;
+    --type-purple-secondary: #F8F4FF;
     --type-yellow-primary: #FFEB39;
     --type-yellow-secondary: #FFFBDC;
  
@@ -157,10 +157,10 @@
     --state-info-secondary: #00162E;
     
     --state-status-primary: #FFEB39;
-    --state-status-secondary: #FFFBDC;
+    --state-status-secondary: #d6c205;
 
     --type-purple-primary: #A454F5;
-    --type-purple-secondary: ##F8F4FF;
+    --type-purple-secondary: #F8F4FF;
     --type-yellow-primary: #FFEB39;
     --type-yellow-secondary: #FFFBDC;
   }

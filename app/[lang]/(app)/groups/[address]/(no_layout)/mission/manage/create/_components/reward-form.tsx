@@ -200,7 +200,7 @@ const RewardForm = ({
                   <div className="flex flex-col items-start">
                     <div className="mb-2 text-title_m">{achievement.name}</div>
                     <Badge variant={"info"} shape="category">
-                      {achievement.nft_type}
+                      {lang.interface.nft_type[achievement.nft_type]}
                     </Badge>
                   </div>
                 </button>

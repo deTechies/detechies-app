@@ -3,10 +3,10 @@ import { defaultAvatar } from "@/lib/constants";
 // import useFetchData from "@/lib/useFetchData";
 import { useRouter } from "next/navigation";
 import { Address } from "wagmi";
+import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";
-import { Skeleton } from "../ui/skeleton";
-import { Badge } from "../ui/badge";
+import { User } from "@/lib/interfaces";
 
 export default function MemberCard({
   address,
@@ -15,7 +15,7 @@ export default function MemberCard({
   isOwner,
 }: {
   address: Address;
-  info?: any;
+  info: User;
   lang?: any;
   isOwner?: boolean;
 }) {
@@ -28,6 +28,7 @@ export default function MemberCard({
   //   return <Skeleton className="h-[200px] w-[100px] animate-pulse" />;
 
   // if (!data) return <div>no data</div>;
+
   return (
     <Card
       className="gap-1 rounded-sm shadow-md border border-border-div bg-background-layer-1 p-0 min-w-[100px] hover:shadow-lg cursor-pointer"
@@ -42,14 +43,13 @@ export default function MemberCard({
 
         <div className="flex gap-1">
           {isOwner && (
-            <Badge className="bg-text-secondary text-accent-on-primary">
+            <Badge className="bg-text-secondary text-accent-on-primary text-title_s">
               {lang && lang.group.member.leader}
             </Badge>
           )}
 
           <Badge variant={"info"} shape="outline">
-            {/* needs role (PM, designer, developer, ) */}
-            {info.role ? info.role : "미설정"}
+            {info.profile_details && lang.interface.profession_type[info.profile_details.profession] || "미설정"}
           </Badge>
         </div>
       </div>

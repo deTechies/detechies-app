@@ -20,6 +20,7 @@ export interface User {
     id: number;
     full_name: string;
     country: string;
+    profession: Professions;
     description: string;
     app_settings: UserSettings;
   }
@@ -51,12 +52,15 @@ export interface User {
   export interface Club extends CreateClub{
     id: string;
     owner: string;
+    verified: boolean;
     contract: string;
     blockchain_address?: string;
     files?: File[];
     members?: Member[];
+    achievements: Achievement[];
     created_at: Date;
     updated_at?: Date;
+    isUserMember?: boolean;
   }
   
 export enum GROUP_TYPE {
@@ -94,8 +98,8 @@ export enum GROUP_TYPE {
   }
   
   export enum PrivacyType {
-    ALL = 'all',
-    PROJECT = 'project',
+    PUBLIC = 'public',
+    PRIVATE = 'private',
     GROUP = 'group'
   }
 
@@ -107,6 +111,16 @@ export enum GROUP_TYPE {
     MARKETING = 'marketing',
     OTHER = 'other'
   }
+  
+  export enum Professions {
+    DEVELOPMENT = 'Developer',
+    PM = 'PM',
+    QA_ENGINEER = 'QA Engineer',
+    PLANNER = 'Planner',
+    DESIGNER = 'Designer',
+    MARKETER = 'Marketer'
+  }
+
 
   export enum ProjectCategory {
     WEB = 'web',
@@ -173,6 +187,8 @@ export enum GROUP_TYPE {
   export interface AchievementReward {
     id: string;
     achievement: Achievement;
+    project: Project;
+    user: User;
     data: string;
     collected: boolean;
     status: 'open' | 'closed' | 'pending' | 'granted' | 'requested';
@@ -203,10 +219,18 @@ export enum GROUP_TYPE {
     userRole: string;
     urls?: string[];
     members: ProjectMember[]
+    links: ProjectLink[]
     files: File[]
     achievements: Achievement[]
     created_at: Date;
     updated_at: Date;
+  }
+  
+  export interface ProjectLink{
+    id: string;
+    name: string;
+    link: string;
+    created_at: Date;
   }
   
   export interface ProjectMember {
