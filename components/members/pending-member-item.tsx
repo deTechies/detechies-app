@@ -79,7 +79,7 @@ export default function PendingMemberItem({ member }: PendingMemberItemProps) {
         <div className="w-full">
           <div className="mb-4 text-title_m">{member.user.display_name}</div>
 
-          <div className="flex flex-wrap items-start justify-between">
+          <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <div className="mb-2 text-label_m text-text-secondary">
                 포지션: {member.role || "없음"}

@@ -586,6 +586,12 @@
       "company": "사내 프로젝트",
       "freelance": "외주 프로젝트",
       "side": "사이드 프로젝트"
+    },
+    
+    "role_type": {
+      "admin": "관리자",
+      "member": "팀원",
+      "client": "클라이언트"
     }
   }
 }
