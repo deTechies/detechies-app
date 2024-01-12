@@ -567,6 +567,14 @@
       "planner": "기획자",
       "designer": "디자이너",
       "marketer": "마케팅"
+    },
+
+    "project_type": {
+      "client": "외주 프로젝트",
+      "internal": "사내 프로젝트",
+      "side": "사이드 프로젝트",
+      "hackathon": "해커톤",
+      "other": "기타"
     }
   }
 }

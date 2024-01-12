@@ -24,6 +24,8 @@ export default function PendingMemberListItem({
 }) {
   const router = useRouter();
 
+  console.log(nft);
+
   const {
     data,
     isLoading,
@@ -151,13 +153,11 @@ export default function PendingMemberListItem({
 
         <div>
           <div className="mb-2 text-title_l">
-            {nft.user.display_name || nft.project.name}
+            {nft.user ? nft.user.display_name : nft.project.name}
           </div>
 
           <Badge shape="outline" variant="info">
-            {nft.user.profile_details?.profession
-              ? nft.user.profile_details.profession
-              : "미설정"}
+            {nft.user ? nft.user.display_name : nft.project.type}
           </Badge>
         </div>
       </div>

@@ -567,6 +567,14 @@
       "planner": "Planner",
       "designer": "Designer",
       "marketer": "Marketer"
+    },
+
+    "project_type": {
+      "client": "Client",
+      "internal": "Internal",
+      "side": "Side",
+      "hackathon": "Hackathon",
+      "other": "Other"
     }
   }
 }
