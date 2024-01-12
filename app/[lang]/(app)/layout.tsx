@@ -4,13 +4,13 @@ import { Locale } from "@/i18n.config";
 import { auth } from "@/lib/helpers/authOptions";
 import type { Metadata } from "next";
 
+import DictionaryProvider from "@/lib/dictionaryProvider";
 import { signOut } from "next-auth/react";
 import localFont from 'next/font/local';
 import { redirect } from "next/navigation";
 import App from "../app";
 import "../globals.css";
 import Navbar from "./nav-bar";
-import DictionaryProvider from "@/lib/dictionaryProvider";
 
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
@@ -61,7 +61,7 @@ export default async function RootLayout({
   }
   
   return (
-    <html lang="kr" suppressHydrationWarning>
+    <html lang={params.lang} suppressHydrationWarning>
       <body
         className={`${pretendard.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >
