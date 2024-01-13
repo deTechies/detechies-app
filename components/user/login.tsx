@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import AccountSettings from "./account-settings";
@@ -91,7 +91,6 @@ export default function Login({lang}:ILoginProps) {
           <IPFSImageLayer
             hashes={session?.web3?.user?.avatar ? session.web3.user.avatar : []}
           />
-          <AvatarFallback>CZ</AvatarFallback>
         </Avatar>
 
         {showModal && (

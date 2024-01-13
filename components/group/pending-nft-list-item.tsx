@@ -155,13 +155,13 @@ export default function PendingMemberListItem({
           </div>
 
 
-          <Badge shape="outline" variant="info">
+          {/* <Badge shape="outline" variant="info">
             {nft.user?.profile_details?.profession
               ? lang.interface.profession_type[
                   nft.user.profile_details.profession
                 ]
               : lang.interface.project_type[nft.project.type]}
-          </Badge>
+          </Badge> */}
         </div>
       </div>
 
