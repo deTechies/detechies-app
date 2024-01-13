@@ -40,26 +40,6 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
     document.getElementById("fileInput")?.click();
   };
 
-  const removeFile = (index: number) => {
-    // setFiles(files.filter((_, i) => i !== index));
-  };
-
-  const getFileContents = async (
-    file: File
-  ): Promise<{ name: string; content: string }> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        resolve({
-          name: file.name,
-          content: reader.result as string,
-        });
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file); // Reads the file as a data URL (Base64)
-    });
-  };
-
   const uploadWorks = async () => {
     setLoading(true);
     let work = newLink as any;
