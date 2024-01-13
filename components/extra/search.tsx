@@ -12,16 +12,27 @@ export default function Search({
   size?: "default" | "md" | undefined;
 }) {
   const router = useRouter();
-   const [text, setText] = useState("");
+  const [text, setText] = useState("");
   const query = useDebounce(text, 500);
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!query) {
-      router.push(pathname);
-      return;
+    const searchParams = new URLSearchParams(window.location.search);
+
+    // params 객체를 인덱스 시그니처를 가진 형태로 정의합니다.
+    const params: { [key: string]: string } = {};
+    searchParams.forEach((value, key) => {
+      if (key !== "search") {
+        params[key] = value;
+      }
+    });
+
+    if (query) {
+      params["search"] = query;
     }
-    router.push(`${pathname}?search=${query}`);
+
+    const queryString = new URLSearchParams(params).toString();
+    router.push(`${pathname}?${queryString}`);
   }, [pathname, query, router]);
 
   return (
@@ -32,9 +43,7 @@ export default function Search({
         type="Search"
         placeholder={placeholder}
         onChange={(e) => {
-          if(setText){
-            setText(e.target.value);
-          }
+          setText(e.target.value);
         }}
         className="px-4 py-3.5"
       />
