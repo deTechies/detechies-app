@@ -20,7 +20,7 @@ import {
 } from "../ui/select";
 import { toast } from "../ui/use-toast";
 
-export default function UploadWorks({ projectId }: { projectId?: string }) {
+export default function UploadWorks({ projectId, lang }: { projectId?: string; lang: any; }) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [newLink, setNewLink] = useState(""); // State for the new link input
@@ -39,7 +39,6 @@ export default function UploadWorks({ projectId }: { projectId?: string }) {
   const openFileDialog = () => {
     document.getElementById("fileInput")?.click();
   };
-
 
   const uploadWorks = async () => {
     setLoading(true);
@@ -102,8 +101,7 @@ export default function UploadWorks({ projectId }: { projectId?: string }) {
     <Dialog>
       <DialogTrigger>
         <Button size="sm" variant="secondary">
-          {/* UPLOAD */}
-          등록하기
+          {lang.project.details.links.upload}
         </Button>
       </DialogTrigger>
 

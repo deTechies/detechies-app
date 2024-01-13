@@ -140,7 +140,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                       {Object.values(NFT_TYPE).map((type) => (
                         <FormItem
                           key={type}
-                          className="flex flex-wrap items-center space-x-3 space-y-0"
+                          className="flex flex-wrap items-center space-y-0"
                         >
                           <FormControl>
                             <RadioGroupItem value={type} />
@@ -172,7 +172,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                       {Object.values(NFT_IMAGE_TYPE).map((type) => (
                         <FormItem
                           key={type}
-                          className="flex flex-wrap items-center space-x-3 space-y-0"
+                          className="flex flex-wrap items-center space-y-0"
                         >
                           <FormControl>
                             <RadioGroupItem value={type} />
@@ -219,7 +219,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                         {Object.values(SBT_TYPE).map((type) => (
                           <FormItem
                             key={type}
-                            className="flex flex-wrap items-center space-x-3 space-y-0"
+                            className="flex flex-wrap items-center space-y-0"
                           >
                             <FormControl>
                               <RadioGroupItem value={type} />
@@ -301,7 +301,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                           {Object.values(AVATAR_TYPE).map((type) => (
                             <FormItem
                               key={type}
-                              className="flex flex-wrap items-center space-x-3 space-y-0"
+                              className="flex flex-wrap items-center space-y-0"
                             >
                               <FormControl>
                                 <RadioGroupItem value={type} />

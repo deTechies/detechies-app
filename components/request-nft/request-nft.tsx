@@ -6,7 +6,6 @@ import { useParams, useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
 import NftListItem from "./nft-list-item";
 
-
 import Search from "@/components/extra/search";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,18 +25,26 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { getGroupAchievementsClient, requestAchievement } from "@/lib/data/achievements";
+import {
+  getGroupAchievementsClient,
+  requestAchievement,
+} from "@/lib/data/achievements";
 import { Achievement, Club } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "../ui/use-toast";
 
-export default function RequestNFTModal({ groups }: { groups: Club[] }) {
-
+export default function RequestNFTModal({
+  groups,
+  lang,
+}: {
+  groups: Club[];
+  lang: any;
+}) {
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
-  
+
   const params = useParams();
 
   const FormSchema = z.object({
@@ -63,153 +70,71 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
   );
   const [loading, setLoading] = useState<boolean>(false);
 
-
   const onClickGroupItem = (_group: any) => {
-
     setSelectedGroup(_group);
   };
 
   const onClickNftItem = (_nft: any) => {
-
     setSelectedAchievement(_nft);
   };
 
   useEffect(() => {
     const getAchievements = async () => {
-      if(!selectedGroup) return;
-      const fetchedGroupAchievement = await getGroupAchievementsClient(selectedGroup.id);
+      if (!selectedGroup) return;
+      const fetchedGroupAchievement = await getGroupAchievementsClient(
+        selectedGroup.id
+      );
       setGroupAchievements(fetchedGroupAchievement);
+    };
+    if (selectedGroup) {
+      setSelectedAchievement;
+      getAchievements();
     }
-    if(selectedGroup) {
-      setSelectedAchievement
-      getAchievements();      
-    }
-  }
-  , [selectedGroup]);
-  
-  
+  }, [selectedGroup]);
+
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setLoading(true);
 
-    const result = await requestAchievement(selectedAchievement.id, params.address.toString(), data.message);
-    
-    
-    // const result = await ------({
-    //   group: selectedGroup,
-    //   achievement: selectedAchievement,
-    //   message: data.message,
-    // });
+    const result = await requestAchievement(
+      selectedAchievement.id,
+      params.address.toString(),
+      data.message
+    );
 
-     if (result) {
-       toast({
-         title: "Successfully requested to nft",
-         description: "The group leader will review your request",
-       });
-     }
+    if (result) {
+      toast({
+        title: "Successfully requested to nft",
+        description: "The group leader will review your request",
+      });
+    }
 
     setLoading(false);
   };
 
-  const dummy_nfts = [
-    {
-      id: "314fec38-e683-44e7-af35-a5cd82130ea2",
-      contract: null,
-      name: "JiyongNFT",
-      description: "내가 하사하는 NFT이니 영광으로 아시오",
-      nft_type: "sbt",
-      image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: "awards",
-      onchain: false,
-      created_at: "2023-12-30T22:32:41.165Z",
-    },
-    {
-      id: "734dd6ae-c5d6-4273-8174-c998bc29ad91",
-      contract: null,
-      name: "AvatarImage",
-      description: "AvatarImage test",
-      nft_type: "erc721",
-      image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: null,
-      onchain: false,
-      created_at: "2024-01-02T00:03:47.120Z",
-    },
-    {
-      id: "0dcd09a0-dbb4-4ecd-80f0-93c70daa52d2",
-      contract: null,
-      name: "test",
-      description: "test",
-      nft_type: "erc721",
-      image: "bafkreiexoszjqguxd3azoasc37gfgermejm54erpo7u4qj6wcpymhwoe4m",
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: null,
-      onchain: false,
-      created_at: "2024-01-02T00:10:47.462Z",
-    },
-    {
-      id: "58ea62eb-e84b-431f-b18c-2a4d952a359a",
-      contract: null,
-      name: "nft_avatar_test",
-      description: "nft_avatar_test",
-      nft_type: "erc721",
-      image: null,
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: "awards",
-      onchain: false,
-      created_at: "2024-01-02T00:13:53.667Z",
-    },
-    {
-      id: "7dfa0afa-0c84-4bac-82ce-0ff5fd1a6864",
-      contract: null,
-      name: "nft_image_test",
-      description: "image_test",
-      nft_type: "erc721",
-      image: "bafkreiexoszjqguxd3azoasc37gfgermejm54erpo7u4qj6wcpymhwoe4m",
-      avatar: null,
-      avatar_type: null,
-      type: null,
-      onchain: false,
-      created_at: "2024-01-02T00:16:28.153Z",
-    },
-    {
-      id: "702704b3-1e15-4d62-bcbe-cb7cf7c3652d",
-      contract: null,
-      name: "testtesttesttest",
-      description: "2342342",
-      nft_type: "sbt",
-      image: "bafkreih5rkiqwfp5hka56idutmgim3gq7ncijjhurxnmfpvvsmnkepm7au",
-      avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-      avatar_type: "clothes",
-      type: "edu",
-      onchain: false,
-      created_at: "2024-01-04T23:19:13.868Z",
-    },
-  ];
-
   return (
     <Dialog>
       <DialogTrigger className="ml-auto">
-        <Button size="sm" variant="secondary">요청하기</Button>
+        <Button size="sm" variant="secondary">
+          {lang.project.details.evalu.request}
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-[500px] gap-0">
-        <h3 className="mb-4 text-subhead_s">그룹에게 NFT 수상 요청하기</h3>
+        <h3 className="mb-4 text-subhead_s">
+          {lang.project.details.evalu.request_title}
+        </h3>
 
         <div className="mb-4 text-body_m">
-          공신력있는 그룹을 선택하고, 해당 그룹이 발행 가능한 NFT 상장을
-          요청해보세요.
+          {lang.project.details.evalu.request_desc}
         </div>
 
         {/* Select Group */}
         {!selectedGroup && (
           <>
             <div className="mb-3">
-              <Search placeholder="그룹 이름을 검색해보세요"></Search>
+              <Search
+                placeholder={lang.project.details.evalu.search_placeholder}
+              ></Search>
             </div>
 
             <div className="max-h-[287px] overflow-y-auto mb-6">
@@ -225,12 +150,14 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
                   );
                 })}
 
-              {filteredData.length < 1 && <div>No Group Data</div>}
+              {filteredData.length < 1 && (
+                <div>{lang.project.details.evalu.no_search_result}</div>
+              )}
             </div>
 
             <DialogClose className="flex">
               <Button size="lg" variant="secondary" className="max-w-full">
-                다음에 할게요
+                {lang.project.details.evalu.later}
               </Button>
             </DialogClose>
           </>
@@ -239,16 +166,20 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
         {/* Select Achievement */}
         {selectedGroup && !selectedAchievement && (
           <>
-            <div className="mb-3 text-title_s">요청하려는 그룹</div>
+            <div className="mb-3 text-title_s">
+              {lang.project.details.evalu.request_group}
+            </div>
 
             <div className="mb-5">
               <GroupListItem _group={selectedGroup}></GroupListItem>
             </div>
 
-            <div className="mb-3 text-title_s">발행 가능한 NFT</div>
+            <div className="mb-3 text-title_s">
+              {lang.project.details.evalu.request_nft}
+            </div>
 
             <div className="mb-6 max-h-[287px] overflow-y-auto ">
-              {groupAchievements.length > 0  &&
+              {groupAchievements.length > 0 &&
                 groupAchievements.map((nft: any, _index: number) => {
                   return (
                     <NftListItem
@@ -260,7 +191,9 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
                   );
                 })}
 
-              {groupAchievements.length < 1 && <div>No Group Data</div>}
+              {groupAchievements.length < 1 && (
+                <div>{lang.project.details.evalu.no_search_result}</div>
+              )}
             </div>
 
             <Button
@@ -272,7 +205,7 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
                 setSelectedGroup(null);
               }}
             >
-              뒤로 가기
+              {lang.project.details.evalu.back}
             </Button>
           </>
         )}
@@ -281,13 +214,17 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
 
         {selectedGroup && selectedAchievement && (
           <div>
-            <div className="mb-3 text-title_s">요청하려는 그룹</div>
+            <div className="mb-3 text-title_s">
+            {lang.project.details.evalu.request_group}
+            </div>
 
             <div className="mb-5">
               <GroupListItem _group={selectedGroup}></GroupListItem>
             </div>
 
-            <div className="mb-3 text-title_s">요청하려는 NFT</div>
+            <div className="mb-3 text-title_s">
+            {lang.project.details.evalu.request_nft}
+            </div>
 
             <div className="mb-5">
               <NftListItem achievement={selectedAchievement}></NftListItem>
@@ -304,13 +241,15 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="mb-3">요청 메세지</FormLabel>
+                        <FormLabel className="mb-3">
+                        {lang.project.details.evalu.message}
+                        </FormLabel>
                         <FormControl>
-                        <Textarea
-                          className="resize-none"
-                          placeholder="안녕하세요. 우리의 혁신적인 프로젝트를 지원해주세요."
-                          {...field}
-                        ></Textarea>
+                          <Textarea
+                            className="resize-none"
+                            placeholder={lang.project.details.evalu.message_placeholder}
+                            {...field}
+                          ></Textarea>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -323,7 +262,7 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
                       variant="secondary"
                       onClick={() => setSelectedAchievement(null)}
                     >
-                      뒤로가기
+                      {lang.project.details.evalu.back}
                     </Button>
 
                     <Button
@@ -332,7 +271,7 @@ export default function RequestNFTModal({ groups }: { groups: Club[] }) {
                       disabled={loading}
                       loading={loading}
                     >
-                      요청하기
+                      {lang.project.details.evalu.request}
                     </Button>
                   </div>
                 </form>

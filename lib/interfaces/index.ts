@@ -20,7 +20,7 @@ export interface User {
     id: number;
     full_name: string;
     country: string;
-    profession: Professions;
+    profession: PROFESSION_TYPE;
     description: string;
     app_settings: UserSettings;
   }
@@ -103,6 +103,12 @@ export enum GROUP_TYPE {
     GROUP = 'group'
   }
 
+  export enum ROLE_TYPE {
+    MEMBER = "member",
+    ADMIN = "admin",
+    CLIENT = "client",
+  }
+
   export enum ContributionType {
     DEVELOPMENT = 'development',
     DESIGN = 'design',
@@ -112,7 +118,7 @@ export enum GROUP_TYPE {
     OTHER = 'other'
   }
   
-  export enum Professions {
+  export enum PROFESSION_TYPE {
     DEVELOPMENT = 'Developer',
     PM = 'PM',
     QA_ENGINEER = 'QA Engineer',

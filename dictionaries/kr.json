@@ -144,6 +144,84 @@
       }
     },
     "details": {
+      "summary": {
+        "edit": "수정하기",
+        "desc": "프로젝트 설명"
+      },
+      "members": {
+        "title": "프로젝트 멤버",
+        "delete": "삭제하기",
+        "contribution": "기여도",
+        "delegate_admin": "관리자 권한 위임",
+        "unregistered": "성과 미등록",
+        "resgistered": "성과인증",
+        "evalu": {
+          "button": "평가하기",
+          "title": "업무/성과 평가하기",
+          "desc": "평가받는 사람의 정보와 프로젝트 정보가 일치하는지 다시 한번 확인해주세요.",
+          "eval_admin": "관리자 평가",
+          "eval_admin_desc": "이 평가는 관리자 입장에서 팀원의 성과/기여도/전문성 등을 평가하며, 팀원의 성과 인증에 가장 영향을 많이 미치는 평가 입니다. 신중하게 평가를 남겨주세요. 사실과 다른 평가를 하는 경우 피평가자의 커리어에 불이익이 생길 수 있어요.",
+          "project": "프로젝트",
+          "evaluated": "평가받는 사람",
+          "job_desc": "업무 내용",
+          "later": "나중에 할게요",
+          "go_eval": "평가하러 가기"
+        },
+        "add_works": {
+          "button": "내 성과 등록하기",
+          "title": "내 성과 등록하기",
+          "desc": "프로젝트에서 내가 결과물을 만들었던 작업 성과를 기록해보세요. 팀원, 리더, 클라이언트에게 평가받고 내 커리어를 확고하게 인증할 수 있어요.",
+          "project": "프로젝트",
+          "my_work": "내 성과",
+          "position": "내가 담당한 역할",
+          "date": "내 업무 기간",
+          "detail_work": "상세 업무 종류",
+          "detail_work_placeholder": "프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)",
+          "attribute": "업무 기여도",
+          "job_desc": "업무 내용",
+          "job_desc_placeholder": "DB 데이터 엑셀 업로드 및 일별 마케팅 대시보드 업데이트",
+          "later": "나중에 할게요",
+          "add": "등록하기",
+          "in_progress": "진행중"
+        } 
+      },
+      "links": {
+        "title": "작업물",
+        "upload": "등록하기",
+        "no_links": "등록된 작업물이 없어요."
+      },
+      "evalu": {
+        "title": "그룹 평가",
+        "request": "요청하기",
+        "no_evalu": "받은 그룹 평가 또는 NFT 수상이 없어요.",
+        "request_title": "그룹에게 NFT 수상 요청하기",
+        "request_desc": "공신력있는 그룹을 선택하고, 해당 그룹이 발행 가능한 NFT 상장을 요청해보세요.",
+        "search_placeholder": "그룹 이름을 검색해보세요",
+        "no_search_result": "검색 결과가 없습니다.",
+        "later": "다음에 할게요",
+        "request_group": "요청하려는 그룹",
+        "request_nft": "발행 가능한 NFT",
+        "back": "뒤로가기",
+        "message": "요청 메세지",
+        "message_placeholder": "안녕하세요. 우리의 혁신적인 프로젝트를 지원해주세요."
+      },
+      "waiting": {
+        "title": "참여 승인 대기중",
+        "no_people": "참여 대기중인 사람이 없어요.",
+        "reject": "거절하기",
+        "accept": "승인하기",
+        "position": "포지션",
+        "send_note":"초대 알림 보내기",
+        "just_now_joined": "방금 전 참여요청",
+        "min_ago_joined": "분 전 참여요청",
+        "hour_ago_joined": "시간 전 참여요청",
+        "day_aog_joined": "일 전 참여요청",
+        "just_now_invited": "방금 전 초대됨", 
+        "min_ago_invited": "분 전 초대됨",
+        "hour_ago_invited": "시간 전 초대됨",
+        "day_aog_invited": "일 전 초대됨"
+      },
+
       "join_project": {
         "title": "프로젝트 참여하기",
         "body": "프로젝트에서 어떤 역할을 했는지 선택하고, 리더에게 참여 요청 메세지를 보내세요. 리더가 승인하면 프로젝트 멤버가 될 수 있어요.",

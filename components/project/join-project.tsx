@@ -22,9 +22,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import { toast } from "../ui/use-toast";
+import { ROLE_TYPE } from "@/lib/interfaces";
 
 const FormSchema = z.object({
-  role: z.enum(["admin", "member", "client"], {
+  role: z.nativeEnum(ROLE_TYPE, {
     required_error: "You need to select an role",
   }),
   message: z
@@ -33,7 +34,7 @@ const FormSchema = z.object({
       message: "Message must be at least 10 characters.",
     })
     .max(200, {
-      message: "Message must not be longer than 160 characters.",
+      message: "Message must not be longer than 200 characters.",
     }),
 });
 interface JoinGroupProps {
@@ -43,8 +44,29 @@ interface JoinGroupProps {
 
 export default function JoinProject({ address, lang }: JoinGroupProps) {
   const [loading, setLoading] = useState<boolean>(false);
+
+  const joinProjectFormSchema = z.object({
+    message: z
+      .string()
+      .min(10, {
+        message: "Please send a message that is at least 10 characters.",
+      })
+      .max(200, {
+        message: "The message must not be longer than 200 characters.",
+      }),
+    role: z.nativeEnum(ROLE_TYPE),
+  });
+
+  type JoinProjectFormValues = z.infer<typeof joinProjectFormSchema>;
+
+  const defaultValues: Partial<JoinProjectFormValues> = {
+    role: ROLE_TYPE.MEMBER,
+  };
+  
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues,
   });
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -54,7 +76,7 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
     //@ts-ignore
     setLoading(true);
     //implement the logic for joina project here..
-    if(!data.role){
+    if (!data.role) {
       toast({
         title: "Error",
         description: "You need to select a role",
@@ -77,24 +99,25 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
     }
 
     setLoading(false);
-
   };
-  
+
   return (
     <Dialog>
       <DialogTrigger>
         <Button variant="primary" size="lg" className="px-5">
-          {lang.details.join_project.button}
+          {lang.project.details.join_project.button}
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
-        <h3 className="text-subhead_s font-medium">
-          {lang.details.join_project.title}
+      <DialogContent className="gap-0">
+        <h3 className="text-subhead_s mb-4">
+          {lang.project.details.join_project.title}
         </h3>
-        <p className="text-body_m text-text-secondary mb-4">
-          {lang.details.join_project.body}
+
+        <p className="text-body_m mb-6">
+          {lang.project.details.join_project.body}
         </p>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -102,37 +125,25 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
               name="role"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>{lang.details.join_project.role}</FormLabel>
+                  <FormLabel>
+                    {lang.project.details.join_project.role}
+                  </FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex flex-row space-x-6"
+                      className="flex flex-row gap-6 min-h-[3rem]"
                     >
-                      <FormItem className="flex items-center space-x-2 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="admin" />
-                        </FormControl>
-                        <FormLabel className="capitalize">
-                          {lang.details.role_type.admin}
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="member" />
-                        </FormControl>
-                        <FormLabel className="capitalize">
-                          {lang.details.role_type.member}
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="client" />
-                        </FormControl>
-                        <FormLabel className="capitalize">
-                          {lang.details.role_type.client}
-                        </FormLabel>
-                      </FormItem>
+                      {Object.values(ROLE_TYPE).map((type) => (
+                        <FormItem className="flex items-center space-y-0" key={type}>
+                          <FormControl>
+                            <RadioGroupItem value={type} />
+                          </FormControl>
+                          <FormLabel className="capitalize">
+                            {lang.project.details.role_type[type]}
+                          </FormLabel>
+                        </FormItem>
+                      ))}
                     </RadioGroup>
                   </FormControl>
                   <FormMessage />
@@ -145,15 +156,17 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{lang.details.join_project.message}</FormLabel>
+                  <FormLabel>
+                    {lang.project.details.join_project.message}
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder={lang.details.join_project.message_ex}
+                      placeholder={lang.project.details.join_project.message_ex}
                       className="resize-none"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription className="text-right">
+                  <FormDescription className={`text-right ${messageValue.length > 200 && "text-state-error"}`}>
                     {messageValue.length} / 200
                   </FormDescription>
                   <FormMessage />
@@ -164,19 +177,19 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
               <DialogClose asChild>
                 <Button
                   variant="secondary"
+                  size="lg"
                   ref={closeButtonRef}
-                  className="max-w-[212px] grow"
                 >
-                  {lang.details.join_project.back}
+                  {lang.project.details.join_project.back}
                 </Button>
               </DialogClose>
               <Button
                 type="submit"
-                className="bg-accent-secondary max-w-[212px] grow"
+                size="lg"
                 loading={loading}
                 disabled={loading}
               >
-                {lang.details.join_project.submit}
+                {lang.project.details.join_project.submit}
               </Button>
             </div>
           </form>
