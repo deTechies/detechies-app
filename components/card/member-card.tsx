@@ -49,7 +49,7 @@ export default function MemberCard({
           )}
 
           <Badge variant={"info"} shape="outline">
-            {info.profile_details.profession && lang.interface.profession_type[info.profile_details.profession] || "미설정"}
+            {info.profile_details?.profession && lang.interface.profession_type[info.profile_details.profession] || "미설정"}
           </Badge>
         </div>
       </div>
