@@ -58,6 +58,7 @@ export default async function Connections({
           {github ? (
             <Link
               className="text-sm text-text-secondary font-light"
+              aria-disabled="true"
               href={`
                         https://github.com`}
             >
