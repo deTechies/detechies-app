@@ -1,12 +1,12 @@
 "use client";
 import { defaultAvatar } from "@/lib/constants";
 // import useFetchData from "@/lib/useFetchData";
+import { User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { Address } from "wagmi";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";
-import { User } from "@/lib/interfaces";
 
 export default function MemberCard({
   address,
@@ -49,7 +49,7 @@ export default function MemberCard({
           )}
 
           <Badge variant={"info"} shape="outline">
-            {info.profile_details && lang.interface.profession_type[info.profile_details.profession] || "미설정"}
+            {info.profile_details.profession && lang.interface.profession_type[info.profile_details.profession] || "미설정"}
           </Badge>
         </div>
       </div>

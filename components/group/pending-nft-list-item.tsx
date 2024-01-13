@@ -156,7 +156,7 @@ export default function PendingMemberListItem({
 
 
           <Badge shape="outline" variant="info">
-            {nft.user
+            {nft.user.profile_details.profession
               ? lang.interface.profession_type[
                   nft.user.profile_details.profession
                 ]
