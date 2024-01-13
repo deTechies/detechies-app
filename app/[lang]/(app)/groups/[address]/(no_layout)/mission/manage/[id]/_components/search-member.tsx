@@ -2,37 +2,11 @@
 import Search from "@/components/extra/search";
 import InlineMemberItem from "@/components/members/inline-member-item";
 import { Card } from "@/components/ui/card";
+import { ProjectMember } from "@/lib/interfaces";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-const dummyMembers: any[] = [
-  {
-    memberId: "M001",
-    display_name: "Robin",
-    role: "Administrator",
-  },
-  {
-    memberId: "M001",
-    display_name: "Robin",
-    role: "Administrator",
-  },
-  {
-    memberId: "M001",
-    display_name: "Robin",
-    role: "Administrator",
-  },
-  {
-    memberId: "M001",
-    display_name: "Robin",
-    role: "Administrator",
-  },
-  {
-    memberId: "M001",
-    display_name: "Robin",
-    role: "Administrator",
-  },
-  // Add more members as needed
-];
+
 export default function SearchMember({
   membersList,
   lang,
@@ -57,9 +31,10 @@ export default function SearchMember({
   const selectedMember = searchParams.get("memberId");
 
   //filter members on uniquenesss
-  const members = membersList.filter((member, index, self) => {
+
+   const members = membersList.filter((member, index, self) => {
     return index === self.findIndex((m) => m.user.id === member.user.id);
-  });
+  }); 
 
   const onSelectUser = (memberId: string) => {
     router.push(pathname + "?" + createQueryString("memberId", memberId));
@@ -72,7 +47,7 @@ export default function SearchMember({
       <Search placeholder={lang.mission.manage.search_placeholder} />
       <div className="flex flex-col gap-3">
         {members.length > 0 ? (
-          members.map((details, index) => (
+          members.map((details:ProjectMember, index:number) => (
             <button
               key={index}
               onClick={() => {
@@ -81,7 +56,7 @@ export default function SearchMember({
             >
               <InlineMemberItem
                 active={selectedMember === details.user.id}
-                avatar={details.user.avatar_link}
+                avatar={details.user.avatar}
                 display_name={details.user.display_name}
                 memberId={details.user.wallet}
               />

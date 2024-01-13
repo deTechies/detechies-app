@@ -75,7 +75,9 @@ export enum GROUP_TYPE {
   export enum AVATAR_TYPE {
     CLOTHES = 'clothes', 
     BACKGROUND = 'background',
-    ACCESSORY = 'accessory'
+    ACCESSORY = 'accessory',
+    HAIR = 'hair',
+    FACE = 'face',
   }
   
   export enum SBT_TYPE{

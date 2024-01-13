@@ -6,28 +6,37 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { ABI } from "@/lib/constants";
 import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
 import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Address, useContractRead } from "wagmi";
 import NftListItem from "../card/nft-list-item";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 export default function DisplayNFT({
   details,
+  contract,
   showSelect,
   lang,
 }: {
   details: Achievement;
+  contract?: string;
   showSelect?: boolean;
   lang?: any;
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const [showFull, setShowFull] = useState(false);
   const [showingImage, setShowingImage] = useState("");
+  const { data, error } = useContractRead({
+    address: contract as Address,
+    abi: ABI.group,
+    functionName: "achievementContract",
+  });
 
   const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
 
@@ -48,7 +57,14 @@ export default function DisplayNFT({
   };
 
   const onClickContract = () => {
-    //
+    if (!contract) {
+      return;
+    }
+    
+    //get the achievment contract 
+    console.log(data)
+
+    window.open(`https://mumbai.polygonscan.com/nft/${data}/${details.tokenId}`, "_blank");
   };
 
   const handleRequestNFT = async () => {
@@ -65,9 +81,8 @@ export default function DisplayNFT({
     setRequesting(false);
   };
 
-  if(showSelect){
-    return <NftListItem item={details} showSelect={showSelect} lang={lang} />
-      
+  if (showSelect) {
+    return <NftListItem item={details} showSelect={showSelect} lang={lang} />;
   }
   return (
     <Dialog>
@@ -80,7 +95,7 @@ export default function DisplayNFT({
           <span className="text-subhead_s">{details.name}</span>
 
           <Button variant="secondary" size="sm" onClick={onClickContract}>
-            {truncateMiddle("aaaaaaaaaaaaaaaaaaa", 13)}
+            {contract ? truncateMiddle(contract, 13) : "no contract"}
           </Button>
         </div>
 

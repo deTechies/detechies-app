@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { sendVerifyEmail } from "@/lib/data/user";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -106,6 +106,14 @@ export default function EmailVerification({
             placeholder={lang.onboard.verify_email.email_verify.code_placeholder}
           />
         </div>
+        <div className="flex gap-2">
+        <Button
+          onClick={() => signOut()}
+          variant="secondary"
+          className="py-3 rounded-sm"
+        >
+          Sign out
+        </Button>
         <Button
           onClick={verifyEmail}
           disabled={!isValid}
@@ -113,6 +121,8 @@ export default function EmailVerification({
         >
           {lang.onboard.verify_email.email_verify.title}
         </Button>
+        </div>
+       
       </div>
     </main>
   );

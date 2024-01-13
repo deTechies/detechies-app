@@ -11,7 +11,7 @@ interface MemberListDetails {
   active?: boolean;
 }
 
-export default async function InlineMemberItem({
+export default function InlineMemberItem({
   avatar,
   display_name,
   role,

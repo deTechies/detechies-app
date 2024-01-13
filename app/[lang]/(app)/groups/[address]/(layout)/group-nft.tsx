@@ -10,11 +10,13 @@ export default function GroupNFT({
   address,
   isCreator,
   achievements,
+  contract,
   lang,
 }: {
   address: any;
   isCreator?: boolean;
   achievements: Achievement[];
+  contract: string;
   lang: any;
 }) {
   const pathName = usePathname();
@@ -36,7 +38,7 @@ export default function GroupNFT({
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {achievements &&
           achievements.map((item: Achievement, index: number) => (
-            <DisplayNFT details={item} key={index} lang={lang} />
+            <DisplayNFT details={item} key={index} lang={lang} contract={contract} />
           ))}
       </div>
 
