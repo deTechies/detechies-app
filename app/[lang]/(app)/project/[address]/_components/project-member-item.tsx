@@ -49,12 +49,15 @@ export default async function ProjectMemberItem({
             <header className="flex items-center justify-between h-full gap-3">
               <h5 className="text-title_m">
                 {details.user?.display_name} |{" "}
-                {
-                  details.role == 'admin' && details.role
-                }
-                {details.works.length < 1 && (
-                  <Badge className="ml-2.5">
-                    {lang.details?.members?.unregistered}
+                {details.role == "admin" &&
+                  lang.interface.role_type[details.role]}
+                {details.works.length < 1 ? (
+                  <Badge shape="sm" className="px-1.5 py-0.5 ml-3">
+                    {lang.project.details.members.unregistered}
+                  </Badge>
+                ) : (
+                  <Badge shape="sm" className="px-1.5 py-0.5 ml-3">
+                    {lang.project.details.members.registered} ({details.works.length})
                   </Badge>
                 )}
               </h5>
@@ -63,17 +66,20 @@ export default async function ProjectMemberItem({
                 {session?.web3.address == details.user.wallet ? (
                   <>
                     {userRole != "client" && details.works.length < 1 && (
-                      <ProjectContributionInvite project={details.project} lang={lang}/>
+                      <ProjectContributionInvite
+                        project={details.project}
+                        lang={lang}
+                      />
                       // <ProjectContribution project={details.project} />
                     )}
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
                         <Button size="sm" variant="secondary">
-                          수정하기
+                          {lang.project.details.summary.edit}
                         </Button>
-                        
+
                         <Button size="sm" variant="secondary">
-                          삭제하기
+                          {lang.project.details.members.delete}
                         </Button>
                       </div>
                     )}
@@ -81,7 +87,10 @@ export default async function ProjectMemberItem({
                 ) : (
                   <>
                     {userRole != "none" && details.works.length > 0 && (
-                      <ProjectMemberEvaluate projectMember={details} />
+                      <ProjectMemberEvaluate
+                        projectMember={details}
+                        lang={lang}
+                      />
                     )}
                     {(userRole == "admin" || userRole == "member") && (
                       <DropdownMenu>
@@ -92,7 +101,7 @@ export default async function ProjectMemberItem({
                           <div className="flex flex-col gap-3 px-3 my-4 text-left">
                             <RequestEvaluation memberId={details.memberId} />
                             <DropdownMenuItem>
-                              관리자 권한 위임
+                              {lang.project.details.members.delegate_admin}
                             </DropdownMenuItem>
                             <DeleteMember memberId={details.memberId} />
                           </div>

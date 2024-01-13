@@ -21,7 +21,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { updateUserProfile } from "@/lib/data/profile";
-import { Professions } from "@/lib/interfaces";
+import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@radix-ui/react-select";
 import { XIcon } from "lucide-react";
@@ -187,7 +187,7 @@ export default function EditProfile({
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              {Object.values(Professions).map((type) => (
+                              {Object.values(PROFESSION_TYPE).map((type) => (
                                 <SelectItem key={type} value={type}>
                                   {type}
                                 </SelectItem>

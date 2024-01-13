@@ -31,15 +31,15 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
 import { addMembersWork } from "@/lib/data/project";
-import { ContributionType } from "@/lib/interfaces";
+import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { useRef, useState } from "react";
 const contributionFormSchema = z.object({
   begin_date: z.string(),
   end_date: z.string().optional(),
-  description: z.string().max(160).min(4),
+  description: z.string().max(5000).min(4),
   percentage: z.array(z.number().min(0).max(100)),
-  name: z.nativeEnum(ContributionType, {
-    required_error: "You need to select a  type.",
+  name: z.nativeEnum(PROFESSION_TYPE, {
+    required_error: "You need to select a type.",
   }),
   present: z.boolean().default(false),
   valid: z.boolean().optional(),
@@ -55,16 +55,16 @@ type ProjectContributionFormProps = {
 export default function ProjectContributionInviteForm({
   projectId,
   lang,
-  setInvite
+  setInvite,
 }: {
-    projectId:string;
-    lang:any;
-    setInvite: () => void;
+  projectId: string;
+  lang: any;
+  setInvite: () => void;
 }) {
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
     defaultValues: {
-      name: ContributionType.DEVELOPMENT,
+      name: PROFESSION_TYPE.DEVELOPMENT,
       percentage: [0],
       present: false,
       valid: false,
@@ -79,7 +79,6 @@ export default function ProjectContributionInviteForm({
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
 
   const [loading, setLoading] = useState(false);
-
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
@@ -96,12 +95,8 @@ export default function ProjectContributionInviteForm({
     setNewTag(e.target.value);
   };
 
-
-
-
   const onSubmit = async (values: ContributionFormData) => {
     console.log(values);
-
 
     try {
       const result = await addMembersWork(values, projectId);
@@ -113,7 +108,7 @@ export default function ProjectContributionInviteForm({
 
       if (closeButtonRef.current) {
         // closeButtonRef.current.click();
-        setInvite()
+        setInvite();
       }
     } catch (error) {
       toast({
@@ -125,8 +120,7 @@ export default function ProjectContributionInviteForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="spaxe-y-8 ">
-        <main className="border p-5 rounded-sm space-y-8 mb-6">
-          
+        <main className="border border-border-div p-5 rounded-md space-y-8 mb-6">
           <section className="flex flex-col gap-5">
             <div className="grid grid-cols-1 gap-4">
               <FormField
@@ -134,7 +128,9 @@ export default function ProjectContributionInviteForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>내가 담당한 역할</FormLabel>
+                    <FormLabel>
+                      {lang.project.details.members.add_works.position}
+                    </FormLabel>
 
                     <Select
                       onValueChange={field.onChange}
@@ -146,9 +142,9 @@ export default function ProjectContributionInviteForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {Object.values(ContributionType).map((type) => (
+                        {Object.values(PROFESSION_TYPE).map((type) => (
                           <SelectItem key={type} value={type}>
-                            {type}
+                            {lang.interface.profession_type[type]}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -160,14 +156,16 @@ export default function ProjectContributionInviteForm({
             </div>
             <div className="flex flex-col gap-3 w-full">
               <div className="flex justify-between">
-                <Label>내 업무 기간</Label>
+                <Label>{lang.project.details.members.add_works.date}</Label>
                 <div className="flex items-center gap-1">
                   <Checkbox
                     onCheckedChange={(e: boolean) => {
                       form.setValue("present", e.valueOf());
                     }}
                   />
-                  <Label>진행중</Label>
+                  <Label>
+                    {lang.project.details.members.add_works.in_progress}
+                  </Label>
                 </div>
               </div>
 
@@ -206,7 +204,10 @@ export default function ProjectContributionInviteForm({
             </div>
 
             <FormItem>
-              <FormLabel>Tags</FormLabel>
+              <FormLabel>
+                {lang.project.details.members.add_works.detail_work}
+              </FormLabel>
+
               <FormControl>
                 <Input
                   placeholder="Type and press enter"
@@ -216,7 +217,7 @@ export default function ProjectContributionInviteForm({
                 />
               </FormControl>
               <div>
-                {form.watch("tags")?.map((tag:any, index) => (
+                {form.watch("tags")?.map((tag: any, index) => (
                   <Badge
                     key={index}
                     className="bg-background-layer-1 border border-accent-primary px-3 py-2 rounded-full text-xs mr-2"
@@ -237,7 +238,9 @@ export default function ProjectContributionInviteForm({
               name="percentage"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>업무 기여도</FormLabel>
+                  <FormLabel>
+                    {lang.project.details.members.add_works.attribute}
+                  </FormLabel>
                   <div className="flex w-full justify-between text-xs text-text-secondary">
                     <span>0</span>
                     <span className="content-center w-full text-right">50</span>
@@ -265,10 +268,15 @@ export default function ProjectContributionInviteForm({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>업무 내용</FormLabel>
+                  <FormLabel>
+                    {lang.project.details.members.add_works.job_desc}
+                  </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell more about your project"
+                      placeholder={
+                        lang.project.details.members.add_works
+                          .job_desc_placeholder
+                      }
                       className="resize-none"
                       {...field}
                     />
@@ -293,7 +301,7 @@ export default function ProjectContributionInviteForm({
               className="grow max-w-[212px]"
               ref={closeButtonRef}
             >
-              나중에 할게요
+              {lang.project.details.members.add_works.later}
             </Button>
           </DialogClose>
           <Button
@@ -303,11 +311,10 @@ export default function ProjectContributionInviteForm({
             variant="default"
             className="grow max-w-[212px]"
           >
-            등록하기
+            {lang.project.details.members.add_works.add}
           </Button>
         </div>
       </form>
-     
     </Form>
   );
 }

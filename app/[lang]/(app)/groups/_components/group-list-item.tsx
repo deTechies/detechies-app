@@ -10,7 +10,7 @@ import { Club } from "@/lib/interfaces";
 const GroupListItem = React.memo(
   ({ details, lang }: { details: Club; lang: any }) => {
     return (
-      <Link href={`groups/${details.id}`}>
+      <Link href={`groups/${details.id}`} className="truncate">
         <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] pb-6 px-6 gap-0">
           <section className="flex flex-col items-center justify-center max-w-full text-center">
             <Avatar className="w-24 h-24 aspect-square bg-[#C7E2FF] mb-2">

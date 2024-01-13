@@ -31,16 +31,16 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
 import { addMembersWork } from "@/lib/data/project";
-import { ContributionType } from "@/lib/interfaces";
+import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { useRef, useState } from "react";
 
 const contributionFormSchema = z.object({
   begin_date: z.string(),
   end_date: z.string().optional(),
-  description: z.string().max(160).min(4),
+  description: z.string().max(5000).min(4),
   percentage: z.array(z.number().min(0).max(100)),
-  name: z.nativeEnum(ContributionType, {
-    required_error: "You need to select a  type.",
+  name: z.nativeEnum(PROFESSION_TYPE, {
+    required_error: "You need to select a type.",
   }),
   present: z.boolean().default(false),
   valid: z.boolean().optional(),
@@ -59,7 +59,7 @@ export default function ProjectContributionForm({
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
     defaultValues: {
-      name: ContributionType.DEVELOPMENT,
+      name: PROFESSION_TYPE.DEVELOPMENT,
       percentage: [0],
       present: false,
       valid: false,
@@ -134,7 +134,7 @@ export default function ProjectContributionForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {Object.values(ContributionType).map((type) => (
+                        {Object.values(PROFESSION_TYPE).map((type) => (
                           <SelectItem key={type} value={type}>
                             {type}
                           </SelectItem>

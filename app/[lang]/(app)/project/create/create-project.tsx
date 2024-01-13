@@ -47,7 +47,7 @@ const projectFormSchema = z.object({
     }),
   begin_date: z.string(),
   end_date: z.string(),
-  description: z.string().max(160).min(4),
+  description: z.string().max(5000).min(4),
   tags: z.array(z.string().optional()),
   scope: z.string().optional(),
   image: z.string().optional(),
@@ -99,7 +99,8 @@ export default function CreateProjectForm({
     setLoading(true);
 
     if (file) {
-      data.image = await uploadContent(file);
+      const uploadedImage = await uploadContent(file);
+      data.image = uploadedImage ?? "";
     }
 
     const result = await createProject({
