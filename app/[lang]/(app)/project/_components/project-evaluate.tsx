@@ -11,9 +11,11 @@ import ProjectSwitcher from "./project-switcher";
 
 type ProjectContributionProps = {
   projectMember: ProjectMember;
+  lang: any;
 };
 export default function ProjectMemberEvaluate({
   projectMember,
+  lang,
 }: ProjectContributionProps) {
   const router = useRouter();
 
@@ -21,7 +23,7 @@ export default function ProjectMemberEvaluate({
     <Dialog>
       <DialogTrigger>
         <Button size="sm" variant="primary">
-          평가하기
+          {lang.project.details.members.evalu.button}
         </Button>
       </DialogTrigger>
 
@@ -29,45 +31,50 @@ export default function ProjectMemberEvaluate({
         <div className="inline-flex flex-col self-stretch gap-6">
           <div className="flex flex-col gap-4 ">
             <h1 className="text-xl font-semibold leading-7">
-              업무/성과 평가하기
+              {lang.project.details.members.evalu.title}
             </h1>
 
             <h5 className="text-body_m">
-              평가받는 사람의 정보와 프로젝트 정보가 일치하는지 다시 한번 확인
-              해주세요.
+              {lang.project.details.members.evalu.desc}
             </h5>
           </div>
 
           <Alert variant="info">
-            <AlertTitle className="text-state-info">관리자 평가</AlertTitle>
+            <AlertTitle className="text-state-info">
+              {lang.project.details.members.evalu.eval_admin}
+            </AlertTitle>
 
             <AlertDescription>
-              이 평가는 관리자 입장에서 팀원의 성과/기여도/전문성 등을 평가하며,
-              팀원의 성과 인증에 가장 영향을 많이 미치는 평가 입니다. 신중하게
-              평가를 남겨주세요. 사실과 다른 평가를 하는 경우 윤창진님의
-              커리어에 불이익이 생길 수 있어요.
+              {lang.project.details.members.evalu.desc}
             </AlertDescription>
           </Alert>
 
           <div className="flex flex-col self-stretch gap-4">
-            <h3 className="text-title_m">프로젝트</h3>
+            <h3 className="text-title_m">
+              {lang.project.details.members.evalu.project}
+            </h3>
             <ProjectSwitcher project={projectMember.project} />
           </div>
 
           <div className="flex flex-col self-stretch gap-4">
-            <h3 className="text-title_m">평가받는 사람</h3>
+            <h3 className="text-title_m">
+              {lang.project.details.members.evalu.evaluated}
+            </h3>
             <ProjectMemberInline projectMember={projectMember} />
           </div>
           <div className="flex flex-col self-stretch gap-4">
             <div className="text-base font-semibold leading-tight tracking-tight text-neutral-900">
-              업무 내용
+              {lang.project.details.members.evalu.job_desc}
             </div>
           </div>
 
           {projectMember.works.length > 0 &&
             projectMember.works.map((work, index: number) => {
               return (
-                <div className="p-5 border rounded-md border-border-div" key={index}>
+                <div
+                  className="p-5 border rounded-md border-border-div"
+                  key={index}
+                >
                   <div className="flex gap-2 mb-5">
                     {work.tags.length > 0 &&
                       work.tags.map((tag: string, index: number) => (
@@ -77,9 +84,7 @@ export default function ProjectMemberEvaluate({
                       ))}
                   </div>
 
-                  <div className="text-body_m">
-                    {work.description}
-                  </div>
+                  <div className="text-body_m">{work.description}</div>
                 </div>
               );
             })}
@@ -87,10 +92,10 @@ export default function ProjectMemberEvaluate({
         <div className="flex justify-center gap-2">
           <DialogClose className="max-w-[212px] grow w-full">
             <Button variant="secondary" size="lg" className="w-full">
-              나중에 할게요
+              {lang.project.details.members.evalu.later}
             </Button>
           </DialogClose>
-          
+
           <Button
             variant={"primary"}
             size="lg"
@@ -98,8 +103,7 @@ export default function ProjectMemberEvaluate({
               router.push(`/work/${projectMember.works[0].workId}`);
             }}
           >
-            {/* to evaluation */}
-            평가하러 가기
+            {lang.project.details.members.evalu.go_eval}
           </Button>
         </div>
       </DialogContent>

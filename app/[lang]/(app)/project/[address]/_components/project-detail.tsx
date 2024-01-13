@@ -47,7 +47,9 @@ export default function ProjectDetail({
                 className="ml-auto shrink-0"
               >
                 <Button variant="secondary" size="sm">
-                  <span className="mr-2">수정하기</span>
+                  <span className="mr-2">
+                    {lang.project.details.summary.edit}
+                  </span>
                   <PenSquare size={16} className="inline-block " />
                 </Button>
               </Link>
@@ -79,7 +81,7 @@ export default function ProjectDetail({
       <div className="flex flex-col w-full gap-5">
         <div className="flex items-center justify-between">
           <h3 className="text-subhead_l ">
-            {lang.project.details.project_description}
+            {lang.project.details.summary.desc}
           </h3>
         </div>
 

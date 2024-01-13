@@ -45,9 +45,9 @@ const projectFormSchema = z.object({
     }),
   begin_date: z.string(),
   end_date: z.string(),
-  description: z.string().max(160).min(4),
+  description: z.string().max(5000).min(4),
   type: z.nativeEnum(ProjectType, {
-    required_error: "You need to select a  type.",
+    required_error: "You need to select a type.",
   }),
   category: z.nativeEnum(ProjectCategory, {
     required_error: "You need to select a category.",
@@ -146,7 +146,7 @@ export default function CreateProject() {
       </DialogTrigger>
 
       <DialogContent>
-        <h3 className="text-subhead_s font-medium mb-4">Create Project</h3>
+        <h3 className="text-subhead_s mb-4">Create Project</h3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

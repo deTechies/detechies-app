@@ -36,7 +36,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     const search = current.toString();
     const query = search ? `?${search}` : "";
 
-    router.push(`${pathname}${query}`);
+    router.replace(`${pathname}${query}`);
   };
 
   const onSelectPrivacy = (_type: PrivacyType) => {
@@ -51,7 +51,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     const search = current.toString();
     const query = search ? `?${search}` : "";
 
-    router.push(`${pathname}${query}`);
+    router.replace(`${pathname}${query}`);
   };
 
   const onChangeMyProject = (_is_my_project: boolean) => {
@@ -66,7 +66,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     const search = current.toString();
     const query = search ? `?${search}` : "";
 
-    router.push(`${pathname}${query}`);
+    router.replace(`${pathname}${query}`);
   };
 
   return (

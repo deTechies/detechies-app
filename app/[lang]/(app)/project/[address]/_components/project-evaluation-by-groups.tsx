@@ -9,8 +9,10 @@ import Image from "next/image";
 
 export default async function ProjectEvaluationByGroups({
   details,
+  lang,
 }: {
   details: any;
+  lang: any;
 }) {
   //pretty simple and straightforward, we just going to check which nfts the project holds in order to showcase htem.
   //we want top check if we own any of the data is pending..
@@ -23,59 +25,16 @@ export default async function ProjectEvaluationByGroups({
   
   if (!groups) return null;
 
-  // const dummy_nfts = [
-  //   {
-  //     id: "314fec38-e683-44e7-af35-a5cd82130ea2",
-  //     contract: null,
-  //     name: "JiyongNFT",
-  //     description: "내가 하사하는 NFT이니 영광으로 아시오",
-  //     nft_type: "sbt",
-  //     image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
-  //     avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-  //     avatar_type: "clothes",
-  //     type: "awards",
-  //     onchain: false,
-  //     created_at: "2023-12-30T22:32:41.165Z",
-  //   },
-  //   {
-  //     id: "734dd6ae-c5d6-4273-8174-c998bc29ad91",
-  //     contract: null,
-  //     name: "AvatarImage",
-  //     description: "AvatarImage test",
-  //     nft_type: "erc721",
-  //     image: "bafybeiakpczli6q36a2dcx3euxyq4zxdwlv5yviumby35pbjj7yzauilty",
-  //     avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-  //     avatar_type: "clothes",
-  //     type: null,
-  //     onchain: false,
-  //     created_at: "2024-01-02T00:03:47.120Z",
-  //   },
-  //   {
-  //     id: "0dcd09a0-dbb4-4ecd-80f0-93c70daa52d2",
-  //     contract: null,
-  //     name: "test",
-  //     description: "test",
-  //     nft_type: "erc721",
-  //     image: "bafkreiexoszjqguxd3azoasc37gfgermejm54erpo7u4qj6wcpymhwoe4m",
-  //     avatar: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
-  //     avatar_type: "clothes",
-  //     type: null,
-  //     onchain: false,
-  //     created_at: "2024-01-02T00:10:47.462Z",
-  //   },
-  // ];
-
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">
       <CardHeader className="flex flex-wrap items-center justify-between">
         <h5 className="text-subhead_s">
-          {/* evaluation by group */}
-          그룹 평가
+          {lang.project.details.evalu.title}
         </h5>
 
         {(details.userRole === "member" ||
           details.userRole === "admin" ||
-          details.userRole === "client") && <RequestNFTModal groups={groups} />}
+          details.userRole === "client") && <RequestNFTModal groups={groups} lang={lang}/>}
       </CardHeader>
 
       <CardContent>
@@ -131,7 +90,7 @@ export default async function ProjectEvaluationByGroups({
             )
           ) : (
             <h5 className="text-center text-text-secondary truncate text-label_m">
-              받은 그룹 평가 또는 NFT 수상이 없어요.
+              {lang.project.details.evalu.no_evalu}
             </h5>
           )}
         </div>

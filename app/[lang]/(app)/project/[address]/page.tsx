@@ -51,17 +51,18 @@ export default async function ProjectDetailPage({
         <ProjectMembers
           details={data}
           projectId={params.address}
-          lang={dictionary.project}
+          lang={dictionary}
         />
       </section>
 
       <section className="flex flex-col gap-5 truncate">
-        <ProjectLinks details={data} />
-        <ProjectEvaluation details={data} />
+        <ProjectLinks details={data} lang={dictionary} />
+        <ProjectEvaluation details={data} lang={dictionary} />
         {data?.userRole === "admin" && (
           <PendingMemberList
             projectId={params.address}
             userRole={data.userRole}
+            lang={dictionary}
           />
         )}
       </section>
