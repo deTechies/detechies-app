@@ -25,7 +25,7 @@ export default async function ProjectLinks({
       </CardHeader>
 
       <CardContent> 
-        {details.links.length < 0 ? (
+        {details.links.length > 0 ? (
           <Links works={details.links} />
         ) : (
           <p className="text-center text-label_m text-text-secondary">
