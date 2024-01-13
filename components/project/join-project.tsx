@@ -77,7 +77,9 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
     }
 
     setLoading(false);
+
   };
+  
   return (
     <Dialog>
       <DialogTrigger>
@@ -171,6 +173,8 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
               <Button
                 type="submit"
                 className="bg-accent-secondary max-w-[212px] grow"
+                loading={loading}
+                disabled={loading}
               >
                 {lang.details.join_project.submit}
               </Button>

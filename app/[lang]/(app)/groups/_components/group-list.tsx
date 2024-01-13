@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
+import { Club } from "@/lib/interfaces";
 
 //TODO: Add type dependency
 export default function GroupList({
@@ -12,7 +13,7 @@ export default function GroupList({
   profileWallet,
   lang,
 }: {
-  groups: any[];
+  groups: Club[];
   profileWallet: string;
   lang: any;
 }) {

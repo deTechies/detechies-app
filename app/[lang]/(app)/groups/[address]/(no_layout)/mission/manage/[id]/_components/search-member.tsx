@@ -57,6 +57,7 @@ export default function SearchMember({
               <InlineMemberItem
                 active={selectedMember === details.user.id}
                 avatar={details.user.avatar}
+                info={details.user} 
                 display_name={details.user.display_name}
                 memberId={details.user.wallet}
               />

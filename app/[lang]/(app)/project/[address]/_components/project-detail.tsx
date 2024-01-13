@@ -38,7 +38,7 @@ export default function ProjectDetail({
           alt="project_image_holder"
         />
         <div className="flex flex-col gap-4 grow">
-          <div className="flex flex-wrap items-start justify-between">
+          <div className="flex flex-wrap items-start justify-between gap-3">
             <h1 className="text-heading_s">{data.name}</h1>
 
             {details.userRole == "admin" && (
@@ -55,7 +55,7 @@ export default function ProjectDetail({
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-4 text-label_l text-text-secondary">
-              {details.type}
+              {lang.interface.project_type[details.type]}
             </div>
 
             <div className="flex items-center gap-1 text-label_l text-text-secondary">
@@ -79,7 +79,7 @@ export default function ProjectDetail({
       <div className="flex flex-col w-full gap-5">
         <div className="flex items-center justify-between">
           <h3 className="text-subhead_l ">
-            {lang.details.project_description}
+            {lang.project.details.project_description}
           </h3>
         </div>
 
@@ -97,7 +97,7 @@ export default function ProjectDetail({
             }}
             className="flex items-center gap-2 mx-auto text-label_m text-text-secondary w-fit"
           >
-            {showFull ? lang.details.hide : lang.details.show_more}
+            {showFull ? lang.project.details.hide : lang.project.details.show_more}
             {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
           </button>
         )}

@@ -13,7 +13,6 @@ export default async function EditProfilePage({
   const profile = await getUserProfile();
   
 
-
   return (
     <>
       <EditProfile

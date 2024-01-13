@@ -35,7 +35,7 @@ export default function PendingMemberListItem({
     abi: ABI.group,
     functionName: "distributeAchievement",
   });
-  
+
   const {
     data: projectData,
     isLoading: projectLoading,
@@ -49,7 +49,7 @@ export default function PendingMemberListItem({
   });
   const [loading, setLoading] = useState(false);
 
-  const {isFetched: projectFinished} = useWaitForTransaction(projectData);
+  const { isFetched: projectFinished } = useWaitForTransaction(projectData);
   const { isFetched } = useWaitForTransaction(data);
 
   useEffect(() => {
@@ -59,8 +59,8 @@ export default function PendingMemberListItem({
         title: "Success",
         description: "succesfully distirbuted the nft. ",
       });
-      
-      setLoading(false)
+
+      setLoading(false);
     };
 
     if (isFetched) {
@@ -68,11 +68,11 @@ export default function PendingMemberListItem({
       router.refresh();
     }
   }, [isFetched, data, nft.id, router]);
-  
+
   useEffect(() => {
     const submitProjectNFT = async () => {
-      const result = await rewardProjectNFT(nft.id)
-      setLoading(false)
+      const result = await rewardProjectNFT(nft.id);
+      setLoading(false);
       toast({
         title: "Success",
         description: "succesfully distirbuted the nft. ",
@@ -84,31 +84,32 @@ export default function PendingMemberListItem({
       router.refresh();
     }
   }, [projectFinished, projectData, nft.id, router]);
-  
+
   useEffect(() => {
     if (isError || projectError) {
-      setLoading(false)
+      setLoading(false);
     }
   }, [isError, projectError]);
 
-
   const acceptNFT = async () => {
-    setLoading(true)
+    setLoading(true);
     if (!nft.achievement.tokenId || !contract) {
       toast({
         title: "Error",
         description: "Failed to accept NFT",
       });
     }
-    
-    if(nft.project) {
-      //get the list of all the project members wallets. 
-      const userWallets = nft.project.members.map((member) => member.user.wallet);
-      
+
+    if (nft.project) {
+      //get the list of all the project members wallets.
+      const userWallets = nft.project.members.map(
+        (member) => member.user.wallet
+      );
+
       await rewardProject({
         args: [nft.achievement.tokenId, userWallets],
       });
-    }else{
+    } else {
       await distributeAchievement({
         args: [nft.achievement.tokenId, nft.user.wallet, 1],
       });
@@ -116,7 +117,7 @@ export default function PendingMemberListItem({
 
     //make sure that it works correct so we can update the nft data.
   };
-  
+
   const rejectNFT = async () => {
     //
     toast({
@@ -124,10 +125,12 @@ export default function PendingMemberListItem({
       description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
     });
   };
-  
+
   return (
     <div
-      className={`grid grid-cols-[262px_1fr_90px_auto] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center ${loading && 'animate-pulse'}`}
+      className={`grid grid-cols-[262px_1fr_90px_auto] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center ${
+        loading && "animate-pulse"
+      }`}
       // onClick={() => router.push(`/nfts/${nft.user.id}`)}
     >
       <div className="flex items-center gap-3">
@@ -147,10 +150,17 @@ export default function PendingMemberListItem({
         </div>
 
         <div>
-          <div className="mb-2 text-title_l">{nft.project ? nft.project.name : nft.user?.display_name}</div>
+          <div className="mb-2 text-title_l">
+            {nft.user ? nft.user.display_name : nft.project.name}
+          </div>
+
 
           <Badge shape="outline" variant="info">
-            {nft.project ? 'project' : "user"}
+            {nft.user
+              ? lang.interface.profession_type[
+                  nft.user.profile_details.profession
+                ]
+              : lang.interface.project_type[nft.project.type]}
           </Badge>
         </div>
       </div>
@@ -166,7 +176,9 @@ export default function PendingMemberListItem({
         </div>
 
         <div>
-          <div className="mb-2 text-title_l">{nft.achievement.name}</div>
+          <div className="mb-2 text-title_l">
+            {nft.achievement?.name && nft.achievement.name}
+          </div>
 
           <div className="flex gap-1">
             {getNftChips(nft.achievement) &&
@@ -198,7 +210,6 @@ export default function PendingMemberListItem({
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
-          
         >
           <X className="w-6 h-6"></X>
         </Button>

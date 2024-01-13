@@ -1,6 +1,6 @@
 import { getClub } from "@/lib/data/groups";
 import GroupDetails from "./group-details";
-import GroupMember, { Member } from "./group-member";
+import GroupMember from "./group-member";
 import GroupNft from "./group-nft";
 
 import { getDictionary } from "@/get-dictionary";
@@ -10,7 +10,7 @@ export interface GroupDetailProps {
   name: string;
   achievements: any[];
   details: any;
-  members: Member[];
+  members: any[];
   chat: any;
   image: string;
   address: string;
@@ -26,9 +26,9 @@ export default async function GroupProfile({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   const data = await getClub(params.address);
-  console.log(data);
+  // console.log(data);
   
-  console.log(data.members[0].user.profile_details)
+  // console.log(data.members[0].user.profile_details)
 
   return (
     <div className="flex flex-col">
