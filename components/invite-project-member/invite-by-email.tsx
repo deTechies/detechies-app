@@ -84,7 +84,7 @@ export default function InviteByEmail({
     <main className="flex flex-col gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          <Label>{lang.details.invite_member.name}</Label>
+          <Label>{lang.project.details.invite_member.name}</Label>
 
           <div className="flex gap-4 mb-2">
             <FormField
@@ -94,7 +94,7 @@ export default function InviteByEmail({
                 <FormItem className="grow">
                   <FormControl>
                     <Input
-                      placeholder={lang.details.invite_member.first_name}
+                      placeholder={lang.project.details.invite_member.first_name}
                       {...field}
                     />
                   </FormControl>
@@ -109,7 +109,7 @@ export default function InviteByEmail({
                 <FormItem className="grow">
                   <FormControl>
                     <Input
-                      placeholder={lang.details.invite_member.last_name}
+                      placeholder={lang.project.details.invite_member.last_name}
                       {...field}
                     />
                   </FormControl>
@@ -119,7 +119,7 @@ export default function InviteByEmail({
             />
           </div>
 
-          <Label>{lang.details.invite_member.email}</Label>
+          <Label>{lang.project.details.invite_member.email}</Label>
 
           <FormField
             control={form.control}
@@ -137,7 +137,7 @@ export default function InviteByEmail({
 
           <div className="flex flex-col items-center justify-center mb-2">
             <Label className="mb-3">
-              {lang.details.invite_member.member_type}
+              {lang.project.details.invite_member.member_type}
             </Label>
 
             <RadioGroup
@@ -149,15 +149,15 @@ export default function InviteByEmail({
             >
               <div className="flex gap-3 items-center">
                 <RadioGroupItem value="member" />
-                <Label>{lang.details.role_type.member}</Label>
+                <Label>{lang.project.details.role_type.member}</Label>
               </div>
               <div className="flex gap-3 items-center">
                 <RadioGroupItem value="admin" />
-                <Label>{lang.details.role_type.admin}</Label>
+                <Label>{lang.project.details.role_type.admin}</Label>
               </div>
               <div className="flex gap-3 items-center">
                 <RadioGroupItem value="client" />
-                <Label>{lang.details.role_type.client}</Label>
+                <Label>{lang.project.details.role_type.client}</Label>
               </div>
             </RadioGroup>
           </div>
@@ -169,7 +169,7 @@ export default function InviteByEmail({
               className="max-w-[212px] grow px-0"
               onClick={() => cancelByEmail()}
             >
-              {lang.details.invite_member.back}
+              {lang.project.details.invite_member.back}
             </Button>
             <Button
               type="submit"
@@ -178,7 +178,7 @@ export default function InviteByEmail({
               disabled={loading || !form.formState.isValid}
               loading={loading}
             >
-              {lang.details.invite_member.invite}
+              {lang.project.details.invite_member.invite}
             </Button>
           </div>
         </form>
