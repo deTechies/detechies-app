@@ -4,14 +4,13 @@
 import MissionCard from "@/components/card/mission-card";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { getClubMissions } from "@/lib/data/mission";
 import { Plus } from "lucide-react";
 
 import Link from "next/link";
-import QuitMission from "./_components/quit-mission";
 import { useParams } from "next/navigation";
+import QuitMission from "./_components/quit-mission";
 
-export default async function ManageNft({
+export default function ManageNft({
   details,
   missions,
   lang,

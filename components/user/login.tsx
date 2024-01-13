@@ -9,8 +9,8 @@ import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
-import ModalLayout from "./modal-layout";
 import AccountSettings from "./account-settings";
+import ModalLayout from "./modal-layout";
 
 interface ILoginProps {
   lang:any
@@ -63,7 +63,7 @@ export default function Login({lang}:ILoginProps) {
       <div className="flex rounded-md  items-center gap-2">
         <Button
           size="sm"
-          variant={"destructive"}
+          variant={"primary"}
           className="text-md"
           onClick={() => signOut()}
 

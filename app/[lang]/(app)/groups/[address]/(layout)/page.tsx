@@ -38,6 +38,7 @@ export default async function GroupProfile({
 
       {/* <GroupAchievements address={params.address.toString()} isCreator={data.isCreator}/> */}
       <GroupNft
+        contract={data.contract}
         address={params.address.toString()}
         achievements={data.achievements}
         lang={dictionary}

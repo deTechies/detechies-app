@@ -1,5 +1,5 @@
 "use client";
-import OnlySearch from "@/components/extra/only-search";
+import Search from "@/components/extra/search";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -52,7 +52,7 @@ export default function GroupList({
       </TabsList>
 
       <div className="w-full my-10 max-w-[27rem] mx-auto">
-        <OnlySearch placeholder={lang.group.list.search_placeholder} />
+        <Search placeholder={lang.group.list.search_placeholder} />
       </div>
 
       <TabsContent value="all" className="mx-0 mt-0 mb-16">

@@ -143,19 +143,90 @@
       }
     },
     "details": {
-      "edit": {
-        "title": "수정하기"
+      "summary": {
+        "edit": "Edit",
+        "desc": "Project Description"
       },
       "members": {
-        "title": "프로젝트 멤버"
+        "title": "Project Members",
+        "delete": "Delete",
+        "contribution": "Contribution",
+        "delegate_admin": "Delegate Admin",
+        "unregistered": "Unregistered",
+        "resgistered": "Resgistered",
+        "evalu": {
+          "button": "Evaluate",
+          "title": "Evaluate Work/Performance",
+          "desc": "Please double-check that the information of the person being evaluated matches the project details.",
+          "eval_admin": "Admin Evaluation",
+          "eval_admin_desc": "This evaluation is from the administrator's perspective, assessing team members' performance, contribution, and expertise. It significantly influences the recognition of the team member's achievements. Please evaluate carefully. Inaccurate evaluations may negatively impact the evaluated person's career.",
+          "project": "Project",
+          "evaluated": "Person Evaluated",
+          "job_desc": "Job Description",
+          "later": "Do It Later",
+          "go_eval": "Go to Evaluate"
+        },
+        "add_works": {
+          "button": "Add Work",
+          "title": "Add Contribution",
+          "desc": "Record your work achievements in the project. Get evaluated by team members, leaders, and clients, and solidify the recognition of your career.",
+          "project": "Project",
+          "my_work": "My Contribution",
+          "position": "Role",
+          "date": "My Work Period",
+          "detail_work": "Type of Detailed Work",
+          "detail_work_placeholder": "Enter the work category you handled in the project. (e.g., Data Analysis)",
+          "attribute": "Contribution to Work",
+          "job_desc": "Job Description",
+          "job_desc_placeholder": "Upload DB data to Excel and update daily marketing dashboard",
+          "later": "Do It Later",
+          "add": "Register",
+          "in_progress": "In Progress"
+        }
+      },
+      "links": {
+        "title": "Works",
+        "upload": "Upload",
+        "no_links": "There are no registered tasks."
+      },
+      "evalu": {
+        "title": "Group Evaluation",
+        "request": "Request",
+        "no_evalu": "No group evaluations or NFT awards received.",
+        "request_title": "Request NFT Award from a Group",
+        "request_desc": "Choose a credible group and request them for a NFT award issuance.",
+        "search_placeholder": "Search for a group name",
+        "no_search_result": "No search results.",
+        "later": "Do It Later",
+        "request_group": "Group to Request",
+        "request_nft": "NFTs Available for Issuance",
+        "back": "Back",
+        "message": "Request Message",
+        "message_placeholder": "Hello, please support our innovative project."
+      },
+      "waiting": {
+        "title": "Waiting for Approval",
+        "no_people": "No one is waiting to join.",
+        "reject": "Reject",
+        "accept": "Accept",
+        "position": "Position",
+        "send_note":"Send Note",
+        "just_now_joined": "Just now",
+        "min_ago_joined": "minutes ago",
+        "hour_ago_joined": "hours ago",
+        "day_aog_joined": "days ago",
+        "just_now_invited": "just now", 
+        "min_ago_invited": "minutes ago",
+        "hour_ago_invited": "hours ago",
+        "day_aog_invited": "days ago"
       },
 
       "join_project": {
         "title": "Join Project",
         "body": "Join this project to start working on it.",
         "button": "Join Project",
-        "role": "role",
-        "message": "message",
+        "role": "Role",
+        "message": "Message",
         "message_ex": "Tell us a little bit about yourself",
         "back": "Close",
         "submit": "Submit"

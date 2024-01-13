@@ -140,7 +140,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                       {Object.values(NFT_TYPE).map((type) => (
                         <FormItem
                           key={type}
-                          className="flex flex-wrap items-center space-x-3 space-y-0"
+                          className="flex flex-wrap items-center space-y-0"
                         >
                           <FormControl>
                             <RadioGroupItem value={type} />
@@ -172,7 +172,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                       {Object.values(NFT_IMAGE_TYPE).map((type) => (
                         <FormItem
                           key={type}
-                          className="flex flex-wrap items-center space-x-3 space-y-0"
+                          className="flex flex-wrap items-center space-y-0"
                         >
                           <FormControl>
                             <RadioGroupItem value={type} />
@@ -219,7 +219,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                         {Object.values(SBT_TYPE).map((type) => (
                           <FormItem
                             key={type}
-                            className="flex flex-wrap items-center space-x-3 space-y-0"
+                            className="flex flex-wrap items-center space-y-0"
                           >
                             <FormControl>
                               <RadioGroupItem value={type} />
@@ -301,7 +301,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                           {Object.values(AVATAR_TYPE).map((type) => (
                             <FormItem
                               key={type}
-                              className="flex flex-wrap items-center space-x-3 space-y-0"
+                              className="flex flex-wrap items-center space-y-0"
                             >
                               <FormControl>
                                 <RadioGroupItem value={type} />
@@ -463,7 +463,7 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
     const uploadData = { ...data, avatar, image, clubId: groupId };
     
     //upload nft data 
-    const metadata = await uploadContent(JSON.stringify({
+    let metadataUpdate = {
       image: 'https://ipfs.io/ipfs/' + uploadData.image,
       name: uploadData.name,
       description: uploadData.description,
@@ -472,10 +472,31 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
         avatar_type: uploadData.avatar_type,
         image_type: uploadData.image_type,
         nft_type: uploadData.nft_type,  
-      }
-    }));
+      },
+      avatar: ""
+    }
+    
+    if(uploadData.image_type == NFT_IMAGE_TYPE.AVATAR) {
+      metadataUpdate.image = 'https://ipfs.io/ipfs/' + uploadData.avatar;
+    }
+    
+    if(uploadData.image_type == NFT_IMAGE_TYPE.IMAGE_AND_AVATAR) {
+      metadataUpdate.image = 'https://ipfs.io/ipfs/' + uploadData.image;
+      metadataUpdate.avatar = 'https://ipfs.io/ipfs/' + uploadData.avatar;
+    }
+    const metadata = await uploadContent(JSON.stringify(metadataUpdate));
     
     const tradeable = NFT_TYPE.SBT == uploadData.nft_type ? false : true;
+    
+    if(!metadata){
+      toast({
+        title: "Error",
+        description: "Failed to upload metadata",
+      });
+      
+      setIsLoading(false);
+      return;
+    }
     
     await write({
       args: [metadata, tradeable],

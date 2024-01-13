@@ -185,7 +185,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
                   {Object.values(GROUP_TYPE).map((type) => (
                     <FormItem
                       key={type}
-                      className="flex flex-wrap items-center space-x-3 space-y-0"
+                      className="flex flex-wrap items-center space-y-0"
                     >
                       <FormControl>
                         <RadioGroupItem

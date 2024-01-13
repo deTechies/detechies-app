@@ -8,11 +8,13 @@ import IPFSImageLayer from "../ui/layer";
 
 interface PendingMemberItemProps {
   member: any;
+  lang: any;
 }
-export default function PendingMemberItem({ member }: PendingMemberItemProps) {
+export default function PendingMemberItem({
+  member,
+  lang,
+}: PendingMemberItemProps) {
   //if accept then we need to put in
-
-  console.log(member);
 
   async function acceptMember() {
     const result = await acceptProjectMember(member.id);
@@ -35,23 +37,23 @@ export default function PendingMemberItem({ member }: PendingMemberItemProps) {
 
     if (status === "joined") {
       if (minutes < 1) {
-        return "방금 전 참여요청";
+        return lang.project.details.waiting.just_now_joined;
       } else if (minutes < 60) {
-        return `${minutes} 분 전 참여요청`;
+        return `${minutes} ${lang.project.details.waiting.min_ago_joined}`;
       } else if (hours < 24) {
-        return `${hours} 시간 전 참여요청`;
+        return `${hours} ${lang.project.details.waiting.hour_ago_joined}`;
       } else {
-        return `${days} 일 전 참여요청`;
+        return `${days} ${lang.project.details.waiting.day_aog_joined}`;
       }
     } else {
       if (minutes < 1) {
-        return "방금 전 초대됨";
+        return lang.project.details.waiting.just_now_invited;
       } else if (minutes < 60) {
-        return `${minutes} 분 전 초대됨`;
+        return `${minutes} ${lang.project.details.waiting.min_ago_invited}`;
       } else if (hours < 24) {
-        return `${hours} 시간 전 초대됨`;
+        return `${hours} ${lang.project.details.waiting.hour_ago_invited}`;
       } else {
-        return `${days} 일 전 초대됨`;
+        return `${days} ${lang.project.details.waiting.day_aog_invited}`;
       }
     }
   }
@@ -82,7 +84,8 @@ export default function PendingMemberItem({ member }: PendingMemberItemProps) {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <div className="mb-2 text-label_m text-text-secondary">
-                포지션: {member.role || "없음"}
+                {lang.project.details.waiting.position}:{" "}
+                {lang.interface.role_type[member.role] || "없음"}
               </div>
 
               <div className="text-text-secondary text-label_m">
@@ -94,22 +97,17 @@ export default function PendingMemberItem({ member }: PendingMemberItemProps) {
               {member.status == "joined" && (
                 <>
                   <Button size="sm" variant="secondary">
-                    {/* Reject */}
-                    거절하기
+                    {lang.project.details.waiting.reject}
                   </Button>
 
                   <Button size="sm" variant="primary" onClick={acceptMember}>
-                    {/* Accept */}
-                    승인하기
+                    {lang.project.details.waiting.accept}
                   </Button>
                 </>
               )}
               {member.status == "invited" && (
-                <Button
-                  size="sm"
-                  variant="primary"
-                >
-                  초대 알림 보내기
+                <Button size="sm" variant="primary">
+                  {lang.project.details.waiting.send_note}
                 </Button>
               )}
             </div>

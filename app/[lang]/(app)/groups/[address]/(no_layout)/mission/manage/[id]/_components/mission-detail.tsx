@@ -20,7 +20,7 @@ export default function MissionDetail({
 }: {
   details: MissionDetails;
   club: Club;
-  lang: any;
+  lang?: any;
 }) {
   const [initialSelectedMissions, setInitialSelectedMissions] = useState<
     Mission[]
@@ -46,7 +46,7 @@ export default function MissionDetail({
       (item) => item.completed && item.user.id === selectedMember
     );
 
-    const missionIds: Mission[] =
+    const missionIds: Mission[] = completedMissions.length > 0 &&
       completedMissions?.map((item) => item.mission as Mission) || [];
 
     const totalPoints = missionIds.reduce(

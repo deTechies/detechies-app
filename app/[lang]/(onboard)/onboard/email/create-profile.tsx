@@ -197,7 +197,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
             control={form.control}
             name="terms_of_service"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center  space-x-3 space-y-0 py-3 border-b border-border-div ">
+              <FormItem className="flex flex-row items-center space-y-0 py-3 border-b border-border-div ">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -217,7 +217,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
             control={form.control}
             name="privacy_policy"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center space-x-3 py-3 space-y-0 border-b border-border-div">
+              <FormItem className="flex flex-row items-cente py-3 space-y-0 border-b border-border-div">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -238,7 +238,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
             control={form.control}
             name="email_policy"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center space-x-3 space-y-0 py-3 border-b border-border-div">
+              <FormItem className="flex flex-row items-cente space-y-0 py-3 border-b border-border-div">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
