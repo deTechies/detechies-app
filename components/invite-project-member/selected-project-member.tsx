@@ -27,6 +27,8 @@ export default function SelectedProjectMember({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  console.log(lang);
+  
   async function inviteMember() {
     setLoading(true);
 
@@ -60,7 +62,7 @@ export default function SelectedProjectMember({
         />
       </div>
 
-      <Label className="mb-3">{lang.details.invite_member.member_type}</Label>
+      <Label className="mb-3">{lang.project.details.invite_member.member_type}</Label>
 
       <RadioGroup
         className="flex py-4 mb-6 gap-9"
@@ -71,15 +73,15 @@ export default function SelectedProjectMember({
       >
         <div className="flex items-center gap-3">
           <RadioGroupItem value="member" />
-          <Label>{lang.details.role_type.member}</Label>
+          <Label>{lang.project.details.role_type.member}</Label>
         </div>
         <div className="flex items-center gap-3">
           <RadioGroupItem value="admin" />
-          <Label>{lang.details.role_type.admin}</Label>
+          <Label>{lang.project.details.role_type.admin}</Label>
         </div>
         <div className="flex items-center gap-3">
           <RadioGroupItem value="client" />
-          <Label>{lang.details.role_type.client}</Label>
+          <Label>{lang.project.details.role_type.client}</Label>
         </div>
       </RadioGroup>
 
@@ -97,7 +99,7 @@ export default function SelectedProjectMember({
             size="lg"
             className="max-w-[212px] grow px-0"
           >
-            {lang.details.invite_member.back}
+            {lang.project.details.invite_member.back}
           </Button>
         </DialogClose>
 
@@ -108,7 +110,7 @@ export default function SelectedProjectMember({
           disabled={loading}
           loading={loading}
         >
-          {lang.details.invite_member.invite}
+          {lang.project.details.invite_member.invite}
         </Button>
       </div>
     </section>
