@@ -104,12 +104,10 @@ export default function ProjectEditForm({
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
 
-    if(file){
-      data.image = await uploadContent(file)
+    if (file) {
+      const uploadedImage = await uploadContent(file);
+      data.image = uploadedImage ?? "";
     }
-
-
-
 
     const result = await updateProject({
       image: data.image,

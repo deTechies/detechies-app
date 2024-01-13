@@ -41,7 +41,7 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
   };
 
   const removeFile = (index: number) => {
-    setFiles(files.filter((_, i) => i !== index));
+    // setFiles(files.filter((_, i) => i !== index));
   };
 
   const getFileContents = async (

@@ -99,7 +99,8 @@ export default function CreateProjectForm({
     setLoading(true);
 
     if (file) {
-      data.image = await uploadContent(file);
+      const uploadedImage = await uploadContent(file);
+      data.image = uploadedImage ?? "";
     }
 
     const result = await createProject({
