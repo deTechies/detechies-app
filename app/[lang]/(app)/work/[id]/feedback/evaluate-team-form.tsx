@@ -20,140 +20,189 @@ type Criterion = {
 // Define your criteria with specific details
 const criteria: Criterion[] = [
   {
-    id: "1",
-    name: "원칙 vs 융통성",
-    ranks: 5,
-    minText: "원칙",
-    maxText: "융통성",
-    category: "일반적인 성향",
+      "id": "1",
+      "name": "원칙적 vs 융통성",
+      "ranks": 5,
+      "minText": "원칙적",
+      "maxText": "융통성",
+      "category": "일반 성향"
   },
   {
-    id: "2",
-    name: "내향적 vs 외향적",
-    ranks: 5,
-    minText: "내향적",
-    maxText: "외향적",
-    category: "일반적인 성향",
+      "id": "2",
+      "name": "내향적 vs 외향적",
+      "ranks": 5,
+      "minText": "내향적",
+      "maxText": "외향적",
+      "category": "일반 성향"
   },
   {
-    id: "3",
-    name: " 감성적 vs 이성적",
-    ranks: 5,
-    minText: "감성적",
-    maxText: "이성적",
-    category: "일반적인 성향",
+      "id": "3",
+      "name": "감성적 vs 이성적",
+      "ranks": 5,
+      "minText": "감성적",
+      "maxText": "이성적",
+      "category": "일반 성향"
   },
   {
-    id: "4",
-    name: " 이타주의 vs 개인주의",
-    ranks: 5,
-    minText: "이타주의",
-    maxText: "원칙을 중시",
-    category: "일반적인 성향",
+      "id": "4",
+      "name": "눈치를 보는 편 vs 눈치를 안 보는 편",
+      "ranks": 5,
+      "minText": "눈치를 보는 편",
+      "maxText": "눈치를 안 보는 편",
+      "category": "일반 성향"
   },
   {
-    id: "5",
-    name: "눈치를 보는 편 vs 눈치를 안 보는 편",
-    ranks: 5,
-    minText: "눈치를 보는 편",
-    maxText: "눈치를 안 보는 편",
-    category: "일반적인 성향",
+      "id": "5",
+      "name": "시간에 둔감 vs 시간 중시",
+      "ranks": 5,
+      "minText": "시간에 둔감",
+      "maxText": "시간 중시",
+      "category": "일반 성향"
   },
   {
-    id: "8",
-    name: "고집이 없는 편 vs 고집이 많은 편",
-    ranks: 5,
-    minText: "고집이 없는 편",
-    maxText: "고집이 많은 편",
-    category: "업무성향",
+      "id": "6",
+      "name": "창의적 vs 경험기반 일처리",
+      "ranks": 5,
+      "minText": "창의적",
+      "maxText": "경험기반 일처리",
+      "category": "업무 성향"
   },
   {
-    id: "9",
-    name: "창의적 vs 경험기반 일처리",
-    ranks: 5,
-    minText: "창의적",
-    maxText: "경험기반 일처리",
-    category: "업무성향",
+      "id": "7",
+      "name": "스페셜리스트 vs 제너럴리스트",
+      "ranks": 5,
+      "minText": "스페셜리스트",
+      "maxText": "제너럴리스트",
+      "category": "업무 성향"
   },
   {
-    id: "10",
-    name: "본인의 전문분야에 충실 vs 다방면의 업무지식 풍부",
-    ranks: 5,
-    minText: "본인의 전문분야에",
-    maxText: "다방면의 업무지식 풍부",
-    category: "업무성향",
+      "id": "8",
+      "name": "팔로워 vs 리더",
+      "ranks": 5,
+      "minText": "팔로워",
+      "maxText": "리더",
+      "category": "업무 성향"
   },
   {
-    id: "11",
-    name: "팔로워 vs 리더",
-    ranks: 5,
-    minText: "팔로워",
-    maxText: "리더",
-    category: "업무성향",
+      "id": "9",
+      "name": "계획형 vs 행동형",
+      "ranks": 5,
+      "minText": "계획형",
+      "maxText": "행동형",
+      "category": "업무 성향"
   },
   {
-    id: "12",
-    name: "계획형 vs 행동형",
-    ranks: 5,
-    minText: "계획형",
-    maxText: "행동형",
-    category: "업무성향",
-  },
-  {
-    id: "13",
-    name: "시스템 엄수 vs 시스템 개선",
-    ranks: 5,
-    minText: "시스템 엄수",
-    maxText: "시스템 개선",
-    category: "업무성향",
-  },
-
-  {
-    id: "14",
-    name: " 시간에 둔감 vs 시간 중시",
-    ranks: 5,
-    minText: " 완성도가 중요",
-    maxText: "속도가 중요",
-    category: "어떤 상황에서 최고의 성과를 내나요?",
-  },
-  {
-    id: "15",
-    name: " 의견이 적은 편 vs 의견이 많은 편",
-    ranks: 5,
-    minText: "소규모 프로젝트",
-    maxText: "대규모 프로젝트",
-    category: "어떤 상황에서 최고의 성과를 내나요?",
-  },
-  {
-    id: "16",
-    name: "고집이 없는 편 vs 고집이 많은 편",
-    ranks: 5,
-    minText: ". 체계가 잡힌 환경 ",
-    maxText: "체계가 없는 환경",
-    category: "어떤 상황에서 최고의 성과를 내나요?",
-  },
-  {
-    id: "17",
-    name: "창의적 vs 경험기반 일처리",
-    ranks: 5,
-    minText: "솔플레이",
-    maxText: "팀플레이",
-    category: "어떤 상황에서 최고의 성과를 내나요?",
-  },
-  {
-    id: "18",
-    name: "본인의 전문분야에 충실 vs 다방면의 업무지식 풍부",
-    ranks: 5,
-    minText: "상주 근무",
-    maxText: "리모트 근무",
-    category: "어떤 상황에서 최고의 성과를 내나요?",
-  },
-
-  /* { id: '19', name: "친밀한 관리자 vs 권위있는 관리자", ranks: 5, minText: "친밀한 관리자", maxText: "권위있는 관리자", category: "리더십 스타일 (관리자 평가만)" },
-  { id: '20', name: "지시형 vs 의견수렴형", ranks: 5, minText: "지시형", maxText: "의견수렴형", category: "리더십 스타일 (관리자 평가만)" },
-  { id: '21', name: "역량을 고려한 업무배분 vs 경험을 고려한 업무배분", ranks: 5, minText: "역량을 고려한 업무배분", maxText: "경험을 고려한 업무배분", category: "리더십 스타일 (관리자 평가만)" },
-   */
-  // Add more criteria as needed
+  "id": "10",
+  "name": "시스템 엄수 vs 시스템 개선",
+  "ranks": 5,
+  "minText": "시스템 엄수",
+  "maxText": "시스템 개선",
+  "category": "업무 성향"
+},
+{
+  "id": "11",
+  "name": "간접적으로 말하는 편 vs 직설적인 편",
+  "ranks": 5,
+  "minText": "간접적으로 말하는 편",
+  "maxText": "직설적인 편",
+  "category": "커뮤니케이션"
+},
+{
+  "id": "12",
+  "name": "과묵함 vs 대화를 즐김",
+  "ranks": 5,
+  "minText": "과묵함",
+  "maxText": "대화를 즐김",
+  "category": "커뮤니케이션"
+},
+{
+  "id": "13",
+  "name": "의견이 적은 편 vs 의견이 많은 편",
+  "ranks": 5,
+  "minText": "의견이 적은 편",
+  "maxText": "의견이 많은 편",
+  "category": "커뮤니케이션"
+},
+{
+  "id": "14",
+  "name": "고집이 없는 편 vs 고집이 많은 편",
+  "ranks": 5,
+  "minText": "고집이 없는 편",
+  "maxText": "고집이 많은 편",
+  "category": "커뮤니케이션"
+},
+{
+  "id": "15",
+  "name": "주기적인 상황 공유 vs 필요할 때 상황 공유",
+  "ranks": 5,
+  "minText": "주기적인 상황 공유",
+  "maxText": "필요할 때 상황 공유",
+  "category": "커뮤니케이션"
+},
+{
+  "id": "16",
+  "name": "완성도가 중요 vs 속도가 중요",
+  "ranks": 5,
+  "minText": "완성도가 중요",
+  "maxText": "속도가 중요",
+  "category": "어떤 상황에서 최고의 성과를 내나요?"
+},
+{
+  "id": "17",
+  "name": "소규모 프로젝트 vs 대규모 프로젝트",
+  "ranks": 5,
+  "minText": "소규모 프로젝트",
+  "maxText": "대규모 프로젝트",
+  "category": "어떤 상황에서 최고의 성과를 내나요?"
+},
+{
+  "id":   "18",
+  "name": "체계가 잡힌 환경 vs 체계가 없는 환경",
+  "ranks": 5,
+  "minText": "체계가 잡힌 환경",
+  "maxText": "체계가 없는 환경",
+  "category": "어떤 상황에서 최고의 성과를 내나요?"
+},
+{
+  "id": "19",
+  "name": "솔플레이 vs 팀플레이",
+  "ranks": 5,
+  "minText": "솔플레이",
+  "maxText": "팀플레이",
+  "category": "어떤 상황에서 최고의 성과를 내나요?"
+},
+{
+  "id": "20",
+  "name": "상주 근무 vs 리모트 근무",
+  "ranks": 5,
+  "minText": "상주 근무",
+  "maxText": "리모트 근무",
+  "category": "어떤 상황에서 최고의 성과를 내나요?"
+},
+{
+  "id": "21",
+  "name": "코드 컨벤션에 맞게 개발을 하나요? vs 코드 컨벤션을 준수하지 않음",
+  "ranks": 5,
+  "minText": "코드 컨벤션에 맞게 개발을 하나요?",
+  "maxText": "코드 컨벤션을 준수하지 않음",
+  "category": "협업 및 커뮤니케이션"
+},
+{
+  "id": "22",
+  "name": "커밋 컨벤션을 준수하나요? vs 커밋 컨벤션을 준수하지 않음",
+  "ranks": 5,
+  "minText": "커밋 컨벤션을 준수하나요?",
+  "maxText": "커밋 컨벤션을 준수하지 않음",
+  "category": "협업 및 커뮤니케이션"
+},
+{
+  "id": "23",
+  "name": "회의 참여 정도: 적극적 vs 소극적",
+  "ranks": 5,
+  "minText": "회의 참여 정도: 적극적",
+  "maxText": "소극적",
+  "category": "협업 및 커뮤니케이션"
+}
 ];
 
 // Define a type for the grouped criteria
