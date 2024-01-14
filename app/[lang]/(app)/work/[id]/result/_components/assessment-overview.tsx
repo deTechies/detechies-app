@@ -27,19 +27,25 @@ type Criterion = {
 
   const AssessmentOverview: React.FC<CategoryAveragesProps> = ({ selectedRanks }) => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  
+    if (!selectedRanks) {
+      return <div>Loading...</div>; // or some other placeholder content
+    }
+
     // Function to calculate averages
     const calculateAverages = (): { [category: string]: number } => {
       const totals: { [category: string]: number } = {};
       const counts: { [category: string]: number } = {};
   
       Object.values(selectedRanks).forEach(({ rank, criterion }) => {
-        totals[criterion.category] = (totals[criterion.category] || 0) + rank;
-        counts[criterion.category] = (counts[criterion.category] || 0) + 1;
+        if (criterion && criterion.category) {
+          const category = criterion.category;
+          totals[category] = (totals[category] || 0) + rank;
+          counts[category] = (counts[category] || 0) + 1;
+        }
       });
   
-      return Object.keys(totals).reduce((acc:any, category:any) => {
-        acc[category] = totals[category] / counts[category];
+      return Object.keys(totals).reduce((acc:any, category:string) => {
+        acc[category] = counts[category] ? totals[category] / counts[category] : 0;
         return acc;
       }, {});
     };

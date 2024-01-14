@@ -18,7 +18,7 @@ const TabsListVariants = cva("items-center", {
   variants: {
     variant: {
       default:
-        "flex border-b border-border-field justify-center p-1 text-text-secondary",
+        "flex justify-start gap-2 border-b border-background-layer-1 text-text-secondary",
       button1: "flex justify-start gap-2",
       button2: "flex justify-start gap-2",
     },
@@ -48,8 +48,8 @@ TabsList.displayName = TabsPrimitive.List.displayName;
 const TabsTriggerVariants = cva("", {
   variants: {
     variant: {
-      default:`justify-center p-2 text-title_m disabled:pointer-events-none 
-      disabled:opacity-50 data-[state=active]:text-text-primary data-[state=active]:border-accent-primary `,
+      default:`p-2 text-title_m disabled:pointer-events-none 
+      disabled:opacity-50 data-[state=active]:text-text-primary data-[state=active]:border-accent-primary data-[state=active]:border-b-2 `,
       button1: "p-3 rounded-full text-title_m data-[state=active]:bg-background-base",
       button2: "p-3 rounded-full text-title_s text-text-secondary bg-background-layer-1 data-[state=active]:bg-accent-secondary data-[state=active]:text-accent-primary",
     },

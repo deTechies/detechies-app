@@ -47,7 +47,7 @@ export default function FinalFeedbackForm({
       title: "You submitted the following values:",
       description: (
         <div className="text-text-primary">
-          Thank you for submitting, please check the results. 
+          Thank you for submitting, please check the results.
         </div>
       ),
     });
@@ -103,20 +103,12 @@ export default function FinalFeedbackForm({
               router.back();
             }}
           >
-       Back
+            Back
           </Button>
-          {defaultValues ? (
-            <Button
-              type="button"
-              onClick={() => router.push(`/work/${workId}/result`)}
-            >
-             Next
-            </Button>
-          ) : (
-            <Button type="submit" variant={"primary"} size="lg">
-             Next
-            </Button>
-          )}
+
+          <Button type="submit" variant={"primary"} size="lg">
+            Save and Continue
+          </Button>
         </section>
       </form>
     </Form>

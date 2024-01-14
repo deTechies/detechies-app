@@ -164,11 +164,13 @@ type CriteriaByCategory = {
 export default function EvaluateTeamForm({
   workId,
   surveyId,
-  defaultValues
+  defaultValues,
+  result = false,
 }: {
   workId: string;
   surveyId: string;
-  defaultValues?:any;
+  defaultValues?: any;
+  result?: boolean;
 }) {
   // Group criteria by category
   const criteriaByCategory: CriteriaByCategory = criteria.reduce(
@@ -195,37 +197,30 @@ export default function EvaluateTeamForm({
   );
 
   useEffect(() => {
-    if(defaultValues){
-      setSelectedRanks(defaultValues)
+    if (defaultValues) {
+      setSelectedRanks(defaultValues);
     }
-  }, [defaultValues])
-   
+  }, [defaultValues]);
 
   const handleSelectRank = (criterionId: string, rank: number) => {
     setSelectedRanks({
       ...selectedRanks,
       [criterionId]: { ...selectedRanks[criterionId], rank: rank },
     });
-
   };
 
   const submitResult = async () => {
     const result = await submitFeedback(selectedRanks, surveyId);
 
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <span className="text-white">
-          You successfully added the rankings to the form.
-        </span>
-      ),
+      description: "You successfully added the rankings to the form.",
     });
 
     router.push(`/work/${workId}/swot`);
   };
 
   return (
-    <main className="max-w-3xl mx-auto my-10">
+    <main className={`max-w-4xl ${result && 'max-w-full'} mx-auto my-10`}>
       <section className="flex flex-col gap-5">
         {Object.entries(criteriaByCategory).map(([category, criteria]) => (
           <Card key={category} className="px-9 pt-7 pb-10">
@@ -239,20 +234,22 @@ export default function EvaluateTeamForm({
                   maxText={criterion.maxText}
                   activeRank={selectedRanks[criterion.id].rank}
                   onSelectRank={(rank) => handleSelectRank(criterion.id, rank)}
+                  disabled={result}
                 />
               ))}
             </section>
           </Card>
         ))}
-
-        <Card className="flex flex-row justify-between">
-          <Button variant="secondary" size="lg" onClick={() => router.back()}>
-            Go Back
-          </Button>
-          <Button variant="primary" size="lg" onClick={submitResult}>
-            Submit
-          </Button>
-        </Card>
+        {!result && (
+          <Card className="flex flex-row justify-between">
+            <Button variant="secondary" size="lg" onClick={() => router.back()}>
+              Go Back
+            </Button>
+            <Button variant="primary" size="lg" onClick={submitResult}>
+              Submit
+            </Button>
+          </Card>
+        )}
       </section>
     </main>
   );

@@ -1,28 +1,46 @@
 "use client";
 import PercentageSliderField from "@/components/form/percentage-helper";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { submitEvaluationSurvey } from "@/lib/data/survey";
 import { Survey } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-
 
 export function SurveyForm({
   workId,
-  responseId, 
+  responseId,
   survey,
-  defaultValues
+  defaultValues,
+  result = false,
 }: {
   workId: string;
-  responseId:string, 
+  responseId: string;
   survey: Survey;
   defaultValues: any;
+  result?: boolean;
 }) {
   const form = useForm<any>({});
+  //setting default values
+
+  useEffect(() => {
+    const transformAnswersToDefaultValues = (answers: any) => {
+      return answers.reduce((acc: any, answer: any) => {
+        acc[answer.questionId] = answer.response;
+        return acc;
+      }, {});
+    };
+
+    // Assuming `answers` is the array of data you provided
+    if (!defaultValues) return console.log("no default values");
+    const defaultFormValues = transformAnswersToDefaultValues(defaultValues);
+    form.reset(defaultFormValues);
+  }, [defaultValues, form]);
+
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
@@ -31,9 +49,8 @@ export function SurveyForm({
       title: "form results",
       description: <span>Thank you for filling in the form. </span>,
     });
-    
-    router.push(`/work/${workId}/feedback`)
-    
+
+    router.push(`/work/${workId}/feedback`);
   };
 
   const questionsByCategory = survey.questions.reduce(
@@ -53,7 +70,8 @@ export function SurveyForm({
           {Object.keys(questionsByCategory).map((category) => {
             return (
               <Card key={category}>
-                <CardHeader>{category}</CardHeader> {/* Display the category */}
+                <h5 className="text-subhead_s mb-7">{category}</h5> {/* Display the category */}
+                <div className="flex flex-col gap-6">
                 {questionsByCategory[category].map((question: any) => {
                   // Render each question
                   if (question.type === "input") {
@@ -78,20 +96,24 @@ export function SurveyForm({
                         label={question.content}
                         steps={100 / 10}
                         messages={question.messages}
+                        disabled={result}
                       />
                     );
                   }
                 })}
+                </div>
               </Card>
             );
           })}
 
-          <Card className="flex flex-row justify-between">
-            <Button type="button" variant={"secondary"}>
-              Go Back
-            </Button>
-            <Button type="submit">Save</Button>
-          </Card>
+          {!result && (
+            <Card className="flex flex-row justify-between">
+              <Button type="button" variant={"secondary"}>
+                Go Back
+              </Button>
+              <Button type="submit">Save</Button>
+            </Card>
+          )}
         </form>
       </Form>
     </div>
