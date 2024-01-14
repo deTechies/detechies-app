@@ -16,6 +16,17 @@ export interface User {
     login_method: 'metamask'|'web3auth';
   }
   
+  export interface SurveyResponse {
+    id: string;
+    user: string;
+    matching: Object;
+    evaluator: ProjectMember;
+    projectWork: ProjectWork;
+    status: 'draft' | 'closed' | 'pending' | 'finished' | 'requested';
+    answers: string[];
+    created_at: Date;
+  }
+  
   export interface ProfileDetails {
     id: number;
     full_name: string;
@@ -263,9 +274,10 @@ export enum GROUP_TYPE {
     workId: string;
     name: string;
     percentage: number;
+    projectMember: ProjectMember;
     tags: string[];
     begin_date: string;
-    surveyResponses: any[];
+    surveyResponses: SurveyResponse[];
     end_date?: string;
     description: string;
     created_at: Date;

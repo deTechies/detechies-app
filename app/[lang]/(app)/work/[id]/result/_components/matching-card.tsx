@@ -101,13 +101,39 @@ export default function MatchingCard({ data }: { data: any }) {
                    
                 </section>
               </div>
+              <div  className="flex flex-col gap-2">
+                <Label>
+                  Good Team Player
+                </Label>
+                <section className="flex gap-3 items-center">
+                <div className="grow">
+                        <Progress value={data.good_team_player} />
+                    </div>
+                    <span className="text-label_m">
+                    {parseInt(data.good_team_player)/20} / 5
+                    </span>
+                   
+                </section>
+              </div>
+              <div  className="flex flex-col gap-2">
+                <Label>
+                feedback_times
+                </Label>
+                <section className="flex gap-3 items-center">
+                <div className="grow">
+                        <Progress value={data.feedback_times} />
+                    </div>
+                    <span className="text-label_m">
+                    {parseInt(data.feedback_times)/20} / 5
+                    </span>
+                   
+                </section>
+              </div>
 
       </div>
         )
       }
-      <span className="text-right text-text-secondary text-label_m">
-        Added at: {data.created_at}
-      </span>
+
     </Card>
   );
 }

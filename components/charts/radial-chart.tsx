@@ -1,42 +1,34 @@
-// components/SingleRadialCarChart.js
-import React from 'react';
-import ApexCharts from 'react-apexcharts';
+import { PolarAngleAxis, RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts';
 
-interface SingleRadialCarChartProps {
-  name: string;
-  average: number;
-  colorClass?: string;  // Made optional
-}
+const SingleRadialBarChart = ({ name, average, colorClass = '#266b6e' }:any) => {
+  // Prepare the data for the RadialBarChart
+  const data = [{ name, value: average }];
 
-const SingleRadialCarChart: React.FC<SingleRadialCarChartProps> = ({ 
-  name, 
-  average, 
-  colorClass = '#266b6e'  // Default color
-}) => {
-  const options = {
-    chart: {
-      type: 'radialBar',
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: '70%',
-        },
-        dataLabels: {
-          name: {
-            color: "#000000",
-          },
-          value: {
-            color: colorClass,
-          }
-        },
-      },
-    },
-    colors: [colorClass],
-    labels: [name],
-  } as any;
-
-  return <ApexCharts options={options} series={[average]} type="radialBar" />;
+  return (
+    <ResponsiveContainer width="100%" aspect={4.0 / 3.0} className="border">
+      <RadialBarChart 
+        innerRadius="10%" 
+        outerRadius="80%" 
+        data={data} 
+        startAngle={180} 
+        endAngle={0}
+      >
+        <PolarAngleAxis 
+          type="number" 
+          domain={[0, 100]} 
+          angleAxisId={0} 
+          tick={false}
+        />
+        <RadialBar 
+          background 
+          dataKey="value" 
+          cornerRadius={10} 
+          fill={colorClass} 
+          label={{ position: 'insideStart', fill: '#fff' }}
+        />
+      </RadialBarChart>
+    </ResponsiveContainer>
+  );
 };
 
-export default SingleRadialCarChart;
+export default SingleRadialBarChart;

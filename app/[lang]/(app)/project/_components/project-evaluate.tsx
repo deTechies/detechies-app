@@ -53,7 +53,7 @@ export default function ProjectMemberEvaluate({
             <h3 className="text-title_m">
               {lang.project.details.members.evalu.project}
             </h3>
-            <ProjectSwitcher project={projectMember.project} />
+            <ProjectSwitcher project={projectMember.project} lang={lang} />
           </div>
 
           <div className="flex flex-col self-stretch gap-4">

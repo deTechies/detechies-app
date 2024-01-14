@@ -13,8 +13,9 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { submitVerifyWork } from "@/lib/data/feedback";
+import { postServer } from "@/lib/data/general";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,6 +25,7 @@ interface BasicEvaluationInfoProps {
   workId: string;
   verified: boolean;
   defaultValues: Partial<verifyWorkValues>;
+  result?: boolean;
 }
 
 const baseInfoSchema = z.object({
@@ -50,6 +52,7 @@ export default function BasicEvaluationInfo({
   workId,
   verified,
   defaultValues,
+  result = false
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
     resolver: zodResolver(baseInfoSchema),
@@ -66,8 +69,13 @@ export default function BasicEvaluationInfo({
 
       return;
     }
-
-    const result = await submitVerifyWork(data, workId);
+    const url = `/survey-response/matching`;
+    
+    const sendingData = JSON.stringify({
+      projectWorkId: workId,
+      matching: data,
+    })
+    const result = await postServer(url, "POST", sendingData);
 
     if (result.status == "500") {
 
@@ -120,6 +128,7 @@ export default function BasicEvaluationInfo({
                       placeholder={
                         text.please_evaluate_users_role_and_performance_in_this_project
                       }
+                      disabled={result}
                     />
                   </FormItem>
                 )}
@@ -136,6 +145,7 @@ export default function BasicEvaluationInfo({
                       placeholder={
                         text.please_evaluate_users_role_and_performance_in_this_project
                       }
+                      disabled={result}
                     />
                   </FormItem>
                 )}
@@ -155,6 +165,7 @@ export default function BasicEvaluationInfo({
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                         className="flex flex-col space-y-1"
+                        disabled={result}
                       >
                         <FormItem className="flex items-center space-y-0">
                           <FormControl>
@@ -191,6 +202,7 @@ export default function BasicEvaluationInfo({
                         placeholder={
                           text.please_evaluate_users_role_and_performance_in_this_project
                         }
+                        disabled={result}
                       />
                     </FormItem>
                   )}
@@ -205,6 +217,7 @@ export default function BasicEvaluationInfo({
                   steps={10}
                   label={text.meet_requirements.label}
                   messages={text.meet_requirements.messages}
+                  disabled={result}
                 />
                 <PercentageSliderField
                   name="rate_contributions"
@@ -212,6 +225,7 @@ export default function BasicEvaluationInfo({
                   steps={10}
                   label={text.work_contribution.label}
                   messages={text.work_contribution.messages}
+                  disabled={result}
                 />
                 <PercentageSliderField
                   name="rate_time_schedule"
@@ -219,6 +233,8 @@ export default function BasicEvaluationInfo({
                   steps={10}
                   label={text.meet_schedule.label}
                   messages={text.meet_schedule.messages}
+                  disabled={result}
+                  
                 />
                  <PercentageSliderField
                   name="feedback_times"
@@ -226,6 +242,7 @@ export default function BasicEvaluationInfo({
                   steps={10}
                   label={text.feedback_times.label}
                   messages={text.feedback_times.messages}
+                  disabled={result}
                 />
                  <PercentageSliderField
                   name="good_team_player"
@@ -233,9 +250,19 @@ export default function BasicEvaluationInfo({
                   steps={10}
                   label={text.good_team_player.label}
                   messages={text.meet_schedule.messages}
+                  disabled={result}
                 />
               </section>
             )}
+            
+            { result ? (
+                <Link href={`/work/${workId}`} passHref className="mx-auto">
+                  <Button variant="secondary" size="lg" type="button">
+                    Modify
+                  </Button>
+
+                </Link>
+            ):(
               <section className="flex justify-between">
                 <Button variant="secondary" size="lg" type="button">
                   {text.go_back}
@@ -257,6 +284,8 @@ export default function BasicEvaluationInfo({
                   </Button>
                 )}
               </section>
+            )
+          }
 
           </Card>
         </form>

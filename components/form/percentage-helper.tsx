@@ -14,9 +14,10 @@ interface PercentageProps {
   messages?: string[];
   steps: number;
   text?: any; // Consider using a more specific type
+  disabled?: boolean;
 }
 
-const PercentageSliderField = ({ form, name, label, messages, steps }: PercentageProps) => {
+const PercentageSliderField = ({ form, name, label, messages, steps, disabled=false }: PercentageProps) => {
   const percentage = form.watch(name, 0);
 
   // Determine alert variant and message based on percentage
@@ -82,10 +83,11 @@ const PercentageSliderField = ({ form, name, label, messages, steps }: Percentag
               color={alertDetails?.color}
               onValueChange={handleSliderChange}
               aria-label="Percentage"
+              disabled={disabled}
             />
           </FormControl>
           <FormDescription>
-          {alertDetails && (
+          {alertDetails  &&  (
             <div
               className={`${alertDetails.variant} rounded-sm border pt-5 pb-7 text-center mt-6 flex flex-col`}
             >

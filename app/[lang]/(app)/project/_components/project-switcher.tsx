@@ -50,7 +50,7 @@ const ProjectDisplay = ({
 
         <section className="flex flex-col gap-2">
           <span className="text-label_m text-text-secondary">
-            {lang ? lang.interface.project_type[project.type] : project.type}
+            {lang.interface?.project_type ? lang.interface.project_type[project.type] : project.type}
           </span>
 
           <span className="text-label_m text-text-secondary">
