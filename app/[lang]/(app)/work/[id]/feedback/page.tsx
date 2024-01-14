@@ -8,10 +8,7 @@ export default async function EvaluateTeamMember({
 }: {
   params: { lang: Locale; app: string; id: string; member: string };
 }) {
-  // Group criteria by category
-  
   const details = await getProjectWork(id);
-  
   const dictionary = await getDictionary(lang);
 
   return <EvaluateTeamForm workId={id} surveyId={details.id} defaultValues={details.assessment} />;

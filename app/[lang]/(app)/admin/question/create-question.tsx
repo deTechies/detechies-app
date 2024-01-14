@@ -36,25 +36,25 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const questionFormSchema = z.object({
+  id: z.string().optional(),
   content: z.string().min(2).max(1000).optional(),
-  type: z.string(),
-  comments: z.string().min(2).max(1000).optional(),
+  type: z.string().default('slider'),
   language: z.string().min(2).max(1000).optional(),
   max_text: z.string().min(2).max(50).optional(),
   min_text: z.string().min(2).max(50).optional(),
-  roles: z.array(z.string().optional()).optional(),
-  category: z.nativeEnum(QuestionCategory, {
-    required_error: "You need to select a category.",
-  }),
+  category: z.string(),
   scale: z.number().min(0).max(10),
   baseWeight: z.number().min(0).max(100).optional(),
   messages: z.array(z.string().optional()).optional(),
 });
 
 type QuestionValues = z.infer<typeof questionFormSchema>;
-const defaultValues: Partial<QuestionValues> = {};
 
-export default function CreateQuestion() {
+export default function CreateQuestion({
+  defaultValues,
+}: {
+  defaultValues?: Partial<QuestionValues>;  
+}) {
   const form = useForm<QuestionValues>({
     resolver: zodResolver(questionFormSchema),
     defaultValues,
@@ -96,6 +96,14 @@ export default function CreateQuestion() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <section className="flex gap-8">
               <div className="flex flex-col gap-4 flex-grow">
+                <span>
+                  Error 
+                  {
+                    <pre>
+                      {JSON.stringify(form.formState.errors, null, 4)}
+                    </pre>
+                  }
+                </span>
                 <div className="grid grid-cols-3 gap-4">
                   <FormField
                     control={form.control}
@@ -157,6 +165,25 @@ export default function CreateQuestion() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Scale</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(parseInt(e.target.value))
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                      <FormField
+                    control={form.control}
+                    name="baseWeight"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>baseWeight</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -300,7 +327,7 @@ export default function CreateQuestion() {
               </DialogClose>
               <Button
                 type="submit"
-                disabled={loading || !form.formState.isValid}
+                disabled={loading}
                 loading={loading}
               >
                 Create Question

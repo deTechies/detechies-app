@@ -116,10 +116,10 @@ export const GroupForm = ({ lang }: { lang: any }) => {
       type: data.type,
       urls: urls,
     });
-
-    if (!result.id) {
+    
+    console.log(result);
+    if (!result.ok) {
       toast({
-        title: "Error",
         description: result.message
       });
 

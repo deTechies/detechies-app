@@ -9,15 +9,10 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-interface BasicEvaluationInfoProps {
-  text: any;
-}
-
 const finalFeedbackForm = z.object({
   strength: z.string(),
   weakness: z.string(),
   opportunity: z.string(),
-  threat: z.string().optional(),
 });
 
 type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
@@ -42,7 +37,10 @@ export default function FinalFeedbackForm({
   const router = useRouter();
 
   async function onSubmit(data: FinalFeedbackValues) {
+    console.log("starting to submit")
     const result = await submitSwotAnalysis(data, workId, surveyResponseId);
+    
+    console.log(result);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -52,6 +50,7 @@ export default function FinalFeedbackForm({
       ),
     });
 
+    
     router.push(`/work/${workId}/result`);
   }
   return (
