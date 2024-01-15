@@ -1,6 +1,7 @@
 "use client";
 import { postServer } from "@/lib/data/postRequest";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 
@@ -14,10 +15,14 @@ export default function PendingMemberItem({
 }: PendingMemberItemProps) {
   //if accept then we need to put in
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function acceptMember() {
+    setIsLoading(true);
     await postServer(`/project-member/accept/member/${member.id}`, '');
     //TODO: make sure that the data is only reloaded.
+    router.refresh();
+    setIsLoading(false);
   }
 
   //TODO: move this in a global util file do it can be used anywhere. 
@@ -95,7 +100,9 @@ export default function PendingMemberItem({
                     {lang.project.details.waiting.reject}
                   </Button>
 
-                  <Button size="sm" variant="primary" onClick={acceptMember}>
+                  <Button size="sm" variant="primary" onClick={acceptMember}
+                    loading={isLoading}
+                  >
                     {lang.project.details.waiting.accept}
                   </Button>
                 </>

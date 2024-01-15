@@ -31,7 +31,11 @@ export async function postServer(endpoint:string, body?:string){
             title: `Failed to POST data from ${endpoint}`,
             description: result.message,
         });
-          
+    }else {
+        toast({
+            title: "Success",
+            description: `You will be redirected to the shortly page`,
+          });
     }
   
     return response.json();
