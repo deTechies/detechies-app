@@ -178,30 +178,6 @@ const criteria: Criterion[] = [
   "minText": "상주 근무",
   "maxText": "리모트 근무",
   "category": "어떤 상황에서 최고의 성과를 내나요?"
-},
-{
-  "id": "21",
-  "name": "코드 컨벤션에 맞게 개발을 하나요? vs 코드 컨벤션을 준수하지 않음",
-  "ranks": 5,
-  "minText": "코드 컨벤션에 맞게 개발을 하나요?",
-  "maxText": "코드 컨벤션을 준수하지 않음",
-  "category": "협업 및 커뮤니케이션"
-},
-{
-  "id": "22",
-  "name": "커밋 컨벤션을 준수하나요? vs 커밋 컨벤션을 준수하지 않음",
-  "ranks": 5,
-  "minText": "커밋 컨벤션을 준수하나요?",
-  "maxText": "커밋 컨벤션을 준수하지 않음",
-  "category": "협업 및 커뮤니케이션"
-},
-{
-  "id": "23",
-  "name": "회의 참여 정도: 적극적 vs 소극적",
-  "ranks": 5,
-  "minText": "회의 참여 정도: 적극적",
-  "maxText": "소극적",
-  "category": "협업 및 커뮤니케이션"
 }
 ];
 
@@ -272,12 +248,12 @@ export default function EvaluateTeamForm({
   };
 
   return (
-    <main className={`max-w-4xl ${result && 'max-w-full'} mx-auto my-10`}>
+    <main className={`max-w-[1000px] ${result && 'max-w-full'} mx-auto my-10 px-auto`}>
       <section className="flex flex-col gap-5">
         {Object.entries(criteriaByCategory).map(([category, criteria]) => (
           <Card key={category} className="px-9 pt-7 pb-10">
             <div className="text-center text-subhead_s mb-10">{category}</div>
-            <section className="flex flex-col gap-10">
+            <section className="flex flex-col gap-[60px] max-w-4xl mx-auto">
               {criteria.map((criterion) => (
                 <Ranking
                   key={criterion.id}

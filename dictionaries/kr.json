@@ -678,5 +678,13 @@
       "member": "팀원",
       "client": "클라이언트"
     }
+  }, 
+  "footer": {
+    "copywrite": "© 2021 CareerZen. All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "white_paper": "백서",
+    "contact": "Contact Us", 
+    "user_guide": "이용 가이드"
   }
 }

@@ -12,6 +12,7 @@ import localFont from 'next/font/local';
 import { redirect } from "next/navigation";
 import App from "../app";
 import "../globals.css";
+import Footer from "./footer";
 import Navbar from "./nav-bar";
 
 // Font files can be colocated inside of `app`
@@ -79,6 +80,7 @@ export default async function RootLayout({
               <main className="mx-auto max-w-[1920px]">{children}</main>
             </DictionaryProvider>
           </App>
+          <Footer lang={dictionary} />
         </ThemeProvider>
       </body>
     </html>
