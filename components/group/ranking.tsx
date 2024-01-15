@@ -62,10 +62,10 @@ export const Ranking: React.FC<RankingProps> = ({
   return (
     <div className="grid grid-cols-8 items-center gap-8">
       <span
-        className={`col-span-2 file:flex px-4 py-2 text-sm bg-neutral-100 rounded-[4px] text-center  text-title_s ease-out duration-200 
+        className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 
         ${
           activeRank < AVERAGE + 1 &&
-          "bg-green-50 rounded-lg outline outline-1 outline-accent-primary"
+          "bg-accent-secondary rounded-lg outline outline-1 outline-accent-primary"
         }`}
       >
         {minText}
@@ -81,15 +81,15 @@ export const Ranking: React.FC<RankingProps> = ({
             disabled={disabled}
           />
           {index < ranks - 1 && (
-            <div className="grow basis-0 h-0 border border-gray-100"></div>
+            <div className="grow basis-0 h-0 border border-background-layer-2"></div>
           )}
         </React.Fragment>
       ))}
       </div>
       <span
-        className={`col-span-2 file:flex px-4 py-2 text-sm bg-neutral-100 rounded-[4px] text-center  text-title_s ease-out duration-200 ${
+        className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 ${
           activeRank > AVERAGE + 1 &&
-          "bg-green-50 rounded-lg outline outline-1 outline-accent-primary"
+          "bg-accent-primary rounded-lg outline outline-1 outline-accent-primary"
         }`}
       >
         {maxText}
