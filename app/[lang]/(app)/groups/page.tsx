@@ -1,9 +1,9 @@
-import { getClub, getGroups } from "@/lib/data/groups";
 import { getUserProfile } from "@/lib/data/user";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
+import { serverApi } from "@/lib/data/general";
 import GroupList from "./_components/group-list";
 import GroupListHeader from "./_components/group-list-header";
 
@@ -16,7 +16,8 @@ export default async function GroupsPage({
   const dictionary = (await getDictionary(params.lang)) as any;
   
   const profile = await getUserProfile();
-  const groups = await getGroups();
+
+  const groups = (await serverApi(`/clubs`)).data
 
   return (
     // Temporarily insert fixed values ​​(to work with grid later)

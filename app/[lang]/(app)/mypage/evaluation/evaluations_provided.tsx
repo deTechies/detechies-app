@@ -10,7 +10,7 @@ export default async function EvaluationProvided() {
   }
   const filters = new URLSearchParams(queries).toString();
   
-  const data = await serverApi(`/survey-response/filtered?${filters}`)
+  const {data} = await serverApi(`/survey-response/filtered?${filters}`)
   
   console.log(data);
   const stats = [

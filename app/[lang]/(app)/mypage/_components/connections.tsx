@@ -1,5 +1,4 @@
 import ConnectGithub from "@/components/connections/github";
-import { getUserConnections } from "@/lib/data/user";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -40,7 +39,7 @@ export default async function Connections({
 }) {
   //const {data, loading, error} = useFetchData<Data>(`/nextid/user/profile/ethereum/${address}`);
 
-  const data = await getUserConnections(address);
+  //const {data} = await getUserConnections(address);
   return (
     <section className={`grid  md:grid-cols-3 sm:grid-cols-2 gap-[20px]`}>
       <div className="flex border p-4 border-border-div rounded-sm items-center gap-4 bg-background-layer-1">

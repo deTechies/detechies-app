@@ -10,7 +10,7 @@ export default async function FinalFeedbackPage({
     params: { lang: Locale; app: string; id: string; member: string;}}) {
         
         const dictionary = await getDictionary(lang);
-        const details = await getProjectWork(id)
+        const {data: details} = await getProjectWork(id)
         
         
         

@@ -1,6 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSingleProject } from "@/lib/data/project";
-import { Project } from "@/lib/interfaces";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
@@ -23,7 +22,7 @@ export default async function ProjectDetailPage({
     `/project/single/${address}`
   ); */
 
-  const data: Project = await getSingleProject(params.address);
+  const {data} = await getSingleProject(params.address);
 
   if (!data)
     return (

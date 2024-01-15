@@ -1,15 +1,14 @@
 import { Suspense } from "react";
 
-import { getProjects } from "@/lib/data/project";
-import { Project, User } from "@/lib/interfaces";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { getProjects } from "@/lib/data/project";
+import { Project } from "@/lib/interfaces";
 
-import { Button } from "@/components/ui/button";
 
-import ProjectItem from "./project-item";
-import ProjectFilter from "./project-filter";
 import { getUserProfile } from "@/lib/data/user";
+import ProjectFilter from "./project-filter";
+import ProjectItem from "./project-item";
 
 export default async function ProjectListPage({
   searchParams,
@@ -18,8 +17,9 @@ export default async function ProjectListPage({
   searchParams: { [key: string]: string | string[] | undefined };
   params: { lang: Locale };
 }) {
-  const profile: User = await getUserProfile();
-  const projects = await getProjects();
+  const profile = await getUserProfile();
+  let projects = (await getProjects()).data;
+
 
   const searchItem = searchParams.search as string;
 

@@ -52,7 +52,7 @@ export default function UserProfile({
             rel="noopener noreferrer"
           >
             <Badge>
-              {profile.wallet.slice(0, 5) + "..." + profile.wallet.slice(-4)}
+              {profile.wallet?.slice(0, 5) + "..." + profile.wallet.slice(-4)}
             </Badge>
           </a>
         </div>

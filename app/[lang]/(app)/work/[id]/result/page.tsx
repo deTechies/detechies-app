@@ -18,7 +18,7 @@ export default async function EvaluationResult({
 }: {
   params: { lang: Locale; id: string };
 }) {
-  const details = await getProjectWork(params.id);
+  const {data: details} = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
   const surveyData = await getEvaluationSurvey(params.id);
 
