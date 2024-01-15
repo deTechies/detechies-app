@@ -231,6 +231,7 @@ export default function EvaluateTeamForm({
     {} as CriteriaByCategory
   );
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Initialize state for each criterion's rank
   const [selectedRanks, setSelectedRanks] = useState<{
@@ -259,6 +260,7 @@ export default function EvaluateTeamForm({
   };
 
   const submitResult = async () => {
+    setLoading(true)
     const result = await submitFeedback(selectedRanks, surveyId);
 
     toast({
@@ -266,6 +268,7 @@ export default function EvaluateTeamForm({
     });
 
     router.push(`/work/${workId}/swot`);
+    setLoading(false)
   };
 
   return (
@@ -291,10 +294,13 @@ export default function EvaluateTeamForm({
         ))}
         {!result && (
           <Card className="flex flex-row justify-between">
-            <Button variant="secondary" size="lg" onClick={() => router.back()}>
+            <Button variant="secondary" size="lg" onClick={() => router.back()} loading={loading}>
               Go Back
             </Button>
-            <Button variant="primary" size="lg" onClick={submitResult}>
+            <Button variant="primary" size="lg" onClick={submitResult}
+              loading={loading}
+              disabled={loading}
+            >
               Submit
             </Button>
           </Card>

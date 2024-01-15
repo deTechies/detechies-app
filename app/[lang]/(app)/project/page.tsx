@@ -7,6 +7,7 @@ import { Project } from "@/lib/interfaces";
 
 
 import { auth } from "@/lib/helpers/authOptions";
+import { Session } from "next-auth";
 import ProjectFilter from "./project-filter";
 import ProjectItem from "./project-item";
 
@@ -17,7 +18,7 @@ export default async function ProjectListPage({
   searchParams: { [key: string]: string | string[] | undefined };
   params: { lang: Locale };
 }) {
-  const {data:profile} = await auth() as any;
+  const profile = await auth() as Session;
   const {data:projects} = await getProjects()
 
 
@@ -32,7 +33,7 @@ export default async function ProjectListPage({
       !searchParams.project || item.type === searchParams.project;
     const privateMatch =
       !searchParams.privacy || item.scope === searchParams.privacy;
-    const myProjectMatch = !searchParams.me || item.owner === profile.web3?.user.wallet;
+    const myProjectMatch = !searchParams.me || item.owner === profile.web3.address
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 

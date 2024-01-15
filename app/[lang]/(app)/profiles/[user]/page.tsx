@@ -20,7 +20,7 @@ export default async function Dashboard({
   
   
   //TODO: Create a profile not found page. 
-  if(!profile.id) return null;
+  if(!profile.id) return <span>No user found.</span>
   
   
 
