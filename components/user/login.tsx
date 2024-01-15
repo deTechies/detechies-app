@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
-import { Avatar } from "../ui/avatar";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import AccountSettings from "./account-settings";
@@ -46,14 +46,11 @@ export default function Login({lang}:ILoginProps) {
 
   if (isConnecting || isReconnecting) {
     return (
-      <Button
-        size="sm"
-        variant={"secondary"}
-        className="text-md animate-pulse"
-        disabled={true}
+      <Avatar
+      className="animate-pulse bg-background-layer-2"
       >
-        Connect
-      </Button>
+        <AvatarFallback />
+      </Avatar>
     );
   }
 
