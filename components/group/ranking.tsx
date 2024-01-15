@@ -61,16 +61,17 @@ export const Ranking: React.FC<RankingProps> = ({
 
   return (
     <div className="grid grid-cols-8 items-center gap-8">
-      <span
+      <button
+      onClick={() => handleRankSelect(1)}
         className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 
         ${
           activeRank < AVERAGE + 1 &&
-          "bg-accent-secondary rounded-lg outline outline-1 outline-accent-primary"
+          "!bg-accent-secondary rounded-lg outline outline-1 outline-accent-primary"
         }`}
       >
         {minText}
-      </span>
-      <div className="col-span-4 shrink justify-center grow flex items-center">
+      </button>
+      <div className="col-span-4 shrink justify-center grow flex items-center max-w-[420px]">
       {Array.from({ length: ranks }, (_, index) => (
         <React.Fragment key={index}>
           <RankElement
@@ -86,14 +87,15 @@ export const Ranking: React.FC<RankingProps> = ({
         </React.Fragment>
       ))}
       </div>
-      <span
+      <button
+      onClick={() => handleRankSelect(5)}
         className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 ${
           activeRank > AVERAGE + 1 &&
-          "bg-accent-primary rounded-lg outline outline-1 outline-accent-primary"
+          "!bg-accent-secondary rounded-lg outline outline-1 outline-accent-primary"
         }`}
       >
         {maxText}
-      </span>
+      </button>
     </div>
   );
 };
