@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 
 export default async function MissionReward({
   achievements,

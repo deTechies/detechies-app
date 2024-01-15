@@ -1,7 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Project } from "@/lib/interfaces";
 import { Locale } from "@/i18n.config";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 export default function ProjectItem({
   details,
@@ -18,7 +20,7 @@ export default function ProjectItem({
   return (
     <Link
       href={`/project/${details.id}`}
-      className="w-full truncate flex flex-row items-start gap-5 pb-8 rounded-md bg-background-layer-1 pt-7 px-7 hover:shadow-lg "
+      className="flex flex-row items-start w-full gap-5 pb-8 truncate rounded-md bg-background-layer-1 pt-7 px-7 hover:shadow-lg "
     >
       <figure className="shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square bg-accent-secondary">
         <Image
@@ -29,10 +31,10 @@ export default function ProjectItem({
         />
       </figure>
 
-      <section className="flex flex-col w-full gap-4 grow truncate">
+      <section className="flex flex-col w-full gap-4 truncate grow">
         <header className="flex items-start justify-between capitalize">
           <div>
-            <h5 className="text-title_m text-text-primary mb-4">
+            <h5 className="mb-4 text-title_m text-text-primary">
               {details.name}
             </h5>
 
@@ -54,7 +56,7 @@ export default function ProjectItem({
 
         <div>
           <p
-            className="text-text-secondary text-body_s truncate"
+            className="truncate text-text-secondary text-body_s"
             dangerouslySetInnerHTML={{
               __html: details.description
                 ? details.description

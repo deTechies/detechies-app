@@ -1,18 +1,17 @@
 import { ProjectMember, ProjectWork } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import Image from "next/image";
+import IPFSImageLayer from "@/components/ui/layer";
+
 
 export default function ProjectMemberInline({projectMember, projectWork}: {projectMember: ProjectMember, projectWork?: ProjectWork}) {
+
   return (
     <div className="bg-background-layer-1 self-stretch p-5 rounded-[20px] border border-border-div gap-5 inline-flex">
       <div className="relative w-20 h-20 rounded-xl bg-background-layer-2">
-        <Image
-          src="https://ipfs.io/ipfs/bafybeia5px5av5fownigw6v5g2ql5cyv57vhgm2v6jtazdmvwgiy7wnmse"
-          alt="robin12"
-          layout="fill"
-          className="rounded-xl"
-        />
+        <IPFSImageLayer hashes={projectMember.user.avatar}></IPFSImageLayer>
       </div>
+      
       <div className="inline-flex flex-col gap-4 grow shrink basis-0">
         <h5 className="text-title_m">{projectMember?.user?.display_name} | {projectMember?.role} | 팀원</h5>
         <div className="flex flex-col gap-2">

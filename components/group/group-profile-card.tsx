@@ -1,4 +1,5 @@
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 
 import { getClub } from "@/lib/data/groups";
 import Link from "next/link";
