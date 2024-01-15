@@ -10,38 +10,40 @@ import ProjectMemberWorkDetails from "./_components/details-work";
 export default async function ProjectMemberEvaluation({
   params,
 }: {
-  params: { lang: Locale; id: string; };
+  params: { lang: Locale; id: string };
 }) {
-  
   const details = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
-  
-  if(!details.projectWork){
-    return (
-      <pre>
-        {JSON.stringify(
-          details, null, 4
-        )}
-      </pre>
-    )
+
+  if (!details.projectWork) {
+    return <pre>{JSON.stringify(details, null, 4)}</pre>;
   }
-  
-  if(details.evaluator.role != 'admin'){
-    redirect(`/work/${params.id}/feedback`)
+
+  if (details.evaluator.role != "admin") {
+    redirect(`/work/${params.id}/feedback`);
   }
-  
+
   return (
     <main className="flex gap-4">
       {/* LEFT SIDE  */}
       <section className="w-[360px] flex flex-col gap-8">
-        <ProjectSwitcher project={details.evaluator?.project} lang={dictionary} />
-        <ProjectMemberInline projectMember={details.projectWork.projectMember} projectWork={details.projectWork}/>
-        <ProjectMemberWorkDetails projectMember={details.projectMember} projectWork={details.projectWork} />
+        <ProjectSwitcher
+          project={details.evaluator?.project}
+          lang={dictionary}
+        />
+        <ProjectMemberInline
+          projectMember={details.projectWork.projectMember}
+          projectWork={details.projectWork}
+          lang={dictionary}
+        />
+        <ProjectMemberWorkDetails
+          projectMember={details.projectMember}
+          projectWork={details.projectWork}
+        />
       </section>
 
       {/* RIGHT SIDE */}
       <section className="flex grow shrink">
-
         <div className="space-y-8 grow">
           <BasicEvaluationInfo
             text={dictionary.project.evaluate}

@@ -273,6 +273,7 @@ export enum GROUP_TYPE {
   export interface ProjectWork {
     workId: string;
     name: string;
+    role: PROFESSION_TYPE;
     percentage: number;
     projectMember: ProjectMember;
     tags: string[];

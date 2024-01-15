@@ -37,6 +37,7 @@ export default async function EvaluationResult({
         <ProjectMemberInline
           projectMember={details.projectWork.projectMember}
           projectWork={details.projectWork}
+          lang={dictionary}
         />
         <ProjectMemberWorkDetails
           projectMember={details.projectMember}
@@ -45,7 +46,7 @@ export default async function EvaluationResult({
       </section>
 
       {/* RIGHT SIDE */}
-      <section className="flex grow shrink mb-10">
+      <section className="flex mb-10 grow shrink">
         <div className="space-y-8 grow">
           <BasicEvaluationInfo
             text={dictionary.project.evaluate}
@@ -73,15 +74,15 @@ export default async function EvaluationResult({
 
           <Card>
             <header className="flex flex-col gap-4 mb-10">
-              <h1 className="text-subhead_s text-center">
+              <h1 className="text-center text-subhead_s">
                 윤창진님에 대한 평가가 모두 정확한가요?
               </h1>
-              <h5 className="text-label_m text-text-secondary text-center">
+              <h5 className="text-center text-label_m text-text-secondary">
                 사실과 다른 평가를 하는 경우 윤창진님의 커리어에 불이익이 생길
                 수 있어요.
               </h5>
             </header>
-            <div className="inline-flex  justify-between">
+            <div className="inline-flex justify-between">
               <Link href={`/work/${params.id}/swot`} passHref>
                 <Button size="lg" variant={"secondary"}>
                   Back

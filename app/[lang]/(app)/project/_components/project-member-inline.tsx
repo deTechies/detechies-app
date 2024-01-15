@@ -3,21 +3,31 @@ import { beginEndDates } from "@/lib/utils";
 import Image from "next/image";
 import IPFSImageLayer from "@/components/ui/layer";
 
-
-export default function ProjectMemberInline({projectMember, projectWork}: {projectMember: ProjectMember, projectWork?: ProjectWork}) {
+export default function ProjectMemberInline({
+  projectMember,
+  projectWork,
+  lang,
+}: {
+  projectMember: ProjectMember;
+  projectWork?: ProjectWork;
+  lang: any;
+}) {
+  console.log(projectMember);
 
   return (
     <div className="bg-background-layer-1 self-stretch p-5 rounded-[20px] border border-border-div gap-5 inline-flex">
       <div className="relative w-20 h-20 rounded-xl bg-background-layer-2">
         <IPFSImageLayer hashes={projectMember.user.avatar}></IPFSImageLayer>
       </div>
-      
+
       <div className="inline-flex flex-col gap-4 grow shrink basis-0">
-        <h5 className="text-title_m">{projectMember?.user?.display_name} | {projectMember?.role} | 팀원</h5>
+        <h5 className="text-title_m">
+          {projectMember?.user?.display_name} | {lang.interface.role_type[projectMember?.role]}
+        </h5>
         <div className="flex flex-col gap-2">
           <div className="inline-flex self-stretch gap-2">
             <span className="text-text-secondary text-label_m">
-              디자이너
+              {lang.interface.profession_type[projectMember.works[0].role]}
             </span>
 
             <span className="text-text-secondary text-label_m">
@@ -25,9 +35,7 @@ export default function ProjectMemberInline({projectMember, projectWork}: {proje
             </span>
           </div>
           <div className="inline-flex self-stretch gap-2">
-            <div className="text-text-secondary text-label_m ">
-              업무기간:
-            </div>
+            <div className="text-text-secondary text-label_m ">업무기간:</div>
 
             <div className="tracking-wide text-text-secondary text-label_m">
               {projectMember && beginEndDates(projectMember.created_at)}
