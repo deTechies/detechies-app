@@ -103,6 +103,8 @@ export async function getEvaluationSurvey(id: string) {
   });
 
   if (!response.ok) {
+    const result= await response.json();
+    console.log(result)
     throw new Error("Failed to fetch the survey id");
   }
 

@@ -683,5 +683,13 @@
       "member": "Member",
       "client": "Client"
     }
+  },
+  "footer": {
+    "copywrite": "© 2021 CareerZen. All rights reserved.",
+    "terms_and_conditions": "Terms of Service",
+    "privacy_policy": "Privacy Policy",
+    "whitepaper": "Whitepaper",
+    "contact": "Contact Us", 
+    "user_guide": "User Guide"
   }
 }
