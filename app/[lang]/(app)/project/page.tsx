@@ -18,12 +18,12 @@ export default async function ProjectListPage({
   params: { lang: Locale };
 }) {
   const profile = await getUserProfile();
-  let projects = (await getProjects()).data;
+  const {data:projects} = await getProjects()
 
 
   const searchItem = searchParams.search as string;
 
-  let filteredData = projects?.filter((item: any) => {
+  let filteredData = projects.filter((item: any) => {
     const matchesSearch = searchParams.search
       ? item.name.toLowerCase().includes(searchItem.toLowerCase())
       : true;

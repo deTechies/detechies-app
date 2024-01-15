@@ -1,5 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { getSingleProject } from "@/lib/data/project";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
@@ -7,6 +6,7 @@ import { Locale } from "@/i18n.config";
 import AcceptInvitation from "./_components/accept-invitation";
 import PendingMemberList from "./_components/pending-members-list";
 
+import { serverApi } from "@/lib/data/general";
 import ProjectDetail from "./_components/project-detail";
 import ProjectEvaluation from "./_components/project-evaluation-by-groups";
 import ProjectLinks from "./_components/project-links";
@@ -22,7 +22,8 @@ export default async function ProjectDetailPage({
     `/project/single/${address}`
   ); */
 
-  const {data} = await getSingleProject(params.address);
+  
+  const {data} = await serverApi(`/projects/${params.address}`);
 
   if (!data)
     return (

@@ -21,14 +21,13 @@ export async function getUserProfile(address?: string) {
       },
     });
 
-    const data = await user.json();
 
-    if (!data) {
+    if (!user.ok) {
       // This will activate the closest `error.js` Error Boundary
       redirect("/onboard");
     }
 
-    return data.data;
+    return user.json();
     //return session.web3.user;
   }
 
