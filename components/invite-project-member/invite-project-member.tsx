@@ -27,34 +27,27 @@ export default function InviteProjectMember({
   lang: any;
 }) {
   const searchParams = useSearchParams()!;
-  const search = searchParams.get("search") as string;
+  const text = searchParams.get("search") || "";
 
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
   const { data: members, loading, error } = useFetchData<any[]>("/users");
 
-  
-
   const [dialogOpen, setDialogOpen] = useState(false);
 
   if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
-  if (!members) return <div>{lang.project.details.invite_member.no_members_found}</div>;
+  if (!members)
+    return <div>{lang.project.details.invite_member.no_members_found}</div>;
 
-
-  /*   const filteredData = members.filter((member: any) => {
-    return member.display_name.toLowerCase().includes(search.toLowerCase());
-  }); */
-
-
+  const filteredData = members.filter((member: any) => {
+    return member.display_name.toLowerCase().includes(text.toLowerCase() || "");
+  });
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger>
-        <Button
-          variant="secondary"
-          size="sm"
-        >
+        <Button variant="secondary" size="sm">
           {lang.project.details.invite_member.invite}
           <Plus size={16} className="inline-block ml-2" />
         </Button>
@@ -62,7 +55,9 @@ export default function InviteProjectMember({
 
       <DialogContent className="gap-6">
         <div className="flex flex-col gap-4">
-          <h5 className="text-subhead_m">{lang.project.details.invite_member.title}</h5>
+          <h5 className="text-subhead_m">
+            {lang.project.details.invite_member.title}
+          </h5>
 
           <p className="text-body_m">
             {/* At the same time as inviting team members, managers, and clients who
@@ -78,8 +73,8 @@ export default function InviteProjectMember({
               <Search placeholder={lang.project.details.invite_member.search} />
 
               <div className="rounded-sm max-h-[30vh] overflow-x-auto">
-                {members &&
-                  members.map((member: User, index: number) => (
+                {filteredData &&
+                  filteredData.map((member: User, index: number) => (
                     <PersonItem
                       key={index}
                       member={member}
@@ -95,7 +90,9 @@ export default function InviteProjectMember({
                 className="flex gap-2 mx-auto text-center"
               >
                 <span>{lang.project.details.invite_member.can_not_find}</span>
-                <span className="text-accent-primary">{lang.project.details.invite_member.invite_by_email}</span>
+                <span className="text-accent-primary">
+                  {lang.project.details.invite_member.invite_by_email}
+                </span>
               </button>
 
               <div className="flex justify-center gap-4">
@@ -109,11 +106,7 @@ export default function InviteProjectMember({
                   </Button>
                 </DialogClose>
 
-                <Button
-                  size="lg"
-                  className="max-w-[212px] grow px-0"
-                  disabled
-                >
+                <Button size="lg" className="max-w-[212px] grow px-0" disabled>
                   {lang.project.details.invite_member.invite}
                 </Button>
               </div>

@@ -9,11 +9,15 @@ import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function AcceptInvitation({
+  name,
   projectId,
   image,
+  lang,
 }: {
   projectId: string;
+  name: string;
   image: string;
+  lang: any;
 }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -29,14 +33,17 @@ export default function AcceptInvitation({
 
       router.refresh();
     }
-    setLoading(false);
+
+    if (result.status !== "success") {
+      setLoading(false);
+    }
   };
 
   const rejectInvitation = async () => {
     router.push("/projects");
   };
   return (
-    <Card className="flex flex-col max-w-md gap-8 m-8 mx-auto">
+    <Card className="flex flex-col max-w-md gap-6 m-8 mx-auto">
       <Avatar className="rounded-sm mx-auto w-[200px] h-[200px] mb-2 aspect-square bg-state-info-secondary">
         <AvatarImage
           src={"https://ipfs.io/ipfs/" + image}
@@ -54,15 +61,25 @@ export default function AcceptInvitation({
         </AvatarFallback>
       </Avatar>
 
-      <h1 className="text-center text-title_l">
-        You have been invited to the project! {projectId}
+      <h1 className="text-center">
+        <div className="mb-3 text-title_l">
+          {lang.project.details.invited_to_project.title}
+        </div>
+        <div className="text-subhead_s">{name}</div>
       </h1>
-      
-      <div className="flex flex-col gap-4 text-center">
-        To see more about the project please accept the membership
+
+      <div className="flex flex-col gap-8 text-center">
+        {lang.project.details.invited_to_project.desc}
+
         <div className="flex items-center justify-center gap-4">
-          <Button variant="destructive" size="lg" onClick={rejectInvitation}>
-            Reject
+          <Button
+            variant="destructive"
+            size="lg"
+            onClick={rejectInvitation}
+            loading={loading}
+            disabled={loading}
+          >
+            {lang.project.details.invited_to_project.reject}
           </Button>
 
           <Button
@@ -71,7 +88,7 @@ export default function AcceptInvitation({
             loading={loading}
             disabled={loading}
           >
-            Accept
+            {lang.project.details.invited_to_project.accept}
           </Button>
         </div>
       </div>

@@ -253,6 +253,12 @@
         "first_name": "First Name",
         "email": "email"
       },
+      "invited_to_project": {
+        "title": "You have been invited to the project!",
+        "desc": "To see more about the project please accept the membership.",
+        "reject": "Reject",
+        "accept": "Accept"
+      },
       "role_type": {
         "admin": "Admin",
         "member": "Member",

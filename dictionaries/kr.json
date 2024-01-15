@@ -164,6 +164,8 @@
           "project": "프로젝트",
           "evaluated": "평가받는 사람",
           "job_desc": "업무 내용",
+          "job_period": "업무 기간",
+          "contribution": "기여도",
           "later": "나중에 할게요",
           "go_eval": "평가하러 가기"
         },
@@ -253,6 +255,13 @@
         "last_name": "성",
         "first_name": "이름",
         "email": "이메일"
+      },
+      
+      "invited_to_project": {
+        "title": "프로젝트에 초대되었습니다!",
+        "desc": "프로젝트에 대해 자세히 알아보려면 회원 가입을 수락하세요.",
+        "reject": "거절하기",
+        "accept": "수락하기"
       },
       "role_type": {
         "admin": "관리자",

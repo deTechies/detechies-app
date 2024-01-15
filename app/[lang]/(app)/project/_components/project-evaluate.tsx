@@ -45,7 +45,7 @@ export default function ProjectMemberEvaluate({
             </AlertTitle>
 
             <AlertDescription>
-              {lang.project.details.members.evalu.desc}
+              {lang.project.details.members.evalu.eval_admin_desc}
             </AlertDescription>
           </Alert>
 

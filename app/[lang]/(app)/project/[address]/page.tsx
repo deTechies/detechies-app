@@ -40,9 +40,11 @@ export default async function ProjectDetailPage({
       </main>
     );
 
+      console.log(data);
+
   const dictionary = (await getDictionary(params.lang)) as any;
   if (data.userRole == "invited")
-    return <AcceptInvitation image={data.image} projectId={data.id} />;
+    return <AcceptInvitation name={data.name} image={data.image} projectId={data.id} lang={dictionary} />;
 
   return (
     <main className="grid w-full gap-6 px-4 my-10 md:grid-cols-3">

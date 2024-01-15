@@ -10,9 +10,11 @@ import { useRouter } from "next/navigation";
 export default function AcceptInvitation({
   id,
   image,
+  lang,
 }: {
   id: string;
   image: string;
+  lang: any;
 }) {
   const router = useRouter();
   const acceptInvitation = async () => {
