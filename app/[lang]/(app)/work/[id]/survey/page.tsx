@@ -9,9 +9,12 @@ export default async function EvaluateAsTeamLead({ params }: { params: any }) {
   const {data: surveyData} = await getEvaluationSurvey(params.id)
   const {data: details} = await getProjectWork(params.id);
 
+  console.log(details);
   if (details.evaluator.role !== "admin") {
     redirect(`/work/${params.id}/feedback`);
   }
+  
+  console.log()
 
   return (
     <div className="flex flex-col gap-4 mb-20 max-w-3xl mx-auto">
