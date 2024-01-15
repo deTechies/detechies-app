@@ -24,7 +24,7 @@ export const RankElement: React.FC<RankElementProps> = ({
         className={`relative cursor-pointer flex justify-center items-center rounded-full ${active ? "bg-accent-secondary shadow-inner" : bgColor}`}
       >
         {active ? (
-          <Check size={16} className="absolute text-accent-primary transition-colors duration-500 ease-in-out" />
+          <Check size={size/2.5} className="absolute text-accent-primary transition-colors duration-500 ease-in-out" />
         ) : (
           <div className="w-1.5 h-1.5 bg-[#BEC3CA] rounded-full absolute" />
         )}
@@ -60,7 +60,7 @@ export const Ranking: React.FC<RankingProps> = ({
   };
 
   return (
-    <div className="grid grid-cols-8 items-center gap-8">
+    <div className="grid grid-cols-8 items-center gap-2 md:gap-8">
       <button
       onClick={() => handleRankSelect(1)}
         className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 
@@ -71,7 +71,7 @@ export const Ranking: React.FC<RankingProps> = ({
       >
         {minText}
       </button>
-      <div className="col-span-4 shrink justify-center grow flex items-center max-w-[420px]">
+      <div className="col-span-4 shrink justify-center grow flex items-center max-w-[600px]">
       {Array.from({ length: ranks }, (_, index) => (
         <React.Fragment key={index}>
           <RankElement
