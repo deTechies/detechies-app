@@ -26,8 +26,6 @@ export default function SelectedProjectMember({
   const [role, setRole] = useState<string>("member");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  console.log(lang);
   
   async function inviteMember() {
     setLoading(true);
@@ -71,15 +69,15 @@ export default function SelectedProjectMember({
         }}
         defaultValue="member"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <RadioGroupItem value="member" />
           <Label>{lang.project.details.role_type.member}</Label>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <RadioGroupItem value="admin" />
           <Label>{lang.project.details.role_type.admin}</Label>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <RadioGroupItem value="client" />
           <Label>{lang.project.details.role_type.client}</Label>
         </div>
