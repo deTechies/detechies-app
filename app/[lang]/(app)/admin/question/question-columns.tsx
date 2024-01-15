@@ -35,8 +35,8 @@ export const questionColumns: ColumnDef<any>[] = [
     header: "Question",
   },
   {
-    accessorKey: "scale",
-    header: "scale",
+    accessorKey: "baseWeight",
+    header: "baseWeight",
   },
   {
     accessorKey: "category",

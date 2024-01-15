@@ -6,12 +6,8 @@ import { getProjects } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
 
 
-<<<<<<< HEAD
-import { getSession } from "next-auth/react";
-=======
 import { auth } from "@/lib/helpers/authOptions";
 import { Session } from "next-auth";
->>>>>>> 41e981eb52b71163ddd27a5cd0ec07f0be98d09a
 import ProjectFilter from "./project-filter";
 import ProjectItem from "./project-item";
 
@@ -22,11 +18,7 @@ export default async function ProjectListPage({
   searchParams: { [key: string]: string | string[] | undefined };
   params: { lang: Locale };
 }) {
-<<<<<<< HEAD
-  const profile = await getSession() as any;
-=======
   const profile = await auth() as Session;
->>>>>>> 41e981eb52b71163ddd27a5cd0ec07f0be98d09a
   const {data:projects} = await getProjects()
 
 
@@ -41,11 +33,7 @@ export default async function ProjectListPage({
       !searchParams.project || item.type === searchParams.project;
     const privateMatch =
       !searchParams.privacy || item.scope === searchParams.privacy;
-<<<<<<< HEAD
-    const myProjectMatch = !searchParams.me || item.owner === profile?.web3?.address;
-=======
-    const myProjectMatch = !searchParams.me || item.owner === profile.web3.address
->>>>>>> 41e981eb52b71163ddd27a5cd0ec07f0be98d09a
+    const myProjectMatch = !searchParams.me || item.owner === profile.web3?.address
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 
