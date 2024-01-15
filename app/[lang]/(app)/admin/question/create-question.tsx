@@ -31,7 +31,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { createQuestion } from "@/lib/data/feedback";
-import { QuestionCategory, QuestionType } from "@/lib/interfaces";
+import { QuestionCategory } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -39,11 +39,9 @@ const questionFormSchema = z.object({
   id: z.string().optional(),
   content: z.string().min(2).max(1000).optional(),
   type: z.string().default('slider'),
-  language: z.string().min(2).max(1000).optional(),
-  max_text: z.string().min(2).max(50).optional(),
-  min_text: z.string().min(2).max(50).optional(),
+  language: z.string().default('kr'),
   category: z.string(),
-  scale: z.number().min(0).max(10),
+  scale: z.number().default(5),
   baseWeight: z.number().min(0).max(100).optional(),
   messages: z.array(z.string().optional()).optional(),
 });
@@ -61,7 +59,7 @@ export default function CreateQuestion({
     mode: "onChange",
   });
 
-  const scale = form.watch("scale", 0); // Watching scale value
+  const scale = form.watch("scale", 5); // Watching scale value
 
   const selectedType = form.watch("type", "slider");
 
@@ -107,33 +105,6 @@ export default function CreateQuestion({
                 <div className="grid grid-cols-3 gap-4">
                   <FormField
                     control={form.control}
-                    name="type"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Category</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a type" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {Object.values(QuestionType).map((type) => (
-                              <SelectItem key={type} value={type}>
-                                {type}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
                     name="category"
                     render={({ field }) => (
                       <FormItem>
@@ -159,25 +130,7 @@ export default function CreateQuestion({
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="scale"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Scale</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            {...field}
-                            onChange={(e) =>
-                              field.onChange(parseInt(e.target.value))
-                            }
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                
                       <FormField
                     control={form.control}
                     name="baseWeight"
@@ -193,30 +146,6 @@ export default function CreateQuestion({
                             }
                           />
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="language"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Language</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a type" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="en">English</SelectItem>
-                            <SelectItem value="kr">Korean</SelectItem>
-                          </SelectContent>
-                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -266,7 +195,7 @@ export default function CreateQuestion({
               </div>
             </section>
 
-            {selectedType == "slider" &&
+            {
               Array.from({ length: scale }, (_, index) => (
                 <FormField
                   key={index}
@@ -283,43 +212,6 @@ export default function CreateQuestion({
                   )}
                 />
               ))}
-
-            {selectedType == "circles" && (
-              <section className="grid grid-cols-2 gap-2">
-                <FormField
-                  control={form.control}
-                  name="min_text"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Min Text</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Write out the question"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="max_text"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Max Text</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Write out the question"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </section>
-            )}
 
             <div className="flex items-center justify-center gap-8">
               <DialogClose asChild>

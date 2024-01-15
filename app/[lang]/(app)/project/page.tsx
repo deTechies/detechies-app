@@ -33,7 +33,7 @@ export default async function ProjectListPage({
       !searchParams.project || item.type === searchParams.project;
     const privateMatch =
       !searchParams.privacy || item.scope === searchParams.privacy;
-    const myProjectMatch = !searchParams.me || item.owner === profile.web3.address
+    const myProjectMatch = !searchParams.me || item.owner === profile.web3?.address
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 

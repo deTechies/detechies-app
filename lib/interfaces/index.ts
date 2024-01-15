@@ -136,8 +136,7 @@ export enum GROUP_TYPE {
     PM = 'PM',
     QA_ENGINEER = 'QA Engineer',
     PLANNER = 'Planner',
-    DESIGNER = 'Designer',
-    MARKETER = 'Marketer'
+    DESIGNER = 'Designer'
   }
 
 
