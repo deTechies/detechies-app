@@ -39,7 +39,7 @@ export default function FinishedProfile({ lang }: { lang: any }) {
 
   useEffect(() => {
     const updateUserSession = async () => {
-      const user = await getUserProfile();
+      const {data:user} = await getUserProfile();
 
       if (!data || !data.web3.user) {
         return;

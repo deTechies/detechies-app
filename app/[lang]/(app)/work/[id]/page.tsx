@@ -13,10 +13,10 @@ export default async function ProjectMemberEvaluation({
   params: { lang: Locale; id: string; };
 }) {
   
-  const details = (await getProjectWork(params.id)).data;
+  const {data: details} = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
   
-  if(!details.projectWork){
+  if(!details?.projectWork){
     return (
       <pre>
         {JSON.stringify(
@@ -26,7 +26,7 @@ export default async function ProjectMemberEvaluation({
     )
   }
   
-  if(details.evaluator.role != 'admin'){
+  if(details?.evaluator.role != 'admin'){
     redirect(`/work/${params.id}/feedback`)
   }
   

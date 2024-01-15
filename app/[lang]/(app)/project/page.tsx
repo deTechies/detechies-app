@@ -6,7 +6,7 @@ import { getProjects } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
 
 
-import { getUserProfile } from "@/lib/data/user";
+import { auth } from "@/lib/helpers/authOptions";
 import ProjectFilter from "./project-filter";
 import ProjectItem from "./project-item";
 
@@ -17,7 +17,7 @@ export default async function ProjectListPage({
   searchParams: { [key: string]: string | string[] | undefined };
   params: { lang: Locale };
 }) {
-  const profile = await getUserProfile();
+  const {data:profile} = await auth() as any;
   const {data:projects} = await getProjects()
 
 
@@ -32,7 +32,7 @@ export default async function ProjectListPage({
       !searchParams.project || item.type === searchParams.project;
     const privateMatch =
       !searchParams.privacy || item.scope === searchParams.privacy;
-    const myProjectMatch = !searchParams.me || item.owner === profile.wallet;
+    const myProjectMatch = !searchParams.me || item.owner === profile.web3?.user.wallet;
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 

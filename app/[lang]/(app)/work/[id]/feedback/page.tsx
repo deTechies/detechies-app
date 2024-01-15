@@ -11,5 +11,5 @@ export default async function EvaluateTeamMember({
   const {data: details} = await getProjectWork(id);
   const dictionary = await getDictionary(lang);
 
-  return <EvaluateTeamForm workId={id} surveyId={details.data.id} defaultValues={details.assessment} />;
+  return <EvaluateTeamForm workId={id} surveyId={details.id} defaultValues={details.assessment} />;
 }

@@ -44,7 +44,7 @@ export default function ProfileCertificates({
               <Card key={achievement_reward.id} className="flex flex-row items-start">
                 <div className="w-[68px] h-[68px] relative aspect-square rounded-sm ">
                   <Image
-                    src={`https://ipfs.io/ipfs/${achievement_reward.achievement.image ? achievement_reward.achievement.image : achievement_reward.achievement.avatar}`}
+                    src={`https://ipfs.io/ipfs/${achievement_reward.achievement?.image ? achievement_reward.achievement.image : achievement_reward.achievement.avatar}`}
                     alt="project image"
                     fill={true}
                     className="rounded-sm"
@@ -52,13 +52,13 @@ export default function ProfileCertificates({
                 </div>
                 <div className="flex flex-col gap-4 grow shrink flex-wrap">
                   <header className="flex gap-2 items-center">
-                    <h5 className="text-subhead_s">{achievement_reward.achievement.name}</h5>
+                    <h5 className="text-subhead_s">{achievement_reward.achievement?.name}</h5>
                   </header>
                   <div className="flex gap-4 items-start">
                     <div className="flex flex-col gap-2 basis-1/4">
                       <span className="text-text-secondary text-label_m">
                         {text?.issuer}:{" "}
-                        <span className="capitalize">{achievement_reward.achievement.club.name}</span>
+                        <span className="capitalize">{achievement_reward.achievement?.club?.name}</span>
                       </span>
                       <span className="text-text-secondary text-label_m ">
                         {text?.issue_date}: {" "} {formatDate(achievement_reward?.created_at.toString())}
