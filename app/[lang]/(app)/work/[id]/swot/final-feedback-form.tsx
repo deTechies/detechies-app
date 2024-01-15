@@ -6,6 +6,7 @@ import { toast } from "@/components/ui/use-toast";
 import { submitSwotAnalysis } from "@/lib/data/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -35,23 +36,21 @@ export default function FinalFeedbackForm({
     defaultValues,
   });
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(data: FinalFeedbackValues) {
-    console.log("starting to submit")
+    setIsLoading(true)
     const result = await submitSwotAnalysis(data, workId, surveyResponseId);
     
-    console.log(result);
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <div className="text-text-primary">
-          Thank you for submitting, please check the results.
-        </div>
-      ),
+      description: result.message
     });
 
+    if(result.status === 'success'){
+      router.push(`/work/${workId}/result`);
+    }
     
-    router.push(`/work/${workId}/result`);
+    setIsLoading(false)
   }
   return (
     <Form {...form}>
@@ -105,7 +104,10 @@ export default function FinalFeedbackForm({
             Back
           </Button>
 
-          <Button type="submit" variant={"primary"} size="lg">
+          <Button type="submit" variant={"primary"} size="lg" 
+            loading={isLoading}
+            disabled={isLoading}
+          >
             Save and Continue
           </Button>
         </section>

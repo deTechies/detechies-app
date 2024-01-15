@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { SurveyForm } from "./surveyform";
 
 export default async function EvaluateAsTeamLead({ params }: { params: any }) {
-  const surveyData = (await getEvaluationSurvey(params.id))
+  const {data: surveyData} = await getEvaluationSurvey(params.id)
   const {data: details} = await getProjectWork(params.id);
 
   if (details.evaluator.role !== "admin") {

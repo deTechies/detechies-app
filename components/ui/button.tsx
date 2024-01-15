@@ -46,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const content = loading ? (
-      <button className="flex items-center gap-4 ">
+      <button className="flex items-center gap-4 " disabled>
         {/* Replace with your spinning icon component */}
         <Loader2 size={16} className="animate-spin" />
         Loading...
