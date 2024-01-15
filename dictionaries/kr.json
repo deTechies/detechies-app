@@ -190,6 +190,13 @@
         "upload": "등록하기",
         "no_links": "등록된 작업물이 없어요."
       },
+      "request": {
+        "request_a_review": "평가 요청하기",
+        "card_title": "내 성과 평가 요청을 보낼까요?", 
+        "card_description": "내가 작성한 성과를 다른 구성원에게 평가받고 내 커리어를 인증해보세요. 선택한 프로젝트 구성원에게 성과 평가 요청을 보낼까요?", 
+        "card_button": " 평가 요청하기",
+        "card_back": "뒤로가기"
+      },
       "evalu": {
         "title": "그룹 평가",
         "request": "요청하기",

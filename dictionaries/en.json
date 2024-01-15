@@ -189,6 +189,13 @@
         "upload": "Upload",
         "no_links": "There are no registered tasks."
       },
+      "request": {
+        "request_a_review": "Request a Review",
+        "card_title": "Notify user to review your contribution?", 
+        "card_description": "Have your performance evaluated by other members and certify your career. Should I send a performance evaluation request to the selected project member", 
+        "card_button": "Request Review",
+        "card_back": "Back"
+      },
       "evalu": {
         "title": "Group Evaluation",
         "request": "Request",
