@@ -16,24 +16,25 @@ export default async function Footer({
         height={60}
         alt={"Logo"}
       />
-      <div className="flex gap-4 text-title_m text-text-secondary">
-        <Link href="#" className=" hover:text-accent-primary">{lang.footer.terms_and_conditions}</Link>
-        <Link href="#" className=" hover:text-accent-primary">{lang.footer.faq}</Link>
-        <Link href="#" className=" hover:text-accent-primary">{lang.footer.privacy_policy}</Link>
-        <Link href="#" className=" hover:text-accent-primary">{lang.footer.whitepaper}</Link>
-        <Link href="#" className=" hover:text-accent-primary">{lang.footer.contact_us}</Link>
+      <div className="flex text-title_m text-text-secondary my-5">
+        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.terms_and_conditions}</Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.faq}</Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.privacy_policy}</Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.whitepaper}</Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.contact_us}</Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.user_guide}</Link>
       </div>
       <div className="grid place-content-center justify-center justify-items-center gap-8">
         <div className="flex gap-4">
-          <Link href="#" passHref>
+        <Link href="https://open.kakao.com/o/gGdZ76If" target="_blank" passHref>
             <Image
-              src={`/icons/discord.png`}
+              src={`/images/socials/color/kakao.png`}
               height={24}
               width={24}
               alt={"Discord"}
             />
           </Link>
-          <Link href="#" passHref>
+          <Link href="https://t.me/Careerzen_org/1" target="_blank" passHref>
           <Image
             src={`/icons/telegram.png`}
             height={24}
@@ -41,14 +42,14 @@ export default async function Footer({
             alt={"Discord"}
           />
           </Link>
-          <Link href="#" passHref>
+          <Link href="https://x.com/careerzen" target="_blank" passHref>
           <Image src={`/icons/x.png`} height={24} width={24} alt={"Discord"} />
           </Link>
         </div>
        
       </div>
       <p className="text-text-secondary text-body_m">
-          Copyright © 2023. Careerzen. All rights reserved.
+         {lang.footer.copywrite}
         </p>
     </div>
   );
