@@ -30,7 +30,7 @@ function useFetchData<T>(path: string) {
           throw new Error(result.error);
         }
 
-        setData(result as T);
+        setData(result.data as T);
       } catch (error) {
         setError((error as Error).message);
       } finally {

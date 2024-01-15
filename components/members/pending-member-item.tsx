@@ -1,9 +1,7 @@
 "use client";
-import { acceptProjectMember } from "@/lib/data/project";
-import Image from "next/image";
+import { postServer } from "@/lib/data/postRequest";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
-import { toast } from "../ui/use-toast";
 import IPFSImageLayer from "../ui/layer";
 
 interface PendingMemberItemProps {
@@ -15,17 +13,14 @@ export default function PendingMemberItem({
   lang,
 }: PendingMemberItemProps) {
   //if accept then we need to put in
+  const router = useRouter();
 
   async function acceptMember() {
-    const result = await acceptProjectMember(member.id);
-
-    if (result) {
-      toast({
-        description: <pre>{JSON.stringify(result, null, 2)}</pre>,
-      });
-    }
+    await postServer(`/project-member/accept/member/${member.id}`, '');
+    //TODO: make sure that the data is only reloaded.
   }
 
+  //TODO: move this in a global util file do it can be used anywhere. 
   function formatInviteTime(inviteTimeStr: string, status: string) {
     const inviteTime = new Date(inviteTimeStr);
     const now = new Date();
