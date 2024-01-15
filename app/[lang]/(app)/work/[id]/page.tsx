@@ -12,15 +12,22 @@ export default async function ProjectMemberEvaluation({
 }: {
   params: { lang: Locale; id: string };
 }) {
-  const details = await getProjectWork(params.id);
+  
+  const {data: details} = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
-
-  if (!details.projectWork) {
-    return <pre>{JSON.stringify(details, null, 4)}</pre>;
+  
+  if(!details?.projectWork){
+    return (
+      <pre>
+        {JSON.stringify(
+          details, null, 4
+        )}
+      </pre>
+    )
   }
-
-  if (details.evaluator.role != "admin") {
-    redirect(`/work/${params.id}/feedback`);
+  
+  if(details?.evaluator.role != 'admin'){
+    redirect(`/work/${params.id}/feedback`)
   }
 
   return (

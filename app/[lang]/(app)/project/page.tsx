@@ -1,15 +1,15 @@
 import { Suspense } from "react";
 
-import { getProjects } from "@/lib/data/project";
-import { Project, User } from "@/lib/interfaces";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { getProjects } from "@/lib/data/project";
+import { Project } from "@/lib/interfaces";
 
-import { Button } from "@/components/ui/button";
 
-import ProjectItem from "./project-item";
+import { auth } from "@/lib/helpers/authOptions";
+import { Session } from "next-auth";
 import ProjectFilter from "./project-filter";
-import { getUserProfile } from "@/lib/data/user";
+import ProjectItem from "./project-item";
 
 export default async function ProjectListPage({
   searchParams,
@@ -18,12 +18,13 @@ export default async function ProjectListPage({
   searchParams: { [key: string]: string | string[] | undefined };
   params: { lang: Locale };
 }) {
-  const profile: User = await getUserProfile();
-  const projects = await getProjects();
+  const profile = await auth() as Session;
+  const {data:projects} = await getProjects()
+
 
   const searchItem = searchParams.search as string;
 
-  let filteredData = projects?.filter((item: any) => {
+  let filteredData = projects.filter((item: any) => {
     const matchesSearch = searchParams.search
       ? item.name.toLowerCase().includes(searchItem.toLowerCase())
       : true;
@@ -32,7 +33,7 @@ export default async function ProjectListPage({
       !searchParams.project || item.type === searchParams.project;
     const privateMatch =
       !searchParams.privacy || item.scope === searchParams.privacy;
-    const myProjectMatch = !searchParams.me || item.owner === profile.wallet;
+    const myProjectMatch = !searchParams.me || item.owner === profile.web3.address
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 

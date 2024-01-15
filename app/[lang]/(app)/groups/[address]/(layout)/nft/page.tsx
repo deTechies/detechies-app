@@ -11,7 +11,7 @@ export default async function GroupAchievements({
 }: {
   params: { address: string; lang: Locale };
 }) {
-  const details = await getClub(params.address);
+  const {data:details} = await getClub(params.address);
 
   const dictionary = (await getDictionary(params.lang)) as any;
 

@@ -3,7 +3,6 @@ import { Locale } from "@/i18n.config";
 import { getUserProfile } from "@/lib/data/user";
 
 
-import { User } from "@/lib/interfaces";
 import ProfileAwards from "../../mypage/_components/profile-awards";
 import ProfileCertificates from "../../mypage/_components/profile-certificates";
 import ProfileDetails from "../../mypage/_components/profile-details";
@@ -16,8 +15,14 @@ export default async function Dashboard({
 }: {
   params: { lang: Locale; user: string };
 }) {
-  const profile = await getUserProfile(params.user) as User;
+  const {data:profile} = await getUserProfile(params.user) as any;
   const dictionary = (await getDictionary(params.lang)) as any;
+  
+  
+  //TODO: Create a profile not found page. 
+  if(!profile.id) return <span>No user found.</span>
+  
+  
 
   return (
     <div className="flex sm:flex-row flex-col m-8 gap-20">
@@ -29,9 +34,9 @@ export default async function Dashboard({
       <div className="grow">
         <main className="flex flex-col gap-6">
           <ProfileDetails profile={profile} text={dictionary.mypage.main} visiting={true}/>
-          <ProfileProjects projects={profile.projects} text={dictionary.mypage.project} visiting={true} />
-          <ProfileCertificates achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.education} />
-          <ProfileAwards achievement_rewards={profile.achievement_rewards} text={dictionary.mypage.awards}/>
+          <ProfileProjects projects={profile?.projects} text={dictionary.mypage.project} visiting={true} />
+          <ProfileCertificates achievement_rewards={profile?.achievement_rewards} text={dictionary.mypage.education} />
+          <ProfileAwards achievement_rewards={profile?.achievement_rewards} text={dictionary.mypage.awards}/>
         </main>
         
         {/* <EditProfile /> */}

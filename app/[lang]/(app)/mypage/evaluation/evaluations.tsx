@@ -6,7 +6,7 @@ export default async function Evaluations({queries}: {queries: any}) {
   
 
   const filters = new URLSearchParams(queries).toString();
-  const data = await serverApi(`/survey-response/filtered?${filters}`) as SurveyResponse[];
+  const {data} = await serverApi(`/survey-response/filtered?${filters}`);
 
   if(data.length < 1) return (
     <div>평가 요청이 없습니다.</div>

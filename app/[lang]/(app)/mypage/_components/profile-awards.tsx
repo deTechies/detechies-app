@@ -4,23 +4,18 @@ import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 // import Image from "next/image";
 import Image from "@/components/ui/image";
-import { Achievement, AchievementReward } from "@/lib/interfaces";
-import { useRouter } from "next/navigation";
+
+import { AchievementReward } from "@/lib/interfaces";
 
 interface IProfileAwardsProps{
   achievement_rewards: AchievementReward[];
   text: any;
 }
 
-interface IClubCertificateProps{
-  details: Achievement
-}
-
 export default function ProfileAwards({
   achievement_rewards,
   text,
 }: IProfileAwardsProps) {
-  const router = useRouter();
   
   return (  
     <div className="flex flex-col gap-2">

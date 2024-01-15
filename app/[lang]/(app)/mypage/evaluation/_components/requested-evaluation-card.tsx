@@ -17,7 +17,7 @@ export default function RequestedEvaluationCard({
     <Link href={`/work/${data.projectWork.workId}`} passHref>
     <Card className="overflow-hidden">
         <div className="flex gap-4">
-            <div className="relative w-24 h-24 bg-background-layer-2 rounded-sm">
+            <div className="relative w-24 aspect-square bg-background-layer-2 rounded-sm">
                 <IPFSImageLayer hashes={data.evaluator.user.avatar ? data.evaluator.user.avatar : defaultAvatar} />
             </div>
             <div className="flex flex-col w-full">

@@ -19,12 +19,12 @@ export default async function ProjectEvaluationByGroups({
   //pretty simple and straightforward, we just going to check which nfts the project holds in order to showcase htem.
   //we want top check if we own any of the data is pending..
 
-  const groups = await getGroups();
+  const {data:groups} = await getGroups();
 
-  const rewardedAchievements = (await serverApi(
+  const {data:rewardedAchievements} = await serverApi(
     `/achievement-rewards/project-rewards/${details.id}`
-  )) as AchievementReward[];
-
+  );
+  
   if (!groups) return null;
 
   return (

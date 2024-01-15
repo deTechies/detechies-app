@@ -8,7 +8,7 @@ import { toast } from "@/components/ui/use-toast";
 import { submitEvaluationSurvey } from "@/lib/data/survey";
 import { Survey } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export function SurveyForm({
@@ -26,6 +26,7 @@ export function SurveyForm({
 }) {
   const form = useForm<any>({});
   //setting default values
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const transformAnswersToDefaultValues = (answers: any) => {
@@ -44,6 +45,7 @@ export function SurveyForm({
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
     const result = await submitEvaluationSurvey(data, workId, responseId);
     toast({
       title: "form results",
@@ -51,6 +53,8 @@ export function SurveyForm({
     });
 
     router.push(`/work/${workId}/feedback`);
+    
+    setIsLoading(false);
   };
 
   const questionsByCategory = survey.questions.reduce(
@@ -111,7 +115,10 @@ export function SurveyForm({
               <Button type="button" variant={"secondary"}>
                 Go Back
               </Button>
-              <Button type="submit">Save</Button>
+              <Button type="submit"
+                loading={isLoading}
+                disabled={isLoading}
+              >Save</Button>
             </Card>
           )}
         </form>

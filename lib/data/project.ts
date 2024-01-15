@@ -21,11 +21,7 @@ export async function getSingleProject(id: string) {
 
   const result = await res.json();
 
-  result.isCreator = result.userRole === "admin";
-
-  //we want to check if the user is amember
-
-  return result;
+  return result.data;
 }
 
 export async function updateProject(data: any) {
@@ -150,7 +146,7 @@ export async function getPendingProjectMembers(address: string) {
   );
   const data = await response.json();
 
-  return data;
+  return data.data;
 }
 
 export async function acceptProjectMember(projectMemberId: string){
@@ -287,6 +283,7 @@ export async function getProjectMember(projectId: string, userId: string) {
 }
 
 
+//TODO: renaming for better understanding
 export async function getProjectWork(id:string){
   const session = await auth();
   const url = new URL(`${API_URL}/survey-response/surveyByWork/${id}`);
@@ -301,7 +298,6 @@ export async function getProjectWork(id:string){
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
   });
-
-
+  
   return response.json();
 }

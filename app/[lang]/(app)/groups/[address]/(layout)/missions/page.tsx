@@ -1,16 +1,16 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import AchievementLink from "./achievement-link";
 import MissionCard from "@/components/card/mission-card";
-import { getClubMissions } from "@/lib/data/mission";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { getClubMissions } from "@/lib/data/mission";
 
 export default async function GroupAchievements({
   params,
 }: {
   params: { address: string; lang: Locale; };
 }) {
-  const data = await getClubMissions(params.address);
+  const {data} = await getClubMissions(params.address);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (

@@ -1,7 +1,7 @@
+import IPFSImageLayer from "@/components/ui/layer";
+import { defaultAvatar } from "@/lib/constants";
 import { ProjectMember, ProjectWork } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
-import Image from "next/image";
-import IPFSImageLayer from "@/components/ui/layer";
 
 export default function ProjectMemberInline({
   projectMember,
@@ -17,7 +17,7 @@ export default function ProjectMemberInline({
   return (
     <div className="bg-background-layer-1 self-stretch p-5 rounded-[20px] border border-border-div gap-5 inline-flex">
       <div className="relative w-20 h-20 rounded-xl bg-background-layer-2">
-        <IPFSImageLayer hashes={projectMember.user.avatar}></IPFSImageLayer>
+      <IPFSImageLayer hashes={projectMember.user.avatar ? projectMember.user.avatar : defaultAvatar} />
       </div>
 
       <div className="inline-flex flex-col gap-4 grow shrink basis-0">

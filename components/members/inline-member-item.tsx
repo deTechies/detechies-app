@@ -24,7 +24,7 @@ export default function InlineMemberItem({
     return (
       <div className="flex items-center py-4">
         <Avatar className="h-10 w-10 bg-background-layer-2">
-          <IPFSImageLayer hashes={[]} />
+          <IPFSImageLayer hashes={avatar? avatar : defaultAvatar} />
         </Avatar>
 
         <div className="ml-4 space-y-1">

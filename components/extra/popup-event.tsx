@@ -5,7 +5,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { getUserProfile } from "@/lib/data/user";
-import { User } from "@/lib/interfaces";
 import { MailQuestion } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,13 +12,12 @@ import Garderobe from "./avatar/garderobe";
 
 export async function PopoverEvent() {
   
-  const user  = await getUserProfile() as User;
+  const {data:user}  = await getUserProfile();
   
   //check if user is member of club named Careerzen
   //if yes, return null
   //if no, return the following
-  
-  const isMember = user.clubs.some((club) => club.club.name === "Careerzen");
+
   
   return (
     <Popover>
@@ -81,7 +79,6 @@ export async function PopoverEvent() {
             </div>
             <div>
               <Button variant="primary" className="w-full"
-                disabled={!isMember}
               >
                 Purchase
               </Button>

@@ -18,9 +18,9 @@ export default async function EvaluationResult({
 }: {
   params: { lang: Locale; id: string };
 }) {
-  const details = await getProjectWork(params.id);
+  const {data: details} = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
-  const surveyData = await getEvaluationSurvey(params.id);
+  const {data:surveyData} = await getEvaluationSurvey(params.id);
 
   if (!details.projectWork) {
     return <pre>{JSON.stringify(details, null, 4)}</pre>;
@@ -48,14 +48,19 @@ export default async function EvaluationResult({
       {/* RIGHT SIDE */}
       <section className="flex mb-10 grow shrink">
         <div className="space-y-8 grow">
-          <BasicEvaluationInfo
+          {
+            details.matching && 
+            <BasicEvaluationInfo
             text={dictionary.project.evaluate}
             workId={params.id}
             verified={details.matching != null}
             defaultValues={details.matching}
             result={true}
           />
-
+          }
+        
+        {
+            details.answers.length > 0 && 
           <SurveyForm
             workId={params.id}
             responseId={details.id}
@@ -63,6 +68,7 @@ export default async function EvaluationResult({
             defaultValues={details.answers}
             result={true}
           />
+        }
 
           <EvaluateTeamForm
             workId={params.id}
