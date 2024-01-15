@@ -23,13 +23,12 @@ export async function getUserProfile(address?: string) {
 
     const data = await user.json();
 
-    if (!user.ok) {
+    if (!data) {
       // This will activate the closest `error.js` Error Boundary
       redirect("/onboard");
-      throw new Error("Failed to fetch data");
     }
 
-    return data;
+    return data.data;
     //return session.web3.user;
   }
 

@@ -13,7 +13,7 @@ export default async function ProjectMemberEvaluation({
   params: { lang: Locale; id: string; };
 }) {
   
-  const details = await getProjectWork(params.id);
+  const details = (await getProjectWork(params.id)).data;
   const dictionary = await getDictionary(params.lang);
   
   if(!details.projectWork){

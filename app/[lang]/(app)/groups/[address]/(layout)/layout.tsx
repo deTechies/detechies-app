@@ -19,7 +19,7 @@ export default async function GroupDetailLayout({
 }) {
 
   const dictionary = (await getDictionary(params.lang)) as any;
-  const data = await getClub(params.address);
+  const {data} = await getClub(params.address);
   
   
   if(data.userRole === 'invited') return (
