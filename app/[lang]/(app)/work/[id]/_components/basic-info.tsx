@@ -171,7 +171,7 @@ export default function BasicEvaluationInfo({
                           <FormControl>
                             <RadioGroupItem value="80" />
                           </FormControl>
-                          <FormLabel className="font-normal">
+                          <FormLabel>
                             {text.more_than_20}
                           </FormLabel>
                         </FormItem>
@@ -179,7 +179,7 @@ export default function BasicEvaluationInfo({
                           <FormControl>
                             <RadioGroupItem value="100" />
                           </FormControl>
-                          <FormLabel className="font-normal lowercase">
+                          <FormLabel>
                             {text.all_match}
                           </FormLabel>
                         </FormItem>
@@ -267,22 +267,13 @@ export default function BasicEvaluationInfo({
                 <Button variant="secondary" size="lg" type="button">
                   {text.go_back}
                 </Button>
-                {verified ? (
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    type="button"
-                    onClick={() => {
-                      router.push(`/work/${workId}/survey`);
-                    }}
+
+                  <Button size="lg" type="submit"
+                    loading={isLoading}
+                    disabled={isLoading}
                   >
-                    {text.next}
-                  </Button>
-                ) : (
-                  <Button size="lg" type="submit">
                     Save
                   </Button>
-                )}
               </section>
             )
           }
