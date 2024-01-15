@@ -20,7 +20,7 @@ export default async function EvaluationResult({
 }) {
   const {data: details} = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
-  const surveyData = await getEvaluationSurvey(params.id);
+  const {data:surveyData} = await getEvaluationSurvey(params.id);
 
   if (!details.projectWork) {
     return <pre>{JSON.stringify(details, null, 4)}</pre>;

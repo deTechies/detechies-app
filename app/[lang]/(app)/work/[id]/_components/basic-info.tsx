@@ -13,10 +13,11 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { postServer } from "@/lib/data/general";
+import { postServer } from "@/lib/data/postRequest";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -52,7 +53,7 @@ export default function BasicEvaluationInfo({
   workId,
   verified,
   defaultValues,
-  result = false
+  result = false,
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
     resolver: zodResolver(baseInfoSchema),
@@ -60,8 +61,10 @@ export default function BasicEvaluationInfo({
   });
 
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(data: verifyWorkValues) {
+    setIsLoading(true);
     if (!workId) {
       toast({
         title: "No idea being found",
@@ -70,41 +73,18 @@ export default function BasicEvaluationInfo({
       return;
     }
     const url = `/survey-response/matching`;
-    
+
     const sendingData = JSON.stringify({
       projectWorkId: workId,
       matching: data,
-    })
-    const result = await postServer(url, "POST", sendingData);
-
-    if (result.status == "500") {
-
-      toast({
-        title: "Oops something went wrong",
-        description:  <pre>{JSON.stringify(result, null,2)}</pre>
-      });
-      return;
-    } else {
+    });
+    const result = await postServer(url, sendingData);
+    
+    if (result.status == 'success') {
       router.push(`/work/${workId}/survey`);
-      toast({
-        title: "Submitted succesfully",
-        description: (
-          <span className="text-white">
-            Thank your evaluating the user, please find more things.
-          </span>
-        ),
-      });
     }
 
     if (data.match == "80") {
-      toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">Email has been send</code>
-          </pre>
-        ),
-      });
       router.push(`/project`);
     }
   }
@@ -234,9 +214,8 @@ export default function BasicEvaluationInfo({
                   label={text.meet_schedule.label}
                   messages={text.meet_schedule.messages}
                   disabled={result}
-                  
                 />
-                 <PercentageSliderField
+                <PercentageSliderField
                   name="feedback_times"
                   form={form}
                   steps={10}
@@ -244,7 +223,7 @@ export default function BasicEvaluationInfo({
                   messages={text.feedback_times.messages}
                   disabled={result}
                 />
-                 <PercentageSliderField
+                <PercentageSliderField
                   name="good_team_player"
                   form={form}
                   steps={10}
@@ -254,15 +233,14 @@ export default function BasicEvaluationInfo({
                 />
               </section>
             )}
-            
-            { result ? (
-                <Link href={`/work/${workId}`} passHref className="mx-auto">
-                  <Button variant="secondary" size="lg" type="button">
-                    Modify
-                  </Button>
 
-                </Link>
-            ):(
+            {result ? (
+              <Link href={`/work/${workId}`} passHref className="mx-auto">
+                <Button variant="secondary" size="lg" type="button">
+                  Modify
+                </Button>
+              </Link>
+            ) : (
               <section className="flex justify-between">
                 <Button variant="secondary" size="lg" type="button">
                   {text.go_back}
@@ -271,13 +249,12 @@ export default function BasicEvaluationInfo({
                   <Button size="lg" type="submit"
                     loading={isLoading}
                     disabled={isLoading}
+                    
                   >
                     Save
                   </Button>
               </section>
-            )
-          }
-
+            )}
           </Card>
         </form>
       </Form>
