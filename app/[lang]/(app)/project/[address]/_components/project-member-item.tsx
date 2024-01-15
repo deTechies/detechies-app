@@ -39,7 +39,7 @@ export default async function ProjectMemberItem({
       <div className="flex flex-wrap w-full gap-5">
         <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
           <IPFSImageLayer
-            hashes={details?.user?.nft ? details.user?.nft : defaultAvatar}
+            hashes={details?.user?.avatar ? details.user?.avatar : defaultAvatar}
             className="rounded-sm"
           />
         </figure>

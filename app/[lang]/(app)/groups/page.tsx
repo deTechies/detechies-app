@@ -1,4 +1,3 @@
-import { getUserProfile } from "@/lib/data/user";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
@@ -14,10 +13,8 @@ export default async function GroupsPage({
 }) {
 
   const dictionary = (await getDictionary(params.lang)) as any;
-  
-  const profile = await getUserProfile();
 
-  const groups = (await serverApi(`/clubs`)).data
+  const {data:groups} = await serverApi(`/clubs`)
 
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
@@ -27,7 +24,6 @@ export default async function GroupsPage({
       {groups?.length > 0 ? (
         <GroupList
           groups={groups}
-          profileWallet={profile.wallet}
           lang={dictionary}
         />
       ) : null}
