@@ -8,6 +8,7 @@ import ProfileCertificates from "../../mypage/_components/profile-certificates";
 import ProfileDetails from "../../mypage/_components/profile-details";
 import ProfileProjects from "../../mypage/_components/profile-projects";
 
+import NoProfileFound from "./_component/no-profile-found";
 import UserProfile from "./_component/user-profile";
 
 export default async function Dashboard({
@@ -20,7 +21,7 @@ export default async function Dashboard({
   
   
   //TODO: Create a profile not found page. 
-  if(!profile.id) return <span>No user found.</span>
+  if(!profile.id) return <NoProfileFound />
   
   
 
