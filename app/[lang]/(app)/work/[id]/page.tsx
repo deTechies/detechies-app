@@ -20,7 +20,7 @@ export default async function ProjectMemberEvaluation({
     return <InvalidWorkAccess details={details} />;
   }
 
-  if (details?.evaluator.role != "admin") {
+  if (details.data?.evaluator.role != "admin") {
     redirect(`/work/${params.id}/feedback`);
   }
 
