@@ -29,21 +29,42 @@ interface BasicEvaluationInfoProps {
   result?: boolean;
 }
 
-const baseInfoSchema = z.object({
-  match: z
-    .enum(["100", "80"], {
+const baseInfoSchema = z
+  .object({
+    match: z.enum(["100", "80"], {
       required_error: "You need to select a matching performance.",
-    })
-    .optional(),
-  hourly_rate: z.string().optional(),
-  weekly_hours: z.string().optional(),
-  reject_letter: z.string().optional(),
-  rate_contributions: z.number().optional(),
-  good_team_player: z.number().optional(),
-  feedback_times: z.number().optional(),
-  rate_requirements: z.number().optional(),
-  rate_time_schedule: z.number().optional(),
-});
+    }),
+    hourly_rate: z.string(),
+    weekly_hours: z.string(),
+    reject_letter: z.string().optional(),
+    rate_contributions: z.number().optional(),
+    rate_requirements: z.number().optional(),
+    rate_time_schedule: z.number().optional(),
+  })
+  .refine(
+    (data) => {
+      if (data.match === "80") {
+        return data.reject_letter !== undefined;
+      }
+      if (data.match === "100") {
+        return (
+          data.rate_contributions !== undefined &&
+          data.rate_requirements !== undefined &&
+          data.rate_time_schedule !== undefined
+        ); 
+      }
+      return true;
+    },
+    {
+      message: "Required fields are missing based on the match value.",
+      path: [
+        "reject_letter",
+        "rate_contributions",
+        "rate_requirements",
+        "rate_time_schedule",
+      ],
+    }
+  );
 
 type verifyWorkValues = z.infer<typeof baseInfoSchema>;
 
@@ -79,8 +100,8 @@ export default function BasicEvaluationInfo({
       matching: data,
     });
     const result = await postServer(url, sendingData);
-    
-    if (result.status == 'success') {
+
+    if (result.status == "success") {
       router.push(`/work/${workId}/survey`);
     }
 
@@ -89,14 +110,18 @@ export default function BasicEvaluationInfo({
     }
   }
 
+  const onClickGoBack = () => {
+    router.back();
+  };
+
   return (
     <main className="grow shrink">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
-          <Card className=" flex gap-7 ">
-            <h4 className="text-subhead_s">{text.basic_information}</h4>
+          <Card className="gap-0">
+            <h4 className="text-subhead_s mb-7">{text.basic_information}</h4>
 
-            <section className="grid grid-cols-2 gap-4">
+            <section className="grid grid-cols-2 gap-4 mb-6">
               <FormField
                 control={form.control}
                 name="weekly_hours"
@@ -136,7 +161,7 @@ export default function BasicEvaluationInfo({
                 control={form.control}
                 name="match"
                 render={({ field }) => (
-                  <FormItem className="space-y-3">
+                  <FormItem className="space-y-3 mb-7">
                     <FormLabel>
                       {text.does_the_work_details_match_the_facts}
                     </FormLabel>
@@ -144,24 +169,20 @@ export default function BasicEvaluationInfo({
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1"
+                        className="flex flex-col gap-0 mt-4 space-y-1"
                         disabled={result}
                       >
                         <FormItem className="flex items-center space-y-0">
                           <FormControl>
                             <RadioGroupItem value="80" />
                           </FormControl>
-                          <FormLabel>
-                            {text.more_than_20}
-                          </FormLabel>
+                          <FormLabel>{text.not_true}</FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-y-0">
                           <FormControl>
                             <RadioGroupItem value="100" />
                           </FormControl>
-                          <FormLabel>
-                            {text.all_match}
-                          </FormLabel>
+                          <FormLabel>{text.all_match}</FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
@@ -170,7 +191,7 @@ export default function BasicEvaluationInfo({
               />
             </section>
             {form.watch("match") == "80" && (
-              <section className="flex flex-col gap-7">
+              <section className="flex flex-col gap-7 mb-7">
                 <FormField
                   control={form.control}
                   name="reject_letter"
@@ -179,9 +200,7 @@ export default function BasicEvaluationInfo({
                       <FormLabel>{text.reject}</FormLabel>
                       <Textarea
                         {...field}
-                        placeholder={
-                          text.please_evaluate_users_role_and_performance_in_this_project
-                        }
+                        placeholder={text.reject_placeholder}
                         disabled={result}
                       />
                     </FormItem>
@@ -190,27 +209,31 @@ export default function BasicEvaluationInfo({
               </section>
             )}
             {form.watch("match") == "100" && (
-              <section className="space-y-7">
+              <section className="space-y-7 mb-7">
+                <PercentageSliderField
+                  name="rate_contributions"
+                  form={form}
+                  steps={10}
+                  text={text}
+                  label={text.work_contribution.label}
+                  messages={text.work_contribution.messages}
+                  disabled={result}
+                />
                 <PercentageSliderField
                   name="rate_requirements"
                   form={form}
                   steps={10}
                   label={text.meet_requirements.label}
                   messages={text.meet_requirements.messages}
+                  text={text}
                   disabled={result}
                 />
-                <PercentageSliderField
-                  name="rate_contributions"
-                  form={form}
-                  steps={10}
-                  label={text.work_contribution.label}
-                  messages={text.work_contribution.messages}
-                  disabled={result}
-                />
+
                 <PercentageSliderField
                   name="rate_time_schedule"
                   form={form}
                   steps={10}
+                  text={text}
                   label={text.meet_schedule.label}
                   messages={text.meet_schedule.messages}
                   disabled={result}
@@ -237,22 +260,30 @@ export default function BasicEvaluationInfo({
             {result ? (
               <Link href={`/work/${workId}`} passHref className="mx-auto">
                 <Button variant="secondary" size="lg" type="button">
-                  Modify
+                  {text.modify}
                 </Button>
               </Link>
             ) : (
               <section className="flex justify-between">
-                <Button variant="secondary" size="lg" type="button">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  type="button"
+                  onClick={onClickGoBack}
+                >
                   {text.go_back}
                 </Button>
 
-                  <Button size="lg" type="submit"
-                    loading={isLoading}
-                    disabled={isLoading}
-                    
-                  >
-                    Save
-                  </Button>
+                <Button
+                  size="lg"
+                  type="submit"
+                  loading={isLoading}
+                  disabled={isLoading && form.getValues("match")}
+                >
+                  {form.getValues("match") == "80"
+                    ? text.register_reason
+                    : text.next}
+                </Button>
               </section>
             )}
           </Card>

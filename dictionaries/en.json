@@ -163,6 +163,8 @@
           "project": "Project",
           "evaluated": "Person Evaluated",
           "job_desc": "Job Description",
+          "job_period": "Period",
+          "contribution": "Contribution",
           "later": "Do It Later",
           "go_eval": "Go to Evaluate"
         },
@@ -265,6 +267,13 @@
         "client": "Client"
       }
     },
+    "work": {
+      "title": "Work Attitude/Tendency Evaluation",
+      "desc": "Please evaluate Mr./Ms.",
+      "desc2": "'s role and performance in this project.",
+      "project": "Collaborated Project",
+      "evaluatee": "Being Evaluated"
+    },
     "evaluate": {
       "evaluate_performance": "Evaluation Performance",
       "evaluate_performance_description": "Please evaluate users role and performance in this project",
@@ -274,14 +283,20 @@
       "hourly_wage_team": "Enter hourly wage set for the team member.",
       "please_evaluate_users_role_and_performance_in_this_project": "Please evaluate users role and performance in this project.",
       "does_the_work_details_match_the_facts": "Does the work written by the user match the facts?",
+      "not_true": "It's not true",
       "more_than_20": "More than 20% of the information stated is different from the facts",
       "more_than_15": "More than 15% of the information stated is different from the facts",
       "more_than_10": "More than 10% of the information stated is different from the facts",
       "more_than_5": "More than 5% of the information stated is different from the facts",
       "all_match": "Yes, they all match.",
       "go_back": "Go Back",
+      "save": "Save",
+      "modify": "Modify",
       "next": "Next",
+      "register_reason": "Register Reasons",
+      "evaluation_contents": "Evaluation Contents",
       "reject": "Reason of rejection",
+      "reject_placeholder": "If you inform us of any parts of the work that are different from the facts, the appraised person will write it again.",
       "meet_requirements": {
         "label": "Did their deliverables meet your requirements?",
         "messages": [

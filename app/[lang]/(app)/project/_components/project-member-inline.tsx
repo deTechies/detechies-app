@@ -7,54 +7,56 @@ export default function ProjectMemberInline({
   projectMember,
   projectWork,
   lang,
+  title,
 }: {
   projectMember: ProjectMember;
   projectWork?: ProjectWork;
   lang: any;
+  title?: string;
 }) {
-
-  console.log(projectMember);
-  console.log(projectWork);
-
   return (
-    <div className="bg-background-layer-1 self-stretch p-5 rounded-[20px] border border-border-div gap-5 inline-flex">
-      <div className="relative w-20 h-20 rounded-xl bg-background-layer-2">
-        <IPFSImageLayer
-          hashes={
-            projectMember?.user
-              ? projectMember.user.avatar
-              : defaultAvatar
-          }
-        />
-      </div>
+    <div className="self-stretch p-5 border rounded-md bg-background-layer-1 border-border-div">
+      {title && <div className="mb-5 text-subhead_s">{title}</div>}
+      
+      <div className="inline-flex gap-5 ">
+        <div className="relative w-20 h-20 rounded-xl bg-background-layer-2">
+          <IPFSImageLayer
+            hashes={
+              projectMember?.user ? projectMember.user.avatar : defaultAvatar
+            }
+          />
+        </div>
 
-      <div className="inline-flex flex-col gap-4 grow shrink basis-0">
-        <h5 className="text-title_m">
-          {projectMember?.user?.display_name} |{" "}
-          {lang.interface.role_type[projectMember?.role]}
-        </h5>
-        <div className="flex flex-col gap-2">
-          <div className="inline-flex self-stretch gap-2">
-            <span className="text-text-secondary text-label_m">
-              {
-                lang.interface.profession_type[
-                  projectWork?.role || projectMember.works[0].name || projectMember.works[0].role
-                ]
-              }
-            </span>
+        <div className="inline-flex flex-col gap-4 grow shrink basis-0">
+          <h5 className="text-title_m">
+            {projectMember?.user?.display_name} |{" "}
+            {lang.interface.role_type[projectMember?.role]}
+          </h5>
+          <div className="flex flex-col gap-2">
+            <div className="inline-flex self-stretch gap-2">
+              <span className="text-text-secondary text-label_m">
+                {
+                  lang.interface.profession_type[
+                    projectWork?.role ||
+                      projectMember.works[0].name ||
+                      projectMember.works[0].role
+                  ]
+                }
+              </span>
 
-            <span className="text-text-secondary text-label_m">
-              | {lang.project.details.members.evalu.contribution}{" "}
-              {projectWork?.percentage || projectMember.works[0].percentage}%
-            </span>
-          </div>
-          <div className="inline-flex self-stretch gap-2">
-            <div className="text-text-secondary text-label_m ">
-              {lang.project.details.members.evalu.job_period}:
+              <span className="text-text-secondary text-label_m">
+                | {lang.project.details.members.evalu.contribution}{" "}
+                {projectWork?.percentage || projectMember.works[0].percentage}%
+              </span>
             </div>
+            <div className="inline-flex self-stretch gap-2">
+              <div className="text-text-secondary text-label_m ">
+                {lang.project.details.members.evalu.job_period}:
+              </div>
 
-            <div className="tracking-wide text-text-secondary text-label_m">
-              {projectMember && beginEndDates(projectMember.created_at)}
+              <div className="tracking-wide text-text-secondary text-label_m">
+                {projectMember && beginEndDates(projectMember.created_at)}
+              </div>
             </div>
           </div>
         </div>

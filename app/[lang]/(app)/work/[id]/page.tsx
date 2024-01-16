@@ -33,12 +33,14 @@ export default async function ProjectMemberEvaluation({
   return (
     <main className="flex gap-4">
       {/* LEFT SIDE  */}
-      <section className="w-[360px] flex flex-col gap-8">
+      <section className="w-[360px] flex flex-col gap-4">
         <ProjectSwitcher
+          title={dictionary.project.work.project}
           project={details.evaluator?.project}
           lang={dictionary}
         />
         <ProjectMemberInline
+          title={dictionary.project.work.evaluatee}
           projectMember={details.projectWork.projectMember}
           projectWork={details.projectWork}
           lang={dictionary}
@@ -46,6 +48,7 @@ export default async function ProjectMemberEvaluation({
         <ProjectMemberWorkDetails
           projectMember={details.projectMember}
           projectWork={details.projectWork}
+          lang={dictionary}
         />
       </section>
 
