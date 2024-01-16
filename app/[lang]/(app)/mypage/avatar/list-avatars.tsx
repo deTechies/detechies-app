@@ -37,7 +37,7 @@ export default function ListAvatars({
       }
     }
     return { pending };
-  }, [rewards]);
+  }, [rewards, avatar, sbt, status]);
   return (
     <div className="grid grid-cols-4 gap-4">
       {filteredAchievements.pending &&

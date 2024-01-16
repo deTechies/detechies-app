@@ -5,34 +5,34 @@ import { Card } from "@/components/ui/card";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getClub } from "@/lib/data/groups";
-import AcceptInvitation from "../../_components/accept-group-invitation";
-
-
-
+import AcceptGroupInvitation from "../../_components/accept-group-invitation";
 
 export default async function GroupDetailLayout({
   params,
   children,
 }: {
-  params: { address: string, lang: Locale };
+  params: { address: string; lang: Locale };
   children: React.ReactNode;
 }) {
-
   const dictionary = (await getDictionary(params.lang)) as any;
-  const {data} = await getClub(params.address);
-  
-  
-  if(data.userRole === 'invited') return (
-    <main className="w-full m-8">
-      <AcceptInvitation id={params.address} image={data.image} />
-    </main>
-  );
+  const { data } = await getClub(params.address);
+
+  if (data.userRole === "invited")
+    return (
+      <main className="w-full m-8">
+        <AcceptGroupInvitation
+          id={params.address}
+          image={data.image}
+          lang={dictionary}
+        />
+      </main>
+    );
 
   return (
     <main className="w-full m-8">
-      <GroupProfileCard id={params.address} lang={dictionary.group}/>
+      <GroupProfileCard id={params.address} lang={dictionary.group} />
       <GroupTabs details={data} lang={dictionary.group}></GroupTabs>
-      
+
       <Card className="px-10 pt-8 rounded-t-none">
         <div className="flex flex-col">{children}</div>
       </Card>

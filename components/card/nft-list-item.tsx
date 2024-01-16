@@ -1,6 +1,7 @@
 "use client";
 import { Achievement } from "@/lib/interfaces";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Badge } from "../ui/badge";
@@ -71,7 +72,7 @@ export default function NftListItem({
               : DEFAULT_IPFS_URL + item.avatar
           }
           alt="nft_list_item"
-          className="object-cover rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
+          className="object-contain rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
           fill={true}
           priority={true}
         />

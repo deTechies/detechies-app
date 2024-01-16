@@ -92,8 +92,8 @@ export default function PendingNFT({ details }: any) {
   return (
     <Dialog>
       <DialogTrigger>
-        <section className="flex gap-4 rounded-sm hover:bg-background-layer-2 cursor-pointer">
-          <div className="aspect-square w-24 h-24 relative object-scale rounded-sm bg-gradient-to-b from-state-info to-accent-secondary">
+        <section className="flex gap-4 rounded-sm cursor-pointer hover:bg-background-layer-2">
+          <div className="relative w-24 h-24 rounded-sm aspect-square object-scale bg-gradient-to-b from-state-info to-accent-secondary">
             <Image
               src={`https://ipfs.io/ipfs/${details.nft?.metadata?.image}`}
               alt={details.nft.metadata?.name}
@@ -101,12 +101,12 @@ export default function PendingNFT({ details }: any) {
               className="rounded-sm shadow-md"
             />
           </div>
-          <div className="flex flex-col justify-evenly text-left">
+          <div className="flex flex-col text-left justify-evenly">
             <h5 className="font-medium">{details.nft.metadata?.name}</h5>
-            <span className="text-text-primary text-sm capitalize font-light">
+            <span className="text-sm font-light capitalize text-text-primary">
               {details.type} - {truncateMiddle(details.requester, 12)}{" "}
             </span>
-            <span className="text-text-secondary text-sm font-light">
+            <span className="text-sm font-light text-text-secondary">
               {" "}
               4 days ago
             </span>
@@ -124,19 +124,19 @@ export default function PendingNFT({ details }: any) {
             />
           </div>
           <div className="bg-black-100 rounded-sm p-2 shadow-sm max-w-md  max-h-[20vh] overflow-auto">
-            <dl className="grid grid-cols-4 justify-between p-1 px-2 gap-2 my-2">
-              <dd className="text-text-secondary font-light text-sm capitalize">
+            <dl className="grid justify-between grid-cols-4 gap-2 p-1 px-2 my-2">
+              <dd className="text-sm font-light capitalize text-text-secondary">
                 Requester
               </dd>
-              <dd className="col-span-3 text-primary text-sm overflow-auto text-right text-clip">
+              <dd className="col-span-3 overflow-auto text-sm text-right text-primary text-clip">
                 {details.requester}
               </dd>
             </dl>
-            <dl className="grid grid-cols-4 justify-between p-1 px-2 gap-2 my-2">
-              <dd className="text-text-secondary font-light text-sm capitalize">
+            <dl className="grid justify-between grid-cols-4 gap-2 p-1 px-2 my-2">
+              <dd className="text-sm font-light capitalize text-text-secondary">
                 Recipients
               </dd>
-              <dd className="col-span-3 text-primary text-sm overflow-auto text-right text-clip">
+              <dd className="col-span-3 overflow-auto text-sm text-right text-primary text-clip">
                 <Link href={`/${details.type}/${details.requester}`}>
                   {details.type}
                 </Link>
@@ -146,13 +146,13 @@ export default function PendingNFT({ details }: any) {
               Object.entries(details.nft.metadata).map(
                 ([key, value], index) => (
                   <dl
-                    className="grid grid-cols-4 justify-between p-1 px-2 gap-2 my-2"
+                    className="grid justify-between grid-cols-4 gap-2 p-1 px-2 my-2"
                     key={index}
                   >
-                    <dd className="text-text-secondary font-light text-sm capitalize">
+                    <dd className="text-sm font-light capitalize text-text-secondary">
                       {key}
                     </dd>
-                    <dd className="col-span-3 text-primary text-sm overflow-auto text-right text-clip">
+                    <dd className="col-span-3 overflow-auto text-sm text-right text-primary text-clip">
                       {value?.toString()}
                     </dd>
                   </dl>

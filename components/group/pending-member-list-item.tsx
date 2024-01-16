@@ -71,7 +71,7 @@ export default function PendingMemberListItem({
   return (
     <div
       className="grid grid-cols-[262px_1fr_90px_auto] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center"
-      // onClick={() => router.push(`/profiles/${profile.user.id}`)}
+      // onClick={() => router.push(`/profiles/${profile.user.wallet}`)}
     >
       <div className="flex items-center gap-3">
         <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
@@ -102,10 +102,6 @@ export default function PendingMemberListItem({
 
       <div className="text-center">
         <span className="text-label_m">
-          {/* 
-            The create time must be changed to the application time.
-            가입시간을 신청시간으로 바꿔야함 
-          */}
           {formatDate(profile.created_at)}
         </span>
       </div>

@@ -3,15 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { acceptGroupInvitations } from "@/lib/data/groups";
-import Image from "next/image";
+import Image from "@/components/ui/image";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function AcceptInvitation({
   id,
   image,
+  lang,
 }: {
   id: string;
   image: string;
+  lang: any;
 }) {
   const router = useRouter();
   const acceptInvitation = async () => {

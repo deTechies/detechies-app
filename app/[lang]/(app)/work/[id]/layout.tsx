@@ -1,15 +1,25 @@
-export default function ProjectMemberEvaluationLayout({
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
+import { getProjectWork } from "@/lib/data/project";
+
+export default async function ProjectMemberEvaluationLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: Locale; id: string };
 }) {
-  
+  const dictionary = await getDictionary(params.lang);
+  const { data: details } = await getProjectWork(params.id);
+
   return (
     <main className="flex flex-col gap-0 mx-8">
-      <header className="space-y-2 text-center my-10">
-        <h2 className="text-heading_m">업무 성향/태도 평가하기</h2>
-        <h5 className="text-title_m">
-          이 프로젝트에서 윤창진님의 역할과 성과를 평가해주세요.
+      <header className="my-10 text-center">
+        <h2 className="mb-4 text-heading_m">{dictionary.project.evaluate.evaluate_performance}</h2>
+        <h5 className="text-title_m text-text-secondary">
+          {dictionary.project.work.desc}
+          {details.projectWork.projectMember?.user?.display_name}
+          {dictionary.project.work.desc2}
         </h5>
       </header>
 

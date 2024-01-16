@@ -10,7 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Achievement } from "@/lib/interfaces";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { ListPlus, Plus, X } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/ui/image";
+// import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
 const RewardForm = ({

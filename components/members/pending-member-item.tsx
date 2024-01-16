@@ -62,19 +62,8 @@ export default function PendingMemberItem({
     // <Dialog>
     //   <DialogTrigger className="flex flex-col items-start gap-2 text-lect">
     <div className="flex gap-5 pb-5 border-b">
-      <div className="shrink-0 relative w-20 h-20 rounded-sm bg-background-layer-2">
+      <div className="relative w-20 h-20 rounded-sm shrink-0 bg-background-layer-2">
         <IPFSImageLayer hashes={member.user.avatar} />
-
-        {/* <Image
-          height="80"
-          width="80"
-          src={
-            member.image ||
-            "https://ipfs.io/ipfs/bafybeidutyodk6auwqx26rieisxwmnen6tgfcyqmj4s5bwlg3omehjrke4"
-          }
-          alt={member.user.display_name}
-          className="rounded-sm bg-background-layer-2 shrink-0"
-        /> */}
       </div>
 
       <div className="flex flex-wrap grow">
