@@ -26,7 +26,7 @@ import { uploadContent } from "@/lib/upload";
 
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ProjectType } from "@/lib/interfaces";
+import { ProjectType, SCOPE_TYPE } from "@/lib/interfaces";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -52,20 +52,25 @@ const projectFormSchema = z.object({
   scope: z.string().optional(),
   image: z.string().optional(),
   type: z.nativeEnum(ProjectType, {
-    required_error: "You need to select a  type.",
+    required_error: "You need to select a type.",
   }),
 });
 
-type ProfileFormValues = z.infer<typeof projectFormSchema>
+type CreateProjectFormValues = z.infer<typeof projectFormSchema>
 
 
+// This can come from your database or API.
+const defaultValues: Partial<CreateProjectFormValues> = {
+  scope: SCOPE_TYPE.PUBLIC,
+};
 
 
 export default function CreateProjectForm({
   lang
 }:{ lang:any}) {
-  const form = useForm<ProfileFormValues>({
+  const form = useForm<CreateProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
+    defaultValues,
     mode: "onChange",
   });
 
@@ -95,7 +100,7 @@ export default function CreateProjectForm({
     setNewTag(e.target.value);
   };
 
-  async function onSubmit(data: ProfileFormValues) {
+  async function onSubmit(data: CreateProjectFormValues) {
     setLoading(true);
 
     if (file) {
@@ -114,17 +119,15 @@ export default function CreateProjectForm({
       type: data.type,
     });
 
-    console.log(result);
-
-    if (result.id) {
+    if (result.status === "success") {
       toast({
         title: "Success",
         description: "Project created successfully",
       });
-      router.push(`/project/${result.id}`);
+      router.push(`/project/${result.data.id}`);
+    } else {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   const selectFile = (file: any) => {
@@ -135,9 +138,9 @@ export default function CreateProjectForm({
   return (
 
       <Card>
-         <h3 className="text-heading_s my-6 px-6" >{lang.project.list.create_project.create}</h3>
+         <h3 className="px-6 my-6 text-heading_s" >{lang.project.list.create_project.create}</h3>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 px-6 ">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="px-6 space-y-8 ">
             <FormElement label={lang.project.list.create_project.name}>
               <FormField
                 control={form.control}
@@ -181,7 +184,7 @@ export default function CreateProjectForm({
               />
             </FormElement>
             <FormElement label={lang.project.list.create_project.period}>
-              <div className="flex flex-row gap-2 items-center w-full">
+              <div className="flex flex-row items-center w-full gap-2">
                 <FormField
                   control={form.control}
                   name="begin_date"
@@ -250,7 +253,7 @@ export default function CreateProjectForm({
                   onKeyDown={handleKeyDown}
                 />
               </FormControl>
-              <div className="mt-3 flex gap-2 items-start">
+              <div className="flex items-start gap-2 mt-3">
                 {form.watch("tags")?.map((tag, index) => (
                   <Button
                     key={index}
@@ -277,15 +280,15 @@ export default function CreateProjectForm({
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-2">
                       <RadioGroupItem value="public" />
                       <Label>{lang.project.list.create_project.public}</Label>
                     </div>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-2">
                       <RadioGroupItem value="private" />
                       <Label>{lang.project.list.create_project.private}</Label>
                     </div>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-2">
                       <RadioGroupItem value="team" />
                       <Label>{lang.project.list.create_project.team}</Label>
                     </div>
@@ -322,7 +325,7 @@ const FormElement = ({ children, ...props }: any) => {
   return (
     <div className="flex items-center" {...props}>
       <Label className="flex-start shrink-0 w-[182px]">{props.label}</Label>
-      <div className="grow items-start justify-start">{children}</div>
+      <div className="items-start justify-start grow">{children}</div>
     </div>
   );
 };

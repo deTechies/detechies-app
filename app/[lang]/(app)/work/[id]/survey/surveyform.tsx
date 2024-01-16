@@ -17,12 +17,14 @@ export function SurveyForm({
   survey,
   defaultValues,
   result = false,
+  lang,
 }: {
   workId: string;
   responseId: string;
   survey: Survey;
   defaultValues: any;
   result?: boolean;
+  lang: any;
 }) {
   const form = useForm<any>({});
   //setting default values
@@ -53,7 +55,7 @@ export function SurveyForm({
     });
 
     router.push(`/work/${workId}/feedback`);
-    
+
     setIsLoading(false);
   };
 
@@ -74,37 +76,39 @@ export function SurveyForm({
           {Object.keys(questionsByCategory).map((category) => {
             return (
               <Card key={category}>
-                <h5 className="text-subhead_s mb-7">{category}</h5> {/* Display the category */}
+                <h5 className="text-subhead_s mb-7">{category}</h5>{" "}
+                {/* Display the category */}
                 <div className="flex flex-col gap-6">
-                {questionsByCategory[category].map((question: any) => {
-                  // Render each question
-                  if (question.type === "input") {
-                    return null;
-                    <FormField
-                      key={question.id}
-                      control={form.control}
-                      name={question.id}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{question.content}</FormLabel>
-                          <Input {...field} />
-                        </FormItem>
-                      )}
-                    />;
-                  } else {
-                    return (
-                      <PercentageSliderField
+                  {questionsByCategory[category].map((question: any) => {
+                    // Render each question
+                    if (question.type === "input") {
+                      return null;
+                      <FormField
                         key={question.id}
-                        form={form}
+                        control={form.control}
                         name={question.id}
-                        label={question.content}
-                        steps={100 / 10}
-                        messages={question.messages}
-                        disabled={result}
-                      />
-                    );
-                  }
-                })}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{question.content}</FormLabel>
+                            <Input {...field} />
+                          </FormItem>
+                        )}
+                      />;
+                    } else {
+                      return (
+                        <PercentageSliderField
+                          key={question.id}
+                          form={form}
+                          name={question.id}
+                          label={question.content}
+                          steps={100 / 10}
+                          messages={question.messages}
+                          disabled={result}
+                          text={lang}
+                        />
+                      );
+                    }
+                  })}
                 </div>
               </Card>
             );
@@ -115,10 +119,9 @@ export function SurveyForm({
               <Button type="button" variant={"secondary"}>
                 Go Back
               </Button>
-              <Button type="submit"
-                loading={isLoading}
-                disabled={isLoading}
-              >Save</Button>
+              <Button type="submit" loading={isLoading} disabled={isLoading}>
+                Save
+              </Button>
             </Card>
           )}
         </form>

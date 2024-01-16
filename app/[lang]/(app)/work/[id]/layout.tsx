@@ -14,9 +14,9 @@ export default async function ProjectMemberEvaluationLayout({
 
   return (
     <main className="flex flex-col gap-0 mx-8">
-      <header className="my-10 space-y-2 text-center">
-        <h2 className="text-heading_m">{dictionary.project.work.title}</h2>
-        <h5 className="text-title_m">
+      <header className="my-10 text-center">
+        <h2 className="mb-4 text-heading_m">{dictionary.project.evaluate.evaluate_performance}</h2>
+        <h5 className="text-title_m text-text-secondary">
           {dictionary.project.work.desc}
           {details.projectWork.projectMember?.user?.display_name}
           {dictionary.project.work.desc2}

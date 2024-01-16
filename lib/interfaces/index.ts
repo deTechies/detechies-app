@@ -138,7 +138,12 @@ export enum GROUP_TYPE {
     PLANNER = 'Planner',
     DESIGNER = 'Designer'
   }
-
+  
+  export enum SCOPE_TYPE {
+    PUBLIC = 'public',
+    PRIVATE = 'private',
+    TEAM = 'team',
+  }
 
   export enum ProjectCategory {
     WEB = 'web',

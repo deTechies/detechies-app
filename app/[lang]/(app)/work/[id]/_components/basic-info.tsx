@@ -40,6 +40,8 @@ const baseInfoSchema = z
     rate_contributions: z.number().optional(),
     rate_requirements: z.number().optional(),
     rate_time_schedule: z.number().optional(),
+    feedback_times: z.number().optional(),
+    good_team_player: z.number().optional(),
   })
   .refine(
     (data) => {
@@ -50,8 +52,10 @@ const baseInfoSchema = z
         return (
           data.rate_contributions !== undefined &&
           data.rate_requirements !== undefined &&
-          data.rate_time_schedule !== undefined
-        ); 
+          data.rate_time_schedule !== undefined &&
+          data.feedback_times !== undefined &&
+          data.good_team_player !== undefined
+        );
       }
       return true;
     },
@@ -161,7 +165,7 @@ export default function BasicEvaluationInfo({
                 control={form.control}
                 name="match"
                 render={({ field }) => (
-                  <FormItem className="space-y-3 mb-7">
+                  <FormItem className="space-y-3">
                     <FormLabel>
                       {text.does_the_work_details_match_the_facts}
                     </FormLabel>
@@ -190,8 +194,9 @@ export default function BasicEvaluationInfo({
                 )}
               />
             </section>
+
             {form.watch("match") == "80" && (
-              <section className="flex flex-col gap-7 mb-7">
+              <section className="flex flex-col mt-6 gap-7">
                 <FormField
                   control={form.control}
                   name="reject_letter"
@@ -206,10 +211,45 @@ export default function BasicEvaluationInfo({
                     </FormItem>
                   )}
                 />
+
+                {result ? (
+                  <Link href={`/work/${workId}`} passHref className="mx-auto">
+                    <Button variant="secondary" size="lg" type="button">
+                      {text.modify}
+                    </Button>
+                  </Link>
+                ) : (
+                  <section className="flex justify-between">
+                    <Button
+                      variant="secondary"
+                      size="lg"
+                      type="button"
+                      onClick={onClickGoBack}
+                    >
+                      {text.go_back}
+                    </Button>
+
+                    <Button
+                      size="lg"
+                      type="submit"
+                      loading={isLoading}
+                      disabled={isLoading}
+                    >
+                      {text.register_reason}
+                    </Button>
+                  </section>
+                )}
               </section>
             )}
-            {form.watch("match") == "100" && (
+          </Card>
+
+          {form.watch("match") == "100" && (
+            <Card>
               <section className="space-y-7 mb-7">
+                <h4 className="text-subhead_s mb-7">
+                  {text.eval_work_contribution}
+                </h4>
+
                 <PercentageSliderField
                   name="rate_contributions"
                   form={form}
@@ -242,6 +282,7 @@ export default function BasicEvaluationInfo({
                   name="feedback_times"
                   form={form}
                   steps={10}
+                  text={text}
                   label={text.feedback_times.label}
                   messages={text.feedback_times.messages}
                   disabled={result}
@@ -250,43 +291,42 @@ export default function BasicEvaluationInfo({
                   name="good_team_player"
                   form={form}
                   steps={10}
+                  text={text}
                   label={text.good_team_player.label}
-                  messages={text.meet_schedule.messages}
+                  messages={text.good_team_player.messages}
                   disabled={result}
                 />
               </section>
-            )}
 
-            {result ? (
-              <Link href={`/work/${workId}`} passHref className="mx-auto">
-                <Button variant="secondary" size="lg" type="button">
-                  {text.modify}
-                </Button>
-              </Link>
-            ) : (
-              <section className="flex justify-between">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  type="button"
-                  onClick={onClickGoBack}
-                >
-                  {text.go_back}
-                </Button>
+              {result ? (
+                <Link href={`/work/${workId}`} passHref className="mx-auto">
+                  <Button variant="secondary" size="lg" type="button">
+                    {text.modify}
+                  </Button>
+                </Link>
+              ) : (
+                <section className="flex justify-between">
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    type="button"
+                    onClick={onClickGoBack}
+                  >
+                    {text.go_back}
+                  </Button>
 
-                <Button
-                  size="lg"
-                  type="submit"
-                  loading={isLoading}
-                  disabled={isLoading && form.getValues("match")}
-                >
-                  {form.getValues("match") == "80"
-                    ? text.register_reason
-                    : text.next}
-                </Button>
-              </section>
-            )}
-          </Card>
+                  <Button
+                    size="lg"
+                    type="submit"
+                    loading={isLoading}
+                    disabled={isLoading}
+                  >
+                    {text.next}
+                  </Button>
+                </section>
+              )}
+            </Card>
+          )}
         </form>
       </Form>
     </main>
