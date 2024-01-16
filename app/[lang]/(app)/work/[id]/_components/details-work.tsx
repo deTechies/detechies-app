@@ -11,8 +11,7 @@ export default function ProjectMemberWorkDetails({
   projectWork: ProjectWork;
   lang: any;
 }) {
-  console.log(projectMember);
-  console.log(projectWork);
+
   return (
     <Card className="flex flex-col flex-wrap gap-5 p-6">
       <CardContent>
