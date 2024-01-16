@@ -1,12 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getDictionary } from "@/get-dictionary";
 import { getUserAchievements } from "@/lib/data/achievements";
-import { AchievementReward } from "@/lib/interfaces";
 import ListAvatars from "./list-avatars";
 
 export default async function Avatars() {
   //need to get the users received achievements
-  const {data:achievements} = await getUserAchievements() as AchievementReward[];
+  const {data:achievements} = await getUserAchievements();
   const lang = await getDictionary("kr");
 
 
