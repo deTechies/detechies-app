@@ -687,7 +687,8 @@
     "terms_and_conditions": "Terms of Service",
     "privacy_policy": "Privacy Policy",
     "whitepaper": "Whitepaper",
-    "contact": "Contact Us", 
+    "contact_us": "Contact Us",
+    "faq": "FAQ", 
     "user_guide": "User Guide"
   }
 }

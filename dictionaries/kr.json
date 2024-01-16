@@ -685,10 +685,11 @@
   }, 
   "footer": {
     "copywrite": "© 2021 CareerZen. All rights reserved.",
-    "terms": "Terms of Service",
-    "privacy": "Privacy Policy",
-    "white_paper": "백서",
-    "contact": "Contact Us", 
+    "privacy_policy": "개인정보처리방침",
+    "terms_and_conditions": "이용약관",
+    "whitepaper": "백서",
+    "contact_us": "Contact Us", 
+    "faq": "FAQ",
     "user_guide": "이용 가이드"
   }
 }
