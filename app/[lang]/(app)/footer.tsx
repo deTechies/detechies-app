@@ -4,38 +4,40 @@ import Link from "next/link";
 export default async function Footer({ lang }: { lang: any }) {
   //const dictionary = (await getDictionary(params.lang)) as any;
   return (
-    <div className="flex flex-col justify-center items-center mx-auto w-full my-[32px] gap-8 ">
+    <div className="flex flex-col justify-center items-center mx-auto w-full my-[32px] gap-8 px-4">
       <Image
         src={`/images/careerzen.png`}
-        className="dark:hidden"
+        className="dark:hidden max-w-[360px]"
+        layout="responsive"
         width={360}
         height={60}
         alt={"Logo"}
       />
       <Image
         src={`/images/logo-invert.png`}
-        className="hidden dark:block"
+        className="hidden dark:block max-w-[360px]"
+        layout="responsive"
         width={360}
         height={60}
         alt={"Logo"}
       />
-      <div className="flex text-title_m text-text-secondary my-5">
-        <Link href="#" className=" hover:text-accent-primary px-4 ">
+      <div className="flex flex-wrap justify-center items-center text-title_m text-text-secondary my-5">
+        <Link href="#" className=" hover:text-accent-primary px-4">
           {lang.footer.terms_and_conditions}
         </Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">
+        <Link href="#" className=" hover:text-accent-primary px-4">
           {lang.footer.faq}
         </Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">
+        <Link href="#" className=" hover:text-accent-primary px-4">
           {lang.footer.privacy_policy}
         </Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">
+        <Link href="#" className=" hover:text-accent-primary px-4">
           {lang.footer.whitepaper}
         </Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">
+        <Link href="#" className=" hover:text-accent-primary px-4">
           {lang.footer.contact_us}
         </Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">
+        <Link href="#" className=" hover:text-accent-primary px-4">
           {lang.footer.user_guide}
         </Link>
       </div>
@@ -50,7 +52,7 @@ export default async function Footer({ lang }: { lang: any }) {
               src={`/images/socials/color/kakao.png`}
               height={24}
               width={24}
-              alt={"Discord"}
+              alt={"Kakao"}
             />
           </Link>
           <Link href="https://t.me/Careerzen_org/1" target="_blank" passHref>
@@ -58,7 +60,7 @@ export default async function Footer({ lang }: { lang: any }) {
               src={`/icons/telegram.png`}
               height={24}
               width={24}
-              alt={"Discord"}
+              alt={"Telegram"}
             />
           </Link>
           <Link href="https://x.com/careerzen" target="_blank" passHref>
@@ -67,7 +69,7 @@ export default async function Footer({ lang }: { lang: any }) {
               className="dark:invert"
               height={24}
               width={24}
-              alt={"Discord"}
+              alt={"Twitter/X"}
             />
           </Link>
         </div>
