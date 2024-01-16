@@ -20,16 +20,32 @@ export default async function Footer({ lang }: { lang: any }) {
         alt={"Logo"}
       />
       <div className="flex text-title_m text-text-secondary my-5">
-        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.terms_and_conditions}</Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.faq}</Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.privacy_policy}</Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.whitepaper}</Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.contact_us}</Link>
-        <Link href="#" className=" hover:text-accent-primary px-4 ">{lang.footer.user_guide}</Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">
+          {lang.footer.terms_and_conditions}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">
+          {lang.footer.faq}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">
+          {lang.footer.privacy_policy}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">
+          {lang.footer.whitepaper}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">
+          {lang.footer.contact_us}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4 ">
+          {lang.footer.user_guide}
+        </Link>
       </div>
       <div className="grid place-content-center justify-center justify-items-center gap-8">
         <div className="flex gap-4">
-        <Link href="https://open.kakao.com/o/gGdZ76If" target="_blank" passHref>
+          <Link
+            href="https://open.kakao.com/o/gGdZ76If"
+            target="_blank"
+            passHref
+          >
             <Image
               src={`/images/socials/color/kakao.png`}
               height={24}
@@ -38,16 +54,20 @@ export default async function Footer({ lang }: { lang: any }) {
             />
           </Link>
           <Link href="https://t.me/Careerzen_org/1" target="_blank" passHref>
-          <Image
-            src={`/icons/telegram.png`}
-            height={24}
-            width={24}
-            alt={"Discord"}
-          />
+            <Image
+              src={`/icons/telegram.png`}
+              height={24}
+              width={24}
+              alt={"Discord"}
+            />
           </Link>
           <Link href="https://x.com/careerzen" target="_blank" passHref>
-          <Image src={`/icons/x.png`} height={24} width={24} alt={"Discord"} />
-            <Link href="#" passHref>
+            <Image
+              src={`/icons/x.png`}
+              height={24}
+              width={24}
+              alt={"Discord"}
+            />
             <Image
               src={`/icons/x.png`}
               className="dark:invert"
@@ -58,9 +78,7 @@ export default async function Footer({ lang }: { lang: any }) {
           </Link>
         </div>
       </div>
-      <p className="text-text-secondary text-body_m">
-         {lang.footer.copywrite}
-        </p>
+      <p className="text-text-secondary text-body_m">{lang.footer.copywrite}</p>
     </div>
   );
 }
