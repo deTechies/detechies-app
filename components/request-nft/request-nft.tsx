@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 // import { RequestNftForm } from "@/components/form/request-nft-form";
 
 import { useParams, useSearchParams } from "next/navigation";
-import GroupListItem from "./group-list-item";
-import NftListItem from "./nft-list-item";
+import RequestGroupListItem from "./request-group-list-item";
+import RequestNftListItem from "./request-nft-list-item";
 
 import Search from "@/components/extra/search";
 import { Button } from "@/components/ui/button";
@@ -141,12 +141,12 @@ export default function RequestNFTModal({
               {filteredData.length > 0 &&
                 filteredData.map((_group: any, _index: number) => {
                   return (
-                    <GroupListItem
+                    <RequestGroupListItem
                       _group={_group}
                       key={_index}
                       type="click"
                       onClick={() => onClickGroupItem(_group)}
-                    ></GroupListItem>
+                    ></RequestGroupListItem>
                   );
                 })}
 
@@ -171,7 +171,7 @@ export default function RequestNFTModal({
             </div>
 
             <div className="mb-5">
-              <GroupListItem _group={selectedGroup}></GroupListItem>
+              <RequestGroupListItem _group={selectedGroup}></RequestGroupListItem>
             </div>
 
             <div className="mb-3 text-title_s">
@@ -182,12 +182,12 @@ export default function RequestNFTModal({
               {groupAchievements.length > 0 &&
                 groupAchievements.map((nft: any, _index: number) => {
                   return (
-                    <NftListItem
+                    <RequestNftListItem
                       achievement={nft}
                       key={_index}
                       type="click"
                       onClick={() => onClickNftItem(nft)}
-                    ></NftListItem>
+                    ></RequestNftListItem>
                   );
                 })}
 
@@ -219,7 +219,7 @@ export default function RequestNFTModal({
             </div>
 
             <div className="mb-5">
-              <GroupListItem _group={selectedGroup}></GroupListItem>
+              <RequestGroupListItem _group={selectedGroup}></RequestGroupListItem>
             </div>
 
             <div className="mb-3 text-title_s">
@@ -227,7 +227,7 @@ export default function RequestNFTModal({
             </div>
 
             <div className="mb-5">
-              <NftListItem achievement={selectedAchievement}></NftListItem>
+              <RequestNftListItem achievement={selectedAchievement}></RequestNftListItem>
             </div>
 
             <div>

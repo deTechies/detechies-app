@@ -2,8 +2,8 @@
 
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
-import Image from "next/image";
-
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 import { Achievement, AchievementReward } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 
@@ -26,13 +26,13 @@ export default function ProfileCertificates({
   
   return (  
     <div className="flex flex-col gap-2">
-      <Card className="flex flex-row justify-between items-center">
+      <Card className="flex flex-row items-center justify-between">
         <h5 className="text-subhead_s">{text?.education}</h5>
         {/* <Button size="sm" variant="secondary" onClick={()=>{
           router.push("/groups/create")
         }}>
           {text?.new_club}{" "}
-          <PlusIcon size="16" className="text-text-secondary ml-2" />
+          <PlusIcon size="16" className="ml-2 text-text-secondary" />
         </Button> */}
       </Card>
       
@@ -50,11 +50,11 @@ export default function ProfileCertificates({
                     className="rounded-sm"
                   />
                 </div>
-                <div className="flex flex-col gap-4 grow shrink flex-wrap">
-                  <header className="flex gap-2 items-center">
+                <div className="flex flex-col flex-wrap gap-4 grow shrink">
+                  <header className="flex items-center gap-2">
                     <h5 className="text-subhead_s">{achievement_reward.achievement?.name}</h5>
                   </header>
-                  <div className="flex gap-4 items-start">
+                  <div className="flex items-start gap-4">
                     <div className="flex flex-col gap-2 basis-1/4">
                       <span className="text-text-secondary text-label_m">
                         {text?.issuer}:{" "}

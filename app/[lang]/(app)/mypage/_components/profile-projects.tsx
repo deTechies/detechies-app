@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -23,7 +24,7 @@ export default function ProfileProjects({
   
   return (
     <div className="flex flex-col gap-3">
-      <Card className="flex flex-row justify-between items-center">
+      <Card className="flex flex-row items-center justify-between">
         <h5 className="text-subhead_s">{text?.projects}</h5>
         {
           !visiting &&
@@ -31,7 +32,7 @@ export default function ProfileProjects({
             router.push("/project/create")
           }}>
             {text?.new_project}{" "}
-            <PlusIcon size="16" className="text-text-secondary ml-2" />
+            <PlusIcon size="16" className="ml-2 text-text-secondary" />
           </Button>
         }
        
@@ -57,7 +58,7 @@ export default function ProfileProjects({
                   </div>
                   {/* Text on the right */}
                   <div className="flex flex-col items-start gap-[16px] relative flex-1 self-stretch grow w-full">
-                    {/* <header className="flex gap-2 items-center bg-orange-100">
+                    {/* <header className="flex items-center gap-2 bg-orange-100">
                       
                       <span className="text-text-secondary text-label_m ">
                         {project.project.type}|{" "}

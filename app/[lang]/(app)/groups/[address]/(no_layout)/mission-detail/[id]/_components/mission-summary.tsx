@@ -3,7 +3,8 @@ import { Card } from "@/components/ui/card";
 import { MissionDetails } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 import { useState } from "react";
 
 export default function MissionSummary({

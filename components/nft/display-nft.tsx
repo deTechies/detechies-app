@@ -11,7 +11,8 @@ import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
 import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 import { useEffect, useState } from "react";
 import { Address, useContractRead } from "wagmi";
 import NftListItem from "../card/nft-list-item";
@@ -117,13 +118,13 @@ export default function DisplayNFT({
                 <Image
                   src={
                     showingImage == details.avatar
-                      ? "/icons/certificate.png"
-                      : "/icons/avatar.png"
+                    ? "/icons/certificate.png"
+                    : "/icons/avatar.png"
                   }
                   alt="avatar"
                   width="48"
                   height="48"
-                ></Image>
+                  ></Image>
               </Button>
             )}
           </div>

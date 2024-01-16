@@ -37,7 +37,7 @@ export default function GroupNFT({
 
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {achievements &&
-          achievements.map((item: Achievement, index: number) => (
+          achievements.slice(0, 5).map((item: Achievement, index: number) => (
             <DisplayNFT details={item} key={index} lang={lang} contract={contract} />
           ))}
       </div>
