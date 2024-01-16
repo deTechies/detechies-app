@@ -64,12 +64,6 @@ export default async function Footer({ lang }: { lang: any }) {
           <Link href="https://x.com/careerzen" target="_blank" passHref>
             <Image
               src={`/icons/x.png`}
-              height={24}
-              width={24}
-              alt={"Discord"}
-            />
-            <Image
-              src={`/icons/x.png`}
               className="dark:invert"
               height={24}
               width={24}
