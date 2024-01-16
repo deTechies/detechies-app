@@ -15,7 +15,7 @@ const finalFeedbackForm = z.object({
   strength: z.string(),
   weakness: z.string(),
   opportunity: z.string().optional(),
-  team_building: z.string(),
+  // team_building: z.string(),
 });
 
 type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
@@ -51,9 +51,9 @@ export default function FinalFeedbackForm({
 
     if (result.status === "success") {
       router.push(`/work/${workId}/result`);
+    } else {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
 
