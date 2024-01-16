@@ -46,7 +46,11 @@
       "title": "Professional career certifications are different!",
       "body": "If you already have an account, log in to Careerzen using your existing account.",
       "web3": "Social Wallet",
-      "browser": "Browser Wallet"
+      "browser": "Browser Wallet",
+      "sign_out": "Sign out", 
+      "sign_in_as": "Sign is as ", 
+      "sign_in_title": "sign_in_title", 
+      "sign_in_body": "sign_in_body"
     },
     "verify_email": {
       "title": "Sign up!",
@@ -704,7 +708,8 @@
     "terms_and_conditions": "Terms of Service",
     "privacy_policy": "Privacy Policy",
     "whitepaper": "Whitepaper",
-    "contact": "Contact Us", 
+    "contact_us": "Contact Us",
+    "faq": "FAQ", 
     "user_guide": "User Guide"
   }
 }

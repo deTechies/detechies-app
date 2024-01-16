@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { formatEther } from "viem";
-import { useAccount, useDisconnect, useNetwork } from "wagmi";
-import { Address, createPublicClient, http } from "viem";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Address, createPublicClient, formatEther, http } from "viem";
+import { useAccount, useDisconnect, useNetwork } from "wagmi";
 import { ThemeToggle } from "../extra/theme-toggle";
 import { Button } from "../ui/button";
 import {
@@ -114,10 +113,14 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
     const newPath = "/" + value + "/" + segments.slice(1).join("/");
     router.replace(newPath);
   }
+  
+  function signUserOut(){
+    router.replace("/onboard")
+    signOut()
+  }
 
   return (
     <ModalLayout title={text_my_account.my_account_title} showModal={showModal}>
-      {isConnected ? (
         <div className="flex flex-col gap-[20px]  !pt-[20px]">
           {/* Address */}
           <div
@@ -141,7 +144,7 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
                     size="sm"
                     variant={"destructive"}
                     className="shrink-0 !dark: border-[1px] border-[#3B414B] !px-[10px] !pt-[4px] !pb-[6px] !text-[14px]"
-                    onClick={() => signOut()}
+                    onClick={signUserOut}
                   >
                     {text_my_account.change_account}
                   </Button>
@@ -177,7 +180,7 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
               onValueChange={(value) => changeLanguage(value)}
               defaultValue={params}
             >
-              <SelectTrigger className="w-fit text-[14px] bg-background-layer-1 border rounded-[5px] !p-[8px]">
+              <SelectTrigger className="w-[100px] bg-background-layer-1 border !p-[8px]">
                 <SelectValue placeholder={text_my_account.language.placeholder} />
               </SelectTrigger>
               <SelectContent>
@@ -209,9 +212,6 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
             </Link>
           </div>
         </div>
-      ) : (
-        <p>{text_my_account.not_connected}</p>
-      )}
     </ModalLayout>
   );
 }

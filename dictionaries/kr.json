@@ -46,7 +46,11 @@
       "title": "전문가들의 커리어 인증은 다르다.",
       "body": "이미 계정이 있다면 기존 계정을 사용해 Careerzen에 로그인 합니다.",
       "web3": "소셜 계정으로 계속하기",
-      "browser": "메타마스크 지갑"
+      "browser": "메타마스크 지갑", 
+      "sign_out": "로그아웃", 
+      "sign_in_as": "이 지갑주소로 로그인", 
+      "sign_in_title": "sign_in_title", 
+      "sign_in_body": "sign_in_body"
     },
     "verify_email": {
       "title": "회원가입",
@@ -702,10 +706,11 @@
   }, 
   "footer": {
     "copywrite": "© 2021 CareerZen. All rights reserved.",
-    "terms": "Terms of Service",
-    "privacy": "Privacy Policy",
-    "white_paper": "백서",
-    "contact": "Contact Us", 
+    "privacy_policy": "개인정보처리방침",
+    "terms_and_conditions": "이용약관",
+    "whitepaper": "백서",
+    "contact_us": "Contact Us", 
+    "faq": "FAQ",
     "user_guide": "이용 가이드"
   }
 }
