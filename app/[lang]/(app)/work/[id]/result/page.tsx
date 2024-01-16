@@ -42,6 +42,7 @@ export default async function EvaluationResult({
         <ProjectMemberWorkDetails
           projectMember={details.projectMember}
           projectWork={details.projectWork}
+          lang={dictionary}
         />
       </section>
 
@@ -67,6 +68,7 @@ export default async function EvaluationResult({
             survey={surveyData}
             defaultValues={details.answers}
             result={true}
+            lang={dictionary}
           />
         }
 
