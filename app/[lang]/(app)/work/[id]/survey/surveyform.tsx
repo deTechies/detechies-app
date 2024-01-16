@@ -6,11 +6,11 @@ import { Form } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { submitEvaluationSurvey } from "@/lib/data/survey";
 import { Survey } from "@/lib/interfaces";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 export function SurveyForm({
   workId,
@@ -31,7 +31,7 @@ export function SurveyForm({
 
   const createSurveySchema = (answers: any) => {
     const schemaFields = answers.questions.reduce((acc: any, question: any) => {
-      acc[question.id] = z.string();
+      acc[question.id] = z.number();
       return acc;
     }, {});
 
@@ -48,7 +48,7 @@ export function SurveyForm({
   useEffect(() => {
     const transformAnswersToDefaultValues = (answers: any) => {
       return answers.reduce((acc: any, answer: any) => {
-        acc[answer.questionId] = answer.response;
+        acc[answer.questionId] = parseInt(answer.response);
         return acc;
       }, {});
     };
@@ -97,6 +97,7 @@ export function SurveyForm({
     <div className="flex flex-col gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
+         
           {Object.keys(questionsByCategory).map((category, index) => {
             return (
               <Card key={category}>
