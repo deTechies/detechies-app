@@ -31,7 +31,7 @@ export function SurveyForm({
 
   const createSurveySchema = (answers: any) => {
     const schemaFields = answers.questions.reduce((acc: any, question: any) => {
-      acc[question.id] = z.string();
+      acc[question.id] = z.number();
       return acc;
     }, {});
 
