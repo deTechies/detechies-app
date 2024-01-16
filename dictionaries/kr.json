@@ -46,7 +46,11 @@
       "title": "전문가들의 커리어 인증은 다르다.",
       "body": "이미 계정이 있다면 기존 계정을 사용해 Careerzen에 로그인 합니다.",
       "web3": "소셜 계정으로 계속하기",
-      "browser": "메타마스크 지갑"
+      "browser": "메타마스크 지갑", 
+      "sign_out": "로그아웃", 
+      "sign_in_as": "이 지갑주소로 로그인", 
+      "sign_in_title": "sign_in_title", 
+      "sign_in_body": "sign_in_body"
     },
     "verify_email": {
       "title": "회원가입",

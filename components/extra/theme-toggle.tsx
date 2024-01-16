@@ -20,7 +20,7 @@ export function ThemeToggle({text}: IThemeToggleProps) {
     onValueChange={(value) => setTheme(value)}
     defaultValue={theme}
   > 
-    <SelectTrigger className="w-fit text-[14px] bg-background-layer-1 border rounded-[5px] !p-[8px]">
+    <SelectTrigger className="w-[100px] bg-background-layer-1 border !p-[8px]">
       <SelectValue placeholder={text.placeholder} />
     </SelectTrigger>
     <SelectContent>

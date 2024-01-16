@@ -123,12 +123,12 @@ export default function LoginButtons({ text }: { text?: any }) {
               className="rounded-none rounded-l-sm flex-grow"
               loading={signing}
             >
-              Sign in with {address && truncateMiddle(address, 13)} 
+              {text.sign_in_as ? text.sign_in_as : "Sign is as "} {address && truncateMiddle(address, 13)} 
             </Button>
             <Button variant={"destructive"} className="rounded-none rounded-r-sm"
               onClick={() => disconnect()}
             >
-              Sign out
+              {text.sign_out ? text.sign_out : "Sign Out"}
             </Button>
           </div>
         )}

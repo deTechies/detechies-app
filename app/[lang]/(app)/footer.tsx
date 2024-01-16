@@ -1,17 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Footer({
-  lang
-}: {
-  lang: any
-}){
-  
+export default async function Footer({ lang }: { lang: any }) {
   //const dictionary = (await getDictionary(params.lang)) as any;
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-full my-[32px] gap-8 ">
       <Image
         src={`/images/careerzen.png`}
+        className="dark:hidden"
+        width={360}
+        height={60}
+        alt={"Logo"}
+      />
+      <Image
+        src={`/images/logo-invert.png`}
+        className="hidden dark:block"
         width={360}
         height={60}
         alt={"Logo"}
@@ -44,13 +47,20 @@ export default async function Footer({
           </Link>
           <Link href="https://x.com/careerzen" target="_blank" passHref>
           <Image src={`/icons/x.png`} height={24} width={24} alt={"Discord"} />
+            <Link href="#" passHref>
+            <Image
+              src={`/icons/x.png`}
+              className="dark:invert"
+              height={24}
+              width={24}
+              alt={"Discord"}
+            />
           </Link>
         </div>
-       
       </div>
       <p className="text-text-secondary text-body_m">
          {lang.footer.copywrite}
         </p>
     </div>
   );
-};
+}

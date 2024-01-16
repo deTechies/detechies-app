@@ -216,7 +216,7 @@ export default function EvaluateTeamForm({
     criteria.reduce(
       (acc, criterion) => ({
         ...acc,
-        [criterion.id]: { rank: 0, criterion },
+        [criterion.id]: { rank: 3, criterion },
       }),
       {}
     )
@@ -251,9 +251,9 @@ export default function EvaluateTeamForm({
     <main className={`max-w-[1000px] ${result && 'max-w-full'} mx-auto my-10 px-auto`}>
       <section className="flex flex-col gap-5">
         {Object.entries(criteriaByCategory).map(([category, criteria]) => (
-          <Card key={category} className="px-9 pt-7 pb-10">
+          <Card key={category} className="px-4 md:px-9 pt-7 pb-10">
             <div className="text-center text-subhead_s mb-10">{category}</div>
-            <section className="flex flex-col gap-[60px] max-w-4xl mx-auto">
+            <section className="flex flex-col gap-[60px] mx-auto">
               {criteria.map((criterion) => (
                 <Ranking
                   key={criterion.id}
