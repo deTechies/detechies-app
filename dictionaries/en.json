@@ -272,15 +272,19 @@
       }
     },
     "work": {
-      "title": "Work Attitude/Tendency Evaluation",
-      "desc": "Please evaluate Mr./Ms.",
-      "desc2": "'s role and performance in this project.",
       "project": "Collaborated Project",
       "evaluatee": "Being Evaluated"
     },
     "evaluate": {
       "evaluate_performance": "Evaluation Performance",
-      "evaluate_performance_description": "Please evaluate users role and performance in this project",
+      "evaluate_performance_description": "Please evaluate Mr./Ms.",
+      "evaluate_performance_description2": "'s role and performance in this project.",
+      "evaluate_specialty": "Evaluate Specialty",
+"evaluate_specialty_description": "Please evaluate the professional skills demonstrated by your colleague in the project.",
+"evaluate_propensity": "Evaluate Propensity",
+"evaluate_propensity_description": "Please assess the disposition of your colleague with whom you worked.",
+"last_feedback": "Evaluate Propensity",
+"last_feedback_description": "Please provide open feedback about the strengths and weaknesses of your colleague.",
       "basic_information": "Basic Information",
       "billable_hourly_wage": "Billable Hourly Wage",
       "time_weekly": "Total hour (weekly)",
@@ -351,7 +355,18 @@
           "Average",
           "Very much so"
         ]
-      }
+      },
+      "feedback_title": "Your final feedback to the user",
+      "strength": "Strengths (Required)",
+      "weakness": "Areas for Improvement (Required)",
+      "feedback": "Feedback for the Evaluatee (Visible only to the evaluatee) (Optional)",
+      "again": "Would you like to work with this team member on a project again? (Required)",      
+      "no_team_building":"No team building intentions",
+      "love_to":"I'd love to join you next time",
+      "register": "Save",
+      "exactly": "Is the evaluation completely accurate?",
+      "exactly_desc": "Submitting an evaluation that is not factually accurate can negatively impact the career of the evaluatee.",
+      "go_to_project": "Go to Project"
     }
   },
   "mypage": {

@@ -274,15 +274,19 @@
       }
     },
     "work": {
-      "title": "업무 성향/태도 평가하기",
-      "desc": "이 프로젝트에서 ",
-      "desc2": "님의 역할과 성과를 평가해주세요.",
       "project": "함께한 프로젝트",
       "evaluatee": "평가받는 사람"
     },
     "evaluate": {
       "evaluate_performance": "성과 평가하기", 
-      "evaluate_performance_description": "이 프로젝트에서 해당 팀원의 역할과 성과를 평가해주세요.", 
+      "evaluate_performance_description": "이 프로젝트에서 ", 
+      "evaluate_performance_description2": "님의 역할과 성과를 평가해주세요.", 
+      "evaluate_specialty": "전문성 평가하기",
+      "evaluate_specialty_description": "프로젝트에서 동료가 보여준 전문분야 능력을 평가해주세요.",
+      "evaluate_propensity": "성향 평가하기",
+      "evaluate_propensity_description": "함께한 동료의 성향을 평가해주세요.",
+      "last_feedback": "마지막 피드백",
+      "last_feedback_description": "동료의 장점, 단점 등에 대한 자유로운 피드백을 알려주세요.",
       "basic_information": "기본 정보",
       "billable_hourly_wage":  "청구시급", 
       "time_weekly": "투입시간 (주 평균)", 
@@ -352,7 +356,18 @@
         "보통임",
         "매우 그러함"
         ]
-      }
+      },
+      "feedback_title": "해당 유저에게 남기는 마지막 피드백",
+      "strength": "강점(필수)",
+      "weakness": "개선할 점(필수)",
+      "feedback": "피평가자에게 남기는 피드백 (피평가자에게만 공개) (선택)",
+      "again": "해당 팀원과 다시 프로젝트를 함께 하고 싶으신가요? (필수)",
+      "no_team_building":"팀빌딩 의사 없음",
+      "love_to":"꼭 다시 함께 하고싶어요",
+      "register": "평가 등록하기",
+      "exactly": "평가가 모두 정확한가요?",
+      "exactly_desc": "사실과 다른 평가를 하는 경우 피평가자의 커리어에 불이익이 생길 수 있어요.",
+      "go_to_project": "프로젝트로 가기"
     }
   },
   "mypage": {

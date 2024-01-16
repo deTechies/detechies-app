@@ -15,7 +15,7 @@ export default async function ProjectMemberEvaluation({
 }) {
   const details = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
-
+  
   if (!details.data) {
     return <InvalidWorkAccess details={details} />;
   }
@@ -51,6 +51,7 @@ export default async function ProjectMemberEvaluation({
               workId={params.id}
               verified={details.data.matching != null}
               defaultValues={details.data.matching}
+              projectId={details.data.evaluator.project.id}
             />
           )}
           {details.data.evaluator.role != "admin" && (
