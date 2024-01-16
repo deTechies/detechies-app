@@ -62,6 +62,7 @@ export const Ranking: React.FC<RankingProps> = ({
   return (
     <div className="grid grid-cols-8 items-center gap-2 md:gap-8">
       <button
+      role="button"
       onClick={() => handleRankSelect(1)}
         className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 
         ${
@@ -88,7 +89,8 @@ export const Ranking: React.FC<RankingProps> = ({
       ))}
       </div>
       <button
-      onClick={() => handleRankSelect(5)}
+        onClick={() => handleRankSelect(5)}
+        role="button"
         className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 ${
           activeRank > AVERAGE + 1 &&
           "!bg-accent-secondary rounded-lg outline outline-1 outline-accent-primary"
