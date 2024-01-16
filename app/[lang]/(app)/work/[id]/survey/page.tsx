@@ -20,10 +20,13 @@ export default async function EvaluateAsTeamLead({
   const { data: details } = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
 
-  console.log(surveyData);
+  if(!details) redirect(`/work/${params.id}`)
   if (details.evaluator.role !== "admin") {
     redirect(`/work/${params.id}/feedback`);
   }
+  
+  
+  console.log()
 
   return (
     <div className="flex flex-col max-w-3xl gap-4 mx-auto mb-20">
