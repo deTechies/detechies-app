@@ -3,8 +3,7 @@ import { Ranking } from "@/components/group/ranking";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-import { submitSwotAnalysis } from "@/lib/data/feedback";
+import { postServer } from "@/lib/data/postRequest";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -15,6 +14,7 @@ const finalFeedbackForm = z.object({
   strength: z.string(),
   weakness: z.string(),
   opportunity: z.string().optional(),
+  recommend: z.number().default(3),
   // team_building: z.string(),
 });
 
@@ -40,14 +40,17 @@ export default function FinalFeedbackForm({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-
   async function onSubmit(data: FinalFeedbackValues) {
     setIsLoading(true);
-    const result = await submitSwotAnalysis(data, workId, surveyResponseId);
 
-    toast({
-      description: result.message,
+    const submitData = JSON.stringify({
+      ...data,
+      projectWorkId: workId,
+      surveyResponseId: surveyResponseId, 
+      recommend: teamBuildingRank,
     });
+    
+    const result = await postServer('/survey-response/swot/create', submitData);
 
     if (result.status === "success") {
       router.push(`/work/${workId}/result`);
@@ -56,9 +59,7 @@ export default function FinalFeedbackForm({
     }
   }
 
-
-
-  const [teamBuildingRank, setTeamBuildingRank] = useState(3);
+  const [teamBuildingRank, setTeamBuildingRank] = useState(defaultValues.recommend? defaultValues.recommend : 3);
 
 
   return (
@@ -92,7 +93,7 @@ export default function FinalFeedbackForm({
             )}
           />
         </section>
-        
+
         <section className="flex flex-col gap-4 mb-20">
           <FormField
             control={form.control}
