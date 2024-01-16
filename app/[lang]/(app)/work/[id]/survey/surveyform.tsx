@@ -2,8 +2,7 @@
 import PercentageSliderField from "@/components/form/percentage-helper";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { submitEvaluationSurvey } from "@/lib/data/survey";
 import { Survey } from "@/lib/interfaces";
@@ -64,11 +63,14 @@ export function SurveyForm({
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
+    if (Object.values(data).some((value) => value === null || value === "" || value === undefined)) {
+      toast({ title: "Error", description: "Please fill in all the fields." });
+
+      setIsLoading(false);
+      return;
+    }
+
     const result = await submitEvaluationSurvey(data, workId, responseId);
-    toast({
-      title: "form results",
-      description: <span>Thank you for filling in the form. </span>,
-    });
 
     router.push(`/work/${workId}/feedback`);
 
@@ -105,17 +107,6 @@ export function SurveyForm({
                     // Render each question
                     if (question.type === "input") {
                       return null;
-                      <FormField
-                        key={question.id}
-                        control={form.control}
-                        name={question.id}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{question.content}</FormLabel>
-                            <Input {...field} />
-                          </FormItem>
-                        )}
-                      />;
                     } else {
                       return (
                         <PercentageSliderField

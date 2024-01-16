@@ -10,6 +10,7 @@ import ProjectMemberInline from "../../../project/_components/project-member-inl
 import ProjectSwitcher from "../../../project/_components/project-switcher";
 import BasicEvaluationInfo from "../_components/basic-info";
 import ProjectMemberWorkDetails from "../_components/details-work";
+import NonAdminContributionForm from "../_components/non-admin-contribution-form";
 import EvaluateTeamForm from "../feedback/evaluate-team-form";
 import { SurveyForm } from "../survey/surveyform";
 import FinalFeedbackOverview from "./_components/swot-analysis";
@@ -48,13 +49,22 @@ export default async function EvaluationResult({
       {/* RIGHT SIDE */}
       <section className="flex mb-10 grow shrink">
         <div className="space-y-8 grow">
-          {details.matching && (
+          {details.matching && details.matching.meet_requirements > 0 ? (
             <BasicEvaluationInfo
               text={dictionary.project.evaluate}
               workId={params.id}
               verified={details.matching != null}
               defaultValues={details.matching}
               result={true}
+            />
+          ) : (
+            <NonAdminContributionForm
+              text={dictionary.project.evaluate}
+              workId={params.id}
+              verified={details.matching != null}
+              defaultValues={details.matching}
+              result={true}
+              sameRole={details.evaluator.role === details.role}
             />
           )}
 

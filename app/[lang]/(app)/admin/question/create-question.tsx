@@ -30,20 +30,18 @@ import {
 } from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
-import { createQuestion } from "@/lib/data/feedback";
+import { postServer } from "@/lib/data/postRequest";
 import { QuestionCategory } from "@/lib/interfaces";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const questionFormSchema = z.object({
   id: z.string().optional(),
   content: z.string().min(2).max(1000).optional(),
-  type: z.string().default('slider'),
   language: z.string().default('kr'),
   category: z.string(),
   scale: z.number().default(5),
   baseWeight: z.number().min(0).max(100).optional(),
-  messages: z.array(z.string().optional()).optional(),
+  messages: z.array(z.string().optional()).optional().transform(messages => messages ? messages.slice(0, 5) : []),
 });
 
 type QuestionValues = z.infer<typeof questionFormSchema>;
@@ -53,28 +51,28 @@ export default function CreateQuestion({
 }: {
   defaultValues?: Partial<QuestionValues>;  
 }) {
+  if (defaultValues && defaultValues.messages) {
+    defaultValues.messages = defaultValues.messages.slice(0, 5);
+  }
   const form = useForm<QuestionValues>({
     resolver: zodResolver(questionFormSchema),
     defaultValues,
     mode: "onChange",
   });
-
-  const scale = form.watch("scale", 5); // Watching scale value
-
-  const selectedType = form.watch("type", "slider");
-
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(data: QuestionValues) {
     setLoading(true);
+    
+    console.log(data)
+    const stringed= JSON.stringify(data)
 
-    const result = await createQuestion(data);
+    const result = await postServer('/question', stringed);
 
-    if (result.id) {
+    if(result.status === 'success') {
       toast({
-        title: "Success",
-        description: "Created successfully",
+        title: "Question created",
+        description: <span>Question has been created. </span>,
       });
     }
 
@@ -196,7 +194,7 @@ export default function CreateQuestion({
             </section>
 
             {
-              Array.from({ length: scale }, (_, index) => (
+              Array.from({ length: 5 }, (_, index) => (
                 <FormField
                   key={index}
                   control={form.control}

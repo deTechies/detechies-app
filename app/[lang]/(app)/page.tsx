@@ -17,7 +17,7 @@ export default async function ProfileDashboard({
   const followers = await getFollowingList();
 
   return (
-    <main className="max-w-4xl m-10 mx-auto">
+    <main className="w-screen flex justify-center content-center">
       <ListProfiles users={users.data} followers={followers} />
     </main>
   );

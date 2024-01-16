@@ -1,12 +1,12 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getProjectWork } from "@/lib/data/project";
-import { redirect } from "next/navigation";
 import ProjectMemberInline from "../../project/_components/project-member-inline";
 import ProjectSwitcher from "../../project/_components/project-switcher";
 import BasicEvaluationInfo from "./_components/basic-info";
 import ProjectMemberWorkDetails from "./_components/details-work";
 import InvalidWorkAccess from "./_components/invalid-work-access";
+import NonAdminContributionForm from "./_components/non-admin-contribution-form";
 
 export default async function ProjectMemberEvaluation({
   params,
@@ -19,11 +19,6 @@ export default async function ProjectMemberEvaluation({
   if (!details.data) {
     return <InvalidWorkAccess details={details} />;
   }
-
-  if (details.data?.evaluator.role != "admin") {
-    redirect(`/work/${params.id}/feedback`);
-  }
-
 
   return (
     <main className="flex gap-4">
@@ -50,13 +45,27 @@ export default async function ProjectMemberEvaluation({
       {/* RIGHT SIDE */}
       <section className="flex grow shrink">
         <div className="space-y-8 grow">
-          <BasicEvaluationInfo
-            text={dictionary.project.evaluate}
-            workId={params.id}
-            verified={details.data.matching != null}
-            defaultValues={details.data.matching}
-            projectId={details.data.evaluator.project.id}
-          />
+          {details.data.evaluator.role === "admin" && (
+            <BasicEvaluationInfo
+              text={dictionary.project.evaluate}
+              workId={params.id}
+              verified={details.data.matching != null}
+              defaultValues={details.data.matching}
+              projectId={details.data.evaluator.project.id}
+            />
+          )}
+          {details.data.evaluator.role != "admin" && (
+            <NonAdminContributionForm
+              workId={params.id}
+              text={dictionary.project.evaluate}
+              defaultValues={details.data.matching}
+              verified={details.data.matching != null}
+              sameRole={
+                details.data.evaluator?.works[0].role ===
+                details.data.projectWork.role
+              }
+            />
+          )}
         </div>
       </section>
     </main>

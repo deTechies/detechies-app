@@ -16,7 +16,7 @@ export default async function ManageMember({
   searchParams: { [key: string]: string | string[] | undefined };
   lang: any;
 }) {
-  const pendingData = await getPendingMembers(details.id);
+  const {data: pendingData} = await getPendingMembers(details.id);
 
   const searchItem = searchParams.search as string;
 
