@@ -18,7 +18,7 @@ export default async function ProjectMemberEvaluationLayout({
         <h2 className="mb-4 text-heading_m">{dictionary.project.evaluate.evaluate_performance}</h2>
         <h5 className="text-title_m text-text-secondary">
           {dictionary.project.work.desc}
-          {details.projectWork.projectMember?.user?.display_name}
+          {details.projectWork?.projectMember?.user?.display_name}
           {dictionary.project.work.desc2}
         </h5>
       </header>

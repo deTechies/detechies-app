@@ -1,7 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
-import { Card } from "@/components/ui/card";
 import { getProjectWork } from "@/lib/data/project";
 import { getEvaluationSurvey } from "@/lib/data/survey";
 
@@ -21,8 +20,8 @@ export default async function EvaluateAsTeamLead({
   const dictionary = await getDictionary(params.lang);
 
   if(!details) redirect(`/work/${params.id}`)
-  if (details.evaluator.role !== "admin") {
-    redirect(`/work/${params.id}/feedback`);
+  if (details.evaluator.role !== "admin" && details.evaluator.works[0].role === details.role) {
+      redirect(`/work/${params.id}/feedback`);
   }
   
   

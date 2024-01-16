@@ -114,6 +114,6 @@ export async function getEvaluationSurvey(id: string) {
 function transformToAnswerDto(data: { [key: string]: number }): any[] {
   return Object.entries(data).map(([questionId, response]) => ({
     questionId,
-    response: response.toString(), // Assuming response is always a number and needs to be a string in AnswerDto
+    response: response ? response.toString() : "", // Safe check for null/undefined
   }));
 }
