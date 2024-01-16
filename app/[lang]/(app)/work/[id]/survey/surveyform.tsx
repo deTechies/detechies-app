@@ -10,6 +10,8 @@ import { Survey } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export function SurveyForm({
   workId,
@@ -26,9 +28,23 @@ export function SurveyForm({
   result?: boolean;
   lang: any;
 }) {
-  const form = useForm<any>({});
-  //setting default values
   const [isLoading, setIsLoading] = useState(false);
+
+  const createSurveySchema = (answers: any) => {
+    const schemaFields = answers.questions.reduce((acc: any, question: any) => {
+      acc[question.id] = z.string();
+      return acc;
+    }, {});
+
+    return z.object(schemaFields);
+  };
+
+  const surveySchema = createSurveySchema(survey);
+
+  const form = useForm<any>({
+    resolver: zodResolver(surveySchema),
+  });
+  //setting default values
 
   useEffect(() => {
     const transformAnswersToDefaultValues = (answers: any) => {
@@ -56,7 +72,13 @@ export function SurveyForm({
 
     router.push(`/work/${workId}/feedback`);
 
-    setIsLoading(false);
+    // setIsLoading(false);
+
+    // if(result.status == "success") {
+    //   router.push(`/work/${workId}/feedback`);
+    // } else {
+    //   setIsLoading(false);
+    // }
   };
 
   const questionsByCategory = survey.questions.reduce(
@@ -73,7 +95,7 @@ export function SurveyForm({
     <div className="flex flex-col gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
-          {Object.keys(questionsByCategory).map((category) => {
+          {Object.keys(questionsByCategory).map((category, index) => {
             return (
               <Card key={category}>
                 <h5 className="text-subhead_s mb-7">{category}</h5>{" "}
@@ -110,20 +132,25 @@ export function SurveyForm({
                     }
                   })}
                 </div>
+                {!result &&
+                  Object.keys(questionsByCategory).length - 1 == index && (
+                    <div className="flex flex-row justify-between mt-3">
+                      <Button type="button" size="lg" variant={"secondary"}>
+                        {lang.project.evaluate.go_back}
+                      </Button>
+                      <Button
+                        type="submit"
+                        size="lg"
+                        loading={isLoading}
+                        disabled={isLoading}
+                      >
+                        {lang.project.evaluate.next}
+                      </Button>
+                    </div>
+                  )}
               </Card>
             );
           })}
-
-          {!result && (
-            <Card className="flex flex-row justify-between">
-              <Button type="button" variant={"secondary"}>
-                Go Back
-              </Button>
-              <Button type="submit" loading={isLoading} disabled={isLoading}>
-                Save
-              </Button>
-            </Card>
-          )}
         </form>
       </Form>
     </div>

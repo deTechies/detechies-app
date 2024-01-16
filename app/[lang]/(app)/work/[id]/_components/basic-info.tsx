@@ -27,6 +27,7 @@ interface BasicEvaluationInfoProps {
   verified: boolean;
   defaultValues: Partial<verifyWorkValues>;
   result?: boolean;
+  projectId?: string;
 }
 
 const baseInfoSchema = z
@@ -79,6 +80,7 @@ export default function BasicEvaluationInfo({
   verified,
   defaultValues,
   result = false,
+  projectId,
 }: BasicEvaluationInfoProps) {
   const form = useForm<verifyWorkValues>({
     resolver: zodResolver(baseInfoSchema),
@@ -106,12 +108,17 @@ export default function BasicEvaluationInfo({
     const result = await postServer(url, sendingData);
 
     if (result.status == "success") {
-      router.push(`/work/${workId}/survey`);
+      if(data.match == "100") {
+        router.push(`/work/${workId}/survey`);
+      }
+
+      if (data.match == "80") {
+        router.push(`/project/${projectId}/`);
+      }
+    } else {
+      setIsLoading(false);
     }
 
-    if (data.match == "80") {
-      router.push(`/project`);
-    }
   }
 
   const onClickGoBack = () => {
@@ -212,13 +219,7 @@ export default function BasicEvaluationInfo({
                   )}
                 />
 
-                {result ? (
-                  <Link href={`/work/${workId}`} passHref className="mx-auto">
-                    <Button variant="secondary" size="lg" type="button">
-                      {text.modify}
-                    </Button>
-                  </Link>
-                ) : (
+                {!result && (
                   <section className="flex justify-between">
                     <Button
                       variant="secondary"
@@ -298,13 +299,7 @@ export default function BasicEvaluationInfo({
                 />
               </section>
 
-              {result ? (
-                <Link href={`/work/${workId}`} passHref className="mx-auto">
-                  <Button variant="secondary" size="lg" type="button">
-                    {text.modify}
-                  </Button>
-                </Link>
-              ) : (
+              {!result && (
                 <section className="flex justify-between">
                   <Button
                     variant="secondary"

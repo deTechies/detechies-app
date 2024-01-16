@@ -1,4 +1,5 @@
 "use client";
+import { Ranking } from "@/components/group/ranking";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,7 +14,8 @@ import { z } from "zod";
 const finalFeedbackForm = z.object({
   strength: z.string(),
   weakness: z.string(),
-  opportunity: z.string(),
+  opportunity: z.string().optional(),
+  team_building: z.string(),
 });
 
 type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
@@ -38,60 +40,87 @@ export default function FinalFeedbackForm({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+
   async function onSubmit(data: FinalFeedbackValues) {
-    setIsLoading(true)
+    setIsLoading(true);
     const result = await submitSwotAnalysis(data, workId, surveyResponseId);
-    
+
     toast({
-      description: result.message
+      description: result.message,
     });
 
-    if(result.status === 'success'){
+    if (result.status === "success") {
       router.push(`/work/${workId}/result`);
     }
-    
-    setIsLoading(false)
+
+    setIsLoading(false);
   }
+
+
+
+  const [teamBuildingRank, setTeamBuildingRank] = useState(3);
+
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
-        <h5 className="text-subhead_s">윤창진님에게 남기는 마지막 피드백</h5>
-        <section className="flex flex-col gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <h5 className="text-subhead_s mb-7">
+          {text.project.evaluate.feedback_title}
+        </h5>
+
+        <section className="flex flex-col gap-4 mb-7">
           <FormField
             control={form.control}
             name="strength"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Strengths</FormLabel>
+                <FormLabel>{text.project.evaluate.strength}</FormLabel>
                 <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col gap-4 mb-7">
           <FormField
             control={form.control}
             name="weakness"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Weakness</FormLabel>
+                <FormLabel>{text.project.evaluate.weakness}</FormLabel>
                 <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
-        <section className="flex flex-col gap-4">
+        
+        <section className="flex flex-col gap-4 mb-20">
           <FormField
             control={form.control}
             name="opportunity"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Advise</FormLabel>
+                <FormLabel>{text.project.evaluate.feedback}</FormLabel>
                 <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
+
+        <section className="flex flex-col mx-auto mb-20">
+          <div className="mb-10 text-center text-subhead_s">
+            {text.project.evaluate.again}
+          </div>
+
+          <Ranking
+            key="team_building"
+            ranks={5}
+            minText={text.project.evaluate.no_team_building}
+            maxText={text.project.evaluate.love_to}
+            onSelectRank={(rank) => setTeamBuildingRank(rank)}
+            activeRank={teamBuildingRank}
+          />
+        </section>
+
         <section className="flex justify-between">
           <Button
             variant="secondary"
@@ -101,14 +130,17 @@ export default function FinalFeedbackForm({
               router.back();
             }}
           >
-            Back
+            {text.project.evaluate.go_back}
           </Button>
 
-          <Button type="submit" variant={"primary"} size="lg" 
+          <Button
+            type="submit"
+            variant={"primary"}
+            size="lg"
             loading={isLoading}
             disabled={isLoading}
           >
-            Save and Continue
+            {text.project.evaluate.register}
           </Button>
         </section>
       </form>

@@ -15,14 +15,15 @@ export default async function ProjectMemberEvaluation({
 }) {
   const details = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
-
+  
   if (!details.data) {
     return <InvalidWorkAccess details={details} />;
   }
 
-  if (details?.evaluator.role != "admin") {
+  if (details.data?.evaluator.role != "admin") {
     redirect(`/work/${params.id}/feedback`);
   }
+
 
   return (
     <main className="flex gap-4">
@@ -30,18 +31,18 @@ export default async function ProjectMemberEvaluation({
       <section className="w-[360px] flex flex-col gap-4">
         <ProjectSwitcher
           title={dictionary.project.work.project}
-          project={details.evaluator?.project}
+          project={details.data.evaluator?.project}
           lang={dictionary}
         />
         <ProjectMemberInline
           title={dictionary.project.work.evaluatee}
-          projectMember={details.projectWork.projectMember}
-          projectWork={details.projectWork}
+          projectMember={details.data.projectWork.projectMember}
+          projectWork={details.data.projectWork}
           lang={dictionary}
         />
         <ProjectMemberWorkDetails
-          projectMember={details.projectMember}
-          projectWork={details.projectWork}
+          projectMember={details.data.projectMember}
+          projectWork={details.data.projectWork}
           lang={dictionary}
         />
       </section>
@@ -54,6 +55,7 @@ export default async function ProjectMemberEvaluation({
             workId={params.id}
             verified={details.data.matching != null}
             defaultValues={details.data.matching}
+            projectId={details.data.evaluator.project.id}
           />
         </div>
       </section>

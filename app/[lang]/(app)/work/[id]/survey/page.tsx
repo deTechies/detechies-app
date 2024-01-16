@@ -24,9 +24,6 @@ export default async function EvaluateAsTeamLead({
   if (details.evaluator.role !== "admin") {
     redirect(`/work/${params.id}/feedback`);
   }
-  
-  
-  console.log()
 
   return (
     <div className="flex flex-col max-w-3xl gap-4 mx-auto mb-20">
