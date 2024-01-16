@@ -9,10 +9,11 @@ export default async function EvaluateAsTeamLead({ params }: { params: any }) {
   const {data: surveyData} = await getEvaluationSurvey(params.id)
   const {data: details} = await getProjectWork(params.id);
 
-  console.log(details);
+  if(!details) redirect(`/work/${params.id}`)
   if (details.evaluator.role !== "admin") {
     redirect(`/work/${params.id}/feedback`);
   }
+  
   
   console.log()
 

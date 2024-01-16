@@ -5,6 +5,7 @@ import { Locale } from "@/i18n.config";
 import { getProjectWork } from "@/lib/data/project";
 import { getEvaluationSurvey } from "@/lib/data/survey";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import ProjectMemberInline from "../../../project/_components/project-member-inline";
 import ProjectSwitcher from "../../../project/_components/project-switcher";
 import BasicEvaluationInfo from "../_components/basic-info";
@@ -22,10 +23,8 @@ export default async function EvaluationResult({
   const dictionary = await getDictionary(params.lang);
   const {data:surveyData} = await getEvaluationSurvey(params.id);
 
-  if (!details.projectWork) {
-    return <pre>{JSON.stringify(details, null, 4)}</pre>;
-  }
-
+  if(!details) redirect(`/work/${params.id}`)
+  
   return (
     <main className="flex gap-4">
       {/* LEFT SIDE  */}
