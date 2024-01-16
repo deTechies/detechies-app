@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
-import { sendVerifyEmail } from "@/lib/data/user";
+import { postServer } from "@/lib/data/postRequest";
 import { signOut, useSession } from "next-auth/react";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -21,7 +21,7 @@ export default function EmailVerification({
   const pathName = usePathname();
   const { data, update } = useSession();
   const code = searchParams.get("code") as string;
-
+  const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -41,22 +41,17 @@ export default function EmailVerification({
 
       return;
     }
+    setIsLoading(true);
 
-    const result = await sendVerifyEmail(code);
+    const result = await postServer(`/users/verify?token=${code}`, '');
 
-    if (result) {
+    if (result.status == 'success') {
       toast({
         title: "Email verified",
         description: "Email verified",
       });
 
       router.refresh();
-    } else {
-      toast({
-        title: "Invalid code",
-        description:
-          "Something went wrong with verifying your email, please check if you email is correct. ",
-      });
     }
   }
 

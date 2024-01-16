@@ -22,7 +22,7 @@ export default function ProjectMemberInline({
         <div className="relative w-20 h-20 rounded-xl bg-background-layer-2">
           <IPFSImageLayer
             hashes={
-              projectMember?.user ? projectMember.user.avatar : defaultAvatar
+              projectMember?.user?.avatar ? projectMember.user.avatar : defaultAvatar
             }
           />
         </div>
