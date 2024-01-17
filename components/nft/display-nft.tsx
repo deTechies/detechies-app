@@ -78,13 +78,15 @@ export default function DisplayNFT({
 
     const result = await requestAchievement(details.id);
 
-    toast({
-      title: "Congratulations!",
-      description:
-        "Please wait for the administrator to accept your nft request!",
-    });
-
-    setRequesting(false);
+    if(result.status == "success"){
+      toast({
+        title: "Congratulations!",
+        description:
+          "Please wait for the administrator to accept your nft request!",
+      });
+    } else {
+      setRequesting(false);
+    }
   };
 
   if (showSelect) {
@@ -220,10 +222,9 @@ export default function DisplayNFT({
 
           <Button
             onClick={handleRequestNFT}
-            loading={requesting}
             disabled={requesting || blockRequest}
           >
-            {blockRequest ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
+            {(blockRequest || requesting) ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
           </Button>
         </div>
       </DialogContent>
