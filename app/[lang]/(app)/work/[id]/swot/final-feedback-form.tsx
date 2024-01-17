@@ -1,23 +1,21 @@
 "use client";
+import { Ranking } from "@/components/group/ranking";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-import { submitSwotAnalysis } from "@/lib/data/feedback";
+import { postServer } from "@/lib/data/postRequest";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-interface BasicEvaluationInfoProps {
-  text: any;
-}
 
 const finalFeedbackForm = z.object({
   strength: z.string(),
   weakness: z.string(),
-  opportunity: z.string(),
-  threat: z.string().optional(),
+  opportunity: z.string().optional(),
+  recommend: z.number().default(3),
+  // team_building: z.string(),
 });
 
 type FinalFeedbackValues = z.infer<typeof finalFeedbackForm>;
@@ -40,60 +38,90 @@ export default function FinalFeedbackForm({
     defaultValues,
   });
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(data: FinalFeedbackValues) {
-    const result = await submitSwotAnalysis(data, workId, surveyResponseId);
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <div className="text-text-primary">
-          Thank you for submitting, please check the results. 
-        </div>
-      ),
-    });
+    setIsLoading(true);
 
-    router.push(`/work/${workId}/result`);
+    const submitData = JSON.stringify({
+      ...data,
+      projectWorkId: workId,
+      surveyResponseId: surveyResponseId, 
+      recommend: teamBuildingRank,
+    });
+    
+    const result = await postServer('/survey-response/swot/create', submitData);
+
+    if (result.status === "success") {
+      router.push(`/work/${workId}/result`);
+    } else {
+      setIsLoading(false);
+    }
   }
+
+  const [teamBuildingRank, setTeamBuildingRank] = useState(defaultValues.recommend? defaultValues.recommend : 3);
+
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
-        <h5 className="text-subhead_s">윤창진님에게 남기는 마지막 피드백</h5>
-        <section className="flex flex-col gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <h5 className="text-subhead_s mb-7">
+          {text.project.evaluate.feedback_title}
+        </h5>
+
+        <section className="flex flex-col gap-4 mb-7">
           <FormField
             control={form.control}
             name="strength"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Strengths</FormLabel>
+                <FormLabel>{text.project.evaluate.strength}</FormLabel>
                 <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col gap-4 mb-7">
           <FormField
             control={form.control}
             name="weakness"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Weakness</FormLabel>
+                <FormLabel>{text.project.evaluate.weakness}</FormLabel>
                 <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
-        <section className="flex flex-col gap-4">
+
+        <section className="flex flex-col gap-4 mb-20">
           <FormField
             control={form.control}
             name="opportunity"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Advise</FormLabel>
+                <FormLabel>{text.project.evaluate.feedback}</FormLabel>
                 <Textarea {...field} />
               </FormItem>
             )}
           />
         </section>
+
+        <section className="flex flex-col mx-auto mb-20">
+          <div className="mb-10 text-center text-subhead_s">
+            {text.project.evaluate.again}
+          </div>
+
+          <Ranking
+            key="team_building"
+            ranks={5}
+            minText={text.project.evaluate.no_team_building}
+            maxText={text.project.evaluate.love_to}
+            onSelectRank={(rank) => setTeamBuildingRank(rank)}
+            activeRank={teamBuildingRank}
+          />
+        </section>
+
         <section className="flex justify-between">
           <Button
             variant="secondary"
@@ -103,20 +131,18 @@ export default function FinalFeedbackForm({
               router.back();
             }}
           >
-       Back
+            {text.project.evaluate.go_back}
           </Button>
-          {defaultValues ? (
-            <Button
-              type="button"
-              onClick={() => router.push(`/work/${workId}/result`)}
-            >
-             Next
-            </Button>
-          ) : (
-            <Button type="submit" variant={"primary"} size="lg">
-             Next
-            </Button>
-          )}
+
+          <Button
+            type="submit"
+            variant={"primary"}
+            size="lg"
+            loading={isLoading}
+            disabled={isLoading}
+          >
+            {text.project.evaluate.register}
+          </Button>
         </section>
       </form>
     </Form>

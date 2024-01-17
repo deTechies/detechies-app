@@ -24,12 +24,12 @@ export default async function PendingMemberList({
       </CardHeader>
 
       <div className="flex flex-col gap-3">
-        {!!pendingMembers.length &&
+        {!!pendingMembers?.length &&
           pendingMembers.map((member: any, index: number) => (
             <PendingMemberItem key={index} member={member} lang={lang}/>
           ))}
 
-        {(!pendingMembers.length || pendingMembers.length < 1) && (
+        {(!pendingMembers?.length || pendingMembers.length < 1) && (
           <p className="text-center text-label_m text-text-secondary">
             {lang.project.details.waiting.no_people}
           </p>

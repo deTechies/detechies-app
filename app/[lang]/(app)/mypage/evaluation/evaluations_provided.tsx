@@ -1,8 +1,17 @@
 import { Card } from "@/components/ui/card";
-import { getAllContributed } from "@/lib/data/survey";
+import { serverApi } from "@/lib/data/general";
+import RequestedEvaluationCard from "./_components/requested-evaluation-card";
 
 export default async function EvaluationProvided() {
-  const data = await getAllContributed();
+  const queries = {
+    provided: "true",
+    status: "finished",
+  };
+  const filters = new URLSearchParams(queries).toString();
+
+  const { data } = await serverApi(`/survey-response/filtered?${filters}`);
+
+  console.log(data);
   const stats = [
     {
       title: "평가 완료",
@@ -20,14 +29,20 @@ export default async function EvaluationProvided() {
       subtext: "0 CAZ",
     },
   ];
+
   return (
-    <div>
-      <section className="flex gap-4 flex-wrap">
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-6">
         {stats.map((stat, index) => (
           <EvaluationStat key={index} {...stat} />
         ))}
-      </section>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      </div>
+      <div className="flex flex-col gap-4">
+        {data &&
+          data.map((item: any, index: number) => (
+            <RequestedEvaluationCard key={index} data={item} />
+          ))}
+      </div>
     </div>
   );
 }
@@ -43,9 +58,8 @@ export async function EvaluationStat({
   value,
   subtext,
 }: EvaluationStatProps) {
-
   return (
-    <Card className="flex flex-col gap-2 min-w-[200px] p-6">
+    <Card className="flex flex-col gap-2 w-[100px] p-6">
       <h4 className="text-title_m">{title}</h4>
       <div className="flex flex-col gap-1">
         <h1 className="text-subhead_s">{value}</h1>

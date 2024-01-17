@@ -40,7 +40,7 @@ export default function InviteGroupMember({
   if (!members) return <div>no_members_found</div>;
 
   const filteredData = members.filter((member: any) => {
-    return member.display_name.toLowerCase().includes(text || "");
+    return member.display_name.toLowerCase().includes(text.toLowerCase() || "");
   });
 
   const onClickGoManage = () => {

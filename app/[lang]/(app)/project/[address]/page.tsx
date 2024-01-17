@@ -1,6 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { getSingleProject } from "@/lib/data/project";
-import { Project } from "@/lib/interfaces";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
@@ -8,6 +6,7 @@ import { Locale } from "@/i18n.config";
 import AcceptInvitation from "./_components/accept-invitation";
 import PendingMemberList from "./_components/pending-members-list";
 
+import { serverApi } from "@/lib/data/general";
 import ProjectDetail from "./_components/project-detail";
 import ProjectEvaluation from "./_components/project-evaluation-by-groups";
 import ProjectLinks from "./_components/project-links";
@@ -23,7 +22,8 @@ export default async function ProjectDetailPage({
     `/project/single/${address}`
   ); */
 
-  const data: Project = await getSingleProject(params.address);
+  
+  const {data} = await serverApi(`/projects/${params.address}`);
 
   if (!data)
     return (
@@ -40,9 +40,11 @@ export default async function ProjectDetailPage({
       </main>
     );
 
+      console.log(data);
+
   const dictionary = (await getDictionary(params.lang)) as any;
   if (data.userRole == "invited")
-    return <AcceptInvitation image={data.image} projectId={data.id} />;
+    return <AcceptInvitation name={data.name} image={data.image} projectId={data.id} lang={dictionary} />;
 
   return (
     <main className="grid w-full gap-6 px-4 my-10 md:grid-cols-3">

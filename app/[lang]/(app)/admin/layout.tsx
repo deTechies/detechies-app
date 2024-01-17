@@ -18,7 +18,7 @@ export default async function MyPageLayout ({
     <div>
       <div className="flex m-8 gap-2">
         {/* LeftSide */}
-        <div className="min-w-[200px] flex flex-col gap-8">
+        <div className="min-w-[100px] flex flex-col gap-8">
 
             <AdminMenu />
         </div>

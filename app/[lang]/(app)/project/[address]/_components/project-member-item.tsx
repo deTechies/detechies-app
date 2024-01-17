@@ -3,7 +3,6 @@ import { Card } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import IPFSImageLayer from "@/components/ui/layer";
@@ -39,7 +38,9 @@ export default async function ProjectMemberItem({
       <div className="flex flex-wrap w-full gap-5">
         <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
           <IPFSImageLayer
-            hashes={details?.user?.nft ? details.user?.nft : defaultAvatar}
+            hashes={
+              details?.user?.avatar ? details.user?.avatar : defaultAvatar
+            }
             className="rounded-sm"
           />
         </figure>
@@ -57,7 +58,8 @@ export default async function ProjectMemberItem({
                   </Badge>
                 ) : (
                   <Badge shape="sm" className="px-1.5 py-0.5 ml-3">
-                    {lang.project.details.members.registered} ({details.works.length})
+                    {lang.project.details.members.registered} (
+                    {details.works.length})
                   </Badge>
                 )}
               </h5>
@@ -86,7 +88,7 @@ export default async function ProjectMemberItem({
                   </>
                 ) : (
                   <>
-                    {userRole != "none" && details.works.length > 0 && (
+                    {userRole != "none" && userRole != 'invited' && userRole != 'joined' && details.works.length > 0 && (
                       <ProjectMemberEvaluate
                         projectMember={details}
                         lang={lang}
@@ -99,10 +101,13 @@ export default async function ProjectMemberItem({
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                           <div className="flex flex-col gap-3 px-3 my-4 text-left">
-                            <RequestEvaluation memberId={details.memberId} />
-                            <DropdownMenuItem>
+                            <RequestEvaluation
+                              memberWallet={details.user.wallet}
+                              lang={lang}
+                            />
+                            {/*    <DropdownMenuItem>
                               {lang.project.details.members.delegate_admin}
-                            </DropdownMenuItem>
+                            </DropdownMenuItem> */}
                             <DeleteMember memberId={details.memberId} />
                           </div>
                         </DropdownMenuContent>
@@ -113,7 +118,7 @@ export default async function ProjectMemberItem({
               </div>
             </header>
 
-            {userRole != "none" ? (
+            {userRole == "admin" || "client" || "member"  ? (
               <ProjectWorkDetail data={details.works[0]} />
             ) : (
               <BlurredProjectWorkDetail />

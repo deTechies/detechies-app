@@ -1,42 +1,73 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
-import { sendRequestEvaluaton } from "@/lib/data/feedback";
-import { } from "@radix-ui/react-dialog";
+import { postServer } from "@/lib/data/postRequest";
+import { useRef, useState } from "react";
 
 export default function RequestEvaluation({
-  memberId,
+  memberWallet,
+  lang,
 }: {
-  memberId: string;
+  memberWallet: string;
+  lang?: any;
 }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const closeButtonRef = useRef<any>(null);
+
   async function requestEvaluation() {
-    await sendRequestEvaluaton(memberId)
-    
-    toast({
-      description: "Succesfully requested evaluation to: " + memberId,
-      variant: "success"
-    });
+    setIsLoading(true);
+    const result = await postServer(`/survey-response/request/${memberWallet}`, "");
+
+    if (result.status == "success") {
+      
+      closeButtonRef.current.click();
+    } else {
+      toast({
+        description: result.message,
+        variant: "destructive",
+      });
+    }
+
+    setIsLoading(false);
   }
   return (
     <Dialog>
       <DialogTrigger>
-        평가 요청하기
+        <span className="text-title_m">
+          {lang.project.details.request.request_a_review}
+        </span>
       </DialogTrigger>
       <DialogContent className="flex flex-col">
-        <h4 className="text-title_m">내 성과 평가 요청을 보낼까요?</h4>
-        <p className="text-body_s">
-          내가 작성한 성과를 다른 구성원에게 평가받고 내 커리어를 인증해보세요.
-          선택한 프로젝트 구성원에게 성과 평가 요청을 보낼까요?
+        <h4 className="text-subhead_s">
+          {lang.project.details.request.card_title}
+        </h4>
+        <p className="text-body_m">
+          {lang.project.details.request.card_description}
         </p>
-        <div className="flex justify-center gap-4" >
-          <DialogClose>
-            <Button size="lg" variant="secondary">
-              뒤로가기
+        <div className="grid grid-cols-2 gap-4 mt-6">
+          <DialogClose asChild
+          
+          >
+            <Button size="lg" variant="secondary" 
+                 ref={closeButtonRef}
+            >
+              {lang.project.details.request.card_back}
             </Button>
           </DialogClose>
-          <Button size="lg" variant="primary" onClick={requestEvaluation}>
-            평가 요청하기
+          <Button
+            size="lg"
+            variant="primary"
+            onClick={requestEvaluation}
+            loading={isLoading}
+            disabled={isLoading}
+          >
+            {lang.project.details.request.card_button}
           </Button>
         </div>
       </DialogContent>

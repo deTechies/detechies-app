@@ -1,4 +1,5 @@
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 
 import { getClub } from "@/lib/data/groups";
 import Link from "next/link";
@@ -14,7 +15,7 @@ export default async function GroupProfileCard({
   id: string;
   lang: any;
 }) {
-  const groupDetail = await getClub(id);
+  const {data:groupDetail} = await getClub(id);
 
   const snsLogos = {
     youtube: "/icons/youtube.png",

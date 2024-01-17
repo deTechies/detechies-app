@@ -117,17 +117,23 @@ export const GroupForm = ({ lang }: { lang: any }) => {
       urls: urls,
     });
 
-    if (!result.id) {
+    if (result.status === "success") {
       toast({
-        title: "Error",
-        description: result.message
+        title: "Success",
+        description: "Group created successfully",
       });
 
-      setIsLoading(false);
-      return;
-    }
+      router.push(`/groups/${result.data.id}`);
+    } else {
+      if (!result.ok) {
+        toast({
+          description: result.message,
+        });
 
-    router.push(`/groups/${result.id}`);
+        setIsLoading(false);
+        return;
+      }
+    }
   }
 
   const selectIcon = (file: File | null, base64: string | null) => {

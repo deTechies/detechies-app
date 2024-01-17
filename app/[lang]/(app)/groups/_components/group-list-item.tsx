@@ -13,7 +13,7 @@ const GroupListItem = React.memo(
       <Link href={`groups/${details.id}`} className="truncate">
         <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] pb-6 px-6 gap-0">
           <section className="flex flex-col items-center justify-center max-w-full text-center">
-            <Avatar className="w-24 h-24 aspect-square bg-[#C7E2FF] mb-2">
+            <Avatar className="w-24 h-24 mb-2 aspect-square bg-state-info-secondary">
               <AvatarImage
                 src={`https://ipfs.io/ipfs/${details.image}`}
                 alt={details.name}
@@ -21,7 +21,12 @@ const GroupListItem = React.memo(
               />
 
               <AvatarFallback className="relative">
-                <Image src="/images/careerzen.png" alt="no-item" fill={true} />
+                <Image
+                  src="/images/careerzen.png"
+                  alt="no-item"
+                  fill={true}
+                  className="object-contain bg-no-repeat"
+                />
               </AvatarFallback>
             </Avatar>
 

@@ -7,7 +7,7 @@ export default async function CreateNFT({
     params
 }: {params: any}) {
   
-  const group = await getClub(params.address);
+  const {data: group} = await getClub(params.address);
   
   if(!group.contract){
     return (

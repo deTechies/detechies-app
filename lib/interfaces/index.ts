@@ -16,6 +16,17 @@ export interface User {
     login_method: 'metamask'|'web3auth';
   }
   
+  export interface SurveyResponse {
+    id: string;
+    user: string;
+    matching: Object;
+    evaluator: ProjectMember;
+    projectWork: ProjectWork;
+    status: 'draft' | 'closed' | 'pending' | 'finished' | 'requested';
+    answers: string[];
+    created_at: Date;
+  }
+  
   export interface ProfileDetails {
     id: number;
     full_name: string;
@@ -125,10 +136,14 @@ export enum GROUP_TYPE {
     PM = 'PM',
     QA_ENGINEER = 'QA Engineer',
     PLANNER = 'Planner',
-    DESIGNER = 'Designer',
-    MARKETER = 'Marketer'
+    DESIGNER = 'Designer'
   }
-
+  
+  export enum SCOPE_TYPE {
+    PUBLIC = 'public',
+    PRIVATE = 'private',
+    TEAM = 'team',
+  }
 
   export enum ProjectCategory {
     WEB = 'web',
@@ -262,10 +277,12 @@ export enum GROUP_TYPE {
   export interface ProjectWork {
     workId: string;
     name: string;
+    role: PROFESSION_TYPE;
     percentage: number;
+    projectMember: ProjectMember;
     tags: string[];
     begin_date: string;
-    surveyResponses: any[];
+    surveyResponses: SurveyResponse[];
     end_date?: string;
     description: string;
     created_at: Date;

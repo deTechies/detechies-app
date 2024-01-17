@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -92,19 +93,24 @@ export default function InviteProjectMember({
         </div>
 
         <Card className="flex-row gap-5 p-6 border border-border-div">
-          <div className="rounded-full w-[68px] h-[68px] flex justify-center items-center shrink-0 overflow-hidden">
-            <Image
-              src={
-                details.image
-                  ? `https://ipfs.io/ipfs/${details.image}`
-                  : "/icons/group_default.png"
-              }
-              alt={`Layer company image`}
-              className="object-scale-down aspect-square"
-              width={68}
-              height={68}
+          <Avatar className="w-[68px] h-[68px] mb-2 aspect-square bg-state-info-secondary">
+            <AvatarImage
+              src={details.image
+                ? `https://ipfs.io/ipfs/${details.image}`
+                : "/icons/group_default.png"}
+              alt={details.name}
+              className="rounded-md"
             />
-          </div>
+
+            <AvatarFallback className="relative">
+              <Image
+                src="/images/careerzen.png"
+                alt="no-item"
+                fill={true}
+                className="object-contain bg-no-repeat"
+              />
+            </AvatarFallback>
+          </Avatar>
 
           <div className="flex flex-col justify-center gap-3">
             <h3 className="truncate text-subhead_s">
@@ -133,8 +139,7 @@ export default function InviteProjectMember({
                   <FormControl>
                     <Textarea
                       placeholder={
-                        lang.details.profile_card.join_group
-                          .message_placeholder
+                        lang.details.profile_card.join_group.message_placeholder
                       }
                       className="resize-none"
                       {...field}

@@ -7,30 +7,32 @@ import { API_URL } from "../constants";
 import { auth, authOptions } from "../helpers/authOptions";
 
 export async function getUserProfile(address?: string) {
-  const session = (await getServerSession(authOptions)) as Session;
+  const session = await auth() as Session;
+  console.log(session);
   if (!address) {
     if (!session) {
       redirect("/onboard");
     }
-
-    const user = await fetch(`${API_URL}/users/${session?.web3.address}`, {
+    if(!session?.web3?.address) {
+      redirect("/onboard");
+    }
+    const user = await fetch(`${API_URL}/users/${session?.web3?.address}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${session?.web3.accessToken}`,
       },
     });
-
-    const data = await user.json();
-
     if (!user.ok) {
       // This will activate the closest `error.js` Error Boundary
-      redirect("/onboard");
       throw new Error("Failed to fetch data");
     }
+    
+    const result = await user.json();
+    
+    console.log(result);
 
-    return data;
-    //return session.web3.user;
+    return result;
   }
 
   const res = await fetch(`${API_URL}/users/${address}`, {
@@ -45,7 +47,6 @@ export async function getUserProfile(address?: string) {
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    return null;
     throw new Error("Failed to fetch data");
   }
 
@@ -68,13 +69,13 @@ export async function getUsers() {
 }
 
 export async function sendVerifyEmail(code: string) {
-  const session = (await getServerSession(authOptions)) as Session;
+  const session = await getSession();
 
   const res = await fetch(`${API_URL}/users/verify?token=${code}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${session.web3.accessToken}`,
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
   })
 

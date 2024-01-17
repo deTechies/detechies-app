@@ -18,11 +18,12 @@ import { Textarea } from "../ui/textarea";
 
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { ROLE_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "../ui/use-toast";
-import { ROLE_TYPE } from "@/lib/interfaces";
 
 const FormSchema = z.object({
   role: z.nativeEnum(ROLE_TYPE, {
@@ -44,6 +45,7 @@ interface JoinGroupProps {
 
 export default function JoinProject({ address, lang }: JoinGroupProps) {
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const joinProjectFormSchema = z.object({
     message: z
@@ -94,7 +96,7 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
         title: "Successfully requested to join project",
         description: "The project leader will review your request",
       });
-
+      router.refresh()
       closeButtonRef.current?.click();
     }
 

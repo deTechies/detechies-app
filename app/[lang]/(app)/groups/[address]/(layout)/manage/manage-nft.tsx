@@ -16,7 +16,7 @@ export default async function ManageNft({
   // const dictionary = await getDictionary(params.lang);
 
 
-  const pendingAchievements = await getPendingAchievements(details.id);
+  const {data: pendingAchievements} = await getPendingAchievements(details.id);
   
   console.log(pendingAchievements)
   return (

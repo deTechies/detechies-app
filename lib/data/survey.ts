@@ -103,6 +103,8 @@ export async function getEvaluationSurvey(id: string) {
   });
 
   if (!response.ok) {
+    const result= await response.json();
+    console.log(result)
     throw new Error("Failed to fetch the survey id");
   }
 
@@ -112,6 +114,6 @@ export async function getEvaluationSurvey(id: string) {
 function transformToAnswerDto(data: { [key: string]: number }): any[] {
   return Object.entries(data).map(([questionId, response]) => ({
     questionId,
-    response: response.toString(), // Assuming response is always a number and needs to be a string in AnswerDto
+    response: response ? response.toString() : "", // Safe check for null/undefined
   }));
 }

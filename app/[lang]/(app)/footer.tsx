@@ -1,43 +1,80 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const Footer = () => {
+export default async function Footer({ lang }: { lang: any }) {
+  //const dictionary = (await getDictionary(params.lang)) as any;
   return (
-    <div className="flex flex-col h-[320px] justify-between items-center">
+    <div className="flex flex-col justify-center items-center mx-auto w-full my-[32px] gap-8 px-4">
       <Image
         src={`/images/careerzen.png`}
-        width={400}
-        height={300}
+        className="dark:hidden max-w-[360px]"
+        layout="responsive"
+        width={360}
+        height={60}
         alt={"Logo"}
       />
-      <div className="flex gap-4 text-md text-gray-500">
-        <p>이용 가이드</p>
-        <p>FAQ</p>
-        <p>백서</p>
-        <p>개인정보처리방침</p>
-        <p>이용약관</p>
+      <Image
+        src={`/images/logo-invert.png`}
+        className="hidden dark:block max-w-[360px]"
+        layout="responsive"
+        width={360}
+        height={60}
+        alt={"Logo"}
+      />
+      <div className="flex flex-wrap justify-center items-center text-title_m text-text-secondary my-5">
+        <Link href="#" className=" hover:text-accent-primary px-4">
+          {lang.footer.terms_and_conditions}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4">
+          {lang.footer.faq}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4">
+          {lang.footer.privacy_policy}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4">
+          {lang.footer.whitepaper}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4">
+          {lang.footer.contact_us}
+        </Link>
+        <Link href="#" className=" hover:text-accent-primary px-4">
+          {lang.footer.user_guide}
+        </Link>
       </div>
-      <div className="grid place-content-center justify-center justify-items-center">
+      <div className="grid place-content-center justify-center justify-items-center gap-8">
         <div className="flex gap-4">
-          <Image
-            src={`/icons/discord.png`}
-            height={24}
-            width={24}
-            alt={"Discord"}
-          />
-          <Image
-            src={`/icons/telegram.png`}
-            height={24}
-            width={24}
-            alt={"Discord"}
-          />
-          <Image src={`/icons/x.png`} height={24} width={24} alt={"Discord"} />
+          <Link
+            href="https://open.kakao.com/o/gGdZ76If"
+            target="_blank"
+            passHref
+          >
+            <Image
+              src={`/images/socials/color/kakao.png`}
+              height={24}
+              width={24}
+              alt={"Kakao"}
+            />
+          </Link>
+          <Link href="https://t.me/Careerzen_org/1" target="_blank" passHref>
+            <Image
+              src={`/icons/telegram.png`}
+              height={24}
+              width={24}
+              alt={"Telegram"}
+            />
+          </Link>
+          <Link href="https://x.com/careerzen" target="_blank" passHref>
+            <Image
+              src={`/icons/x.png`}
+              className="dark:invert"
+              height={24}
+              width={24}
+              alt={"Twitter/X"}
+            />
+          </Link>
         </div>
-        <p className="text-gray-300 text-md m-6">
-          Copyright © 2023. Careerzen. All rights reserved.
-        </p>
       </div>
+      <p className="text-text-secondary text-body_m">{lang.footer.copywrite}</p>
     </div>
   );
-};
-
-export default Footer;
+}

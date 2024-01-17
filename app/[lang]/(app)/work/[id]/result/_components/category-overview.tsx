@@ -16,21 +16,17 @@ interface CategoryData {
     '#096EFE', 
     '#F59754' 
   ]
-const CategoryOverview = ({responses}: {responses:any[]}) => {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const CategoryOverview = ({ responses = [] }: { responses: any[] }) => {
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string>("#0CAB6D");
 
-  // Assuming `responses` is the array of your response data
-
-  // Function to calculate the average
   const calculateAverage = (values: string[]) => {
     const sum = values.reduce((acc, val) => acc + parseFloat(val), 0);
     return sum / values.length;
   };
 
-  // Organizing the data by category
   const categoryData: Record<string, CategoryData> = responses.reduce((acc:any, response:any) => {
-    const category = response.question.category;
+    const category = response.question?.category;
     if (!acc[category]) {
       acc[category] = { responses: [], total: 0, average: 0 };
     }
@@ -41,11 +37,13 @@ const CategoryOverview = ({responses}: {responses:any[]}) => {
 
   // Calculating averages
   Object.keys(categoryData).forEach(category => {
-    categoryData[category].average = calculateAverage(
-      categoryData[category].responses.map(res => res.response)
-    );
+    if (categoryData[category].responses && categoryData[category].responses.length > 0) {
+      categoryData[category].average = calculateAverage(
+        categoryData[category].responses.map(res => res.response)
+      );
+    }
   });
-
+  
   return (
     <div className="flex flex-col gap-2">
     <Card className="grid grid-cols-3">
@@ -53,12 +51,20 @@ const CategoryOverview = ({responses}: {responses:any[]}) => {
         <div key={category} onClick={() => {
             setSelectedCategory(category)
             setSelectedColor(colors[index])
-        }}>
+        }}
+        className="flex flex-col gap-2 items-center cursor-pointer  justify-center text-center"
+        >
             <SingleRadialCarChart 
                 name={category}
                 average={parseInt(data.average.toFixed(2))}
                 colorClass={colors[index]}
             />
+            <div>
+              <h5>{category}</h5>
+              <span>
+                {parseInt(data.average.toFixed(2))}
+                </span>
+            </div>
         </div>
       ))}
       </Card>

@@ -15,7 +15,7 @@ interface MemberDetails {
 
 export default async function MemberListItem({details, userAddress}: {details:MemberDetails, userAddress: string}) {
     
-    const data = await getUserProfile(userAddress);
+    const {data} = await getUserProfile(userAddress);
     
     if(!data) return (
         <div className="flex items-center">

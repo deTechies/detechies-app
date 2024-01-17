@@ -45,7 +45,7 @@ export default function ProjectMemberEvaluate({
             </AlertTitle>
 
             <AlertDescription>
-              {lang.project.details.members.evalu.desc}
+              {lang.project.details.members.evalu.eval_admin_desc}
             </AlertDescription>
           </Alert>
 
@@ -53,14 +53,14 @@ export default function ProjectMemberEvaluate({
             <h3 className="text-title_m">
               {lang.project.details.members.evalu.project}
             </h3>
-            <ProjectSwitcher project={projectMember.project} />
+            <ProjectSwitcher project={projectMember.project} lang={lang} />
           </div>
 
           <div className="flex flex-col self-stretch gap-4">
             <h3 className="text-title_m">
               {lang.project.details.members.evalu.evaluated}
             </h3>
-            <ProjectMemberInline projectMember={projectMember} />
+            <ProjectMemberInline projectMember={projectMember} lang={lang}/>
           </div>
           <div className="flex flex-col self-stretch gap-4">
             <div className="text-base font-semibold leading-tight tracking-tight text-neutral-900">

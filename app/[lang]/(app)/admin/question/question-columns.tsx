@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { formatDate } from "@/lib/utils"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
+import CreateQuestion from "./create-question"
 import PreviewQuestion from "./preview-question"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -34,8 +35,8 @@ export const questionColumns: ColumnDef<any>[] = [
     header: "Question",
   },
   {
-    accessorKey: "scale",
-    header: "scale",
+    accessorKey: "baseWeight",
+    header: "baseWeight",
   },
   {
     accessorKey: "category",
@@ -69,6 +70,7 @@ export const questionColumns: ColumnDef<any>[] = [
       return (
         <div className="flex gap-4">
           <PreviewQuestion question={row.original} />
+          <CreateQuestion defaultValues={row.original} />
         </div>
       )
     },

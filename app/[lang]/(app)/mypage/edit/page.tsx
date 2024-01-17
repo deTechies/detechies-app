@@ -10,7 +10,7 @@ export default async function EditProfilePage({
   params: { lang: Locale };
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
-  const profile = await getUserProfile();
+  const {data:profile} = await getUserProfile();
   
 
   return (

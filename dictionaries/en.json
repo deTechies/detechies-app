@@ -46,7 +46,11 @@
       "title": "Professional career certifications are different!",
       "body": "If you already have an account, log in to Careerzen using your existing account.",
       "web3": "Social Wallet",
-      "browser": "Browser Wallet"
+      "browser": "Browser Wallet",
+      "sign_out": "Sign out", 
+      "sign_in_as": "Sign is as ", 
+      "sign_in_title": "sign_in_title", 
+      "sign_in_body": "sign_in_body"
     },
     "verify_email": {
       "title": "Sign up!",
@@ -153,7 +157,7 @@
         "contribution": "Contribution",
         "delegate_admin": "Delegate Admin",
         "unregistered": "Unregistered",
-        "resgistered": "Resgistered",
+        "registered": "Registered",
         "evalu": {
           "button": "Evaluate",
           "title": "Evaluate Work/Performance",
@@ -163,6 +167,8 @@
           "project": "Project",
           "evaluated": "Person Evaluated",
           "job_desc": "Job Description",
+          "job_period": "Period",
+          "contribution": "Contribution",
           "later": "Do It Later",
           "go_eval": "Go to Evaluate"
         },
@@ -188,6 +194,13 @@
         "title": "Works",
         "upload": "Upload",
         "no_links": "There are no registered tasks."
+      },
+      "request": {
+        "request_a_review": "Request a Review",
+        "card_title": "Notify user to review your contribution?", 
+        "card_description": "Have your performance evaluated by other members and certify your career. Should I send a performance evaluation request to the selected project member", 
+        "card_button": "Request Review",
+        "card_back": "Back"
       },
       "evalu": {
         "title": "Group Evaluation",
@@ -246,79 +259,114 @@
         "first_name": "First Name",
         "email": "email"
       },
+      "invited_to_project": {
+        "title": "You have been invited to the project!",
+        "desc": "To see more about the project please accept the membership.",
+        "reject": "Reject",
+        "accept": "Accept"
+      },
       "role_type": {
         "admin": "Admin",
         "member": "Member",
         "client": "Client"
       }
     },
+    "work": {
+      "project": "Collaborated Project",
+      "evaluatee": "Being Evaluated"
+    },
     "evaluate": {
       "evaluate_performance": "Evaluation Performance",
-      "evaluate_performance_description": "Please evaluate users role and performance in this project",
+      "evaluate_performance_description": "Please evaluate Mr./Ms.",
+      "evaluate_performance_description2": "'s role and performance in this project.",
+      "evaluate_specialty": "Evaluate Specialty",
+"evaluate_specialty_description": "Please evaluate the professional skills demonstrated by your colleague in the project.",
+"evaluate_propensity": "Evaluate Propensity",
+"evaluate_propensity_description": "Please assess the disposition of your colleague with whom you worked.",
+"last_feedback": "Evaluate Propensity",
+"last_feedback_description": "Please provide open feedback about the strengths and weaknesses of your colleague.",
       "basic_information": "Basic Information",
       "billable_hourly_wage": "Billable Hourly Wage",
       "time_weekly": "Total hour (weekly)",
       "hourly_wage_team": "Enter hourly wage set for the team member.",
       "please_evaluate_users_role_and_performance_in_this_project": "Please evaluate users role and performance in this project.",
       "does_the_work_details_match_the_facts": "Does the work written by the user match the facts?",
+      "not_true": "There is something different from the truth. (comment needed)",
       "more_than_20": "More than 20% of the information stated is different from the facts",
       "more_than_15": "More than 15% of the information stated is different from the facts",
       "more_than_10": "More than 10% of the information stated is different from the facts",
       "more_than_5": "More than 5% of the information stated is different from the facts",
-      "all_match": "Yes, they all match.",
+      "all_match": "Yes, it matches the contribution.",
       "go_back": "Go Back",
+      "save": "Save",
+      "modify": "Modify",
       "next": "Next",
+      "register_reason": "Register Reasons",
+      "evaluation_contents": "Evaluation Contents",
       "reject": "Reason of rejection",
-      "meet_requirements": {
-        "label": "Did their deliverables meet your requirements?",
+      "reject_placeholder": "If you inform us of any parts of the work that are different from the facts, the appraised person will write it again.",
+      "eval_work_contribution": "Performance/Contribution Evaluation",
+      "work_contribution": {
+        "label": "Please tell us about this team member's contribution to the work.",
         "messages": [
-          "More than 20% missing or defective (critical defects or omissions)",
-          "Less than 20% of omissions or defects (level that makes response difficult)",
-          "About 10% of omissions or defects (a level that can be handled)",
-          "Only the essential requirements were met.",
-          "It satisfied all requirements."
+          "Barely contributed",
+          "Contributed less than other team members for this work.",
+          "Shared the work equally with other team members.",
+          "Mostly done by Hong Gildong, but with a little help from other team members.",
+          "Completely performed the entire part."
+        ]
+      },
+      "meet_requirements": {
+        "label": "Did this team member's output meet the requirements?",
+        "messages": [
+          "More than 20% omissions or defects (critical errors or omissions)",
+          "Less than 20% omissions or defects (difficult to manage level)",
+          "Around 10% omissions or defects (manageable level)",
+          "Met only the essential requirements.",
+          "Met all the requirements."
         ]
       },
       "meet_schedule": {
-        "label": "Did the users meet the time schedules of the project?",
+        "label": "Did they adhere to the work schedule according to the milestones?",
         "messages": [
-          "More than +4 days late from the agreed upon task duration",
-          "More than +2 days late from the agreed upon task duration",
-          "More than +1 day late from the agreed upon task duration",
-          "Completed and shared work within the due date",
-          "Worked ahead of milestones and asked for feedback"
-        ]
-      },
-      "work_contribution": {
-        "label": "Please tell us the team member's contribution to the above works?.",
-        "messages": [
-          "User contributed little to the project",
-          "In this work, my contribution is less than that of other team members.",
-          "User shared the work with other team members.",
-          "Shared the work with others, but had the majority of the contribution",
-          "You performed that entire part perfectly."
-        ]
-      },
-      "good_team_player": {
-        "label": "Were you a positive influence on other team members?",
-        "messages": [
-          "Negatively affects teammates",
-          "Negatively affects teammates",
-          "Moderate",
-          "Moderately so",
-          "Very much so"
+          "Delayed more than +4 days from the agreed work period",
+          "Delayed more than +2 days from the agreed work period",
+          "Delayed more than +1 day from the agreed work period",
+          "Completed and shared the work within the completion date",
+          "Worked faster than the milestones and asked for feedback"
         ]
       },
       "feedback_times": {
-        "label": "On average, how many days do you incorporate feedback or corrections when they occur?",
+        "label": "How many days on average does it take to incorporate feedback or make revisions when they arise?",
         "messages": [
-          "5 days or more",
-          "4 days or less",
-          "2 days or less",
+          "More than 5 days",
+          "Within 4 days",
+          "Within 2 days",
           "Within 1 day",
-          "Improve as soon as it happens"
+          "Immediately improves on the spot"
         ]
-      }
+      },
+      "good_team_player": {
+        "label": "Did they have a positive impact on other team members?",
+        "messages": [
+          "Had a negative impact on team members",
+          "Had a negative impact on team members",
+          "Average",
+          "Average",
+          "Very much so"
+        ]
+      },
+      "feedback_title": "Your final feedback to the user",
+      "strength": "Strengths (Required)",
+      "weakness": "Areas for Improvement (Required)",
+      "feedback": "Feedback for the Evaluatee (Visible only to the evaluatee) (Optional)",
+      "again": "Would you like to work with this team member on a project again? (Required)",      
+      "no_team_building":"No team building intentions",
+      "love_to":"I'd love to join you next time",
+      "register": "Save",
+      "exactly": "Is the evaluation completely accurate?",
+      "exactly_desc": "Submitting an evaluation that is not factually accurate can negatively impact the career of the evaluatee.",
+      "go_to_project": "Go to Project"
     }
   },
   "mypage": {
@@ -386,9 +434,10 @@
     },
     "evaluations": {
       "menu": {
-        "evaluation_requested": "Evaluation Requested",
-        "evaluation_requests": "Evaluations Requests",
-        "evaluation_wrote": "Evaluation Written"
+        "evaluation_requested": "Requested evaluations",
+        "evaluation_requests": "Evaluation Requested by Me",
+        "evaluation_received": "Received evaluations",
+        "evaluation_wrote": "Written evaluations"
       }
     }
   },
@@ -670,5 +719,14 @@
       "member": "Member",
       "client": "Client"
     }
+  },
+  "footer": {
+    "copywrite": "© 2021 CareerZen. All rights reserved.",
+    "terms_and_conditions": "Terms of Service",
+    "privacy_policy": "Privacy Policy",
+    "whitepaper": "Whitepaper",
+    "contact_us": "Contact Us",
+    "faq": "FAQ", 
+    "user_guide": "User Guide"
   }
 }

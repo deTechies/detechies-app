@@ -30,53 +30,49 @@ import {
 } from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
-import { createQuestion } from "@/lib/data/feedback";
-import { QuestionCategory, QuestionType } from "@/lib/interfaces";
-import { useRouter } from "next/navigation";
+import { postServer } from "@/lib/data/postRequest";
+import { QuestionCategory } from "@/lib/interfaces";
 import { useState } from "react";
 
 const questionFormSchema = z.object({
+  id: z.string().optional(),
   content: z.string().min(2).max(1000).optional(),
-  type: z.string(),
-  comments: z.string().min(2).max(1000).optional(),
-  language: z.string().min(2).max(1000).optional(),
-  max_text: z.string().min(2).max(50).optional(),
-  min_text: z.string().min(2).max(50).optional(),
-  roles: z.array(z.string().optional()).optional(),
-  category: z.nativeEnum(QuestionCategory, {
-    required_error: "You need to select a category.",
-  }),
-  scale: z.number().min(0).max(10),
+  language: z.string().default('kr'),
+  category: z.string(),
+  scale: z.number().default(5),
   baseWeight: z.number().min(0).max(100).optional(),
-  messages: z.array(z.string().optional()).optional(),
+  messages: z.array(z.string().optional()).optional().transform(messages => messages ? messages.slice(0, 5) : []),
 });
 
 type QuestionValues = z.infer<typeof questionFormSchema>;
-const defaultValues: Partial<QuestionValues> = {};
 
-export default function CreateQuestion() {
+export default function CreateQuestion({
+  defaultValues,
+}: {
+  defaultValues?: Partial<QuestionValues>;  
+}) {
+  if (defaultValues && defaultValues.messages) {
+    defaultValues.messages = defaultValues.messages.slice(0, 5);
+  }
   const form = useForm<QuestionValues>({
     resolver: zodResolver(questionFormSchema),
     defaultValues,
     mode: "onChange",
   });
-
-  const scale = form.watch("scale", 0); // Watching scale value
-
-  const selectedType = form.watch("type", "slider");
-
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(data: QuestionValues) {
     setLoading(true);
+    
+    console.log(data)
+    const stringed= JSON.stringify(data)
 
-    const result = await createQuestion(data);
+    const result = await postServer('/question', stringed);
 
-    if (result.id) {
+    if(result.status === 'success') {
       toast({
-        title: "Success",
-        description: "Created successfully",
+        title: "Question created",
+        description: <span>Question has been created. </span>,
       });
     }
 
@@ -96,34 +92,15 @@ export default function CreateQuestion() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <section className="flex gap-8">
               <div className="flex flex-col gap-4 flex-grow">
+                <span>
+                  Error 
+                  {
+                    <pre>
+                      {JSON.stringify(form.formState.errors, null, 4)}
+                    </pre>
+                  }
+                </span>
                 <div className="grid grid-cols-3 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="type"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Category</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a type" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {Object.values(QuestionType).map((type) => (
-                              <SelectItem key={type} value={type}>
-                                {type}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
                   <FormField
                     control={form.control}
                     name="category"
@@ -151,12 +128,13 @@ export default function CreateQuestion() {
                       </FormItem>
                     )}
                   />
-                  <FormField
+                
+                      <FormField
                     control={form.control}
-                    name="scale"
+                    name="baseWeight"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Scale</FormLabel>
+                        <FormLabel>baseWeight</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
@@ -166,30 +144,6 @@ export default function CreateQuestion() {
                             }
                           />
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="language"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Language</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a type" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="en">English</SelectItem>
-                            <SelectItem value="kr">Korean</SelectItem>
-                          </SelectContent>
-                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -239,8 +193,8 @@ export default function CreateQuestion() {
               </div>
             </section>
 
-            {selectedType == "slider" &&
-              Array.from({ length: scale }, (_, index) => (
+            {
+              Array.from({ length: 5 }, (_, index) => (
                 <FormField
                   key={index}
                   control={form.control}
@@ -257,50 +211,13 @@ export default function CreateQuestion() {
                 />
               ))}
 
-            {selectedType == "circles" && (
-              <section className="grid grid-cols-2 gap-2">
-                <FormField
-                  control={form.control}
-                  name="min_text"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Min Text</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Write out the question"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="max_text"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Max Text</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Write out the question"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </section>
-            )}
-
             <div className="flex items-center justify-center gap-8">
               <DialogClose asChild>
                 <Button variant="secondary">Close</Button>
               </DialogClose>
               <Button
                 type="submit"
-                disabled={loading || !form.formState.isValid}
+                disabled={loading}
                 loading={loading}
               >
                 Create Question

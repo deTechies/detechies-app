@@ -1,6 +1,6 @@
 import { User } from "@/lib/interfaces";
 
-import { inviteProjectMembers } from "@/lib/data/project";
+import { postServer } from "@/lib/data/postRequest";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -21,33 +21,38 @@ export default function SelectedProjectMember({
   projectId: string;
   onSelectValue: (value: string) => void;
   lang: any;
-  onInvite?: Function,
+  onInvite?: Function;
 }) {
   const [role, setRole] = useState<string>("member");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  console.log(lang);
-  
   async function inviteMember() {
     setLoading(true);
 
-    const result = await inviteProjectMembers([user.id], role, projectId);
-
-    toast({
-      title: "Invited team member",
-      description: (
-        <span>
-          You succesfully invited your team member, please wait for the member
-          to accept the invitation.
-        </span>
-      ),
+    const data = JSON.stringify({
+      userId: [user.id],
+      role: role,
+      projectId: projectId,
     });
-    router.refresh();
+    //const result = await inviteProjectMembers([user.id], role, projectId);
+    const result = await postServer("/project-member/invite", data);
+    if (result) {
+      toast({
+        title: "Invited team member",
+        description: (
+          <span>
+            You succesfully invited your team member, please wait for the member
+            to accept the invitation.
+          </span>
+        ),
+      });
+      router.refresh();
+    }
 
     setLoading(false);
 
-    if(onInvite) {
+    if (onInvite) {
       onInvite();
     }
   }
@@ -62,7 +67,9 @@ export default function SelectedProjectMember({
         />
       </div>
 
-      <Label className="mb-3">{lang.project.details.invite_member.member_type}</Label>
+      <Label className="mb-3">
+        {lang.project.details.invite_member.member_type}
+      </Label>
 
       <RadioGroup
         className="flex py-4 mb-6 gap-9"
@@ -71,15 +78,15 @@ export default function SelectedProjectMember({
         }}
         defaultValue="member"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <RadioGroupItem value="member" />
           <Label>{lang.project.details.role_type.member}</Label>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <RadioGroupItem value="admin" />
           <Label>{lang.project.details.role_type.admin}</Label>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <RadioGroupItem value="client" />
           <Label>{lang.project.details.role_type.client}</Label>
         </div>

@@ -1,24 +1,24 @@
 "use client";
 import Search from "@/components/extra/search";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Club } from "@/lib/interfaces";
 import { ArrowRight } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
-import { Club } from "@/lib/interfaces";
 
 //TODO: Add type dependency
 export default function GroupList({
   groups,
-  profileWallet,
   lang,
 }: {
   groups: Club[];
-  profileWallet: string;
   lang: any;
 }) {
   //const { search: searchValue } = searchParams as { [key: string]: string };
 
+  const {data: user}= useSession();
   //const resultsText = products.length > 1 ? 'results' : 'result';
 
   const searchParams = useSearchParams();
@@ -32,7 +32,7 @@ export default function GroupList({
 
   const filterJoinedGroups = filteredData.filter((group) => group.isUserMember);
   const filterCreatedGroups = filteredData.filter(
-    (group) => group.owner === profileWallet
+    (group) => group.owner === user?.web3?.address
   );
 
   return (
@@ -89,9 +89,9 @@ export default function GroupList({
             {lang.group.list.banner}
           </div>
 
-          <div className="mb-5 text-subhead_m">{lang.group.list.banner2}</div>
+          <div className="mb-5 text-subhead_m text-black">{lang.group.list.banner2}</div>
 
-          <div className="flex items-center gap-1 text-title_m">
+          <div className="flex items-center gap-1 text-title_m text-black">
             {lang.group.list.banner3}
             <ArrowRight className="w-4 h-4"></ArrowRight>
           </div>

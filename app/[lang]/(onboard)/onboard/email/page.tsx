@@ -15,7 +15,7 @@ export default async function EmailVerify({
   const dictionary = await getDictionary(lang);
   const text = dictionary.onboard.verify_email;
 
-  const user = await getUserProfile();
+  const {data:user} = await getUserProfile();
 
   return (
     <div>

@@ -390,8 +390,9 @@ export function CreateNFTForm({ group }: { group: Club }) {
               <Button
                 type="submit"
                 loading={isLoading}
+                
                 size="lg"
-                disabled={createDisabled()}
+                disabled={createDisabled() || isLoading}
               >
                 Create NFT
               </Button>

@@ -7,7 +7,7 @@ import { QuestionTable } from "./question-table";
 export default async function Questions() {
   //get the
 
-  const questions = await getQuestions();
+  const {data:questions} = await getQuestions();
 
   return (
     <Card className="">

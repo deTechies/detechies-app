@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { ProjectWork } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 
-export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
+export default function ProjectWorkDetail({ data, showTags=true }: { data: ProjectWork, showTags?: boolean }) {
   if (!data) return null;
 
   return (
@@ -27,7 +27,7 @@ export default function ProjectWorkDetail({ data }: { data: ProjectWork }) {
       </div>
 
       <div className="inline-flex flex-wrap items-start justify-start gap-2">
-        {data.tags?.length > 0 &&
+        {showTags && data.tags?.length > 0 &&
           data.tags.map((tag: string, index: number) => (
             <Badge
               variant="secondary"

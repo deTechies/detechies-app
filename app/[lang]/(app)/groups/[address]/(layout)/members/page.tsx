@@ -1,9 +1,9 @@
 import MemberCard from "@/components/card/member-card";
 import Search from "@/components/extra/search";
-import { Address } from "wagmi";
-import { getClub } from "@/lib/data/groups";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { getClub } from "@/lib/data/groups";
+import { Address } from "wagmi";
 interface Profile {
   id: string;
   name: string;
@@ -32,7 +32,7 @@ export default async function GroupMember({
   params: { address: string; lang: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const data = await getClub(params.address);
+  const {data} = await getClub(params.address);
 
   const searchItem = searchParams.search as string;
 

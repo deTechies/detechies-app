@@ -38,7 +38,7 @@ const contributionFormSchema = z.object({
   end_date: z.string().optional(),
   description: z.string().max(5000).min(4),
   percentage: z.array(z.number().min(0).max(100)),
-  name: z.nativeEnum(PROFESSION_TYPE, {
+  role: z.nativeEnum(PROFESSION_TYPE, {
     required_error: "You need to select a type.",
   }),
   present: z.boolean().default(false),
@@ -64,7 +64,7 @@ export default function ProjectContributionInviteForm({
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
     defaultValues: {
-      name: PROFESSION_TYPE.DEVELOPMENT,
+      role: PROFESSION_TYPE.DEVELOPMENT,
       percentage: [0],
       present: false,
       valid: false,
@@ -120,12 +120,12 @@ export default function ProjectContributionInviteForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="spaxe-y-8 ">
-        <main className="border border-border-div p-5 rounded-md space-y-8 mb-6">
+        <main className="p-5 mb-6 space-y-8 border rounded-md border-border-div">
           <section className="flex flex-col gap-5">
             <div className="grid grid-cols-1 gap-4">
               <FormField
                 control={form.control}
-                name="name"
+                name="role"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -154,7 +154,7 @@ export default function ProjectContributionInviteForm({
                 )}
               />
             </div>
-            <div className="flex flex-col gap-3 w-full">
+            <div className="flex flex-col w-full gap-3">
               <div className="flex justify-between">
                 <Label>{lang.project.details.members.add_works.date}</Label>
                 <div className="flex items-center gap-1">
@@ -169,7 +169,7 @@ export default function ProjectContributionInviteForm({
                 </div>
               </div>
 
-              <div className="flex flex-row gap-2 items-center w-full">
+              <div className="flex flex-row items-center w-full gap-2">
                 <FormField
                   control={form.control}
                   name="begin_date"
@@ -220,7 +220,7 @@ export default function ProjectContributionInviteForm({
                 {form.watch("tags")?.map((tag: any, index) => (
                   <Badge
                     key={index}
-                    className="bg-background-layer-1 border border-accent-primary px-3 py-2 rounded-full text-xs mr-2"
+                    className="px-3 py-2 mr-2 text-xs border rounded-full bg-background-layer-1 border-accent-primary"
                     onClick={() => {
                       const currentTags = form.getValues("tags") || [];
                       const newTags = currentTags.filter((t) => t !== tag);
@@ -241,10 +241,10 @@ export default function ProjectContributionInviteForm({
                   <FormLabel>
                     {lang.project.details.members.add_works.attribute}
                   </FormLabel>
-                  <div className="flex w-full justify-between text-xs text-text-secondary">
+                  <div className="flex justify-between w-full text-xs text-text-secondary">
                     <span>0</span>
                     <span className="content-center w-full text-right">50</span>
-                    <span className="content-right text-right w-full">100</span>
+                    <span className="w-full text-right content-right">100</span>
                   </div>
                   <FormControl>
                     <Slider
@@ -255,7 +255,7 @@ export default function ProjectContributionInviteForm({
                   </FormControl>
                   <FormDescription className="flex">
                     <FormMessage className="w-full" />
-                    {/* <span className="content-right text-right w-full">
+                    {/* <span className="w-full text-right content-right">
                       {currentPercentage[0]} of 100
                     </span> */}
                   </FormDescription>
@@ -284,7 +284,7 @@ export default function ProjectContributionInviteForm({
 
                   <FormDescription className="flex">
                     <FormMessage className="w-full" />
-                    <span className="content-right text-right w-full">
+                    <span className="w-full text-right content-right">
                       {messageValue.length} / 5000
                     </span>
                   </FormDescription>
