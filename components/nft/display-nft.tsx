@@ -91,6 +91,7 @@ export default function DisplayNFT({
         description:
           "Please wait for the administrator to accept your nft request!",
       });
+    } else {
       setRequesting(false);
     }
   };
