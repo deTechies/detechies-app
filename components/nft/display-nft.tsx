@@ -77,12 +77,7 @@ export default function DisplayNFT({
       achievementId: details.id,
       message: "",
     });
-    // const result = await requestAchievement();
-
-    //
-
     const result = await postServer("/achievement-rewards", data);
-
     if (result) {
       toast({
         title: "Congratulations!",
