@@ -1,8 +1,5 @@
-import PercentageSliderField from "@/components/form/percentage-helper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Survey } from "@/lib/interfaces";
 import { useForm } from "react-hook-form";
@@ -34,40 +31,27 @@ export function PreviewSurvey({
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-4">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
-              {selected.questions.map((question: any) => {
-                if (question.type == "input") {
-                  return (
-                    <FormField
-                      key={question.id}
-                      control={form.control}
-                      name={question.id}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{question.content}</FormLabel>
-                          <Input {...field} />
-                        </FormItem>
-                      )}
-                    />
-                  );
-                }
-
-                return (
-                  <PercentageSliderField
-                    key={question.id}
-                    form={form}
-                    name={question.id}
-                    label={question.content}
-                    steps={100 / question.scale}
-                    messages={question.messages}
-                  />
-                );
-              })}
-
-              <Button type="submit">show result</Button>
-            </form>
-          </Form>
+          {
+            selected.questions.map((question, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <span className="text-subhead_s">{question.content}</span>
+                <span className="text-text-secondary">{question.category}</span>
+                <ul className="my-2">
+                  { question.messages &&
+                    question.messages.map((option, index) => 
+                    option &&
+                    (
+                      
+                      <li key={index}>
+                        <span />
+                        {option}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            ))
+          }
         </div>
       </CardContent>
     </Card>
