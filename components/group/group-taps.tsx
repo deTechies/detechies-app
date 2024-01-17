@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
+import { ROLE_TYPE } from "@/lib/interfaces";
 
 export default function GroupTaps({
   details,
@@ -18,35 +19,58 @@ export default function GroupTaps({
     {
       name: lang.tabs.about,
       href: "",
-      role: ["none", "member", "client", "admin",],
+      role: [
+        ROLE_TYPE.NONE,
+        ROLE_TYPE.JOINED,
+        ROLE_TYPE.INVITED,
+        ROLE_TYPE.CLIENT,
+        ROLE_TYPE.ADMIN,
+      ],
     },
     {
       name: lang.tabs.nft,
       href: "nft",
-      role: ["none", "member", "client", "admin",],
+      role: [
+        ROLE_TYPE.NONE,
+        ROLE_TYPE.JOINED,
+        ROLE_TYPE.INVITED,
+        ROLE_TYPE.CLIENT,
+        ROLE_TYPE.ADMIN,
+      ],
     },
     {
       name: lang.tabs.members,
       href: "members",
-      role: ["none", "member", "client", "admin",],
+      role: [
+        ROLE_TYPE.NONE,
+        ROLE_TYPE.JOINED,
+        ROLE_TYPE.INVITED,
+        ROLE_TYPE.CLIENT,
+        ROLE_TYPE.ADMIN,
+      ],
     },
     {
       name: lang.tabs.mission,
       href: "missions",
-      role: ["none", "member", "client", "admin",],
+      role: [
+        ROLE_TYPE.NONE,
+        ROLE_TYPE.JOINED,
+        ROLE_TYPE.INVITED,
+        ROLE_TYPE.CLIENT,
+        ROLE_TYPE.ADMIN,
+      ],
     },
     {
       name: lang.tabs.manage,
       href: "manage",
-      role: ["admin",],
+      role: [ROLE_TYPE.ADMIN],
     },
   ];
 
   return (
     <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 rounded-none">
       {links.map((link: any, index: number) => {
-
-        if(!link.role.includes(details.userRole)){
+        if (!link.role.includes(details.userRole)) {
           return;
         }
 

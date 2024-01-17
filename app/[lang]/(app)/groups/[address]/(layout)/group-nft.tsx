@@ -22,10 +22,6 @@ export default function GroupNFT({
   lang: any;
 }) {
   const pathName = usePathname();
-
-  console.log(achievements);
-  console.log(userAchievements);
-
   const user_achievements = userAchievements.map(item => item.achievement.id);
 
   return (

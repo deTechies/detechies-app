@@ -726,7 +726,10 @@
     "role_type": {
       "admin": "Admin",
       "member": "Member",
-      "client": "Client"
+      "client": "Client",
+      "joined": "Joined",
+      "invited": "Invited",
+      "none": "None"
     }
   },
   "footer": {

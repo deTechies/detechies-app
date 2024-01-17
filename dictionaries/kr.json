@@ -727,7 +727,10 @@
     "role_type": {
       "admin": "관리자",
       "member": "팀원",
-      "client": "클라이언트"
+      "client": "클라이언트",
+      "joined": "멤버",
+      "invited": "초대됨",
+      "none": "행인"
     }
   }, 
   "footer": {
