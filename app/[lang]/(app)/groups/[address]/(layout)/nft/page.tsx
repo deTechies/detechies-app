@@ -94,7 +94,12 @@ export default async function GroupAchievements({
                     return item.avatar;
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} lang={dictionary} />
+                    <DisplayNFT
+                      details={item}
+                      key={index}
+                      lang={dictionary}
+                      blockRequest={user_achievements.includes(item.id)}
+                    />
                   ))}
             </div>
           </TabsContent>
