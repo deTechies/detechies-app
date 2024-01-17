@@ -13,14 +13,14 @@ export default async function Evaluation({
 
   const text = dictionary.mypage?.evaluations?.menu;
   return (
-    <main className="w-full">
-      <Tabs defaultValue="requested" className="w-full">
+    <main className="">
+      <Tabs defaultValue="requested" className="flex flex-col w-full">
         <TabsList>
           <TabsTrigger value="requested">
             {text?.evaluation_requested}
           </TabsTrigger>
           <TabsTrigger value="requests">
-            {text?.evaluation_requests}
+            {text?.evaluation_received}
           </TabsTrigger>
           <TabsTrigger value="evaluations">
             {text?.evaluation_wrote}
@@ -29,12 +29,13 @@ export default async function Evaluation({
         <TabsContent value="requested">
           <Evaluations queries={{ status: "requested" }} />
         </TabsContent>
-        <TabsContent value="requests">
-          <Evaluations queries={{ status: "draft"}} />
-        </TabsContent>
         <TabsContent value="evaluations">
           <EvaluationProvided />
         </TabsContent>
+        <TabsContent value="requests">
+          <Evaluations queries={{ status: "draft"}} />
+        </TabsContent>
+  
       </Tabs>
     </main>
   );

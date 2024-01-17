@@ -59,7 +59,7 @@ export async function EvaluationStat({
   subtext,
 }: EvaluationStatProps) {
   return (
-    <Card className="flex flex-col gap-2 w-[200px] p-6">
+    <Card className="flex flex-col gap-2 w-[100px] p-6">
       <h4 className="text-title_m">{title}</h4>
       <div className="flex flex-col gap-1">
         <h1 className="text-subhead_s">{value}</h1>
