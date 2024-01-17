@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/dialog";
 
 import { ABI } from "@/lib/constants";
-import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
 import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 // import Image from "next/image";
 import Image from "@/components/ui/image";
+import { postServer } from "@/lib/data/postRequest";
 import { useEffect, useState } from "react";
 import { Address, useContractRead } from "wagmi";
 import NftListItem from "../card/nft-list-item";
@@ -75,16 +75,22 @@ export default function DisplayNFT({
 
   const handleRequestNFT = async () => {
     setRequesting(true);
+    const data = JSON.stringify({
+      achievementId: details.id,
+      message: "",
+    });
+    // const result = await requestAchievement();
 
-    const result = await requestAchievement(details.id);
+    //
 
-    if(result.status == "success"){
+    const result = await postServer("/achievement-rewards", data);
+
+    if (result) {
       toast({
         title: "Congratulations!",
         description:
           "Please wait for the administrator to accept your nft request!",
       });
-    } else {
       setRequesting(false);
     }
   };
@@ -224,6 +230,7 @@ export default function DisplayNFT({
             onClick={handleRequestNFT}
             disabled={requesting || blockRequest}
           >
+            {blockRequest}
             {(blockRequest || requesting) ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
           </Button>
         </div>

@@ -125,7 +125,7 @@ export default function PendingMemberListItem({
   };
   
   const rejectNFT = async () => {
-    
+    setLoading(true);
     const result = await postServer(`/achievement-rewards/${nft.id}/reject`, '');
     if(result){
       toast({
@@ -135,6 +135,8 @@ export default function PendingMemberListItem({
       
       router.refresh();
     }
+    
+    setLoading(false);
     
   };
 
@@ -221,6 +223,7 @@ export default function PendingMemberListItem({
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
+          disabled={isLoading || projectLoading || loading}
         >
           <X className="w-6 h-6"></X>
         </Button>
@@ -229,7 +232,6 @@ export default function PendingMemberListItem({
           onClick={acceptNFT}
           className="p-2 rounded-md w-14 h-14"
           size="icon"
-          loading={isLoading || projectLoading || loading}
           disabled={isLoading || projectLoading || loading}
         >
           <Check className="w-6 h-6"></Check>

@@ -13,8 +13,10 @@ export default async function GroupAchievements({
   params: { address: string; lang: Locale };
 }) {
   const { data: details } = await getClub(params.address);
-  const {data: userAchievements} = await getUserAchievements();
-  const user_achievements = userAchievements.map((item: any) => item.achievement.id);
+  const { data: userAchievements } = await getUserAchievements();
+  const user_achievements = userAchievements.map(
+    (item: any) => item.achievement.id
+  );
 
   const dictionary = (await getDictionary(params.lang)) as any;
 
@@ -58,7 +60,12 @@ export default async function GroupAchievements({
                     return item.nft_type == "sbt";
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} lang={dictionary} />
+                    <DisplayNFT
+                      details={item}
+                      key={index}
+                      lang={dictionary}
+                      blockRequest={user_achievements.includes(item.id)}
+                    />
                   ))}
             </div>
           </TabsContent>
@@ -70,7 +77,12 @@ export default async function GroupAchievements({
                     return item.nft_type == "erc721";
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} lang={dictionary} />
+                    <DisplayNFT
+                      details={item}
+                      key={index}
+                      lang={dictionary}
+                      blockRequest={user_achievements.includes(item.id)}
+                    />
                   ))}
             </div>
           </TabsContent>
