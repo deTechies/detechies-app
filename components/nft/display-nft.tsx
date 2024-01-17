@@ -24,11 +24,13 @@ export default function DisplayNFT({
   contract,
   showSelect,
   lang,
+  blockRequest
 }: {
   details: Achievement;
   contract?: string;
   showSelect?: boolean;
   lang?: any;
+  blockRequest?: boolean;
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const [showFull, setShowFull] = useState(false);
@@ -61,11 +63,14 @@ export default function DisplayNFT({
     if (!contract) {
       return;
     }
-    
-    //get the achievment contract 
-    console.log(data)
 
-    window.open(`https://mumbai.polygonscan.com/nft/${data}/${details.tokenId}`, "_blank");
+    //get the achievment contract
+    console.log(data);
+
+    window.open(
+      `https://mumbai.polygonscan.com/nft/${data}/${details.tokenId}`,
+      "_blank"
+    );
   };
 
   const handleRequestNFT = async () => {
@@ -118,13 +123,14 @@ export default function DisplayNFT({
                 <Image
                   src={
                     showingImage == details.avatar
-                    ? "/icons/certificate.png"
-                    : "/icons/avatar.png"
+                      ? "/icons/certificate.png"
+                      : "/icons/avatar.png"
                   }
+                  className="bg-transparent"
                   alt="avatar"
                   width="48"
                   height="48"
-                  ></Image>
+                ></Image>
               </Button>
             )}
           </div>
@@ -212,8 +218,12 @@ export default function DisplayNFT({
             </Button>
           </DialogClose>
 
-          <Button onClick={handleRequestNFT}>
-            {lang.achievement.display_nft.send_request}
+          <Button
+            onClick={handleRequestNFT}
+            loading={requesting}
+            disabled={requesting || blockRequest}
+          >
+            {blockRequest ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
           </Button>
         </div>
       </DialogContent>

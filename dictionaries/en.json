@@ -607,7 +607,8 @@
       "show_more": "Show More",
       "hide": "Hide",
       "close": "Do It Later",
-      "send_request": "Request Issuance"
+      "send_request": "Request Issuance",
+      "complete_request": "Request Complete"
     }
   },
   "mission": {

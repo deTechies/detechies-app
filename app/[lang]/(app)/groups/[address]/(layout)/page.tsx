@@ -1,3 +1,4 @@
+import { getUserAchievements } from "@/lib/data/achievements";
 import GroupDetails from "./group-details";
 import GroupMember from "./group-member";
 import GroupNft from "./group-nft";
@@ -24,7 +25,7 @@ export default async function GroupProfile({
   params: { address: string; lang: Locale };
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
-
+  const userAchievements = await getUserAchievements();
 
   const {data} = await serverApi(`/clubs/${params.address}`);
   // console.log(data);
@@ -43,6 +44,7 @@ export default async function GroupProfile({
         contract={data.contract}
         address={params.address.toString()}
         achievements={data.achievements}
+        userAchievements={userAchievements.data}
         lang={dictionary}
       ></GroupNft>
 
