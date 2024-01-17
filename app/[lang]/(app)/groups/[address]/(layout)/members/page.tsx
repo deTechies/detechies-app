@@ -47,7 +47,7 @@ export default async function GroupMember({
   });
 
   return (
-    <div className="overflow-auto max-w-[90vw]">
+    <div className="max-w-[90vw]">
       <div className="max-w-[500px] mx-auto mb-8">
         <Search
           placeholder={dictionary.group.details.members.search_placeholder}
@@ -57,9 +57,9 @@ export default async function GroupMember({
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {filteredData &&
           filteredData.map((item: Member, index: any) => {
-            if (index > 4) {
-              return;
-            }
+            // if (index > 4) {
+            //   return;
+            // }
             return (
               <MemberCard
                 address={item.memberId}

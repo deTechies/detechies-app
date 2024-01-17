@@ -7,6 +7,8 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import GroupListItem from "./group-list-item";
+import { useEffect, useState } from "react";
+import GroupSearch from "@/components/extra/group-search";
 
 //TODO: Add type dependency
 export default function GroupList({
@@ -24,15 +26,30 @@ export default function GroupList({
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
-  const filteredData = groups.filter((group: any) => {
+  const [sortedData, setSortedData] = useState<any>([])
+  
+  useEffect(()=>{
+    const data = groups.sort((a,b)=>{
+      if((a.members?.length as number) - (b.members?.length as number) == 0){
+        return Number(new Date(a.created_at)) - Number(new Date(b.created_at))
+      }
+      return (a.members?.length as number) - (b.members?.length as number) ;
+    })
+
+    setSortedData(data)
+
+  },[])
+  
+
+  const filteredData = sortedData.filter((group: any) => {
     return group.name
       .toLowerCase()
       .includes(search ? search.toLowerCase() : "");
   });
 
-  const filterJoinedGroups = filteredData.filter((group) => group.isUserMember);
+  const filterJoinedGroups = filteredData.filter((group:any) => group.isUserMember);
   const filterCreatedGroups = filteredData.filter(
-    (group) => group.owner === user?.web3?.address
+    (group:any) => group.owner === user?.web3?.address
   );
 
   return (
@@ -52,7 +69,7 @@ export default function GroupList({
       </TabsList>
 
       <div className="w-full my-10 max-w-[27rem] mx-auto">
-        <Search placeholder={lang.group.list.search_placeholder} />
+        <GroupSearch placeholder={lang.group.list.search_placeholder} />
       </div>
 
       <TabsContent value="all" className="mx-0 mt-0 mb-16">
