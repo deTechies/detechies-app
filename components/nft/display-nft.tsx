@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/dialog";
 
 import { ABI } from "@/lib/constants";
-import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
 import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 // import Image from "next/image";
 import Image from "@/components/ui/image";
+import { postServer } from "@/lib/data/postRequest";
 import { useEffect, useState } from "react";
 import { Address, useContractRead } from "wagmi";
 import NftListItem from "../card/nft-list-item";
@@ -61,25 +61,38 @@ export default function DisplayNFT({
     if (!contract) {
       return;
     }
-    
-    //get the achievment contract 
-    console.log(data)
 
-    window.open(`https://mumbai.polygonscan.com/nft/${data}/${details.tokenId}`, "_blank");
+    //get the achievment contract
+    console.log(data);
+
+    window.open(
+      `https://mumbai.polygonscan.com/nft/${data}/${details.tokenId}`,
+      "_blank"
+    );
   };
 
   const handleRequestNFT = async () => {
     setRequesting(true);
-
-    const result = await requestAchievement(details.id);
-
-    toast({
-      title: "Congratulations!",
-      description:
-        "Please wait for the administrator to accept your nft request!",
+    const data = JSON.stringify({
+      achievementId: details.id,
+      message: "",
     });
+    // const result = await requestAchievement();
 
-    setRequesting(false);
+    //
+
+    const result = await postServer("/achievement-rewards", data);
+
+    if (result) {
+      toast({
+        title: "Congratulations!",
+        description:
+          "Please wait for the administrator to accept your nft request!",
+      });
+      setRequesting(false);
+
+    }
+
   };
 
   if (showSelect) {
@@ -118,13 +131,13 @@ export default function DisplayNFT({
                 <Image
                   src={
                     showingImage == details.avatar
-                    ? "/icons/certificate.png"
-                    : "/icons/avatar.png"
+                      ? "/icons/certificate.png"
+                      : "/icons/avatar.png"
                   }
                   alt="avatar"
                   width="48"
                   height="48"
-                  ></Image>
+                ></Image>
               </Button>
             )}
           </div>
