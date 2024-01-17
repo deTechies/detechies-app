@@ -61,8 +61,7 @@ export const Ranking: React.FC<RankingProps> = ({
 
   return (
     <div className="grid grid-cols-8 items-center gap-2 md:gap-8">
-      <button
-      role="button"
+      <div
       onClick={() => handleRankSelect(1)}
         className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 
         ${
@@ -71,7 +70,7 @@ export const Ranking: React.FC<RankingProps> = ({
         }`}
       >
         {minText}
-      </button>
+      </div>
       <div className="col-span-4 shrink justify-center grow flex items-center max-w-[600px]">
       {Array.from({ length: ranks }, (_, index) => (
         <React.Fragment key={index}>
@@ -88,7 +87,7 @@ export const Ranking: React.FC<RankingProps> = ({
         </React.Fragment>
       ))}
       </div>
-      <button
+      <div
         onClick={() => handleRankSelect(5)}
         role="button"
         className={`col-span-2 file:flex px-4 py-2 text-sm bg-background-layer-2 rounded-[4px] text-center  text-title_s ease-out duration-200 ${
@@ -97,7 +96,7 @@ export const Ranking: React.FC<RankingProps> = ({
         }`}
       >
         {maxText}
-      </button>
+      </div>
     </div>
   );
 };
