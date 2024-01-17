@@ -434,9 +434,10 @@
     },
     "evaluations": {
       "menu": {
-        "evaluation_requested": "Evaluation Requested received",
+        "evaluation_requested": "Requested evaluations",
         "evaluation_requests": "Evaluation Requested by Me",
-        "evaluation_wrote": "Evaluations Written by Me"
+        "evaluation_received": "Received evaluations",
+        "evaluation_wrote": "Written evaluations"
       }
     }
   },

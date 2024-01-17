@@ -437,6 +437,7 @@
       "menu": {
         "evaluation_requested": "내가 요청한 평가", 
         "evaluation_requests": "요청받은 평가", 
+        "evaluation_received": "내가 요청한 평가",
         "evaluation_wrote": "내가 작성한 평가"
       }
     }
