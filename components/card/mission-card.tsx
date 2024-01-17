@@ -123,10 +123,10 @@ export default function MemberCard({
 
   return (
     <Card
-      className="gap-1 p-0 overflow-hidden border rounded-md cursor-pointer border-border-div bg-bacound-layer-1 hover:shadow-lg"
+      className="gap-1 p-0 overflow-hidden border rounded-md cursor-pointer border-border-div bg-bacound-layer-1 hover:shadow-lg aspect-[3/4]"
       onClick={onClickCard}
     >
-      <div className="relative w-full m-0 rounded-t-sm bg-accent-secondary">
+      <div className="relative w-full m-0">
         <Image
           src="/images/mission.png"
           alt="mission"

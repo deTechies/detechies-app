@@ -33,12 +33,12 @@ export default function ManageNft({
             className="w-full h-full"
             href={`/${params.lang}/groups/${details.id}/mission/manage/create`}
           >
-            <Card className="items-center justify-center w-full h-full gap-6 border-[3px] border-dashed rounded-md cursor-pointer border-border-div">
+            <Card className="items-center justify-center w-full h-full aspect-[3/4] gap-6 border-[3px] border-dashed rounded-md cursor-pointer border-border-div">
               <div className="flex items-center justify-center w-20 h-20 rounded-md bg-accent-secondary text-accent-primary">
                 <Plus className="w-10 h-10"></Plus>
               </div>
 
-              <div className="text-text-secondary text-subhead_m text-center">
+              <div className="text-center text-text-secondary text-subhead_m">
                 {lang.group.details.manage.mission.create}
               </div>
             </Card>

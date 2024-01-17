@@ -24,11 +24,13 @@ export default function DisplayNFT({
   contract,
   showSelect,
   lang,
+  blockRequest
 }: {
   details: Achievement;
   contract?: string;
   showSelect?: boolean;
   lang?: any;
+  blockRequest?: boolean;
 }) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const [showFull, setShowFull] = useState(false);
@@ -89,10 +91,9 @@ export default function DisplayNFT({
         description:
           "Please wait for the administrator to accept your nft request!",
       });
+    } else {
       setRequesting(false);
-
     }
-
   };
 
   if (showSelect) {
@@ -134,6 +135,7 @@ export default function DisplayNFT({
                       ? "/icons/certificate.png"
                       : "/icons/avatar.png"
                   }
+                  className="bg-transparent"
                   alt="avatar"
                   width="48"
                   height="48"
@@ -225,8 +227,12 @@ export default function DisplayNFT({
             </Button>
           </DialogClose>
 
-          <Button onClick={handleRequestNFT}>
-            {lang.achievement.display_nft.send_request}
+          <Button
+            onClick={handleRequestNFT}
+            disabled={requesting || blockRequest}
+          >
+            {blockRequest}
+            {(blockRequest || requesting) ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
           </Button>
         </div>
       </DialogContent>

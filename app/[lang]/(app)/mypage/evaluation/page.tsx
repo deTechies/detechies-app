@@ -29,11 +29,11 @@ export default async function Evaluation({
         <TabsContent value="requested">
           <Evaluations queries={{ status: "requested" }} />
         </TabsContent>
-        <TabsContent value="evaluations">
-          <EvaluationProvided />
-        </TabsContent>
         <TabsContent value="requests">
           <Evaluations queries={{ status: "draft"}} />
+        </TabsContent>
+        <TabsContent value="evaluations">
+          <EvaluationProvided />
         </TabsContent>
   
       </Tabs>

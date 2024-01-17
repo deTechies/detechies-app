@@ -117,9 +117,12 @@ export enum GROUP_TYPE {
   }
 
   export enum ROLE_TYPE {
-    MEMBER = "member",
     ADMIN = "admin",
+    JOINED = "joined",
     CLIENT = "client",
+    INVITED = "invited",
+    NONE = "none",
+    MEMBER = "member"
   }
 
   export enum ContributionType {
