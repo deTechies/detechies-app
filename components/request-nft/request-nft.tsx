@@ -81,7 +81,7 @@ export default function RequestNFTModal({
   useEffect(() => {
     const getAchievements = async () => {
       if (!selectedGroup) return;
-      const fetchedGroupAchievement = await getGroupAchievementsClient(
+      const {data: fetchedGroupAchievement} = await getGroupAchievementsClient(
         selectedGroup.id
       );
       setGroupAchievements(fetchedGroupAchievement);

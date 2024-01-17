@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { ABI, MUMBAI } from "@/lib/constants";
-import { createGroupContract } from "@/lib/data/groups";
+import { postServer } from "@/lib/data/postRequest";
 import { Club } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
@@ -29,9 +29,10 @@ export default function CreateGroupContract({
 
   useEffect(() => {
     const submitGroup = async () => {
-      const result = await createGroupContract(group.id, "something");
+      //const result = await createGroupContract(group.id, "something");
 
-      if (result.ok) {
+      const result = await postServer(`/clubs/add-contract/${group.id}`, "");
+      if (result) {
         toast({
           title: "Group Contract",
           description: "Group contract created successfully",

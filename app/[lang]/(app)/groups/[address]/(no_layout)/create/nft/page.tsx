@@ -9,12 +9,14 @@ export default async function CreateNFT({
 }: {
   params: { address: string; lang: Locale };
 }) {
-  const group = await getClub(params.address);
-
   const dictionary = await getDictionary(params.lang);
-
-  if (!group.contract) {
-    return <CreateGroupContract group={group} lang={dictionary} />;
+  
+  const {data: group} = await getClub(params.address);
+  
+  if(!group.contract){
+    return (
+      <CreateGroupContract group={group} lang={dictionary}/>
+    )
   }
   return (
     <main className="w-full max-w-[60rem] m-8 mx-auto">
