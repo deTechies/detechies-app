@@ -32,6 +32,8 @@ export async function postServer(endpoint: string, body?: string) {
       variant: "destructive"
     });
     
+    console.log(result);
+    
     return;
   } else {
     toast({

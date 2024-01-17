@@ -59,7 +59,7 @@ export default function PendingMemberListItem({
       });
 
       const result = await postServer(`/achievement-rewards/update`, submitData);
-      //const result = await updateNFTRequest(nft.id, "accepted", data?.hash);
+
       if (result) {
         toast({
           title: "Success",
@@ -78,14 +78,17 @@ export default function PendingMemberListItem({
 
   useEffect(() => {
     const submitProjectNFT = async () => {
-
       const result = await postServer(`/achievement-rewards/rewardProject/${nft.id}`, '')
+
+      if(result){
+        
+        toast({
+          title: "Success",
+          description: "succesfully distirbuted the nft. ",
+        });
+      }
       
       setLoading(false);
-      toast({
-        title: "Success",
-        description: "succesfully distirbuted the nft. ",
-      });
     };
 
     if (projectFinished) {
@@ -120,13 +123,19 @@ export default function PendingMemberListItem({
 
     //make sure that it works correct so we can update the nft data.
   };
-
+  
   const rejectNFT = async () => {
-    //
-    toast({
-      title: "rejecting NFT",
-      description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
-    });
+    
+    const result = await postServer(`/achievement-rewards/${nft.id}/reject`, '');
+    if(result){
+      toast({
+        title: "rejecting NFT",
+        description: "succesfully rejected the nft. ",
+      });  
+      
+      router.refresh();
+    }
+    
   };
 
   return (
