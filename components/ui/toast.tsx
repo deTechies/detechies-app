@@ -32,10 +32,10 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: "  text-white ",
+        default: "text-white",
         success: "text-accent-onPrimary",
         destructive:
-          "destructive group  bg-destructive text-white",
+          "destructive group  bg-state-error-secondary text-state-error",
       },
       
     },
@@ -67,7 +67,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-error-state/30 group-[.destructive]:hover:bg-error-state-secondary group-[.destructive]:hover:text-error-state group-[.destructive]:focus:ring-destructive",
       className
     )}
     {...props}

@@ -15,8 +15,8 @@ export default async function GroupDetailManageLayout({
   params: { address: string; lang: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const {data} = await getClub(params.address);
-  const {data:missions} = await getClubMissions(data.id);
+  const {data:club} = await getClub(params.address);
+  const {data:missions} = await getClubMissions(club.id);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
@@ -40,7 +40,7 @@ export default async function GroupDetailManageLayout({
 
         <TabsContent value="members">
           <ManageMember
-            details={data}
+            details={club}
             searchParams={searchParams}
             lang={dictionary}
           ></ManageMember>
@@ -48,14 +48,14 @@ export default async function GroupDetailManageLayout({
 
         <TabsContent value="nft">
           <ManageNft
-            details={data}
+            details={club}
             lang={dictionary}
           ></ManageNft>
         </TabsContent>
 
         <TabsContent value="missions">
           <ManageMission
-            details={data}
+            details={club}
             missions={missions}
             lang={dictionary}
           ></ManageMission>

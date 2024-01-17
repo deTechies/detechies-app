@@ -31,6 +31,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
 
     if (file) {
       const fileType = file.type.split("/")[0];
+      console.log(fileType);
       if (fileType === "image" || fileType === "video") {
         const src = URL.createObjectURL(file);
         setMediaSource(src);
@@ -45,7 +46,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
           console.error("Error converting file to base64:", error);
         }
       } else {
-        alert("Please upload an image or video format.");
+        window.alert("Please upload an image or video format.");
       }
     }
   };
