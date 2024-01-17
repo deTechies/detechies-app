@@ -13,8 +13,8 @@ export default async function MissionDetailPage({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
 
-  const missionDetails = await getMissionDetails(params.id);
-  const club = await getClub(params.address);
+  const {data: missionDetails} = await getMissionDetails(params.id);
+  const {data: club} = await getClub(params.address);
 
   return (
     <main className="grid md:grid-cols-3 gap-6 w-full my-10 mx-8">

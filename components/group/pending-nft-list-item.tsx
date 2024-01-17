@@ -58,7 +58,7 @@ export default function PendingMemberListItem({
         data: data?.hash,
       });
 
-      const result = await postServer(`/api/achievements/update`, submitData);
+      const result = await postServer(`/achievement-rewards/update`, submitData);
       //const result = await updateNFTRequest(nft.id, "accepted", data?.hash);
       if (result) {
         toast({
