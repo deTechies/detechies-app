@@ -3,13 +3,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import { Input } from "../ui/input";
+import { SearchIcon } from "lucide-react";
 
 export default function Search({
   placeholder,
   size,
+  className,
 }: {
   placeholder: string;
   size?: "default" | "md" | undefined;
+  className?: string;
 }) {
   const router = useRouter();
   const [text, setText] = useState("");
@@ -45,8 +48,12 @@ export default function Search({
         onChange={(e) => {
           setText(e.target.value);
         }}
-        className="px-4 py-3.5"
+        className={`px-4 py-3.5 ${className}`}
       />
+
+      {!text && (
+        <SearchIcon className="absolute -translate-y-1/2 top-1/2 right-4 text-text-placeholder"></SearchIcon>
+      )}
     </div>
   );
 }

@@ -466,7 +466,9 @@
       "form": {
         "type": "Category",
         "name": "Group Name",
+        "name_placeholder": "Enter Group Name",
         "desc": "Description",
+        "desc_placeholder": "Tell us a little bit about your group here",
         "image": "Image",
         "image_guide": "Image Guide",
         "guird": "1:1 ratio recommended",
@@ -740,5 +742,10 @@
     "contact_us": "Contact Us",
     "faq": "FAQ", 
     "user_guide": "User Guide"
+  },
+  "media_uploader": {
+    "drag": "Click to upload",
+    "upload_image": "Upload Image",
+    "delete_image": "Delete Image"
   }
 }

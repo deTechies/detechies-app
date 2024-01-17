@@ -467,11 +467,13 @@
       "form": {
         "type": "카테고리", 
         "name": "그룹명",
-        "desc": "설명",
-        "image": "이미지",
+        "name_placeholder": "그룹을 대표하는 이름을 입력하세요.",
+        "desc": "그룹 설명",
+        "desc_placeholder": "설명글을 작성해서 그룹을 소개해주세요!",
+        "image": "그룹 로고",
         "image_guide": "이미지 가이드",
         "guird": "1:1 비율 권장",
-        "cover_image": "커버 이미지",
+        "cover_image": "대표 배경 이미지",
         "rect": "4:3 비율 권장",
         "check": "그룹 목록과 그룹상세보기에서 확인 가능합니다.",
         "links": "대표 사이트",
@@ -741,5 +743,10 @@
     "contact_us": "Contact Us", 
     "faq": "FAQ",
     "user_guide": "이용 가이드"
+  },
+  "media_uploader": {
+    "drag": "여기로 이미지 드래그",
+    "upload_image": "파일 올리기",
+    "delete_image": "삭제하기"
   }
 }
