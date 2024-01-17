@@ -24,9 +24,10 @@ import { Label } from "@radix-ui/react-label";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import * as z from "zod";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const profileFormSchema = z.object({
   display_name: z
@@ -63,20 +64,30 @@ export default function CreateProfile({ lang }: { lang: any }) {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const { refresh } = useRouter();
+  const { refresh, push } = useRouter();
   const { connector } = useAccount();
+  const { disconnect } = useDisconnect({
+    onSuccess: () => {
+      push("/onboard");
+    },
+    onError: (error) => {
+      setIsLoading(false);
+      console.error("Error disconnecting:", error);
+    },
+  });
 
-  if (connector?.id == "web3auth") {
-    const getInfo = async () => {
-      const result = await web3AuthInstance?.getUserInfo();
+  const [blockPopupOpen, setBlockPopupOpen] = useState(false);
 
-      if (result?.email) {
-        form.setValue("email", result.email);
-        form.setValue("verified", true);
-      }
-    };
-
-    getInfo();
+  if (connector?.id == "web3auth" && !blockPopupOpen) {
+    setBlockPopupOpen(true);
+    // const getInfo = async () => {
+    //   const result = await web3AuthInstance?.getUserInfo();
+    //   if (result?.email) {
+    //     form.setValue("email", result.email);
+    //     form.setValue("verified", true);
+    //   }
+    // };
+    // getInfo();
   }
 
   async function sendVerification(data: ProfileFormValues) {
@@ -130,158 +141,187 @@ export default function CreateProfile({ lang }: { lang: any }) {
     setIsLoading(false);
   }
 
-  return (
-    <Form {...form}>
-      <h1 className="text-heading_s mb-3 text-primary">
-        {lang.onboard.verify_email.title}
-      </h1>
+  const onClickDisconnect = async () => {
+    setIsLoading(true);
+    disconnect();
+  };
 
-      <form
-        onSubmit={form.handleSubmit(sendVerification)}
-        className="space-y-8 my-8"
-      >
-        <h4 className="text-text-secondary text-body_s">
-          {lang.onboard.verify_email.body}
-        </h4>
-        <FormField
-          control={form.control}
-          name="display_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{lang.onboard.verify_email.username}</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder={lang.onboard.verify_email.username_placeholder}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name={lang.onboard.verify_email.email}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="capitalize">
-                {lang.onboard.verify_email.email}
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder={lang.onboard.verify_email.email_placeholder}
-                  {...field}
-                  disabled={connector?.id == "web3auth"}
-                />
-              </FormControl>
-              {/* <FormDescription className="font-light">
+  return (
+    <>
+      <Form {...form}>
+        <h1 className="mb-3 text-heading_s text-primary">
+          {lang.onboard.verify_email.title}
+        </h1>
+
+        <form
+          onSubmit={form.handleSubmit(sendVerification)}
+          className="my-8 space-y-8"
+        >
+          <h4 className="text-text-secondary text-body_s">
+            {lang.onboard.verify_email.body}
+          </h4>
+          <FormField
+            control={form.control}
+            name="display_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{lang.onboard.verify_email.username}</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={lang.onboard.verify_email.username_placeholder}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name={lang.onboard.verify_email.email}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="capitalize">
+                  {lang.onboard.verify_email.email}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={lang.onboard.verify_email.email_placeholder}
+                    {...field}
+                    disabled={connector?.id == "web3auth"}
+                  />
+                </FormControl>
+                {/* <FormDescription className="font-light">
                 We will send the verification email to this address
               </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Alert variant="info">
-          <AlertTitle className="text-state-info">
-            {lang.onboard.verify_email.alert_title}
-          </AlertTitle>
-
-          <AlertDescription>
-            {lang.onboard.verify_email.alert_body}
-          </AlertDescription>
-        </Alert>
-
-        <section className="flex flex-col">
-          <FormField
-            control={form.control}
-            name="terms_of_service"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center space-y-0 py-3 border-b border-border-div ">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className="space-y-1 leading-none w-full">
-                  <Label className="text-title_m">
-                    {lang.onboard.verify_email.accordion.terms_of_services}
-                  </Label>
-                </div>
-                <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer" />
+                <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="privacy_policy"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-cente py-3 space-y-0 border-b border-border-div">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="my-auto"
-                  />
-                </FormControl>
-                <div className="space-y-1 leading-none w-full">
-                  <Label className="text-title_m flex-stretch">
-                    {lang.onboard.verify_email.accordion.privacy_policy}
-                  </Label>
-                </div>
-                <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer" />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email_policy"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-cente space-y-0 py-3 border-b border-border-div">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="my-auto"
-                  />
-                </FormControl>
-                <div className="space-y-1 leading-none flex-stretch w-full">
-                  <FormLabel className="text-title_m">
-                    {lang.onboard.verify_email.accordion.reward_notification}
-                  </FormLabel>
-                </div>
-                <ChevronRight className="text-text-secondary h-6 w-6 hover:text-accent-primary cursor-pointer" />
-              </FormItem>
-            )}
-          />
-        </section>
 
-        <div className="flex items-center gap-2 w-full">
+          <Alert variant="info">
+            <AlertTitle className="text-state-info">
+              {lang.onboard.verify_email.alert_title}
+            </AlertTitle>
+
+            <AlertDescription>
+              {lang.onboard.verify_email.alert_body}
+            </AlertDescription>
+          </Alert>
+
+          <section className="flex flex-col">
+            <FormField
+              control={form.control}
+              name="terms_of_service"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center py-3 space-y-0 border-b border-border-div ">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="w-full space-y-1 leading-none">
+                    <Label className="text-title_m">
+                      {lang.onboard.verify_email.accordion.terms_of_services}
+                    </Label>
+                  </div>
+                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="privacy_policy"
+              render={({ field }) => (
+                <FormItem className="flex flex-row py-3 space-y-0 border-b items-cente border-border-div">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="my-auto"
+                    />
+                  </FormControl>
+                  <div className="w-full space-y-1 leading-none">
+                    <Label className="text-title_m flex-stretch">
+                      {lang.onboard.verify_email.accordion.privacy_policy}
+                    </Label>
+                  </div>
+                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email_policy"
+              render={({ field }) => (
+                <FormItem className="flex flex-row py-3 space-y-0 border-b items-cente border-border-div">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="my-auto"
+                    />
+                  </FormControl>
+                  <div className="w-full space-y-1 leading-none flex-stretch">
+                    <FormLabel className="text-title_m">
+                      {lang.onboard.verify_email.accordion.reward_notification}
+                    </FormLabel>
+                  </div>
+                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+                </FormItem>
+              )}
+            />
+          </section>
+
+          <div className="flex items-center w-full gap-2">
+            <Button
+              type="button"
+              variant="secondary"
+              size="lg"
+              className="w-full"
+              onClick={() => {
+                signOut();
+                refresh();
+              }}
+            >
+              {lang.onboard.verify_email.cancel}
+            </Button>
+
+            <Button
+              type="submit"
+              className="w-full"
+              size="lg"
+              disabled={isLoading}
+              loading={isLoading}
+            >
+              {lang.onboard.verify_email.next}
+            </Button>
+          </div>
+        </form>
+      </Form>
+
+      <Dialog open={blockPopupOpen}>
+        <DialogContent className="max-w-[500px] gap-0">
+          <h3 className="mb-4 text-subhead_s">
+            {lang.onboard.verify_email.block_web3auth.title}
+          </h3>
+
+          <div className="mb-6 text-body_m">
+            {lang.onboard.verify_email.block_web3auth.desc}
+          </div>
+
           <Button
-            type="button"
-            variant="secondary"
             size="lg"
-            className="w-full"
-            onClick={() => {
-              signOut();
-              refresh();
-            }}
-          >
-            {lang.onboard.verify_email.cancel}
-          </Button>
-          
-          <Button
-            type="submit"
-            className="w-full"
-            size="lg"
-            disabled={isLoading}
+            className="max-w-full"
+            onClick={onClickDisconnect}
             loading={isLoading}
+            disabled={isLoading}
           >
-            {lang.onboard.verify_email.next}
+            {lang.onboard.verify_email.block_web3auth.button}
           </Button>
-        </div>
-      </form>
-    </Form>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

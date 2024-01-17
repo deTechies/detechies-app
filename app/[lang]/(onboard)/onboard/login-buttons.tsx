@@ -9,13 +9,14 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
+import { wepinInstance } from "@/app/[lang]/app";
 
 export default function LoginButtons({ text }: { text?: any }) {
   const { connect, connectors } = useConnect();
   const { address } = useAccount();
   const { data: session } = useSession();
   const { signMessageAsync } = useSignMessage();
-  const [signing, setSigning] = useState(false);  
+  const [signing, setSigning] = useState(false);
   const { disconnect } = useDisconnect();
 
   const [mounted, setMounted] = useState(false);
@@ -65,7 +66,6 @@ export default function LoginButtons({ text }: { text?: any }) {
           title: "Error",
           description: response.error,
         });
-
       }
     } catch (error: any) {
       toast({
@@ -73,25 +73,25 @@ export default function LoginButtons({ text }: { text?: any }) {
         description: error.message,
       });
     }
-    
-    setSigning(false)
+
+    setSigning(false);
   };
 
   return (
     <main>
-      <div className="flex flex-col space-y-1 gap-4">
+      <div className="flex flex-col gap-4 space-y-1">
         {!address ? (
           <>
             <div
-              key={connectors[0].id}
-              className="bg-accent-secondary text-accent-primary rounded-sm px-6 py-4 flex gap-6 hover:outline hover:outline-accent-primary items-center cursor-pointer"
-              onClick={() => handleConnect(connectors[1])}
+              key={connectors[2].id}
+              className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-accent-secondary text-accent-primary hover:outline hover:outline-accent-primary"
+              onClick={() => handleConnect(connectors[2])}
             >
               <Image
                 src={`/icons/google.png`}
                 height={24}
                 width={24}
-                alt={connectors[1].name}
+                alt={connectors[2].name}
                 quality={2}
               />
               <span className="w-full text-center text-title_m">
@@ -100,8 +100,8 @@ export default function LoginButtons({ text }: { text?: any }) {
             </div>
 
             <div
-              key={connectors[1].id}
-              className="bg-background-layer-2 font-medium border border-border-div rounded-sm px-6 py-4 flex gap-6 hover:border-orange-500 items-center cursor-pointer"
+              key={connectors[0].id}
+              className="flex items-center gap-6 px-6 py-4 font-medium border rounded-sm cursor-pointer bg-background-layer-2 border-border-div hover:border-orange-500"
               onClick={() => handleConnect(connectors[0])}
             >
               <Image
@@ -114,18 +114,37 @@ export default function LoginButtons({ text }: { text?: any }) {
                 {text?.browser ? text.browser : "Browser Wallet"}
               </span>
             </div>
+
+            <div
+              key={connectors[1].id}
+              className="flex items-center gap-6 px-6 py-4 font-medium border rounded-sm cursor-pointer bg-background-layer-2 border-border-div hover:border-orange-500"
+              onClick={() => handleConnect(connectors[1])}
+            >
+              <Image
+                src={`/icons/web3auth.png`}
+                height={24}
+                width={24}
+                alt={connectors[1].name}
+              />
+              <span className="w-full text-center text-title_m">
+                Web3auth (기존 소셜 계정 회원)
+              </span>
+            </div>
           </>
         ) : (
           <div className="flex w-full">
             <Button
               variant={"secondary"}
               onClick={handleSign}
-              className="rounded-none rounded-l-sm flex-grow"
+              className="flex-grow rounded-none rounded-l-sm"
               loading={signing}
             >
-              {text.sign_in_as ? text.sign_in_as : "Sign is as "} {address && truncateMiddle(address, 13)} 
+              {text.sign_in_as ? text.sign_in_as : "Sign is as "}{" "}
+              {address && truncateMiddle(address, 13)}
             </Button>
-            <Button variant={"destructive"} className="rounded-none rounded-r-sm"
+            <Button
+              variant={"destructive"}
+              className="rounded-none rounded-r-sm"
               onClick={() => disconnect()}
             >
               {text.sign_out ? text.sign_out : "Sign Out"}
