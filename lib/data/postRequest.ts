@@ -29,6 +29,7 @@ export async function postServer(endpoint: string, body?: string) {
     const result = await response.json();
     toast({
       description: result.message,
+      variant: "destructive"
     });
     
     return;
