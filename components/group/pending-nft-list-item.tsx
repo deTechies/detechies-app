@@ -102,14 +102,6 @@ export default function PendingMemberListItem({
 
   const acceptNFT = async () => {
     setLoading(true);
-    if (!nft.achievement.tokenId || !contract) {
-      
-      console.log(nft.achievement.tokenId, contract);
-      toast({
-        title: "Error",
-        description: "Failed to accept NFT",
-      });
-    }
 
     if (nft.project) {
       //get the list of all the project members wallets.
