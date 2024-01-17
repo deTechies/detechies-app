@@ -264,6 +264,7 @@ export const Wizard = ({
                   className="w-full"
                   onClick={nextStep}
                   disabled={nextDisabled()}
+                  loading={loading}
                 >
                   {lang.mission.create.next}
                 </Button>
@@ -273,6 +274,7 @@ export const Wizard = ({
                   size="lg"
                   className="w-full"
                   onClick={submitForm}
+                  loading={loading}
                   disabled={nextDisabled() || loading }
                 >
                   {lang.mission.create.submit}

@@ -482,6 +482,12 @@
     "details": {
       "profile_card": {
         "create_nft": "NFT 생성하기",
+        "group_contract": {
+          "title": "블록체인 그룹 계정 등록하기",
+          "desc": " 한번만 블록체인 그룹 계정으로 등록하면 수료증, 자격증, 멤버십 등 원하는 모든 종류의 NFT 증명서를 발행할 수 있어요. (계정 등록을 위해서는 MATIC 토큰이 필요해요. ",
+          "anchor": "MATIC 토큰 받기",
+          "button": "등록하기"
+        },
         "join_group": {
           "title": "그룹 가입하기",
           "desc": "해당 그룹의 리더에게 가입 요청 메세지를 보내세요. 리더가 승인하면 그룹 멤버가 될 수 있어요.",
@@ -602,7 +608,8 @@
       "show_more": "더 보기",
       "hide": "숨기기",
       "close": "다음에 할래요",
-      "send_request": "발행 요청"
+      "send_request": "발행 요청",
+      "complete_request": "요청 완료"
     }
   },
   "mission": {
@@ -631,8 +638,10 @@
       "previous": "이전",
       "next": "다음",
       "submit": "제출",
-      "name": "이름",
-      "desc": "설명",
+      "name": "미션 제목",
+      "name_placeholder": "미션 제목을 입력해주세요.",
+      "desc": "미션 설명",
+      "desc_placeholder": "미션 설명을 입력해주세요.",
       "date": "기간",
       "begin_date": "시작 날짜",
       "end_date": "종료 날짜",
@@ -718,7 +727,10 @@
     "role_type": {
       "admin": "관리자",
       "member": "팀원",
-      "client": "클라이언트"
+      "client": "클라이언트",
+      "joined": "멤버",
+      "invited": "초대됨",
+      "none": "행인"
     }
   }, 
   "footer": {

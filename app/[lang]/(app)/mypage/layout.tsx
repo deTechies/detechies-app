@@ -15,8 +15,9 @@ export default async function MyPageLayout({
 
   return (
     <div>
-      <div className="flex sm:flex-row flex-col m-8 gap-20">
-        <div className="w-full md:min-w-[300px] md:max-w-[367px] flex flex-col gap-8">
+      <div className="flex flex-col gap-20 m-8 md:flex-row">
+        {/* LeftSide */}
+        <div className="md:max-w-[376px] shrink-0 flex flex-col gap-8">
           <Profile text={dictionary.mypage.profile} profile={profile} />
           <Menu links={dictionary.mypage.menu} />
         </div>
