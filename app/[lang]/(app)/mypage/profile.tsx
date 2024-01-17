@@ -79,7 +79,7 @@ export default function Profile({
 
   if (pathName.includes("/mypage/avatar")) {
     return (
-      <Card className="flex flex-col gap-5 w-[400px]">
+      <Card className="flex flex-col gap-5">
         <div className="w-full aspect-square relative m-0 z-0 bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-md">
           <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
@@ -96,7 +96,7 @@ export default function Profile({
   }
 
   return (
-    <Card className="flex flex-col gap-5 w-[400px]">
+    <Card className="flex flex-col gap-5">
       <div className="flex">
         <div className="relative w-[120px] aspect-square rounded-md bg-background-layer-2">
           <IPFSImageLayer hashes={profile.avatar ? hashes : []} />

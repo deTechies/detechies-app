@@ -29,7 +29,7 @@ export default function Menu({ links }: { links: any }) {
     }, 
   ]
   return (
-    <div className="bg-background-layer-1 rounded-sm grid items-center">
+    <div className="bg-background-layer-1 rounded-sm grid items-center ">
       {
         menuItems.map((item) => {
           return (

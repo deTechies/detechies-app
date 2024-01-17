@@ -88,7 +88,7 @@ export default async function ProjectMemberItem({
                   </>
                 ) : (
                   <>
-                    {userRole != "none" && details.works.length > 0 && (
+                    {userRole != "none" && userRole != 'invited' && userRole != 'joined' && details.works.length > 0 && (
                       <ProjectMemberEvaluate
                         projectMember={details}
                         lang={lang}
@@ -118,7 +118,7 @@ export default async function ProjectMemberItem({
               </div>
             </header>
 
-            {userRole != "none" ? (
+            {userRole == "admin" || "client" || "member"  ? (
               <ProjectWorkDetail data={details.works[0]} />
             ) : (
               <BlurredProjectWorkDetail />
