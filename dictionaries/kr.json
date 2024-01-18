@@ -115,12 +115,17 @@
       "no_projects_found": "검색 결과가 없습니다.",
       "view_more": "더 보기",
       "create_project" : {
-        "create" : "내 프로젝트 만들기",
+        "create" : "프로젝트 생성하기",
         "name" : "프로젝트명",
+        "name_placeholder" : "프로젝트명을 입력하세요",
         "type" : "프로젝트 종류",
+        "type_placeholder" : "선택하세요",
         "period" : "기간",
         "describe" : "프로젝트 설명",
+        "describe_placeholder" : "프로젝트 설명을 입력하세요",
         "image" : "대표 이미지",
+        "image_guide1": "가로 세로 비율이 1:1인 이미지 업로드",
+        "image_guide2": "저작권에 위배되지 않는 이미지만 업로드",
         "category" : "프로젝트 카테고리",
         "scope" : "공개 범위",
         "back" : "뒤로가기",
@@ -140,8 +145,8 @@
         "delete_confirm" : "프로젝트를 삭제할까요?",
         "delete_dsc": "삭제할 경우 리더님과 다른 멤버의 프로젝트 활동 정보가 모두 삭제 돼요. 정말로 프로젝트를 삭제하고 싶다면 프로젝트명:",
         "delete_project_name" : "을 입력해 주세요.",
+        "placeholder": "정말로 삭제를 원할 시, 프로젝트명을 입력해주세요.",
         "cancel" : "취소하기"
-
       },
       "add_work":{
         "work":"Add Work"
@@ -467,11 +472,13 @@
       "form": {
         "type": "카테고리", 
         "name": "그룹명",
-        "desc": "설명",
-        "image": "이미지",
+        "name_placeholder": "그룹을 대표하는 이름을 입력하세요.",
+        "desc": "그룹 설명",
+        "desc_placeholder": "설명글을 작성해서 그룹을 소개해주세요!",
+        "image": "그룹 로고",
         "image_guide": "이미지 가이드",
         "guird": "1:1 비율 권장",
-        "cover_image": "커버 이미지",
+        "cover_image": "대표 배경 이미지",
         "rect": "4:3 비율 권장",
         "check": "그룹 목록과 그룹상세보기에서 확인 가능합니다.",
         "links": "대표 사이트",
@@ -731,6 +738,12 @@
       "joined": "멤버",
       "invited": "초대됨",
       "none": "행인"
+    },
+
+    "privacy_type": {
+      "public": "모든 유저",
+      "private": "프라이빗",
+      "group": "그룹 멤버"
     }
   }, 
   "footer": {
@@ -741,5 +754,10 @@
     "contact_us": "Contact Us", 
     "faq": "FAQ",
     "user_guide": "이용 가이드"
+  },
+  "media_uploader": {
+    "drag": "여기로 이미지 드래그",
+    "upload_image": "파일 올리기",
+    "delete_image": "삭제하기"
   }
 }
