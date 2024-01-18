@@ -52,6 +52,7 @@ export default function GroupNFT({
                 key={index}
                 lang={lang}
                 contract={contract}
+                showMintButton={true}
                 blockRequest={user_achievements.includes(item.id)}
               />
             ))}

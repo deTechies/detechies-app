@@ -47,6 +47,7 @@ export default async function GroupAchievements({
                     details={item}
                     key={index}
                     lang={dictionary}
+                    showMintButton={true}
                     blockRequest={user_achievements.includes(item.id)}
                   />
                 ))}
@@ -64,6 +65,7 @@ export default async function GroupAchievements({
                       details={item}
                       key={index}
                       lang={dictionary}
+                      showMintButton={true}
                       blockRequest={user_achievements.includes(item.id)}
                     />
                   ))}
@@ -81,6 +83,7 @@ export default async function GroupAchievements({
                       details={item}
                       key={index}
                       lang={dictionary}
+                      showMintButton={true}
                       blockRequest={user_achievements.includes(item.id)}
                     />
                   ))}
@@ -98,6 +101,7 @@ export default async function GroupAchievements({
                       details={item}
                       key={index}
                       lang={dictionary}
+                      showMintButton={true}
                       blockRequest={user_achievements.includes(item.id)}
                     />
                   ))}

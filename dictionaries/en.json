@@ -606,7 +606,7 @@
       "nft_desc": "NFT Description",
       "show_more": "Show More",
       "hide": "Hide",
-      "close": "Do It Later",
+      "close": "Close",
       "send_request": "Request Issuance",
       "complete_request": "Request Complete"
     }
