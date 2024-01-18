@@ -2,6 +2,7 @@
 
 
 
+import { defaultAvatar } from "@/lib/constants";
 import { User } from "@/lib/interfaces";
 import IPFSImageLayer from "../ui/layer";
 
@@ -18,12 +19,12 @@ export default function PersonItem({
     //on select 
 
     return (
-      <button className={`flex justify-between items-center py-4 hover:bg-background-layer-2 w-full rounded-sm ${selected && 'bg-accent-secondary hover:bg-state-error-secondary'}`} onClick={() => {
+      <button className={`flex justify-between items-center py-4 px-2 hover:bg-background-layer-2 w-full rounded-sm ${selected && 'bg-accent-secondary hover:bg-state-error-secondary'}`} onClick={() => {
          returnValue(member)
       }}>
         <figure className="flex gap-4">
           <div className="relative w-12 h-12 rounded-full overflow-hidden bg-background-layer-2">
-              <IPFSImageLayer hashes={[]} />
+              <IPFSImageLayer hashes={member?.avatar ? member.avatar : defaultAvatar} />
           </div>
 
           <div className="text-left flex flex-col gap-1">
