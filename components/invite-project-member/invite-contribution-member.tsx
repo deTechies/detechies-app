@@ -46,7 +46,7 @@ export default function InviteContributionMember({
   if (error) return <div>{JSON.stringify(error)}</div>;
   if (!members) return <div>{lang.project.details.invite_member.no_members_found}</div>;
 
-
+  console.log(members);
 
   return (
 

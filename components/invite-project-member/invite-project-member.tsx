@@ -18,13 +18,16 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
 import SelectedProjectMember from "./selected-project-member";
+import { ProjectMember } from "@/lib/interfaces";
 
 export default function InviteProjectMember({
   projectId,
   lang,
+  projectMembers,
 }: {
   projectId: string;
   lang: any;
+  projectMembers: ProjectMember[];
 }) {
   const searchParams = useSearchParams()!;
   const text = searchParams.get("search") || "";
@@ -40,8 +43,15 @@ export default function InviteProjectMember({
   if (!members)
     return <div>{lang.project.details.invite_member.no_members_found}</div>;
 
+  const array_member_id = projectMembers.map(
+    (member: ProjectMember) => member.user.id
+  );
+
   const filteredData = members.filter((member: any) => {
-    return member.display_name.toLowerCase().includes(text.toLowerCase() || "");
+    return (
+      !array_member_id.includes(member.id) &&
+      member.display_name.toLowerCase().includes(text.toLowerCase() || "")
+    );
   });
 
   return (
