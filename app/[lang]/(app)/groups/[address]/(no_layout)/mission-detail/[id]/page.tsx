@@ -12,7 +12,7 @@ export default async function MissionDetailPage({
   params: { id: string; lang: Locale };
 }) {
   const {data: userProgress} = await getUsersMissionProgress(params.id);
-  const {data: missionDetails} = await getMissionDetails(params.id);
+  const missionDetails = await getMissionDetails(params.id);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
