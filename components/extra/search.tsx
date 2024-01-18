@@ -1,9 +1,9 @@
 "use client";
+import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import { Input } from "../ui/input";
-import { SearchIcon } from "lucide-react";
 
 export default function Search({
   placeholder,
@@ -16,7 +16,7 @@ export default function Search({
 }) {
   const router = useRouter();
   const [text, setText] = useState("");
-  const query = useDebounce(text, 500);
+  const query = useDebounce(text, 100);
   const pathname = usePathname();
 
   useEffect(() => {

@@ -1,14 +1,14 @@
 "use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Project } from "@/lib/interfaces";
-import { ChevronDown, ChevronUp, PenSquare, Plus } from "lucide-react";
+import { beginEndDates } from "@/lib/utils";
+import { ChevronDown, ChevronUp, PenSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { beginEndDates } from "@/lib/utils";
 
 
 export default function ProjectDetail({
@@ -38,6 +38,8 @@ export default function ProjectDetail({
                 : "/images/no-item.png"
             }`}
             alt="project_image_holder"
+            width={100}
+            height={100}
           />
 
           <AvatarFallback className="relative">
