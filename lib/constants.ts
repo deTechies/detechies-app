@@ -6,7 +6,6 @@ import groupRegistry from "./abi/groupRegistry.abi.json";
 import profile from "./abi/profile.abi.json";
 import project from "./abi/project.abi.json";
 import projectRegistry from "./abi/projectRegistry.abi.json";
-
 const MUMBAI = {
     groupRegistry: "0xbdb946fd58e083abed65ccfddc8d2bdb3662a1a7" as Address,
     projectRegistry: "0x1Cf9a47f91DccA1D18184203C73B0f3988b38e3c" as Address,
@@ -25,6 +24,7 @@ const ABI = {
 export const API_URL = process.env.NEXT_PUBLIC_API || 'http://localhost:4000'
 // export const API_URL = process.env.NEXT_PUBLIC_API || 'http://192.168.0.3:4000'
 
+
 export const defaultAvatar = [
     "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
     "bafkreidlzc4pnszwiyx73yqlbwgkchyuendxkfq63sp54vhnky3ruti5xu",
@@ -33,7 +33,4 @@ export const defaultAvatar = [
     "bafkreif6oi5pwrjzey5q4pmyd3zck6a53uoefozxydapiipgq2flsbldsi", 
     "bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose",
   ];
-
 export { ABI, MUMBAI };
-
-export const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
