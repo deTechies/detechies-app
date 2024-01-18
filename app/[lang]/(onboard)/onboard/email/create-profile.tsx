@@ -292,7 +292,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
               type="submit"
               className="w-full"
               size="lg"
-              disabled={isLoading}
+              disabled={isLoading || blockPopupOpen}
               loading={isLoading}
             >
               {lang.onboard.verify_email.next}
