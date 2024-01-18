@@ -1,9 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Image from "@/components/ui/image";
 import { toast } from "@/components/ui/use-toast";
 import { acceptGroupInvitations } from "@/lib/data/groups";
-import Image from "@/components/ui/image";
 // import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -20,7 +20,7 @@ export default function AcceptInvitation({
   const acceptInvitation = async () => {
     const result = await acceptGroupInvitations(id);
 
-    if (result.ok) {
+    if (result.status == 'success') {
       toast({
         title: "Accept invitation",
         description: "Thank you for accepting the membersship",
