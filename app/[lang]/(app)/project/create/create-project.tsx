@@ -8,6 +8,7 @@ import { createProject } from "@/lib/data/project";
 import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
 import MediaUploader from "@/components/extra/media-uploader";
+// import SelectGroupInScope from "./select-group-in-scope";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -333,16 +334,18 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                   />
                 </FormControl>
 
-                <div className="mt-3 flex gap-2 items-start">
+                <div className="mt-3 flex flex-wrap gap-2 items-start">
                   {form.getValues("tags") &&
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
                         key={index}
                         variant="accent"
                         shape="md"
-                        className="flex items-center gap-1.5"
+                        className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        {tag}
+                        <div className="truncate w-full">
+                          {tag}
+                        </div>
                         <X
                           className="cursor-pointer w-5 h-5"
                           onClick={() => {
@@ -394,7 +397,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                 ))}
 
                 {/* {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
-                  <Badge className="cursor-pointer">공개그룹 선택</Badge>
+                  <SelectGroupInScope lang={lang}></SelectGroupInScope>
                 )} */}
               </RadioGroup>
 

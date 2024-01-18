@@ -339,16 +339,16 @@ export default function ProjectEditForm({
                   />
                 </FormControl>
 
-                <div className="mt-3 flex gap-2 items-start">
+                <div className="mt-3 flex flex-wrap gap-2 items-start">
                   {form.getValues("tags") &&
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
                         key={index}
                         variant="accent"
                         shape="md"
-                        className="flex items-center gap-1.5"
+                        className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        {tag}
+                        <div className="truncate w-full">{tag}</div>
                         <X
                           className="cursor-pointer w-5 h-5"
                           onClick={() => {
