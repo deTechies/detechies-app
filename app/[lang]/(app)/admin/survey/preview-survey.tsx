@@ -35,7 +35,7 @@ export function PreviewSurvey({
             selected.questions.map((question, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <span className="text-subhead_s">{question.content}</span>
-                <span className="text-text-secondary">{question.category}</span>
+                <span className="text-text-secondary">{question.category} ({question.id})</span>
                 <ul className="my-2">
                   { question.messages &&
                     question.messages.map((option, index) => 

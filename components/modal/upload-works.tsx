@@ -71,14 +71,13 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
       type: workType,
     });
 
-    console.log(body);
     const result = await postServer(
       `/projects/${projectId}/add-link`,
       "POST",
       body
     );
 
-    if (result.error) {
+    if (!result) {
       toast({
         title: result.error,
         description: result.message,
@@ -86,6 +85,9 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
       setLoading(false);
       return;
     }
+    
+    //TODO: close window. 
+    
 
     toast({
       title: "Successfully uploaded",

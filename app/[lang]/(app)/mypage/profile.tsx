@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { updateUserAvatar } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -110,9 +111,11 @@ export default function Profile({
                 : "Name: Not Set"}
             </span>
           </div>
-          <Button disabled variant={"secondary"} size="sm">
-            {text?.avatar_settings}
-          </Button>
+          <Link href="/mypage/avatar" passHref>
+            <Button variant={"secondary"} size="sm">
+              {text?.avatar_settings}
+            </Button>
+          </Link>
         </div>
       </div>
 

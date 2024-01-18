@@ -481,6 +481,12 @@
     "details": {
       "profile_card": {
         "create_nft": "Create NFT",
+        "group_contract": {
+          "title": "Create Group Contract",
+          "desc": "Once you register for a blockchain group account, you can issue any kind of NFT certificate you want, including diplomas, certificates, memberships, and more. (You'll need MATIC tokens to register for an account. ",
+          "anchor": "Get MATIC Tokens",
+          "button": "Create Group Contract"
+        },
         "join_group": {
           "title": "Join Group",
           "desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
@@ -601,7 +607,8 @@
       "show_more": "Show More",
       "hide": "Hide",
       "close": "Do It Later",
-      "send_request": "Request Issuance"
+      "send_request": "Request Issuance",
+      "complete_request": "Request Complete"
     }
   },
   "mission": {
@@ -630,8 +637,10 @@
       "previous": "Previous",
       "next": "Next",
       "submit": "Submit",
-      "name": "Name",
+      "name": "Campaign Name",
+      "name_placeholder": "Enter Campaign Name",
       "desc": "Description",
+      "desc_placeholder": "Enter Campaign Description",
       "date": "Duration",
       "begin_date": "Start Date",
       "end_date": "End Date",
@@ -717,7 +726,10 @@
     "role_type": {
       "admin": "Admin",
       "member": "Member",
-      "client": "Client"
+      "client": "Client",
+      "joined": "Joined",
+      "invited": "Invited",
+      "none": "None"
     }
   },
   "footer": {

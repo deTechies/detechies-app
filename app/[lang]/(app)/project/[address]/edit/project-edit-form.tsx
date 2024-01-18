@@ -265,7 +265,7 @@ export default function ProjectEditForm({
                 </Button> */}
                 <label className="block bg-gray-100 px-3 py-2  border-slate-300 rounded-md text-title_s text-xs cursor-pointer
                   hover:shadow-inner items-center justify-center ring-offset-background transition-colors " htmlFor="fileUpload">Change Image
-                  <input   className="hidden" type="file" onChange={uploadImage} id="fileUpload"/>
+                  <input   className="hidden" type="file" accept="image/*,video/*" onChange={uploadImage} id="fileUpload" />
                 </label>
                 
               </div>

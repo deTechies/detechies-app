@@ -8,10 +8,12 @@ import IPFSImageLayer from "../ui/layer";
 interface PendingMemberItemProps {
   member: any;
   lang: any;
+  onSuccessInvite?: Function;
 }
 export default function PendingMemberItem({
   member,
   lang,
+  onSuccessInvite,
 }: PendingMemberItemProps) {
   //if accept then we need to put in
   const router = useRouter();
@@ -19,13 +21,21 @@ export default function PendingMemberItem({
 
   async function acceptMember() {
     setIsLoading(true);
-    await postServer(`/project-member/accept/member/${member.id}`, '');
+    const result = await postServer(
+      `/project-member/accept/member/${member.id}`,
+      ""
+    );
+
+    if (result && result.status === "success") {
+      onSuccessInvite && onSuccessInvite(member.id);
+      router.refresh();
+    } else {
+      setIsLoading(false);
+    }
     //TODO: make sure that the data is only reloaded.
-    router.refresh();
-    setIsLoading(false);
   }
 
-  //TODO: move this in a global util file do it can be used anywhere. 
+  //TODO: move this in a global util file do it can be used anywhere.
   function formatInviteTime(inviteTimeStr: string, status: string) {
     const inviteTime = new Date(inviteTimeStr);
     const now = new Date();
@@ -85,12 +95,21 @@ export default function PendingMemberItem({
             <div className="flex flex-wrap items-center justify-end gap-3 ml-auto">
               {member.status == "joined" && (
                 <>
-                  <Button size="sm" variant="secondary">
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    loading={isLoading}
+                    disabled={isLoading}
+                  >
                     {lang.project.details.waiting.reject}
                   </Button>
 
-                  <Button size="sm" variant="primary" onClick={acceptMember}
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    onClick={acceptMember}
                     loading={isLoading}
+                    disabled={isLoading}
                   >
                     {lang.project.details.waiting.accept}
                   </Button>
