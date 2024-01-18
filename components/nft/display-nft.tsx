@@ -14,6 +14,7 @@ interface IDisplayNFTProps {
   showSelect?: boolean;
   lang?: any;
   showMintButton: boolean;
+  blockRequest?: boolean
 }
 
 export default function DisplayNFT({
@@ -21,7 +22,8 @@ export default function DisplayNFT({
   contract,
   showSelect,
   lang,
-  showMintButton
+  showMintButton,
+  blockRequest
 }: IDisplayNFTProps) {
 
   if (showSelect) {
@@ -33,7 +35,7 @@ export default function DisplayNFT({
       <DialogTrigger className="min-w-[150px] w-full grow">
         <NftListItem item={details} showSelect={showSelect} lang={lang} />
       </DialogTrigger>
-      <DisplayNFTModal details={details} contract={contract} showSelect={showSelect} lang={lang} showMintButton={showMintButton}/>     
+      <DisplayNFTModal details={details} contract={contract} showSelect={showSelect} lang={lang} showMintButton={showMintButton} blockRequest={blockRequest}/>     
     </Dialog>
   );
 }

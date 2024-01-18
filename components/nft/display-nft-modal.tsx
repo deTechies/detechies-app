@@ -23,6 +23,7 @@ interface IDisplayNFTModalProps {
   showSelect?: boolean;
   lang: any;
   showMintButton: boolean;
+  blockRequest?: boolean;
 }
 
 export default function DisplayNFTModal({
@@ -30,7 +31,8 @@ export default function DisplayNFTModal({
   contract,
   showSelect,
   lang,
-  showMintButton
+  showMintButton,
+  blockRequest
 }: IDisplayNFTModalProps) {
   const [requesting, setRequesting] = useState<boolean>(false);
   const [showFull, setShowFull] = useState(false);
@@ -208,9 +210,13 @@ export default function DisplayNFTModal({
             </Button>
             </DialogClose>
             {showMintButton ? (
-                            <Button onClick={handleRequestNFT}>
-                            {lang.achievement.display_nft.send_request}
-                            </Button>
+              <Button
+            onClick={handleRequestNFT}
+            disabled={requesting || blockRequest}
+          >
+            {blockRequest}
+            {(blockRequest || requesting) ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
+            </Button>
             ): null}
         </div>
     </DialogContent>
