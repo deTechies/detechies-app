@@ -6,7 +6,7 @@ import { BellRing, Menu, Send, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useParams  } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 
 export default function Navbar({ lang }: { lang: any }) {
@@ -49,7 +49,8 @@ export default function Navbar({ lang }: { lang: any }) {
                     className="block object-contain h-12 dark:hidden"
                     src="/images/careerzen.png"
                     alt="Careerzen"
-                    fill={true}
+                    width={150}
+                    height={48}
                     onClick={() => {
                       window.location.href = "/";
                     }}
@@ -59,7 +60,8 @@ export default function Navbar({ lang }: { lang: any }) {
                     className="hidden object-contain h-12 dark:block"
                     src="/images/logo-invert.png"
                     alt="Careerzen"
-                    fill={true}
+                    width={150}
+                    height={48}
                     onClick={() => {
                       window.location.href = "/";
                     }}
