@@ -202,7 +202,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
             {lang.project.list.create_project.period}
             <span className="ml-1 text-state-error">*</span>
           </FormInlineLabel>
-          <div className="flex flex-row gap-2 items-center w-full">
+          <div className="flex flex-row gap-2 flex-wrap sm:flex-nowrap items-center w-full">
             <FormField
               control={form.control}
               name="begin_date"

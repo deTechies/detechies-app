@@ -236,7 +236,7 @@ export default function CreateProject() {
                     </div>
                   </div>
 
-                  <div className="flex flex-row gap-2 items-center w-full">
+                  <div className="flex flex-row gap-2 items-center flex-wrap sm:flex-nowrap w-full">
                     <FormField
                       control={form.control}
                       name="begin_date"
