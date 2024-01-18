@@ -69,7 +69,7 @@ export default async function ManageNft({
         <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {details.achievements &&
             details.achievements.map((item: Achievement, index: number) => (
-              <DisplayNFT details={item} key={index} lang={lang} />
+              <DisplayNFT details={item} key={index} lang={lang} showMintButton={false}/>
             ))}
         </div>
 
