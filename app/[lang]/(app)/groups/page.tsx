@@ -15,7 +15,9 @@ export default async function GroupsPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   const {data:groups} = await serverApi(`/clubs`)
-
+  console.log(groups) 
+  
+  
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
     <main className="flex flex-col w-full max-w-[97rem] gap-6 m-12">
