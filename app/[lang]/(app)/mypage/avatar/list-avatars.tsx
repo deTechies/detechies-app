@@ -48,6 +48,7 @@ export default function ListAvatars({
               details={achievementReward.achievement}
               showSelect={avatar}
               lang={lang}
+              showMintButton={true}
               blockRequest={true}
             />
           )
