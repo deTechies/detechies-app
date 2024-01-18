@@ -375,18 +375,18 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
           )}
         />
 
-        <div className="flex items-center justify-end gap-8">
+        <div className="flex items-center justify-end gap-2">
           <Button
             variant="secondary"
             type="button"
             size="lg"
             onClick={() => {
-              // router.back();
-              console.log(form.getValues());
+              router.back();
             }}
           >
             {lang.project.list.create_project.back}
           </Button>
+
           <Button
             type="submit"
             size="lg"
