@@ -1,5 +1,27 @@
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+import { uploadContent } from "@/lib/upload";
+import { PrivacyType, ProjectType } from "@/lib/interfaces";
+import { updateProject } from "@/lib/data/project";
+
+import MediaUploader from "@/components/extra/media-uploader";
+
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "@/components/ui/use-toast";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -10,35 +32,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { uploadContent } from "@/lib/upload";
-
-import { Label } from "@/components/ui/label";
-import { PrivacyType, ProjectType } from "@/lib/interfaces";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateProject } from "@/lib/data/project";
-// import Image from "next/image";
-import Link from "next/link";
-import MediaUploader from "@/components/extra/media-uploader";
 import { X } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+
 
 const projectFormSchema = z.object({
   name: z
@@ -249,7 +247,7 @@ export default function ProjectEditForm({
               <div className="grow">
                 <FormControl className="mb-1">
                   <Textarea
-                    placeholder={lang.group.create.form.desc_placeholder}
+                    placeholder={lang.project.list.create_project.describe_placeholder}
                     className="p-4 resize-none min-h-[132px]"
                     {...field}
                   />
@@ -304,12 +302,12 @@ export default function ProjectEditForm({
                     value={newTag}
                     onChange={handleNewTagChange}
                     onKeyDown={handleKeyDown}
-                    disabled={form.getValues("tags").length > 4}
+                    disabled={form.getValues("tags") && form.getValues("tags").length > 4}
                   />
                 </FormControl>
 
                 <div className="mt-3 flex gap-2 items-start">
-                  {form.watch("tags")?.map((tag, index) => (
+                  {form.getValues("tags") && form.getValues("tags")?.map((tag, index) => (
                     <Badge
                       key={index}
                       variant="accent"
@@ -393,12 +391,3 @@ export default function ProjectEditForm({
     </Form>
   );
 }
-
-const FormElement = ({ children, ...props }: any) => {
-  return (
-    <div className="flex items-center" {...props}>
-      <Label className="flex-start shrink-0 w-[182px]">{props.label}</Label>
-      <div className="grow items-start justify-start">{children}</div>
-    </div>
-  );
-};

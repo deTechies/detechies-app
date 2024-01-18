@@ -115,7 +115,7 @@
       "no_projects_found": "검색 결과가 없습니다.",
       "view_more": "더 보기",
       "create_project" : {
-        "create" : "내 프로젝트 만들기",
+        "create" : "프로젝트 생성하기",
         "name" : "프로젝트명",
         "name_placeholder" : "프로젝트명을 입력하세요",
         "type" : "프로젝트 종류",
