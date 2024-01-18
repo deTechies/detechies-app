@@ -224,7 +224,10 @@ export const GroupForm = ({ lang }: { lang: any }) => {
 
                 <div className="grow">
                   <FormControl className="mb-2">
-                    <Input placeholder="Enter group name" {...field} />
+                    <Input
+                      placeholder={lang.group.create.form.name_placeholder}
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -246,7 +249,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
                 <div className="grow">
                   <FormControl className="mb-1">
                     <Textarea
-                      placeholder="Tell us a little bit about your group here"
+                      placeholder={lang.group.create.form.desc_placeholder}
                       className="p-4 resize-none min-h-[132px]"
                       {...field}
                     />
@@ -308,7 +311,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
         </div>
 
         <div className="flex flex-col gap-2">
-          {[...fields].reverse().map((field, index) => {
+          {/* {[...fields].reverse().map((field, index) => {
             const reversedIndex = fields.length - 1 - index;
 
             const handleSelectChange = (selectedValue: string) => {
@@ -382,7 +385,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
                 )}
               />
             );
-          })}
+          })} */}
 
           {/* <div className="items-end justify-right align-end">
             <Button

@@ -25,11 +25,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createProject } from "@/lib/data/project";
 import { uploadContent } from "@/lib/upload";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { postServer } from "@/lib/data/postRequest";
 import { ProjectCategory, ProjectType } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -110,8 +110,8 @@ export default function CreateProject() {
     if(present){
       data.end_date = "present";
     }
-
-    const result = await createProject({
+    
+    const submitData = JSON.stringify({
       image: image,
       name: data.name,
       description: data.description,
@@ -121,13 +121,14 @@ export default function CreateProject() {
       type: data.type,
     });
     
+    const result = await postServer("/project/create", submitData);
 
-    if (result.id) {
+    if (result.data) {
       toast({
         title: "Success",
         description: "Project created successfully",
       });
-      router.push(`/project/${result.id}`);
+      router.push(`/project/${result.data.id}`);
     }
 
     setLoading(false);

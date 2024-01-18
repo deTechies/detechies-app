@@ -4,6 +4,7 @@ import { ImagePlus } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
+import { useDictionary } from "@/lib/dictionaryProvider";
 
 interface MediaUploaderProps {
   onFileSelected?: (file: File | null, base64: string | null) => void;
@@ -24,6 +25,8 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
   const [mediaType, setMediaType] = useState<"image" | "video" | null>(null);
   const random = Math.random();
 
+  const dictionary = useDictionary();
+
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -31,6 +34,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
 
     if (file) {
       const fileType = file.type.split("/")[0];
+      console.log(fileType);
       if (fileType === "image" || fileType === "video") {
         const src = URL.createObjectURL(file);
         setMediaSource(src);
@@ -45,7 +49,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
           console.error("Error converting file to base64:", error);
         }
       } else {
-        alert("Please upload an image or video format.");
+        window.alert("Please upload an image or video format.");
       }
     }
   };
@@ -98,14 +102,14 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
           )}
           {!mediaSource && (
             <div
-              className={`flex flex-col gap-4 text-text-secondary py-3 px-4 text-center text-xs justify-center items-center w-full`}
+              className={`flex flex-col gap-2 text-text-secondary py-3 px-4 text-center text-xs justify-center items-center w-full`}
             >
               <ImagePlus
                 size={24}
                 className="font-light text-text-secondary"
                 strokeWidth={1.5}
               />
-              Click to upload
+              {dictionary.media_uploader.drag}
             </div>
           )}
           <input
@@ -130,7 +134,9 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               document.getElementById(random.toString())?.click();
             }}
           >
-            Upload Image
+            {dictionary.media_uploader.upload_image}
+
+            {/* Upload Image */}
           </Button>
           <Button
             size="sm"
@@ -146,7 +152,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               }
             }}
           >
-            Delete Image
+            {dictionary.media_uploader.delete_image}
           </Button>
         </div>
       </div>

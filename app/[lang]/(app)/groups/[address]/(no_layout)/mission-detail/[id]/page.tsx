@@ -1,5 +1,5 @@
-import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 
 import { getMissionDetails, getUsersMissionProgress } from "@/lib/data/mission";
 import MissionList from "./_components/mission-list";
@@ -11,19 +11,17 @@ export default async function MissionDetailPage({
 }: {
   params: { id: string; lang: Locale };
 }) {
-  const userProgress = await getUsersMissionProgress(params.id);
-  const missionDetails = await getMissionDetails(params.id);
-
+  const {data: userProgress} = await getUsersMissionProgress(params.id);
+  const {data: missionDetails} = await getMissionDetails(params.id);
   const dictionary = (await getDictionary(params.lang)) as any;
-  // console.log(missionDetails)
 
   return (
     <main className="grid w-full gap-6 mx-8 my-10 md:grid-cols-3">
-      <section className="flex flex-col md:col-span-2 gap-5">
-        <MissionSummary details={missionDetails} lang={dictionary} />
+      <section className="flex flex-col gap-5 md:col-span-2">
+        <MissionSummary details={missionDetails.data} lang={dictionary} />
 
         <MissionList
-          mission={missionDetails}
+          mission={missionDetails.data}
           userProgress={userProgress}
           lang={dictionary}
         ></MissionList>

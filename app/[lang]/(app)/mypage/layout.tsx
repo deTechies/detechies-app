@@ -21,10 +21,8 @@ export default async function MyPageLayout({
           <Profile text={dictionary.mypage.profile} profile={profile} />
           <Menu links={dictionary.mypage.menu} />
         </div>
-        {/* main */}
-        <div className="grow">
+        <div className="grow shrink">
           {children}
-          {/* <EditProfile /> */}
         </div>
       </div>
     </div>

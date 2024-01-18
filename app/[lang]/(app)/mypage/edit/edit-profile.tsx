@@ -119,7 +119,7 @@ export default function EditProfile({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <section className="mb-8">
-              <h1 className="mb-6 capitalize text-primary text-subhead_m">
+              <h1 className="capitalize text-text-primary text-subhead_s">
                 {text.edit_profile}
               </h1>
             </section>
