@@ -1,5 +1,29 @@
 "use client";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+
+import { uploadContent } from "@/lib/upload";
+import { createProject } from "@/lib/data/project";
+import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
+
+import MediaUploader from "@/components/extra/media-uploader";
+
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -10,33 +34,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { uploadContent } from "@/lib/upload";
-
-import { Label } from "@/components/ui/label";
-import { PrivacyType, ProjectType, SCOPE_TYPE } from "@/lib/interfaces";
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-
-import MediaUploader from "@/components/extra/media-uploader";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { createProject } from "@/lib/data/project";
-import { useDictionary } from "@/lib/dictionaryProvider";
-import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 
 const projectFormSchema = z.object({
@@ -63,7 +63,7 @@ type CreateProjectFormValues = z.infer<typeof projectFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<CreateProjectFormValues> = {
-  scope: SCOPE_TYPE.PUBLIC,
+  scope: PRIVACY_TYPE.PUBLIC,
 };
 
 export default function CreateProjectForm({ lang }: { lang: any }) {
@@ -73,11 +73,10 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
     mode: "onChange",
   });
 
-  const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
-  const search = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [present, setPresent] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
   // const dictionary = useDictionary()
@@ -105,6 +104,10 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
       data.image = uploadedImage ?? "";
     }
 
+    if (present) {
+      data.end_date = "";
+    }
+
     const result = await createProject({
       image: data.image,
       name: data.name,
@@ -128,7 +131,6 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
   }
 
   const selectFile = (file: any) => {
-    console.log(file);
     setFile(file);
   };
 
@@ -197,7 +199,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
           )}
         />
 
-        <FormInlineItem className="items-start">
+        <FormInlineItem className="items-start relative">
           <FormInlineLabel className="mt-5">
             {lang.project.list.create_project.period}
             <span className="ml-1 text-state-error">*</span>
@@ -208,7 +210,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               name="begin_date"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <Input type="date" placeholder="Select a type" {...field} />
+                  <Input type="date" {...field} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -218,17 +220,39 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               control={form.control}
               name="end_date"
               render={({ field }) => (
-                <FormItem className="w-full">
-                  <Input
-                    type="date"
-                    placeholder="Select a type"
-                    {...field}
-                    disabled={present}
-                  />
+                <FormItem
+                  className={`w-full relative space-y-0 ${
+                    present && "opacity-40"
+                  }`}
+                >
+                  <Input type="date" {...field} disabled={present} />
+                  {present && (
+                    <div className="text-title_m text-text-placeholder px-4 py-5 absolute inset-0 bg-background-layer-2 rounded-sm">
+                      {lang.project.list.create_project.in_progress}
+                    </div>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
+
+          <div className="flex justify-end absolute bottom-full right-0 gap-1 pb-3">
+            <Checkbox
+              id="present"
+              onCheckedChange={(_value: boolean) => {
+                if (_value) {
+                  form.setValue("end_date", "2099-12-31");
+                } else {
+                  form.setValue("end_date", "");
+                }
+
+                setPresent(!present);
+              }}
+            />
+            <Label htmlFor="present">
+              {lang.project.list.create_project.in_progress}
+            </Label>
           </div>
         </FormInlineItem>
 
@@ -352,9 +376,9 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-row flex-wrap gap-6"
+                className="flex flex-row flex-wrap gap-6 items-center"
               >
-                {Object.values(PrivacyType).map((type) => (
+                {Object.values(PRIVACY_TYPE).map((type) => (
                   <FormItem
                     key={type}
                     className="flex flex-wrap items-center space-y-0"
@@ -368,6 +392,10 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                     </FormLabel>
                   </FormItem>
                 ))}
+
+                {/* {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
+                  <Badge className="cursor-pointer">공개그룹 선택</Badge>
+                )} */}
               </RadioGroup>
 
               <FormMessage />
@@ -400,12 +428,3 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
     </Form>
   );
 }
-
-const FormElement = ({ children, ...props }: any) => {
-  return (
-    <div className="flex items-center" {...props}>
-      <Label className="flex-start shrink-0 w-[182px]">{props.label}</Label>
-      <div className="items-start justify-start grow">{children}</div>
-    </div>
-  );
-};

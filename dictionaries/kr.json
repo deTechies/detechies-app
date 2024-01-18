@@ -121,6 +121,7 @@
         "type" : "프로젝트 종류",
         "type_placeholder" : "선택하세요",
         "period" : "기간",
+        "in_progress": "진행중",
         "describe" : "프로젝트 설명",
         "describe_placeholder" : "프로젝트 설명을 입력하세요",
         "image" : "대표 이미지",

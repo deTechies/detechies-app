@@ -25,6 +25,8 @@ export default function ProjectDetail({
 
   const [showFull, setShowFull] = useState(false);
 
+  console.log(details);
+
   return (
     <Card className="w-full gap-8 px-8 pt-8 pb-5">
       <header className="flex items-start gap-9">
@@ -72,7 +74,7 @@ export default function ProjectDetail({
             </div>
 
             <div className="flex items-center gap-1 text-label_l text-text-secondary">
-              {beginEndDates(details.begin_date, details?.end_date)}
+              {beginEndDates(details.begin_date ,details?.end_date)}
             </div>
           </div>
 

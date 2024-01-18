@@ -121,6 +121,7 @@
         "type": "Type",
         "type_placeholder" : "Select Type",
         "period": "Period",
+        "in_progress": "In Progress",
         "describe": "Description",
         "describe_placeholder" : "Enter Description",
         "image": "Image",
