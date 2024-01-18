@@ -117,10 +117,15 @@
       "create_project" : {
         "create" : "내 프로젝트 만들기",
         "name" : "프로젝트명",
+        "name_placeholder" : "프로젝트명을 입력하세요",
         "type" : "프로젝트 종류",
+        "type_placeholder" : "선택하세요",
         "period" : "기간",
         "describe" : "프로젝트 설명",
+        "describe_placeholder" : "프로젝트 설명을 입력하세요",
         "image" : "대표 이미지",
+        "image_guide1": "guide1",
+        "image_guide2": "guide2",
         "category" : "프로젝트 카테고리",
         "scope" : "공개 범위",
         "back" : "뒤로가기",
@@ -140,8 +145,8 @@
         "delete_confirm" : "프로젝트를 삭제할까요?",
         "delete_dsc": "삭제할 경우 리더님과 다른 멤버의 프로젝트 활동 정보가 모두 삭제 돼요. 정말로 프로젝트를 삭제하고 싶다면 프로젝트명:",
         "delete_project_name" : "을 입력해 주세요.",
+        "placeholder": "정말로 삭제를 원할 시, 프로젝트명을 입력해주세요.",
         "cancel" : "취소하기"
-
       },
       "add_work":{
         "work":"Add Work"
@@ -733,6 +738,12 @@
       "joined": "멤버",
       "invited": "초대됨",
       "none": "행인"
+    },
+
+    "privacy_type": {
+      "public": "모든 유저",
+      "private": "프라이빗",
+      "group": "그룹 멤버"
     }
   }, 
   "footer": {

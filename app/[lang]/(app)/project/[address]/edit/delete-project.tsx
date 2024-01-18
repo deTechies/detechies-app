@@ -39,10 +39,15 @@ export default function DeleteProject({
   }
   return (
     <Dialog>
-      <DialogTrigger className="w-full py-4 text-center">{lang.project.list.delete_project.delete}</DialogTrigger>
-      <DialogContent className="flex flex-col gap-6">
+      <DialogTrigger className="w-full mt-5 text-center">
+        <Button variant="secondary" className="max-w-full" size="lg">
+          {lang.project.list.delete_project.delete}
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="flex flex-col gap-6 px-8">
         <header className="flex flex-col gap-4">
-          <h5 className="text-subhead_m">{lang.project.list.delete_project.delete_confirm}</h5>
+          <h5 className="text-subhead_s">{lang.project.list.delete_project.delete_confirm}</h5>
           <p className="text-body_m">
             {lang.project.list.delete_project.delete_dsc}<strong>{projectData.name}</strong>{" "}
             {lang.project.list.delete_project.delete_project_name}
@@ -53,9 +58,11 @@ export default function DeleteProject({
           type="text"
           onChange={(e) => setDeleteInput(e.target.value)}
           value={deleteInput}
+          placeholder={lang.project.list.delete_project.placeholder}
         />
+
         <div className="flex justify-center gap-2">
-          <DialogClose>
+          <DialogClose className="max-w-[212px] w-full">
             <Button size="lg" variant="secondary">
             {lang.project.list.delete_project.cancel}
             </Button>
