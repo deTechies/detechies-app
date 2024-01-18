@@ -1,14 +1,17 @@
 "use client";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
-import { PrivacyType, ProjectType } from "@/lib/interfaces";
 import { updateProject } from "@/lib/data/project";
 
 import MediaUploader from "@/components/extra/media-uploader";
 
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,11 +35,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X } from "lucide-react";
-
 
 const projectFormSchema = z.object({
   name: z
@@ -74,11 +76,11 @@ export default function ProjectEditForm({
     mode: "onChange",
   });
 
-  const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [present, setPresent] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
+  const [file, setFile] = useState<File | null>(null);
 
   const [createObjectURL, setCreateObjectURL] = useState(null);
 
@@ -103,6 +105,10 @@ export default function ProjectEditForm({
     if (file) {
       const uploadedImage = await uploadContent(file);
       data.image = uploadedImage ?? "";
+    }
+
+    if (present) {
+      data.end_date = "";
     }
 
     const result = await updateProject({
@@ -199,18 +205,18 @@ export default function ProjectEditForm({
           )}
         />
 
-        <FormInlineItem className="items-start">
+        <FormInlineItem className="items-start relative">
           <FormInlineLabel className="mt-5">
             {lang.project.list.create_project.period}
             <span className="ml-1 text-state-error">*</span>
           </FormInlineLabel>
-          <div className="flex flex-row gap-2 items-center w-full">
+          <div className="flex flex-row gap-2 items-center w-full flex-wrap sm:flex-nowrap">
             <FormField
               control={form.control}
               name="begin_date"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <Input type="date" placeholder="Select a type" {...field} />
+                  <Input type="date" {...field} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -220,17 +226,39 @@ export default function ProjectEditForm({
               control={form.control}
               name="end_date"
               render={({ field }) => (
-                <FormItem className="w-full">
-                  <Input
-                    type="date"
-                    placeholder="Select a type"
-                    {...field}
-                    disabled={present}
-                  />
+                <FormItem
+                  className={`w-full relative space-y-0 ${
+                    present && "opacity-40"
+                  }`}
+                >
+                  <Input type="date" {...field} disabled={present} />
+                  {present && (
+                    <div className="text-title_m text-text-placeholder px-4 py-5 absolute inset-0 bg-background-layer-2 rounded-sm">
+                      {lang.project.list.create_project.in_progress}
+                    </div>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
+
+          <div className="flex justify-end absolute bottom-full right-0 gap-1 pb-3">
+            <Checkbox
+              id="present"
+              onCheckedChange={(_value: boolean) => {
+                if (_value) {
+                  form.setValue("end_date", "2099-12-31");
+                } else {
+                  form.setValue("end_date", "");
+                }
+
+                setPresent(!present);
+              }}
+            />
+            <Label htmlFor="present">
+              {lang.project.list.create_project.in_progress}
+            </Label>
           </div>
         </FormInlineItem>
 
@@ -247,7 +275,9 @@ export default function ProjectEditForm({
               <div className="grow">
                 <FormControl className="mb-1">
                   <Textarea
-                    placeholder={lang.project.list.create_project.describe_placeholder}
+                    placeholder={
+                      lang.project.list.create_project.describe_placeholder
+                    }
                     className="p-4 resize-none min-h-[132px]"
                     {...field}
                   />
@@ -302,31 +332,37 @@ export default function ProjectEditForm({
                     value={newTag}
                     onChange={handleNewTagChange}
                     onKeyDown={handleKeyDown}
-                    disabled={form.getValues("tags") && form.getValues("tags").length > 4}
+                    disabled={
+                      form.getValues("tags") &&
+                      form.getValues("tags").length > 4
+                    }
                   />
                 </FormControl>
 
                 <div className="mt-3 flex gap-2 items-start">
-                  {form.getValues("tags") && form.getValues("tags")?.map((tag, index) => (
-                    <Badge
-                      key={index}
-                      variant="accent"
-                      shape="md"
-                      className="flex items-center gap-1.5"
-                    >
-                      {tag}
-                      <X
-                        className="cursor-pointer w-5 h-5"
-                        onClick={() => {
-                          const currentTags = form.getValues("tags") || [];
-                          const newTags = currentTags.filter((t) => t !== tag);
-                          form.setValue("tags", newTags, {
-                            shouldValidate: true,
-                          });
-                        }}
-                      ></X>
-                    </Badge>
-                  ))}
+                  {form.getValues("tags") &&
+                    form.getValues("tags")?.map((tag, index) => (
+                      <Badge
+                        key={index}
+                        variant="accent"
+                        shape="md"
+                        className="flex items-center gap-1.5"
+                      >
+                        {tag}
+                        <X
+                          className="cursor-pointer w-5 h-5"
+                          onClick={() => {
+                            const currentTags = form.getValues("tags") || [];
+                            const newTags = currentTags.filter(
+                              (t) => t !== tag
+                            );
+                            form.setValue("tags", newTags, {
+                              shouldValidate: true,
+                            });
+                          }}
+                        ></X>
+                      </Badge>
+                    ))}
                 </div>
               </div>
             </FormInlineItem>
@@ -348,7 +384,7 @@ export default function ProjectEditForm({
                 defaultValue={field.value}
                 className="flex flex-row flex-wrap gap-6"
               >
-                {Object.values(PrivacyType).map((type) => (
+                {Object.values(PRIVACY_TYPE).map((type) => (
                   <FormItem
                     key={type}
                     className="flex flex-wrap items-center space-y-0"

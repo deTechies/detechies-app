@@ -2,7 +2,7 @@
 import { fileToBase64 } from "@/lib/utils";
 import { ImagePlus } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "../ui/button";
 import { useDictionary } from "@/lib/dictionaryProvider";
 
@@ -24,6 +24,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
   const [mediaSource, setMediaSource] = useState<string | null>(null);
   const [mediaType, setMediaType] = useState<"image" | "video" | null>(null);
   const random = Math.random();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const dictionary = useDictionary();
 
@@ -34,7 +35,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
 
     if (file) {
       const fileType = file.type.split("/")[0];
-      console.log(fileType);
+
       if (fileType === "image" || fileType === "video") {
         const src = URL.createObjectURL(file);
         setMediaSource(src);
@@ -66,7 +67,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
   );
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 flex-wrap">
       <div
         className="relative flex items-center justify-center overflow-hidden border-2 border-dashed rounded-sm cursor-pointer border-border-input media-uploader bg-background-layer-2 hover:bg-background-layer-1"
         onClick={() => document.getElementById(random.toString())?.click()}
@@ -118,6 +119,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
             accept="image/*,video/*"
             onChange={handleFileChange}
             className="hidden"
+            ref={fileInputRef}
           />
         </div>
       </div>
@@ -149,6 +151,9 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               setMediaType(null);
               if (onFileSelected) {
                 onFileSelected(null, null);
+              }
+              if (fileInputRef.current) {
+                fileInputRef.current.value = "";
               }
             }}
           >
