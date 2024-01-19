@@ -226,11 +226,6 @@ export default function ProjectContributionForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>업무 기여도</FormLabel>
-                  <div className="flex w-full justify-between text-xs text-text-secondary">
-                    <span>0</span>
-                    <span className="content-center w-full text-right">50</span>
-                    <span className="content-right text-right w-full">100</span>
-                  </div>
                   <FormControl>
                     <Slider
                       {...field}
