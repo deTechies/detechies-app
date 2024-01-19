@@ -26,12 +26,12 @@ export default async function ProjectMemberEvaluation({
       <section className="w-[360px] flex flex-col gap-4">
         <ProjectSwitcher
           title={dictionary.project.work.project}
-          project={details.data.evaluator?.project}
+          project={details.data.projectWork?.projectMember?.project}
           lang={dictionary}
         />
         <ProjectMemberInline
           title={dictionary.project.work.evaluatee}
-          projectMember={details.data.projectWork.projectMember}
+          projectMember={details.data.projectWork?.projectMember}
           projectWork={details.data.projectWork}
           lang={dictionary}
         />
