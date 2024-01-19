@@ -43,7 +43,7 @@ const contributionFormSchema = z.object({
   }),
   present: z.boolean().default(false),
   valid: z.boolean().optional(),
-  tags: z.array(z.string()).optional(),
+  tags: z.array(z.string()),
 });
 
 export type ContributionFormData = z.infer<typeof contributionFormSchema>;
@@ -177,7 +177,6 @@ export default function ProjectContributionInviteForm({
                     <FormItem className="w-full">
                       <Input
                         type="date"
-                        placeholder="Select a type"
                         {...field}
                       />
                       <FormMessage />
@@ -192,7 +191,6 @@ export default function ProjectContributionInviteForm({
                     <FormItem className="w-full">
                       <Input
                         type="date"
-                        placeholder="Select a type"
                         {...field}
                         disabled={form.watch("present", false)}
                       />
@@ -210,24 +208,33 @@ export default function ProjectContributionInviteForm({
 
               <FormControl>
                 <Input
-                  placeholder="Type and press enter"
+                  placeholder={lang.project.details.members.add_works.type}
                   value={newTag}
                   onChange={handleNewTagChange}
                   onKeyDown={handleKeyDown}
+                  disabled={
+                    form.getValues("tags") &&
+                    form.getValues("tags").length > 4
+                  }
                 />
               </FormControl>
-              <div>
+
+              <div className="flex flex-wrap gap-3">
+              {/* py-4 px-5 border border-border-div rounded-sm */}
                 {form.watch("tags")?.map((tag: any, index) => (
                   <Badge
                     key={index}
-                    className="px-3 py-2 mr-2 text-xs border rounded-full bg-background-layer-1 border-accent-primary"
+                    shape="outline"
+                    variant="accent"
                     onClick={() => {
                       const currentTags = form.getValues("tags") || [];
                       const newTags = currentTags.filter((t) => t !== tag);
                       form.setValue("tags", newTags, { shouldValidate: true });
                     }}
                   >
-                    {tag}
+                    <div className="truncate">
+                      {tag}
+                    </div>
                   </Badge>
                 ))}
               </div>
@@ -241,11 +248,6 @@ export default function ProjectContributionInviteForm({
                   <FormLabel>
                     {lang.project.details.members.add_works.attribute}
                   </FormLabel>
-                  <div className="flex justify-between w-full text-xs text-text-secondary">
-                    <span>0</span>
-                    <span className="content-center w-full text-right">50</span>
-                    <span className="w-full text-right content-right">100</span>
-                  </div>
                   <FormControl>
                     <Slider
                       {...field}
