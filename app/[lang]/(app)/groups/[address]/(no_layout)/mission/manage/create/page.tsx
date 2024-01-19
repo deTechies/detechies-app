@@ -27,7 +27,7 @@ export default async function CreateMissionPage({
     lang: Locale;
   };
 }) {
-  const {data:achievements} = await getGroupAchievements(params.address);
+  const achievements = await getGroupAchievements(params.address);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (

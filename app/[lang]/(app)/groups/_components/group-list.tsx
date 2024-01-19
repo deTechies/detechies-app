@@ -52,7 +52,7 @@ export default function GroupList({
       </TabsList>
 
       <div className="w-full my-10 max-w-[27rem] mx-auto">
-        <Search placeholder={lang.group.list.search_placeholder} />
+        <Search placeholder={lang.group.list.search_placeholder} className="bg-background-layer-1" />
       </div>
 
       <TabsContent value="all" className="mx-0 mt-0 mb-16">
@@ -89,9 +89,9 @@ export default function GroupList({
             {lang.group.list.banner}
           </div>
 
-          <div className="mb-5 text-subhead_m text-black">{lang.group.list.banner2}</div>
+          <div className="mb-5 text-subhead_m text-text-fixed">{lang.group.list.banner2}</div>
 
-          <div className="flex items-center gap-1 text-title_m text-black">
+          <div className="flex items-center gap-1 text-title_m text-text-fixed">
             {lang.group.list.banner3}
             <ArrowRight className="w-4 h-4"></ArrowRight>
           </div>

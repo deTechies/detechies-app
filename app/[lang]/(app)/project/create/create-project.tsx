@@ -1,20 +1,23 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { useRouter } from "next/navigation";
 
+import { uploadContent } from "@/lib/upload";
+import { createProject } from "@/lib/data/project";
+import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
+
+import MediaUploader from "@/components/extra/media-uploader";
+// import SelectGroupInScope from "./select-group-in-scope";
+
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -22,19 +25,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { uploadContent } from "@/lib/upload";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormInlineItem,
+  FormInlineLabel,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { ProjectType, SCOPE_TYPE } from "@/lib/interfaces";
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-
-import MediaUploader from "@/components/extra/media-uploader";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { createProject } from "@/lib/data/project";
-import { useDictionary } from "@/lib/dictionaryProvider";
-
+import { X } from "lucide-react";
 
 const projectFormSchema = z.object({
   name: z
@@ -48,7 +52,7 @@ const projectFormSchema = z.object({
   begin_date: z.string(),
   end_date: z.string(),
   description: z.string().max(5000).min(4),
-  tags: z.array(z.string().optional()),
+  tags: z.array(z.string()),
   scope: z.string().optional(),
   image: z.string().optional(),
   type: z.nativeEnum(ProjectType, {
@@ -56,34 +60,27 @@ const projectFormSchema = z.object({
   }),
 });
 
-type CreateProjectFormValues = z.infer<typeof projectFormSchema>
-
+type CreateProjectFormValues = z.infer<typeof projectFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<CreateProjectFormValues> = {
-  scope: SCOPE_TYPE.PUBLIC,
+  scope: PRIVACY_TYPE.PUBLIC,
 };
 
-
-export default function CreateProjectForm({
-  lang
-}:{ lang:any}) {
+export default function CreateProjectForm({ lang }: { lang: any }) {
   const form = useForm<CreateProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues,
     mode: "onChange",
   });
 
-  const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
-  const search = useSearchParams()
   const [loading, setLoading] = useState(false);
   const [present, setPresent] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
   // const dictionary = useDictionary()
-
-
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
@@ -106,6 +103,10 @@ export default function CreateProjectForm({
     if (file) {
       const uploadedImage = await uploadContent(file);
       data.image = uploadedImage ?? "";
+    }
+
+    if (present) {
+      data.end_date = "";
     }
 
     const result = await createProject({
@@ -131,201 +132,302 @@ export default function CreateProjectForm({
   }
 
   const selectFile = (file: any) => {
-    console.log(file)
     setFile(file);
   };
 
   return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="mt-5">
+                {lang.project.list.create_project.name}
+                <span className="ml-1 text-state-error">*</span>
+              </FormInlineLabel>
 
-      <Card>
-         <h3 className="px-6 my-6 text-heading_s" >{lang.project.list.create_project.create}</h3>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="px-6 space-y-8 ">
-            <FormElement label={lang.project.list.create_project.name}>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem >
-                    <FormControl>
-                      <Input placeholder={lang.project.list.create_project.name_dsc} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </FormElement>
-            <FormElement label={lang.project.list.create_project.type}>
-              <FormField
-                control={form.control}
-                name="type"
-                render={({ field }) => (
-                  <FormItem>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl className="max-w-[300px]">
-                        <SelectTrigger>
-                          <SelectValue placeholder={lang.project.list.create_project.type_dsc}  />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Object.values(ProjectType).map((type) => (
-                          <SelectItem key={type} value={type}>
-                            {type}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </FormElement>
-            <FormElement label={lang.project.list.create_project.period}>
-              <div className="flex flex-row items-center w-full gap-2">
-                <FormField
-                  control={form.control}
-                  name="begin_date"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <Input
-                        type="date"
-                        placeholder="Select a type"
-                        {...field}
+              <div className="grow">
+                <FormControl className="mb-2">
+                  <Input
+                    placeholder={lang.project.list.create_project.name_dsc}
+                    {...field}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </div>
+            </FormInlineItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="mt-5">
+                {lang.project.list.create_project.type}
+                <span className="ml-1 text-state-error">*</span>
+              </FormInlineLabel>
+
+              <div className="grow">
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl className="max-w-[300px]">
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={
+                          lang.project.list.create_project.type_placeholder
+                        }
                       />
-                      <FormMessage />
-                    </FormItem>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {Object.values(ProjectType).map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {lang.interface.project_type[type]}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </div>
+            </FormInlineItem>
+          )}
+        />
+
+        <FormInlineItem className="items-start relative">
+          <FormInlineLabel className="mt-5">
+            {lang.project.list.create_project.period}
+            <span className="ml-1 text-state-error">*</span>
+          </FormInlineLabel>
+          <div className="flex flex-row gap-2 flex-wrap sm:flex-nowrap items-center w-full">
+            <FormField
+              control={form.control}
+              name="begin_date"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <Input type="date" {...field} />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <span>~</span>
+            <FormField
+              control={form.control}
+              name="end_date"
+              render={({ field }) => (
+                <FormItem
+                  className={`w-full relative space-y-0 ${
+                    present && "opacity-40"
+                  }`}
+                >
+                  <Input type="date" {...field} disabled={present} />
+                  {present && (
+                    <div className="text-title_m text-text-placeholder px-4 py-5 absolute inset-0 bg-background-layer-2 rounded-sm">
+                      {lang.project.list.create_project.in_progress}
+                    </div>
                   )}
-                />
-                <span>~</span>
-                <FormField
-                  control={form.control}
-                  name="end_date"
-                  render={({ field }) => (
-                    <FormItem className="w-full">
-                      <Input
-                        type="date"
-                        placeholder="Select a type"
-                        {...field}
-                        disabled={present}
-                      />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </FormElement>
-            <FormElement label={lang.project.list.create_project.describe} className="flex items-start">
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Textarea
-                        placeholder={lang.project.list.create_project.describe_dsc} 
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </FormElement>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-            <FormElement label={lang.project.list.create_project.image} className="flex items-start">
-              <div className="flex gap-3">
-                <MediaUploader
-                  onFileSelected={selectFile}
-                  width={140}
-                  height={140}
-                />
-              </div>
-            </FormElement>
-            <FormElement label={lang.project.list.create_project.category}>
-              <FormControl>
-                <Input
-                  placeholder={lang.project.list.create_project.category_dsc} 
-                  value={newTag}
-                  onChange={handleNewTagChange}
-                  onKeyDown={handleKeyDown}
-                />
-              </FormControl>
-              <div className="flex items-start gap-2 mt-3">
-                {form.watch("tags")?.map((tag, index) => (
-                  <Button
-                    key={index}
-                    size="sm"
-                    variant="primary"
-                    onClick={() => {
-                      const currentTags = form.getValues("tags") || [];
-                      const newTags = currentTags.filter((t) => t !== tag);
-                      form.setValue("tags", newTags, { shouldValidate: true });
-                    }}
-                  >
-                    {tag}
-                  </Button>
-                ))}
-              </div>
-            </FormElement>
-            <FormElement label={lang.project.list.create_project.scope}>
-              <FormField
-                control={form.control}
-                name="scope"
-                render={({ field }) => (
-                  <RadioGroup
-                    className="flex gap-4"
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <div className="flex items-center gap-2">
-                      <RadioGroupItem value="public" />
-                      <Label>{lang.project.list.create_project.public}</Label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <RadioGroupItem value="private" />
-                      <Label>{lang.project.list.create_project.private}</Label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <RadioGroupItem value="team" />
-                      <Label>{lang.project.list.create_project.team}</Label>
-                    </div>
-                  </RadioGroup>
-                )}
-              />
-            </FormElement>
+          <div className="flex justify-end absolute bottom-full right-0 gap-1 pb-3">
+            <Checkbox
+              id="present"
+              onCheckedChange={(_value: boolean) => {
+                if (_value) {
+                  form.setValue("end_date", "2099-12-31");
+                } else {
+                  form.setValue("end_date", "");
+                }
 
-            <div className="flex items-center justify-end gap-8">
-              <Button variant="secondary" type="button" size="lg"
-                onClick={() => {
-                  router.back();
-                }}
-              >
-                {lang.project.list.create_project.back}
-              </Button>
-              <Button
-                type="submit"
-                size="lg"
-                disabled={loading || !form.formState.isValid}
-                loading={loading}
-              >
-                {lang.project.list.create_project.make}
-              </Button>
+                setPresent(!present);
+              }}
+            />
+            <Label htmlFor="present">
+              {lang.project.list.create_project.in_progress}
+            </Label>
+          </div>
+        </FormInlineItem>
+
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormInlineItem className="items-start">
+              <FormInlineLabel>
+                {lang.project.list.create_project.describe}
+                <span className="ml-1 text-state-error">*</span>
+              </FormInlineLabel>
+
+              <div className="grow">
+                <FormControl className="mb-1">
+                  <Textarea
+                    placeholder={
+                      lang.project.list.create_project.describe_placeholder
+                    }
+                    className="p-4 resize-none min-h-[132px]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </div>
+            </FormInlineItem>
+          )}
+        />
+
+        <FormInlineItem className="items-start">
+          <FormInlineLabel className="items-start">
+            {lang.group.create.form.cover_image}
+          </FormInlineLabel>
+
+          <MediaUploader
+            key="image"
+            onFileSelected={selectFile}
+            width={140}
+            height={140}
+          >
+            <div>
+              <div className="mb-1 text-title_s text-text-secondary">
+                {lang.group.create.form.image_guide}
+              </div>
+
+              <li className="text-text-placeholder text-label_s">
+                {lang.project.list.create_project.image_guide1}
+              </li>
+
+              <li className="text-text-placeholder text-label_s">
+                {lang.project.list.create_project.image_guide2}
+              </li>
             </div>
-          </form>
-        </Form>
-      </Card>
+          </MediaUploader>
+        </FormInlineItem>
 
+        <FormField
+          control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="mt-5">
+                {lang.project.list.create_project.category}
+                <span className="ml-1 text-state-error">*</span>
+              </FormInlineLabel>
+
+              <div className="grow">
+                <FormControl className="mb-2">
+                  <Input
+                    placeholder={lang.project.list.create_project.category_dsc}
+                    value={newTag}
+                    onChange={handleNewTagChange}
+                    onKeyDown={handleKeyDown}
+                    disabled={
+                      form.getValues("tags") &&
+                      form.getValues("tags").length > 4
+                    }
+                  />
+                </FormControl>
+
+                <div className="mt-3 flex flex-wrap gap-2 items-start">
+                  {form.getValues("tags") &&
+                    form.getValues("tags")?.map((tag, index) => (
+                      <Badge
+                        key={index}
+                        variant="accent"
+                        shape="md"
+                        className="flex items-center gap-1.5 max-w-[200px]"
+                      >
+                        <div className="truncate w-full">
+                          {tag}
+                        </div>
+                        <X
+                          className="cursor-pointer w-5 h-5"
+                          onClick={() => {
+                            const currentTags = form.getValues("tags") || [];
+                            const newTags = currentTags.filter(
+                              (t) => t !== tag
+                            );
+                            form.setValue("tags", newTags, {
+                              shouldValidate: true,
+                            });
+                          }}
+                        ></X>
+                      </Badge>
+                    ))}
+                </div>
+              </div>
+            </FormInlineItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="scope"
+          render={({ field }) => (
+            <FormInlineItem className="h-12">
+              <FormInlineLabel>
+                {lang.project.list.create_project.scope}
+                <span className="ml-1 text-state-error">*</span>
+              </FormInlineLabel>
+
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                className="flex flex-row flex-wrap gap-6 items-center"
+              >
+                {Object.values(PRIVACY_TYPE).map((type) => (
+                  <FormItem
+                    key={type}
+                    className="flex flex-wrap items-center space-y-0"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value={type} />
+                    </FormControl>
+
+                    <FormLabel className="font-normal capitalize">
+                      {lang.interface.privacy_type[type]}
+                    </FormLabel>
+                  </FormItem>
+                ))}
+
+                {/* {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
+                  <SelectGroupInScope lang={lang}></SelectGroupInScope>
+                )} */}
+              </RadioGroup>
+
+              <FormMessage />
+            </FormInlineItem>
+          )}
+        />
+
+        <div className="flex items-center justify-end gap-2">
+          <Button
+            variant="secondary"
+            type="button"
+            size="lg"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            {lang.project.list.create_project.back}
+          </Button>
+
+          <Button
+            type="submit"
+            size="lg"
+            disabled={loading || !form.formState.isValid}
+            loading={loading}
+          >
+            {lang.project.list.create_project.make}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }
-
-const FormElement = ({ children, ...props }: any) => {
-  return (
-    <div className="flex items-center" {...props}>
-      <Label className="flex-start shrink-0 w-[182px]">{props.label}</Label>
-      <div className="items-start justify-start grow">{children}</div>
-    </div>
-  );
-};

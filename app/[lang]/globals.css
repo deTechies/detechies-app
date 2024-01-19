@@ -52,7 +52,8 @@
     --text-secondary: #6B7684;
     --text-placeholder: #A2A9B3;
     --text-disabled: #A2A9B3;
-    
+    --text-fixed: #101113;
+
     --icon-primary: #101113;
     --icon-secondary: #96A6B4;
     
@@ -132,6 +133,7 @@
     --text-secondary: #6B7684;
     --text-disabled: #8C8E92;
     --text-placeholder: #8C8E92;
+    --text-fixed: #101113;
     
     --icon-primary: #101113;
     --icon-secondary: #96A6B4;

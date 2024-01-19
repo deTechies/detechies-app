@@ -14,6 +14,8 @@ export default async function ProjectMembers({
   projectId: string;
   lang: any;
 }) {
+
+
   return (
     <section className="flex flex-col gap-4">
       <Card className="flex flex-col gap-4 p-6">
@@ -26,7 +28,11 @@ export default async function ProjectMembers({
             <JoinProject lang={lang} address={projectId} />
           )}
           {details.userRole == "admin" && (
-            <InviteProjectMember lang={lang} projectId={projectId} />
+            <InviteProjectMember
+              lang={lang}
+              projectId={projectId}
+              projectMembers={details.members}
+            />
           )}
         </header>
       </Card>

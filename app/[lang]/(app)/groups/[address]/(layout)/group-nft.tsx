@@ -22,8 +22,6 @@ export default function GroupNFT({
   lang: any;
 }) {
   const pathName = usePathname();
-  console.log(achievements);
-  console.log(userAchievements);
 
   const user_achievements = userAchievements.map(item => item.achievement.id);
 
@@ -52,6 +50,7 @@ export default function GroupNFT({
                 key={index}
                 lang={lang}
                 contract={contract}
+                showMintButton={true}
                 blockRequest={user_achievements.includes(item.id)}
               />
             ))}
