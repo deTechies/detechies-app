@@ -5,7 +5,7 @@ import * as React from "react"
 import { Loader2 } from "lucide-react"
 
 const buttonVariants = cva(
-  "inline-flex hover:shadow-inner items-center justify-center ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex hover:opacity-70 items-center justify-center ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -25,7 +25,8 @@ const buttonVariants = cva(
         lg: "py-[15.5px] px-4 rounded-full text-title_m max-w-[212px] w-full grow truncate",
         icon: "h-12 w-12 shrink-0 rounded-md p-2 truncate",
         icon_circle: "h-12 w-12 shrink-0 rounded-full p-2 truncate",
-        image: "h-fit w-fit p-0 bg-transparent hover:shadow-none truncate"
+        image: "h-fit w-fit p-0 bg-transparent hover:shadow-none truncate",
+        ts: "pt-1 pb-[6px] px-[10px] text-title_s rounded-[14px] truncate",
       },
     },
     defaultVariants: {

@@ -119,7 +119,7 @@ export default async function ProjectMemberItem({
             </header>
 
             {userRole == "admin" || "client" || "member"  ? (
-              <ProjectWorkDetail data={details.works[0]} />
+              <ProjectWorkDetail data={details.works[0]} lang={lang} />
             ) : (
               <BlurredProjectWorkDetail />
             )}
