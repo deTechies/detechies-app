@@ -8,19 +8,19 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import {DEFAULT_IPFS_URL} from "@/lib/constants";
 
-interface NftListItemProps {
+interface IListAvatarItemTriggerProps {
   showSelect?: boolean;
   selected?: boolean;
   item: Achievement;
   lang?: any;
 }
 
-export default function NftListItem({
+export default function ListAvatarItemTrigger({
   showSelect,
   selected,
   item,
   lang,
-}: NftListItemProps) {
+}: IListAvatarItemTriggerProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -40,7 +40,6 @@ export default function NftListItem({
       ? url.substring(DEFAULT_IPFS_URL.length)
       : url;
   }
-
 
   return (
     <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
