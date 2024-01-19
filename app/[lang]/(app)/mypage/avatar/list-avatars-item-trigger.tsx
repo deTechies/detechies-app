@@ -15,6 +15,11 @@ interface IListAvatarItemTriggerProps {
   lang?: any;
 }
 
+interface INftTypeChipProps{
+  label: string,
+  theme: "warning" | "info"
+}
+
 export default function ListAvatarItemTrigger({
   showSelect,
   selected,
@@ -42,8 +47,8 @@ export default function ListAvatarItemTrigger({
   }
 
   return (
-    <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
-      <div className="relative object-scale-down w-full m-0 aspect-square ">
+    <section className="w-[174px] p-0 border rounded-md shadow-custom bg-background-layer-2">
+      <div className="relative object-scale-down w-full m-0 aspect-square">
         {showSelect && item.avatar_type && (
           <Switch
             className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
@@ -67,15 +72,15 @@ export default function ListAvatarItemTrigger({
               : DEFAULT_IPFS_URL + item.avatar
           }
           alt="nft_list_item"
-          className="object-contain rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
+          className="object-contain rounded-t-sm bg-background-base"
           fill={true}
           priority={true}
         />
       </div>
 
-      <div className="flex flex-col items-start justify-start gap-3 p-5">
+      <div className="flex flex-col items-start justify-start gap-3 pt-2 px-3 pb-3">
         <div className="flex justify-between w-full">
-          <span className="capitalize truncate text-title_l">
+          <span className="capitalize truncate text-title_s">
             {item?.name || "undefined"}
           </span>
         </div>
@@ -84,19 +89,31 @@ export default function ListAvatarItemTrigger({
         </Link> */}
 
         <div className="flex flex-wrap gap-2">
-          <Badge variant="info" shape="category">
-            {lang && item.nft_type
+          <NftTypeChip label={
+            lang && item.nft_type
               ? lang.interface.nft_type[item.nft_type]
               : "No Type"}
-          </Badge>
+              theme="info"
+            />
+
+
 
           {item?.avatar && (
-            <Badge variant="warning" shape="category">
-              {lang.interface.nft_image_type.avatar}
-            </Badge>
+            <NftTypeChip label={lang.interface.nft_image_type.avatar} theme="warning"/>
           )}
         </div>
       </div>
     </section>
   );
 }
+
+
+
+function NftTypeChip({label, theme}:INftTypeChipProps){
+  return(
+    <div className={`relative grid select-none items-center whitespace-nowrap rounded-full ${theme == "info" ? "bg-state-warning-secondary" : "bg-state-info-secondary"} py-1 px-2 font-sans text-xs font-normal uppercase`}>
+      <span>{label}</span>
+    </div>
+  )
+}
+
