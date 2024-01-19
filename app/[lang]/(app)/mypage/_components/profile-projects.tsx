@@ -47,17 +47,17 @@ export default function ProfileProjects({
             >
               <Card key={index} className="flex flex-row">
                   {/* Image on the left */}
-                  <div className="w-[100px] h-[100px] relative aspect-square rounded-[12px] overflow-hidden">
+                  <div className="relative h-[100px] w-[100px] aspect-square rounded-md ">
                     <Image
                       src={`https://cloudflare-ipfs.com/ipfs/${project.project.image}`}
                       alt="project image"
-                      width={68}
-                      height={68}
+                      width={100}
+                      height={100}
                       className="rounded-sm"
                     />
                   </div>
                   {/* Text on the right */}
-                  <div className="flex flex-col items-start gap-[16px] relative flex-1 self-stretch grow w-full">
+                  <div className="flex flex-col items-start gap-4  grow w-full">
                     {/* <header className="flex items-center gap-2 bg-orange-100">
                       
                       <span className="text-text-secondary text-label_m ">
@@ -69,41 +69,41 @@ export default function ProfileProjects({
                       </span>
                       <Badge>{text?.evaluation} (0)</Badge>
                     </header> */}
-                    <div className="flex items-start gap-[16px] relative self-stretch">
-                      <div className="flex flex-col gap-[16px] flex-1 grow items-start relative">
+                    <div className="flex items-start gap-4 self-stretch">
+                      <div className="flex flex-col gap-4 grow items-start">
                         <h5 className="text-subhead_s">{project.project.name}</h5>
-                        <div className="flex h-[48px] gap-[8px] self-stretch w-full items-start relative">
-                          <div className="flex flex-col w-[240px] gap-[8px] items-start relative">
-                            <div className="flex gap-[8px] self-stretch w-full flex-[0_0_auto] items-start relative">
-                              <span className="text-[#6B7684] text-sm">{project.project.type}</span>
-                              <span className="text-[#6B7684] text-sm">| {formatDate(project.project.begin_date)} ~ {project.project.end_date
+                        <div className="flex md:flex-row flex-col h-12 gap-2 w-full items-start">
+                          <div className="flex flex-col max-w-[240px] flex-wrap gap-[8px] items-start">
+                            <div className="flex flex-col gap-2 flex-wrap w-full shrink-0 items-start">
+                              <span className="text-text-secondary text-sm">{project.project.type}</span>
+                              <span className="text-text-secondary text-sm">| {formatDate(project.project.begin_date)} ~ {project.project.end_date
                           ? formatDate(project.project.end_date)
                           : text?.present}{" "}</span>
                             </div>
                             <div className="flex flex-col gap-[8px]">
                               {project.works.map((work: any, index: number)=>{
                                 return(
-                                  <div className="flex flex-row gap-[8px] self-stretch w-full flex[0_0_auto] items-start relative" key={index}>
-                                    <span className="text-[#6B7684] text-sm">{work.name}</span>
-                                    <span className="text-[#6B7684] text-sm">{"| "} {work.percentage} %</span>
+                                  <div className="flex flex-row gap-2 self-stretch w-full items-start" key={index}>
+                                    <span className="text-text-secondary text-sm">{work.name}</span>
+                                    <span className="text-text-secondary text-sm">{"| "} {work.percentage} %</span>
                                   </div>
                                 )
 
                               })}
                             </div>
                           </div>
-                          <span className="self-stretch flex-1 flex grow text-[#6B7684] text-sm">{project.project.description}</span>
+                          <span className="self-stretch flex grow text-text-secondary text-sm">{project.project.description}</span>
                         </div>
                       </div>
-                      <div className="inline-flex gap-[12px] self-stretch flex-[0_0_auto] items-start relative">
-                        <Badge className="!flex-[0_0_auto] !px-[10px] !py-[8px]">{text?.evaluation} {project.level}</Badge>
+                      <div className="inline-flex gap-3 self-stretch flex-[0_0_auto] items-start">
+                        <Badge className="!px-3 !py-2">{text?.evaluation} {project.level}</Badge>
                       </div>
                     </div>
-                    <div className="inline-flex items-start gap-[12px] relative">
+                    <div className="flex gap-3 ">
                       {project.project?.tags && project.project?.tags.map((tag: string, index: number)=>{
                         return(
-                          <div className="inline-flex relative h-[32px] py-[8px] px-[10px] justify-center items-center rounded-[20px] border-[1px] border-[#BEC3CA]" key={index}>
-                            <span className="text-[#A2A9B3] text-[12px]">{tag}</span>
+                          <div className="inline-flex  h-8 max-w-8 overflow-ellipse py-2 px-2.5 justify-center items-center rounded-[20px] border border-border-div" key={index}>
+                            <span className="text-text-secondary">{tag}</span>
                           </div>
                         )
                       })}
