@@ -128,7 +128,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                 control={form.control}
                 name="nft_type"
                 render={({ field }) => (
-                  <FormInlineItem className="h-12">
+                  <FormInlineItem>
                     <FormInlineLabel>
                       NFT 유형 <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
@@ -160,7 +160,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                 control={form.control}
                 name="image_type"
                 render={({ field }) => (
-                  <FormInlineItem className="h-12">
+                  <FormInlineItem>
                     <FormInlineLabel>
                       NFT 속성 <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
@@ -205,7 +205,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                   control={form.control}
                   name="type"
                   render={({ field }) => (
-                    <FormInlineItem className="h-12">
+                    <FormInlineItem>
                       <FormInlineLabel>
                         {/* Type */}
                         증명서 타입
@@ -287,7 +287,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                     control={form.control}
                     name="avatar_type"
                     render={({ field }) => (
-                      <FormInlineItem className="h-12">
+                      <FormInlineItem>
                         <FormInlineLabel>
                           {/* Avatar Type */}
                           아바타 타입

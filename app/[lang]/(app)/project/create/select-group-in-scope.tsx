@@ -1,11 +1,11 @@
-// "use client";
+"use client";
 import { useEffect, useState } from "react";
 
-import { useParams, useSearchParams } from "next/navigation";
+import { Club } from "@/lib/interfaces";
+import { serverApi } from "@/lib/data/general";
 
-import Search from "@/components/extra/search";
 import { Button } from "@/components/ui/button";
-
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogClose,
@@ -13,71 +13,68 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Achievement, Club } from "@/lib/interfaces";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { toast } from "@/components/ui/use-toast";
-import { Badge } from "@/components/ui/badge";
-import { getUserProfile } from "@/lib/data/user";
-import { getGroups } from "@/lib/data/groups";
-import useFetchData from "@/lib/useFetchData";
+import GroupCheckboxListItem from "./group-checkbox-list-item";
 
-export default function SelectGroupInScope({ lang }: { lang: any }) {
+export default function SelectGroupInScope({
+  lang,
+  selectedGroup,
+  setSelectedGroup,
+}: {
+  lang: any;
+  selectedGroup: Club[]; 
+  setSelectedGroup: Function;
+}) {
   const [Selecting, setSelecting] = useState<boolean>(false);
-  const [selectedGroup, setSelectedGroup] = useState<Club[]>([]);
+  const [myGroups, setMyGroups] = useState<Club[]>([]);
+  const [selectedTempGroup, setSelectedTempGroup] = useState<Club[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // const { data: members, loading: fetchLoading, error } = useFetchData<any[]>("/users");
+  useEffect(() => {
+    setSelectedTempGroup([...selectedGroup]);
+  }, [selectedGroup])
 
-  const onClickSelectGroup = async () => {
-    setLoading(true);
-    const groups = await getGroups();
-    console.log(groups);
-    setSelecting(true);
+  const onClickGoSelectGroup = async () => {
+    if (myGroups.length === 0) {
+      setLoading(true);
+      const result = await serverApi(`/clubs/my`);
+
+      if (result.status === "success") {
+        setSelecting(true);
+        setMyGroups(result.data);
+      } else {
+        // error
+      }
+      setLoading(false);
+    } else {
+      setSelecting(true);
+    }
   };
-  
 
+  const onClickSelectGroup = () => {
+    setSelectedGroup([...selectedTempGroup]);
+    setSelecting(false);
+  };
 
-  // const onClickGroupItem = (_group: any) => {
-  //   setSelectedGroup(_group);
-  // };
+  const onClickGroupListItem = (_group: Club) => {
+    setSelectedTempGroup((prevSelected) => {
+      if (prevSelected.includes(_group)) {
+        // 이미 선택된 경우, 해당 ID 제거
+        return prevSelected.filter((_prev_group) => _prev_group !== _group);
+      } else {
+        // 선택되지 않은 경우, ID 추가
+        return [...prevSelected, _group];
+      }
+    });
+  };
 
-  // useEffect(() => {
-  //   const getAchievements = async () => {
-  //     if (!selectedGroup) return;
-  //     const { data: fetchedGroupAchievement } =
-  //       await getGroupAchievementsClient(selectedGroup.id);
-  //     setGroupAchievements(fetchedGroupAchievement);
-  //   };
-  //   if (selectedGroup) {
-  //     setSelectedAchievement;
-  //     getAchievements();
-  //   }
-  // }, [selectedGroup]);
-
-  // const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-  //   setLoading(true);
-
-  //   const result = await requestAchievement(
-  //     selectedAchievement.id,
-  //     params.address.toString(),
-  //     data.message
-  //   );
-
-  //   if (result) {
-  //     toast({
-  //       title: "Successfully requested to nft",
-  //       description: "The group leader will review your request",
-  //     });
-  //   }
-
-  //   setLoading(false);
-  // };
+  const onClickBack = () => {
+    setSelectedTempGroup([...selectedGroup]);
+    setSelecting(false);
+  };
 
   return (
     <Dialog>
-      <DialogTrigger className="ml-auto">
+      <DialogTrigger>
         <Badge className="cursor-pointer">공개그룹 선택</Badge>
       </DialogTrigger>
 
@@ -93,11 +90,7 @@ export default function SelectGroupInScope({ lang }: { lang: any }) {
 
             <div className="flex gap-2 justify-center">
               <DialogClose className="flex max-w-[212px] w-full">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="max-w-full"
-                >
+                <Button size="lg" variant="secondary" className="max-w-full">
                   닫기
                 </Button>
               </DialogClose>
@@ -105,7 +98,7 @@ export default function SelectGroupInScope({ lang }: { lang: any }) {
               <Button
                 size="lg"
                 variant="primary"
-                onClick={onClickSelectGroup}
+                onClick={onClickGoSelectGroup}
                 loading={loading}
                 disabled={loading}
               >
@@ -123,20 +116,34 @@ export default function SelectGroupInScope({ lang }: { lang: any }) {
                 수 있어요.
               </div>
 
-              <div className="h-[232px] mb-6">Hi!</div>
+              <div className="h-[232px] mb-6 overflow-auto">
+                {myGroups.length > 0 &&
+                  myGroups.map((_group: Club) => {
+                    return (
+                      <GroupCheckboxListItem
+                        group={_group}
+                        isChecked={selectedTempGroup.includes(_group)}
+                        onClick={() => onClickGroupListItem(_group)}
+                        key={_group.id}
+                      ></GroupCheckboxListItem>
+                    );
+                  })}
+              </div>
 
               <div className="flex gap-2 justify-center">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  onClick={() => setSelecting(false)}
-                >
+                <Button size="lg" variant="secondary" onClick={onClickBack}>
                   뒤로가기
                 </Button>
 
-                <Button size="lg" variant="primary">
-                  그룹 선택하기
-                </Button>
+                <DialogClose className="max-w-[212px] w-full">
+                  <Button
+                    size="lg"
+                    variant="primary"
+                    onClick={onClickSelectGroup}
+                  >
+                    그룹 선택하기
+                  </Button>
+                </DialogClose>
               </div>
             </div>
           </>

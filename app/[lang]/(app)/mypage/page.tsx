@@ -13,6 +13,8 @@ export default async function Dashboard({
   const { data: profile } = await getUserProfile();
   const dictionary = (await getDictionary(params.lang)) as any;
 
+  console.log(profile);
+
   if (!profile) {
     return <div>loading</div>;
   }
