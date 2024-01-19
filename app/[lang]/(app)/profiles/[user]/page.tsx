@@ -34,7 +34,7 @@ export default async function Dashboard({
       {/* main */}
       <div className="grow">
         <main className="flex flex-col gap-6">
-          <ProfileDetails profile={profile} text={dictionary.mypage.main} visiting={true}/>
+          <ProfileDetails profile={profile} text={dictionary} visiting={true}/>
           <ProfileProjects projects={profile?.projects} text={dictionary.mypage.project} visiting={true} />
           <ProfileCertificates achievement_rewards={profile?.achievement_rewards} text={dictionary.mypage.education} />
           <ProfileAwards achievement_rewards={profile?.achievement_rewards} text={dictionary.mypage.awards}/>
