@@ -42,6 +42,8 @@ export default function RequestNFTModal({
   groups: Club[];
   lang: any;
 }) {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
@@ -81,9 +83,8 @@ export default function RequestNFTModal({
   useEffect(() => {
     const getAchievements = async () => {
       if (!selectedGroup) return;
-      const {data: fetchedGroupAchievement} = await getGroupAchievementsClient(
-        selectedGroup.id
-      );
+      const { data: fetchedGroupAchievement } =
+        await getGroupAchievementsClient(selectedGroup.id);
       setGroupAchievements(fetchedGroupAchievement);
     };
     if (selectedGroup) {
@@ -101,18 +102,26 @@ export default function RequestNFTModal({
       data.message
     );
 
-    if (result) {
+    if (result.status === "success") {
       toast({
         title: "Successfully requested to nft",
         description: "The group leader will review your request",
       });
+      setSelectedGroup(null);
+      setSelectedAchievement(null);
+    } else {
+      toast({
+        title: "Failed",
+        description: result.message,
+      });
     }
 
     setLoading(false);
+    setDialogOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger className="ml-auto">
         <Button size="sm" variant="secondary">
           {lang.project.details.evalu.request}
@@ -171,7 +180,9 @@ export default function RequestNFTModal({
             </div>
 
             <div className="mb-5">
-              <RequestGroupListItem _group={selectedGroup}></RequestGroupListItem>
+              <RequestGroupListItem
+                _group={selectedGroup}
+              ></RequestGroupListItem>
             </div>
 
             <div className="mb-3 text-title_s">
@@ -215,19 +226,23 @@ export default function RequestNFTModal({
         {selectedGroup && selectedAchievement && (
           <div>
             <div className="mb-3 text-title_s">
-            {lang.project.details.evalu.request_group}
+              {lang.project.details.evalu.request_group}
             </div>
 
             <div className="mb-5">
-              <RequestGroupListItem _group={selectedGroup}></RequestGroupListItem>
+              <RequestGroupListItem
+                _group={selectedGroup}
+              ></RequestGroupListItem>
             </div>
 
             <div className="mb-3 text-title_s">
-            {lang.project.details.evalu.request_nft}
+              {lang.project.details.evalu.request_nft}
             </div>
 
             <div className="mb-5">
-              <RequestNftListItem achievement={selectedAchievement}></RequestNftListItem>
+              <RequestNftListItem
+                achievement={selectedAchievement}
+              ></RequestNftListItem>
             </div>
 
             <div>
@@ -242,12 +257,14 @@ export default function RequestNFTModal({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="mb-3">
-                        {lang.project.details.evalu.message}
+                          {lang.project.details.evalu.message}
                         </FormLabel>
                         <FormControl>
                           <Textarea
                             className="resize-none"
-                            placeholder={lang.project.details.evalu.message_placeholder}
+                            placeholder={
+                              lang.project.details.evalu.message_placeholder
+                            }
                             {...field}
                           ></Textarea>
                         </FormControl>
