@@ -192,7 +192,6 @@ export default function DisplayNFTModal({
                 {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
                 </button>
             </div>
-
             <p
                 className={`text-body_m break-words ${
                 !showFull && "line-clamp-2"
@@ -203,20 +202,20 @@ export default function DisplayNFTModal({
             </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className={`grid ${showMintButton ? "grid-cols-2": "grid-cols-1"} gap-2`}>
             <DialogClose asChild>
-            <Button variant={"secondary"}>
-                {lang.achievement.display_nft.close}
-            </Button>
+              <Button variant={"secondary"}>
+                  {lang.achievement.display_nft.close}
+              </Button>
             </DialogClose>
             {showMintButton ? (
               <Button
-            onClick={handleRequestNFT}
-            disabled={requesting || blockRequest}
-          >
-            {blockRequest}
-            {(blockRequest || requesting) ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
-            </Button>
+                onClick={handleRequestNFT}
+                disabled={requesting || blockRequest}
+              >
+                {blockRequest}
+                {(blockRequest || requesting) ? lang.achievement.display_nft.complete_request : lang.achievement.display_nft.send_request}
+              </Button>
             ): null}
         </div>
     </DialogContent>
