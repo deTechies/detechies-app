@@ -108,7 +108,7 @@ export default async function EvaluationResult({
                 </Button>
               </Link>
               <Link
-                href={`/project/${details.evaluator?.project.id}`}
+                href={`/project/${details.projectWork?.projectMember?.project.id}`}
                 passHref
                 className="w-full max-w-[212px]"
               >
