@@ -47,8 +47,8 @@ export default function ListAvatarItemTrigger({
   }
 
   return (
-    <section className="w-[174px] p-0 border rounded-md shadow-custom bg-background-layer-2">
-      <div className="relative object-scale-down w-full m-0 aspect-square">
+    <section className="w-[174px] p-0 border border-inherit rounded-xl shadow-custom">
+      <div className="relative object-scale-down w-full m-0 aspect-square rounded-t-xl">
         {showSelect && item.avatar_type && (
           <Switch
             className="absolute z-10 text-white cursor-pointer top-5 right-5 hover:text-text-primary"
@@ -72,13 +72,13 @@ export default function ListAvatarItemTrigger({
               : DEFAULT_IPFS_URL + item.avatar
           }
           alt="nft_list_item"
-          className="object-contain rounded-t-sm bg-background-base"
+          className="object-contain rounded-t-xl !bg-background-layer-2"
           fill={true}
           priority={true}
         />
       </div>
 
-      <div className="flex flex-col items-start justify-start gap-3 pt-2 px-3 pb-3">
+      <div className="flex flex-col items-start justify-start gap-3 pt-2 px-3 pb-3 bg-background-layer-1 rounded-b-xl">
         <div className="flex justify-between w-full">
           <span className="capitalize truncate text-title_s">
             {item?.name || "undefined"}
@@ -88,7 +88,7 @@ export default function ListAvatarItemTrigger({
           {item?.name || "undefined"}
         </Link> */}
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 bg-background-layer-1">
           <NftTypeChip label={
             lang && item.nft_type
               ? lang.interface.nft_type[item.nft_type]
