@@ -1,5 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { serverApi } from "@/lib/data/general";
 import { getUserProfile } from "@/lib/data/user";
 import ProfileAwards from "./_components/profile-awards";
 import ProfileCertificates from "./_components/profile-certificates";
@@ -12,6 +13,10 @@ export default async function Dashboard({
 }) {
   const { data: profile } = await getUserProfile();
   const dictionary = (await getDictionary(params.lang)) as any;
+  
+  const {data: myProfile} = await serverApi(`/users/me`);
+  
+  console.log(myProfile)
 
   if (!profile) {
     return <div>loading</div>;

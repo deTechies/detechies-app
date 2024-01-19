@@ -1,26 +1,19 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 // import Image from "next/image";
-import Image from "@/components/ui/image";
-import { Achievement, AchievementReward } from "@/lib/interfaces";
-import { useRouter } from "next/navigation";
 import DisplayNFTModal from "@/components/nft/display-nft-modal";
+import Image from "@/components/ui/image";
 import { useDictionary } from "@/lib/dictionaryProvider";
+import { AchievementReward } from "@/lib/interfaces";
 
 import {
   Dialog,
-  DialogClose,
-  DialogDescription,
   DialogOverlay,
   DialogPortal,
-  DialogTitle,
-  DialogTrigger,
-  DialogContent
+  DialogTrigger
 } from "@/components/ui/dialog";
 
 
@@ -36,7 +29,6 @@ export default function ProfileCertificates({
     achievement_rewards,
     text,
   }: IProfileClubsProps) {
-  const router = useRouter();
   const dictionary = useDictionary();
 
   return (  
