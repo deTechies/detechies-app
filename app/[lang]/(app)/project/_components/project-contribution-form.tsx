@@ -32,6 +32,7 @@ import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
 import { addMembersWork } from "@/lib/data/project";
 import { PROFESSION_TYPE } from "@/lib/interfaces";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 const contributionFormSchema = z.object({
@@ -69,6 +70,7 @@ export default function ProjectContributionForm({
   });
   const messageValue = form.watch("description", "");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   const currentPercentage = form.watch("percentage", [0]);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
@@ -94,6 +96,7 @@ export default function ProjectContributionForm({
 
 
     try {
+      //TODO: change to postServer
       const result = await addMembersWork(values, projectId);
 
       toast({
@@ -104,6 +107,7 @@ export default function ProjectContributionForm({
       if (closeButtonRef.current) {
         closeButtonRef.current.click();
       }
+      router.refresh();
     } catch (error) {
       toast({
         title: "error",
