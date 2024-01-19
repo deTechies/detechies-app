@@ -230,7 +230,6 @@ export default function ProjectContributionForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>업무 기여도</FormLabel>
-            
                   <FormControl>
                     <Slider
                       {...field}

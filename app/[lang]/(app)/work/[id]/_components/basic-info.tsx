@@ -113,7 +113,8 @@ export default function BasicEvaluationInfo({
       }
 
       if (data.match == "80") {
-        router.push(`/project/${projectId}/`);
+        // router.push(`/project/${projectId}/`);
+        router.back();
       }
     } else {
       setIsLoading(false);
