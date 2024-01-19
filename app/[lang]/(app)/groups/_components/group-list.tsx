@@ -106,9 +106,9 @@ export default function GroupList({
             {lang.group.list.banner}
           </div>
 
-          <div className="mb-5 text-subhead_m">{lang.group.list.banner2}</div>
+          <div className="mb-5 text-subhead_m text-text-fixed">{lang.group.list.banner2}</div>
 
-          <div className="flex items-center gap-1 text-title_m">
+          <div className="flex items-center gap-1 text-title_m text-text-fixed">
             {lang.group.list.banner3}
             <ArrowRight className="w-4 h-4"></ArrowRight>
           </div>

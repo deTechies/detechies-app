@@ -159,7 +159,7 @@ export default function ProjectContributionForm({
                 </div>
               </div>
 
-              <div className="flex flex-row gap-2 items-center w-full">
+              <div className="flex flex-row gap-2 flex-wrap sm:flex-nowrap items-center w-full">
                 <FormField
                   control={form.control}
                   name="begin_date"

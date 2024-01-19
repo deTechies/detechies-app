@@ -15,16 +15,14 @@ export default async function MyPageLayout({
 
   return (
     <div>
-      <div className="flex sm:flex-row flex-col m-8 gap-20">
+      <div className="flex flex-col gap-20 m-8 md:flex-row">
         {/* LeftSide */}
-        <div className="max-w-[330px] flex flex-col gap-8">
+        <div className="md:max-w-[376px] shrink-0 flex flex-col gap-8">
           <Profile text={dictionary.mypage.profile} profile={profile} />
           <Menu links={dictionary.mypage.menu} />
         </div>
-        {/* main */}
-        <div className="grow">
+        <div className="grow shrink">
           {children}
-          {/* <EditProfile /> */}
         </div>
       </div>
     </div>

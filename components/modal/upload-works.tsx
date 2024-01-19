@@ -6,7 +6,12 @@ import { postServer } from "@/lib/data/general";
 import { uploadContent } from "@/lib/upload";
 import { X } from "lucide-react";
 import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import {
@@ -20,16 +25,23 @@ import {
 } from "../ui/select";
 import { toast } from "../ui/use-toast";
 
-export default function UploadWorks({ projectId, lang }: { projectId?: string; lang: any; }) {
+export default function UploadWorks({
+  projectId,
+  lang,
+}: {
+  projectId?: string;
+  lang: any;
+}) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [newLink, setNewLink] = useState(""); // State for the new link input
   const router = useRouter();
   const [workType, setWorkType] = useState<string>("file");
   const [file, setFile] = useState<File | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if(event.target.files){
+    if (event.target.files) {
       const newFile = event.target.files?.[0];
       console.log(newFile);
       setFile(newFile);
@@ -45,11 +57,11 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
     let work = newLink as any;
 
     if (workType === "file") {
-      if(!file){
+      if (!file) {
         toast({
           title: "Please select a file",
           description: "Please select a file",
-        })
+        });
         return;
       }
       work = await uploadContent(file);
@@ -71,14 +83,13 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
       type: workType,
     });
 
-    console.log(body);
     const result = await postServer(
       `/projects/${projectId}/add-link`,
       "POST",
       body
     );
 
-    if (result.error) {
+    if (!result) {
       toast({
         title: result.error,
         description: result.message,
@@ -87,18 +98,20 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
       return;
     }
 
+    //TODO: close window.
+
     toast({
       title: "Successfully uploaded",
       description: "Successfully uploaded",
     });
 
     router.refresh();
-
+    setDialogOpen(false);
     setLoading(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger>
         <Button size="sm" variant="secondary">
           {lang.project.details.links.upload}
@@ -106,29 +119,40 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
       </DialogTrigger>
 
       <DialogContent>
-        <h3 className="text-subhead_m">Upload works</h3>
+        <h3 className="text-subhead_m">
+          {lang.project.details.links.dialog.title}
+        </h3>
         <section className="flex flex-col gap-8 my-4">
           <div>
             <Label htmlFor="name" className="mb-4">
-              Name
+              {lang.project.details.links.dialog.name}
             </Label>
+
             <Input
-              placeholder="name of link"
+              placeholder={lang.project.details.links.dialog.name_placeholder}
               onChange={(e) => setName(e.target.value)}
               value={name}
             />
           </div>
 
-          <div className="flex gap-4 justify-center ">
-            <Select onValueChange={(value) => setWorkType(value)}>
+          <div className="flex gap-4 justify-center items-center">
+            <Select onValueChange={(value) => setWorkType(value)}
+              defaultValue="file"
+            >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select" />
+                <SelectValue placeholder={lang.project.details.links.dialog.type} />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Type</SelectLabel>
-                  <SelectItem value="file">File</SelectItem>
-                  <SelectItem value="link">Link</SelectItem>
+                  <SelectLabel>
+                    {lang.project.details.links.dialog.type}
+                  </SelectLabel>
+                  <SelectItem value="file">
+                    {lang.project.details.links.dialog.file}
+                  </SelectItem>
+                  <SelectItem value="link">
+                    {lang.project.details.links.dialog.link}
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -154,7 +178,7 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
                     </div>
                   ) : (
                     <Button className="w-full" onClick={openFileDialog}>
-                      Upload file
+                      {lang.project.details.links.dialog.upload_file}
                     </Button>
                   )}
 
@@ -170,9 +194,22 @@ export default function UploadWorks({ projectId, lang }: { projectId?: string; l
           </div>
         </section>
 
-        <Button loading={loading} onClick={uploadWorks} disabled={loading}>
-          Upload works
-        </Button>
+        <div className="flex justify-center gap-2">
+          <DialogClose className="w-full max-w-[212px]">
+            <Button size="lg" variant="secondary">
+              {lang.project.details.links.dialog.close}
+            </Button>
+          </DialogClose>
+
+          <Button
+            size="lg"
+            loading={loading}
+            onClick={uploadWorks}
+            disabled={loading}
+          >
+            {lang.project.details.links.dialog.upload_works}
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );

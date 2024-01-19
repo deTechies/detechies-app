@@ -35,7 +35,7 @@ export default async function CreateMissionPage({
     <main className="m-8  w-full max-w-[60rem] flex">
       <Wizard
         clubId={params.address}
-        achievements={achievements}
+        achievements={achievements.data}
         lang={dictionary}
       />
     </main>

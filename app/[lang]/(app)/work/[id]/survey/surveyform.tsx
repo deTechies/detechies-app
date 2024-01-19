@@ -82,6 +82,9 @@ export function SurveyForm({
     //   setIsLoading(false);
     // }
   };
+  
+  const categoryOrder = ["기술 전문성", "협업 및 커뮤니케이션", "업무 지식"];
+
 
   const questionsByCategory = survey.questions.reduce(
     (acc: any, question: any) => {
@@ -92,13 +95,17 @@ export function SurveyForm({
     },
     {}
   );
+  
+    const sortedCategories = Object.keys(questionsByCategory).sort(
+    (a, b) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b)
+  );
 
   return (
     <div className="flex flex-col gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
          
-          {Object.keys(questionsByCategory).map((category, index) => {
+        {sortedCategories.map((category,index) => {
             return (
               <Card key={category}>
                 <h5 className="text-subhead_s mb-7">{category}</h5>{" "}

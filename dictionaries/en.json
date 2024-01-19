@@ -117,10 +117,16 @@
       "create_project": {
         "create": "Create Project",
         "name": "Project Name",
+        "name_placeholder" : "Enter Project Name",
         "type": "Type",
+        "type_placeholder" : "Select Type",
         "period": "Period",
+        "in_progress": "In Progress",
         "describe": "Description",
+        "describe_placeholder" : "Enter Description",
         "image": "Image",
+        "image_guide1": "an aspect ratio of 1:1",
+        "image_guide2": "not violate copyright",
         "category": "Project Categories",
         "scope": "Public Scope",
         "back": "Back",
@@ -138,8 +144,9 @@
       "delete_project":{
         "delete" : "Delete Project",
         "delete_confirm" : "Are you sure delete project?",
-        "delete_dsc":" If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",
+        "delete_dsc":" If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",        
         "delete_project_name" : "and click delete",
+        "placeholder": "Enter project name",
         "cancel" : "Cancel"
       },
       "add_work":{
@@ -193,7 +200,18 @@
       "links": {
         "title": "Works",
         "upload": "Upload",
-        "no_links": "There are no registered tasks."
+        "no_links": "There are no registered tasks.",
+        "dialog": {
+          "title": "Upload works",
+          "name": "Name",
+          "name_placeholder": "name of link",
+          "type": "Type",
+          "file": "File",
+          "link": "Link",
+          "upload_file": "Upload file",
+          "close": "Close",
+          "upload_works": "Upload works"
+        }
       },
       "request": {
         "request_a_review": "Request a Review",
@@ -466,7 +484,9 @@
       "form": {
         "type": "Category",
         "name": "Group Name",
+        "name_placeholder": "Enter Group Name",
         "desc": "Description",
+        "desc_placeholder": "Tell us a little bit about your group here",
         "image": "Image",
         "image_guide": "Image Guide",
         "guird": "1:1 ratio recommended",
@@ -481,6 +501,12 @@
     "details": {
       "profile_card": {
         "create_nft": "Create NFT",
+        "group_contract": {
+          "title": "Create Group Contract",
+          "desc": "Once you register for a blockchain group account, you can issue any kind of NFT certificate you want, including diplomas, certificates, memberships, and more. (You'll need MATIC tokens to register for an account. ",
+          "anchor": "Get MATIC Tokens",
+          "button": "Create Group Contract"
+        },
         "join_group": {
           "title": "Join Group",
           "desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
@@ -600,8 +626,9 @@
       "nft_desc": "NFT Description",
       "show_more": "Show More",
       "hide": "Hide",
-      "close": "Do It Later",
-      "send_request": "Request Issuance"
+      "close": "Close",
+      "send_request": "Request Issuance",
+      "complete_request": "Request Complete"
     }
   },
   "mission": {
@@ -630,8 +657,10 @@
       "previous": "Previous",
       "next": "Next",
       "submit": "Submit",
-      "name": "Name",
+      "name": "Campaign Name",
+      "name_placeholder": "Enter Campaign Name",
       "desc": "Description",
+      "desc_placeholder": "Enter Campaign Description",
       "date": "Duration",
       "begin_date": "Start Date",
       "end_date": "End Date",
@@ -717,7 +746,15 @@
     "role_type": {
       "admin": "Admin",
       "member": "Member",
-      "client": "Client"
+      "client": "Client",
+      "joined": "Joined",
+      "invited": "Invited",
+      "none": "None"
+    },
+    "privacy_type": {
+      "public": "All users",
+      "private": "Private",
+      "group": "Group members"
     }
   },
   "footer": {
@@ -728,5 +765,10 @@
     "contact_us": "Contact Us",
     "faq": "FAQ", 
     "user_guide": "User Guide"
+  },
+  "media_uploader": {
+    "drag": "Click to upload",
+    "upload_image": "Upload Image",
+    "delete_image": "Delete Image"
   }
 }

@@ -5,13 +5,18 @@ import { Achievement } from "@/lib/interfaces";
 // import AchievementLink from "./achievement-link";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { getUserAchievements } from "@/lib/data/achievements";
 
 export default async function GroupAchievements({
   params,
 }: {
   params: { address: string; lang: Locale };
 }) {
-  const {data:details} = await getClub(params.address);
+  const { data: details } = await getClub(params.address);
+  const { data: userAchievements } = await getUserAchievements();
+  const user_achievements = userAchievements.map(
+    (item: any) => item.achievement.id
+  );
 
   const dictionary = (await getDictionary(params.lang)) as any;
 
@@ -38,7 +43,13 @@ export default async function GroupAchievements({
             <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
               {details.achievements &&
                 details.achievements.map((item: Achievement, index: number) => (
-                  <DisplayNFT details={item} key={index} lang={dictionary} />
+                  <DisplayNFT
+                    details={item}
+                    key={index}
+                    lang={dictionary}
+                    showMintButton={true}
+                    blockRequest={user_achievements.includes(item.id)}
+                  />
                 ))}
             </div>
           </TabsContent>
@@ -50,7 +61,13 @@ export default async function GroupAchievements({
                     return item.nft_type == "sbt";
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} lang={dictionary} />
+                    <DisplayNFT
+                      details={item}
+                      key={index}
+                      lang={dictionary}
+                      showMintButton={true}
+                      blockRequest={user_achievements.includes(item.id)}
+                    />
                   ))}
             </div>
           </TabsContent>
@@ -62,7 +79,13 @@ export default async function GroupAchievements({
                     return item.nft_type == "erc721";
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} lang={dictionary} />
+                    <DisplayNFT
+                      details={item}
+                      key={index}
+                      lang={dictionary}
+                      showMintButton={true}
+                      blockRequest={user_achievements.includes(item.id)}
+                    />
                   ))}
             </div>
           </TabsContent>
@@ -74,7 +97,13 @@ export default async function GroupAchievements({
                     return item.avatar;
                   })
                   .map((item: Achievement, index: number) => (
-                    <DisplayNFT details={item} key={index} lang={dictionary} />
+                    <DisplayNFT
+                      details={item}
+                      key={index}
+                      lang={dictionary}
+                      showMintButton={true}
+                      blockRequest={user_achievements.includes(item.id)}
+                    />
                   ))}
             </div>
           </TabsContent>

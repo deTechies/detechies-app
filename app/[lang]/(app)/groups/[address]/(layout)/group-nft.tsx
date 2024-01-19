@@ -10,16 +10,21 @@ export default function GroupNFT({
   address,
   isCreator,
   achievements,
+  userAchievements,
   contract,
   lang,
 }: {
   address: any;
   isCreator?: boolean;
   achievements: Achievement[];
+  userAchievements: any[];
   contract: string;
   lang: any;
 }) {
   const pathName = usePathname();
+
+  const user_achievements = userAchievements.map(item => item.achievement.id);
+
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -37,9 +42,18 @@ export default function GroupNFT({
 
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {achievements &&
-          achievements.slice(0, 5).map((item: Achievement, index: number) => (
-            <DisplayNFT details={item} key={index} lang={lang} contract={contract} />
-          ))}
+          achievements
+            .slice(0, 5)
+            .map((item: Achievement, index: number) => (
+              <DisplayNFT
+                details={item}
+                key={index}
+                lang={lang}
+                contract={contract}
+                showMintButton={true}
+                blockRequest={user_achievements.includes(item.id)}
+              />
+            ))}
       </div>
 
       {achievements && achievements.length < 1 && (

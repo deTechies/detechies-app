@@ -35,6 +35,7 @@ module.exports = {
           primary: "var(--text-primary)",
           secondary: "var(--text-secondary)",
           placeholder: "var(--text-placeholder)",
+          fixed: "var(--text-fixed)"
         },
         icon: {
           primary: "var(--icon-primary)",

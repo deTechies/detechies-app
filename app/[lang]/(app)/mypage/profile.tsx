@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { updateUserAvatar } from "@/lib/data/user";
 import { User } from "@/lib/interfaces";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -79,8 +80,8 @@ export default function Profile({
 
   if (pathName.includes("/mypage/avatar")) {
     return (
-      <Card className="flex flex-col gap-5">
-        <div className="w-full aspect-square relative m-0 z-0 bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-md">
+      <Card className="flex w-full flex-col gap-5">
+        <div className="relative w-[320px] aspect-square bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-md">
           <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
         <div className="flex gap-4 ">
@@ -110,9 +111,11 @@ export default function Profile({
                 : "Name: Not Set"}
             </span>
           </div>
-          <Button disabled variant={"secondary"} size="sm">
-            {text?.avatar_settings}
-          </Button>
+          <Link href="/mypage/avatar" passHref>
+            <Button variant={"secondary"} size="sm">
+              {text?.avatar_settings}
+            </Button>
+          </Link>
         </div>
       </div>
 

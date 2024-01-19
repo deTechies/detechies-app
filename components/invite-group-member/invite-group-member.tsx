@@ -21,9 +21,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 export default function InviteGroupMember({
   groupId,
   lang,
+  groupMembers,
 }: {
   groupId: string;
   lang: any;
+  groupMembers: any[];
 }) {
   const searchParams = useSearchParams();
   const text = searchParams.get("search") || "";
@@ -39,8 +41,13 @@ export default function InviteGroupMember({
   // if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
   if (!members) return <div>no_members_found</div>;
 
+  const array_member_id = groupMembers.map((member: any) => member.user.id);
+
   const filteredData = members.filter((member: any) => {
-    return member.display_name.toLowerCase().includes(text.toLowerCase() || "");
+    return (
+      !array_member_id.includes(member.id) &&
+      member.display_name.toLowerCase().includes(text.toLowerCase() || "")
+    );
   });
 
   const onClickGoManage = () => {

@@ -1,4 +1,3 @@
-import ConnectGithub from "@/components/connections/github";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -64,7 +63,7 @@ export default async function Connections({
               {github[0]}
             </Link>
           ) : (
-            <ConnectGithub />
+            <></>
           )}
         </div>
       </div>

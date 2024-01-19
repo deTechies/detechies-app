@@ -1,8 +1,9 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+import { ROLE_TYPE } from "@/lib/interfaces";
 import Link from "next/link";
-import { usePathname, useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 export default function GroupTaps({
   details,
@@ -18,35 +19,34 @@ export default function GroupTaps({
     {
       name: lang.tabs.about,
       href: "",
-      role: ["none", "member", "client", "admin",],
+      isAdmin: false,
     },
     {
       name: lang.tabs.nft,
       href: "nft",
-      role: ["none", "member", "client", "admin",],
+      isAdmin: false,
     },
     {
       name: lang.tabs.members,
       href: "members",
-      role: ["none", "member", "client", "admin",],
+      isAdmin: false,
     },
     {
       name: lang.tabs.mission,
       href: "missions",
-      role: ["none", "member", "client", "admin",],
+      isAdmin: false,
     },
     {
       name: lang.tabs.manage,
       href: "manage",
-      role: ["admin",],
+      isAdmin: true,
     },
-  ];
+  ] as any;
 
   return (
     <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 rounded-none">
       {links.map((link: any, index: number) => {
-
-        if(!link.role.includes(details.userRole)){
+        if (link.isAdmin && details.userRole != ROLE_TYPE.ADMIN)  {
           return;
         }
 

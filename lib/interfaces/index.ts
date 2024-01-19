@@ -110,16 +110,16 @@ export enum GROUP_TYPE {
     SIDE = 'side'
   }
   
-  export enum PrivacyType {
+  export enum PRIVACY_TYPE {
     PUBLIC = 'public',
     PRIVATE = 'private',
     GROUP = 'group'
   }
 
   export enum ROLE_TYPE {
-    MEMBER = "member",
     ADMIN = "admin",
     CLIENT = "client",
+    MEMBER = "member"
   }
 
   export enum ContributionType {
@@ -139,12 +139,6 @@ export enum GROUP_TYPE {
     DESIGNER = 'Designer'
   }
   
-  export enum SCOPE_TYPE {
-    PUBLIC = 'public',
-    PRIVATE = 'private',
-    TEAM = 'team',
-  }
-
   export enum ProjectCategory {
     WEB = 'web',
     MOBILE = 'mobile',

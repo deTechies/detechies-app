@@ -1,7 +1,7 @@
 "use client";
 import IPFSImageLayer from "@/components/ui/layer";
 import { ABI, defaultAvatar } from "@/lib/constants";
-import { rewardProjectNFT, updateNFTRequest } from "@/lib/data/achievements";
+import { postServer } from "@/lib/data/postRequest";
 import { AchievementReward } from "@/lib/interfaces";
 import { formatDate, getNftChips } from "@/lib/utils";
 import { Check, X } from "lucide-react";
@@ -27,7 +27,6 @@ export default function PendingMemberListItem({
   const {
     data,
     isLoading,
-    isSuccess,
     isError,
     write: distributeAchievement,
   } = useContractWrite({
@@ -39,7 +38,6 @@ export default function PendingMemberListItem({
   const {
     data: projectData,
     isLoading: projectLoading,
-    isSuccess: projectSuccess,
     isError: projectError,
     write: rewardProject,
   } = useContractWrite({
@@ -54,11 +52,20 @@ export default function PendingMemberListItem({
 
   useEffect(() => {
     const submitNFT = async () => {
-      const result = await updateNFTRequest(nft.id, "accepted", data?.hash);
-      toast({
-        title: "Success",
-        description: "succesfully distirbuted the nft. ",
+      const submitData = JSON.stringify({
+        achievementId: nft.id,
+        status: "accepted",
+        data: data?.hash,
       });
+
+      const result = await postServer(`/achievement-rewards/update`, submitData);
+
+      if (result) {
+        toast({
+          title: "Success",
+          description: "succesfully distirbuted the nft. ",
+        });
+      }
 
       setLoading(false);
     };
@@ -71,12 +78,17 @@ export default function PendingMemberListItem({
 
   useEffect(() => {
     const submitProjectNFT = async () => {
-      const result = await rewardProjectNFT(nft.id);
+      const result = await postServer(`/achievement-rewards/rewardProject/${nft.id}`, '')
+
+      if(result){
+        
+        toast({
+          title: "Success",
+          description: "succesfully distirbuted the nft. ",
+        });
+      }
+      
       setLoading(false);
-      toast({
-        title: "Success",
-        description: "succesfully distirbuted the nft. ",
-      });
     };
 
     if (projectFinished) {
@@ -93,12 +105,6 @@ export default function PendingMemberListItem({
 
   const acceptNFT = async () => {
     setLoading(true);
-    if (!nft.achievement.tokenId || !contract) {
-      toast({
-        title: "Error",
-        description: "Failed to accept NFT",
-      });
-    }
 
     if (nft.project) {
       //get the list of all the project members wallets.
@@ -117,13 +123,21 @@ export default function PendingMemberListItem({
 
     //make sure that it works correct so we can update the nft data.
   };
-
+  
   const rejectNFT = async () => {
-    //
-    toast({
-      title: "rejecting NFT",
-      description: <pre>{JSON.stringify(nft, null, 2)}</pre>,
-    });
+    setLoading(true);
+    const result = await postServer(`/achievement-rewards/${nft.id}/reject`, '');
+    if(result){
+      toast({
+        title: "rejecting NFT",
+        description: "succesfully rejected the nft. ",
+      });  
+      
+      router.refresh();
+    }
+    
+    setLoading(false);
+    
   };
 
   return (
@@ -153,7 +167,6 @@ export default function PendingMemberListItem({
           <div className="mb-2 text-title_l">
             {nft.user ? nft.user.display_name : nft.project.name}
           </div>
-
 
           {/* <Badge shape="outline" variant="info">
             {nft.user?.profile_details?.profession
@@ -210,6 +223,7 @@ export default function PendingMemberListItem({
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
+          disabled={isLoading || projectLoading || loading}
         >
           <X className="w-6 h-6"></X>
         </Button>
@@ -218,7 +232,6 @@ export default function PendingMemberListItem({
           onClick={acceptNFT}
           className="p-2 rounded-md w-14 h-14"
           size="icon"
-          loading={isLoading || projectLoading || loading}
           disabled={isLoading || projectLoading || loading}
         >
           <Check className="w-6 h-6"></Check>

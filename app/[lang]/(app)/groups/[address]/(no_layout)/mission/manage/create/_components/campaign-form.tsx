@@ -29,7 +29,7 @@ export const StepOne = ({
         <Input
           type="text"
           name="name"
-          placeholder="Campaign Name"
+          placeholder={lang.mission.create.name_placeholder}
           value={formData.name}
           onChange={onInputChange}
           className="flex grow"
@@ -42,7 +42,7 @@ export const StepOne = ({
         </Label>
         <Textarea
           name="description"
-          placeholder="Description"
+          placeholder={lang.mission.create.desc_placeholder}
           value={formData.description}
           onChange={onInputChange}
           className="flex p-4 grow"

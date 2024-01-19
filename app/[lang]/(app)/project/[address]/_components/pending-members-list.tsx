@@ -1,21 +1,26 @@
+"use client";
+
+import React from 'react';
 import PendingMemberItem from "@/components/members/pending-member-item";
 import { Card, CardHeader } from "@/components/ui/card";
-import { getPendingProjectMembers } from "@/lib/data/project";
+import { useState } from "react";
 
-export default async function PendingMemberList({
-  projectId,
-  userRole,
+function PendingMemberListComponent({
   lang,
+  pendingMembers,
 }: {
-  projectId: string;
-  userRole: string;
   lang: any;
+  pendingMembers: any[];
 }) {
-  let pendingMembers: any[] = [];
+  const [pendingMemberList, setPendingMemberList] = useState([...pendingMembers]);
 
-  if (userRole == "admin") {
-    pendingMembers = await getPendingProjectMembers(projectId);
-  }
+  const filterPendingProjectMembers = (_memberId: string) => {
+    const filteredPendingMembers = pendingMembers.filter((_members) => {
+      return _members.id !== _memberId;
+    });
+
+    setPendingMemberList(filteredPendingMembers);
+  };
 
   return (
     <Card className="gap-0 px-6 pt-6 pb-7">
@@ -24,9 +29,14 @@ export default async function PendingMemberList({
       </CardHeader>
 
       <div className="flex flex-col gap-3">
-        {!!pendingMembers?.length &&
-          pendingMembers.map((member: any, index: number) => (
-            <PendingMemberItem key={index} member={member} lang={lang}/>
+        {!!pendingMemberList?.length &&
+          pendingMemberList.map((member: any, index: number) => (
+            <PendingMemberItem
+              key={index}
+              member={member}
+              lang={lang}
+              onSuccessInvite={filterPendingProjectMembers}
+            />
           ))}
 
         {(!pendingMembers?.length || pendingMembers.length < 1) && (
@@ -38,3 +48,7 @@ export default async function PendingMemberList({
     </Card>
   );
 }
+
+const PendingMemberList = React.memo(PendingMemberListComponent);
+
+export default PendingMemberList;

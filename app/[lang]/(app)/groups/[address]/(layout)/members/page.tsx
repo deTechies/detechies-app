@@ -57,9 +57,6 @@ export default async function GroupMember({
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {filteredData &&
           filteredData.map((item: Member, index: any) => {
-            // if (index > 4) {
-            //   return;
-            // }
             return (
               <MemberCard
                 address={item.memberId}

@@ -1,4 +1,5 @@
 "use client";
+import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
@@ -7,13 +8,15 @@ import { Input } from "../ui/input";
 export default function Search({
   placeholder,
   size,
+  className,
 }: {
   placeholder: string;
   size?: "default" | "md" | undefined;
+  className?: string;
 }) {
   const router = useRouter();
   const [text, setText] = useState("");
-  const query = useDebounce(text, 500);
+  const query = useDebounce(text, 100);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -45,8 +48,12 @@ export default function Search({
         onChange={(e) => {
           setText(e.target.value);
         }}
-        className="px-4 py-3.5"
+        className={`px-4 py-3.5 ${className}`}
       />
+
+      {!text && (
+        <SearchIcon className="absolute -translate-y-1/2 top-1/2 right-4 text-text-placeholder"></SearchIcon>
+      )}
     </div>
   );
 }
