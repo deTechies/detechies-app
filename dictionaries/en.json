@@ -200,7 +200,18 @@
       "links": {
         "title": "Works",
         "upload": "Upload",
-        "no_links": "There are no registered tasks."
+        "no_links": "There are no registered tasks.",
+        "dialog": {
+          "title": "Upload works",
+          "name": "Name",
+          "name_placeholder": "name of link",
+          "type": "Type",
+          "file": "File",
+          "link": "Link",
+          "upload_file": "Upload file",
+          "close": "Close",
+          "upload_works": "Upload works"
+        }
       },
       "request": {
         "request_a_review": "Request a Review",

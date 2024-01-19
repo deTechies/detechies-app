@@ -200,7 +200,18 @@
       "links": {
         "title": "작업물",
         "upload": "등록하기",
-        "no_links": "등록된 작업물이 없어요."
+        "no_links": "등록된 작업물이 없어요.",
+        "dialog": {
+          "title": "작업물 등록",
+          "name": "작업물 이름",
+          "name_placeholder": "작업물 이름",
+          "type": "종류",
+          "file": "파일",
+          "link": "링크",
+          "upload_file": "파일 업로드",
+          "close": "닫기",
+          "upload_works": "등록완료"
+        }
       },
       "request": {
         "request_a_review": "평가 요청하기",
