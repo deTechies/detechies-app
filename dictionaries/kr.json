@@ -189,6 +189,7 @@
           "date": "내 업무 기간",
           "detail_work": "상세 업무 종류",
           "detail_work_placeholder": "프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)",
+          "type": "프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)",
           "attribute": "업무 기여도",
           "job_desc": "업무 내용",
           "job_desc_placeholder": "DB 데이터 엑셀 업로드 및 일별 마케팅 대시보드 업데이트",

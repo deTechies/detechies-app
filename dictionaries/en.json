@@ -189,6 +189,7 @@
           "date": "My Work Period",
           "detail_work": "Type of Detailed Work",
           "detail_work_placeholder": "Enter the work category you handled in the project. (e.g., Data Analysis)",
+          "type": "Type and press enter",
           "attribute": "Contribution to Work",
           "job_desc": "Job Description",
           "job_desc_placeholder": "Upload DB data to Excel and update daily marketing dashboard",
