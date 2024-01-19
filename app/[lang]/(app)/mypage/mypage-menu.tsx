@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Menu({ links }: { links: any }) {
+export default function MyPageMenu({ links }: { links: any }) {
   const pathName = usePathname();
 
   
@@ -29,7 +29,7 @@ export default function Menu({ links }: { links: any }) {
     }, 
   ]
   return (
-    <div className="bg-background-layer-1 rounded-sm grid items-center ">
+    <div className="bg-background-layer-1 rounded-md grid items-center ">
       {
         menuItems.map((item) => {
           return (
@@ -38,8 +38,8 @@ export default function Menu({ links }: { links: any }) {
               href={item.link}
               as={item.link}
               className={`
-              text-title_m  py-[18px] px-6 first:rounded-t-sm last:rounded-b-sm capitalize
-              ${pathName.endsWith(item.link) ? 'bg-accent-secondary text-text-primary' : "text-text-secondary"}
+              text-title_m  py-[18px] px-6 first:rounded-t-md first:pt-[22px] last:pb-[22px] last:rounded-b-md  capitalize
+              ${pathName.endsWith(item.link) ? 'bg-accent-tertiary text-text-primary' : "text-text-secondary"}
               `}
             >
               {item.name}

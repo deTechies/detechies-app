@@ -30,6 +30,7 @@ module.exports = {
           secondary: "var(--accent-secondary)",
           "on-primary": "var(--accent-on-primary)",
           "on-secondary": "var(--accent-on-secondary)",
+          tertiary: "var(--accent-tertiary)",
         },
         text: {
           primary: "var(--text-primary)",

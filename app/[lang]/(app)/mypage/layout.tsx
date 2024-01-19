@@ -1,7 +1,8 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getUserProfile } from "@/lib/data/user";
-import Menu from "./menu";
+
+import MyPageMenu from "./mypage-menu";
 import ProfilePageCard from "./profile-page-card";
 export default async function MyPageLayout({
   params,
@@ -19,7 +20,7 @@ export default async function MyPageLayout({
         {/* LeftSide */}
         <div className="md:w-[376px] shrink-0 flex flex-col gap-8">
           <ProfilePageCard text={dictionary.mypage.profile} profile={profile} />
-          <Menu links={dictionary.mypage.menu} />
+          <MyPageMenu links={dictionary.mypage.menu} />
         </div>
         <div className="grow shrink">
           {children}

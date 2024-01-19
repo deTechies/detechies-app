@@ -4,13 +4,14 @@ import { formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({ data, showTags=true, lang }: { data: ProjectWork, showTags?: boolean, lang?: any }) {
   if (!data) return null;
+  console.log(data);
 
   return (
     <>
       <div className="inline-flex flex-wrap items-start justify-start gap-4 text-text-secondary">
         <div className="inline-flex flex-col items-start justify-start gap-2">
           <div className="divide-x">
-            <span className="pr-2 capitalize text-label_m"> {lang.interface.role_type[data?.role]}</span>
+            <span className="pr-2 capitalize text-label_m"> {data?.role && lang?.interface.profession_type[data?.role]}</span>
             <span className="pl-2 text-label_m">{data.percentage} %</span>
           </div>
           <span className="text-label_m">

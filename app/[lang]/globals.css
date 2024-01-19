@@ -41,6 +41,7 @@
     --accent-primary: #00D41D;
     --accent-on-primary: #F4F4F4;
     --accent-secondary: #DEFFD9;
+    --accent-tertiary: #F1FFF6;
     --accent-on-secondary: #00D41D;
 
     --background-base: #F2F3F5;
@@ -124,6 +125,7 @@
     --accent-on-primary: #FEFEFE;
     --accent-secondary: #0B5700;
     --accent-on-secondary: #00C71B;
+    --accent-tertiary: #F1FFF6;
     
     --background-base: #000000;
     --background-layer-1: #101113;
