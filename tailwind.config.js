@@ -46,6 +46,7 @@ module.exports = {
           "layer-1": "var(--background-layer-1)",
           "layer-2": "var(--background-layer-2)",
           "input-inactive": "var(--background-input-inactive)",
+          "tooltip": "var(--background-tooltip)",
         },
         border: {
           input: "var(--border-input)",

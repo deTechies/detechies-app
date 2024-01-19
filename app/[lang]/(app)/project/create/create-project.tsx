@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 
 import { uploadContent } from "@/lib/upload";
 import { createProject } from "@/lib/data/project";
-import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
+import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
 import MediaUploader from "@/components/extra/media-uploader";
-// import SelectGroupInScope from "./select-group-in-scope";
+import SelectGroupInScope from "./select-group-in-scope";
 
+import Image from "@/components/ui/image";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
@@ -35,10 +36,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { X } from "lucide-react";
+import { AlertCircle, X } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 const projectFormSchema = z.object({
   name: z
@@ -78,8 +85,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
   const [loading, setLoading] = useState(false);
   const [present, setPresent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
+  const [selectedGroup, setSelectedGroup] = useState<Club[]>([]);
   // const dictionary = useDictionary()
 
   const handleKeyDown = (e: any) => {
@@ -133,6 +140,12 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
 
   const selectFile = (file: any) => {
     setFile(file);
+  };
+
+  const onClickDeleteClub = (clickedGroup: Club) => {
+    setSelectedGroup(selectedGroup.filter(_group => {
+      return _group.id !== clickedGroup.id
+    }))
   };
 
   return (
@@ -343,9 +356,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                         shape="md"
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        <div className="truncate w-full">
-                          {tag}
-                        </div>
+                        <div className="truncate w-full">{tag}</div>
                         <X
                           className="cursor-pointer w-5 h-5"
                           onClick={() => {
@@ -370,38 +381,94 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
           control={form.control}
           name="scope"
           render={({ field }) => (
-            <FormInlineItem className="h-12">
-              <FormInlineLabel>
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="h-10 flex items-center">
                 {lang.project.list.create_project.scope}
                 <span className="ml-1 text-state-error">*</span>
+
+                <Popover>
+                  <PopoverTrigger className="ml-2">
+                    <AlertCircle className="w-4 h-4"></AlertCircle>
+                  </PopoverTrigger>
+
+                  <PopoverContent className="max-w-full p-0">
+                    {/* plan to make variant */}
+                    <Card className="max-w-[500px] bg-background-tooltip rounded-sm p-4 ">
+                      <ul className="text-body_m space-y-2 text-accent-on-primary">
+                        {Object.values(PRIVACY_TYPE).map((type, index) => (
+                          <li key={index}>
+                            {lang.interface.privacy_type[type]}:{" "}
+                            {
+                              lang.project.list.create_project[
+                                `tooltip_${type}`
+                              ]
+                            }
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </PopoverContent>
+                </Popover>
               </FormInlineLabel>
 
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex flex-row flex-wrap gap-6 items-center"
-              >
-                {Object.values(PRIVACY_TYPE).map((type) => (
-                  <FormItem
-                    key={type}
-                    className="flex flex-wrap items-center space-y-0"
-                  >
-                    <FormControl>
-                      <RadioGroupItem value={type} />
-                    </FormControl>
+              <div>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-row flex-wrap gap-6 items-center"
+                >
+                  {Object.values(PRIVACY_TYPE).map((type) => (
+                    <FormItem
+                      key={type}
+                      className="flex flex-wrap items-center space-y-0"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value={type} />
+                      </FormControl>
 
-                    <FormLabel className="font-normal capitalize">
-                      {lang.interface.privacy_type[type]}
-                    </FormLabel>
-                  </FormItem>
-                ))}
+                      <FormLabel className="font-normal capitalize">
+                        {lang.interface.privacy_type[type]}
+                      </FormLabel>
+                    </FormItem>
+                  ))}
 
-                {/* {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
-                  <SelectGroupInScope lang={lang}></SelectGroupInScope>
-                )} */}
-              </RadioGroup>
+                  {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
+                    <SelectGroupInScope
+                      lang={lang}
+                      selectedGroup={selectedGroup}
+                      setSelectedGroup={setSelectedGroup}
+                    ></SelectGroupInScope>
+                  )}
+                </RadioGroup>
 
-              <FormMessage />
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {selectedGroup.length > 0 &&
+                    selectedGroup.map((group: Club, index: number) => {
+                      return (
+                        <Badge shape="outline" className="gap-2 my-1.5" key={index}>
+                          <div className="shrink-0 w-5 h-5 rounded-full overflow-hidden">
+                            <Image
+                              src={`https://ipfs.io/ipfs/${group.image}`}
+                              alt={group.name}
+                              width="20"
+                              height="20"
+                            ></Image>
+                          </div>
+
+                          <div className="text-label_m max-w-[120px] truncate">
+                            {group.name}
+                          </div>
+
+                          <X
+                            className="shrink-0 w-5 h-5 cursor-pointer text-text-secondary"
+                            onClick={() => onClickDeleteClub(group)}
+                          ></X>
+                        </Badge>
+                      );
+                    })}
+                </div>
+                <FormMessage />
+              </div>
             </FormInlineItem>
           )}
         />

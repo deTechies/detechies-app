@@ -35,10 +35,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { X } from "lucide-react";
+import { AlertCircle, X } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 const projectFormSchema = z.object({
   name: z
@@ -373,10 +378,34 @@ export default function ProjectEditForm({
           control={form.control}
           name="scope"
           render={({ field }) => (
-            <FormInlineItem className="h-12">
-              <FormInlineLabel>
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="h-10 flex items-center">
                 {lang.project.list.create_project.scope}
                 <span className="ml-1 text-state-error">*</span>
+
+                <Popover>
+                  <PopoverTrigger className="ml-2">
+                    <AlertCircle className="w-4 h-4"></AlertCircle>
+                  </PopoverTrigger>
+
+                  <PopoverContent className="max-w-full p-0">
+                    {/* plan to make variant */}
+                    <Card className="max-w-[500px] bg-background-tooltip rounded-sm p-4 ">
+                      <ul className="text-body_m space-y-2 text-accent-on-primary">
+                        {Object.values(PRIVACY_TYPE).map((type, index) => (
+                          <li key={index}>
+                            {lang.interface.privacy_type[type]}:{" "}
+                            {
+                              lang.project.list.create_project[
+                                `tooltip_${type}`
+                              ]
+                            }
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </PopoverContent>
+                </Popover>
               </FormInlineLabel>
 
               <RadioGroup

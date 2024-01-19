@@ -135,9 +135,9 @@
         "type_dsc": "종류 선택",
         "describe_dsc" : "프로젝트 설명을 입력해 주세요",
         "category_dsc" : "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
-        "public" : "모든 유저",
-        "private": "프로젝트 멤버",
-        "team" : "그룹멤버"
+        "tooltip_public": "커리어젠에 있는 모든 유저가 프로젝트를 열람할 수 있어요",
+        "tooltip_private": "프로젝트 멤버만 프로젝트를 열람할 수 있어요",
+        "tooltip_group": "프로젝트 및 그룹 멤버만 프로젝트를 열람할 수 있어요"
       },
       "edit_project":"프로젝트 수정하기",
       "edit" : "수정하기",

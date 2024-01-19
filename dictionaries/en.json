@@ -135,10 +135,9 @@
         "type_dsc": "Select a type",
         "describe_dsc": "Tell more about your project",
         "category_dsc": "Type and press enter",
-        "public": "Public",
-        "private": "Private",
-        "team" : "Team"
-      },
+        "tooltip_public": "All users on CareerGen can view the project",
+        "tooltip_private": "Only project members can view the project",
+        "tooltip_group": "Only project and group members can view the project"      },
       "edit_project":"Edit Project",
       "edit" : "Update Project",
       "delete_project":{
