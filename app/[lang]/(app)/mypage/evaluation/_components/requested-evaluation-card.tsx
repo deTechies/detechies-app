@@ -9,8 +9,10 @@ import Link from "next/link";
 import ProjectWorkDetail from "../../../project/_components/project-work-detail";
 
 export default function RequestedEvaluationCard({
+  lang,
   data,
 }: {
+  lang: any;
   data: SurveyResponse;
 }) {
   return (
@@ -57,7 +59,7 @@ export default function RequestedEvaluationCard({
                 Review by: {data.evaluator.user.display_name} |{" "}
                 {data.projectWork.projectMember.user.display_name}
               </span>
-              <ProjectWorkDetail data={data.projectWork} showTags={false} />
+              <ProjectWorkDetail data={data.projectWork} showTags={false} lang={lang}/>
             </div>
           </div>
         </div>

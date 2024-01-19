@@ -27,13 +27,13 @@ export default async function Evaluation({
           </TabsTrigger>
         </TabsList>
         <TabsContent value="requested">
-          <Evaluations queries={{ status: "requested" }} />
+          <Evaluations queries={{ status: "requested" }} lang={dictionary} />
         </TabsContent>
         <TabsContent value="requests">
-          <Evaluations queries={{ status: "draft"}} />
+          <Evaluations queries={{ status: "draft"}} lang={dictionary} />
         </TabsContent>
         <TabsContent value="evaluations">
-          <EvaluationProvided />
+          <EvaluationProvided lang={dictionary} />
         </TabsContent>
   
       </Tabs>

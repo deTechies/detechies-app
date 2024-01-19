@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Edit } from "lucide-react";
 import Link from "next/link";
 import Connections from "./connections";
@@ -19,13 +19,13 @@ export default async function ProfileDetails({
     <Card className="pt-[28px] px-9 pb-[36px] gap-[20px]">
         <header className="flex justify-between items-center">
             {/* PROFILE LABEL */}
-            <h5 className="text-subhead_s capitalize">{text?.profile}</h5>
+            <h5 className="text-subhead_s capitalize">{text?.mypage.main.profile}</h5>
             {/* EDIT PROFILE BUTTON */}
             {
               !visiting && 
               <Link href="/mypage/edit">
               <Badge variant={"secondary"} shape={"icon"}>
-                {text?.edit} <Edit className='ml-2 text-icon-secondary' size='12'/>
+                {text?.mypage.main.edit} <Edit className='ml-2 text-icon-secondary' size='12'/>
               </Badge>
             </Link>
             }
@@ -35,32 +35,32 @@ export default async function ProfileDetails({
         {/* SECOND ROW FOR OCCUPATION &  SKILLS BADGES*/}
         <div className="inline-flex items-start gap-2 relative">
           {profile.profile_details?.profession ?(
-            <div className="!flex-[0_0_auto] inline-flex relative border-[1px] border-state-info text- text-xs font-medium px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-blue-900 dark:text-blue-300">
-              {profile.profile_details?.profession as string}
-            </div>
+            <Badge variant={"info"} shape={"outline"}>
+              {text.interface.profession_type?.[profile.profile_details?.profession]}
+            </Badge>
           ) : null}
-          {profile.profile_details && profile.profile_details.length > 0 && profile.profile_details?.skills.map((skill:string)=>{
+          {profile.profile_details && profile.profile_details?.skills.map((skill:string)=>{
             return(
-              <div className="!flex-[0_0_auto] border-[1px] border-accent-primary text-accent-primary text-xs font-medium px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-green-900 dark:text-green-300" key={skill}>
+              <Badge variant="accent" shape="outline" key={skill}>
                 {skill}
-              </div>
+              </Badge>
             )
           })}
         </div>
 
       {/* Contact info & Intro */}
-      <CardContent className="flex flex-col gap-8">
+
         <Connections github={profile?.github} address={profile?.id} />
 
         {profile?.profile_details?.description && (
-          <section className="border border-border-div rounded-sm flex flex-col p-[16px] gap-[16px]">
-            <h5 className="text-title_m capitalize">{text?.description}</h5>
-            <p className="text-body_m">
+          <section className="border border-border-div rounded-sm flex flex-col p-4 gap-4">
+            <h5 className="text-title_m capitalize">{text?.mypage.main.description}</h5>
+            <p className="text-body_s">
               {profile?.profile_details?.description}
             </p>
           </section>
         )}
-      </CardContent>
+
     </Card>
   );
 }

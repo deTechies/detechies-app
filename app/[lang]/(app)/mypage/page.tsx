@@ -20,7 +20,7 @@ export default async function Dashboard({
   }
   return (
     <main className="flex flex-col gap-6">
-      <ProfileDetails profile={profile} text={dictionary.mypage.main} />
+      <ProfileDetails profile={profile} text={dictionary} />
        <ProfileProjects
         projects={profile.projects}
         text={dictionary.mypage.project}
