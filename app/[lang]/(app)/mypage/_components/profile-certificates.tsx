@@ -52,11 +52,11 @@ export default function ProfileCertificates({
       </Card>
       
       {achievement_rewards &&
-        achievement_rewards.map((achievement_reward: AchievementReward) => {
+        achievement_rewards.map((achievement_reward: AchievementReward, index: number) => {
 
           if(achievement_reward.status == 'granted'){
             return (
-              <Dialog>
+              <Dialog key={index}>
                 <DialogTrigger>
                   <Card key={achievement_reward.id} className="flex flex-row items-start">
                     <div className="w-[68px] h-[68px] relative aspect-square rounded-sm ">
