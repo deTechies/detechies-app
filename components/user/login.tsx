@@ -65,8 +65,12 @@ export default function Login({lang}:ILoginProps) {
           onClick={() => signOut()}
 
         >
-          Change Account
-        
+          <Avatar
+          className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:outline hover:outline-accent-primary"
+          onClick={() => setShowModal(!showModal)}
+        > 
+            !
+        </Avatar>
         </Button>
         {showModal && (
           <AccountSettings

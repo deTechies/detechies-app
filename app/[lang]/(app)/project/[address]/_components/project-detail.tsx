@@ -25,6 +25,7 @@ export default function ProjectDetail({
 
   const [showFull, setShowFull] = useState(false);
 
+
   return (
     <Card className="w-full gap-8 px-8 pt-8 pb-5">
       <header className="flex items-start gap-9">

@@ -31,7 +31,7 @@ const badgeVariants = cva(
         category: "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
         outline: "max-w-[200px] truncate py-2 px-2.5 border rounded-md bg-background-transparent text-title_s",
         outline_sm: "h-[22px] px-2.5 border rounded-full text-label_s",
-        icon: "py-1.5 px-[10px] rounded-md text-label_m flex items-center justify-center",
+        base_icon: "py-1.5 px-[10px] rounded-md text-label_m flex items-center justify-center",
       },
     },
     defaultVariants: {
