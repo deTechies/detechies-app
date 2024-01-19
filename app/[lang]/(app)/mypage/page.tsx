@@ -22,6 +22,7 @@ export default async function Dashboard({
        <ProfileProjects
         projects={profile.projects}
         text={dictionary.mypage.project}
+        lang={dictionary}
       /> 
       {profile?.achievement_rewards  && (
         <div className="flex flex-col gap-6">
@@ -32,6 +33,7 @@ export default async function Dashboard({
           <ProfileAwards
             achievement_rewards={profile.achievement_rewards}
             text={dictionary.mypage.awards}
+            
           />
         </div>
       )}

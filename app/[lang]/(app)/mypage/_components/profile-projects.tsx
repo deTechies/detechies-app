@@ -9,14 +9,17 @@ import ProjectDetailItem from "./project-detail-item";
 export default function ProfileProjects({
   projects,
   text,
+  lang,
   visiting = false,
 }: {
   projects: any;
   text: any;
+  lang: any;
   visiting?: boolean;
 }) {
   //get all the projects the user the user is part of
   const router = useRouter();
+  console.log(projects);
 
   return (
     <div className="flex flex-col gap-3">
@@ -42,16 +45,16 @@ export default function ProfileProjects({
                 link: `/project/${project.project.id}`,
                 image: project.project.image,
                 description: project.project.description,
-                role: project.project.role,
+                role: project.works[0]?.role,
                 type: project.project.type,
-                contribution: project.project.contribution,
+                contribution: project.works[0]?.percentage,
                 tags: project.project.tags,
                 title: project.project.name,
                 begin_date: project.project.begin_date,
                 end_date: project.project.end_date,
                 work_name: project.project.work_name,
               }}
-              lang={text}
+              lang={lang}
               key={index}
             />
           ))}

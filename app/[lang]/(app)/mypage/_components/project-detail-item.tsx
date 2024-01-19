@@ -55,23 +55,23 @@ export default function ProjectDetailItem({
               <div className="flex flex-col gap-5 flex-wrap">
                 <div className="flex md:flex-row flex-col items-start justify-start gap-4 text-text-secondary">
                   <div className="flex flex-col items-start justify-start gap-2">
-                    <div className="divide-x">
+                    <div className="divide-x shrink-0">
                       <span className="pr-2 capitalize text-label_m">
                         {" "}
                         {data?.role &&
-                          lang?.interface.profession_type[data?.role]}
+                          lang?.interface?.profession_type[data?.role]}
                       </span>
-                      <span className="pl-2 text-label_m">
-                        {data.contribution} %
+                      <span className="pl-2 text-label_m shrink-0">
+                        {data.contribution}%
                       </span>
                     </div>
-                    <span className="text-label_m">
+                    <span className="text-label_m shrink-0">
                       {formatDate(data.begin_date)} ~{" "}
                       {data.end_date ? formatDate(data.end_date) : "Present"}
                     </span>
                   </div>
 
-                  <div className="grow  line-clamp-2">
+                  <div className="grow  line-clamp-3">
                     <span className="text-label_m">{data.description}</span>
                   </div>
                 </div>
