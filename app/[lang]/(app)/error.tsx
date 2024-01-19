@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import Link from "next/link"
 
 export default function Error() {
   return (
@@ -13,9 +14,11 @@ export default function Error() {
           Something went wrong, please try again later.
           If it persists, please contact us.
         </p>
+        <Link href='https://t.me/Careerzen_org' passHref>
         <Button variant="secondary" size="lg" className="mt-4 mx-auto">
           Contact us
         </Button>
+        </Link>
     </Card>
   )
 }

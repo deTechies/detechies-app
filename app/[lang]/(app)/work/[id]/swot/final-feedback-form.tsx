@@ -52,14 +52,14 @@ export default function FinalFeedbackForm({
     
     const result = await postServer('/survey-response/swot/create', submitData);
 
-    if (result.status === "success") {
+    if (result) {
       router.push(`/work/${workId}/result`);
     } else {
       setIsLoading(false);
     }
   }
 
-  const [teamBuildingRank, setTeamBuildingRank] = useState(defaultValues.recommend? defaultValues.recommend : 3);
+  const [teamBuildingRank, setTeamBuildingRank] = useState(defaultValues?.recommend? defaultValues.recommend : 3);
 
 
   return (

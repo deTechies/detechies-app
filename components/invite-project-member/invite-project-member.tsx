@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-import { User } from "@/lib/interfaces";
+import { ProjectMember, User } from "@/lib/interfaces";
 import useFetchData from "@/lib/useFetchData";
 import { Plus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -18,7 +18,6 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
 import SelectedProjectMember from "./selected-project-member";
-import { ProjectMember } from "@/lib/interfaces";
 
 export default function InviteProjectMember({
   projectId,
@@ -82,7 +81,7 @@ export default function InviteProjectMember({
             <>
               <Search placeholder={lang.project.details.invite_member.search} />
 
-              <div className="rounded-sm max-h-[30vh] overflow-x-auto">
+              <div className="rounded-sm h-[30vh] overflow-x-auto">
                 {filteredData &&
                   filteredData.map((member: User, index: number) => (
                     <PersonItem

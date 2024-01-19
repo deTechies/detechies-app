@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { RequestNftForm } from "@/components/form/request-nft-form";
 
 import { useParams, useSearchParams } from "next/navigation";
@@ -46,6 +46,7 @@ export default function RequestNFTModal({
 
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const params = useParams();
 
@@ -164,8 +165,8 @@ export default function RequestNFTModal({
               )}
             </div>
 
-            <DialogClose className="flex">
-              <Button size="lg" variant="secondary" className="max-w-full">
+            <DialogClose className="flex" asChild>
+              <Button size="lg" variant="secondary" className="max-w-full" ref={closeButtonRef}>
                 {lang.project.details.evalu.later}
               </Button>
             </DialogClose>
