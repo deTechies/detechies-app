@@ -69,8 +69,8 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
         </section>
         <section className="grid grid-cols-3 gap-4 ">
           <ProfileStat label="Followers" value={10} />
-          <ProfileStat label="Followers" value={10} />
-          <ProfileStat label="Followers" value={10} />
+          <ProfileStat label="Achievements" value={10} />
+          <ProfileStat label="Projects" value={10} />
         </section>
       </div>
     </section>
