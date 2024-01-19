@@ -47,7 +47,7 @@ export default async function GroupMember({
   });
 
   return (
-    <div className="overflow-auto max-w-[90vw]">
+    <div className="max-w-[90vw]">
       <div className="max-w-[500px] mx-auto mb-8">
         <Search
           placeholder={dictionary.group.details.members.search_placeholder}
