@@ -137,7 +137,18 @@
         "category_dsc": "Type and press enter",
         "tooltip_public": "All users on CareerGen can view the project",
         "tooltip_private": "Only project members can view the project",
-        "tooltip_group": "Only project and group members can view the project"      },
+        "tooltip_group": "Only project and group members can view the project",
+        "select_group": {
+          "button": "Select public group",
+          "subtitle": "Please select a group to make public",
+          "subdesc": "You have not selected a group to make public, if you apply a group to make the project public, only members of the applied group will be able to see the project",
+          "close": "Close",
+          "select_group": "Select group",
+          "title": "Selecting a group to make public",
+          "desc": "If I select a group I'm in, only members of that group will be able to see this project",
+          "back": "Back"
+        }
+      },
       "edit_project":"Edit Project",
       "edit" : "Update Project",
       "delete_project":{
