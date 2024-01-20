@@ -1,16 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import { uploadContent } from "@/lib/upload";
 import { createProject } from "@/lib/data/project";
+import { serverApi } from "@/lib/data/general";
+
 import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
-import MediaUploader from "@/components/extra/media-uploader";
+import NoticeGroupSelect from "./notice-group-select";
 import SelectGroupInScope from "./select-group-in-scope";
+import MediaUploader from "@/components/extra/media-uploader";
+import ProfessionTagType from "./profession-tag-type";
 
 import Image from "@/components/ui/image";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
@@ -19,6 +24,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
@@ -45,7 +51,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { AlertCircle, X } from "lucide-react";
-import { Card } from "@/components/ui/card";
 
 const projectFormSchema = z.object({
   name: z
@@ -86,18 +91,31 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
   const [present, setPresent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
+
+  const [selectGroupDialog, setSelectGroupDialog] = useState<boolean>(false);
+  const [myGroups, setMyGroups] = useState<Club[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<Club[]>([]);
-  // const dictionary = useDictionary()
+  const [noticeGroupSelectOpen, setNoticeGroupSelectOpen] =
+    useState<boolean>(false);
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
       e.preventDefault();
       const currentTags = form.getValues("tags") || [];
-      form.setValue("tags", [...currentTags, newTag.trim()], {
-        shouldValidate: true,
-      });
+      !currentTags.includes(newTag.trim()) &&
+        form.setValue("tags", [...currentTags, newTag.trim()], {
+          shouldValidate: true,
+        });
       setNewTag(""); // Clear the input field for new tag
     }
+  };
+
+  const clickTagsBadge = (_job_item: string) => {
+    const currentTags = form.getValues("tags") || [];
+    !currentTags.includes(_job_item.trim()) && form.setValue("tags", [...currentTags, _job_item.trim()], {
+      shouldValidate: true,
+    });
+    setNewTag(""); // Clear the input field for new tag
   };
 
   const handleNewTagChange = (e: any) => {
@@ -105,6 +123,14 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
   };
 
   async function onSubmit(data: CreateProjectFormValues) {
+    if (
+      form.getValues("scope") === PRIVACY_TYPE.GROUP &&
+      selectedGroup.length < 1
+    ) {
+      setNoticeGroupSelectOpen(true);
+      return;
+    }
+
     setLoading(true);
 
     if (file) {
@@ -142,11 +168,32 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
     setFile(file);
   };
 
-  const onClickDeleteClub = (clickedGroup: Club) => {
-    setSelectedGroup(selectedGroup.filter(_group => {
-      return _group.id !== clickedGroup.id
-    }))
+  // Select Group
+  const onSelectGroup = (_groups: Club[]) => {
+    setSelectedGroup(_groups);
   };
+
+  const onClickDeleteClub = (clickedGroup: Club) => {
+    setSelectedGroup(
+      selectedGroup.filter((_group) => {
+        return _group.id !== clickedGroup.id;
+      })
+    );
+  };
+
+  useEffect(() => {
+    const fetchMyGroupsData = async () => {
+      if (selectGroupDialog && myGroups.length < 1) {
+        const result = await serverApi(`/clubs/my`);
+  
+        if (result.status === "success") {
+          setMyGroups(result.data);
+        }
+      }
+    };
+  
+    fetchMyGroupsData();
+  }, [selectGroupDialog, myGroups.length]);
 
   return (
     <Form {...form}>
@@ -335,16 +382,26 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
 
               <div className="grow">
                 <FormControl className="mb-2">
-                  <Input
-                    placeholder={lang.project.list.create_project.category_dsc}
-                    value={newTag}
-                    onChange={handleNewTagChange}
-                    onKeyDown={handleKeyDown}
-                    disabled={
-                      form.getValues("tags") &&
-                      form.getValues("tags").length > 4
-                    }
-                  />
+                  <div>
+                    <Input
+                      placeholder={
+                        lang.project.list.create_project.category_dsc
+                      }
+                      value={newTag}
+                      onChange={handleNewTagChange}
+                      onKeyDown={handleKeyDown}
+                      disabled={
+                        form.getValues("tags") &&
+                        form.getValues("tags").length > 4
+                      }
+                    />
+                    {newTag && (
+                      <ProfessionTagType
+                        newTag={newTag}
+                        onClickJobBadge={clickTagsBadge}
+                      ></ProfessionTagType>
+                    )}
+                  </div>
                 </FormControl>
 
                 <div className="mt-3 flex flex-wrap gap-2 items-start">
@@ -433,45 +490,81 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                   ))}
 
                   {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
-                    <SelectGroupInScope
-                      lang={lang}
-                      selectedGroup={selectedGroup}
-                      setSelectedGroup={setSelectedGroup}
-                    ></SelectGroupInScope>
+                    <>
+                      <Dialog
+                        open={selectGroupDialog}
+                        onOpenChange={setSelectGroupDialog}
+                      >
+                        <DialogTrigger>
+                          <Badge className="cursor-pointer">
+                            {
+                              lang.project.list.create_project.select_group
+                                .button
+                            }
+                          </Badge>
+                        </DialogTrigger>
+
+                        <DialogContent className="max-w-[720px] gap-0 px-8">
+                          <SelectGroupInScope
+                            lang={lang}
+                            myGroups={myGroups}
+                            selectedGroup={selectedGroup}
+                            onSelectGroup={onSelectGroup}
+                          ></SelectGroupInScope>
+                        </DialogContent>
+                      </Dialog>
+                    </>
                   )}
                 </RadioGroup>
 
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {selectedGroup.length > 0 &&
-                    selectedGroup.map((group: Club, index: number) => {
-                      return (
-                        <Badge shape="outline" className="gap-2 my-1.5" key={index}>
-                          <div className="shrink-0 w-5 h-5 rounded-full overflow-hidden">
-                            <Image
-                              src={`https://ipfs.io/ipfs/${group.image}`}
-                              alt={group.name}
-                              width="20"
-                              height="20"
-                            ></Image>
-                          </div>
+                {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {selectedGroup.length > 0 &&
+                      selectedGroup.map((group: Club, index: number) => {
+                        return (
+                          <Badge
+                            shape="outline"
+                            className="gap-2 my-1.5"
+                            key={index}
+                          >
+                            <div className="shrink-0 w-5 h-5 rounded-full overflow-hidden">
+                              <Image
+                                src={`https://ipfs.io/ipfs/${group.image}`}
+                                alt={group.name}
+                                width="20"
+                                height="20"
+                              ></Image>
+                            </div>
 
-                          <div className="text-label_m max-w-[120px] truncate">
-                            {group.name}
-                          </div>
+                            <div className="text-label_m max-w-[120px] truncate">
+                              {group.name}
+                            </div>
 
-                          <X
-                            className="shrink-0 w-5 h-5 cursor-pointer text-text-secondary"
-                            onClick={() => onClickDeleteClub(group)}
-                          ></X>
-                        </Badge>
-                      );
-                    })}
-                </div>
+                            <X
+                              className="shrink-0 w-5 h-5 cursor-pointer text-text-secondary"
+                              onClick={() => onClickDeleteClub(group)}
+                            ></X>
+                          </Badge>
+                        );
+                      })}
+                  </div>
+                )}
+
                 <FormMessage />
               </div>
             </FormInlineItem>
           )}
         />
+
+        <NoticeGroupSelect
+          lang={lang}
+          open={noticeGroupSelectOpen}
+          onOpenChange={setNoticeGroupSelectOpen}
+          onClickSelectGroup={() => {
+            setNoticeGroupSelectOpen(false);
+            setSelectGroupDialog(true);
+          }}
+        ></NoticeGroupSelect>
 
         <div className="flex items-center justify-end gap-2">
           <Button
