@@ -5,10 +5,11 @@ import { toast } from "@/components/ui/use-toast";
 import { createMissionCampaign } from "@/lib/data/mission";
 import { Achievement } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { StepOne } from "./campaign-form";
 import { StepTwo } from "./mission-form";
 import RewardForm from "./reward-form";
+import { CheckSquare, ChevronRight, Gift, Pencil } from "lucide-react";
 
 interface Mission {
   name: string;
@@ -127,7 +128,7 @@ export const Wizard = ({
   };
 
   const submitForm = async () => {
-    setLoading(true)
+    setLoading(true);
 
     // we can create hte missions here
     const result = await createMissionCampaign(formData, clubId);
@@ -136,7 +137,7 @@ export const Wizard = ({
       description: "Succesfully created missoin campaign.",
     });
 
-    setLoading(false)
+    setLoading(false);
     router.push(`/groups/${clubId}/missions`);
   };
 
@@ -186,13 +187,15 @@ export const Wizard = ({
 
   return (
     <div className="flex flex-col w-full">
-      <div className="mb-10">
-        <h2 className="text-center text-heading_s">
+      <div className="mb-7">
+        <h2 className="text-center text-heading_s ">
           {lang.mission.create.title}
         </h2>
 
         {/* progress tabs */}
       </div>
+
+      <StepIndicator lang={lang} currentStep={currentStep}></StepIndicator>
 
       <Card className="w-full gap-6 py-10 px-14">
         <CardHeader className="flex-col items-start gap-3">
@@ -275,7 +278,7 @@ export const Wizard = ({
                   className="w-full"
                   onClick={submitForm}
                   loading={loading}
-                  disabled={nextDisabled() || loading }
+                  disabled={nextDisabled() || loading}
                 >
                   {lang.mission.create.submit}
                 </Button>
@@ -284,6 +287,118 @@ export const Wizard = ({
           </div>
         </CardContent>
       </Card>
+    </div>
+  );
+};
+
+// =================================
+// StepIndicator
+
+const StepIndicator = ({
+  lang,
+  currentStep,
+}: {
+  lang: any;
+  currentStep: number;
+}) => {
+  const stepIndicatorList = [
+    { title: "미션 정보 입력", icon: <Pencil></Pencil> },
+    { title: "상세 미션 등록", icon: <CheckSquare></CheckSquare> },
+    { title: "보상 정보 등록", icon: <Gift></Gift> },
+  ];
+
+  return (
+    <div className="flex flex-wrap items-center justify-center mb-10 gap-[30px]">
+      {stepIndicatorList.map(
+        (
+          _stepItem: { title: string; icon: React.ReactNode },
+          _index: number
+        ) => {
+          return (
+            <>
+              <StepIndicatorItem
+                title={_stepItem.title}
+                step={_index + 1}
+                currentStep={currentStep}
+              >
+                {_stepItem.icon}
+              </StepIndicatorItem>
+
+              {_index + 1 < stepIndicatorList.length && (
+                <ChevronRight className="w-7 text-border-input"></ChevronRight>
+              )}
+            </>
+          );
+        }
+      )}
+    </div>
+  );
+};
+
+const StepIndicatorItem = ({
+  title,
+  step,
+  currentStep,
+  children,
+}: {
+  title: string;
+  step: number;
+  currentStep: number;
+  children?: React.ReactNode;
+}) => {
+  const getState = () => {
+    if (step < currentStep) {
+      return "complete";
+    } else if (step == currentStep) {
+      return "active";
+    } else {
+      return "pre";
+    }
+  };
+
+  const computedState = useMemo(() => {
+    return getState();
+  }, [currentStep]);
+
+  return (
+    <div
+      className={`flex items-center max-w-[190px] p-2 rounded-full w-full transition ${
+        computedState == "active"
+          ? "bg-accent-primary bg-animate"
+          : "bg-background-layer-1"
+      }`}
+    >
+      <div
+        className={`flex items-center justify-center shrink-0 w-12 h-12 rounded-full transition aspect-square mr-3.5 ${
+          computedState == "active"
+            ? "bg-background-layer-1"
+            : "bg-background-layer-2 text-border-input"
+        }`}
+      >
+        {children}
+      </div>
+
+      <div>
+        <div
+          className={`text-title_l transition ${
+            computedState == "active"
+              ? "text-background-layer-1"
+              : "text-border-input"
+          }`}
+        >
+          STEP {step}
+        </div>
+
+        <div
+          className={`text-label_s transition ${
+            computedState == "active"
+              ? "text-background-layer-1"
+              : "text-text-secondary"
+          }`}
+        >
+          {title}
+        </div>
+      </div>
     </div>
   );
 };

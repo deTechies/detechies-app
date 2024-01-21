@@ -55,10 +55,10 @@
     "verify_email": {
       "title": "회원가입",
       "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.",
-      "username": "이름",
-      "username_placeholder": "이름을 입력하세요.",
+      "username": "닉네임",
+      "username_placeholder": "모두에게 공개되는 사용자 이름이에요.",
       "email": "메일주소",
-      "email_placeholder": "메일주소를 입력하세요.",
+      "email_placeholder": "qud582@gmail.com",
       "email_desc": "메일주소를 입력하세요.",
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",

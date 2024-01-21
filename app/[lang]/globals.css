@@ -231,3 +231,16 @@ html {
     margin-right: 4px; /* 간격 조정 */
   }
 }
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.bg-animate {
+  animation: fadeInOut 2s ease-in-out infinite;
+}
