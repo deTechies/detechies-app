@@ -166,7 +166,9 @@
     "details": {
       "summary": {
         "edit": "수정하기",
-        "desc": "프로젝트 설명"
+        "desc": "프로젝트 설명",
+        "show_more": "자세히 보기",
+        "hide": "숨기기"
       },
       "members": {
         "title": "프로젝트 멤버",

@@ -166,7 +166,9 @@
     "details": {
       "summary": {
         "edit": "Edit",
-        "desc": "Project Description"
+        "desc": "Project Description",
+        "show_more": "show more",
+        "hide": "hide"
       },
       "members": {
         "title": "Project Members",

@@ -15,7 +15,7 @@ export default function SelectGroupInScope({
   onSelectGroup,
 }: {
   lang: any;
-  myGroups: Club[];
+  myGroups: Club[]; 
   selectedGroup: Club[];
   onSelectGroup: Function;
 }) {
