@@ -17,9 +17,9 @@ export default async function ProfileDetails({
 }: ProfileDetailsProps) {
   return (
     <Card className="pt-[28px] px-9 pb-[36px] gap-[20px]">
-        <header className="flex justify-between items-center">
+        <header className="flex items-center justify-between">
             {/* PROFILE LABEL */}
-            <h5 className="text-subhead_s capitalize">{text?.mypage.main.profile}</h5>
+            <h5 className="capitalize text-subhead_s">{text?.mypage.main.profile}</h5>
             {/* EDIT PROFILE BUTTON */}
             {
               !visiting && 
@@ -33,7 +33,7 @@ export default async function ProfileDetails({
         </header>
         
         {/* SECOND ROW FOR OCCUPATION &  SKILLS BADGES*/}
-        <div className="inline-flex items-start gap-2 relative">
+        <div className="relative inline-flex items-start gap-2">
           {profile.profile_details?.profession ?(
             <Badge variant={"info"} shape={"outline"}>
               {text.interface.profession_type?.[profile.profile_details?.profession]}
@@ -53,8 +53,8 @@ export default async function ProfileDetails({
         <Connections github={profile?.github} address={profile?.id} />
 
         {profile?.profile_details?.description && (
-          <section className="border border-border-div rounded-sm flex flex-col p-4 gap-4">
-            <h5 className="text-title_m capitalize">{text?.mypage.main.description}</h5>
+          <section className="flex flex-col gap-4 p-4 border rounded-sm border-border-div">
+            <h5 className="capitalize text-title_m">{text?.mypage.main.description}</h5>
             <p className="text-body_s">
               {profile?.profile_details?.description}
             </p>

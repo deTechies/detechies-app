@@ -7,16 +7,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
-import { removeProjectMember } from "@/lib/data/project";
+import { removeProjectWork } from "@/lib/data/project";
 import {} from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function DeleteMember({
-  memberId,
+export default function DeleteWorks({
+  projectId,
   lang,
 }: {
-  memberId: string;
+  projectId: string;
   lang: any;
 }) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,37 +24,42 @@ export default function DeleteMember({
   const router = useRouter();
   async function deleteMember() {
     setLoading(true);
-    const result = await removeProjectMember(memberId);
+    const result = await removeProjectWork(projectId);
 
-    console.log(result);
+    if (result.status === "success") {
+      toast({
+        description: <pre>{JSON.stringify(result, null, 3)}</pre>,
+      });
 
-    toast({
-      description: <pre>{JSON.stringify(result, null, 3)}</pre>,
-    });
-
-    router.refresh();
-    setLoading(false);
+      router.refresh();
+    } else {
+      toast({
+        description: <pre>{JSON.stringify(result, null, 3)}</pre>,
+      });
+      setLoading(false);
+    }
   }
+
   return (
     <Dialog>
       <DialogTrigger className="text-left">
-        <span className="text-title_m">
-          {lang.project.details.members.expel.button}
-        </span>
+        <Button size="sm" variant="secondary">
+          {lang.project.details.members.delete_works.button}
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="flex flex-col gap-0 px-8 py-7">
         <h4 className="mb-4 text-subhead_s">
-          {lang.project.details.members.expel.title}
+          {lang.project.details.members.delete_works.title}
         </h4>
         <p className="mb-6 text-body_m">
-          {lang.project.details.members.expel.desc}
+          {lang.project.details.members.delete_works.desc}
         </p>
 
         <div className="flex justify-center gap-2">
           <DialogClose className="w-full max-w-[212px]">
             <Button size="lg" variant="secondary" className="w-full">
-              {lang.project.details.members.expel.back}
+              {lang.project.details.members.delete_works.back}
             </Button>
           </DialogClose>
 
@@ -65,7 +70,7 @@ export default function DeleteMember({
             loading={loading}
             disabled={loading}
           >
-            {lang.project.details.members.expel.button}
+            {lang.project.details.members.delete_works.delete}
           </Button>
         </div>
       </DialogContent>

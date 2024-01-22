@@ -96,16 +96,24 @@ export default function ProjectContributionInviteForm({
   };
 
   const onSubmit = async (values: ContributionFormData) => {
-    console.log(values);
+    setLoading(true)
 
     try {
       const result = await addMembersWork(values, projectId);
 
-      toast({
-        title: "Success",
-        description: "Your contribution has been added.",
-      });
-
+      if(result.status === "success"){
+        toast({
+          title: "Success",
+          description: "Your contribution has been added.",
+        });
+      } else {
+        toast({
+          title: "Failed",
+          description: result.codeMessage,
+        });
+      }
+      
+      setLoading(false);
       if (closeButtonRef.current) {
         // closeButtonRef.current.click();
         setInvite();
@@ -300,18 +308,19 @@ export default function ProjectContributionInviteForm({
           <DialogClose asChild>
             <Button
               variant={"secondary"}
-              className="grow max-w-[212px]"
               ref={closeButtonRef}
+              size="lg"
             >
               {lang.project.details.members.add_works.later}
             </Button>
           </DialogClose>
+
           <Button
             type="submit"
             disabled={loading || !form.formState.isValid}
             loading={loading}
             variant="default"
-            className="grow max-w-[212px]"
+            size="lg"
           >
             {lang.project.details.members.add_works.add}
           </Button>
