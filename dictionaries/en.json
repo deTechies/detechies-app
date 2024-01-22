@@ -550,6 +550,13 @@
           "anchor": "Get MATIC Tokens",
           "button": "Create Group Contract"
         },
+        "completed_success": {
+          "title": "Your limited edition NFT has been created!",
+          "desc1": "You can manage the created NFT in group management.",
+          "desc2": "You can check the application status in the NFT certificate.",
+          "go_manage:": "Go to group management",
+          "go_nft": "Go to NFT certificate"
+        },
         "join_group": {
           "title": "Join Group",
           "desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",

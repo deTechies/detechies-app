@@ -52,51 +52,56 @@ import * as z from "zod";
 
 import { AlertCircle, X } from "lucide-react";
 
-const projectFormSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, {
-      message: "Enter project name.", // 필수 필드에 대한 사용자 정의 메시지
-    })
-    .min(2, {
-      message: "Your group's name must be at least 2 characters.",
-    })
-    .max(30, {
-      message: "Your group's name must not be longer than 30 characters.",
-    })
-    .refine((val) => {
-      const trimmed = val.replace(/\s+/g, ' ');
-      return trimmed.length >= 2 && trimmed.length <= 30;
-    }, {
-      message: "Your group's name must be between 2 and 30 characters, consecutive spaces are counted as one."
+const projectFormSchema = z
+  .object({
+    name: z
+      .string()
+      .trim()
+      .min(1, {
+        message: "Enter project name.", // 필수 필드에 대한 사용자 정의 메시지
+      })
+      .min(2, {
+        message: "Your group's name must be at least 2 characters.",
+      })
+      .max(30, {
+        message: "Your group's name must not be longer than 30 characters.",
+      })
+      .refine(
+        (val) => {
+          const trimmed = val.replace(/\s+/g, " ");
+          return trimmed.length >= 2 && trimmed.length <= 30;
+        },
+        {
+          message:
+            "Your group's name must be between 2 and 30 characters, consecutive spaces are counted as one.",
+        }
+      ),
+    begin_date: z.string(),
+    end_date: z.string(),
+    description: z
+      .string()
+      .trim()
+      .min(10, {
+        message: "Your groups description must be at least 10 characters.",
+      })
+      .max(1000, {
+        message:
+          "Your groups description must not be longer than 1000 characters.",
+      }),
+    tags: z
+      .array(z.string())
+      .min(1, {
+        message: "At least one tag is required.",
+      })
+      .max(5, {
+        message: "No more than 5 tags are allowed.",
+      }),
+    scope: z.string(),
+    image: z.string().optional(),
+    type: z.nativeEnum(ProjectType, {
+      required_error: "You need to select a type.",
     }),
-  begin_date: z.string(),
-  end_date: z.string(),
-  description: z
-    .string()
-    .trim()
-    .min(10, {
-      message: "Your groups description must be at least 10 characters.",
-    })
-    .max(1000, {
-      message:
-        "Your groups description must not be longer than 1000 characters.",
-    }),
-  tags: z
-    .array(z.string())
-    .min(1, {
-      message: "At least one tag is required.",
-    })
-    .max(5, {
-      message: "No more than 5 tags are allowed.",
-    }),
-  scope: z.string(),
-  image: z.string().optional(),
-  type: z.nativeEnum(ProjectType, {
-    required_error: "You need to select a type.",
-  }),
-});
+  });
 
 type CreateProjectFormValues = z.infer<typeof projectFormSchema>;
 
@@ -169,7 +174,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
       data.end_date = "";
     }
 
-    const computedName = data.name.replace(/\s+/g, ' ').trim();
+    const computedName = data.name.replace(/\s+/g, " ").trim();
 
     const result = await createProject({
       image: data.image,
@@ -283,7 +288,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage />
+                <FormMessage className="mt-2" />
               </div>
             </FormInlineItem>
           )}
@@ -424,12 +429,14 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                         form.getValues("tags").length > 4
                       }
                     />
+
                     {newTag && (
                       <ProfessionTagType
                         newTag={newTag}
                         onClickJobBadge={clickTagsBadge}
                       ></ProfessionTagType>
                     )}
+                    <FormMessage className="mt-2"></FormMessage>
                   </div>
                 </FormControl>
 
