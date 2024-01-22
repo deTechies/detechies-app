@@ -55,10 +55,10 @@
     "verify_email": {
       "title": "회원가입",
       "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.",
-      "username": "이름",
-      "username_placeholder": "이름을 입력하세요.",
+      "username": "닉네임",
+      "username_placeholder": "모두에게 공개되는 사용자 이름이에요.",
       "email": "메일주소",
-      "email_placeholder": "메일주소를 입력하세요.",
+      "email_placeholder": "qud582@gmail.com",
       "email_desc": "메일주소를 입력하세요.",
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
@@ -137,7 +137,17 @@
         "category_dsc" : "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
         "tooltip_public": "커리어젠에 있는 모든 유저가 프로젝트를 열람할 수 있어요",
         "tooltip_private": "프로젝트 멤버만 프로젝트를 열람할 수 있어요",
-        "tooltip_group": "프로젝트 및 그룹 멤버만 프로젝트를 열람할 수 있어요"
+        "tooltip_group": "프로젝트 및 그룹 멤버만 프로젝트를 열람할 수 있어요",
+        "select_group": {
+          "button": "공개그룹 선택",
+          "subtitle": "공개할 그룹을 선택해 주세요",
+          "subdesc": "공개할 그룹을 선택하지 않았어요. 프로젝트를 공개할 그룹을 적용하면, 적용된 그룹 멤버만 프로젝트를 볼 수 있어요.",
+          "close": "닫기",
+          "select_group": "그룹 선택하기",
+          "title": "공개할 그룹 선택하기",
+          "desc": "내가 참여중인 그룹을 선택하면, 해당 그룹 멤버만 이 프로젝트를 볼 수 있어요.",
+          "back": "뒤로가기"
+        }
       },
       "edit_project":"프로젝트 수정하기",
       "edit" : "수정하기",
@@ -156,7 +166,9 @@
     "details": {
       "summary": {
         "edit": "수정하기",
-        "desc": "프로젝트 설명"
+        "desc": "프로젝트 설명",
+        "show_more": "자세히 보기",
+        "hide": "숨기기"
       },
       "members": {
         "title": "프로젝트 멤버",

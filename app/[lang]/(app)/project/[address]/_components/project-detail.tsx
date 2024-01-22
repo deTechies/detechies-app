@@ -8,8 +8,7 @@ import { beginEndDates } from "@/lib/utils";
 import { ChevronDown, ChevronUp, PenSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
 
 export default function ProjectDetail({
   details,
@@ -24,6 +23,27 @@ export default function ProjectDetail({
   });
 
   const [showFull, setShowFull] = useState(false);
+
+  const detailDescriptionRef = useRef<any>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    // 높이 설정
+    const updateHeight = () => {
+      if (detailDescriptionRef.current) {
+        setHeight(detailDescriptionRef.current.offsetHeight);
+      }
+    };
+
+    // 컴포넌트 마운트 시 높이 측정
+    updateHeight();
+
+    // 윈도우 리사이즈 이벤트에 대응
+    window.addEventListener("resize", updateHeight);
+
+    // 클린업 함수
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
 
   return (
     <Card className="w-full gap-8 px-8 pt-8 pb-5">
@@ -74,7 +94,7 @@ export default function ProjectDetail({
             </div>
 
             <div className="flex items-center gap-1 text-label_l text-text-secondary">
-              {beginEndDates(details.begin_date ,details?.end_date)}
+              {beginEndDates(details.begin_date, details?.end_date)}
             </div>
           </div>
 
@@ -83,9 +103,7 @@ export default function ProjectDetail({
               {details.tags &&
                 details.tags?.map((tag) => (
                   <Badge key={tag} shape="outline" variant="accent">
-                    <div className="truncate">
-                      {tag}
-                    </div>
+                    <div className="truncate">{tag}</div>
                   </Badge>
                 ))}
             </div>
@@ -100,24 +118,30 @@ export default function ProjectDetail({
           </h3>
         </div>
 
-        <div className={`overflow-hidden ${showFull ? "" : "max-h-[100px]"}`}>
+        <div className="relative">
           <div
-            className="text-body_m"
+            className={`text-body_m ${showFull ? "" : "line-clamp-3"}`}
+            dangerouslySetInnerHTML={{ __html: details.description }}
+          ></div>
+          
+          <div
+            ref={detailDescriptionRef}
+            className="absolute top-0 left-0 right-0 invisible opacity-0 pointer-events-none select-none text-body_m"
             dangerouslySetInnerHTML={{ __html: details.description }}
           ></div>
         </div>
 
-        {details.description.length > 200 && (
+        {height > 72 && (
           <button
             onClick={() => {
               setShowFull(!showFull);
             }}
-            className="flex items-center gap-2 mx-auto text-label_m text-text-secondary w-fit"
+            className="flex items-center gap-1 mx-auto text-label_m text-text-secondary w-fit"
           >
             {showFull
-              ? lang.project.details.hide
-              : lang.project.details.show_more}
-            {showFull ? <ChevronUp size="12" /> : <ChevronDown size="12" />}
+              ? lang.project.details.summary.hide
+              : lang.project.details.summary.show_more}
+            {showFull ? <ChevronUp size="20" /> : <ChevronDown size="20" />}
           </button>
         )}
       </div>

@@ -65,7 +65,7 @@ export default function ProjectItem({
           ></p>
         </div>
 
-        <div className="flex gap-3 justify-self-end">
+        <div className="flex flex-wrap gap-3 justify-self-end">
           {details.tags &&
             details.tags?.map((tag) => (
               <Badge
@@ -74,7 +74,9 @@ export default function ProjectItem({
                 variant="placeholder"
                 className="text-label_s"
               >
-                {tag}
+                <div className="truncate">
+                  {tag}
+                </div>
               </Badge>
             ))}
 
