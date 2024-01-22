@@ -6,7 +6,7 @@ import ListAvatars from "./list-avatars";
 export default async function Avatars() {
   //need to get the users received achievements
   const {data:achievements} = await getUserAchievements();
-  const lang = await getDictionary("kr");
+  const lang = await getDictionary("ko");
 
 
   return (

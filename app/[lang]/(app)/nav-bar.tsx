@@ -35,7 +35,7 @@ export default function Navbar({ lang }: { lang: any }) {
   ];
   
   function changeLanguage() {
-    const value = params.lang === "en" ? "kr" : "en";
+    const value = params.lang === "en" ? "ko" : "en";
     //change the value in the path name
     const segments = pathname.split("/").filter(Boolean);
     const newPath = "/" + value + "/" + segments.slice(1).join("/");
