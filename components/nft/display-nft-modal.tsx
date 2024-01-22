@@ -4,12 +4,12 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 
+import Image from "@/components/ui/image";
 import { ABI, DEFAULT_IPFS_URL } from "@/lib/constants";
 import { requestAchievement } from "@/lib/data/achievements";
 import { Achievement } from "@/lib/interfaces";
 import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import Image from "@/components/ui/image";
 import { useEffect, useState } from "react";
 import { Address, useContractRead } from "wagmi";
 import NftListItem from "../card/nft-list-item";
@@ -168,7 +168,7 @@ export default function DisplayNFTModal({
 
                 <div className="flex items-center gap-2 overflow-auto text-right">
                 <span className="text-title_m">
-                    {lang.achievement.display_nft.group_name}
+                  {details.club?.name}
                 </span>
                 </div>
             </div>

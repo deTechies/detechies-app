@@ -63,7 +63,13 @@ const defaultValues: Partial<ProfileFormValues> = {
   avatar_type: AVATAR_TYPE.CLOTHES,
 };
 
-export function CreateNFTForm({ group }: { group: Club }) {
+export function CreateNFTForm({
+  group,
+  lang,
+}: {
+  group: Club;
+  lang: any;
+}) {
   const {
     form,
     setUploadedImage,
@@ -75,12 +81,10 @@ export function CreateNFTForm({ group }: { group: Club }) {
     onSubmit,
   } = useCreateNFTForm(group.id, group);
 
-
   const router = useRouter();
-  
-  
+
   if (completed) return <CompletedSuccess groupId={group.id} />;
-  
+
   const onClickCancel = () => {
     router.back();
   };
@@ -105,6 +109,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
     return false;
   };
 
+  const text = lang.group.details.manage.nft.create
   return (
     <main>
       <Form {...form}>
@@ -115,10 +120,12 @@ export function CreateNFTForm({ group }: { group: Club }) {
           <Card className="gap-6 py-10 px-14">
             <CardHeader>
               <div>
-                <h2 className="mb-3 text-heading_s">새로운 NFT 생성하기</h2>
+                <h2 className="mb-3 text-heading_s">
+                  {text.create_new_nft_title}
+                </h2>
 
                 <span className="mb-1 text-body_s text-state-error">
-                  *는 필수입력 사항입니다.
+                  {text.required_fields}
                 </span>
               </div>
             </CardHeader>
@@ -130,7 +137,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                 render={({ field }) => (
                   <FormInlineItem>
                     <FormInlineLabel>
-                      NFT 유형 <span className="ml-1 text-state-error">*</span>
+                      {text.nft_type} <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -162,7 +169,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                 render={({ field }) => (
                   <FormInlineItem>
                     <FormInlineLabel>
-                      NFT 속성 <span className="ml-1 text-state-error">*</span>
+                      {text.nft_properties} <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -195,7 +202,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                 {form.watch("nft_type") == "sbt" ? "커리어 NFT" : "한정판 NFT"}
               </h2>
               <span className="mb-1 text-body_s text-state-error">
-                *는 필수입력 사항입니다.
+                * {text.career_nft}
               </span>
             </div>
 
@@ -208,7 +215,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                     <FormInlineItem>
                       <FormInlineLabel>
                         {/* Type */}
-                        증명서 타입
+                        {text.certificate_type}
                         <span className="ml-1 text-state-error">*</span>
                       </FormInlineLabel>
                       <RadioGroup
@@ -244,10 +251,10 @@ export function CreateNFTForm({ group }: { group: Club }) {
                   <FormInlineItem className="items-start">
                     <FormInlineLabel className="mt-5">
                       {/* Name */}
-                      증명서 이름
+                      {text.certificate_name}
                       <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
-                    
+
                     <div className="grow">
                       <FormControl className="mb-2">
                         <Input placeholder="Enter your name" {...field} />
@@ -264,7 +271,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                   <FormInlineItem className="items-start">
                     <FormInlineLabel>
                       {/* Description */}
-                      증명서 설명
+                      {text.certificate_description}
                       <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
                     <FormControl>
@@ -290,7 +297,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                       <FormInlineItem>
                         <FormInlineLabel>
                           {/* Avatar Type */}
-                          아바타 타입
+                          {text.avatar_type}
                           <span className="ml-1 text-state-error">*</span>
                         </FormInlineLabel>
                         <RadioGroup
@@ -331,19 +338,19 @@ export function CreateNFTForm({ group }: { group: Club }) {
                     >
                       <div>
                         <div className="mb-1 text-title_s text-text-secondary">
-                          이미지 가이드
+                          {text.image_guides}
                         </div>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          1:1 비율 권장
+                          {text.image_guides_desc}
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          배경이 없는 PNG 형식의 이미지 권장
+                          {text.images_guides_desc_2}
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          NFT 증명서 페이지에서 확인 가능합니다.
+                          {text.images_guides_nft}
                         </li>
                       </div>
                     </MediaUploader>
@@ -369,7 +376,7 @@ export function CreateNFTForm({ group }: { group: Club }) {
                       </div>
 
                       <li className="mb-1 text-text-placeholder text-label_s">
-                        NFT 증명서 페이지에서 확인 가능합니다.
+                        {text.images_guides_nft}
                       </li>
                     </div>
                   </MediaUploader>
@@ -384,17 +391,16 @@ export function CreateNFTForm({ group }: { group: Club }) {
                 variant="secondary"
                 onClick={onClickCancel}
               >
-                Cancel
+                {text.cancel}
               </Button>
 
               <Button
                 type="submit"
                 loading={isLoading}
-                
                 size="lg"
                 disabled={createDisabled() || isLoading}
               >
-                Create NFT
+                {text.create_nft}
               </Button>
             </div>
           </Card>
@@ -415,7 +421,7 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
   const [uploadedAvatar, setUploadedAvatar] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
-  
+
   const { write, error } = useContractWrite({
     address: group.contract as Address,
     abi: ABI.group,
@@ -462,46 +468,46 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
     }
 
     const uploadData = { ...data, avatar, image, clubId: groupId };
-    
-    //upload nft data 
+
+    //upload nft data
     let metadataUpdate = {
-      image: 'https://ipfs.io/ipfs/' + uploadData.image,
+      image: "https://ipfs.io/ipfs/" + uploadData.image,
       name: uploadData.name,
       description: uploadData.description,
       attributes: {
         type: uploadData.type,
         avatar_type: uploadData.avatar_type,
         image_type: uploadData.image_type,
-        nft_type: uploadData.nft_type,  
+        nft_type: uploadData.nft_type,
       },
-      avatar: ""
+      avatar: "",
+    };
+
+    if (uploadData.image_type == NFT_IMAGE_TYPE.AVATAR) {
+      metadataUpdate.image = "https://ipfs.io/ipfs/" + uploadData.avatar;
     }
-    
-    if(uploadData.image_type == NFT_IMAGE_TYPE.AVATAR) {
-      metadataUpdate.image = 'https://ipfs.io/ipfs/' + uploadData.avatar;
-    }
-    
-    if(uploadData.image_type == NFT_IMAGE_TYPE.IMAGE_AND_AVATAR) {
-      metadataUpdate.image = 'https://ipfs.io/ipfs/' + uploadData.image;
-      metadataUpdate.avatar = 'https://ipfs.io/ipfs/' + uploadData.avatar;
+
+    if (uploadData.image_type == NFT_IMAGE_TYPE.IMAGE_AND_AVATAR) {
+      metadataUpdate.image = "https://ipfs.io/ipfs/" + uploadData.image;
+      metadataUpdate.avatar = "https://ipfs.io/ipfs/" + uploadData.avatar;
     }
     const metadata = await uploadContent(JSON.stringify(metadataUpdate));
-    
+
     const tradeable = NFT_TYPE.SBT == uploadData.nft_type ? false : true;
-    
-    if(!metadata){
+
+    if (!metadata) {
       toast({
         title: "Error",
         description: "Failed to upload metadata",
       });
-      
+
       setIsLoading(false);
       return;
     }
-    
+
     await write({
       args: [metadata, tradeable],
-    })
+    });
 
     const result = await uploadAchievement(uploadData);
 
