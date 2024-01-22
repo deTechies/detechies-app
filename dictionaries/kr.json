@@ -172,7 +172,6 @@
       },
       "members": {
         "title": "프로젝트 멤버",
-        "delete": "삭제하기",
         "contribution": "기여도",
         "delegate_admin": "관리자 권한 위임",
         "unregistered": "성과 미등록",
@@ -191,6 +190,12 @@
           "later": "나중에 할게요",
           "go_eval": "평가하러 가기"
         },
+        "expel": {
+          "button": "내보내기",
+          "title": "선택한 구성원을 프로젝트에서 내보낼까요?",
+          "desc": "내보낼 경우 멤버의 프로젝트 활동 정보가 모두 삭제돼요. 정말로 내보낼까요?",
+          "back": "뒤로가기"
+        },
         "add_works": {
           "button": "내 성과 등록하기",
           "title": "내 성과 등록하기",
@@ -208,7 +213,14 @@
           "later": "나중에 할게요",
           "add": "등록하기",
           "in_progress": "진행중"
-        } 
+        },
+        "delete_works": {
+          "button": "삭제하기",
+          "title": "작성했던 성과내역을 삭제할까요?",
+          "desc": "진짜요?",
+          "back": "뒤로가기",
+          "delete": "삭제하기"
+        }
       },
       "links": {
         "title": "작업물",

@@ -172,7 +172,6 @@
       },
       "members": {
         "title": "Project Members",
-        "delete": "Delete",
         "contribution": "Contribution",
         "delegate_admin": "Delegate Admin",
         "unregistered": "Unregistered",
@@ -191,6 +190,12 @@
           "later": "Do It Later",
           "go_eval": "Go to Evaluate"
         },
+        "expel": {
+          "button": "Remove",
+          "title": "Remove selected members from the project?",
+          "desc": "Removing will delete all of the member's project activity information, do you really want to remove?",
+          "back": "Back"
+        },
         "add_works": {
           "button": "Add Work",
           "title": "Add Contribution",
@@ -208,6 +213,13 @@
           "later": "Do It Later",
           "add": "Register",
           "in_progress": "In Progress"
+        },
+        "delete_works": {
+          "button": "Delete",
+          "title": "Do you want to delete the works you created?",
+          "desc": "Really?",
+          "back": "Back",
+          "delete": "Delete"
         }
       },
       "links": {
