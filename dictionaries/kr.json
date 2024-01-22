@@ -58,7 +58,7 @@
       "username": "닉네임",
       "username_placeholder": "모두에게 공개되는 사용자 이름이에요.",
       "email": "메일주소",
-      "email_placeholder": "qud582@gmail.com",
+      "email_placeholder": "email@example.com",
       "email_desc": "메일주소를 입력하세요.",
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
