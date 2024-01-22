@@ -611,6 +611,26 @@
           "info": "그룹 정보"
         },
         "nft": {
+          "create": {
+            "create_new_nft_title": "새로운 NFT 생성하기", 
+            "this_is_required": "*는 필수입력 사항입니다.", 
+            "nft_type": "NFT 종류",
+            "nft_properties": "NFT 속성 *",
+            "career_nft": "커리어 NFT",
+            "certificate_type": "증명서 타입*", 
+            "certificate_name": "증명서 이름", 
+            "certificate_description": "증명서 설명", 
+            "avatar_type": "아바타 타입", 
+            "avatar_image": "아바타 이미지", 
+            "image_guides": "이미지 가이드", 
+            "image_guides_desc": "1:1 비율 권장",
+            "images_guides_desc_2": "배경이 없는 PNG 형식의 이미지 권장",
+            "images_guides_nft": "NFT 증명서 페이지에서 확인 가능합니다.", 
+            "upload_image": "upload image", 
+            "delete_image": "Delete image", 
+            "create_nft": "Create NFT", 
+            "cancel": "Cancel"
+          }, 
           "waiting": "NFT 발행 대기 중",
           "published": "생성된 NFT",
           "no_published": "최근 생성한 NFT가 없습니다.",

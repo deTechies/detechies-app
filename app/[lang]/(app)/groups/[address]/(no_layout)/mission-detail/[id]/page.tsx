@@ -29,7 +29,7 @@ export default async function MissionDetailPage({
 
       <section>
         <MissionReward
-          achievements={missionDetails.achievements}
+          achievements={missionDetails.data.achievements}
           lang={dictionary}
         ></MissionReward>
       </section>

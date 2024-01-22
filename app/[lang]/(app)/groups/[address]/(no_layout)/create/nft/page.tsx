@@ -1,8 +1,8 @@
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 import { getClub } from "@/lib/data/groups";
 import CreateGroupContract from "./_components/create-group-contract";
 import { CreateNFTForm } from "./create-nft-form";
-import { getDictionary } from "@/get-dictionary";
-import { Locale } from "@/i18n.config";
 
 export default async function CreateNFT({
   params,

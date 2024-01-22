@@ -160,7 +160,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
         />
         <FormField
           control={form.control}
-          name="email"
+          name={"email"}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="capitalize">

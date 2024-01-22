@@ -103,6 +103,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
     return false;
   };
 
+  const text = lang.group.details.manage.nft.create
   return (
     <main>
       <Form {...form}>
@@ -342,11 +343,11 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          {lang.group.details.profile_card.create_nft.guide2}
+                          배경이 없는 PNG 형식의 이미지 권장
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          {lang.group.details.profile_card.create_nft.guide3}
+                          NFT 증명서 페이지에서 확인 가능합니다.
                         </li>
                       </div>
                     </MediaUploader>
