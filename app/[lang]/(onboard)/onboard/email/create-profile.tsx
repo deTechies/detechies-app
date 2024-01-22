@@ -8,11 +8,10 @@ import { useState } from "react";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -20,13 +19,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
 
 import { web3AuthInstance } from "@/app/[lang]/app";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Label } from "@radix-ui/react-label";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAccount } from "wagmi";
 import * as z from "zod";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const profileFormSchema = z.object({
   display_name: z
@@ -161,7 +160,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
         />
         <FormField
           control={form.control}
-          name={lang.onboard.verify_email.email}
+          name={"email"}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="capitalize">
