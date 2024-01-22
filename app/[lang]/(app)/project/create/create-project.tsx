@@ -55,17 +55,43 @@ import { AlertCircle, X } from "lucide-react";
 const projectFormSchema = z.object({
   name: z
     .string()
+    .trim()
+    .min(1, {
+      message: "Enter project name.", // 필수 필드에 대한 사용자 정의 메시지
+    })
     .min(2, {
-      message: "Your groups name must be at least 2 characters.",
+      message: "Your group's name must be at least 2 characters.",
     })
     .max(30, {
-      message: "Your groups name must not be longer than 30 characters.",
+      message: "Your group's name must not be longer than 30 characters.",
+    })
+    .refine((val) => {
+      const trimmed = val.replace(/\s+/g, ' ');
+      return trimmed.length >= 2 && trimmed.length <= 30;
+    }, {
+      message: "Your group's name must be between 2 and 30 characters, consecutive spaces are counted as one."
     }),
   begin_date: z.string(),
   end_date: z.string(),
-  description: z.string().max(5000).min(4),
-  tags: z.array(z.string()),
-  scope: z.string().optional(),
+  description: z
+    .string()
+    .trim()
+    .min(10, {
+      message: "Your groups description must be at least 10 characters.",
+    })
+    .max(1000, {
+      message:
+        "Your groups description must not be longer than 1000 characters.",
+    }),
+  tags: z
+    .array(z.string())
+    .min(1, {
+      message: "At least one tag is required.",
+    })
+    .max(5, {
+      message: "No more than 5 tags are allowed.",
+    }),
+  scope: z.string(),
   image: z.string().optional(),
   type: z.nativeEnum(ProjectType, {
     required_error: "You need to select a type.",
@@ -112,9 +138,10 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
 
   const clickTagsBadge = (_job_item: string) => {
     const currentTags = form.getValues("tags") || [];
-    !currentTags.includes(_job_item.trim()) && form.setValue("tags", [...currentTags, _job_item.trim()], {
-      shouldValidate: true,
-    });
+    !currentTags.includes(_job_item.trim()) &&
+      form.setValue("tags", [...currentTags, _job_item.trim()], {
+        shouldValidate: true,
+      });
     setNewTag(""); // Clear the input field for new tag
   };
 
@@ -142,9 +169,11 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
       data.end_date = "";
     }
 
+    const computedName = data.name.replace(/\s+/g, ' ').trim();
+
     const result = await createProject({
       image: data.image,
-      name: data.name,
+      name: computedName,
       description: data.description,
       begin_date: data.begin_date,
       end_date: data.end_date,
@@ -185,13 +214,13 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
     const fetchMyGroupsData = async () => {
       if (selectGroupDialog && myGroups.length < 1) {
         const result = await serverApi(`/clubs/my`);
-  
+
         if (result.status === "success") {
           setMyGroups(result.data);
         }
       }
     };
-  
+
     fetchMyGroupsData();
   }, [selectGroupDialog, myGroups.length]);
 
@@ -260,12 +289,12 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
           )}
         />
 
-        <FormInlineItem className="items-start relative">
+        <FormInlineItem className="relative items-start">
           <FormInlineLabel className="mt-5">
             {lang.project.list.create_project.period}
             <span className="ml-1 text-state-error">*</span>
           </FormInlineLabel>
-          <div className="flex flex-row gap-2 flex-wrap sm:flex-nowrap items-center w-full">
+          <div className="flex flex-row flex-wrap items-center w-full gap-2 sm:flex-nowrap">
             <FormField
               control={form.control}
               name="begin_date"
@@ -288,7 +317,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                 >
                   <Input type="date" {...field} disabled={present} />
                   {present && (
-                    <div className="text-title_m text-text-placeholder px-4 py-5 absolute inset-0 bg-background-layer-2 rounded-sm">
+                    <div className="absolute inset-0 px-4 py-5 rounded-sm text-title_m text-text-placeholder bg-background-layer-2">
                       {lang.project.list.create_project.in_progress}
                     </div>
                   )}
@@ -298,7 +327,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
             />
           </div>
 
-          <div className="flex justify-end absolute bottom-full right-0 gap-1 pb-3">
+          <div className="absolute right-0 flex justify-end gap-1 pb-3 bottom-full">
             <Checkbox
               id="present"
               onCheckedChange={(_value: boolean) => {
@@ -404,7 +433,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                   </div>
                 </FormControl>
 
-                <div className="mt-3 flex flex-wrap gap-2 items-start">
+                <div className="flex flex-wrap items-start gap-2 mt-3">
                   {form.getValues("tags") &&
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
@@ -413,9 +442,9 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                         shape="md"
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        <div className="truncate w-full">{tag}</div>
+                        <div className="w-full truncate">{tag}</div>
                         <X
-                          className="cursor-pointer w-5 h-5"
+                          className="w-5 h-5 cursor-pointer"
                           onClick={() => {
                             const currentTags = form.getValues("tags") || [];
                             const newTags = currentTags.filter(
@@ -439,7 +468,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
           name="scope"
           render={({ field }) => (
             <FormInlineItem className="items-start">
-              <FormInlineLabel className="h-10 flex items-center">
+              <FormInlineLabel className="flex items-center h-10">
                 {lang.project.list.create_project.scope}
                 <span className="ml-1 text-state-error">*</span>
 
@@ -451,7 +480,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                   <PopoverContent className="max-w-full p-0">
                     {/* plan to make variant */}
                     <Card className="max-w-[500px] bg-background-tooltip rounded-sm p-4 ">
-                      <ul className="text-body_m space-y-2 text-accent-on-primary">
+                      <ul className="space-y-2 text-body_m text-accent-on-primary">
                         {Object.values(PRIVACY_TYPE).map((type, index) => (
                           <li key={index}>
                             {lang.interface.privacy_type[type]}:{" "}
@@ -472,7 +501,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-row flex-wrap gap-6 items-center"
+                  className="flex flex-row flex-wrap items-center gap-6"
                 >
                   {Object.values(PRIVACY_TYPE).map((type) => (
                     <FormItem
@@ -527,7 +556,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                             className="gap-2 my-1.5"
                             key={index}
                           >
-                            <div className="shrink-0 w-5 h-5 rounded-full overflow-hidden">
+                            <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
                               <Image
                                 src={`https://ipfs.io/ipfs/${group.image}`}
                                 alt={group.name}
@@ -541,7 +570,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                             </div>
 
                             <X
-                              className="shrink-0 w-5 h-5 cursor-pointer text-text-secondary"
+                              className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
                               onClick={() => onClickDeleteClub(group)}
                             ></X>
                           </Badge>
@@ -578,12 +607,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
             {lang.project.list.create_project.back}
           </Button>
 
-          <Button
-            type="submit"
-            size="lg"
-            disabled={loading || !form.formState.isValid}
-            loading={loading}
-          >
+          <Button type="submit" size="lg" disabled={loading} loading={loading}>
+            {/* || !form.formState.isValid */}
             {lang.project.list.create_project.make}
           </Button>
         </div>

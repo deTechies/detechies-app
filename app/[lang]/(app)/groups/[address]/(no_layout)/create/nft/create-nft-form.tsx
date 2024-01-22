@@ -63,13 +63,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   avatar_type: AVATAR_TYPE.CLOTHES,
 };
 
-export function CreateNFTForm({
-  group,
-  lang,
-}: {
-  group: Club;
-  lang: any;
-}) {
+export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
   const {
     form,
     setUploadedImage,
@@ -121,11 +115,11 @@ export function CreateNFTForm({
             <CardHeader>
               <div>
                 <h2 className="mb-3 text-heading_s">
-                  {text.create_new_nft_title}
+                  {lang.group.details.profile_card.create_nft.title}
                 </h2>
 
                 <span className="mb-1 text-body_s text-state-error">
-                  {text.required_fields}
+                  {lang.group.details.profile_card.create_nft.required_text}
                 </span>
               </div>
             </CardHeader>
@@ -137,7 +131,8 @@ export function CreateNFTForm({
                 render={({ field }) => (
                   <FormInlineItem>
                     <FormInlineLabel>
-                      {text.nft_type} <span className="ml-1 text-state-error">*</span>
+                      {lang.group.details.profile_card.create_nft.nft_type}
+                      <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -153,7 +148,7 @@ export function CreateNFTForm({
                             <RadioGroupItem value={type} />
                           </FormControl>
                           <FormLabel className="font-normal uppercase">
-                            {type}
+                            {lang.interface.nft_type[type]}
                           </FormLabel>
                         </FormItem>
                       ))}
@@ -169,7 +164,8 @@ export function CreateNFTForm({
                 render={({ field }) => (
                   <FormInlineItem>
                     <FormInlineLabel>
-                      {text.nft_properties} <span className="ml-1 text-state-error">*</span>
+                      {lang.group.details.profile_card.create_nft.nft_prop}
+                      <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -185,7 +181,7 @@ export function CreateNFTForm({
                             <RadioGroupItem value={type} />
                           </FormControl>
                           <FormLabel className="font-normal capitalize">
-                            {type}
+                            {lang.interface.nft_image_type[type]}
                           </FormLabel>
                         </FormItem>
                       ))}
@@ -199,10 +195,10 @@ export function CreateNFTForm({
           <Card className="gap-6 py-10 px-14">
             <div>
               <h2 className="mb-3 text-subhead_m">
-                {form.watch("nft_type") == "sbt" ? "커리어 NFT" : "한정판 NFT"}
+                {lang.interface.nft_type[form.watch("nft_type")]} NFT
               </h2>
               <span className="mb-1 text-body_s text-state-error">
-                * {text.career_nft}
+                {lang.group.details.profile_card.create_nft.required_text}
               </span>
             </div>
 
@@ -214,8 +210,7 @@ export function CreateNFTForm({
                   render={({ field }) => (
                     <FormInlineItem>
                       <FormInlineLabel>
-                        {/* Type */}
-                        {text.certificate_type}
+                        {lang.group.details.profile_card.create_nft.sbt_type}
                         <span className="ml-1 text-state-error">*</span>
                       </FormInlineLabel>
                       <RadioGroup
@@ -232,7 +227,7 @@ export function CreateNFTForm({
                               <RadioGroupItem value={type} />
                             </FormControl>
                             <FormLabel className="font-normal uppercase">
-                              {type}
+                              {lang.interface.sbt_type[type]}
                             </FormLabel>
                           </FormItem>
                         ))}
@@ -250,8 +245,7 @@ export function CreateNFTForm({
                 render={({ field }) => (
                   <FormInlineItem className="items-start">
                     <FormInlineLabel className="mt-5">
-                      {/* Name */}
-                      {text.certificate_name}
+                      {lang.group.details.profile_card.create_nft.sbt_name}
                       <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
 
@@ -270,8 +264,7 @@ export function CreateNFTForm({
                 render={({ field }) => (
                   <FormInlineItem className="items-start">
                     <FormInlineLabel>
-                      {/* Description */}
-                      {text.certificate_description}
+                      {lang.group.details.profile_card.create_nft.sbt_desc}
                       <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
                     <FormControl>
@@ -296,8 +289,10 @@ export function CreateNFTForm({
                     render={({ field }) => (
                       <FormInlineItem>
                         <FormInlineLabel>
-                          {/* Avatar Type */}
-                          {text.avatar_type}
+                          {
+                            lang.group.details.profile_card.create_nft
+                              .avatar_type
+                          }
                           <span className="ml-1 text-state-error">*</span>
                         </FormInlineLabel>
                         <RadioGroup
@@ -314,7 +309,7 @@ export function CreateNFTForm({
                                 <RadioGroupItem value={type} />
                               </FormControl>
                               <FormLabel className="font-normal uppercase">
-                                {type}
+                                {lang.interface.avatar_type[type]}
                               </FormLabel>
                             </FormItem>
                           ))}
@@ -326,8 +321,7 @@ export function CreateNFTForm({
                   />
                   <FormInlineItem className="items-start">
                     <FormInlineLabel>
-                      {/* Avatar */}
-                      아바타 이미지
+                      {lang.group.details.profile_card.create_nft.avatar_image}
                       <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
                     <MediaUploader
@@ -338,19 +332,22 @@ export function CreateNFTForm({
                     >
                       <div>
                         <div className="mb-1 text-title_s text-text-secondary">
-                          {text.image_guides}
+                          {
+                            lang.group.details.profile_card.create_nft
+                              .guide_title
+                          }
                         </div>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          {text.image_guides_desc}
+                          {lang.group.details.profile_card.create_nft.guide1}
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          {text.images_guides_desc_2}
+                          배경이 없는 PNG 형식의 이미지 권장
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                          {text.images_guides_nft}
+                          NFT 증명서 페이지에서 확인 가능합니다.
                         </li>
                       </div>
                     </MediaUploader>
@@ -360,8 +357,7 @@ export function CreateNFTForm({
               {form.watch("image_type") != "avatar" && (
                 <FormInlineItem className="items-start">
                   <FormInlineLabel>
-                    {/* Image */}
-                    증명서 이미지
+                    {lang.group.details.profile_card.create_nft.sbt_image}
                     <span className="ml-1 text-state-error">*</span>
                   </FormInlineLabel>
                   <MediaUploader
@@ -372,11 +368,11 @@ export function CreateNFTForm({
                   >
                     <div>
                       <div className="mb-1 text-title_s text-text-secondary">
-                        이미지 가이드
+                        {lang.group.details.profile_card.create_nft.guide_title}
                       </div>
 
                       <li className="mb-1 text-text-placeholder text-label_s">
-                        {text.images_guides_nft}
+                        {lang.group.details.profile_card.create_nft.guide3}
                       </li>
                     </div>
                   </MediaUploader>
@@ -391,7 +387,7 @@ export function CreateNFTForm({
                 variant="secondary"
                 onClick={onClickCancel}
               >
-                {text.cancel}
+                {lang.group.details.profile_card.create_nft.back}
               </Button>
 
               <Button
@@ -400,7 +396,7 @@ export function CreateNFTForm({
                 size="lg"
                 disabled={createDisabled() || isLoading}
               >
-                {text.create_nft}
+                {lang.group.details.profile_card.create_nft.back}
               </Button>
             </div>
           </Card>

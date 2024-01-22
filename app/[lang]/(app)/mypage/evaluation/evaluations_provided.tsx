@@ -15,7 +15,7 @@ export default async function EvaluationProvided({
 
   const { data } = await serverApi(`/survey-response/filtered?${filters}`);
 
-  console.log(data);
+  // console.log(data);
   const stats = [
     {
       title: "평가 완료",
