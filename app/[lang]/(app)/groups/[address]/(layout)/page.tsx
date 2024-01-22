@@ -27,7 +27,7 @@ export default async function GroupProfile({
   const dictionary = (await getDictionary(params.lang)) as any;
   const userAchievements = await getUserAchievements();
 
-  const {data} = await serverApi(`/clubs/${params.address}`);
+  const {data: clubInfo} = await serverApi(`/clubs/${params.address}`);
   // console.log(data);
   
 
@@ -35,15 +35,15 @@ export default async function GroupProfile({
 
   return (
     <div className="flex flex-col">
-      <GroupDetails details={data} />
+      <GroupDetails details={clubInfo} />
 
       <hr className="my-8 solid h-[1px] bg-border-div"></hr>
 
       {/* <GroupAchievements address={params.address.toString()} isCreator={data.isCreator}/> */}
       <GroupNft
-        contract={data.contract}
+        contract={clubInfo.contract}
         address={params.address.toString()}
-        achievements={data.achievements}
+        achievements={clubInfo.achievements}
         userAchievements={userAchievements.data}
         lang={dictionary}
       ></GroupNft>
@@ -52,7 +52,7 @@ export default async function GroupProfile({
 
       <GroupMember
         address={params.address.toString()}
-        members={data.members}
+        members={clubInfo.members}
         lang={dictionary}
       />
     </div>
