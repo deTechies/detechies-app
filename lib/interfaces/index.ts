@@ -12,6 +12,9 @@ export interface User {
     profile_details: ProfileDetails;
     projects: ProjectMember[];
     clubs: Member[];
+    projectsCount: number;
+    clubsCount: number;
+    achievementsCount: number;
     achievement_rewards: AchievementReward[];
     login_method: 'metamask'|'web3auth';
   }
