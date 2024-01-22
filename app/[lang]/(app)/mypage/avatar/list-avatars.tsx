@@ -1,8 +1,8 @@
 "use client";
-import DisplayNFT from "@/components/nft/display-nft";
 import { AchievementReward } from "@/lib/interfaces";
 import { useMemo } from "react";
 import ListAvatarItem from "./list-avatars-item";
+import ListAvatarItemTrigger from "./list-avatars-item-trigger";
 export default function ListAvatars({
   rewards,
   status,
@@ -40,7 +40,7 @@ export default function ListAvatars({
   }, [rewards, avatar, sbt, status]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-[11px]">
-      {filteredAchievements.pending &&
+      {!avatar ? filteredAchievements.pending &&
         filteredAchievements.pending.map(
           (achievementReward: AchievementReward, index: number) => (
             <ListAvatarItem
@@ -52,7 +52,15 @@ export default function ListAvatars({
               blockRequest={true}
             />
           )
-        )}
+        ) : filteredAchievements.pending.map(
+          (achievementReward: AchievementReward, index: number) => (
+            <ListAvatarItemTrigger
+              key={index}
+              showSelect={true} 
+              item={achievementReward.achievement} 
+              lang={lang}
+            />
+          ))}
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function RequestedEvaluationCard({
   data: SurveyResponse;
 }) {
   return (
-    <Link href={`/work/${data.projectWork.workId}`} passHref>
+    <Link href="#" passHref>
       <Card className="overflow-hidden">
         <div className="flex gap-4">
           <div className="relative w-24 rounded-sm aspect-square bg-background-layer-2 shrink-0">

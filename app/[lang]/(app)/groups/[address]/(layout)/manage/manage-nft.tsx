@@ -18,7 +18,6 @@ export default async function ManageNft({
 
   const {data: pendingAchievements} = await getPendingAchievements(details.id);
   
-  console.log(pendingAchievements)
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="flex justify-between mb-4">
