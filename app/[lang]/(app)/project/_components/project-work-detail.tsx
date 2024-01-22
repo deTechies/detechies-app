@@ -4,7 +4,7 @@ import { formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({ data, showTags=true, lang }: { data: ProjectWork, showTags?: boolean, lang?: any }) {
   if (!data) return null;
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

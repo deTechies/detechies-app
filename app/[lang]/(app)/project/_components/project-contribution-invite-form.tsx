@@ -96,7 +96,7 @@ export default function ProjectContributionInviteForm({
   };
 
   const onSubmit = async (values: ContributionFormData) => {
-    console.log(values);
+    // console.log(values);
 
     try {
       const result = await addMembersWork(values, projectId);

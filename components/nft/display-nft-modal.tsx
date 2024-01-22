@@ -88,6 +88,8 @@ export default function DisplayNFTModal({
     return <NftListItem item={details} showSelect={showSelect} lang={lang} />;
   }
   
+  console.log(details);
+
   return (
     <DialogContent className="flex flex-col gap-6 max-w-[504px] pt-6">
         <div className="flex items-center justify-between gap-2">
@@ -168,7 +170,8 @@ export default function DisplayNFTModal({
 
                 <div className="flex items-center gap-2 overflow-auto text-right">
                 <span className="text-title_m">
-                    {lang.achievement.display_nft.group_name}
+                  
+                    {/* {lang.achievement.display_nft.group_name} */}
                 </span>
                 </div>
             </div>

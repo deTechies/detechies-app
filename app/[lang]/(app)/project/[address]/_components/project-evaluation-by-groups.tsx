@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { serverApi } from "@/lib/data/general";
 import { AchievementReward } from "@/lib/interfaces";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { formatDate } from "@/lib/utils";
 
 export default async function ProjectEvaluationByGroups({
   details,
@@ -19,13 +21,15 @@ export default async function ProjectEvaluationByGroups({
   //pretty simple and straightforward, we just going to check which nfts the project holds in order to showcase htem.
   //we want top check if we own any of the data is pending..
 
-  const {data:groups} = await getGroups();
+  const { data: groups } = await getGroups();
 
-  const {data:rewardedAchievements} = await serverApi(
+  const { data: rewardedAchievements } = await serverApi(
     `/achievement-rewards/project-rewards/${details.id}`
   );
-  
+
   if (!groups) return null;
+
+  console.log(rewardedAchievements);
 
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">
@@ -66,24 +70,27 @@ export default async function ProjectEvaluationByGroups({
                   </Avatar>
 
                   <div className="truncate border-b border-border-div">
-                    <div className="mb-4 text-title_m">
+                    <div className="flex items-center mb-4 text-title_m">
                       <div className="mr-3 truncate">
                         {achievementReward.achievement.name}
                       </div>
 
-                      {/* <Badge variant="details" shape="category">
-                    {achievementReward.achievement.type == "awards" ? "수상" : "교육 수료증"}
-                  </Badge> */}
+                      <Badge variant="info" shape="category">
+                        {
+                          lang.interface.sbt_type[
+                            achievementReward.achievement.type
+                          ]
+                        }
+                      </Badge>
                     </div>
 
                     <div className="mb-2 truncate text-label_m text-text-secondary">
-                      asdfas asdfasdf asdfas asdfasdfasdfas asdfasdfasdfas
-                      asdfasdfasdfas asdfasdfasdfas asdfasdf
+                      {achievementReward.achievement.description}
                     </div>
 
                     <div className="mb-5 truncate text-label_m text-text-secondary">
-                      asdfas asdfasdf asdfas asdfasdfasdfas asdfasdfasdfas
-                      asdfasdfasdfas asdfasdfasdfas asdfasdf
+                      {lang.project.details.evalu.created_at}{" "}
+                      {formatDate(achievementReward.achievement.created_at)}
                     </div>
                   </div>
                 </div>

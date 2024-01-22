@@ -237,6 +237,7 @@
         "title": "Group Evaluation",
         "request": "Request",
         "no_evalu": "No group evaluations or NFT awards received.",
+        "created_at": "create at",
         "request_title": "Request NFT Award from a Group",
         "request_desc": "Choose a credible group and request them for a NFT award issuance.",
         "search_placeholder": "Search for a group name",
@@ -428,8 +429,8 @@
       "following": "following",
       "followers": "followers",
       "token": "token",
-      "avatar_settings": "Change avatar",
-      "name": "name",
+      "avatar_settings": "Set Avatar",
+      "name": "Name",
       "address": "Wallet Address"
     },
     "edit_profile": {
@@ -513,7 +514,24 @@
     },
     "details": {
       "profile_card": {
-        "create_nft": "Create NFT",
+        "create_nft": {
+          "title": "Create a new NFT",
+          "required_text": "* is a required field", 
+          "nft_type": "NFT type",
+          "nft_prop": "NFT property",
+          "guide_title": "Image guide",
+          "guide1": "1:1 ratio recommended",
+          "guide2": "Recommended images in PNG format with no background",
+          "guide3": "Available on the NFT certificate page",
+          "sbt_type": "Career type",
+          "sbt_name": "Certificate name",
+          "sbt_desc": "Certificate description",
+          "avatar_type": "Avatar type",
+          "avatar_image": "Avatar image", 
+          "sbt_image": "SBT image", 
+          "back": "Back",
+          "create_nft": "Create NFT"
+        },
         "group_contract": {
           "title": "Create Group Contract",
           "desc": "Once you register for a blockchain group account, you can issue any kind of NFT certificate you want, including diplomas, certificates, memberships, and more. (You'll need MATIC tokens to register for an account. ",
@@ -768,6 +786,13 @@
       "public": "All users",
       "private": "Private",
       "group": "Group members"
+    },
+    "avatar_type": {
+      "clothes": "clothes", 
+      "background": "background",
+      "accessory": "accessory",
+      "hair": "hair",
+      "face": "face"
     }
   },
   "footer": {

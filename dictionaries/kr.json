@@ -237,6 +237,7 @@
         "title": "그룹 평가",
         "request": "요청하기",
         "no_evalu": "받은 그룹 평가 또는 NFT 수상이 없어요.",
+        "created_at": "발행일자:",
         "request_title": "그룹에게 NFT 수상 요청하기",
         "request_desc": "공신력있는 그룹을 선택하고, 해당 그룹이 발행 가능한 NFT 상장을 요청해보세요.",
         "search_placeholder": "그룹 이름을 검색해보세요",
@@ -513,7 +514,24 @@
     },
     "details": {
       "profile_card": {
-        "create_nft": "NFT 생성하기",
+        "create_nft": {
+          "title": "새로운 NFT 생성하기",
+          "required_text": "*는 필수입력 사항입니다.", 
+          "nft_type": "NFT 유형",
+          "nft_prop": "NFT 속성",
+          "guide_title": "이미지 가이드",
+          "guide1": "1:1 비율 권장",
+          "guide2": "배경이 없는 PNG 형식의 이미지 권장",
+          "guide3": "NFT 증명서 페이지에서 확인 가능합니다.",
+          "sbt_type": "증명서 타입",
+          "sbt_name": "증명서 이름",
+          "sbt_desc": "증명서 설명",
+          "avatar_type": "아바타 타입",
+          "avatar_image": "아바타 이미지", 
+          "sbt_image": "증명서 이미지", 
+          "back": "뒤로가기",
+          "create_nft": "NFT 생성하기"
+        },
         "group_contract": {
           "title": "블록체인 그룹 계정 등록하기",
           "desc": " 한번만 블록체인 그룹 계정으로 등록하면 수료증, 자격증, 멤버십 등 원하는 모든 종류의 NFT 증명서를 발행할 수 있어요. (계정 등록을 위해서는 MATIC 토큰이 필요해요. ",
@@ -769,6 +787,14 @@
       "public": "모든 유저",
       "private": "프라이빗",
       "group": "그룹 멤버"
+    },
+
+    "avatar_type": {
+      "clothes": "의상", 
+      "background": "배경",
+      "accessory": "액세서리",
+      "hair": "머리모양",
+      "face": "얼굴모양"
     }
   }, 
   "footer": {
