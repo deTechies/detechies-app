@@ -346,7 +346,7 @@ const StepIndicatorItem = ({
   currentStep: number;
   children?: React.ReactNode;
 }) => {
-  const getState = () => {
+  const computedState = useMemo(() => {
     if (step < currentStep) {
       return "complete";
     } else if (step == currentStep) {
@@ -354,11 +354,7 @@ const StepIndicatorItem = ({
     } else {
       return "pre";
     }
-  };
-
-  const computedState = useMemo(() => {
-    return getState();
-  }, [currentStep]);
+  }, [step, currentStep]); 
 
   return (
     <div

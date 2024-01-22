@@ -36,7 +36,7 @@ export default function GroupList({
     });
 
     setSortedData(data);
-  }, []);
+  }, [groups]);
 
   const filteredData = sortedData.filter((group: any) => {
     return group.name
