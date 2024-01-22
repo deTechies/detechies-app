@@ -84,7 +84,7 @@ export default function GroupList({
 
       <TabsContent value="joined" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
+          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
@@ -92,7 +92,7 @@ export default function GroupList({
 
       <TabsContent value="created" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
+          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>

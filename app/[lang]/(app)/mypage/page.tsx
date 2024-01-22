@@ -1,6 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { serverApi } from "@/lib/data/general";
+// import { serverApi } from "@/lib/data/general";
 import { getUserProfile } from "@/lib/data/user";
 import ProfileAwards from "./_components/profile-awards";
 import ProfileCertificates from "./_components/profile-certificates";
@@ -13,12 +13,8 @@ export default async function Dashboard({
 }) {
   const { data: profile } = await getUserProfile();
   const dictionary = (await getDictionary(params.lang)) as any;
-  
-  const {data: myProfile} = await serverApi(`/users/me`);
-  
-  console.log(myProfile)
 
-  console.log(profile);
+  // const {data: myProfile} = await serverApi(`/users/me`);
 
   if (!profile) {
     return <div>loading</div>;
@@ -26,12 +22,12 @@ export default async function Dashboard({
   return (
     <main className="flex flex-col gap-6">
       <ProfileDetails profile={profile} text={dictionary} />
-       <ProfileProjects
+      <ProfileProjects
         projects={profile.projects}
         text={dictionary.mypage.project}
         lang={dictionary}
-      /> 
-      {profile?.achievement_rewards  && (
+      />
+      {profile?.achievement_rewards && (
         <div className="flex flex-col gap-6">
           <ProfileCertificates
             achievement_rewards={profile.achievement_rewards}
@@ -40,7 +36,6 @@ export default async function Dashboard({
           <ProfileAwards
             achievement_rewards={profile.achievement_rewards}
             text={dictionary.mypage.awards}
-            
           />
         </div>
       )}

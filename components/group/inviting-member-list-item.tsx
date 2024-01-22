@@ -40,6 +40,8 @@ export default function InvitingMemberListItem({
     //
   };
 
+  console.log(profile);
+
   return (
     <div
       className="grid grid-cols-[1fr_90px_124px] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center"
@@ -48,7 +50,7 @@ export default function InvitingMemberListItem({
       <div className="flex items-center gap-3">
         <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
           <IPFSImageLayer
-            hashes={profile.user.nft ? profile.user.nft : defaultAvatar}
+            hashes={profile.user.avatar ? profile.user.avatar : defaultAvatar}
           />
         </div>
 
