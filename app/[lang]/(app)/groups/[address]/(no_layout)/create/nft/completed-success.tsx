@@ -23,23 +23,23 @@ export default function CompletedSuccess({
         </div>
 
         <h3 className="text-center text-subhead_s">
-          {lang.groups.create_nft.completed_success.title}
+          {lang.group.details.profile_card.completed_success.title}
         </h3>
         <h5 className="flex flex-col text-center text-body_m">
-          <span>{lang.groups.create_nft.completed_success.desc1}</span>
-          <span>{lang.groups.create_nft.completed_success.desc2}</span>
+          <span>{lang.group.details.profile_card.completed_success.desc1}</span>
+          <span>{lang.group.details.profile_card.completed_success.desc2}</span>
         </h5>
 
         <section className="flex justify-center gap-2 mt-4 shrink-0">
           <Link href={`/groups/${groupId}/manage`} passHref>
             <Button variant="secondary" size="lg">
-              {lang.groups.create_nft.completed_success.go_manage}
+              {lang.group.details.profile_card.completed_success.go_manage}
             </Button>
           </Link>
 
           <Link href={`/groups/${groupId}/nft`} passHref>
             <Button size="lg">
-              {lang.groups.create_nft.completed_success.go_nft}
+              {lang.group.details.profile_card.completed_success.go_nft}
             </Button>
           </Link>
         </section>

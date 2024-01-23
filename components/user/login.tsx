@@ -13,10 +13,10 @@ import AccountSettings from "./account-settings";
 import ModalLayout from "./modal-layout";
 
 interface ILoginProps {
-  lang:any
+  lang: any;
 }
 
-export default function Login({lang}:ILoginProps) {
+export default function Login({ lang }: ILoginProps) {
   const { connect, connectors } = useConnect();
   const {
     address,
@@ -46,9 +46,7 @@ export default function Login({lang}:ILoginProps) {
 
   if (isConnecting || isReconnecting) {
     return (
-      <Avatar
-      className="animate-pulse bg-background-layer-2"
-      >
+      <Avatar className="animate-pulse bg-background-layer-2">
         <AvatarFallback />
       </Avatar>
     );
@@ -57,30 +55,25 @@ export default function Login({lang}:ILoginProps) {
   if (session?.web3?.address != address) {
     //sign message
     return (
-      <div className="flex rounded-md  items-center gap-2">
+      <div className="flex items-center gap-2 rounded-md">
         <Button
           size="sm"
           variant={"primary"}
           className="text-md"
           onClick={() => signOut()}
-
         >
-          Change Account
-        
+          {lang.sign_in}
         </Button>
         {showModal && (
-          <AccountSettings
-            showModal={showModal}
-            text_my_account={lang}
-          />
+          <AccountSettings showModal={showModal} text_my_account={lang} />
         )}
       </div>
     );
   }
-  
+
   if (!isConnecting && address == session?.web3?.address) {
     return (
-      <div className="flex rounded-md  items-center gap-2">
+      <div className="flex items-center gap-2 rounded-md">
         <Avatar
           className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:outline hover:outline-accent-primary"
           onClick={() => setShowModal(!showModal)}
@@ -91,10 +84,7 @@ export default function Login({lang}:ILoginProps) {
         </Avatar>
 
         {showModal && (
-          <AccountSettings
-          showModal={showModal}
-          text_my_account={lang}
-          />
+          <AccountSettings showModal={showModal} text_my_account={lang} />
         )}
 
         {chain?.id != 314159 && chain?.id != 80001 && (
@@ -111,7 +101,7 @@ export default function Login({lang}:ILoginProps) {
   }
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex items-center gap-4">
       <Button
         size="sm"
         className="text-md"
@@ -188,10 +178,10 @@ const ConnectModal = ({
       <div className="flex flex-col gap-2 my-4">
         {!isConnected && (
           <>
-            <div className="flex flex-col space-y-1 gap-4">
+            <div className="flex flex-col gap-4 space-y-1">
               <div
                 key={connectors[0].id}
-                className="text-lg font-medium border border-border-div rounded-sm px-6 py-4 flex gap-6 hover:border-blue-500 items-center cursor-pointer"
+                className="flex items-center gap-6 px-6 py-4 text-lg font-medium border rounded-sm cursor-pointer border-border-div hover:border-blue-500"
                 onClick={() => connect({ connector: connectors[1] })}
               >
                 <Image
@@ -205,7 +195,7 @@ const ConnectModal = ({
 
               <div
                 key={connectors[1].id}
-                className="text-lg font-medium border border-border-div rounded-sm px-6 py-4 flex gap-6 hover:border-orange-500 items-center cursor-pointer"
+                className="flex items-center gap-6 px-6 py-4 text-lg font-medium border rounded-sm cursor-pointer border-border-div hover:border-orange-500"
                 onClick={() => connect({ connector: connectors[0] })}
               >
                 <Image

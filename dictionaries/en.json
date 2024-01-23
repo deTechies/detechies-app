@@ -25,6 +25,7 @@
         "dark": "Dark",
         "system": "System"
       },
+      "sign_in": "Sign in",
       "sign_out": "Sign out",
       "my_profile": "My Profile",
       "not_connected": "Not Connected"
