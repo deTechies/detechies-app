@@ -218,7 +218,7 @@
         "delete_works": {
           "button": "Delete",
           "title": "Do you want to delete the works you created?",
-          "desc": "Really?",
+          "desc": "If you deleted it, you'll have to recreate it.?",
           "back": "Back",
           "delete": "Delete"
         }
