@@ -33,4 +33,6 @@ export const defaultAvatar = [
     "bafkreif6oi5pwrjzey5q4pmyd3zck6a53uoefozxydapiipgq2flsbldsi", 
     "bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose",
   ];
+
+export const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
 export { ABI, MUMBAI };

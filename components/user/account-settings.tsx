@@ -184,7 +184,7 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
                 <SelectValue placeholder={text_my_account.language.placeholder} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="kr">{text_my_account.language.korean}</SelectItem>
+                <SelectItem value="ko">{text_my_account.language.korean}</SelectItem>
                 <SelectItem value="en">{text_my_account.language.english}</SelectItem>
               </SelectContent>
             </Select>

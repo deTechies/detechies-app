@@ -25,6 +25,7 @@
         "dark": "Dark",
         "system": "System"
       },
+      "sign_in": "Sign in",
       "sign_out": "Sign out",
       "my_profile": "My Profile",
       "not_connected": "Not Connected"
@@ -122,10 +123,16 @@
       "create_project": {
         "create": "Create Project",
         "name": "Project Name",
+        "name_placeholder" : "Enter Project Name",
         "type": "Type",
+        "type_placeholder" : "Select Type",
         "period": "Period",
+        "in_progress": "In Progress",
         "describe": "Description",
+        "describe_placeholder" : "Enter Description",
         "image": "Image",
+        "image_guide1": "an aspect ratio of 1:1",
+        "image_guide2": "not violate copyright",
         "category": "Project Categories",
         "scope": "Public Scope",
         "back": "Back",
@@ -134,17 +141,28 @@
         "type_dsc": "Select a type",
         "describe_dsc": "Tell more about your project",
         "category_dsc": "Type and press enter",
-        "public": "Public",
-        "private": "Private",
-        "team" : "Team"
+        "tooltip_public": "All users on CareerGen can view the project",
+        "tooltip_private": "Only project members can view the project",
+        "tooltip_group": "Only project and group members can view the project",
+        "select_group": {
+          "button": "Select public group",
+          "subtitle": "Please select a group to make public",
+          "subdesc": "You have not selected a group to make public, if you apply a group to make the project public, only members of the applied group will be able to see the project",
+          "close": "Close",
+          "select_group": "Select group",
+          "title": "Selecting a group to make public",
+          "desc": "If I select a group I'm in, only members of that group will be able to see this project",
+          "back": "Back"
+        }
       },
       "edit_project":"Edit Project",
       "edit" : "Update Project",
       "delete_project":{
         "delete" : "Delete Project",
         "delete_confirm" : "Are you sure delete project?",
-        "delete_dsc":" If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",
+        "delete_dsc":" If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",        
         "delete_project_name" : "and click delete",
+        "placeholder": "Enter project name",
         "cancel" : "Cancel"
       },
       "add_work":{
@@ -154,11 +172,12 @@
     "details": {
       "summary": {
         "edit": "Edit",
-        "desc": "Project Description"
+        "desc": "Project Description",
+        "show_more": "show more",
+        "hide": "hide"
       },
       "members": {
         "title": "Project Members",
-        "delete": "Delete",
         "contribution": "Contribution",
         "delegate_admin": "Delegate Admin",
         "unregistered": "Unregistered",
@@ -177,6 +196,12 @@
           "later": "Do It Later",
           "go_eval": "Go to Evaluate"
         },
+        "expel": {
+          "button": "Remove",
+          "title": "Remove selected members from the project?",
+          "desc": "Removing will delete all of the member's project activity information, do you really want to remove?",
+          "back": "Back"
+        },
         "add_works": {
           "button": "Add Work",
           "title": "Add Contribution",
@@ -187,18 +212,37 @@
           "date": "My Work Period",
           "detail_work": "Type of Detailed Work",
           "detail_work_placeholder": "Enter the work category you handled in the project. (e.g., Data Analysis)",
+          "type": "Type and press enter",
           "attribute": "Contribution to Work",
           "job_desc": "Job Description",
           "job_desc_placeholder": "Upload DB data to Excel and update daily marketing dashboard",
           "later": "Do It Later",
           "add": "Register",
           "in_progress": "In Progress"
+        },
+        "delete_works": {
+          "button": "Delete",
+          "title": "Do you want to delete the works you created?",
+          "desc": "If you deleted it, you'll have to recreate it.?",
+          "back": "Back",
+          "delete": "Delete"
         }
       },
       "links": {
         "title": "Works",
         "upload": "Upload",
-        "no_links": "There are no registered tasks."
+        "no_links": "There are no registered tasks.",
+        "dialog": {
+          "title": "Upload works",
+          "name": "Name",
+          "name_placeholder": "name of link",
+          "type": "Type",
+          "file": "File",
+          "link": "Link",
+          "upload_file": "Upload file",
+          "close": "Close",
+          "upload_works": "Upload works"
+        }
       },
       "request": {
         "request_a_review": "Request a Review",
@@ -211,6 +255,7 @@
         "title": "Group Evaluation",
         "request": "Request",
         "no_evalu": "No group evaluations or NFT awards received.",
+        "created_at": "create at",
         "request_title": "Request NFT Award from a Group",
         "request_desc": "Choose a credible group and request them for a NFT award issuance.",
         "search_placeholder": "Search for a group name",
@@ -402,8 +447,8 @@
       "following": "following",
       "followers": "followers",
       "token": "token",
-      "avatar_settings": "Set avatar",
-      "name": "name",
+      "avatar_settings": "Set Avatar",
+      "name": "Name",
       "address": "Wallet Address"
     },
     "edit_profile": {
@@ -487,12 +532,36 @@
     },
     "details": {
       "profile_card": {
-        "create_nft": "Create NFT",
+        "create_nft": {
+          "title": "Create a new NFT",
+          "required_text": "* is a required field", 
+          "nft_type": "NFT type",
+          "nft_prop": "NFT property",
+          "guide_title": "Image guide",
+          "guide1": "1:1 ratio recommended",
+          "guide2": "Recommended images in PNG format with no background",
+          "guide3": "Available on the NFT certificate page",
+          "sbt_type": "Career type",
+          "sbt_name": "Certificate name",
+          "sbt_desc": "Certificate description",
+          "avatar_type": "Avatar type",
+          "avatar_image": "Avatar image", 
+          "sbt_image": "SBT image", 
+          "back": "Back",
+          "create_nft": "Create NFT"
+        },
         "group_contract": {
           "title": "Create Group Contract",
           "desc": "Once you register for a blockchain group account, you can issue any kind of NFT certificate you want, including diplomas, certificates, memberships, and more. (You'll need MATIC tokens to register for an account. ",
           "anchor": "Get MATIC Tokens",
           "button": "Create Group Contract"
+        },
+        "completed_success": {
+          "title": "Your limited edition NFT has been created!",
+          "desc1": "You can manage the created NFT in group management.",
+          "desc2": "You can check the application status in the NFT certificate.",
+          "go_manage:": "Go to group management",
+          "go_nft": "Go to NFT certificate"
         },
         "join_group": {
           "title": "Join Group",
@@ -555,6 +624,27 @@
           "info": "Infomation"
         },
         "nft": {
+          "create": {
+            "create_new_nft_title": "Create new NFT", 
+            "this_is_required": "* are the required fields.", 
+            "nft_type": "NFT type",
+            "nft_properties": "NFT Properties*",
+            "career_nft": "Career NFT",
+            "certificate_type": "Type", 
+            "certificate_name": "Name", 
+            "certificate_description": "Certificate Description", 
+            "avatar_type": "Avatar Type", 
+            "avatar_image": "Avatar Image", 
+            "nft__image": "NFT Image", 
+            "image_guides": "이미지 가이드", 
+            "image_guides_desc": "1:1 비율 권장",
+            "images_guides_desc_2": "배경이 없는 PNG 형식의 이미지 권장",
+            "images_guides_nft": "NFT 증명서 페이지에서 확인 가능합니다.", 
+            "upload_image": "Upload image", 
+            "delete_image": "Delete image", 
+            "create_nft": "Create NFT", 
+            "cancel": "Cancel"
+          }, 
           "waiting": "NFT Issuance Pending",
           "published": "Created NFT",
           "no_published": "No NFT",
@@ -613,7 +703,7 @@
       "nft_desc": "NFT Description",
       "show_more": "Show More",
       "hide": "Hide",
-      "close": "Do It Later",
+      "close": "Close",
       "send_request": "Request Issuance",
       "complete_request": "Request Complete"
     }
@@ -737,6 +827,18 @@
       "joined": "Joined",
       "invited": "Invited",
       "none": "None"
+    },
+    "privacy_type": {
+      "public": "All users",
+      "private": "Private",
+      "group": "Group members"
+    },
+    "avatar_type": {
+      "clothes": "clothes", 
+      "background": "background",
+      "accessory": "accessory",
+      "hair": "hair",
+      "face": "face"
     }
   },
   "footer": {

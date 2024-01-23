@@ -18,7 +18,6 @@ export default async function ManageNft({
 
   const {data: pendingAchievements} = await getPendingAchievements(details.id);
   
-  console.log(pendingAchievements)
   return (
     <div className="overflow-auto max-w-[90vw]">
       <div className="flex justify-between mb-4">
@@ -69,7 +68,7 @@ export default async function ManageNft({
         <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {details.achievements &&
             details.achievements.map((item: Achievement, index: number) => (
-              <DisplayNFT details={item} key={index} lang={lang} />
+              <DisplayNFT details={item} key={index} lang={lang} showMintButton={false}/>
             ))}
         </div>
 

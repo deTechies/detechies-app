@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { PrivacyType, ProjectType } from "@/lib/interfaces";
+import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -39,10 +39,10 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     router.replace(`${pathname}${query}`);
   };
 
-  const onSelectPrivacy = (_type: PrivacyType) => {
+  const onSelectPrivacy = (_type: PRIVACY_TYPE) => {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
-    if (!_type || _type == PrivacyType.PUBLIC) {
+    if (!_type || _type == PRIVACY_TYPE.PUBLIC) {
       current.delete("privacy");
     } else {
       current.set("privacy", _type);
@@ -99,7 +99,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
             </SelectTrigger>
 
             <SelectContent>
-              {Object.values(PrivacyType).map((type) => (
+              {Object.values(PRIVACY_TYPE).map((type) => (
                 <SelectItem key={type} value={type}>
                   {lang.project.list.privacy_type[type]}
                 </SelectItem>

@@ -2,7 +2,11 @@ import { Card } from "@/components/ui/card";
 import { serverApi } from "@/lib/data/general";
 import RequestedEvaluationCard from "./_components/requested-evaluation-card";
 
-export default async function EvaluationProvided() {
+export default async function EvaluationProvided({
+  lang
+}: {
+  lang: any;
+}) {
   const queries = {
     provided: "true",
     status: "finished",
@@ -11,7 +15,7 @@ export default async function EvaluationProvided() {
 
   const { data } = await serverApi(`/survey-response/filtered?${filters}`);
 
-  console.log(data);
+  // console.log(data);
   const stats = [
     {
       title: "평가 완료",
@@ -40,7 +44,7 @@ export default async function EvaluationProvided() {
       <div className="flex flex-col gap-4">
         {data &&
           data.map((item: any, index: number) => (
-            <RequestedEvaluationCard key={index} data={item} />
+            <RequestedEvaluationCard key={index} data={item} lang={lang}/>
           ))}
       </div>
     </div>

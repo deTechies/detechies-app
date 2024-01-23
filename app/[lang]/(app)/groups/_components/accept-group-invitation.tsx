@@ -1,11 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { toast } from "@/components/ui/use-toast";
-import { acceptGroupInvitations } from "@/lib/data/groups";
 import Image from "@/components/ui/image";
+import { toast } from "@/components/ui/use-toast";
+import { postServer } from "@/lib/data/postRequest";
 // import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function AcceptInvitation({
   id,
@@ -17,10 +18,13 @@ export default function AcceptInvitation({
   lang: any;
 }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false)
   const acceptInvitation = async () => {
-    const result = await acceptGroupInvitations(id);
+    setLoading(true)
+    
+    const result = await postServer(`/members/accept/invite/${id}`, '')
 
-    if (result.ok) {
+    if (result) {
       toast({
         title: "Accept invitation",
         description: "Thank you for accepting the membersship",
@@ -51,7 +55,7 @@ export default function AcceptInvitation({
           <Button variant="destructive" size="lg" onClick={rejectInvitation}>
             Reject
           </Button>
-          <Button size="lg" onClick={acceptInvitation}>
+          <Button size="lg" onClick={acceptInvitation} disabled={loading} loading={loading}>
             Accept
           </Button>
         </div>

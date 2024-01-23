@@ -48,7 +48,7 @@ export default function InvitingMemberListItem({
       <div className="flex items-center gap-3">
         <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
           <IPFSImageLayer
-            hashes={profile.user.nft ? profile.user.nft : defaultAvatar}
+            hashes={profile.user.avatar ? profile.user.avatar : defaultAvatar}
           />
         </div>
 

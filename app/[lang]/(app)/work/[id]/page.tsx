@@ -15,7 +15,7 @@ export default async function ProjectMemberEvaluation({
 }) {
   const details = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
-  
+
   if (!details.data) {
     return <InvalidWorkAccess details={details} />;
   }
@@ -26,12 +26,12 @@ export default async function ProjectMemberEvaluation({
       <section className="w-[360px] flex flex-col gap-4">
         <ProjectSwitcher
           title={dictionary.project.work.project}
-          project={details.data.evaluator?.project}
+          project={details.data.projectWork?.projectMember?.project}
           lang={dictionary}
         />
         <ProjectMemberInline
           title={dictionary.project.work.evaluatee}
-          projectMember={details.data.projectWork.projectMember}
+          projectMember={details.data.projectWork?.projectMember}
           projectWork={details.data.projectWork}
           lang={dictionary}
         />
@@ -51,7 +51,8 @@ export default async function ProjectMemberEvaluation({
               workId={params.id}
               verified={details.data.matching != null}
               defaultValues={details.data.matching}
-              projectId={details.data.evaluator.project.id}
+              // projectId={details.data.evaluator.project.id}
+              projectId={""}
             />
           )}
           {details.data.evaluator.role != "admin" && (

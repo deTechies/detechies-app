@@ -8,7 +8,6 @@ import { auth, authOptions } from "../helpers/authOptions";
 
 export async function getUserProfile(address?: string) {
   const session = await auth() as Session;
-  console.log(session);
   if (!address) {
     if (!session) {
       redirect("/onboard");
@@ -30,7 +29,6 @@ export async function getUserProfile(address?: string) {
     
     const result = await user.json();
     
-    console.log(result);
 
     return result;
   }

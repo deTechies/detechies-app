@@ -25,6 +25,7 @@
         "dark": "어두운",
         "system": "체계"
       },
+      "sign_in": "로그인",
       "sign_out": "로그아웃",
       "my_profile": "내 프로필",
       "not_connected": "연결되지 않은"
@@ -55,10 +56,10 @@
     "verify_email": {
       "title": "회원가입",
       "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.",
-      "username": "이름",
-      "username_placeholder": "이름을 입력하세요.",
+      "username": "닉네임",
+      "username_placeholder": "모두에게 공개되는 사용자 이름이에요.",
       "email": "메일주소",
-      "email_placeholder": "메일주소를 입력하세요.",
+      "email_placeholder": "email@example.com",
       "email_desc": "메일주소를 입력하세요.",
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
@@ -120,12 +121,18 @@
       "no_projects_found": "검색 결과가 없습니다.",
       "view_more": "더 보기",
       "create_project" : {
-        "create" : "내 프로젝트 만들기",
+        "create" : "프로젝트 생성하기",
         "name" : "프로젝트명",
+        "name_placeholder" : "프로젝트명을 입력하세요",
         "type" : "프로젝트 종류",
+        "type_placeholder" : "선택하세요",
         "period" : "기간",
+        "in_progress": "진행중",
         "describe" : "프로젝트 설명",
+        "describe_placeholder" : "프로젝트 설명을 입력하세요",
         "image" : "대표 이미지",
+        "image_guide1": "가로 세로 비율이 1:1인 이미지 업로드",
+        "image_guide2": "저작권에 위배되지 않는 이미지만 업로드",
         "category" : "프로젝트 카테고리",
         "scope" : "공개 범위",
         "back" : "뒤로가기",
@@ -134,9 +141,19 @@
         "type_dsc": "종류 선택",
         "describe_dsc" : "프로젝트 설명을 입력해 주세요",
         "category_dsc" : "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
-        "public" : "모든 유저",
-        "private": "프로젝트 멤버",
-        "team" : "그룹멤버"
+        "tooltip_public": "커리어젠에 있는 모든 유저가 프로젝트를 열람할 수 있어요",
+        "tooltip_private": "프로젝트 멤버만 프로젝트를 열람할 수 있어요",
+        "tooltip_group": "프로젝트 및 그룹 멤버만 프로젝트를 열람할 수 있어요",
+        "select_group": {
+          "button": "공개그룹 선택",
+          "subtitle": "공개할 그룹을 선택해 주세요",
+          "subdesc": "공개할 그룹을 선택하지 않았어요. 프로젝트를 공개할 그룹을 적용하면, 적용된 그룹 멤버만 프로젝트를 볼 수 있어요.",
+          "close": "닫기",
+          "select_group": "그룹 선택하기",
+          "title": "공개할 그룹 선택하기",
+          "desc": "내가 참여중인 그룹을 선택하면, 해당 그룹 멤버만 이 프로젝트를 볼 수 있어요.",
+          "back": "뒤로가기"
+        }
       },
       "edit_project":"프로젝트 수정하기",
       "edit" : "수정하기",
@@ -145,8 +162,8 @@
         "delete_confirm" : "프로젝트를 삭제할까요?",
         "delete_dsc": "삭제할 경우 리더님과 다른 멤버의 프로젝트 활동 정보가 모두 삭제 돼요. 정말로 프로젝트를 삭제하고 싶다면 프로젝트명:",
         "delete_project_name" : "을 입력해 주세요.",
+        "placeholder": "정말로 삭제를 원할 시, 프로젝트명을 입력해주세요.",
         "cancel" : "취소하기"
-
       },
       "add_work":{
         "work":"Add Work"
@@ -155,11 +172,12 @@
     "details": {
       "summary": {
         "edit": "수정하기",
-        "desc": "프로젝트 설명"
+        "desc": "프로젝트 설명",
+        "show_more": "자세히 보기",
+        "hide": "숨기기"
       },
       "members": {
         "title": "프로젝트 멤버",
-        "delete": "삭제하기",
         "contribution": "기여도",
         "delegate_admin": "관리자 권한 위임",
         "unregistered": "성과 미등록",
@@ -178,6 +196,12 @@
           "later": "나중에 할게요",
           "go_eval": "평가하러 가기"
         },
+        "expel": {
+          "button": "내보내기",
+          "title": "선택한 구성원을 프로젝트에서 내보낼까요?",
+          "desc": "내보낼 경우 멤버의 프로젝트 활동 정보가 모두 삭제돼요. 정말로 내보낼까요?",
+          "back": "뒤로가기"
+        },
         "add_works": {
           "button": "내 성과 등록하기",
           "title": "내 성과 등록하기",
@@ -188,18 +212,37 @@
           "date": "내 업무 기간",
           "detail_work": "상세 업무 종류",
           "detail_work_placeholder": "프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)",
+          "type": "프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)",
           "attribute": "업무 기여도",
           "job_desc": "업무 내용",
           "job_desc_placeholder": "DB 데이터 엑셀 업로드 및 일별 마케팅 대시보드 업데이트",
           "later": "나중에 할게요",
           "add": "등록하기",
           "in_progress": "진행중"
-        } 
+        },
+        "delete_works": {
+          "button": "삭제하기",
+          "title": "작성했던 성과내역을 삭제할까요?",
+          "desc": "성과내역을 삭제한다면, 다시 작성해야 합니다.",
+          "back": "뒤로가기",
+          "delete": "삭제하기"
+        }
       },
       "links": {
         "title": "작업물",
         "upload": "등록하기",
-        "no_links": "등록된 작업물이 없어요."
+        "no_links": "등록된 작업물이 없어요.",
+        "dialog": {
+          "title": "작업물 등록",
+          "name": "작업물 이름",
+          "name_placeholder": "작업물 이름",
+          "type": "종류",
+          "file": "파일",
+          "link": "링크",
+          "upload_file": "파일 업로드",
+          "close": "닫기",
+          "upload_works": "등록완료"
+        }
       },
       "request": {
         "request_a_review": "평가 요청하기",
@@ -212,6 +255,7 @@
         "title": "그룹 평가",
         "request": "요청하기",
         "no_evalu": "받은 그룹 평가 또는 NFT 수상이 없어요.",
+        "created_at": "발행일자:",
         "request_title": "그룹에게 NFT 수상 요청하기",
         "request_desc": "공신력있는 그룹을 선택하고, 해당 그룹이 발행 가능한 NFT 상장을 요청해보세요.",
         "search_placeholder": "그룹 이름을 검색해보세요",
@@ -429,7 +473,7 @@
     "main": {
       "profile": "프로필",
       "edit": "수정하기",
-      "description": "설명"
+      "description": "내 소개"
     },
     "menu": {
       "portfolio": "포트폴리오",
@@ -452,8 +496,8 @@
       "message": "커뮤니티에 가입하고",
       "message2": "나만의 커리어 증명 NFT을 소유하세요!",
       "all": "전체보기",
-      "created": "참여중인 그룹",
-      "joined": "내가 만든 그룹",
+      "created": "내가 만든 그룹",
+      "joined": "참여중인 그룹",
       "search_placeholder": "그룹명을 검색해보세요.",
       "agency": "기업 인증 완료",
       "authority": "기관 인증 완료",
@@ -488,12 +532,36 @@
     },
     "details": {
       "profile_card": {
-        "create_nft": "NFT 생성하기",
+        "create_nft": {
+          "title": "새로운 NFT 생성하기",
+          "required_text": "*는 필수입력 사항입니다.", 
+          "nft_type": "NFT 유형",
+          "nft_prop": "NFT 속성",
+          "guide_title": "이미지 가이드",
+          "guide1": "1:1 비율 권장",
+          "guide2": "배경이 없는 PNG 형식의 이미지 권장",
+          "guide3": "NFT 증명서 페이지에서 확인 가능합니다.",
+          "sbt_type": "증명서 타입",
+          "sbt_name": "증명서 이름",
+          "sbt_desc": "증명서 설명",
+          "avatar_type": "아바타 타입",
+          "avatar_image": "아바타 이미지", 
+          "sbt_image": "증명서 이미지", 
+          "back": "뒤로가기",
+          "create_nft": "NFT 생성하기"
+        },
         "group_contract": {
           "title": "블록체인 그룹 계정 등록하기",
           "desc": " 한번만 블록체인 그룹 계정으로 등록하면 수료증, 자격증, 멤버십 등 원하는 모든 종류의 NFT 증명서를 발행할 수 있어요. (계정 등록을 위해서는 MATIC 토큰이 필요해요. ",
           "anchor": "MATIC 토큰 받기",
           "button": "등록하기"
+        },
+        "completed_success": {
+          "title": "한정판 NFT가 생성되었습니다!",
+          "desc1": "생성하신 NFT의 관리는 그룹 관리에서 가능하고,",
+          "desc2": "NFT 증명서에서는 적용 여부를 확인하실수 있어요.",
+          "go_manage:": "그룹 관리 바로가기",
+          "go_nft": "NFT 증명서 바로가기"
         },
         "join_group": {
           "title": "그룹 가입하기",
@@ -556,6 +624,26 @@
           "info": "그룹 정보"
         },
         "nft": {
+          "create": {
+            "create_new_nft_title": "새로운 NFT 생성하기", 
+            "this_is_required": "*는 필수입력 사항입니다.", 
+            "nft_type": "NFT 종류",
+            "nft_properties": "NFT 속성 *",
+            "career_nft": "커리어 NFT",
+            "certificate_type": "증명서 타입*", 
+            "certificate_name": "증명서 이름", 
+            "certificate_description": "증명서 설명", 
+            "avatar_type": "아바타 타입", 
+            "avatar_image": "아바타 이미지", 
+            "image_guides": "이미지 가이드", 
+            "image_guides_desc": "1:1 비율 권장",
+            "images_guides_desc_2": "배경이 없는 PNG 형식의 이미지 권장",
+            "images_guides_nft": "NFT 증명서 페이지에서 확인 가능합니다.", 
+            "upload_image": "upload image", 
+            "delete_image": "Delete image", 
+            "create_nft": "Create NFT", 
+            "cancel": "Cancel"
+          }, 
           "waiting": "NFT 발행 대기 중",
           "published": "생성된 NFT",
           "no_published": "최근 생성한 NFT가 없습니다.",
@@ -738,6 +826,20 @@
       "joined": "멤버",
       "invited": "초대됨",
       "none": "행인"
+    },
+
+    "privacy_type": {
+      "public": "모든 유저",
+      "private": "프라이빗",
+      "group": "그룹 멤버"
+    },
+
+    "avatar_type": {
+      "clothes": "의상", 
+      "background": "배경",
+      "accessory": "액세서리",
+      "hair": "머리모양",
+      "face": "얼굴모양"
     }
   }, 
   "footer": {

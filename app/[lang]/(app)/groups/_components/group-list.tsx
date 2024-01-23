@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import GroupListItem from "./group-list-item";
 
 //TODO: Add type dependency
@@ -18,21 +19,36 @@ export default function GroupList({
 }) {
   //const { search: searchValue } = searchParams as { [key: string]: string };
 
-  const {data: user}= useSession();
+  const { data: user } = useSession();
   //const resultsText = products.length > 1 ? 'results' : 'result';
 
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
-  const filteredData = groups.filter((group: any) => {
+  const [sortedData, setSortedData] = useState<any>([]);
+
+  useEffect(() => {
+    const data = groups.sort((a, b) => {
+      if ((a.members?.length as number) - (b.members?.length as number) == 0) {
+        return Number(new Date(a.created_at)) - Number(new Date(b.created_at));
+      }
+      return (a.members?.length as number) - (b.members?.length as number);
+    });
+
+    setSortedData(data);
+  }, [groups]);
+
+  const filteredData = sortedData.filter((group: any) => {
     return group.name
       .toLowerCase()
       .includes(search ? search.toLowerCase() : "");
   });
 
-  const filterJoinedGroups = filteredData.filter((group) => group.isUserMember);
+  const filterJoinedGroups = filteredData.filter(
+    (group: any) => group.isUserMember
+  );
   const filterCreatedGroups = filteredData.filter(
-    (group) => group.owner === user?.web3?.address
+    (group: any) => group.owner === user?.web3?.address
   );
 
   return (
@@ -52,7 +68,10 @@ export default function GroupList({
       </TabsList>
 
       <div className="w-full my-10 max-w-[27rem] mx-auto">
-        <Search placeholder={lang.group.list.search_placeholder} className="bg-background-layer-1" />
+        <Search
+          placeholder={lang.group.list.search_placeholder}
+          className="bg-background-layer-1"
+        />
       </div>
 
       <TabsContent value="all" className="mx-0 mt-0 mb-16">
@@ -63,21 +82,20 @@ export default function GroupList({
         </div>
       </TabsContent>
 
-      <TabsContent value="joined" className="mx-0 mt-0 mb-16">
-      <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
+      <TabsContent value="created" className="mx-0 mt-0 mb-16">
+        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
       </TabsContent>
 
-      <TabsContent value="created" className="mx-0 mt-0 mb-16">
-      <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
+      <TabsContent value="joined" className="mx-0 mt-0 mb-16">
+        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
-      
       </TabsContent>
 
       <Link
@@ -89,7 +107,9 @@ export default function GroupList({
             {lang.group.list.banner}
           </div>
 
-          <div className="mb-5 text-subhead_m text-text-fixed">{lang.group.list.banner2}</div>
+          <div className="mb-5 text-subhead_m text-text-fixed">
+            {lang.group.list.banner2}
+          </div>
 
           <div className="flex items-center gap-1 text-title_m text-text-fixed">
             {lang.group.list.banner3}

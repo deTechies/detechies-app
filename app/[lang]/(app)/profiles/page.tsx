@@ -9,7 +9,7 @@ export default async function ProfilePage() {
   const followers = [] as any[];
 
   return (
-    <main className="flex gap-md  justify-center mx-auto max-w-5xl	">
+    <main className="w-screen flex justify-center content-center">
       <ListProfiles users={users} followers={followers} />
     </main>
   );

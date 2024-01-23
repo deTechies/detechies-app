@@ -32,6 +32,7 @@ import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
 import { addMembersWork } from "@/lib/data/project";
 import { PROFESSION_TYPE } from "@/lib/interfaces";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 const contributionFormSchema = z.object({
@@ -69,6 +70,7 @@ export default function ProjectContributionForm({
   });
   const messageValue = form.watch("description", "");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   const currentPercentage = form.watch("percentage", [0]);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
@@ -94,6 +96,7 @@ export default function ProjectContributionForm({
 
 
     try {
+      //TODO: change to postServer
       const result = await addMembersWork(values, projectId);
 
       toast({
@@ -104,6 +107,7 @@ export default function ProjectContributionForm({
       if (closeButtonRef.current) {
         closeButtonRef.current.click();
       }
+      router.refresh();
     } catch (error) {
       toast({
         title: "error",
@@ -159,7 +163,7 @@ export default function ProjectContributionForm({
                 </div>
               </div>
 
-              <div className="flex flex-row gap-2 items-center w-full">
+              <div className="flex flex-row gap-2 flex-wrap sm:flex-nowrap items-center w-full">
                 <FormField
                   control={form.control}
                   name="begin_date"
@@ -226,11 +230,6 @@ export default function ProjectContributionForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>업무 기여도</FormLabel>
-                  <div className="flex w-full justify-between text-xs text-text-secondary">
-                    <span>0</span>
-                    <span className="content-center w-full text-right">50</span>
-                    <span className="content-right text-right w-full">100</span>
-                  </div>
                   <FormControl>
                     <Slider
                       {...field}

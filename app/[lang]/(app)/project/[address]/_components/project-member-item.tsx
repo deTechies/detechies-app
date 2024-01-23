@@ -19,17 +19,20 @@ import { Button } from "@/components/ui/button";
 import ProjectContributionInvite from "../../_components/project-contribution-invite";
 import DeleteMember from "./modals/delete-member";
 import RequestEvaluation from "./modals/request-evaluation";
+import DeleteWorks from "./modals/delete-works";
 
 export default async function ProjectMemberItem({
   details,
   projectId,
   lang,
   userRole,
+  onlyOne,
 }: {
   details: ProjectMember;
   projectId: string;
   lang: any;
   userRole: string;
+  onlyOne?: boolean;
 }) {
   const session = await auth();
 
@@ -71,6 +74,7 @@ export default async function ProjectMemberItem({
                       <ProjectContributionInvite
                         project={details.project}
                         lang={lang}
+                        onlyOne={onlyOne}
                       />
                       // <ProjectContribution project={details.project} />
                     )}
@@ -80,20 +84,24 @@ export default async function ProjectMemberItem({
                           {lang.project.details.summary.edit}
                         </Button>
 
-                        <Button size="sm" variant="secondary">
-                          {lang.project.details.members.delete}
-                        </Button>
+                        <DeleteWorks
+                          projectId={projectId}
+                          lang={lang}
+                        ></DeleteWorks>
                       </div>
                     )}
                   </>
                 ) : (
                   <>
-                    {userRole != "none" && userRole != 'invited' && userRole != 'joined' && details.works.length > 0 && (
-                      <ProjectMemberEvaluate
-                        projectMember={details}
-                        lang={lang}
-                      />
-                    )}
+                    {userRole != "none" &&
+                      userRole != "invited" &&
+                      userRole != "joined" &&
+                      details.works.length > 0 && (
+                        <ProjectMemberEvaluate
+                          projectMember={details}
+                          lang={lang}
+                        />
+                      )}
                     {(userRole == "admin" || userRole == "member") && (
                       <DropdownMenu>
                         <DropdownMenuTrigger>
@@ -108,7 +116,10 @@ export default async function ProjectMemberItem({
                             {/*    <DropdownMenuItem>
                               {lang.project.details.members.delegate_admin}
                             </DropdownMenuItem> */}
-                            <DeleteMember memberId={details.memberId} />
+                            <DeleteMember
+                              memberId={details.memberId}
+                              lang={lang}
+                            />
                           </div>
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -118,8 +129,8 @@ export default async function ProjectMemberItem({
               </div>
             </header>
 
-            {userRole == "admin" || "client" || "member"  ? (
-              <ProjectWorkDetail data={details.works[0]} />
+            {userRole == "admin" || "client" || "member" ? (
+              <ProjectWorkDetail data={details.works[0]} lang={lang} />
             ) : (
               <BlurredProjectWorkDetail />
             )}

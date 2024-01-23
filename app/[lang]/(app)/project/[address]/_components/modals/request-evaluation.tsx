@@ -22,10 +22,12 @@ export default function RequestEvaluation({
 
   async function requestEvaluation() {
     setIsLoading(true);
-    const result = await postServer(`/survey-response/request/${memberWallet}`, "");
+    const result = await postServer(
+      `/survey-response/request/${memberWallet}`,
+      ""
+    );
 
     if (result.status == "success") {
-      
       closeButtonRef.current.click();
     } else {
       toast({
@@ -38,7 +40,7 @@ export default function RequestEvaluation({
   }
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="text-left">
         <span className="text-title_m">
           {lang.project.details.request.request_a_review}
         </span>
@@ -51,12 +53,8 @@ export default function RequestEvaluation({
           {lang.project.details.request.card_description}
         </p>
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <DialogClose asChild
-          
-          >
-            <Button size="lg" variant="secondary" 
-                 ref={closeButtonRef}
-            >
+          <DialogClose asChild>
+            <Button size="lg" variant="secondary" ref={closeButtonRef}>
               {lang.project.details.request.card_back}
             </Button>
           </DialogClose>

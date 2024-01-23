@@ -1,4 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { Edit } from "lucide-react";
 import Link from "next/link";
 import Connections from "./connections";
@@ -15,51 +16,51 @@ export default async function ProfileDetails({
   text,
 }: ProfileDetailsProps) {
   return (
-    <Card className="pt-[28px] px-[36px] pb-[36px] gap-[20px]">
-        <header className="flex justify-between items-center">
+    <Card className="pt-[28px] px-9 pb-[36px] gap-[20px]">
+        <header className="flex items-center justify-between">
             {/* PROFILE LABEL */}
-            <h5 className="text-subhead_s capitalize">{text?.profile}</h5>
+            <h5 className="capitalize text-subhead_s">{text?.mypage.main.profile}</h5>
             {/* EDIT PROFILE BUTTON */}
             {
               !visiting && 
               <Link href="/mypage/edit">
-              <div className="flex bg-[#EFF0F2] text-[#101113] text-xs font-medium me-2 px-[10px] py-[6px] rounded-[20px] dark:bg-slate-100 dark:text-slate-500 capitalize">
-                {text?.edit} <Edit className='ml-2 text-text-secondary' size='12'/>
-              </div>
+              <Badge variant={"secondary"} shape={"icon"}>
+                {text?.mypage.main.edit} <Edit className='ml-2 text-icon-secondary' size='12'/>
+              </Badge>
             </Link>
             }
          
         </header>
         
         {/* SECOND ROW FOR OCCUPATION &  SKILLS BADGES*/}
-        <div className="inline-flex items-start gap-[8px] relative">
+        <div className="relative inline-flex items-start gap-2">
           {profile.profile_details?.profession ?(
-            <div className="!flex-[0_0_auto] inline-flex relative border-[1px] border-[#0099FF] text-[#2E94FF] text-xs font-medium px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-blue-900 dark:text-blue-300">
-              {profile.profile_details?.profession as string}
-            </div>
+            <Badge variant={"info"} shape={"outline"}>
+              {text.interface.profession_type?.[profile.profile_details?.profession]}
+            </Badge>
           ) : null}
-          {profile.profile_details && profile.profile_details.length > 0 && profile.profile_details?.skills.map((skill:string)=>{
+          {profile.profile_details && profile.profile_details?.skills.map((skill:string)=>{
             return(
-              <div className="!flex-[0_0_auto] border-[1px] border-[#00D41D] text-[#00D41D] text-xs font-medium px-2.5 py-0.5 rounded-md dark:border-0 dark:bg-green-900 dark:text-green-300" key={skill}>
+              <Badge variant="accent" shape="outline" key={skill}>
                 {skill}
-              </div>
+              </Badge>
             )
           })}
         </div>
 
       {/* Contact info & Intro */}
-      <CardContent className="flex flex-col gap-8">
+
         <Connections github={profile?.github} address={profile?.id} />
 
         {profile?.profile_details?.description && (
-          <section className="border border-border-div rounded-sm flex flex-col p-[16px] gap-[16px]">
-            <h5 className="text-title_m capitalize">{text?.description}</h5>
-            <p className="text-body_m">
+          <section className="flex flex-col gap-4 p-4 border rounded-sm border-border-div">
+            <h5 className="capitalize text-title_m">{text?.mypage.main.description}</h5>
+            <p className="text-body_s">
               {profile?.profile_details?.description}
             </p>
           </section>
         )}
-      </CardContent>
+
     </Card>
   );
 }

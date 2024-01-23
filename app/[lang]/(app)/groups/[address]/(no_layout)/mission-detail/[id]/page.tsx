@@ -12,12 +12,12 @@ export default async function MissionDetailPage({
   params: { id: string; lang: Locale };
 }) {
   const {data: userProgress} = await getUsersMissionProgress(params.id);
-  const {data: missionDetails} = await getMissionDetails(params.id);
+  const missionDetails = await getMissionDetails(params.id);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
     <main className="grid w-full gap-6 mx-8 my-10 md:grid-cols-3">
-      <section className="flex flex-col gap-5 md:col-span-2">
+      <section className="flex flex-col gap-5 truncate md:col-span-2">
         <MissionSummary details={missionDetails.data} lang={dictionary} />
 
         <MissionList
@@ -29,7 +29,7 @@ export default async function MissionDetailPage({
 
       <section>
         <MissionReward
-          achievements={missionDetails.achievements}
+          achievements={missionDetails.data.achievements}
           lang={dictionary}
         ></MissionReward>
       </section>

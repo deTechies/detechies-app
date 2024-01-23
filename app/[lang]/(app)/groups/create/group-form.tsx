@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -17,24 +17,15 @@ import {
 } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { createGroup } from "@/lib/data/groups";
 import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
-import { PlusIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -49,11 +40,6 @@ const profileFormSchema = z.object({
     }),
   type: z.nativeEnum(GROUP_TYPE),
   description: z.string().max(4000).min(4),
-  urls: z.array(
-    z.object({
-      value: z.string().url({ message: "Please enter a valid URL." }),
-    })
-  ),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -62,7 +48,6 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 const defaultValues: Partial<ProfileFormValues> = {
   type: GROUP_TYPE.COMMUNITY,
   description: "",
-  urls: [{ value: "https://" }],
 };
 
 export const GroupForm = ({ lang }: { lang: any }) => {
@@ -77,44 +62,31 @@ export const GroupForm = ({ lang }: { lang: any }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const { fields, append } = useFieldArray({
+/*   const { fields, append } = useFieldArray({
     control: form.control,
     name: "urls",
   });
-
+ */
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
-    const image = await uploadContent(icon);
+    
+    
+   let image = "" as any;
+   
+   if(icon){
+     image = await uploadContent(icon);
+   }
 
-    toast({
-      title: "Succesfully uploaded the content",
-    });
+    
 
-    if (!icon) {
-      toast({
-        title: "Error",
-        description: "Make sure your have valid image file",
-      });
-      return;
-    }
-
-    //name, image and detail
-    if (!image) {
-      toast({
-        title: "Error",
-        description: "Make sure your have valid image file",
-      });
-      return;
-    }
-
-    const urls = data.urls.map((url) => url.value);
+    //const urls = data?.urls?.map((url) => url.value);
 
     const result = await createGroup({
       image: image,
       name: data.name,
       description: data.description,
       type: data.type,
-      urls: urls,
+      urls: []
     });
 
     if (result.status === "success") {
@@ -142,7 +114,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
   const selectCover = (file: File | null, base64: string | null) => {
     setCover(file);
   };
-
+/* 
   const clickAddLinks = (
     _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -166,7 +138,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
       url: "https://instagram.com/",
     },
   ];
-
+ */
   return (
     <Form {...form}>
       <form
@@ -178,7 +150,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
             control={form.control}
             name="type"
             render={({ field }) => (
-              <FormInlineItem className="h-12">
+              <FormInlineItem>
                 <FormInlineLabel>
                   {lang.group.create.form.type}
                   <span className="ml-1 text-state-error">*</span>
@@ -414,7 +386,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
             type="submit"
             size="lg"
             loading={isLoading}
-            disabled={isLoading}
+            disabled={isLoading || !form.formState.isValid}
           >
             {lang.group.create.form.create_group}
           </Button>
