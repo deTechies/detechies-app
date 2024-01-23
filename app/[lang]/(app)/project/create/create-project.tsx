@@ -243,10 +243,11 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               </FormInlineLabel>
 
               <div className="grow">
-                <FormControl className="mb-2">
+                <FormControl>
                   <Input
                     placeholder={lang.project.list.create_project.name_dsc}
                     {...field}
+                    {...form.register("name")}
                   />
                 </FormControl>
 
@@ -288,7 +289,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage className="mt-2" />
+                
+                <FormMessage />
               </div>
             </FormInlineItem>
           )}
@@ -316,7 +318,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               name="end_date"
               render={({ field }) => (
                 <FormItem
-                  className={`w-full relative space-y-0 ${
+                  className={`w-full relative ${
                     present && "opacity-40"
                   }`}
                 >
@@ -332,7 +334,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
             />
           </div>
 
-          <div className="absolute right-0 flex justify-end gap-1 pb-3 bottom-full">
+          <div className="absolute right-0 flex justify-end gap-1 pb-2 bottom-full">
             <Checkbox
               id="present"
               onCheckedChange={(_value: boolean) => {
@@ -362,7 +364,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               </FormInlineLabel>
 
               <div className="grow">
-                <FormControl className="mb-1">
+                <FormControl>
                   <Textarea
                     placeholder={
                       lang.project.list.create_project.describe_placeholder
@@ -415,7 +417,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               </FormInlineLabel>
 
               <div className="grow">
-                <FormControl className="mb-2">
+                <FormControl>
                   <div>
                     <Input
                       placeholder={
@@ -436,7 +438,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                         onClickJobBadge={clickTagsBadge}
                       ></ProfessionTagType>
                     )}
-                    <FormMessage className="mt-2"></FormMessage>
+                    <FormMessage />
                   </div>
                 </FormControl>
 
