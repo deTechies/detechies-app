@@ -283,6 +283,7 @@ export default function EvaluateTeamForm({
                       variant="secondary"
                       size="lg"
                       onClick={() => router.back()}
+                      disabled={loading}
                     >
                       {lang.project.evaluate.go_back}
                     </Button>

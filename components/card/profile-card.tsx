@@ -64,13 +64,13 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
           <span className="text-label_m text-text-secondary">
             {profile.profile_details?.profession
               ? profile.profile_details?.profession
-              : "not_found"}
+              : " "}
           </span>
         </section>
         <section className="grid grid-cols-3 gap-4 ">
-          <ProfileStat label="Followers" value={10} />
-          <ProfileStat label="Achievements" value={10} />
-          <ProfileStat label="Projects" value={10} />
+          <ProfileStat label="Clubs" value={profile.clubsCount} />
+          <ProfileStat label="Achievements" value={profile.achievementsCount} />
+          <ProfileStat label="Projects" value={profile.projectsCount} />
         </section>
       </div>
     </section>

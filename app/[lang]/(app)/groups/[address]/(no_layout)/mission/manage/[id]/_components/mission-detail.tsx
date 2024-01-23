@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { ABI } from "@/lib/constants";
-import { rewardMissionNFT } from "@/lib/data/achievements";
 import { uploadMissionChanges } from "@/lib/data/mission";
+import { postServer } from "@/lib/data/postRequest";
 import { getUserById } from "@/lib/data/user";
 import { Club, Mission, MissionDetails } from "@/lib/interfaces";
 import { useSearchParams } from "next/navigation";
@@ -110,31 +110,38 @@ export default function MissionDetail({
       removedMissionsIds,
       selectedMember
     );
-
-    //get the wallet of the selected member.
-    const getUser = await getUserById(selectedMember);
+    
+    const {data: getUser} = await getUserById(selectedMember);
     for (const achievement of details.achievements) {
       if (missionState.totalPoints >= achievement.min_score) {
-        const result = await rewardMissionNFT(
+        const data = JSON.stringify({
+          userId: getUser.id,
+          achievementId: achievement.achievement.id,
+          tokenId:achievement.achievement.tokenId,
+        });
+        
+        const result = await postServer(
+          `/achievement-rewards/nft-reward`, data
+        )
+     /*    const result = await rewardMissionNFT(
           getUser.id,
           achievement.achievement.id,
           achievement.achievement.tokenId,
           "hash"
-        );
+        ); */
 
-        if (result.ok) {
+        if (result) {
+          toast({
+            description: "Succcesfully request.",
+          });
+          
           await distributeAchievement({
             args: [achievement.achievement.tokenId, getUser.wallet, 1],
           });
         }
-        toast({
-          title: "Success",
-          description: <pre>{JSON.stringify(result, null, 2)}</pre>,
-        });
+       
       }
     }
-
-    toast(result);
   }
 
   return (
