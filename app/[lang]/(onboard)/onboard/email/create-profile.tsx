@@ -78,7 +78,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
   const [blockPopupOpen, setBlockPopupOpen] = useState(false);
 
   if (connector?.id == "web3auth" && !blockPopupOpen) {
-    // setBlockPopupOpen(true);
+    setBlockPopupOpen(true);
     const getInfo = async () => {
       const result = await web3AuthInstance?.getUserInfo();
       if (result?.email) {
@@ -91,9 +91,11 @@ export default function CreateProfile({ lang }: { lang: any }) {
 
   useEffect(() => {
     if (localStorage.getItem("wagmi.wallet") === `"wepin"`) {
-      const storageWepinData = localStorage.getItem(`wepin:widget:${testAppId}`);
-      if(storageWepinData !== null) {
-        const obj_wepin = JSON.parse(storageWepinData); 
+      const storageWepinData = localStorage.getItem(
+        `wepin:widget:${testAppId}`
+      );
+      if (storageWepinData !== null) {
+        const obj_wepin = JSON.parse(storageWepinData);
         form.setValue("email", obj_wepin.user_info.email);
         form.setValue("verified", true);
       }
@@ -189,7 +191,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
           />
           <FormField
             control={form.control}
-            name={lang.onboard.verify_email.email}
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="capitalize">
@@ -200,7 +202,8 @@ export default function CreateProfile({ lang }: { lang: any }) {
                     placeholder={lang.onboard.verify_email.email_placeholder}
                     {...field}
                     disabled={
-                      connector?.id == "web3auth" 
+                      connector?.id == "web3auth" ||
+                      localStorage.getItem("wagmi.wallet") === `"wepin"`
                     }
                   />
                 </FormControl>
