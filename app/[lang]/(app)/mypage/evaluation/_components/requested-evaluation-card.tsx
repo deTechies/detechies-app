@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
-import { defaultAvatar } from "@/lib/constants";
 import { SurveyResponse } from "@/lib/interfaces";
 
 import { Progress } from "@/components/ui/progress";
@@ -24,9 +23,7 @@ export default function RequestedEvaluationCard({
           <div className="relative w-24 h-24 rounded-sm aspect-square bg-background-layer-2 shrink-0">
             <IPFSImageLayer
               hashes={
-                data.evaluator.user.avatar
-                  ? data.evaluator.user.avatar
-                  : defaultAvatar
+                provided ? data.projectWork.projectMember.user.avatar : data.evaluator.user.avatar
               }
             />
           </div>
@@ -45,7 +42,14 @@ export default function RequestedEvaluationCard({
                   {lang.mypage.evaluations.status.requested}
                 </Badge>
               )}
-              {data.status === "finished" && (
+              {
+                data.status === "finished" && !provided && (
+                  <Badge variant={"success"} className="uppercase">
+                    {lang.mypage.evaluations.status.reviewed}
+                  </Badge>
+                )
+              }
+              {data.status === "finished" && provided && (
                 <div className="flex gap-2">
                   <span className="text-label_s">{lang.mypage.evaluations.score}: 60</span>
                   <Progress value={60} className="w-[200px]" />

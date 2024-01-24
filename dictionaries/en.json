@@ -492,6 +492,7 @@
         "pending": "pending", 
         "draft": "draft", 
         "completed": "completed",
+        "reviewed": "reviewed", 
         "rejected": "rejected", 
         "requested": "requested"
       },

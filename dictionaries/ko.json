@@ -491,6 +491,7 @@
         "pending": "보류 중",
         "draft": "검토 중",
         "completed": "완료",
+        "reviewed": "검토됨", 
         "rejected": "거부됨",
         "requested": "요청 중"
       },
