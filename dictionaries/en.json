@@ -487,6 +487,13 @@
         "total_earned": "Total earned",
         "average_rewards": "Average per review"
       },
+      "status": {
+        "pending": "pending", 
+        "draft": "draft", 
+        "completed": "completed",
+        "rejected": "rejected", 
+        "requested": "requested"
+      },
       "coming_soon": "Coming Soon",
       "reviewed_by": "Reviewed by",
       "reviewing": "Reviewing", 

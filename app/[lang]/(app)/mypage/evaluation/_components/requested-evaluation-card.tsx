@@ -37,12 +37,12 @@ export default function RequestedEvaluationCard({
               </h4>
               {data.status === "pending" && (
                 <Badge variant={"accent"} className="uppercase">
-                  {data.status}
+                  {lang.mypage.evaluations.status.pending}
                 </Badge>
               )}
               {data.status === "requested" && (
                 <Badge variant={"info"} className="uppercase">
-                  {data.status}
+                  {lang.mypage.evaluations.status.requested}
                 </Badge>
               )}
               {data.status === "finished" && (
@@ -52,8 +52,8 @@ export default function RequestedEvaluationCard({
                 </div>
               )}
               {data.status === "draft" && (
-                <Badge variant={"success"} className="uppercase">
-                  {data.status}
+                <Badge variant={"tertiary"} className="uppercase">
+                  {lang.mypage.evaluations.status.draft}
                 </Badge>
               )}
             </div>
