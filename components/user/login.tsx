@@ -46,13 +46,15 @@ export default function Login({ lang }: ILoginProps) {
 
   if (isConnecting || isReconnecting) {
     return (
-      <Avatar className="animate-pulse bg-background-layer-2">
+      <Avatar
+      className="animate-pulse bg-accent-primary"
+      >
         <AvatarFallback />
       </Avatar>
     );
   }
 
-  if (session?.web3?.address != address) {
+  if (session?.web3?.address != address && isConnected) {
     //sign message
     return (
       <div className="flex items-center gap-2 rounded-md">
