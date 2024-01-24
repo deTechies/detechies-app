@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
 
-import { web3AuthInstance, wepinInstance } from "@/app/[lang]/app";
+import { testAppId, web3AuthInstance } from "@/app/[lang]/app";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Label } from "@radix-ui/react-label";
 import { ChevronRight } from "lucide-react";
@@ -89,22 +89,17 @@ export default function CreateProfile({ lang }: { lang: any }) {
     getInfo();
   }
 
-  console.log(connector);
-
-  if (connector?.id == "wepin") {
-    // email 정보를 가져와야됩니다.
-
-    // const getResult = async () => {
-    //   const result = await wepinInstance.login();
-
-    //   if(result.status == "success") {
-    //     form.setValue("email", result.userInfo.email);
-    //     form.setValue("verified", true);
-    //   }
-    // };
-    
-    // getResult();
-  }
+  useEffect(() => {
+    if (localStorage.getItem("wagmi.wallet") === `"wepin"`) {
+      const storageWepinData = localStorage.getItem(`wepin:widget:${testAppId}`);
+      if(storageWepinData !== null) {
+        const obj_wepin = JSON.parse(storageWepinData); 
+        form.setValue("email", obj_wepin.user_info.email);
+        form.setValue("verified", true);
+      }
+      console.log(form.getValues("email"));
+    }
+  }, []);
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
@@ -204,7 +199,9 @@ export default function CreateProfile({ lang }: { lang: any }) {
                   <Input
                     placeholder={lang.onboard.verify_email.email_placeholder}
                     {...field}
-                    disabled={connector?.id == "web3auth" || connector?.id == "wepin"}
+                    disabled={
+                      connector?.id == "web3auth" 
+                    }
                   />
                 </FormControl>
                 {/* <FormDescription className="font-light">

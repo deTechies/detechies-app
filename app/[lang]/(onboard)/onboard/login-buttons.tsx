@@ -9,7 +9,6 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
-import { wepinInstance } from "@/app/[lang]/app";
 
 export default function LoginButtons({ text }: { text?: any }) {
   const { connect, connectors } = useConnect();

@@ -15,14 +15,11 @@ import { WepinConnector } from "@wepin/wagmi-connector";
 import type { WepinConnectorOptions } from "@wepin/wagmi-connector";
 
 import OnboardLoading from "./(onboard)/onboard/loading";
-import "@wepin/widget-sdk";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
   [publicProvider()]
 );
-
-export let wepinInstance: any;
 
 export const web3AuthInstance =
   typeof window !== "undefined"
@@ -47,13 +44,13 @@ export const web3AuthInstance =
 
 
 const testAppKey = "ak_test_YwTTMVZ0M6PXZQxEqdpeJ9kMGVuZUPLVZJxxfqEFDj1";
-const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
+export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
 // const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키 
 // const testAppId = 'app_id_eg12sf3491azgs520' // 테스트용 앱 ID
 
 const connectorOptions: WepinConnectorOptions = {
-  appId: testAppKey,
-  appKey: testAppId,
+  appId: testAppId,
+  appKey: testAppKey,
   attributes: {
     type: "hide",
   },
@@ -88,29 +85,6 @@ const config = createConfig({
 
 
 export default function App({ children }: { children: any }) {
-  const [isWepinInitialized, setIsWepinInitialized] = useState(false);
-
-  useEffect(() => {
-    async function initializeWepin() {
-      const Wepin = window && window?.Wepin;
-      try {
-        wepinInstance = await Wepin.init(testAppId, testAppKey);
-        setIsWepinInitialized(true);
-
-        if (wepinInstance.isInitialized()) {
-          console.log("wepin is initialized!");
-        }
-      } catch (error) {
-        console.error("Error initializing Wepin:", error);
-      }
-    }
-
-    initializeWepin();
-  }, []);
-
-  if (!isWepinInitialized) {
-    return <OnboardLoading />;
-  }
 
   return (
     <WagmiConfig config={config}>
