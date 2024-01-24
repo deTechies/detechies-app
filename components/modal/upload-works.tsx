@@ -2,7 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { postServer } from "@/lib/data/general";
+// import { postServer } from "@/lib/data/general";
+import { postServer } from "@/lib/data/postRequest";
 import { uploadContent } from "@/lib/upload";
 import { X } from "lucide-react";
 import { Button } from "../ui/button";
@@ -85,7 +86,6 @@ export default function UploadWorks({
 
     const result = await postServer(
       `/projects/${projectId}/add-link`,
-      "POST",
       body
     );
 
@@ -135,7 +135,7 @@ export default function UploadWorks({
             />
           </div>
 
-          <div className="flex gap-4 justify-center items-center">
+          <div className="flex items-center justify-center gap-4">
             <Select onValueChange={(value) => setWorkType(value)}
               defaultValue="file"
             >
@@ -158,7 +158,7 @@ export default function UploadWorks({
             </Select>
             <div className="w-full">
               {workType === "link" ? (
-                <div className="flex gap-2 items-center">
+                <div className="flex items-center gap-2">
                   <Input
                     placeholder="Link"
                     onChange={(e) => setNewLink(e.target.value)}
@@ -168,10 +168,10 @@ export default function UploadWorks({
               ) : (
                 <div>
                   {file ? (
-                    <div className="flex justify-between text-accent-on-secondary bg-background-layer-2 py-5 px-8 rounded-sm">
+                    <div className="flex justify-between px-8 py-5 rounded-sm text-accent-on-secondary bg-background-layer-2">
                       {file.name}
                       <X
-                        className="ml-2 cursor-pointer hover:text-state-error text-text-secondary mr-4"
+                        className="ml-2 mr-4 cursor-pointer hover:text-state-error text-text-secondary"
                         onClick={() => setFile(null)}
                         size="1.5rem"
                       />
