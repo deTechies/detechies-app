@@ -482,8 +482,17 @@
         "evaluation_requests": "요청받은 평가", 
         "evaluation_received": "내가 요청한 평가",
         "evaluation_wrote": "내가 작성한 평가"
-      }
-    }
+      },
+      "stats": {
+        "total_reviews": "내가 작성한 평가",
+        "total_earned": "누적 보상",
+        "average_rewards": "조회 당 평균 보상"
+      },
+      "coming_soon": "곧 출시 예정",
+      "reviewed_by": "평가 작성자",
+      "reviewing": "윤창진", 
+      "score": "총점"
+        }
   },
   "group": {
     "list": {
