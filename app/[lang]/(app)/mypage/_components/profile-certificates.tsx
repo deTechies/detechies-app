@@ -80,7 +80,7 @@ export default function ProfileCertificates({
                       </div>
                     </div>
                     <div className="flex flex-col justify-between shrink-0">
-                      <Badge variant="info" shape="category">{achievement_reward.achievement?.type}</Badge>
+                      <Badge variant="info">{achievement_reward.achievement?.type}</Badge>
                     </div>
                   </Card>
                 </DialogTrigger>
