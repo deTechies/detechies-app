@@ -20,7 +20,7 @@ export const MissionItem: React.FC<MissionItemProps> = ({
 }) => {
   return (
     <div
-      className={`border rounded-md py-7 px-8 flex justify-between items-center ${
+      className={`border rounded-md py-7 px-8 flex justify-between items-center flex-wrap ${
         isActive && "border-accent-primary"
       }`}
       onClick={onSelect}
@@ -33,7 +33,7 @@ export const MissionItem: React.FC<MissionItemProps> = ({
           </Badge>
         ) : null}
       </div>
-      <div className="flex gap-5 items-center">
+      <div className="flex items-center gap-5 ml-auto">
         <div
           className={`min-w-[140px] p-3 text-center rounded-full text-title_l grow max-w-[140px] ${
             isActive ? "bg-gradient-to-r from-accent-secondary to-state-success-secondary" : "bg-background-layer-2 text-text-secondary"

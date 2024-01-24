@@ -4,7 +4,13 @@ import { Check } from "lucide-react";
 
 import Link from "next/link";
 
-export default function CompletedSuccess({ groupId }: any) {
+export default function CompletedSuccess({
+  groupId,
+  lang,
+}: {
+  groupId: string;
+  lang: any;
+}) {
   return (
     <main>
       <Card className="flex flex-col justify-center gap-4">
@@ -17,22 +23,24 @@ export default function CompletedSuccess({ groupId }: any) {
         </div>
 
         <h3 className="text-center text-subhead_s">
-          한정판 NFT가 생성되었습니다!
+          {lang.group.details.profile_card.completed_success.title}
         </h3>
         <h5 className="flex flex-col text-center text-body_m">
-          <span>생성하신 NFT의 관리는 그룹 관리에서 가능하고,</span>
-          <span>NFT 증명서에서는 적용 여부를 확인하실수 있어요.</span>
+          <span>{lang.group.details.profile_card.completed_success.desc1}</span>
+          <span>{lang.group.details.profile_card.completed_success.desc2}</span>
         </h5>
 
         <section className="flex justify-center gap-2 mt-4 shrink-0">
           <Link href={`/groups/${groupId}/manage`} passHref>
             <Button variant="secondary" size="lg">
-              그룹 관리 바로가기
+              {lang.group.details.profile_card.completed_success.go_manage}
             </Button>
           </Link>
 
           <Link href={`/groups/${groupId}/nft`} passHref>
-            <Button size="lg">NFT 증명서 바로가기</Button>
+            <Button size="lg">
+              {lang.group.details.profile_card.completed_success.go_nft}
+            </Button>
           </Link>
         </section>
       </Card>

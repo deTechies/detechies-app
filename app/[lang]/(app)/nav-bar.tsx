@@ -86,7 +86,7 @@ export default function Navbar({ lang }: { lang: any }) {
                     key={index}
                     href={link.href}
                     aria-disabled={link?.disabled}
-                    className={`inline-flex items-center border-b-[3px] capitalize 
+                    className={`inline-flex items-center truncate border-b-[3px] capitalize 
                       ${
                         pathname.includes(link.href)
                           ? "border-accent-primary text-text-primary"
