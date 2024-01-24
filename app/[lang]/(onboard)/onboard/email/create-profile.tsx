@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { getSession, signOut } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Form,
@@ -11,14 +11,14 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
 
-import { web3AuthInstance } from "@/app/[lang]/app";
+import { web3AuthInstance, wepinInstance } from "@/app/[lang]/app";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Label } from "@radix-ui/react-label";
 import { ChevronRight } from "lucide-react";
@@ -78,15 +78,32 @@ export default function CreateProfile({ lang }: { lang: any }) {
   const [blockPopupOpen, setBlockPopupOpen] = useState(false);
 
   if (connector?.id == "web3auth" && !blockPopupOpen) {
-    setBlockPopupOpen(true);
-    // const getInfo = async () => {
-    //   const result = await web3AuthInstance?.getUserInfo();
-    //   if (result?.email) {
-    //     form.setValue("email", result.email);
+    // setBlockPopupOpen(true);
+    const getInfo = async () => {
+      const result = await web3AuthInstance?.getUserInfo();
+      if (result?.email) {
+        form.setValue("email", result.email);
+        form.setValue("verified", true);
+      }
+    };
+    getInfo();
+  }
+
+  console.log(connector);
+
+  if (connector?.id == "wepin") {
+    // email 정보를 가져와야됩니다.
+
+    // const getResult = async () => {
+    //   const result = await wepinInstance.login();
+
+    //   if(result.status == "success") {
+    //     form.setValue("email", result.userInfo.email);
     //     form.setValue("verified", true);
     //   }
     // };
-    // getInfo();
+    
+    // getResult();
   }
 
   async function sendVerification(data: ProfileFormValues) {
@@ -187,7 +204,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
                   <Input
                     placeholder={lang.onboard.verify_email.email_placeholder}
                     {...field}
-                    disabled={connector?.id == "web3auth"}
+                    disabled={connector?.id == "web3auth" || connector?.id == "wepin"}
                   />
                 </FormControl>
                 {/* <FormDescription className="font-light">
