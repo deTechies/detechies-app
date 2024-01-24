@@ -98,7 +98,6 @@ export default function PendingMemberItem({
                   <Button
                     size="sm"
                     variant="secondary"
-                    loading={isLoading}
                     disabled={isLoading}
                   >
                     {lang.project.details.waiting.reject}
