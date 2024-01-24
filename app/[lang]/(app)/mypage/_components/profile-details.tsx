@@ -39,7 +39,7 @@ export default async function ProfileDetails({
               {text.interface.profession_type?.[profile.profile_details?.profession]}
             </Badge>
           ) : null}
-          {profile.profile_details && profile.profile_details?.skills.map((skill:string)=>{
+          {profile.profile_details && profile.profile_details?.skills?.map((skill:string)=>{
             return(
               <Badge variant="accent" shape="outline" key={skill}>
                 {skill}
