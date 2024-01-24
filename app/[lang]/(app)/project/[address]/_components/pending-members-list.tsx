@@ -1,17 +1,16 @@
-"use client";
-
 import PendingMemberItem from "@/components/members/pending-member-item";
 import { Card, CardHeader } from "@/components/ui/card";
+import { serverApi } from "@/lib/data/general";
 import React from 'react';
 
-function PendingMemberListComponent({
+async function PendingMemberListComponent({
+  projectId,
   lang,
-  pendingMembers,
 }: {
+  projectId: string;
   lang: any;
-  pendingMembers: any[];
 }) {
-  
+ const {data:pendingMembers} = await serverApi(`/project-member/invites/${projectId}`)
   return (
     <Card className="gap-0 px-6 pt-6 pb-7">
       <CardHeader className="mb-6">
