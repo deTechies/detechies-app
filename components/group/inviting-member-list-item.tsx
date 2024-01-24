@@ -40,8 +40,6 @@ export default function InvitingMemberListItem({
     //
   };
 
-  console.log(profile);
-
   return (
     <div
       className="grid grid-cols-[1fr_90px_124px] gap-4 p-5 border rounded-md border-border-div hover:shadow-lg items-center"

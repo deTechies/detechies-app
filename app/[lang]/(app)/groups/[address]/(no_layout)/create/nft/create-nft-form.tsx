@@ -77,7 +77,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
 
   const router = useRouter();
 
-  if (completed) return <CompletedSuccess groupId={group.id} />;
+  if (completed) return <CompletedSuccess groupId={group.id} lang={lang} />;
 
   const onClickCancel = () => {
     router.back();
@@ -137,7 +137,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex flex-row flex-wrap space-x-1"
+                      className="flex flex-row flex-wrap"
                     >
                       {Object.values(NFT_TYPE).map((type) => (
                         <FormItem
@@ -170,7 +170,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex flex-row flex-wrap space-x-1"
+                      className="flex flex-row flex-wrap"
                     >
                       {Object.values(NFT_IMAGE_TYPE).map((type) => (
                         <FormItem
@@ -216,7 +216,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-row flex-wrap space-x-1"
+                        className="flex flex-row flex-wrap"
                       >
                         {Object.values(SBT_TYPE).map((type) => (
                           <FormItem
@@ -298,7 +298,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                         <RadioGroup
                           onValueChange={field.onChange}
                           defaultValue={field.value}
-                          className="flex flex-row flex-wrap space-x-1"
+                          className="flex flex-row flex-wrap"
                         >
                           {Object.values(AVATAR_TYPE).map((type) => (
                             <FormItem
@@ -396,7 +396,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                 size="lg"
                 disabled={createDisabled() || isLoading}
               >
-                {lang.group.details.profile_card.create_nft.back}
+                {lang.group.details.profile_card.create_nft.create_nft}
               </Button>
             </div>
           </Card>

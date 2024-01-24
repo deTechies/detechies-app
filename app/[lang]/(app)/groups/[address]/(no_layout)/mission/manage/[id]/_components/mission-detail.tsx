@@ -145,7 +145,7 @@ export default function MissionDetail({
   }
 
   return (
-    <div className="flex gap-4 flex-col">
+    <div className="flex flex-col gap-4">
       <ManageMissionReward
         achievements={details.achievements}
         totalPoints={missionState.totalPoints}
@@ -164,7 +164,8 @@ export default function MissionDetail({
             selectedMissions={missionState.selectedMissions}
             lang={lang}
           />
-          <section className="flex justify-between text-subhead_s">
+
+          <section className="flex flex-wrap justify-between text-subhead_s">
             <span>
               {lang.mission.manage.cleard_mission} ({" "}
               {missionState.selectedMissions.length} / {details.missions.length}{" "}
@@ -178,6 +179,7 @@ export default function MissionDetail({
               {lang.mission.manage.points}
             </div>
           </section>
+
           <section className="flex justify-between">
             <Button size="lg" variant="secondary">
               {lang.mission.manage.back}
