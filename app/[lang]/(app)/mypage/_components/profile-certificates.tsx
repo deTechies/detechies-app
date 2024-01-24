@@ -46,7 +46,7 @@ export default function ProfileCertificates({
       {achievement_rewards &&
         achievement_rewards.map((achievement_reward: AchievementReward, index: number) => {
 
-          if(achievement_reward.status == 'granted'){
+          if(achievement_reward.status == 'granted' && achievement_reward.achievement.type == 'edu'){
             return (
               <Dialog key={index}>
                 <DialogTrigger>
