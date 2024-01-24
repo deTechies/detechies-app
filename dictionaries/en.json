@@ -48,9 +48,9 @@
       "body": "If you already have an account, log in to Careerzen using your existing account.",
       "web3": "Social Wallet",
       "browser": "Browser Wallet",
-      "sign_out": "Sign out", 
-      "sign_in_as": "Sign is as ", 
-      "sign_in_title": "sign_in_title", 
+      "sign_out": "Sign out",
+      "sign_in_as": "Sign is as ",
+      "sign_in_title": "sign_in_title",
       "sign_in_body": "sign_in_body"
     },
     "verify_email": {
@@ -123,13 +123,13 @@
       "create_project": {
         "create": "Create Project",
         "name": "Project Name",
-        "name_placeholder" : "Enter Project Name",
+        "name_placeholder": "Enter Project Name",
         "type": "Type",
-        "type_placeholder" : "Select Type",
+        "type_placeholder": "Select Type",
         "period": "Period",
         "in_progress": "In Progress",
         "describe": "Description",
-        "describe_placeholder" : "Enter Description",
+        "describe_placeholder": "Enter Description",
         "image": "Image",
         "image_guide1": "an aspect ratio of 1:1",
         "image_guide2": "not violate copyright",
@@ -155,18 +155,18 @@
           "back": "Back"
         }
       },
-      "edit_project":"Edit Project",
-      "edit" : "Update Project",
-      "delete_project":{
-        "delete" : "Delete Project",
-        "delete_confirm" : "Are you sure delete project?",
-        "delete_dsc":" If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",        
-        "delete_project_name" : "and click delete",
+      "edit_project": "Edit Project",
+      "edit": "Update Project",
+      "delete_project": {
+        "delete": "Delete Project",
+        "delete_confirm": "Are you sure delete project?",
+        "delete_dsc": " If deleted, all project activity information of the leader and other members will be deleted. If you really want to delete the project, please enter the project name:",
+        "delete_project_name": "and click delete",
         "placeholder": "Enter project name",
-        "cancel" : "Cancel"
+        "cancel": "Cancel"
       },
-      "add_work":{
-        "work":"Add Work"
+      "add_work": {
+        "work": "Add Work"
       }
     },
     "details": {
@@ -246,8 +246,8 @@
       },
       "request": {
         "request_a_review": "Request a Review",
-        "card_title": "Notify user to review your contribution?", 
-        "card_description": "Have your performance evaluated by other members and certify your career. Should I send a performance evaluation request to the selected project member", 
+        "card_title": "Notify user to review your contribution?",
+        "card_description": "Have your performance evaluated by other members and certify your career. Should I send a performance evaluation request to the selected project member",
         "card_button": "Request Review",
         "card_back": "Back"
       },
@@ -273,17 +273,16 @@
         "reject": "Reject",
         "accept": "Accept",
         "position": "Position",
-        "send_note":"Send Note",
+        "send_note": "Send Note",
         "just_now_joined": "Just now",
         "min_ago_joined": "minutes ago",
         "hour_ago_joined": "hours ago",
         "day_aog_joined": "days ago",
-        "just_now_invited": "just now", 
+        "just_now_invited": "just now",
         "min_ago_invited": "minutes ago",
         "hour_ago_invited": "hours ago",
         "day_aog_invited": "days ago"
       },
-
       "join_project": {
         "title": "Join Project",
         "body": "Join this project to start working on it.",
@@ -330,11 +329,11 @@
       "evaluate_performance_description": "Please evaluate Mr./Ms.",
       "evaluate_performance_description2": "'s role and performance in this project.",
       "evaluate_specialty": "Evaluate Specialty",
-"evaluate_specialty_description": "Please evaluate the professional skills demonstrated by your colleague in the project.",
-"evaluate_propensity": "Evaluate Propensity",
-"evaluate_propensity_description": "Please assess the disposition of your colleague with whom you worked.",
-"last_feedback": "Evaluate Propensity",
-"last_feedback_description": "Please provide open feedback about the strengths and weaknesses of your colleague.",
+      "evaluate_specialty_description": "Please evaluate the professional skills demonstrated by your colleague in the project.",
+      "evaluate_propensity": "Evaluate Propensity",
+      "evaluate_propensity_description": "Please assess the disposition of your colleague with whom you worked.",
+      "last_feedback": "Evaluate Propensity",
+      "last_feedback_description": "Please provide open feedback about the strengths and weaknesses of your colleague.",
       "basic_information": "Basic Information",
       "billable_hourly_wage": "Billable Hourly Wage",
       "time_weekly": "Total hour (weekly)",
@@ -410,9 +409,9 @@
       "strength": "Strengths (Required)",
       "weakness": "Areas for Improvement (Required)",
       "feedback": "Feedback for the Evaluatee (Visible only to the evaluatee) (Optional)",
-      "again": "Would you like to work with this team member on a project again? (Required)",      
-      "no_team_building":"No team building intentions",
-      "love_to":"I'd love to join you next time",
+      "again": "Would you like to work with this team member on a project again? (Required)",
+      "no_team_building": "No team building intentions",
+      "love_to": "I'd love to join you next time",
       "register": "Save",
       "exactly": "Is the evaluation completely accurate?",
       "exactly_desc": "Submitting an evaluation that is not factually accurate can negatively impact the career of the evaluatee.",
@@ -488,7 +487,24 @@
         "evaluation_requests": "Evaluation Requested by Me",
         "evaluation_received": "Received evaluations",
         "evaluation_wrote": "Written evaluations"
-      }
+      },
+      "stats": {
+        "total_reviews": "Total reviews",
+        "total_earned": "Total earned",
+        "average_rewards": "Average per review"
+      },
+      "status": {
+        "pending": "pending", 
+        "draft": "draft", 
+        "completed": "completed",
+        "reviewed": "reviewed", 
+        "rejected": "rejected", 
+        "requested": "requested"
+      },
+      "coming_soon": "Coming Soon",
+      "reviewed_by": "Reviewed by",
+      "reviewing": "Reviewing", 
+      "score": "score"
     }
   },
   "group": {
@@ -534,7 +550,7 @@
       "profile_card": {
         "create_nft": {
           "title": "Create a new NFT",
-          "required_text": "* is a required field", 
+          "required_text": "* is a required field",
           "nft_type": "NFT type",
           "nft_prop": "NFT property",
           "guide_title": "Image guide",
@@ -545,8 +561,8 @@
           "sbt_name": "Certificate name",
           "sbt_desc": "Certificate description",
           "avatar_type": "Avatar type",
-          "avatar_image": "Avatar image", 
-          "sbt_image": "SBT image", 
+          "avatar_image": "Avatar image",
+          "sbt_image": "SBT image",
           "back": "Back",
           "create_nft": "Create NFT"
         },
@@ -625,26 +641,26 @@
         },
         "nft": {
           "create": {
-            "create_new_nft_title": "Create new NFT", 
-            "this_is_required": "* are the required fields.", 
+            "create_new_nft_title": "Create new NFT",
+            "this_is_required": "* are the required fields.",
             "nft_type": "NFT type",
             "nft_properties": "NFT Properties*",
             "career_nft": "Career NFT",
-            "certificate_type": "Type", 
-            "certificate_name": "Name", 
-            "certificate_description": "Certificate Description", 
-            "avatar_type": "Avatar Type", 
-            "avatar_image": "Avatar Image", 
-            "nft__image": "NFT Image", 
-            "image_guides": "이미지 가이드", 
+            "certificate_type": "Type",
+            "certificate_name": "Name",
+            "certificate_description": "Certificate Description",
+            "avatar_type": "Avatar Type",
+            "avatar_image": "Avatar Image",
+            "nft__image": "NFT Image",
+            "image_guides": "이미지 가이드",
             "image_guides_desc": "1:1 비율 권장",
             "images_guides_desc_2": "배경이 없는 PNG 형식의 이미지 권장",
-            "images_guides_nft": "NFT 증명서 페이지에서 확인 가능합니다.", 
-            "upload_image": "Upload image", 
-            "delete_image": "Delete image", 
-            "create_nft": "Create NFT", 
+            "images_guides_nft": "NFT 증명서 페이지에서 확인 가능합니다.",
+            "upload_image": "Upload image",
+            "delete_image": "Delete image",
+            "create_nft": "Create NFT",
             "cancel": "Cancel"
-          }, 
+          },
           "waiting": "NFT Issuance Pending",
           "published": "Created NFT",
           "no_published": "No NFT",
@@ -804,7 +820,6 @@
       "Planner": "Planner",
       "Designer": "Designer",
       "Marketer": "Marketer",
-
       "developer": "Developer",
       "pm": "PM",
       "pa_engineer": "QA Engineer",
@@ -812,14 +827,12 @@
       "designer": "Designer",
       "marketer": "Marketer"
     },
-
     "project_type": {
       "all": "All",
       "company": "Company",
       "freelance": "Freelance",
       "side": "Side"
     },
-
     "role_type": {
       "admin": "Admin",
       "member": "Member",
@@ -834,7 +847,7 @@
       "group": "Group members"
     },
     "avatar_type": {
-      "clothes": "clothes", 
+      "clothes": "clothes",
       "background": "background",
       "accessory": "accessory",
       "hair": "hair",
@@ -847,7 +860,7 @@
     "privacy_policy": "Privacy Policy",
     "whitepaper": "Whitepaper",
     "contact_us": "Contact Us",
-    "faq": "FAQ", 
+    "faq": "FAQ",
     "user_guide": "User Guide"
   },
   "media_uploader": {
