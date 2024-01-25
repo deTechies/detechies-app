@@ -12,11 +12,11 @@ export default function UserReport({
   profile: any;
   text: any;
 }) {
-    console.log(profile);
+  
   return (
     <Card className="flex flex-col gap-0 w-[328px] px-6 pt-6 pb-7">
       <CardHeader className="mb-6 text-subhead_s">
-        뀨뀨 의 평판 보고서
+        {profile.display_name} 의 평판 보고서
       </CardHeader>
       <CardContent>
         <div className="mb-3">
@@ -37,7 +37,7 @@ export default function UserReport({
           </Badge>
         </div>
 
-        <Link href="/report">
+        <Link href={`${profile.wallet}/report`}>
             <Button size="lg" className="max-w-full">
                 열람하기
             </Button>

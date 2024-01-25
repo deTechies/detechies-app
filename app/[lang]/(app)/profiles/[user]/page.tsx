@@ -20,7 +20,6 @@ export default async function Dashboard({
   const {data:profile} = await getUserProfile(params.user) as any;
   const dictionary = (await getDictionary(params.lang)) as any;
   
-  
   //TODO: Create a profile not found page. 
   if(!profile.id) return <NoProfileFound />
   
