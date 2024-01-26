@@ -450,8 +450,10 @@
       "first_name": "이름",
       "last_name": "성",
       "profession": "직업",
+      "email": "email", 
       "specialisation": "전문분야",
       "profile_description": "내 소개",
+      "profile_description_label": "익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다.",
       "skills": "스킬",
       "username": "닉네임",
       "save_changes": "저장하기"
