@@ -78,6 +78,9 @@ export default function Login({ lang }: ILoginProps) {
     );
   }
 
+  console.log(chains);
+  console.log(chain);
+
   if (!isConnecting && address == session?.web3?.address) {
     return (
       <div className="flex items-center gap-2 rounded-md">

@@ -52,7 +52,7 @@ const connectorOptions: WepinConnectorOptions = {
   appId: testAppId,
   appKey: testAppKey,
   attributes: {
-    type: "show",
+    defaultChainId: 80001,
   },
 };
 
@@ -73,7 +73,7 @@ const config = createConfig({
       name: "Social Login",
     }),
     new WepinConnector({
-      chains: chains as any,
+      chains,
       options: connectorOptions,
     }),
     //Web3AuthConnectorInstance(chains) as any,
