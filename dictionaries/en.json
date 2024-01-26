@@ -450,6 +450,14 @@
       "name": "Name",
       "address": "Wallet Address"
     },
+    "edit_avatar":{
+        "tab_all": "All",
+        "tab_career": "Career NFT",
+        "tab_avatar": "Avatar NFT",
+        "not_approved": "Not Approved",
+        "reset": "Reset",
+        "save":  "Save"
+    },
     "edit_profile": {
       "edit_profile": "edit profile",
       "full_name": "full name",
