@@ -97,8 +97,9 @@ export default function UploadWorks({
       setLoading(false);
       return;
     }
-
-    //TODO: close window.
+    setFile(null);
+    setName("");
+    setNewLink("");
 
     toast({
       title: "Successfully uploaded",
