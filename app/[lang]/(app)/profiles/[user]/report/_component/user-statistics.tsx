@@ -1,13 +1,11 @@
 "use client";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import SimplePosNagChart, {
-  ScoreCard,
-  SimpleRadarChart,
-  SimpleBarChart,
-  StarRating,
-} from "./statistics-item";
-import { ThumbsUp } from "lucide-react";
+import ScoreCard from "./score-card";
+import SimpleRadarChart from "@/components/charts/radar-chart";
+import StarRating from "@/components/charts/star-rating";
+import SimpleBarChart from "@/components/charts/bar-chart";
+import SimplePosNagChart from "@/components/charts/pos-nag-chart";
 
 export default function UserStatistics({
   profile,
@@ -44,13 +42,41 @@ export default function UserStatistics({
             {70} 점
           </div>
 
-          <div className="flex">
-            <div className="text-title_m">관리자</div>
-            <div className="text-title_m">20%</div>
-            <div className="text-label_s text-text-placeholder">
-              (총 3개 평가)
+          <div className="flex flex-wrap items-center mb-4">
+            <div className="text-title_m min-w-[100px] text-left">관리자</div>
+            <div className="flex flex-wrap items-center justify-between gap-2 grow">
+              <div className="text-title_m">20%</div>
+              <div className="text-label_s text-text-placeholder">
+                (총 3개 평가)
+              </div>
+              <StarRating score={50}></StarRating>
             </div>
-            <StarRating score={50}></StarRating>
+          </div>
+
+          <div className="flex flex-wrap items-center mb-4">
+            <div className="text-title_m min-w-[100px] text-left">멤버</div>
+
+            <div className="flex flex-wrap items-center justify-between gap-2 grow">
+              <div className="text-title_m">5%</div>
+              <div className="text-label_s text-text-placeholder">
+                (총 155개 평가)
+              </div>
+              <StarRating score={50}></StarRating>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center">
+            <div className="text-title_m min-w-[100px] text-left">
+              클라이언트
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-2 grow">
+              <div className="text-title_m">99%</div>
+              <div className="text-label_s text-text-placeholder">
+                (총 155개 평가)
+              </div>
+              <StarRating score={50}></StarRating>
+            </div>
           </div>
         </CardContent>
       </Card>
