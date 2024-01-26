@@ -58,38 +58,42 @@ export const StepTwo: React.FC<StepTwoProps> = ({
         {missions.map((mission, index) => (
           <div
             key={index}
-            className="flex items-center gap-5 p-6 border rounded-md border-border-input"
+            className="flex flex-wrap items-center gap-5 p-6 border rounded-md border-border-input"
           >
-            <Label className="text-title_m shrink-0">
-              {lang.mission.create.mission} {index + 1}{" "}
-              <span className="ml-1 text-state-error">*</span>
-            </Label>
+            <div className="flex items-center gap-5 grow">
+              <Label className="text-title_m shrink-0">
+                {lang.mission.create.mission} {index + 1}{" "}
+                <span className="ml-1 text-state-error">*</span>
+              </Label>
 
-            <Input
-              type="text"
-              name="name"
-              placeholder="Mission Name"
-              value={mission.name}
-              onChange={(e) => handleMissionInputChange(index, e)}
-              className="flex grow h-[60px]"
-            />
+              <Input
+                type="text"
+                name="name"
+                placeholder="Mission Name"
+                value={mission.name}
+                onChange={(e) => handleMissionInputChange(index, e)}
+                className="flex grow h-[60px]"
+              />
+            </div>
 
-            <Label className="text-title_m shrink-0">
-              {lang.mission.create.point}{" "}
-              <span className="ml-1 text-state-error">*</span>
-            </Label>
+            <div className="flex items-center gap-5">
+              <Label className="text-title_m shrink-0">
+                {lang.mission.create.point}{" "}
+                <span className="ml-1 text-state-error">*</span>
+              </Label>
 
-            <Input
-              type="number"
-              name="score"
-              placeholder="0"
-              value={mission.score}
-              onChange={(e) => handleMissionInputChange(index, e)}
-              className="w-16 text-center h-[60px]"
-              min={0}
-              max={100}
-              maxLength={3}
-            />
+              <Input
+                type="number"
+                name="score"
+                placeholder="0"
+                value={mission.score}
+                onChange={(e) => handleMissionInputChange(index, e)}
+                className="w-16 text-center h-[60px]"
+                min={0}
+                max={100}
+                maxLength={3}
+              />
+            </div>
 
             <div className="flex items-center gap-1 shrink-0">
               <Input
@@ -124,7 +128,7 @@ export const StepTwo: React.FC<StepTwoProps> = ({
         </Button>
       </div>
 
-      <div className="flex items-center justify-between py-7 px-9">
+      <div className="flex flex-wrap items-center justify-between py-7 px-9">
         <span className="text-subhead_s">
           {lang.mission.create.total_mission} ( {missions.length} )
         </span>

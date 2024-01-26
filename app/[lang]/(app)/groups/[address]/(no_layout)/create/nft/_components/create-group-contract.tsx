@@ -88,7 +88,12 @@ export default function CreateGroupContract({
             {")"}
           </p>
 
-          <Button size="lg" onClick={createGroup} loading={isLoading}>
+          <Button
+            size="lg"
+            onClick={createGroup}
+            loading={isLoading}
+            disabled={isLoading}
+          >
             {lang.group.details.profile_card.group_contract.button}
           </Button>
         </CardContent>

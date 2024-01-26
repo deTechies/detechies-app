@@ -18,24 +18,24 @@ export default async function EvaluationProvided({
   // console.log(data);
   const stats = [
     {
-      title: "평가 완료",
+      title: lang.mypage.evaluations.stats.total_reviews,
       value: data.length,
       subtext: "",
     },
     {
-      title: "평가 대기",
-      value: "coming soon",
+      title: lang.mypage.evaluations.stats.total_earned,
+      value: lang.mypage.evaluations.coming_soon,
       subtext: "0 CAZ",
     },
     {
-      title: "평가 요청",
-      value: "coming soon",
+      title: lang.mypage.evaluations.stats.average_rewards,
+      value: lang.mypage.evaluations.coming_soon,
       subtext: "0 CAZ",
     },
   ];
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <div className="flex gap-6">
         {stats.map((stat, index) => (
           <EvaluationStat key={index} {...stat} />
@@ -44,7 +44,7 @@ export default async function EvaluationProvided({
       <div className="flex flex-col gap-4">
         {data &&
           data.map((item: any, index: number) => (
-            <RequestedEvaluationCard key={index} data={item} lang={lang}/>
+            <RequestedEvaluationCard key={index} data={item} lang={lang} provided={true} />
           ))}
       </div>
     </div>

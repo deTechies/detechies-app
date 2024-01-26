@@ -92,7 +92,7 @@ const FormInlineItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-x-2 flex items-center min-h-12", className)} {...props} />
+      <div ref={ref} className={cn("flex items-center flex-wrap sm:flex-nowrap min-h-12", className)} {...props} />
     </FormItemContext.Provider>
   )
 })
@@ -187,7 +187,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-state-error", className)}
+      className={cn("text-sm font-medium text-state-error mt-2", className)}
       {...props}
     >
       {body}

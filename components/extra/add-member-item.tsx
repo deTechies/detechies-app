@@ -29,7 +29,7 @@ export default function PersonItem({
 
           <div className="text-left flex flex-col gap-1">
             <p className="text-title-s">{member?.display_name}</p>
-            <p className="text-label-m text-muted-foreground">{'no jobtitle found'}</p>
+            <p className="text-label-m text-muted-foreground">{member?.role ? member.role : "no role"}</p>
           </div>
         </figure>
       </button>
