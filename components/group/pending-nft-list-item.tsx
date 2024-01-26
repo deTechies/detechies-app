@@ -4,7 +4,6 @@ import { ABI, defaultAvatar } from "@/lib/constants";
 import { postServer } from "@/lib/data/postRequest";
 import { AchievementReward } from "@/lib/interfaces";
 import { formatDate, getNftChips } from "@/lib/utils";
-import { getBalance } from '@wagmi/core';
 import { Check, X } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -118,19 +117,6 @@ export default function PendingMemberListItem({
         title: "Error",
         description: "Please connect a wallet to accept the NFT",
       });
-      return;
-    }
-    const balance = await getBalance({
-      address: session?.web3?.address,
-      unit: 'ether'
-    });
-    
-    if(balance < 0.01) {
-      toast({
-        title: "Error",
-        description: "You need at least 0.01 CAZ to accept the NFT",
-      });
-      setLoading(false);
       return;
     }
 

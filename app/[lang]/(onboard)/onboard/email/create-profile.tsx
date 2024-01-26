@@ -20,13 +20,13 @@ import { API_URL } from "@/lib/constants";
 
 import { testAppId, web3AuthInstance } from "@/app/[lang]/app";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Label } from "@radix-ui/react-label";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAccount, useDisconnect } from "wagmi";
 import * as z from "zod";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const profileFormSchema = z.object({
   display_name: z
@@ -100,7 +100,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
         form.setValue("verified", true);
       }
     }
-  }, []);
+  }, [form]);
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);

@@ -1,11 +1,9 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
 // import Image from "next/image";
-import Image from "@/components/ui/image";
-import { NftCard } from "./nft-card";
 import { AchievementReward } from "@/lib/interfaces";
+import { NftCard } from "./nft-card";
 
 interface IProfileAwardsProps{
   achievement_rewards: AchievementReward[];
@@ -33,7 +31,7 @@ export default function ProfileAwards({
         achievement_rewards.map((achievement_reward: AchievementReward) => {
             if(achievement_reward.status == 'granted' && achievement_reward.achievement.type == 'awards'){
                 return (
-                    <NftCard id={achievement_reward.id} achievement={achievement_reward.achievement}/>
+                    <NftCard id={achievement_reward.id} achievement={achievement_reward.achievement} key={achievement_reward.id}/>
                   );
             }
         })}

@@ -5,10 +5,9 @@ import { User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAccount } from "wagmi";
-import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
-import { Badge } from "../ui/badge";
 
 
 
@@ -67,7 +66,7 @@ export default function ProfileCard({ profile, followed }: ProfileProps) {
         <h5 className="font-bold text-lg tracking-wider text-center capitalize truncate my-2 ">{profile.display_name? profile.display_name : 'not_found'}</h5>
         <div className="flex mt-3 justify-center  align-center">
           {profile.tags?.length > 0 ? profile.tags.map((item,index)=> index>2 ? index==3 ? <Badge className="text-[14px] not-italic leading-4 tracking-wider font-medium">그외 기술+{profile.tags?.length-3}</Badge> : '' : 
-          <Badge className="text-[14px] not-italic leading-4 tracking-wider font-medium">{item}</Badge> ) : ''}
+          <Badge className="text-[14px] not-italic leading-4 tracking-wider font-medium" key={index}>{item}</Badge> ) : ''}
         </div>
         <div className="px-5  mt-5">
           <div className="w-full border-[1px] border-lightGray/30  "></div>
