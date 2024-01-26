@@ -18,6 +18,7 @@ export default async function EditProfilePage({
       <EditProfile
         username={profile.display_name}
         currentValues={profile.profile_details}
+        email={profile.email}
         text={dictionary.mypage.edit_profile}
       />
       <ProfileAccounts />
