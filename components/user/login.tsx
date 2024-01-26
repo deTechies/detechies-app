@@ -41,7 +41,14 @@ export default function Login({ lang }: ILoginProps) {
 
     if (!isWagmiConnected) return;
 
-    connect({ connector: connectors as any });
+    const str_wallet = localStorage.getItem("wagmi.wallet");
+    const wallet_name = str_wallet && str_wallet.replace(/^"|"$/g, "");
+    connect({
+      connector: connectors.find((connector) => connector.id === wallet_name),
+    });
+
+    // console.log(connectors);
+    // connect({ connector: connectors as any });
   }, [connect, connectors, isDisconnected]);
 
   if (isConnecting || isReconnecting) {

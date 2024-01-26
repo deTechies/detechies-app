@@ -52,7 +52,7 @@ const connectorOptions: WepinConnectorOptions = {
   appId: testAppId,
   appKey: testAppKey,
   attributes: {
-    type: "hide",
+    type: "show",
   },
 };
 
