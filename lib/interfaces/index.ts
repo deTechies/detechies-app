@@ -103,6 +103,7 @@ export enum GROUP_TYPE {
     EDU = 'edu', 
     AWARDS = 'awards'
   }
+  
   export enum NFT_IMAGE_TYPE{
     AVATAR = 'avatar', 
     IMAGE = 'image', 
