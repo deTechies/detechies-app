@@ -19,12 +19,14 @@ export function SurveyForm({
   defaultValues,
   result = false,
   lang,
+  selectedLanguage,
 }: {
   workId: string;
   responseId: string;
   survey: Survey;
   defaultValues: any;
   result?: boolean;
+  selectedLanguage?: string;
   lang: any;
 }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -112,7 +114,10 @@ export function SurveyForm({
                 {/* Display the category */}
                 <div className="flex flex-col gap-6">
                   {questionsByCategory[category].map((question: any) => {
-                    // Render each question
+                    // Display the questions based on language 
+                    const existingTranslation = question.translations?.find(
+                      (translation: any) => translation.language === selectedLanguage
+                    );
                     if (question.type === "input") {
                       return null;
                     } else {
@@ -121,9 +126,9 @@ export function SurveyForm({
                           key={question.id}
                           form={form}
                           name={question.id}
-                          label={question.content}
+                          label={existingTranslation.content ? existingTranslation.content : question.content}
                           steps={100 / 10}
-                          messages={question.messages}
+                          messages={existingTranslation.messages ? existingTranslation.messages : question.messages}
                           disabled={result}
                           text={lang}
                         />
