@@ -76,13 +76,6 @@ export function SurveyForm({
 
     router.push(`/work/${workId}/feedback`);
 
-    // setIsLoading(false);
-
-    // if(result.status == "success") {
-    //   router.push(`/work/${workId}/feedback`);
-    // } else {
-    //   setIsLoading(false);
-    // }
   };
   
   const categoryOrder = ["기술 전문성", "협업 및 커뮤니케이션", "업무 지식"];
