@@ -86,7 +86,7 @@ export function formatDate(stringDate: string | Date):string {
   const day = date.getDate()
   const month = date.getMonth() + 1
   const year = date.getFullYear()
-  return `${day}.${month}.${year}`
+  return `${year}.${month}.${day}`
 }
 
 export function beginEndDates(beginDate: string | Date, endDate?: string | Date):string {

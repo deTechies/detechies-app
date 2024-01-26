@@ -21,17 +21,17 @@ export default async function ManageMissionReward({
         <h3 className="text-subhead_s">{lang.mission.manage.give_reward}</h3>
       </CardHeader>
 
-      <CardContent className="grid grid-cols-2 gap-4">
+      <CardContent className="grid gap-4 md:grid-cols-2">
         {achievements &&
           achievements.map((item: any, index: number) => {
             return (
               <div key={index}>
                 <div
-                  className={`flex gap-5 rounded-sm border p-5 ${
+                  className={`flex gap-5 rounded-sm border p-5 flex-wrap ${
                     totalPoints >= item.min_score && "border-accent-primary"
                   }`}
                 >
-                  <div className="w-[120px] h-[120px] relative bg-background-layer-2 rounded-sm">
+                  <div className="w-[120px] h-[120px] shrink-0 relative bg-background-layer-2 rounded-sm">
                     <Image
                       src={`https://ipfs.io/ipfs/${item.achievement.image}`}
                       alt={item.achievement.name}

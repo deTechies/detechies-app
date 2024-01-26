@@ -241,6 +241,31 @@ export async function addMembersWork(
   return response.json();
 }
 
+export async function removeProjectWork(
+  projectId: string
+) {
+  const session = await getSession();
+
+  // Check for a valid session and required tokens
+  if (!session || !session.web3 || !session.web3.accessToken) {
+    throw new Error("Invalid session or missing access token");
+  }
+
+  const response = await fetch(`${API_URL}/project-work/${projectId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session.web3.accessToken}`,
+    },
+    body: JSON.stringify({
+      userId: session.web3.address,
+      projectId,
+    }),
+  });
+
+  return response.json();
+}
+
 export async function removeProjectMember(memberId:string){
   const url = API_URL + '/project-member/' + memberId
   const session = await getSession();
@@ -256,6 +281,8 @@ export async function removeProjectMember(memberId:string){
         Authorization: `Bearer ${session.web3.accessToken}`
       } 
     })
+
+  return response.json();
 }
 
 export async function getProjectMember(projectId: string, userId: string) {

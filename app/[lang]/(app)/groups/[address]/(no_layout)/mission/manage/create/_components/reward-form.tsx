@@ -107,39 +107,44 @@ const RewardForm = ({
               </div>
 
               <div className="flex items-center justify-end gap-5">
-                <Label className="text-title_m">
-                  <span>{lang.mission.create.reward_stand}</span>
-                  <span className="ml-1 text-state-error">*</span>
-                </Label>
-                <Input
-                  type="number"
-                  className="w-16 text-center"
-                  placeholder="100"
-                  value={achievement.min_score}
-                  onChange={(e) =>
-                    onInputChange(
-                      achievement.achievementId,
-                      "min_score",
-                      Number(e.target.value)
-                    )
-                  }
-                />
-                <Label className="text-title_m">
-                  {lang.mission.create.reward_at_least}
-                </Label>
-                <Input
-                  type="number"
-                  className="w-16 text-center"
-                  value={achievement.min_required_missions}
-                  onChange={(e) =>
-                    onInputChange(
-                      achievement.achievementId,
-                      "min_required_missions",
-                      Number(e.target.value)
-                    )
-                  }
-                  placeholder=" 2"
-                />
+                <div className="flex items-center gap-5">
+                  <Label className="text-title_m">
+                    <span>{lang.mission.create.reward_stand}</span>
+                    <span className="ml-1 text-state-error">*</span>
+                  </Label>
+                  <Input
+                    type="number"
+                    className="w-16 text-center"
+                    placeholder="100"
+                    value={achievement.min_score}
+                    onChange={(e) =>
+                      onInputChange(
+                        achievement.achievementId,
+                        "min_score",
+                        Number(e.target.value)
+                      )
+                    }
+                  />
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <Label className="text-title_m">
+                    {lang.mission.create.reward_at_least}
+                  </Label>
+                  <Input
+                    type="number"
+                    className="w-16 text-center"
+                    value={achievement.min_required_missions}
+                    onChange={(e) =>
+                      onInputChange(
+                        achievement.achievementId,
+                        "min_required_missions",
+                        Number(e.target.value)
+                      )
+                    }
+                    placeholder=" 2"
+                  />
+                </div>
               </div>
             </div>
 
@@ -200,6 +205,7 @@ const RewardForm = ({
 
                   <div className="flex flex-col items-start">
                     <div className="mb-2 text-title_m">{achievement.name}</div>
+                    
                     <Badge variant={"info"} shape="category">
                       {lang.interface.nft_type[achievement.nft_type]}
                     </Badge>
@@ -225,7 +231,7 @@ const RewardForm = ({
         </Dialog>
       </div>
 
-      <div className="flex items-center justify-between py-7 px-9">
+      <div className="flex flex-wrap items-center justify-between py-7 px-9">
         <span className="text-subhead_s">
           {lang.mission.create.total_reward} ( {selectedAchievements.length} )
         </span>

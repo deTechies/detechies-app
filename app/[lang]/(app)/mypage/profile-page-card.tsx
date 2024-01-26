@@ -1,5 +1,4 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
@@ -11,7 +10,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function Profile({
+export default function ProfilePageCard({
   text,
   profile,
 }: {
@@ -81,10 +80,10 @@ export default function Profile({
   if (pathName.includes("/mypage/avatar")) {
     return (
       <Card className="flex w-full flex-col gap-5">
-        <div className="relative w-[320px] aspect-square bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-md">
+        <div className="relative w-[320px] aspect-square bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-[8px]">
           <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
-        <div className="flex gap-4 ">
+        <div className="flex gap-4">
           <Button size="lg" variant="secondary" onClick={reset}>
             Reset
           </Button>
@@ -97,19 +96,22 @@ export default function Profile({
   }
 
   return (
-    <Card className="flex flex-col gap-5">
-      <div className="flex">
-        <div className="relative w-[120px] aspect-square rounded-md bg-background-layer-2">
+    <Card className="flex flex-col gap-5 w-full pt-[24px] pb-[28px] px-5">
+      <div className="flex gap-4">
+        <div className="relative w-[120px] aspect-square rounded-[8px] bg-background-layer-2">
           <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
         </div>
-        <div className="flex flex-col justify-between basis-auto ml-4">
+        <div className="flex flex-col justify-between basis-auto mt-1">
           <div className="flex flex-col gap-3">
-            <p className="text-title_l"># {profile.display_name}</p>
-            <span className="text-title_m mb-4">
-              {profile.profile_details?.full_name
-                ? "Name: " + profile.profile_details?.full_name
-                : "Name: Not Set"}
-            </span>
+            <p className="text-title_l">#{profile.display_name}</p>
+            <div className="text-title_m mb-4">
+              <span className="capitalize">{text.name}: </span>
+              <span className="ml-">
+                {profile.profile_details?.full_name
+                  ? profile.profile_details?.full_name
+                  : "Not Set"}
+              </span>
+            </div>
           </div>
           <Link href="/mypage/avatar" passHref>
             <Button variant={"secondary"} size="sm">
@@ -118,18 +120,19 @@ export default function Profile({
           </Link>
         </div>
       </div>
-
-      <div className="grid px-5 py-3  border rounded-sm border-border-div">
-        <div className="flex p-1">
-          <div className="basis-1/2 gap-2">
-            <p className="text-subhead_s font-semibold">0</p>
-            <p className="text-title_m text-text-secondary capitalize">
+                  
+      <div className="flex flex-col gap-3">
+      <div className="grid pt-3 pb-4 px-5  border rounded-sm border-border-div">
+        <div className="flex">
+          <div className="basis-1/2 gap-2 flex flex-col">
+            <p className="text-title_l font-semibold">0</p>
+            <p className="text-title_s text-text-secondary capitalize">
               {text?.following}
             </p>
           </div>
-          <div className="basis-1/2">
-            <p className="text-subhead_s font-semibold">0</p>
-            <p className="text-title_m text-text-secondary capitalize">
+          <div className="basis-1/2 flex flex-col gap-2">
+            <p className="text-title_l font-semibold">0</p>
+            <p className="text-title_s text-text-secondary capitalize">
               {text?.followers}
             </p>
           </div>
@@ -137,20 +140,21 @@ export default function Profile({
       </div>
 
       <div className="grid border rounded-sm border-border-div">
-        <div className="flex justify-between p-5 items-center">
-          <div className="flex items-center mr-4 text-nowrap">
+        <div className="flex justify-between px-5 py-7 items-center gap-4">
+          <div className="flex items-center text-nowrap text-title_m">
             {text?.address}
           </div>
-          <a
+          <Link
             href={`https://polygonscan.com/address/${profile.wallet}`}
             target="_blank"
-            rel="noopener noreferrer"
+            passHref
           >
-            <Badge>
+            <Button variant={"secondary"} size="ts">
               {profile.wallet.slice(0, 5) + "..." + profile.wallet.slice(-4)}
-            </Badge>
-          </a>
+            </Button>
+          </Link>
         </div>
+      </div>
       </div>
     </Card>
   );

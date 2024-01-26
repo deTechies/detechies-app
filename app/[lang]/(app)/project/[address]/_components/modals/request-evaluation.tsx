@@ -13,32 +13,39 @@ import { useRef, useState } from "react";
 export default function RequestEvaluation({
   memberWallet,
   lang,
+  projectId
 }: {
   memberWallet: string;
   lang?: any;
+  projectId: string;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const closeButtonRef = useRef<any>(null);
 
   async function requestEvaluation() {
     setIsLoading(true);
-    const result = await postServer(`/survey-response/request/${memberWallet}`, "");
+    
+    const data = JSON.stringify({
+      evaluatorWallet: memberWallet,
+      projectId: projectId
+    })
+    const result = await postServer(
+      `/survey-response/request`,
+      data
+    );
 
-    if (result.status == "success") {
-      
+    if (result) {
       closeButtonRef.current.click();
-    } else {
       toast({
-        description: result.message,
-        variant: "destructive",
-      });
+        description: "Request sent successfully",
+      })
     }
 
     setIsLoading(false);
   }
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="text-left">
         <span className="text-title_m">
           {lang.project.details.request.request_a_review}
         </span>
@@ -51,12 +58,8 @@ export default function RequestEvaluation({
           {lang.project.details.request.card_description}
         </p>
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <DialogClose asChild
-          
-          >
-            <Button size="lg" variant="secondary" 
-                 ref={closeButtonRef}
-            >
+          <DialogClose asChild>
+            <Button size="lg" variant="secondary" ref={closeButtonRef}>
               {lang.project.details.request.card_back}
             </Button>
           </DialogClose>

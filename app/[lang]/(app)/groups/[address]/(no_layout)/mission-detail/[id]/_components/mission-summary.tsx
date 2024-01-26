@@ -26,8 +26,8 @@ export default function MissionSummary({
           className="rounded-[6px] bg-accent-secondary max-h-[100px]"
           alt="mission"
         />
-        <div className="flex flex-col justify-end gap-2">
-          <h1 className="text-heading_s">{details.name}</h1>
+        <div className="flex flex-col justify-end gap-2 truncate">
+          <h1 className="truncate text-heading_s">{details.name}</h1>
 
           <div className="text-label_l text-text-secondary">
             {beginEndDates(details.begin_date, details.end_date)}

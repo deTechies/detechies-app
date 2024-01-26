@@ -150,7 +150,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
             control={form.control}
             name="type"
             render={({ field }) => (
-              <FormInlineItem className="h-12">
+              <FormInlineItem>
                 <FormInlineLabel>
                   {lang.group.create.form.type}
                   <span className="ml-1 text-state-error">*</span>

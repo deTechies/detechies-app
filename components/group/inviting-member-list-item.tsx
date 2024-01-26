@@ -1,15 +1,10 @@
 "use client";
-import useFetchData from "@/lib/useFetchData";
+import { defaultAvatar } from "@/lib/constants";
+import { formatDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import IPFSImageLayer from "../ui/layer";
-import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { Address, useContractWrite } from "wagmi";
-import { ABI, defaultAvatar } from "@/lib/constants";
-import { toast } from "../ui/use-toast";
-import { formatDate } from "@/lib/utils";
-import { useState } from "react";
+import IPFSImageLayer from "../ui/layer";
 
 export default function InvitingMemberListItem({
   profile,
@@ -24,13 +19,6 @@ export default function InvitingMemberListItem({
 
   // need data for invitation status
   const invitationStatus = "waiting"; // temp
-
-  // if (error) return <div>{JSON.stringify(error)}</div>;
-
-  // if (loading)
-  //   return <Skeleton className="h-[200px] w-[100px] animate-pulse" />;
-
-  // if (!data) return <div>no data</div>;
 
   const sendInvitationNotif = () => {
     //
@@ -48,7 +36,7 @@ export default function InvitingMemberListItem({
       <div className="flex items-center gap-3">
         <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
           <IPFSImageLayer
-            hashes={profile.user.nft ? profile.user.nft : defaultAvatar}
+            hashes={profile.user.avatar ? profile.user.avatar : defaultAvatar}
           />
         </div>
 

@@ -34,7 +34,7 @@ export default function ProfileAwards({
 
             if(achievement_reward.status == 'granted' && achievement_reward.achievement.type == 'award'){
                 return (
-                    <Card key={achievement_reward.id} className="inline-flex flex-row items-start ">
+                    <Card key={achievement_reward.id} className="flex flex-row items-start ">
                       <div className="w-[68px] h-[68px] relative aspect-square rounded-sm ">
                         <Image
                           src={`https://ipfs.io/ipfs/${achievement_reward.achievement.image ? achievement_reward.achievement.image : achievement_reward.achievement.avatar}`}

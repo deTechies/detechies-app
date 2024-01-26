@@ -1,7 +1,8 @@
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { postServer } from "@/lib/data/postRequest";
-import { useState } from "react";
 import TranslationForm from "./form/translation-form";
 
 interface TranslationData {
@@ -42,15 +43,12 @@ export function PreviewSurvey({ selected, setSelected }: any) {
     }));
 
   };
+
   return (
     <Card className="flex flex-col gap-4">
       <CardHeader>
-        <h3>
-          {selected.name} ({selected.questions.length})
-        </h3>
-        <Button size="sm" onClick={() => setSelected(null)}>
-          Back
-        </Button>
+        <h3>{selected.name} ({selected.questions.length})</h3>
+        <Button size="sm" onClick={() => setSelected(null)}>Back</Button>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-4">
@@ -111,9 +109,10 @@ export function PreviewSurvey({ selected, setSelected }: any) {
               </div>
             </div>
           ))}
-
         </div>
       </CardContent>
     </Card>
   );
 }
+
+export default PreviewSurvey;

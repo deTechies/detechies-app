@@ -51,6 +51,7 @@ export default function InviteProjectMember({
     resolver: zodResolver(FormSchema),
   });
 
+  const [ openDialog, setOpenDialog ] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { data: session } = useSession();
 
@@ -63,10 +64,16 @@ export default function InviteProjectMember({
       message: data.message,
     });
 
-    if (result) {
+    if (result.status === "success") {
       toast({
         title: "Successfully requested to join project",
         description: "The project leader will review your request",
+      });
+      setOpenDialog(false);
+    } else {
+      toast({
+        title: result.status,
+        description: result.messageCode,
       });
     }
 
@@ -74,7 +81,7 @@ export default function InviteProjectMember({
   };
 
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger className="max-w-[230px] grow">
         <Button size="lg" variant="primary" className="w-full">
           {lang.details.profile_card.join_group.title}
