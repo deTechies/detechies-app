@@ -1,6 +1,7 @@
 // we want to add in the abis and the contracts in here to make sure that we can build the contracts
 
 import { Address } from "wagmi";
+import careerzen from "./abi/careerzen.abi.json";
 import group from "./abi/group.abi.json";
 import groupRegistry from "./abi/groupRegistry.abi.json";
 import profile from "./abi/profile.abi.json";
@@ -10,6 +11,7 @@ const MUMBAI = {
     groupRegistry: "0xbdb946fd58e083abed65ccfddc8d2bdb3662a1a7" as Address,
     projectRegistry: "0x1Cf9a47f91DccA1D18184203C73B0f3988b38e3c" as Address,
     profile: "0xee044eC69DEFAc105376ee55C0BE458B5D843045" as Address,
+    careerzen: "0x84375E261A870d711FC30C6eaB53FC63787Bd20F" as Address
 }
 
 const ABI = {
@@ -18,6 +20,7 @@ const ABI = {
     project: project as any,
     group: group as any,
     profile: profile as any,
+    careerzen: careerzen as any
 
 }
 
