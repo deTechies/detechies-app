@@ -18,22 +18,28 @@ export default function StarRating({ score }: { score: number }) {
 
   return (
     <div className="flex flex-wrap gap-2">
-      {Array(filledStars).fill(
-        <Image
-          src="/icons/star_filled.png"
-          alt="Filled Star"
-          width="24"
-          height="24"
-        />
-      )}
-      {Array(emptyStars).fill(
-        <Image
-          src="/icons/star_empty.png"
-          alt="Empty Star"
-          width="24"
-          height="24"
-        />
-      )}
+      {Array(filledStars)
+        .fill(null)
+        .map((_, index) => (
+          <Image
+            key={`filled-star-${index}`}
+            src="/icons/star_filled.png"
+            alt="Filled Star"
+            width="24"
+            height="24"
+          />
+        ))}
+      {Array(emptyStars)
+        .fill(null)
+        .map((_, index) => (
+          <Image
+            key={`empty-star-${index}`}
+            src="/icons/star_empty.png"
+            alt="Empty Star"
+            width="24"
+            height="24"
+          />
+        ))}
     </div>
   );
 }

@@ -10,15 +10,19 @@ import { useState } from "react";
 export default function UserSummary({
   profile,
   lang,
+  survey,
 }: {
   profile: any;
   lang: any;
+  survey: any;
 }) {
   const [showMore, setShowMore] = useState(false);
 
   const onShowMore = () => {
     setShowMore(!showMore);
   };
+
+  // console.log(survey);
 
   return (
     <div>

@@ -39,8 +39,26 @@
       "Profile Items": "profile items"
     }
   },
-  "profile_detail_card": {
-    "example": "example"
+  "profile": {
+    "report_card": {
+      "title": "Reputation Report",
+      "total_experience": "Total experience",
+      "total_evalucation": "Total evaluations received",
+      "admin_evalu": "Administrator evaluation",
+      "member_evalu": "Member evaluation",
+      "client_evalu": "Client evaluation",
+      "view": "View"
+    },
+    "report_popup": {
+      "title": "View reputation report",
+      "desc": "View the consolidated reputation report and see the performance ratings experts have received on projects.",
+      "this_report": "The report you want to view",
+      "total_report": "Consolidated Reputation Report",
+      "point_to_need": "Points needed to view",
+      "points_held": "Points held",
+      "back": "Back",
+      "view": "View"
+    }
   },
   "onboard": {
     "welcome": {

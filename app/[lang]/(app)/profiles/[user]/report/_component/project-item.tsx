@@ -17,6 +17,8 @@ function TotalProjectItem({
   selected: boolean;
   onClick: Function;
 }) {
+
+    console.log(profile);
   return (
     <div
       className={`p-5 border rounded-md cursor-pointer transition-all ${

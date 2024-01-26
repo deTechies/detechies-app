@@ -7,9 +7,11 @@ import { ChevronDown } from "lucide-react";
 export default function UserReports({
   profile,
   lang,
+  survey,
 }: {
   profile: any;
   lang: any;
+  survey: any;
 }) {
   const [selectProject, setSelectProject] = useState<any>(null);
 
