@@ -26,7 +26,8 @@ export default function ProjectItem({
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
-          fill={true}
+          width={100}
+          height={100}
           className="rounded-sm"
         />
       </figure>
