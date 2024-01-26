@@ -11,6 +11,7 @@ export default async function EditProfilePage({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
   const {data:profile} = await getUserProfile();
+  //search params validate for for refetching data
   
 
   return (

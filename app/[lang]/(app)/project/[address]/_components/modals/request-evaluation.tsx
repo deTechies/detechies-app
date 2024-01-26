@@ -13,27 +13,32 @@ import { useRef, useState } from "react";
 export default function RequestEvaluation({
   memberWallet,
   lang,
+  projectId
 }: {
   memberWallet: string;
   lang?: any;
+  projectId: string;
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const closeButtonRef = useRef<any>(null);
 
   async function requestEvaluation() {
     setIsLoading(true);
+    
+    const data = JSON.stringify({
+      evaluatorWallet: memberWallet,
+      projectId: projectId
+    })
     const result = await postServer(
-      `/survey-response/request/${memberWallet}`,
-      ""
+      `/survey-response/request`,
+      data
     );
 
-    if (result.status == "success") {
+    if (result) {
       closeButtonRef.current.click();
-    } else {
       toast({
-        description: result.message,
-        variant: "destructive",
-      });
+        description: "Request sent successfully",
+      })
     }
 
     setIsLoading(false);
