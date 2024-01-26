@@ -99,7 +99,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
         form.setValue("email", obj_wepin.user_info.email);
         form.setValue("verified", true);
       }
-      console.log(form.getValues("email"));
     }
   }, []);
 
