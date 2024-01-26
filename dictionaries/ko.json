@@ -444,6 +444,14 @@
       "name": "이름",
       "address": "블록체인 계정주소"
     },
+    "edit_avatar":{
+      "tab_all": "전체",
+      "tab_career": "커리어 NFT",
+      "tab_avatar": "한정판 NFT",
+      "not_approved": "발행 대기중",
+      "reset": "초기화",
+      "save":  "저장하기"
+    },
     "edit_profile": {
       "edit_profile": "프로필 수정",
       "full_name": "본명 (비공개)",
