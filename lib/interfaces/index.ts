@@ -6,6 +6,7 @@ export interface User {
     credits: number;
     display_name: string;
     nft: string[];
+    tags: string[];
     avatar: string[];
     avatar_link: string;
     role:string;
