@@ -33,7 +33,7 @@ export default async function ProfileDetails({
         </header>
         
         {/* SECOND ROW FOR OCCUPATION &  SKILLS BADGES*/}
-        <div className="relative inline-flex items-start gap-2">
+        <div className="relative flex gap-2 flex-wrap">
           {profile.profile_details?.profession ?(
             <Badge variant={"info"} shape={"outline"}>
               {text.interface.profession_type?.[profile.profile_details?.profession]}
