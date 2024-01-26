@@ -33,7 +33,7 @@ export default function InviteProjectMember({
 
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
-  const { data: members, loading, error } = useFetchData<any[]>("/users");
+  const { data: members, loading, error } = useFetchData<any[]>("/users?limit=1000");
 
   const [dialogOpen, setDialogOpen] = useState(false);
 

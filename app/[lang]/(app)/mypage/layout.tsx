@@ -13,6 +13,8 @@ export default async function MyPageLayout({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
   const { data: profile } = await getUserProfile();
+  
+  if(!profile) return (<div>loading...</div>);
 
   return (
     <div>
