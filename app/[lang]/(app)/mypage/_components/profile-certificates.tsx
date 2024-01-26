@@ -62,6 +62,7 @@ export default function ProfileCertificates({
                     <div className="flex flex-col flex-wrap gap-4 grow shrink">
                       <header className="flex items-center gap-2">
                         <h5 className="text-subhead_s">{achievement_reward.achievement?.name}</h5>
+                        
                       </header>
                       <div className="flex items-start gap-4">
                         <div className="flex flex-col gap-2 basis-1/4">
