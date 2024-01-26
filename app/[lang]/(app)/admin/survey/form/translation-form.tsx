@@ -1,4 +1,6 @@
 // src/components/TranslationForm.js
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 
 const TranslationForm = ({
@@ -34,24 +36,24 @@ const TranslationForm = ({
     onSubmit(formattedData);
   };
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)}>
-      <div>
+    <form onSubmit={handleSubmit(onFormSubmit)} className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <label>Content</label>
-        <input {...register("content")} />
+        <Input {...register("content")} />
         {errors.content && <span>{errors.content.message?.toString()}</span>}
       </div>
-      <div>
+      <div className="flex flex-col">
         <label>Category</label>
-        <input {...register("category")} />
+        <Input {...register("category")} />
         {errors.category && <span>{errors.category.message?.toString()}</span>}
       </div>
       {Array.from({ length: 5 }).map((_, index) => (
-        <div key={index}>
+        <div className="flex flex-col" key={index}>
           <label>Message {index + 1}</label>
-          <input {...register(`messages.${index}`)} />
+          <Input {...register(`messages.${index}`)} />
         </div>
       ))}
-      <button type="submit">Submit</button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 };
