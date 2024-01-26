@@ -50,6 +50,7 @@ export default function ProfileCertificates({
             return (
               <Dialog key={index}>
                 <DialogTrigger>
+
                   <NftCard id={achievement_reward.id} achievement={achievement_reward.achievement}/>
                 </DialogTrigger>
                <DialogPortal >

@@ -91,6 +91,11 @@
         "client_desc": "Find experts for our project",
         "admin": "Enterprise, Institution, Community Operator",
         "admin_desc": "Create unique NFTs for our organization"
+      },
+      "block_web3auth": {
+        "title": "Please use Wiffin to sign up for new social accounts.",
+        "desc": "If you are a new member, please click “Social Wallet” on the welcome screen. Web3auth accounts are only available to existing members.",
+        "button": "Sign up with a social wallet"
       }
     }
   },

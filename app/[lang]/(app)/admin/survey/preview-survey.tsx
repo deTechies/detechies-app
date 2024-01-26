@@ -8,6 +8,7 @@ import TranslationForm from "./form/translation-form";
 interface TranslationData {
   content: string;
   category: string;
+  language: string;
   messages: string[];
 }
 
@@ -15,28 +16,32 @@ interface TranslationsState {
   [key: string]: TranslationData;
 }
 
-export function PreviewSurvey({ selected, setSelected }:any) {
-  const [translations, setTranslations] = useState<TranslationsState>({});
+export function PreviewSurvey({ selected, setSelected }: any) {
+  const [translations, setTranslations] = useState<TranslationData[]>([]);
 
-  const handleTranslationSubmit = async(
+  const handleTranslationSubmit = async (
     questionId: string,
     language: string,
     data: TranslationData
   ) => {
-    console.log(data)
+    console.log(data);
     console.log("Submitted data:", { questionId, language, data });
-    
+
     const formData = JSON.stringify({
       content: data.content,
       category: data.category,
-      messages: data.messages,
-      language: language
-    })
-    const result = await postServer(`/question/${questionId}/translations/${language}`, formData)
-    setTranslations(prev => ({
+      messages: data.messages[0],
+      language: language,
+    });
+    const result = await postServer(
+      `/question/${questionId}/translations/${language}`,
+      formData
+    );
+    setTranslations((prev) => ({
       ...prev,
       [`${questionId}-${language}`]: data,
     }));
+
   };
 
   return (
@@ -47,7 +52,8 @@ export function PreviewSurvey({ selected, setSelected }:any) {
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-4">
-          {selected.questions.map((question:any, index:number) => (
+
+          {selected.questions.map((question: any, index: number) => (
             <div key={index}>
               <div className="my-4 grid grid-cols-3">
                 <h1>{question.content}</h1>
@@ -55,20 +61,44 @@ export function PreviewSurvey({ selected, setSelected }:any) {
                 <h2>{question.category}</h2>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                {["en", "ko"].map(language => {
+                {["en", "ko"].map((language) => {
                   const translationKey = `${question.id}-${language}`;
-                  const existingTranslation = translations[translationKey];
-                  const defaultValues = existingTranslation ? existingTranslation : {
-                    content: "",
-                    category: "",
-                    messages: Array(5).fill("")
-                  };
+                  const existingTranslation = question.translations?.find(
+                    (translation: any) => translation.language === language
+                  );
+                
+                 
+                  const defaultValues = existingTranslation
+                    ? existingTranslation
+                    : {
+                        content: "",
+                        category: "",
+                        messages: Array(5).fill(""),
+                      };
+             /*          
+                      if(language == "ko"){
+                        defaultValues.messages = question.messages;
+                        defaultValues.category = question.category;
+                        defaultValues.content = question.content;
+                        
+                      } */
+
+                  if (existingTranslation && existingTranslation.messages) {
+                    console.log(existingTranslation.messages)
+                    //defaultValues.messages = existingTranslation.messages[0].split(",");
+                    //defaultValues.messages = existingTranslation.messages[0];
+                    //console.log(defaultValues.messages)
+                  }
+
+                  //console.log(defaultValues.messages)
 
                   return (
                     <div className="flex flex-col gap-3" key={language}>
                       <span>{language.toUpperCase()}</span>
                       <TranslationForm
-                        onSubmit={(data:any) => handleTranslationSubmit(question.id, language, data)}
+                        onSubmit={(data: any) =>
+                          handleTranslationSubmit(question.id, language, data)
+                        }
                         defaultValues={defaultValues}
                         questionId={question.id}
                         language={language}
