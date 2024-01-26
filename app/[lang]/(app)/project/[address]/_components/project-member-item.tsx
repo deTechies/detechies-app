@@ -18,8 +18,8 @@ import ProjectWorkDetail, {
 import { Button } from "@/components/ui/button";
 import ProjectContributionInvite from "../../_components/project-contribution-invite";
 import DeleteMember from "./modals/delete-member";
-import RequestEvaluation from "./modals/request-evaluation";
 import DeleteWorks from "./modals/delete-works";
+import RequestEvaluation from "./modals/request-evaluation";
 
 export default async function ProjectMemberItem({
   details,
@@ -110,6 +110,7 @@ export default async function ProjectMemberItem({
                         <DropdownMenuContent>
                           <div className="flex flex-col gap-3 px-3 my-4 text-left">
                             <RequestEvaluation
+                              projectId={projectId}
                               memberWallet={details.user.wallet}
                               lang={lang}
                             />

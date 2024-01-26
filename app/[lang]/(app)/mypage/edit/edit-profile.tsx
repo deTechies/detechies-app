@@ -57,21 +57,22 @@ const defaultValues: Partial<ProfileFormValues> = {};
 interface EditProfileProps {
   text: any;
   currentValues: Partial<any>;
+  email: string;
   username: string;
 }
 
 export default function EditProfile({
   text,
   username,
+  email, 
   currentValues,
 }: EditProfileProps) {
-  
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: currentValues,
     mode: "onChange",
   });
-  const { push } = useRouter();
+  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
@@ -80,11 +81,13 @@ export default function EditProfile({
     setLoading(true);
     await updateUserProfile(data);
     toast({
-      title: "Creating profile...",
-      description: "succesfully updated your profile",
+      title: "Updated your profile",
+      description: "You will be redirected shortly.",
     });
+    
+    router.refresh();
 
-    push("/mypage");
+    router.push("/mypage?updated=true", { scroll: true });
 
     setLoading(false);
   }
@@ -156,18 +159,6 @@ export default function EditProfile({
                       />
                     </div>
                   </div>
-                  <div className="">
-                    <Label className="mb-2 capitalize">{text?.username}</Label>
-                    <Input
-                      placeholder={username}
-                      value={username}
-                      disabled
-                      className="mt-2"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-1">
                   <div>
                     <FormField
                       control={form.control}
@@ -199,6 +190,27 @@ export default function EditProfile({
                     />
                   </div>
                 </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="">
+                    <Label className="mb-2 capitalize">{text?.username}</Label>
+                    <Input
+                      placeholder={username}
+                      value={username}
+                      disabled
+                      className="mt-2"
+                    />
+                  </div>
+                  <div className="">
+                    <Label className="mb-2 capitalize">{text?.email}</Label>
+                    <Input
+                      placeholder={email}
+                      value={email}
+                      disabled
+                      className="mt-2"
+                    />
+                  </div>
+                </div>
               </div>
             </section>
             <section className="my-10">
@@ -227,8 +239,8 @@ export default function EditProfile({
                         }}
                       >
                         {tag}
-                        
-                        <XIcon className="ml-1" size={16}/>
+
+                        <XIcon className="ml-1" size={16} />
                       </Badge>
                     ))}
                   </div>
@@ -247,7 +259,7 @@ export default function EditProfile({
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다."
+                          placeholder={text?.profile_description.label}
                           style={{ height: "200px" }}
                           {...field}
                         />

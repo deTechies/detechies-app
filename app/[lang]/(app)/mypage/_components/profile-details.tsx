@@ -33,13 +33,13 @@ export default async function ProfileDetails({
         </header>
         
         {/* SECOND ROW FOR OCCUPATION &  SKILLS BADGES*/}
-        <div className="relative inline-flex items-start gap-2">
+        <div className="relative flex flex-wrap gap-2">
           {profile.profile_details?.profession ?(
             <Badge variant={"info"} shape={"outline"}>
               {text.interface.profession_type?.[profile.profile_details?.profession]}
             </Badge>
           ) : null}
-          {profile.profile_details && (profile.profile_details?.skills || []).map((skill:string)=>{
+          {profile.profile_details?.skills && profile.profile_details.skills.map((skill:string)=>{
             return(
               <Badge variant="accent" shape="outline" key={skill}>
                 {skill}

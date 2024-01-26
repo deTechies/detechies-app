@@ -455,9 +455,11 @@
       "full_name": "full name",
       "first_name": "first name",
       "last_name": "last name",
+      "email": "email", 
       "profession": "profession",
       "specialisation": "specialisation",
       "profile_description": "profile description",
+      "profile_description_label": "Tell us a little bit about yourself",
       "skills": "skills",
       "username": "username",
       "save_changes": "save changes"
