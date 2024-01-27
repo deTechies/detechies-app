@@ -16,18 +16,26 @@ export default async function ProfileReport({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   const userSurvey = await getAllSurveyAboutUser(profile.id);
-  
-  if (userSurvey.status === "success") {
-    //
-  }
 
-  // const result = await serverApi("/survey-report/createSurveyReport/a0206c96-d0f9-454f-adc2-57c7ec12b13e");
+  // if (userSurvey.status === "success") {
+  //   //
+  // }
 
-  // console.log(result);
+  const result = await serverApi(
+    "/survey-report/createSurveyReport/a0206c96-d0f9-454f-adc2-57c7ec12b13e"
+  );
+
+  const results = [
+    { id1: [result, result, result] },
+    { id2: [result, result] },
+    { id3: [result, result, result, result] },
+  ];
 
   return (
     <div className="flex flex-col gap-4 m-10 max-w-[80rem]">
-      <h4 className="mb-10 text-center text-heading_s">전문가 평판 보고서</h4>
+      <h4 className="mb-10 text-center text-heading_s">
+        {dictionary.profile.summary.title}
+      </h4>
 
       <UserSummary
         lang={dictionary}
@@ -37,7 +45,7 @@ export default async function ProfileReport({
 
       <UserReports
         lang={dictionary}
-        profile={profile}
+        projects={profile.projects}
         survey={userSurvey.data}
       />
     </div>

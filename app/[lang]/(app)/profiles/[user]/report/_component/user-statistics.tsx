@@ -8,10 +8,10 @@ import SimpleBarChart from "@/components/charts/bar-chart";
 import SimplePosNagChart from "@/components/charts/pos-nag-chart";
 
 export default function UserStatistics({
-  profile,
+  projects,
   lang,
 }: {
-  profile: any;
+  projects: any;
   lang: any;
 }) {
   return (

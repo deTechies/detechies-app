@@ -7,18 +7,17 @@ import { ChevronUp } from "lucide-react";
 import React, { useState } from "react";
 
 function TotalProjectItem({
-  profile,
+  projects,
   lang,
   selected,
   onClick,
 }: {
-  profile: any;
+  projects: any;
   lang: any;
   selected: boolean;
   onClick: Function;
 }) {
 
-    console.log(profile);
   return (
     <div
       className={`p-5 border rounded-md cursor-pointer transition-all ${

@@ -58,6 +58,14 @@
       "points_held": "보유 포인트",
       "back": "뒤로가기",
       "view": "열람하기"
+    },
+    "summary": {
+      "title": "전문가 평판 보고서",
+      "billing": "청구시급",
+      "billing_unit": "원",
+      "hours": "투입시간",
+      "hours_unit": "시간/주",
+      "introduction": "소개글"
     }
   },
   "onboard": {

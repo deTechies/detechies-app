@@ -8,20 +8,21 @@ import {
 } from "./project-item";
 
 export default function UserProjects({
-  profile,
+  projects,
   lang,
   selectProject,
   setSelectProject,
 }: {
-  profile: any;
+  projects: any;
   lang: any;
   selectProject: any;
   setSelectProject: Function;
 }) {
+
   return (
     <Card className="flex gap-0 px-8 pb-8 pt-7">
       <h3 className="mb-4 text-subhead_s">
-        참여한 프로젝트 ({profile.projects.length})
+        참여한 프로젝트 ({projects.length})
       </h3>
 
       <div className="mb-6 text-text-secondary text-body_m">
@@ -30,7 +31,7 @@ export default function UserProjects({
 
       <div className="mb-3">
         <TotalProjectItem
-          profile={profile}
+          projects={projects}
           lang={lang}
           selected={!selectProject}
           onClick={() => setSelectProject(null)}
@@ -38,18 +39,15 @@ export default function UserProjects({
       </div>
 
       <div className="overflow-y-auto max-h-[400px] flex flex-col gap-3">
-        {profile.projects &&
-          profile.projects.map((project: any) => {
-            if (project.works.length < 1) return;
-
+        {projects &&
+          projects.map((project: any) => {
             return (
               <CommonProjectItem
                 project={project}
                 lang={lang}
-                selected={selectProject == project.project.id}
+                selected={selectProject?.project.id == project.project.id}
                 onClick={() => {
-                  setSelectProject(project.project.id);
-                  console.log(project.project.id);
+                  setSelectProject(project);
                 }}
                 key={project.project.id}
               ></CommonProjectItem>

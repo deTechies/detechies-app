@@ -4,29 +4,37 @@ import { useState } from "react";
 import UserProjects from "./user-projects";
 import UserStatistics from "./user-statistics";
 import { ChevronDown } from "lucide-react";
+import { Project } from "@/lib/interfaces";
 export default function UserReports({
-  profile,
-  lang,
+  projects,
   survey,
+  lang,
 }: {
-  profile: any;
-  lang: any;
+  projects: Project[];
   survey: any;
+  lang: any;
 }) {
-  const [selectProject, setSelectProject] = useState<any>(null);
+  const [selectProject, setSelectProject] = useState<Project | null>(null);
+
+  const workIds = new Set(survey.map((item: any) => item.projectWork.workId));
+  const evaluated_projects = projects.filter((item: any) => {
+    return workIds.has(item.works[0]?.workId);
+  });
 
   return (
     <div>
       {/* {selectProject} */}
 
       <UserProjects
-        profile={profile}
+        projects={evaluated_projects}
         lang={lang}
         selectProject={selectProject}
         setSelectProject={setSelectProject}
       />
 
-      <h3 className="mt-[60px] mb-4 text-heading_s text-center">통합 평판 보고서</h3>
+      <h3 className="mt-[60px] mb-4 text-heading_s text-center">
+        통합 평판 보고서
+      </h3>
 
       <div className="mb-5 text-center text-title_m text-text-secondary">
         총 받은 평가 ({12})
@@ -34,7 +42,7 @@ export default function UserReports({
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>
 
-      <UserStatistics profile={profile} lang={lang}></UserStatistics>
+      <UserStatistics projects={projects} lang={lang}></UserStatistics>
     </div>
   );
 }

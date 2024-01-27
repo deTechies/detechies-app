@@ -58,6 +58,15 @@
       "points_held": "Points held",
       "back": "Back",
       "view": "View"
+    },
+    "summary": {
+      "title": "Expert Reputation Report",
+      "billing": "Billed hourly rate",
+      "billing_unit": "Won",
+      "hours": "Input hours",     
+      "hours_unit": "hours per week",
+
+      "introduction": "Introduction"
     }
   },
   "onboard": {
