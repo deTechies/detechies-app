@@ -4,24 +4,12 @@ import ProfileCard from "@/components/card/profile-card";
 import { User } from "@/lib/interfaces";
 import { useSearchParams } from "next/navigation";
 
-export interface Profile {
-  id: string;
-  name: string;
-  email: string;
-  display_name: string;
-  avatar: string;
-  wallet:string;
-  image: string;
-  nft: string[];
-}
 export default function ListProfiles({
   users,
-  followers,
   lang,
 }: {
   users: User[];
-  followers: string[];
-  lang: any
+  lang: any;
 }) {
   const searchParams = useSearchParams()!;
 
@@ -40,11 +28,7 @@ export default function ListProfiles({
             );
           })
           .map((profile: User, index) => (
-            <ProfileCard
-              key={index}
-              profile={profile}
-              lang={lang}
-            />
+            <ProfileCard key={index} profile={profile} lang={lang} />
           ))}
     </div>
   );
