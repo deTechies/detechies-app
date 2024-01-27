@@ -1,8 +1,8 @@
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 import { getUsers } from "@/lib/data/user";
 import ListProfiles from "./list-profiles";
 import ProfileFilter from "./profile-filter";
-import { Locale } from "@/i18n.config";
-import { getDictionary } from "@/get-dictionary";
 
 export default async function ProfilePage({
   params,
