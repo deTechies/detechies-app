@@ -30,6 +30,7 @@ import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
+import { postServer } from "@/lib/data/postRequest";
 import { addMembersWork } from "@/lib/data/project";
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { useRef, useState } from "react";
@@ -55,11 +56,13 @@ type ProjectContributionFormProps = {
 export default function ProjectContributionInviteForm({
   projectId,
   lang,
-  setInvite,
+  defaultValues,
+  workId,
 }: {
   projectId: string;
   lang: any;
-  setInvite: () => void;
+  defaultValues?: ContributionFormData;
+  workId?: string;
 }) {
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
@@ -96,12 +99,26 @@ export default function ProjectContributionInviteForm({
   };
 
   const onSubmit = async (values: ContributionFormData) => {
-    setLoading(true)
+    setLoading(true);
 
-    try {
+    if (workId) {
+      const data = JSON.stringify({
+        projectId,
+        ...values,
+        percentage: values.percentage[0],
+        workId: workId,
+      });
+      const result = await postServer(`/project-work/${workId}`, data);
+
+      if (result) {
+        toast({
+          description: "You contribution has been added, thank you.",
+        });
+      }
+    } else {
       const result = await addMembersWork(values, projectId);
 
-      if(result.status === "success"){
+      if (result.status === "success") {
         toast({
           title: "Success",
           description: "Your contribution has been added.",
@@ -112,18 +129,14 @@ export default function ProjectContributionInviteForm({
           description: result.codeMessage,
         });
       }
-      
-      setLoading(false);
-      if (closeButtonRef.current) {
-        // closeButtonRef.current.click();
-        setInvite();
-      }
-    } catch (error) {
-      toast({
-        title: "error",
-      });
+    }
+
+    setLoading(false);
+    if (closeButtonRef.current) {
+      closeButtonRef.current.click();
     }
   };
+
 
   return (
     <Form {...form}>
@@ -183,10 +196,7 @@ export default function ProjectContributionInviteForm({
                   name="begin_date"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <Input
-                        type="date"
-                        {...field}
-                      />
+                      <Input type="date" {...field} />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -221,14 +231,13 @@ export default function ProjectContributionInviteForm({
                   onChange={handleNewTagChange}
                   onKeyDown={handleKeyDown}
                   disabled={
-                    form.getValues("tags") &&
-                    form.getValues("tags").length > 4
+                    form.getValues("tags") && form.getValues("tags").length > 4
                   }
                 />
               </FormControl>
 
               <div className="flex flex-wrap gap-3">
-              {/* py-4 px-5 border border-border-div rounded-sm */}
+                {/* py-4 px-5 border border-border-div rounded-sm */}
                 {form.watch("tags")?.map((tag: any, index) => (
                   <Badge
                     key={index}
@@ -240,9 +249,7 @@ export default function ProjectContributionInviteForm({
                       form.setValue("tags", newTags, { shouldValidate: true });
                     }}
                   >
-                    <div className="truncate">
-                      {tag}
-                    </div>
+                    <div className="truncate">{tag}</div>
                   </Badge>
                 ))}
               </div>
@@ -265,9 +272,6 @@ export default function ProjectContributionInviteForm({
                   </FormControl>
                   <FormDescription className="flex">
                     <FormMessage className="w-full" />
-                    {/* <span className="w-full text-right content-right">
-                      {currentPercentage[0]} of 100
-                    </span> */}
                   </FormDescription>
                 </FormItem>
               )}
@@ -306,11 +310,7 @@ export default function ProjectContributionInviteForm({
 
         <div className="flex items-center justify-center gap-2">
           <DialogClose asChild>
-            <Button
-              variant={"secondary"}
-              ref={closeButtonRef}
-              size="lg"
-            >
+            <Button variant={"secondary"} ref={closeButtonRef} size="lg">
               {lang.project.details.members.add_works.later}
             </Button>
           </DialogClose>
