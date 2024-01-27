@@ -64,7 +64,6 @@ export default function CreateQuestion({
   async function onSubmit(data: QuestionValues) {
     setLoading(true);
     
-    console.log(data)
     const stringed= JSON.stringify(data)
 
     const result = await postServer('/question', stringed);

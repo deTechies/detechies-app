@@ -44,8 +44,7 @@ const ConnectGithub = () => {
     )
       .then((res) =>{
         return res.json();
-      })
-      .catch((err: Error) => console.log(err));
+      });
 
       setVerify(result);
     setLoading(false);
@@ -79,7 +78,7 @@ const ConnectGithub = () => {
           });
           
           router.refresh()
-    }).catch((err: Error) => console.log(err));
+    });
 
 
 

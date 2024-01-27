@@ -1,10 +1,9 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
-  MemoizedTotalProjectItem as TotalProjectItem,
   MemoizedCommonProjectItem as CommonProjectItem,
+  MemoizedTotalProjectItem as TotalProjectItem,
 } from "./project-item";
 
 export default function UserProjects({
@@ -49,7 +48,6 @@ export default function UserProjects({
                 selected={selectProject == project.project.id}
                 onClick={() => {
                   setSelectProject(project.project.id);
-                  console.log(project.project.id);
                 }}
                 key={project.project.id}
               ></CommonProjectItem>

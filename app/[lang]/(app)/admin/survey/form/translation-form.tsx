@@ -32,7 +32,6 @@ const TranslationForm = ({
         .map(key => data[key])
     };
 
-    console.log("Formatted Data:", formattedData); // Log the formatted data
     onSubmit(formattedData);
   };
   return (

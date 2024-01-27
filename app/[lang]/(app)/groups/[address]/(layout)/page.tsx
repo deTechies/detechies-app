@@ -28,10 +28,7 @@ export default async function GroupProfile({
   const userAchievements = await getUserAchievements();
 
   const {data: clubInfo} = await serverApi(`/clubs/${params.address}`);
-  // console.log(data);
-  
 
-  // console.log(data.members[0].user.profile_details)
 
   return (
     <div className="flex flex-col">

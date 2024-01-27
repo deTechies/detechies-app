@@ -24,8 +24,7 @@ export function PreviewSurvey({ selected, setSelected }: any) {
     language: string,
     data: TranslationData
   ) => {
-    console.log(data);
-    console.log("Submitted data:", { questionId, language, data });
+
 
     const formData = JSON.stringify({
       content: data.content,
@@ -90,7 +89,6 @@ export function PreviewSurvey({ selected, setSelected }: any) {
                     //console.log(defaultValues.messages)
                   }
 
-                  //console.log(defaultValues.messages)
 
                   return (
                     <div className="flex flex-col gap-3" key={language}>

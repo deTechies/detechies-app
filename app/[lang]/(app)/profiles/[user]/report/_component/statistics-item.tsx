@@ -1,27 +1,26 @@
-import React from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ThumbsUp, AlertTriangle } from "lucide-react";
+import { AlertTriangle, ThumbsUp } from "lucide-react";
+import React from "react";
 
+import Image from "next/image";
 import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ComposedChart,
+  Line,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
   Radar,
   RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Cell,
-  ResponsiveContainer,
   ReferenceLine,
-  Line,
-  ComposedChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from "recharts";
-import Image from "next/image";
 
 function ScoreCard({
   score,
@@ -250,7 +249,6 @@ function SimpleBarChart({ dataKey }: { dataKey: string }) {
               }
               className="cursor-pointer"
               onClick={() => {
-                console.log(entry);
               }}
             />
           ))}
@@ -349,9 +347,7 @@ export default function SimplePosNagChart() {
 }
 
 export {
-  ScoreCard,
-  StarRating,
-  SimpleRadarChart,
-  SimpleBarChart,
-  SimplePosNagChart,
+  ScoreCard, SimpleBarChart,
+  SimplePosNagChart, SimpleRadarChart, StarRating
 };
+

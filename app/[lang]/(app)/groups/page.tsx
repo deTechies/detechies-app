@@ -15,7 +15,6 @@ export default async function GroupsPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   const {data:groups} = await serverApi(`/clubs`)
-  // console.log(groups) 
   
   
   return (
@@ -29,6 +28,7 @@ export default async function GroupsPage({
           lang={dictionary}
         />
       ) : null}
+
     </main>
   );
 }

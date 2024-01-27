@@ -56,7 +56,7 @@ export function SurveyForm({
     };
 
     // Assuming `answers` is the array of data you provided
-    if (!defaultValues) return console.log("no default values");
+    if (!defaultValues) return;
     const defaultFormValues = transformAnswersToDefaultValues(defaultValues);
     form.reset(defaultFormValues);
   }, [defaultValues, form]);
