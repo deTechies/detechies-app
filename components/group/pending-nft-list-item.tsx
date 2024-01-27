@@ -5,6 +5,7 @@ import { postServer } from "@/lib/data/postRequest";
 import { AchievementReward } from "@/lib/interfaces";
 import { formatDate, getNftChips } from "@/lib/utils";
 import { Check, X } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -46,7 +47,7 @@ export default function PendingMemberListItem({
     functionName: "rewardProject",
   });
   const [loading, setLoading] = useState(false);
-
+  const { data: session } = useSession();
   const { isFetched: projectFinished } = useWaitForTransaction(projectData);
   const { isFetched } = useWaitForTransaction(data);
 
@@ -58,7 +59,10 @@ export default function PendingMemberListItem({
         data: data?.hash,
       });
 
-      const result = await postServer(`/achievement-rewards/update`, submitData);
+      const result = await postServer(
+        `/achievement-rewards/update`,
+        submitData
+      );
 
       if (result) {
         toast({
@@ -78,16 +82,18 @@ export default function PendingMemberListItem({
 
   useEffect(() => {
     const submitProjectNFT = async () => {
-      const result = await postServer(`/achievement-rewards/rewardProject/${nft.id}`, '')
+      const result = await postServer(
+        `/achievement-rewards/rewardProject/${nft.id}`,
+        ""
+      );
 
-      if(result){
-        
+      if (result) {
         toast({
           title: "Success",
           description: "succesfully distirbuted the nft. ",
         });
       }
-      
+
       setLoading(false);
     };
 
@@ -105,6 +111,14 @@ export default function PendingMemberListItem({
 
   const acceptNFT = async () => {
     setLoading(true);
+    
+    if(!session?.web3?.address) {
+      toast({
+        title: "Error",
+        description: "Please connect a wallet to accept the NFT",
+      });
+      return;
+    }
 
     if (nft.project) {
       //get the list of all the project members wallets.
@@ -123,21 +137,23 @@ export default function PendingMemberListItem({
 
     //make sure that it works correct so we can update the nft data.
   };
-  
+
   const rejectNFT = async () => {
     setLoading(true);
-    const result = await postServer(`/achievement-rewards/${nft.id}/reject`, '');
-    if(result){
+    const result = await postServer(
+      `/achievement-rewards/${nft.id}/reject`,
+      ""
+    );
+    if (result) {
       toast({
         title: "rejecting NFT",
         description: "succesfully rejected the nft. ",
-      });  
-      
+      });
+
       router.refresh();
     }
-    
+
     setLoading(false);
-    
   };
 
   return (
@@ -165,7 +181,7 @@ export default function PendingMemberListItem({
 
         <div>
           <div className="mb-2 text-title_l">
-            {nft.user ? nft.user.display_name : nft.project.name}
+            {nft.project ? nft.project.name : nft.user.display_name}
           </div>
 
           {/* <Badge shape="outline" variant="info">
@@ -180,12 +196,21 @@ export default function PendingMemberListItem({
 
       <div className="flex items-center gap-3">
         <div className="relative w-20 h-20 bg-background-layer-2">
-          <Image
-            src={`https://ipfs.io/ipfs/${nft.achievement.image}`}
-            alt="achievement_image"
-            fill={true}
-            className="rounded-sm"
-          />
+          {nft.achievement.image ? (
+            <Image
+              src={`https://ipfs.io/ipfs/${nft.achievement.image}`}
+              alt="achievement_image"
+              fill={true}
+              className="rounded-sm"
+            />
+          ) : (
+            <Image
+              src={`https://ipfs.io/ipfs/${nft.achievement.avatar}`}
+              alt="achievement_image"
+              fill={true}
+              className="rounded-sm"
+            />
+          )}
         </div>
 
         <div>

@@ -11,7 +11,6 @@ import ProjectDetail from "./_components/project-detail";
 import ProjectEvaluation from "./_components/project-evaluation-by-groups";
 import ProjectLinks from "./_components/project-links";
 import ProjectMembers from "./_components/project-members";
-import { getPendingProjectMembers } from "@/lib/data/project";
 
 export default async function ProjectDetailPage({
   params,
@@ -43,12 +42,6 @@ export default async function ProjectDetailPage({
 
   const dictionary = (await getDictionary(params.lang)) as any;
 
-  let pendingMembers: any[] = [];
-
-  if (data.userRole == "admin") {
-    pendingMembers = await getPendingProjectMembers(params.address);
-  }
-
   if (data.userRole == "invited")
     return <AcceptInvitation name={data.name} image={data.image} projectId={data.id} lang={dictionary} />;
 
@@ -68,7 +61,7 @@ export default async function ProjectDetailPage({
         <ProjectEvaluation details={data} lang={dictionary} />
         {data?.userRole === "admin" && (
           <PendingMemberList
-            pendingMembers={pendingMembers}
+          projectId={params.address}
             lang={dictionary}
           />
         )}

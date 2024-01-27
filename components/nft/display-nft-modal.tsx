@@ -62,7 +62,7 @@ export default function DisplayNFTModal({
     }
 
     //get the achievment contract
-    console.log(data);
+    // console.log(data);
 
     window.open(
       `https://mumbai.polygonscan.com/nft/${data}/${details.tokenId}`,

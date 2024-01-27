@@ -1,48 +1,32 @@
-"use client";
-
 import ProfileCard from "@/components/card/profile-card";
+import { serverApi } from "@/lib/data/general";
 import { User } from "@/lib/interfaces";
-import { useSearchParams } from "next/navigation";
 
-export interface Profile {
-  id: string;
-  name: string;
-  email: string;
-  display_name: string;
-  avatar: string;
-  wallet:string;
-  image: string;
-  nft: string[];
-}
-export default function ListProfiles({
-  users,
-  followers,
+export default async function ListProfiles({
+  lang,
+  searchParams,
 }: {
-  users: User[];
-  followers: string[];
+  lang: any;
+  searchParams: { [key: string]: string | undefined };
 }) {
-  const searchParams = useSearchParams()!;
+  // lets get all the users profiles here..
+  const role = searchParams.role;
+  const newUrl = new URLSearchParams();
+  if (role) {
+    newUrl.set("role", role);
+  }
+  if (searchParams.search) {
+    newUrl.set("display_name", searchParams.search);
+  }
 
-  const nameFilter = searchParams.get("search") || "";
+  const { data: users } = await serverApi(`/users`, newUrl.toString());
 
   return (
-    <div className="w-full md:m-24 m-8 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div className="w-full  grid grid-cols-1 md:grid-cols-2 gap-4 pr-8">
       {users?.length > 0 &&
         users
-          .filter((profile: User) => {
-            return (
-              nameFilter === "" ||
-              profile.display_name
-                .toLowerCase()
-                .includes(nameFilter.toLowerCase())
-            );
-          })
-          .map((profile: User, index) => (
-            <ProfileCard
-              key={index}
-              profile={profile}
-              followed={followers && followers.includes(profile.id)}
-            />
+          .map((profile: User, index:number) => (
+            <ProfileCard key={index} profile={profile} lang={lang} />
           ))}
     </div>
   );

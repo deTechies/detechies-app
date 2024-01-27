@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { useDictionary } from "@/lib/dictionaryProvider";
 
 export default function ProfilePageCard({
   text,
@@ -36,6 +37,8 @@ export default function ProfilePageCard({
     profile.avatar[4],
     profile.avatar[5],
   ];
+
+  const dictionary = useDictionary();
 
   const updateAvatar = async () => {
     setRefresh(true);
@@ -85,10 +88,10 @@ export default function ProfilePageCard({
         </div>
         <div className="flex gap-4">
           <Button size="lg" variant="secondary" onClick={reset}>
-            Reset
+            {dictionary.mypage.edit_avatar.reset}
           </Button>
           <Button size="lg" onClick={updateAvatar} loading={refresh}>
-            Save
+          {dictionary.mypage.edit_avatar.save}
           </Button>
         </div>
       </Card>

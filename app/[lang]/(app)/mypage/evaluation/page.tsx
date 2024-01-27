@@ -19,7 +19,7 @@ export default async function Evaluation({
           <TabsTrigger value="requested">
             {text?.evaluation_requested}
           </TabsTrigger>
-          <TabsTrigger value="requests">
+          <TabsTrigger value="received">
             {text?.evaluation_received}
           </TabsTrigger>
           <TabsTrigger value="evaluations">
@@ -29,8 +29,8 @@ export default async function Evaluation({
         <TabsContent value="requested">
           <Evaluations queries={{ status: "requested" }} lang={dictionary} />
         </TabsContent>
-        <TabsContent value="requests">
-          <Evaluations queries={{ status: "draft"}} lang={dictionary} />
+        <TabsContent value="received">
+          <Evaluations queries={{ status: "finished"}} lang={dictionary} />
         </TabsContent>
         <TabsContent value="evaluations">
           <EvaluationProvided lang={dictionary} />

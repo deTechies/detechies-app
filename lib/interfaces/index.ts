@@ -6,8 +6,10 @@ export interface User {
     credits: number;
     display_name: string;
     nft: string[];
+    tags: string[];
     avatar: string[];
     avatar_link: string;
+    role:string;
     verified: boolean;
     profile_details: ProfileDetails;
     projects: ProjectMember[];
@@ -101,6 +103,7 @@ export enum GROUP_TYPE {
     EDU = 'edu', 
     AWARDS = 'awards'
   }
+  
   export enum NFT_IMAGE_TYPE{
     AVATAR = 'avatar', 
     IMAGE = 'image', 

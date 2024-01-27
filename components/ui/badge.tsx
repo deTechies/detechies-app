@@ -21,7 +21,7 @@ const badgeVariants = cva(
         purple: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
+        outline: "text-text-primary",
         ghost: "text-text-primary border border-text-secondary hover:bg-background-layer-2/80",
       },
       shape: {
@@ -32,6 +32,7 @@ const badgeVariants = cva(
         outline: "max-w-[200px] truncate py-[8px] px-[10px] border rounded-md bg-background-transparent text-title_s",
         outline_sm: "h-[22px] px-2.5 border rounded-full text-label_s",
         icon: "py-1.5 px-[10px] rounded-md text-label_m flex items-center justify-center",
+        skill: "text-label_s bg-background-layer-2 rounded-[5px] px-2 py-1",
       },
     },
     defaultVariants: {

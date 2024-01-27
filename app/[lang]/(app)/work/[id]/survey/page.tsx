@@ -37,6 +37,7 @@ export default async function EvaluateAsTeamLead({
         survey={surveyData}
         defaultValues={details.answers}
         lang={dictionary}
+        selectedLanguage={params.lang}
       />
     </div>
   );

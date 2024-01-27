@@ -11,13 +11,13 @@ export default async function EditProfilePage({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
   const {data:profile} = await getUserProfile();
-  
 
   return (
     <>
       <EditProfile
         username={profile.display_name}
         currentValues={profile.profile_details}
+        email={profile.email}
         text={dictionary.mypage.edit_profile}
       />
       <ProfileAccounts />
