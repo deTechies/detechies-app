@@ -11,14 +11,12 @@ export default async function Dashboard({
 }: {
   params: { lang: Locale };
 }) {
+  //TODO: make sure that this is refetched when the users edit profile. 
   const { data: profile } = await getUserProfile();
   const dictionary = (await getDictionary(params.lang)) as any;
 
   // const {data: myProfile} = await serverApi(`/users/me`);
-
-  if (!profile) {
-    return <div>loading</div>;
-  }
+  
   return (
     <main className="flex flex-col gap-6">
       <ProfileDetails profile={profile} text={dictionary} />

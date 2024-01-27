@@ -1,20 +1,17 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
 
 import { Card } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
 // import Image from "next/image";
 import DisplayNFTModal from "@/components/nft/display-nft-modal";
-import Image from "@/components/ui/image";
-import { useDictionary } from "@/lib/dictionaryProvider";
-import { AchievementReward } from "@/lib/interfaces";
-import { NftCard } from "./nft-card";
 import {
   Dialog,
   DialogOverlay,
   DialogPortal,
   DialogTrigger
 } from "@/components/ui/dialog";
+import { useDictionary } from "@/lib/dictionaryProvider";
+import { AchievementReward } from "@/lib/interfaces";
+import { NftCard } from "./nft-card";
 
 
 

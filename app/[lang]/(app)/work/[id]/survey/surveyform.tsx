@@ -119,9 +119,9 @@ export function SurveyForm({
                           key={question.id}
                           form={form}
                           name={question.id}
-                          label={existingTranslation.content ? existingTranslation.content : question.content}
+                          label={existingTranslation?.content ? existingTranslation.content : question.content}
                           steps={100 / 10}
-                          messages={existingTranslation.messages ? existingTranslation.messages : question.messages}
+                          messages={existingTranslation?.messages ? existingTranslation.messages : question.messages}
                           disabled={result}
                           text={lang}
                         />

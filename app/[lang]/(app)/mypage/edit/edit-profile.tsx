@@ -86,7 +86,6 @@ export default function EditProfile({
     });
     
     router.refresh();
-
     router.push("/mypage?updated=true", { scroll: true });
 
     setLoading(false);

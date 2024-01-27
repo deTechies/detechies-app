@@ -1,10 +1,9 @@
-import React from 'react'
+import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
-import Image from 'next/image'
 import { useDictionary } from '@/lib/dictionaryProvider'
 import { Achievement } from '@/lib/interfaces'
 import { formatDate } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
+import Image from 'next/image'
 
 interface INftCardProps {
     id: string;
@@ -15,7 +14,7 @@ export const NftCard = ({id, achievement}:INftCardProps) => {
     const dictionary = useDictionary();
 
     return (
-        <Card key={id} className="flex flex-col md:flex-row items-start">
+        <Card key={id} className="flex flex-col md:flex-row">
             <div className="w-[100px] h-[100px] relative aspect-square rounded-sm">
                 <Image
                     src={`https://ipfs.io/ipfs/${achievement?.image ? achievement.image : achievement.avatar}`}
@@ -28,9 +27,9 @@ export const NftCard = ({id, achievement}:INftCardProps) => {
                 <header className="flex items-center gap-2">
                     <h5 className="text-subhead_s">{achievement?.name}</h5>
                 </header>
-                <div className="flex flex-col md:flex-row items-start gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
                     <div className="flex flex-col gap-2  justify-start text-left ">
-                        <span className="text-text-secondary text-label_m w-[240px]">
+                        <span className="text-text-secondary text-label_m">
                             {dictionary.mypage.awards.issuer}:{" "}
                             <span className="capitalize">{achievement?.club?.name}</span>
                         </span>
