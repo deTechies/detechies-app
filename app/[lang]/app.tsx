@@ -1,25 +1,29 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { polygonMumbai } from "@/helpers/mumbai";
 import SessionProvider from "@/lib/SessionProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
-import { WagmiConfig, configureChains, createConfig } from "wagmi";
+import { WagmiConfig, WindowProvider, configureChains, createConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
 
-import { WepinConnector } from "@wepin/wagmi-connector";
 import type { WepinConnectorOptions } from "@wepin/wagmi-connector";
+import { WepinConnector } from "@wepin/wagmi-connector";
 
-import OnboardLoading from "./(onboard)/onboard/loading";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
   [publicProvider()]
 );
+
+declare global {
+  interface Window {
+    ethereum?: WindowProvider
+  }
+}
 
 export const web3AuthInstance =
   typeof window !== "undefined"
@@ -51,9 +55,7 @@ export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
 const connectorOptions: WepinConnectorOptions = {
   appId: testAppId,
   appKey: testAppKey,
-  attributes: {
-    defaultChainId: 80001,
-  },
+  defaultChainId: 80001,
 };
 
 const config = createConfig({
