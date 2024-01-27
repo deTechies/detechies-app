@@ -12,14 +12,14 @@ export default async function Avatars() {
   return (
     <Tabs defaultValue="all">
       <TabsList className="flex items-start justify-start w-full gap-4">
-        <TabsTrigger value="all">All</TabsTrigger>
-        <TabsTrigger value="career">Career</TabsTrigger>
-        <TabsTrigger value="avatar">Avatar</TabsTrigger>
-        <TabsTrigger value="minting">on Minting</TabsTrigger>
+        <TabsTrigger value="all">{lang.mypage.edit_avatar.tab_all}</TabsTrigger>
+        <TabsTrigger value="career">{lang.mypage.edit_avatar.tab_career}</TabsTrigger>
+        <TabsTrigger value="avatar">{lang.mypage.edit_avatar.tab_avatar}</TabsTrigger>
+        <TabsTrigger value="minting">{lang.mypage.edit_avatar.not_approved}</TabsTrigger>
       </TabsList>
 
       <TabsContent value="all">
-      <ListAvatars status="granted" rewards={achievements} lang={lang}/>
+        <ListAvatars status="granted" rewards={achievements} lang={lang}/>
       </TabsContent>
       <TabsContent value="career">
         <ListAvatars status="granted" sbt={true} rewards={achievements} lang={lang}/>

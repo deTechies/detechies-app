@@ -69,6 +69,23 @@
       "introduction": "Introduction"
     }
   },
+  "profile_filter": {
+    "profiles": "Profiles", 
+    "all": "All",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "info_text": "You can search for profiles by name, profession, or skills."
+    
+  },
+  "profile_detail_card": {
+    "example": "example", 
+    "achievements": "Achievements",
+    "certificates": "certificates",
+    "projects": "Projects",
+    "groups": "Groups",
+    "no role": "_norole"
+  },
   "onboard": {
     "welcome": {
       "title": "Professional career certifications are different!",
@@ -118,6 +135,11 @@
         "client_desc": "Find experts for our project",
         "admin": "Enterprise, Institution, Community Operator",
         "admin_desc": "Create unique NFTs for our organization"
+      },
+      "block_web3auth": {
+        "title": "Please use Wiffin to sign up for new social accounts.",
+        "desc": "If you are a new member, please click “Social Wallet” on the welcome screen. Web3auth accounts are only available to existing members.",
+        "button": "Sign up with a social wallet"
       }
     }
   },
@@ -472,14 +494,24 @@
       "name": "Name",
       "address": "Wallet Address"
     },
+    "edit_avatar":{
+        "tab_all": "All",
+        "tab_career": "Career NFT",
+        "tab_avatar": "Avatar NFT",
+        "not_approved": "Not Approved",
+        "reset": "Reset",
+        "save":  "Save"
+    },
     "edit_profile": {
       "edit_profile": "edit profile",
       "full_name": "full name",
       "first_name": "first name",
       "last_name": "last name",
+      "email": "email", 
       "profession": "profession",
       "specialisation": "specialisation",
       "profile_description": "profile description",
+      "profile_description_label": "Tell us a little bit about yourself",
       "skills": "skills",
       "username": "username",
       "save_changes": "save changes"
@@ -847,7 +879,8 @@
       "pa_engineer": "QA Engineer",
       "planner": "Planner",
       "designer": "Designer",
-      "marketer": "Marketer"
+      "marketer": "Marketer",
+      "all":"all"
     },
     "project_type": {
       "all": "All",
