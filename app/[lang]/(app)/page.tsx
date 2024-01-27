@@ -8,6 +8,9 @@ export default async function ProfileDashboard({
 }) {
 
   return (
+    <main className="m-8">
     <Dashboard params={params} />
+    
+    </main>
   );
 }
