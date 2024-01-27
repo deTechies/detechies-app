@@ -1,15 +1,14 @@
 "use client";
+import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
+import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Project } from "@/lib/interfaces";
-import ProjectContributionForm, {
+import { useState } from "react";
+import {
   ContributionFormData,
 } from "./project-contribution-form";
-import ProjectSwitcher from "./project-switcher";
-import { Button } from "@/components/ui/button";
-import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
-import { useState } from "react";
 import ProjectContributionInviteForm from "./project-contribution-invite-form";
-import useFetchData from "@/lib/useFetchData";
+import ProjectSwitcher from "./project-switcher";
 const newContribution = {
   valid: false,
 } as ContributionFormData;
@@ -65,9 +64,7 @@ export default function ProjectContributionInvite({
                 <ProjectContributionInviteForm
                   projectId={project.id}
                   lang={lang}
-                  setInvite={() => {
-                    onlyOne && setInvite(true);
-                  }}
+
                 />
               )}
             </section>

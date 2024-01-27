@@ -39,8 +39,22 @@
       "Profile Items": "profile items"
     }
   },
+  "profile_filter": {
+    "profiles": "Profiles", 
+    "all": "All",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "info_text": "You can search for profiles by name, profession, or skills."
+    
+  },
   "profile_detail_card": {
-    "example": "example"
+    "example": "example", 
+    "achievements": "Achievements",
+    "certificates": "certificates",
+    "projects": "Projects",
+    "groups": "Groups",
+    "no role": "_norole"
   },
   "onboard": {
     "welcome": {
@@ -835,7 +849,8 @@
       "pa_engineer": "QA Engineer",
       "planner": "Planner",
       "designer": "Designer",
-      "marketer": "Marketer"
+      "marketer": "Marketer",
+      "all":"all"
     },
     "project_type": {
       "all": "All",

@@ -1,8 +1,8 @@
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 import { getUsers } from "@/lib/data/user";
 import ListProfiles from "./list-profiles";
 import ProfileFilter from "./profile-filter";
-import { Locale } from "@/i18n.config";
-import { getDictionary } from "@/get-dictionary";
 
 export default async function ProfilePage({
   params,
@@ -10,6 +10,7 @@ export default async function ProfilePage({
   params: { lang: Locale };
 }) {
   // lets get all the users profiles here..
+
 
   const users = (await getUsers()).data;
   //TODO: get the followers of the user here..
@@ -19,7 +20,7 @@ export default async function ProfilePage({
     <main className="flex flex-col w-full gap-6 p-4 ">
       <ProfileFilter lang={dictionary}></ProfileFilter>
       <div className="w-screen " >
-        <ListProfiles users={users} followers={followers} />
+        <ListProfiles users={users} followers={followers} lang={dictionary}/>
       </div>
     </main>
     

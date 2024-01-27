@@ -17,9 +17,11 @@ export interface Profile {
 export default function ListProfiles({
   users,
   followers,
+  lang,
 }: {
   users: User[];
   followers: string[];
+  lang: any
 }) {
   const searchParams = useSearchParams()!;
 
@@ -41,7 +43,7 @@ export default function ListProfiles({
             <ProfileCard
               key={index}
               profile={profile}
-              followed={followers && followers.includes(profile.id)}
+              lang={lang}
             />
           ))}
     </div>
