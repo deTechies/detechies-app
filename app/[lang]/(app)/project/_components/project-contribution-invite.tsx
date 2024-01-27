@@ -64,7 +64,6 @@ export default function ProjectContributionInvite({
                 <ProjectContributionInviteForm
                   projectId={project.id}
                   lang={lang}
-
                 />
               )}
             </section>

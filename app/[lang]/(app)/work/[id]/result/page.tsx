@@ -76,6 +76,7 @@ export default async function EvaluationResult({
               defaultValues={details.answers}
               result={true}
               lang={dictionary}
+              selectedLanguage={params.lang}
             />
           )}
 
