@@ -9,35 +9,28 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data2 = [
-  {
-    name: "Page A",
-    uv: 40,
-  },
-  {
-    name: "Page B",
-    uv: 30,
-  },
-  {
-    name: "Page E",
-    uv: 90,
-  },
-  {
-    name: "Page F",
-    uv: 23,
-  },
-  {
-    name: "Page G",
-    uv: 90,
-  },
-];
+// const data_example = [
+//   {
+//     xKey: "data1",
+//     yKey: 40,
+//   },
+//   ...
+// ];
 
-export default function SimpleBarChart({ dataKey }: { dataKey: string }) {
+export default function SimpleBarChart({
+  data,
+  xKey,
+  yKey,
+}: {
+  data: any;
+  xKey: string;
+  yKey: string;
+}) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
         height={260}
-        data={data2}
+        data={data}
         margin={{
           top: 5,
           right: 0,
@@ -47,7 +40,7 @@ export default function SimpleBarChart({ dataKey }: { dataKey: string }) {
         barSize={36}
       >
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="name" tickLine={false} />
+        <XAxis dataKey={xKey} tickLine={false} />
         <YAxis
           tickCount={6}
           tickLine={false}
@@ -59,14 +52,14 @@ export default function SimpleBarChart({ dataKey }: { dataKey: string }) {
           content={<CustomTooltip />}
           cursor={{ fill: "#00D41D", fillOpacity: 0.2 }}
         />
-        <Bar dataKey="uv" radius={[8, 8, 0, 0]}>
-          {data2.map((entry, index) => (
+        <Bar dataKey={yKey} radius={[8, 8, 0, 0]}>
+          {data.map((entry: any, index: number) => (
             <Cell
               key={`cell-${index}`}
               fill={
-                entry.uv < 30
+                entry[yKey] < 30
                   ? "#FF3939"
-                  : entry.uv < 70
+                  : entry[yKey] < 70
                   ? "#BEC3CA"
                   : "#00D41D"
               }
@@ -82,22 +75,20 @@ export default function SimpleBarChart({ dataKey }: { dataKey: string }) {
   );
 }
 
-
 const CustomTooltip = ({
-    active,
-    payload,
-  }: {
-    active?: any;
-    payload?: any;
-  }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="px-3 py-2 rounded-sm bg-background-tooltip text-text-fixed">
-          <p className="label text-accent-on-primary">{`${payload[0].value}점`}</p>
-        </div>
-      );
-    }
-  
-    return null;
-  };
-  
+  active,
+  payload,
+}: {
+  active?: any;
+  payload?: any;
+}) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="px-3 py-2 rounded-sm bg-background-tooltip text-text-fixed">
+        <p className="label text-accent-on-primary">{`${payload[0].value}점`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};

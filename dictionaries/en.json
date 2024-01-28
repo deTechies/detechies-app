@@ -67,6 +67,11 @@
       "hours_unit": "hours per week",
 
       "introduction": "Introduction"
+    },
+    "statistics": {
+      "feedback_times": "Feedback Times",
+      "rate_requirements": "Rate Requirements",
+      "rate_time_schedule": "Rate Time Schedule"
     }
   },
   "profile_filter": {

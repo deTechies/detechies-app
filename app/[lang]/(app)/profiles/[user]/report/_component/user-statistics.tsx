@@ -10,10 +10,20 @@ import SimplePosNagChart from "@/components/charts/pos-nag-chart";
 export default function UserStatistics({
   projects,
   lang,
+  statistics,
 }: {
   projects: any;
   lang: any;
+  statistics: any;
 }) {
+
+  function rankToScore(totalRanks: number, currentRank: number) {
+    const middleRank = Math.ceil(totalRanks / 2);
+    return ((currentRank - middleRank) / (totalRanks - middleRank)) * 100;
+  }
+
+  console.log(statistics);
+
   return (
     <div className="grid grid-cols-[2fr_5fr_5fr] gap-4">
       <ScoreCard score={50} lang={lang} />
@@ -24,7 +34,11 @@ export default function UserStatistics({
         </CardHeader>
 
         <CardContent>
-          <SimpleRadarChart></SimpleRadarChart>
+          {/* <SimpleRadarChart
+            data={}
+            dataKey=""
+            dataValue=""
+          ></SimpleRadarChart> */}
         </CardContent>
       </Card>
 
@@ -89,18 +103,74 @@ export default function UserStatistics({
         <div className="flex gap-8">
           <ScoreCard score={50} lang={lang} className="min-h-[234px] mb-7" />
 
-          <SimpleBarChart dataKey="project1"></SimpleBarChart>
+          {/* <SimpleBarChart dataKey="project1"></SimpleBarChart> */}
         </div>
       </Card>
 
+      {/* categories */}
+      {Object.keys(statistics.categories).map((category_key: any) => {
+        const category_value = statistics.categories[category_key];
+
+        return (
+          <Card className="col-span-3 gap-10" key={category_key}>
+            <CardHeader className="justify-center text-subhead_m">
+              {category_key}
+            </CardHeader>
+
+            <div className="flex gap-8">
+              <ScoreCard
+                score={category_value.average}
+                lang={lang}
+                className="min-h-[234px] mb-7"
+              />
+
+              <SimpleBarChart
+                data={category_value.answers}
+                xKey="question"
+                yKey="response"
+              ></SimpleBarChart>
+            </div>
+          </Card>
+        );
+      })}
+
+      {/* assessmentReport */}
       <Card className="col-span-3 gap-10">
         <CardHeader className="justify-center text-subhead_m">
-          프로젝트 성과
+          성향 평가
         </CardHeader>
 
-        <div className="flex gap-8 h-[300px]">
-          <SimplePosNagChart></SimplePosNagChart>
-          <SimplePosNagChart></SimplePosNagChart>
+        <div className="grid gap-8 sm:grid-cols-2">
+          {Object.keys(statistics.assessmentReport).map(
+            (assessment_key: any) => {
+
+              const transformedArray = statistics.assessmentReport[
+                assessment_key
+              ].criteria.map((item: any) => ({
+                minText: item.criterion.minText,
+                maxText: item.criterion.maxText,
+                value: rankToScore(item.criterion.ranks, item.rank),
+                value2: 0,
+              }));
+
+              return (
+                <div key={assessment_key}>
+                  <h3 className="mb-5 text-center text-subhead_s">
+                    {assessment_key}
+                  </h3>
+                  <div className=" h-[300px]">
+                    <SimplePosNagChart
+                      data={transformedArray}
+                      xKey="value"
+                      xKey2="value2"
+                      yKey="minText"
+                      yKey2="maxText"
+                    ></SimplePosNagChart>
+                  </div>
+                </div>
+              );
+            }
+          )}
         </div>
       </Card>
     </div>

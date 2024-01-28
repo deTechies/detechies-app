@@ -66,6 +66,11 @@
       "hours": "투입시간",
       "hours_unit": "시간/주",
       "introduction": "소개글"
+    },
+    "statistics": {
+      "feedback_times": "피드백 반영도",
+      "rate_requirements": "완성도",
+      "rate_time_schedule": "마감일 준수율"
     }
   },
   "profile_filter": {

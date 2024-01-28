@@ -6,17 +6,18 @@ import {
   MemoizedTotalProjectItem as TotalProjectItem,
   MemoizedCommonProjectItem as CommonProjectItem,
 } from "./project-item";
+import { ProjectMember } from "@/lib/interfaces";
 
 export default function UserProjects({
   projects,
   lang,
-  selectProject,
-  setSelectProject,
+  selectedProject,
+  setSelectedProject,
 }: {
-  projects: any;
+  projects: ProjectMember[];
   lang: any;
-  selectProject: any;
-  setSelectProject: Function;
+  selectedProject: any;
+  setSelectedProject: Function;
 }) {
 
   return (
@@ -33,8 +34,8 @@ export default function UserProjects({
         <TotalProjectItem
           projects={projects}
           lang={lang}
-          selected={!selectProject}
-          onClick={() => setSelectProject(null)}
+          selected={!selectedProject}
+          onClick={() => setSelectedProject(null)}
         ></TotalProjectItem>
       </div>
 
@@ -45,9 +46,9 @@ export default function UserProjects({
               <CommonProjectItem
                 project={project}
                 lang={lang}
-                selected={selectProject?.project.id == project.project.id}
+                selected={selectedProject?.project.id == project.project.id}
                 onClick={() => {
-                  setSelectProject(project);
+                  setSelectedProject(project);
                 }}
                 key={project.project.id}
               ></CommonProjectItem>

@@ -8,57 +8,34 @@ import {
   ComposedChart,
 } from "recharts";
 
-const data3 = [
-  {
-    name: "Page A",
-    name2: "PageA2",
-    uv: 40,
-    pv: 40,
-  },
-  {
-    name: "Page B",
-    name2: "PageB2",
-    uv: -30,
-    pv: -30,
-  },
-  {
-    name: "Page C",
-    name2: "PageC2",
-    uv: -20,
-    pv: -20,
-  },
-  {
-    name: "Page D",
-    name2: "PageD2",
-    uv: 27,
-    pv: 27,
-  },
-  {
-    name: "Page E",
-    name2: "PageE2",
-    uv: -10,
-    pv: -10,
-  },
-  {
-    name: "Page F",
-    name2: "PageF2",
-    uv: 23,
-    pv: 23,
-  },
-  {
-    name: "Page G",
-    name2: "PageG2",
-    uv: 34,
-    pv: 34,
-  },
-];
+// const data_example = [
+//   {
+//     yKey: "data1",
+//     yKey2: "data2",
+//     xKey: 40,
+//     xKey2: 0, // not used, but required
+//   },
+//   ...
+// ];
 
-export default function SimplePosNagChart() {
+export default function SimplePosNagChart({
+  data,
+  xKey,
+  xKey2,
+  yKey,
+  yKey2,
+}: {
+  data: any;
+  xKey: string;
+  xKey2: string;
+  yKey: string;
+  yKey2: string;
+}) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
         height={500}
-        data={data3}
+        data={data}
         margin={{
           right: 20,
           left: 20,
@@ -75,7 +52,7 @@ export default function SimplePosNagChart() {
         <YAxis
           yAxisId="left"
           orientation="left"
-          dataKey="name"
+          dataKey={yKey}
           type="category"
           tickLine={false}
           axisLine={false}
@@ -83,13 +60,13 @@ export default function SimplePosNagChart() {
         <YAxis
           yAxisId="right"
           orientation="right"
-          dataKey="name2"
+          dataKey={yKey2}
           type="category"
           tickLine={false}
           axisLine={false}
         />
-        <Line yAxisId="left" dataKey="uv" className="hidden" />
-        <Bar yAxisId="right" dataKey="pv" fill="#00D41D" barSize={18} />
+        <Bar yAxisId="right" dataKey={xKey} fill="#00D41D" barSize={18} />
+        <Line yAxisId="left" dataKey={xKey2} className="hidden" />
         <ReferenceLine yAxisId="right" x="0" strokeWidth={2} stroke="#BEC3CA" />
       </ComposedChart>
     </ResponsiveContainer>

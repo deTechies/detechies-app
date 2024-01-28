@@ -25,12 +25,6 @@ export default async function ProfileReport({
     "/survey-report/createSurveyReport/a0206c96-d0f9-454f-adc2-57c7ec12b13e"
   );
 
-  const results = [
-    { id1: [result, result, result] },
-    { id2: [result, result] },
-    { id3: [result, result, result, result] },
-  ];
-
   return (
     <div className="flex flex-col gap-4 m-10 max-w-[80rem]">
       <h4 className="mb-10 text-center text-heading_s">
@@ -47,6 +41,7 @@ export default async function ProfileReport({
         lang={dictionary}
         projects={profile.projects}
         survey={userSurvey.data}
+        totalResult={result.data}
       />
     </div>
   );

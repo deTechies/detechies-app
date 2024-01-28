@@ -6,40 +6,23 @@ import {
   PolarRadiusAxis,
 } from "recharts";
 
-const data = [
-  {
-    subject: "완성도",
-    A: 20,
-    fullMark: 100,
-  },
-  {
-    subject: "업무 지식",
-    A: 98,
-    fullMark: 100,
-  },
-  {
-    subject: "협업 및 커뮤니케이션",
-    A: 86,
-    fullMark: 100,
-  },
-  {
-    subject: "기술 전문성",
-    A: 99,
-    fullMark: 100,
-  },
-  {
-    subject: "피드백 반영도",
-    A: 85,
-    fullMark: 100,
-  },
-  {
-    subject: "마감일 준수율",
-    A: 65,
-    fullMark: 100,
-  },
-];
+// const data_example = [
+//   {
+//     dataKey: "data1",
+//     dataValue: 20,
+//   },
+//   ...
+// ];
 
-export default function SimpleRadarChart() {
+export default function SimpleRadarChart({
+  data,
+  dataKey,
+  dataValue,
+}: {
+  data: any;
+  dataKey: string;
+  dataValue: string;
+}) {
   return (
     <RadarChart
       cx="50%"
@@ -59,11 +42,10 @@ export default function SimpleRadarChart() {
         axisLine={false}
       />
 
-      <PolarAngleAxis dataKey="subject" />
+      <PolarAngleAxis dataKey={dataValue} />
 
       <Radar
-        name="Mike"
-        dataKey="A"
+        dataKey={dataKey}
         stroke="#101113"
         strokeOpacity={0.3}
         fill="#00D41D"

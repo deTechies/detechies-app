@@ -31,18 +31,13 @@ export default function UserSummary({
       item.surveyResponses.forEach((response: any) => {
         if (response.matching) {
           if (
-            response.matching.weekly_hours &&
-            !isNaN(response.matching.weekly_hours)
+            response.matching.weekly_hours && response.matching.hourly_rate &&
+            !isNaN(response.matching.weekly_hours) && !isNaN(response.matching.hourly_rate)
           ) {
             totalWeeklyHours += Number(response.matching.weekly_hours);
-          }
-          if (
-            response.matching.hourly_rate &&
-            !isNaN(response.matching.hourly_rate)
-          ) {
             totalHourlyRate += Number(response.matching.hourly_rate);
+            count++;
           }
-          count++;
         }
       });
     });

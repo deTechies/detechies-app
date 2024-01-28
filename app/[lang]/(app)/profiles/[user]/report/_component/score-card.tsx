@@ -36,7 +36,7 @@ export default function ScoreCard({
           <AlertTriangle className="w-8 h-8 mb-2" />
         )}
 
-        <div className="truncate text-heading_m">{score} 점</div>
+        <div className="truncate text-heading_m">{Math.round(score)} 점</div>
       </CardContent>
     </Card>
   );

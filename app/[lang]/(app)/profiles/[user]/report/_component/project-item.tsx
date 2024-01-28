@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import Image from "@/components/ui/image";
+import { ProjectMember } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import { ChevronUp } from "lucide-react";
 import React, { useState } from "react";
@@ -12,7 +13,7 @@ function TotalProjectItem({
   selected,
   onClick,
 }: {
-  projects: any;
+  projects: ProjectMember[];
   lang: any;
   selected: boolean;
   onClick: Function;
@@ -56,7 +57,7 @@ function CommonProjectItem({
   selected,
   onClick,
 }: {
-  project: any;
+  project: ProjectMember;
   lang: any;
   selected: boolean;
   onClick: Function;
