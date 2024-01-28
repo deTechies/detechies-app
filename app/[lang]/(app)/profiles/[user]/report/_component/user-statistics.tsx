@@ -22,7 +22,8 @@ export default function UserStatistics({
     return ((currentRank - middleRank) / (totalRanks - middleRank)) * 100;
   }
 
-  console.log(statistics);
+  
+  // console.log(statistics.categories);
 
   return (
     <div className="grid grid-cols-[2fr_5fr_5fr] gap-4">
