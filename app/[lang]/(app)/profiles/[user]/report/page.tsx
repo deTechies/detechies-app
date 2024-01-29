@@ -22,7 +22,7 @@ export default async function ProfileReport({
   );
 
   return (
-    <div className="flex flex-col gap-4 m-10 max-w-[80rem]">
+    <div className="flex flex-col gap-4 my-10 mx-auto max-w-[80rem]">
       <h4 className="mb-10 text-center text-heading_s">
         {dictionary.profile.summary.title}
       </h4>
