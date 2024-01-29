@@ -190,6 +190,7 @@ export default function EvaluateTeamForm({
   workId,
   surveyId,
   defaultValues,
+  proficiency,
   result = false,
   lang,
 }: {
@@ -197,6 +198,7 @@ export default function EvaluateTeamForm({
   surveyId: string;
   defaultValues?: any;
   result?: boolean;
+  proficiency: any;
   lang: any;
 }) {
   // Group criteria by category
@@ -248,6 +250,14 @@ export default function EvaluateTeamForm({
     router.push(`/work/${workId}/swot`);
     // setLoading(false);
   };
+  
+  const findProficiencyMatch = (criterionId: string) => {
+    if(!proficiency) return;
+    const match = proficiency.find((item: any) => item.proficiency == criterionId);
+    return match;
+  }
+  
+  console.log(findProficiencyMatch("1"));
 
   return (
     <main
@@ -265,8 +275,8 @@ export default function EvaluateTeamForm({
                   <Ranking
                     key={criterion.id}
                     ranks={criterion.ranks}
-                    minText={criterion.minText}
-                    maxText={criterion.maxText}
+                    minText={findProficiencyMatch(criterion.id) ? findProficiencyMatch(criterion.id).minValue  : criterion.minText}
+                    maxText={findProficiencyMatch(criterion.id) ? findProficiencyMatch(criterion.id).maxValue: criterion.maxText}
                     activeRank={selectedRanks[criterion.id].rank}
                     onSelectRank={(rank) =>
                       handleSelectRank(criterion.id, rank)
