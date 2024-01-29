@@ -30,14 +30,15 @@ export default function ProjectDetailItem({
   return (
     <Link href={`${data.link}`} >
       <Card >
-      <div className="flex w-full  gap-5">
+      <div className="flex w-full gap-5">
         <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
           <Image
             src={`https://ipfs.io/ipfs/`+data.image}
             alt="Project Image"
-            layout="fill"
             objectFit="cover"
             className="rounded-sm"
+            width={80}
+            height={80}
           />
         </figure>
 
@@ -52,8 +53,8 @@ export default function ProjectDetailItem({
               <Badge>{lang?.evaluation} (0)</Badge>
               </div>
             </header>
-              <div className="flex flex-col gap-5 flex-wrap">
-                <div className="flex md:flex-row flex-col items-start justify-start gap-4 text-text-secondary">
+              <div className="flex flex-col flex-wrap gap-5">
+                <div className="flex flex-col items-start justify-start gap-4 md:flex-row text-text-secondary">
                   <div className="flex flex-col items-start justify-start gap-2">
                     <div className="divide-x shrink-0">
                       <span className="pr-2 capitalize text-label_m">
@@ -71,7 +72,7 @@ export default function ProjectDetailItem({
                     </span>
                   </div>
 
-                  <div className="grow  line-clamp-3">
+                  <div className="grow line-clamp-3">
                     <span className="text-label_m">{data.description}</span>
                   </div>
                 </div>

@@ -6,8 +6,10 @@ export interface User {
     credits: number;
     display_name: string;
     nft: string[];
+    tags: string[];
     avatar: string[];
     avatar_link: string;
+    role:string;
     verified: boolean;
     profile_details: ProfileDetails;
     projects: ProjectMember[];
@@ -22,12 +24,13 @@ export interface User {
   export interface SurveyResponse {
     id: string;
     user: string;
-    matching: Object;
+    matching: { [key: string]: number };
     evaluator: ProjectMember;
     projectWork: ProjectWork;
     status: 'draft' | 'closed' | 'pending' | 'finished' | 'requested';
     answers: string[];
     created_at: Date;
+    categories: { [key: string]: number }[];
   }
   
   export interface ProfileDetails {
@@ -101,6 +104,7 @@ export enum GROUP_TYPE {
     EDU = 'edu', 
     AWARDS = 'awards'
   }
+  
   export enum NFT_IMAGE_TYPE{
     AVATAR = 'avatar', 
     IMAGE = 'image', 

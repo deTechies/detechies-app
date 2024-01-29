@@ -302,9 +302,9 @@ const StepIndicator = ({
   currentStep: number;
 }) => {
   const stepIndicatorList = [
-    { title: "미션 정보 입력", icon: <Pencil></Pencil> },
-    { title: "상세 미션 등록", icon: <CheckSquare></CheckSquare> },
-    { title: "보상 정보 등록", icon: <Gift></Gift> },
+    { title: lang.mission.create.mission_info, icon: <Pencil></Pencil> },
+    { title: lang.mission.create.detail_info, icon: <CheckSquare></CheckSquare> },
+    { title: lang.mission.create.reward_info, icon: <Gift></Gift> },
   ];
 
   return (

@@ -15,11 +15,10 @@ import ProjectWorkDetail, {
   BlurredProjectWorkDetail,
 } from "../../_components/project-work-detail";
 
-import { Button } from "@/components/ui/button";
-import ProjectContributionInvite from "../../_components/project-contribution-invite";
+import ProjectContribution from "../../_components/project-contribution";
 import DeleteMember from "./modals/delete-member";
-import RequestEvaluation from "./modals/request-evaluation";
 import DeleteWorks from "./modals/delete-works";
+import RequestEvaluation from "./modals/request-evaluation";
 
 export default async function ProjectMemberItem({
   details,
@@ -71,23 +70,16 @@ export default async function ProjectMemberItem({
                 {session?.web3.address == details.user.wallet ? (
                   <>
                     {userRole != "client" && details.works.length < 1 && (
-                      <ProjectContributionInvite
+                    /*   <AddProjectContribution
                         project={details.project}
                         lang={lang}
-                        onlyOne={onlyOne}
-                      />
-                      // <ProjectContribution project={details.project} />
+                      /> */
+                       <ProjectContribution project={details.project} lang={lang}/>
                     )}
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
-                        <Button size="sm" variant="secondary">
-                          {lang.project.details.summary.edit}
-                        </Button>
-
-                        <DeleteWorks
-                          projectId={projectId}
-                          lang={lang}
-                        ></DeleteWorks>
+                        <ProjectContribution project={details.project} lang={lang} defaultValues={details.works[0]}/>
+                        <DeleteWorks projectId={projectId} lang={lang} />
                       </div>
                     )}
                   </>
@@ -110,6 +102,7 @@ export default async function ProjectMemberItem({
                         <DropdownMenuContent>
                           <div className="flex flex-col gap-3 px-3 my-4 text-left">
                             <RequestEvaluation
+                              projectId={projectId}
                               memberWallet={details.user.wallet}
                               lang={lang}
                             />

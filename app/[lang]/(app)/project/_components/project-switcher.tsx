@@ -40,7 +40,7 @@ const ProjectDisplay = ({
       {title && <div className="mb-5 text-subhead_s">{title}</div>}
       
       <div className="flex items-start gap-6">
-        <figure className="flex items-center justify-center w-[80px] h-[80px] overflow-hidden rounded-sm bg-background-layer-2">
+        <figure className="flex items-center justify-center w-[80px] h-[80px] shrink-0 overflow-hidden rounded-sm bg-background-layer-2">
           {project?.image ? (
             <Image
               src={`https://ipfs.io/ipfs/` + project.image}

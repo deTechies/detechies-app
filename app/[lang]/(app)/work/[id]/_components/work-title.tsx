@@ -21,11 +21,11 @@ export default function WorkTitle({
       title = lang.project.evaluate.evaluate_specialty;
       subTitle = lang.project.evaluate.evaluate_specialty_description;
       break;
-    case "result":
+    case "feedback":
       title = lang.project.evaluate.evaluate_propensity;
       subTitle = lang.project.evaluate.evaluate_propensity_description;
       break;
-    case "feedback":
+    case "result":
       title = lang.project.evaluate.last_feedback;
       subTitle = lang.project.evaluate.last_feedback_description;
       break;

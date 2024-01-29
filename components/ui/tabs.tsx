@@ -19,7 +19,7 @@ const TabsListVariants = cva("items-center", {
     variant: {
       default:
         "flex justify-start gap-2 border-b border-background-layer-1 text-text-secondary",
-      button1: "flex justify-start gap-2",
+      button1: "flex justify-start gap-2 ",
       button2: "flex justify-start gap-2",
     },
   },
@@ -36,7 +36,7 @@ const TabsList = React.forwardRef<
 >(({ className, variant, ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
-    className={cn(TabsListVariants({ variant }), className)}
+    className={cn("overflow-x-auto", TabsListVariants({ variant }), className)}
     {...props}
   />
 ));

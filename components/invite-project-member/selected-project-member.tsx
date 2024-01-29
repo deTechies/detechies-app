@@ -47,6 +47,7 @@ export default function SelectedProjectMember({
           </span>
         ),
       });
+      onSelectValue("leave");
       router.refresh();
     }
 

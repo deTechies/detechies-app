@@ -26,14 +26,16 @@ export default function DeleteMember({
     setLoading(true);
     const result = await removeProjectMember(memberId);
 
-    console.log(result);
+    if(result === "success") {
+      router.refresh();
+
+    } else {
+      setLoading(false);
+    }
 
     toast({
       description: <pre>{JSON.stringify(result, null, 3)}</pre>,
     });
-
-    router.refresh();
-    setLoading(false);
   }
   return (
     <Dialog>
