@@ -1,12 +1,17 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 import { getUserAchievements } from "@/lib/data/achievements";
 import ListAvatars from "./list-avatars";
 
-export default async function Avatars() {
+export default async function Avatars({
+  params
+}: {
+  params: { lang: Locale };
+}) {
   //need to get the users received achievements
   const {data:achievements} = await getUserAchievements();
-  const lang = await getDictionary("ko");
+  const lang = await getDictionary(params.lang);
 
 
   return (

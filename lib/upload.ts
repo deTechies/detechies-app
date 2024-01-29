@@ -23,7 +23,6 @@ export async function uploadContent(content: any) {
     return cid as string;
     
   }catch(e){
-    console.log(e);
     toast({
       title: "Upload failed",
       description: "Your content could not be uploaded",

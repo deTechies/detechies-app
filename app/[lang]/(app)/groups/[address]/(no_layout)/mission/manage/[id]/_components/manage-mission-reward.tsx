@@ -13,8 +13,6 @@ export default async function ManageMissionReward({
   lang: any;
 }) {
 
-  // console.log(achievements);  
-
   return (
     <Card className="min-w-[300px] pt-7 px-8 pb-8 gap-7">
       <CardHeader className="flex items-center justify-between">

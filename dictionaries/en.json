@@ -507,6 +507,7 @@
         "reset": "Reset",
         "save":  "Save"
     },
+    
     "edit_profile": {
       "edit_profile": "edit profile",
       "full_name": "full name",

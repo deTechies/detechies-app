@@ -61,9 +61,6 @@ export default function DisplayNFTModal({
       return;
     }
 
-    //get the achievment contract
-    // console.log(data);
-
     window.open(
       `https://mumbai.polygonscan.com/nft/${data}/${details.tokenId}`,
       "_blank"
@@ -87,8 +84,6 @@ export default function DisplayNFTModal({
   if (showSelect) {
     return <NftListItem item={details} showSelect={showSelect} lang={lang} />;
   }
-
-  console.log(details);
 
   return (
     <DialogContent className="flex flex-col gap-6 max-w-[504px] pt-6">
