@@ -27,7 +27,7 @@ export default function NextPageButton({lang}: {lang: any}) {
         [searchParams]
       );
   return (
-    <Button className='w-full' onClick={nextPage}>
+    <Button className='w-full' variant={"secondary"} onClick={nextPage}>
         Next Page
     </Button>
   )
