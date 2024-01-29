@@ -1,10 +1,9 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
-  MemoizedTotalProjectItem as TotalProjectItem,
   MemoizedCommonProjectItem as CommonProjectItem,
+  MemoizedTotalProjectItem as TotalProjectItem,
 } from "./project-item";
 import { ProjectMember } from "@/lib/interfaces";
 

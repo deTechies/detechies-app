@@ -44,7 +44,6 @@ export default function UploadWorks({
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const newFile = event.target.files?.[0];
-      console.log(newFile);
       setFile(newFile);
     }
   };

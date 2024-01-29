@@ -12,7 +12,6 @@ export default function ProjectWorkDetail({
   lang?: any;
 }) {
   if (!data) return null;
-  // console.log(data);
 
   return (
     <>

@@ -2,14 +2,14 @@
 import { getGroups } from "@/lib/data/groups";
 
 import RequestNFTModal from "@/components/request-nft/request-nft";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
+import { Badge } from "@/components/ui/badge";
 import { serverApi } from "@/lib/data/general";
 import { AchievementReward } from "@/lib/interfaces";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/utils";
+import Image from "next/image";
 
 export default async function ProjectEvaluationByGroups({
   details,
@@ -29,7 +29,6 @@ export default async function ProjectEvaluationByGroups({
 
   if (!groups) return null;
 
-  console.log(rewardedAchievements);
 
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">

@@ -69,14 +69,12 @@ export default function InviteByEmail({
 
     if (result) {
       toast({
-        title: "Success",
-        description: "Project created successfully",
+        description: "Invitation sent successfully to " + data.email + ".",
       });
       setLoading(false);
       cancelByEmail();
-      return
+      return;
     }
-
 
     setLoading(false);
   }
@@ -117,9 +115,7 @@ export default function InviteByEmail({
             />
           </div>
 
-          <Label>
-            {lang.details.profile_card.invite.email}
-          </Label>
+          <Label>{lang.details.profile_card.invite.email}</Label>
 
           <FormField
             control={form.control}

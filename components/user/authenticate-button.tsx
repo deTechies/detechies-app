@@ -39,9 +39,6 @@ const AuthenticateButton = () => {
         redirect: true,
         callbackUrl: "/onboard",
       });
-      if (response?.error) {
-        console.log("Error occured:", response.error);
-      }
     } catch (error) {
       console.log("Error Occured", error);
     }

@@ -51,8 +51,6 @@ export default function MissionList({
     setLoading(false);
   };
 
-  console.log(mission);
-  console.log(userProgress);
 
   if (userProgress.length > 0) {
     return (

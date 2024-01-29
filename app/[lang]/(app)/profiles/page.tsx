@@ -1,3 +1,4 @@
+import NextPageButton from "@/components/extra/next-page-button";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { Suspense } from "react";
@@ -19,11 +20,12 @@ export default async function ProfilePage({
   return (
     <main className="flex flex-col w-full gap-6 p-4 ">
       <ProfileFilter lang={dictionary}></ProfileFilter>
-      <div className="w-screen" >
+      <div className="w-screen flex flex-col gap-2" >
         <Suspense fallback={<ProfilesLoading />}>
         <ListProfiles  lang={dictionary} searchParams={searchParams}/>
         </Suspense>
       </div>
+      <NextPageButton lang={dictionary}/>
     </main>
     
   );

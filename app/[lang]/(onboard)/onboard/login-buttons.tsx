@@ -81,7 +81,7 @@ export default function LoginButtons({ text }: { text?: any }) {
       <div className="flex flex-col gap-4 space-y-1">
         {!address ? (
           <>
-            <div
+         {/*    <div
               key={connectors[2].id}
               className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-accent-secondary text-accent-primary hover:outline hover:outline-accent-primary"
               onClick={() => handleConnect(connectors[2])}
@@ -97,7 +97,7 @@ export default function LoginButtons({ text }: { text?: any }) {
                 {text?.web3 ? text.web3 : "Social Wallet"}
               </span>
             </div>
-
+ */}
             <div
               key={connectors[0].id}
               className="flex items-center gap-6 px-6 py-4 font-medium border rounded-sm cursor-pointer bg-background-layer-2 border-border-div hover:border-orange-500"

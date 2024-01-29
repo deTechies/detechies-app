@@ -32,6 +32,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@tanstack/react-table": "^8.10.7",
     "@types/recharts": "^1.8.29",
+    "@vercel/analytics": "^1.1.2",
     "@web3auth/modal": "^7.0.3",
     "@web3auth/web3auth-wagmi-connector": "^5.0.1",
     "@wepin/wagmi-connector": "^0.1.2",
@@ -59,7 +60,7 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^2.9.1",
-    "viem": "^2.2.0",
+    "viem": "^1.3.3",
     "wagmi": "^1.4.3",
     "zod": "^3.22.4"
   },

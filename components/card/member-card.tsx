@@ -29,7 +29,6 @@ export default function MemberCard({
 
   // if (!data) return <div>no data</div>;
 
-  // console.log(info);
 
   return (
     <Card
