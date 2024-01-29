@@ -69,9 +69,26 @@
       "introduction": "Introduction"
     },
     "statistics": {
+      "joined_projects": "Joined projects",
+      "joined_projects_desc": "Click on a project to view the performance evaluations received for each project.",
+      "total_report": "Total reputation report",
+      "total_career": "Total career",
+      "total_evaluation": "Total evaluation received",
+      "admin_evaluation": "Admin",
+      "member_evaluation": "Member",
+      "client_evaluation": "Client",
+      "work_period": "Work period",
+      "project_part": "Contributed Part",
+      "s_evaluation": "'s works",
+      "total": "Total ",
+      "reputation_report": "Reputation Report",
       "feedback_times": "Feedback Times",
       "rate_requirements": "Rate Requirements",
-      "rate_time_schedule": "Rate Time Schedule"
+      "rate_time_schedule": "Rate Time Schedule",
+      "good_team_player": "Good Team Player",
+      "rate_contributions": "Rate Contributions",
+      "points": "",
+      "total_points": "Total"
     }
   },
   "profile_filter": {
@@ -403,8 +420,8 @@
       "evaluation_contents": "Evaluation Contents",
       "reject": "Reason of rejection",
       "reject_placeholder": "If you inform us of any parts of the work that are different from the facts, the appraised person will write it again.",
-      "eval_work_contribution": "Performance/Contribution Evaluation",
-      "work_contribution": {
+      "eval_rate_contributions": "Performance/Contribution Evaluation",
+      "rate_contributions": {
         "label": "Please tell us about this team member's contribution to the work.",
         "messages": [
           "Barely contributed",
@@ -414,7 +431,7 @@
           "Completely performed the entire part."
         ]
       },
-      "meet_requirements": {
+      "rate_requirements": {
         "label": "Did this team member's output meet the requirements?",
         "messages": [
           "More than 20% omissions or defects (critical errors or omissions)",
@@ -424,7 +441,7 @@
           "Met all the requirements."
         ]
       },
-      "meet_schedule": {
+      "rate_time_schedule": {
         "label": "Did they adhere to the work schedule according to the milestones?",
         "messages": [
           "Delayed more than +4 days from the agreed work period",

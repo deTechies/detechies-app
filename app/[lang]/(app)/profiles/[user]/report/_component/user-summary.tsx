@@ -22,32 +22,6 @@ export default function UserSummary({
     setShowMore(!showMore);
   };
 
-  const calculateAverages = () => {
-    let totalWeeklyHours = 0;
-    let totalHourlyRate = 0;
-    let count = 0;
-
-    survey.forEach((item: any) => {
-      item.surveyResponses.forEach((response: any) => {
-        if (response.matching) {
-          if (
-            response.matching.weekly_hours && response.matching.hourly_rate &&
-            !isNaN(response.matching.weekly_hours) && !isNaN(response.matching.hourly_rate)
-          ) {
-            totalWeeklyHours += Number(response.matching.weekly_hours);
-            totalHourlyRate += Number(response.matching.hourly_rate);
-            count++;
-          }
-        }
-      });
-    });
-
-    const averageWeeklyHours = totalWeeklyHours / count;
-    const averageHourlyRate = totalHourlyRate / count;
-
-    return { averageWeeklyHours, averageHourlyRate };
-  };
-
   return (
     <div>
       <Card className="flex flex-row flex-wrap items-start px-6 pt-6 pb-7">
@@ -71,13 +45,12 @@ export default function UserSummary({
           <div className="text-body_s mb-2.5 flex flex-wrap gap-2">
             <span>{lang.profile.summary.billing}</span>
             <span className="text-title_s">
-              {calculateAverages().averageHourlyRate.toLocaleString()}
-              {lang.profile.summary.billing_unit} |{" "}
+              {survey.matching.hourly_rate} {lang.profile.summary.billing_unit}{" "}
+              |
             </span>
             <span>{lang.profile.summary.hours}</span>
             <span className="text-title_s">
-              {calculateAverages().averageWeeklyHours.toLocaleString()}{" "}
-              {lang.profile.summary.hours_unit}
+              {survey.matching.weekly_hours} {lang.profile.summary.hours_unit}
             </span>
           </div>
 

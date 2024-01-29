@@ -42,10 +42,22 @@ export default function SimpleRadarChart({
         axisLine={false}
       />
 
-      <PolarAngleAxis dataKey={dataValue} />
+      <PolarAngleAxis
+        dataKey={dataKey}
+        tick={({ payload, x, y, ...rest }) => (
+          <text
+            {...rest}
+            x={x}
+            y={y}
+            className="text-text-secondary text-title_s"
+          >
+            {payload.value}
+          </text>
+        )}
+      />
 
       <Radar
-        dataKey={dataKey}
+        dataKey={dataValue}
         stroke="#101113"
         strokeOpacity={0.3}
         fill="#00D41D"

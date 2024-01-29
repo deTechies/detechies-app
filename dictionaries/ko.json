@@ -68,9 +68,26 @@
       "introduction": "소개글"
     },
     "statistics": {
+      "joined_projects": "참여한 프로젝트",
+      "joined_projects_desc": "프로젝트를 클릭하면 프로젝트 별 받은 성과 평가를 열람할 수 있어요.",
+      "total_report": "통합 평판 보고서",
+      "total_career": "총 경력",
+      "total_evaluation": "총 받은 평가",
+      "admin_evaluation": "관리자 평가",
+      "member_evaluation": "동료 평가",
+      "client_evaluation": "클라이언트 평가",
+      "work_period": "작업 기간",
+      "project_part": "기여한 파트",
+      "s_evaluation": "님이 작성한 평가",
+      "total": "통합 ",
+      "reputation_report": "평판 보고서",
       "feedback_times": "피드백 반영도",
       "rate_requirements": "완성도",
-      "rate_time_schedule": "마감일 준수율"
+      "rate_time_schedule": "마감일 준수율",
+      "good_team_player": "긍정적인 영향",
+      "rate_contributions": "기여도",
+      "points": "점",
+      "total_points": "총점"
     }
   },
   "profile_filter": {
@@ -400,8 +417,8 @@
       "evaluation_contents": "평가 내용",
       "reject": "업무내용 사실여부 평가 사유",
       "reject_placeholder": "해당 업무내용이 사실과 다른 부분을 알려주시면 피평가자가 다시 작성할거에요.",
-      "eval_work_contribution": "성과/기여도 평가",
-      "work_contribution": {
+      "eval_rate_contributions": "성과/기여도 평가",
+      "rate_contributions": {
         "label": "위 업무에 대한 해당 팀원의 기여도를 알려주세요.",
         "messages": [
           "거의 기여하지 않음",
@@ -411,7 +428,7 @@
           "해당 파트 전체를 완벽하게 수행했어요."
         ]
       },
-      "meet_requirements": {
+      "rate_requirements": {
         "label": "해당 팀원의 결과물은 요구사항을 충족했나요?",
         "messages": [
           "누락 또는 하자가 20% 이상 (치명적인 하자 또는 누락)",
@@ -421,7 +438,7 @@
           "모든 요구사항을 만족시켰어요."
         ]
       },
-      "meet_schedule": {
+      "rate_time_schedule": {
         "label": "마일스톤에 따른 작업 일정을 준수했나요?",
         "messages": [
           "합의된 작업 기간에서 +4일 이상 지연",
