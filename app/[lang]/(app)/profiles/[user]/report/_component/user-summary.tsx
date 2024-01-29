@@ -10,14 +10,42 @@ import { useState } from "react";
 export default function UserSummary({
   profile,
   lang,
+  survey,
 }: {
   profile: any;
   lang: any;
+  survey: any;
 }) {
   const [showMore, setShowMore] = useState(false);
 
   const onShowMore = () => {
     setShowMore(!showMore);
+  };
+
+  const calculateAverages = () => {
+    let totalWeeklyHours = 0;
+    let totalHourlyRate = 0;
+    let count = 0;
+
+    survey.forEach((item: any) => {
+      item.surveyResponses.forEach((response: any) => {
+        if (response.matching) {
+          if (
+            response.matching.weekly_hours && response.matching.hourly_rate &&
+            !isNaN(response.matching.weekly_hours) && !isNaN(response.matching.hourly_rate)
+          ) {
+            totalWeeklyHours += Number(response.matching.weekly_hours);
+            totalHourlyRate += Number(response.matching.hourly_rate);
+            count++;
+          }
+        }
+      });
+    });
+
+    const averageWeeklyHours = totalWeeklyHours / count;
+    const averageHourlyRate = totalHourlyRate / count;
+
+    return { averageWeeklyHours, averageHourlyRate };
   };
 
   return (
@@ -33,10 +61,25 @@ export default function UserSummary({
           <div className="mb-1 text-subhead_s">{profile.display_name}</div>
 
           <div className="mb-1 text-title_m">
-            {profile.profile_details?.profession}
+            {
+              lang.interface.profession_type[
+                profile.profile_details?.profession
+              ]
+            }
           </div>
 
-          <div className="text-body_s mb-2.5">청구시급 | 투입시간 얼마얼마</div>
+          <div className="text-body_s mb-2.5 flex flex-wrap gap-2">
+            <span>{lang.profile.summary.billing}</span>
+            <span className="text-title_s">
+              {calculateAverages().averageHourlyRate.toLocaleString()}
+              {lang.profile.summary.billing_unit} |{" "}
+            </span>
+            <span>{lang.profile.summary.hours}</span>
+            <span className="text-title_s">
+              {calculateAverages().averageWeeklyHours.toLocaleString()}{" "}
+              {lang.profile.summary.hours_unit}
+            </span>
+          </div>
 
           <div className="flex flex-wrap items-end gap-2">
             {profile.profile_details &&
@@ -53,7 +96,7 @@ export default function UserSummary({
               className="flex gap-1 ml-auto cursor-pointer text-label_m text-text-secondary"
               onClick={onShowMore}
             >
-              소개글
+              {lang.profile.summary.introduction}
               <ChevronUp
                 className={`w-5 h-5 transition ${showMore && "rotate-180"}`}
               ></ChevronUp>

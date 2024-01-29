@@ -24,12 +24,13 @@ export interface User {
   export interface SurveyResponse {
     id: string;
     user: string;
-    matching: Object;
+    matching: { [key: string]: number };
     evaluator: ProjectMember;
     projectWork: ProjectWork;
     status: 'draft' | 'closed' | 'pending' | 'finished' | 'requested';
     answers: string[];
     created_at: Date;
+    categories: { [key: string]: number }[];
   }
   
   export interface ProfileDetails {

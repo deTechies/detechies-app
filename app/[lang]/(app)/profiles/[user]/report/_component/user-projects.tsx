@@ -6,22 +6,24 @@ import {
   MemoizedTotalProjectItem as TotalProjectItem,
   MemoizedCommonProjectItem as CommonProjectItem,
 } from "./project-item";
+import { ProjectMember } from "@/lib/interfaces";
 
 export default function UserProjects({
-  profile,
+  projects,
   lang,
-  selectProject,
-  setSelectProject,
+  selectedProject,
+  setSelectedProject,
 }: {
-  profile: any;
+  projects: ProjectMember[];
   lang: any;
-  selectProject: any;
-  setSelectProject: Function;
+  selectedProject: any;
+  setSelectedProject: Function;
 }) {
+
   return (
     <Card className="flex gap-0 px-8 pb-8 pt-7">
       <h3 className="mb-4 text-subhead_s">
-        참여한 프로젝트 ({profile.projects.length})
+        참여한 프로젝트 ({projects.length})
       </h3>
 
       <div className="mb-6 text-text-secondary text-body_m">
@@ -30,26 +32,23 @@ export default function UserProjects({
 
       <div className="mb-3">
         <TotalProjectItem
-          profile={profile}
+          projects={projects}
           lang={lang}
-          selected={!selectProject}
-          onClick={() => setSelectProject(null)}
+          selected={!selectedProject}
+          onClick={() => setSelectedProject(null)}
         ></TotalProjectItem>
       </div>
 
       <div className="overflow-y-auto max-h-[400px] flex flex-col gap-3">
-        {profile.projects &&
-          profile.projects.map((project: any) => {
-            if (project.works.length < 1) return;
-
+        {projects &&
+          projects.map((project: any) => {
             return (
               <CommonProjectItem
                 project={project}
                 lang={lang}
-                selected={selectProject == project.project.id}
+                selected={selectedProject?.project.id == project.project.id}
                 onClick={() => {
-                  setSelectProject(project.project.id);
-                  console.log(project.project.id);
+                  setSelectedProject(project);
                 }}
                 key={project.project.id}
               ></CommonProjectItem>

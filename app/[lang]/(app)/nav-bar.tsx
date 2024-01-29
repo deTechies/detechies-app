@@ -55,7 +55,7 @@ export default function Navbar({ lang }: { lang: any }) {
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
    
                   <Image
-                    className="block object-contain h-12 dark:hidden"
+                    className="block object-contain dark:hidden"
                     src="/images/careerzen.png"
                     alt="Careerzen"
                     width={150}
