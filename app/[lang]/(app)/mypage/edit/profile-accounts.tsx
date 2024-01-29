@@ -24,7 +24,7 @@ const logos = [
 export default function ProfileAccounts() {
   return (
     <Card className="my-8">
-    <h1 className="text-2xl font-medium mb-6 text-primary">
+    <h1 className="text-subhead_m font-medium mb-6 text-primary ">
       아이덴티티 인증
     </h1>
     {/* 4개씩 3줄짜리 테이블 */}
