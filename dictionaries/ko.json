@@ -601,9 +601,15 @@
     "create": {
       "title": "그룹 만들기",
       "required_text": "*는 필수입력 사항입니다.",
-      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.",
+      "description": "대표 이메일 인증이 필요해요. 대표 메일로 전송된 인증번호를 확인 후 입력해주세요.",
       "form": {
-        "type": "카테고리",
+        "email_placeholder": "이메일을 입력해주세요.",
+        "verify_code_placeholder": "인증번호 입력하세요.",
+        "resend": "다시 보내기",
+        "send_code": "인증번호 보내기",
+        "verify": "인증하기",
+        "seconds": "초",
+        "type": "그룹 성격 선택하기",
         "name": "그룹명",
         "name_placeholder": "그룹을 대표하는 이름을 입력하세요.",
         "desc": "그룹 설명",
@@ -616,7 +622,14 @@
         "check": "그룹 목록과 그룹상세보기에서 확인 가능합니다.",
         "links": "대표 사이트",
         "cancel": "취소",
-        "create_group": "만들기"
+        "create_group": "만들기",
+        "dialog_title": "그룹 만들기 요청 성공!",
+        "dialog_desc": "그룹 만들기 인증 절차를 위해 커리어젠 서포터팀에서 아래 이메일로 영업일 1일 이내에 메일을 보내드릴게요.",
+        "dialog_email": "인증 절차 안내받을 이메일",
+        "dialog_information": "문의사항 발생 시, 커리어젠 서포터팀으로 연락하세요.",
+        "ok": "확인",
+        "wait_for_auth": "인증 대기 중..",
+        "contact": "1:1 문의하기"
       }
     },
     "details": {

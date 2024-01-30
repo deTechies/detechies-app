@@ -80,13 +80,13 @@ function CommonProjectItem({
     >
       <div className="flex flex-wrap gap-5">
         <div className="relative shrink-0 w-[120px] h-[120px]">
-          {/* <Image
+          <Image
             src={`https://ipfs.io/ipfs/` + project.project.image}
             alt="Project Image"
             width="120"
             height="120"
             className="rounded-sm"
-          /> */}
+          />
         </div>
 
         <div className="grow">

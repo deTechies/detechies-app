@@ -605,9 +605,15 @@
     "create": {
       "title": "Create Group",
       "required_text": "* indicates required fields.",
-      "description": "Schools, companies, and institutions can create groups after verifying their official email.",
+      "description": "Representative email verification is required. Please check and enter the authentication number sent to your main email address.",
       "form": {
-        "type": "Category",
+        "email_placeholder": "Enter email.",
+        "verify_code_placeholder": "Enter verification code.",
+        "resend": "Resend",
+        "send_code": "Send Code",
+        "verify": "Verify",
+        "seconds": "s",
+        "type": "Group Type",
         "name": "Group Name",
         "name_placeholder": "Enter Group Name",
         "desc": "Description",
@@ -620,7 +626,14 @@
         "check": "Can be checked in the group list and group detail view.",
         "links": "Official Website",
         "cancel": "Cancel",
-        "create_group": "Create"
+        "create_group": "Create",
+        "dialog_title": "Group creation request successful!",
+        "dialog_desc": "The CareerGen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
+        "dialog_email": "Email to receive authentication process instructions",
+        "dialog_information": "If you have any questions, please contact the CareerGen Support Team.",
+        "ok": "I understand",
+        "wait_for_auth": "Waiting for auth..",
+        "contact": "Contact Us"
       }
     },
     "details": {

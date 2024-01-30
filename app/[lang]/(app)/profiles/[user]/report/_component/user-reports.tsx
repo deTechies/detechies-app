@@ -35,6 +35,7 @@ export default function UserReports({
   totalResult: any;
   userReport: any;
 }) {
+
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [contributionNumber, setContributionNumber] = useState(0);
 
@@ -52,7 +53,7 @@ export default function UserReports({
       setContributionNumber(contributionNumber);
     }
 
-    console.log(selectedProject);
+    // console.log(selectedProject);
   }, [selectedProject]);
 
   return (
