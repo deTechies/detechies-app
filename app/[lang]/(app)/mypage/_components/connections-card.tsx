@@ -9,7 +9,7 @@ interface IConnectionCardProps {
     logoSrc: string;
     logoAlt: string;
     label: string;
-    sublabel: string | undefined;
+    sublabel: string | null | undefined;
 }
 
 const ConnectionCard = ({key, logoSrc, logoAlt, label, sublabel}: IConnectionCardProps) => {

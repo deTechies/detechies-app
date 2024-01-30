@@ -71,7 +71,7 @@ export default function ProfileAccounts({profile}:IProfileAccountsProps) {
           logoSrc={verified ? logos[i].src : darkLogos[i].src} 
           logoAlt={verified ? logos[i].alt : darkLogos[i].alt} 
           label={verified ? logos[i].text : darkLogos[i].text}
-          sublabel={verified? profile[logo.name as keyof Profile] : dictionary.mypage.edit_profile.verify}
+          sublabel={verified? profile[logo.name as keyof Profile] as string: dictionary.mypage.edit_profile.verify}
           />
         )
     })}

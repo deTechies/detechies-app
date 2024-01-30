@@ -1,5 +1,6 @@
+"use client"
 import Image from "next/image";
-
+import ConnectionCard from "./connections-card";
 const networks = [
   {
     image: "/icons/ens.png",
@@ -49,29 +50,10 @@ export default async function Connections({
 
   //const {data} = await getUserConnections(address);
   return (
-    <section className={`w-full flex flex-wrap items-start justify-between gap-[20px]`}>
+    <section className={`w-full flex flex-wrap items-start justify-between`}>
 
       {networks.map((network: any, key: number) => (
-        <div
-          key={key}
-          className="flex border p-4 pb-[20px] border-border-div rounded-sm items-center gap-4 bg-background-layer-1 grow"
-        >
-          <Image
-            src={network.image}
-            alt={network.name}
-            width={48}
-            height={48}
-            className="rounded-sm shrink-0"
-          />
-          <div className="flex flex-col gap-2">
-            <span className="text-title_s capitalize">
-              {network.name}
-            </span>
-            <span className="text-label_s text-text-secondary">
-              Coming soon
-            </span>
-          </div>
-        </div>
+        <ConnectionCard key={key} logoSrc={network.image} logoAlt={network.name} label={network.name} sublabel={"Coming soon"}/>
       ))}
     </section>
   );
