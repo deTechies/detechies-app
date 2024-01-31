@@ -9,8 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-accent-secondary text-accent-primary",
         default: "bg-accent-secondary text-accent-primary",
+        primary: "bg-accent-secondary text-accent-primary",
         success: "bg-accent-primary text-background-layer-1",
         error: "bg-state-error-secondary text-state-error",
         destructive: "bg-state-error-secondary text-state-error hover:bg-destructive/20",
@@ -18,6 +18,7 @@ const buttonVariants = cva(
         secondary: "bg-button-secondary",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        inactive: "text-text-secondary bg-background-layer-1",
       },
       size: {
         default: "px-6 py-4 rounded-full truncate",

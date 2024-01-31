@@ -600,7 +600,8 @@
       "nfts": "NFTs",
       "banner": "Create your own group and",
       "banner2": "Award NFTs to projects and individuals and be an influential group!",
-      "banner3": "Go create a group"
+      "banner3": "Go create a group",
+      "view_more": "View More"
     },
     "create": {
       "title": "Create Group",
