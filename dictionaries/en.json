@@ -39,6 +39,41 @@
       "Profile Items": "profile items"
     }
   },
+  "profile": {
+    "report_card": {
+      "title": "Reputation Report",
+      "total_experience": "Total experience",
+      "total_evalucation": "Total evaluations received",
+      "admin_evalu": "Administrator evaluation",
+      "member_evalu": "Member evaluation",
+      "client_evalu": "Client evaluation",
+      "view": "View"
+    },
+    "report_popup": {
+      "title": "View reputation report",
+      "desc": "View the consolidated reputation report and see the performance ratings experts have received on projects.",
+      "this_report": "The report you want to view",
+      "total_report": "Consolidated Reputation Report",
+      "point_to_need": "Points needed to view",
+      "points_held": "Points held",
+      "back": "Back",
+      "view": "View"
+    },
+    "summary": {
+      "title": "Expert Reputation Report",
+      "billing": "Billed hourly rate",
+      "billing_unit": "Won",
+      "hours": "Input hours",     
+      "hours_unit": "hours per week",
+
+      "introduction": "Introduction"
+    },
+    "statistics": {
+      "feedback_times": "Feedback Times",
+      "rate_requirements": "Rate Requirements",
+      "rate_time_schedule": "Rate Time Schedule"
+    }
+  },
   "profile_filter": {
     "profiles": "Profiles", 
     "all": "All",
@@ -472,7 +507,6 @@
         "reset": "Reset",
         "save":  "Save"
     },
-    
     "edit_profile": {
       "edit_profile": "edit profile",
       "full_name": "full name",
@@ -485,7 +519,25 @@
       "profile_description_label": "Tell us a little bit about yourself",
       "skills": "skills",
       "username": "username",
-      "save_changes": "save changes"
+      "save_changes": "save changes",
+      "identity_authentication": "Linked Accounts",
+      "verify":"Coming soon",
+      "social_networks":{
+        "google":"Google",
+        "phone_number":"Phone Number",
+        "telegram":"Telegram",
+        "email":"Email",
+        "web3_wallet":"Web3 Wallet",
+        "github":"Github",
+        "figma":"Figma",
+        "pinterest":"Pinterest",
+        "youtube":"Youtube",
+        "linkedin":"LinkedIn",
+        "facebook":"Facebook",
+        "reddit":"Reddit",
+        "kakao": "Kakaotalk",
+        "twitter": "X (Twitter)"
+      }
     },
     "project": {
       "projects": "Projects",

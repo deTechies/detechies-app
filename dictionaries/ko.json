@@ -39,6 +39,40 @@
       "Profile Items": "profile items"
     }
   },
+  "profile": {
+    "report_card": {
+      "title": "의 평판보고서",
+      "total_experience": "총 경력",
+      "total_evalucation": "총 받은 평가",
+      "admin_evalu": "관리자 평가",
+      "member_evalu": "동료 평가",
+      "client_evalu": "클라이언트 평가",
+      "view": "열람하기"
+    },
+    "report_popup": {
+      "title": "통합 평판 보고서 열람하기",
+      "desc": "통합 평판 보고서 열람하고, 전문가가 프로젝트에서 받은 성과 평가를 확인해보세요.",
+      "this_report": "열람하려는 보고서",
+      "total_report": "통합 평판 보고서",
+      "point_to_need": "열람에 필요한 포인트",
+      "points_held": "보유 포인트",
+      "back": "뒤로가기",
+      "view": "열람하기"
+    },
+    "summary": {
+      "title": "전문가 평판 보고서",
+      "billing": "청구시급",
+      "billing_unit": "원",
+      "hours": "투입시간",
+      "hours_unit": "시간/주",
+      "introduction": "소개글"
+    },
+    "statistics": {
+      "feedback_times": "피드백 반영도",
+      "rate_requirements": "완성도",
+      "rate_time_schedule": "마감일 준수율"
+    }
+  },
   "profile_filter": {
     "profiles": "전문가 찾기",
     "all": "All",
@@ -482,7 +516,25 @@
       "profile_description_label": "익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다.",
       "skills": "스킬",
       "username": "닉네임",
-      "save_changes": "저장하기"
+      "save_changes": "저장하기",
+      "identity_authentication": "아이덴티티 인증",
+      "verify":"인증하기",
+      "social_networks":{
+        "google":"구글 계정",
+        "phone_number":"전화번호",
+        "telegram":"텔레그램",
+        "email":"이메일",
+        "web3_wallet":"탈중앙화 개인지갑",
+        "github":"Github",
+        "figma":"피그마",
+        "pinterest":"핀터레스트",
+        "youtube":"유튜브",
+        "linkedin":"링크드인",
+        "facebook":"페이스북",
+        "reddit":"레딧",
+        "kakao": "카카오톡",
+        "twitter": "트위터"
+      }
     },
     "project": {
       "projects": "프로젝트",

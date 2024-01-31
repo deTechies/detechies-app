@@ -20,7 +20,7 @@ export default async function EditProfilePage({
         email={profile.email}
         text={dictionary.mypage.edit_profile}
       />
-      <ProfileAccounts />
+      <ProfileAccounts profile={profile}/>
     </>
   );
 }

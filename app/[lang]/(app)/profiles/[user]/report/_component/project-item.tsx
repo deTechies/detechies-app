@@ -2,21 +2,23 @@
 
 import { Badge } from "@/components/ui/badge";
 import Image from "@/components/ui/image";
+import { ProjectMember } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import { ChevronUp } from "lucide-react";
 import React, { useState } from "react";
 
 function TotalProjectItem({
-  profile,
+  projects,
   lang,
   selected,
   onClick,
 }: {
-  profile: any;
+  projects: ProjectMember[];
   lang: any;
   selected: boolean;
   onClick: Function;
 }) {
+
   return (
     <div
       className={`p-5 border rounded-md cursor-pointer transition-all ${
@@ -55,7 +57,7 @@ function CommonProjectItem({
   selected,
   onClick,
 }: {
-  project: any;
+  project: ProjectMember;
   lang: any;
   selected: boolean;
   onClick: Function;
