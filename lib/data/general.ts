@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
 import { auth } from "../helpers/authOptions";
 
-export async function serverApi(endpoint:string, searchParams?: string ) {
+export async function serverApi(endpoint:string, searchParams?: any) {
   const method = 'GET'
     const session = await auth();
   
@@ -15,12 +15,17 @@ export async function serverApi(endpoint:string, searchParams?: string ) {
     
     
     let url = new URL(`${API_URL}${endpoint}`);
+    
   
     if (searchParams) {
-      url.search = new URLSearchParams(searchParams).toString();
-    }
+      const params = new URLSearchParams(searchParams);
+
+      url.search = params.toString();
+      // Add your parameters
     
-    console.log(url);
+    }
+    // Add your parameters
+
     
   
     const options = {

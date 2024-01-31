@@ -58,6 +58,8 @@ export interface User {
   }
   
   export interface CreateClub {
+    email: string;
+    certification_number: string;
     name: string;
     image: string;
     type: GROUP_TYPE;

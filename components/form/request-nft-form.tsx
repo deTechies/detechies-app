@@ -112,7 +112,6 @@ export function RequestNftForm({
         description:
           "Please contact the admins to see if there is an issue with the contract",
       });
-      console.log(submitData);
 
       return;
     }

@@ -4,78 +4,87 @@ import { useEffect, useState } from "react";
 import UserProjects from "./user-projects";
 import UserStatistics from "./user-statistics";
 import { ChevronDown } from "lucide-react";
-import { ProjectMember, SurveyResponse } from "@/lib/interfaces";
+import {
+  PROFESSION_TYPE,
+  ProjectMember,
+  SurveyResponse,
+} from "@/lib/interfaces";
+
+interface ReportContribution {
+  description: string;
+  end_date: string | null;
+  role: PROFESSION_TYPE;
+  start_date: Date;
+  surveyResults: any[];
+  tags: string[];
+}
+interface ReportProject {
+  begin_date: string;
+  end_date: string | null;
+  description: string;
+  name: string;
+  recommendScoresByRole: { [key: string]: number };
+}
 
 export default function UserReports({
-  projects,
-  survey,
   lang,
   totalResult,
+  userReport,
 }: {
-  projects: ProjectMember[];
-  survey: any;
   lang: any;
   totalResult: any;
+  userReport: any;
 }) {
 
-  const [selectedProject, setSelectedProject] = useState<ProjectMember | null>(
-    null
-  );
-  const [selectedProjectSurvey, setSelectedProjectSurvey] = useState<
-    any | undefined
-  >(null);
-  const workIds = new Set(survey.map((item: any) => item.projectWork.workId));
-  const evaluated_projects = projects.filter((item: any) => {
-    return workIds.has(item.works[0]?.workId);
-  });
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
+  const [contributionNumber, setContributionNumber] = useState(0);
 
   useEffect(() => {
-    const selected =
-      survey &&
-      survey.find((item: any) => {
-        return item.projectWork.workId === selectedProject?.works[0].workId;
-      });
-
-    if (selected) {
-      setSelectedProjectSurvey([selected]);
+    if (selectedProject) {
+      const contributionNumber = selectedProject.contribution.length;
+      setContributionNumber(contributionNumber);
     } else {
-      setSelectedProjectSurvey(survey);
+      const contributionNumber = userReport.projects.reduce(
+        (acc: number, project: any) => {
+          return acc + project.contribution.length;
+        },
+        0
+      );
+      setContributionNumber(contributionNumber);
     }
-  }, [selectedProject]);
 
-  
-  useEffect(() => {
-    // console.log(totalResult);
-    // console.log(selectedProjectSurvey);
-  }, [selectedProjectSurvey]);
+    // console.log(selectedProject);
+  }, [selectedProject]);
 
   return (
     <div>
       <UserProjects
-        projects={evaluated_projects}
+        projects={userReport.projects}
         lang={lang}
         selectedProject={selectedProject}
         setSelectedProject={setSelectedProject}
       />
 
       <h3 className="mt-[60px] mb-4 text-heading_s text-center">
-        {selectedProject ? selectedProject.project.name : "통합 "}
+        {selectedProject
+          ? selectedProject.project.name
+          : lang.profile.statistics.total}
         {selectedProject && <br />}
-        평판 보고서
+        {lang.profile.statistics.reputation_report}
       </h3>
 
       <div className="mb-5 text-center text-title_m text-text-secondary">
-        총 받은 평가 ({12})
+        {lang.profile.statistics.total_evaluation} ({contributionNumber})
       </div>
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>
 
       <UserStatistics
-        projects={projects}
         lang={lang}
-        statistics={totalResult}
-      ></UserStatistics>
+        statistics={
+          totalResult
+        }
+      />
     </div>
   );
 }
-

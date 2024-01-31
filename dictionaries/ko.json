@@ -68,9 +68,26 @@
       "introduction": "소개글"
     },
     "statistics": {
+      "joined_projects": "참여한 프로젝트",
+      "joined_projects_desc": "프로젝트를 클릭하면 프로젝트 별 받은 성과 평가를 열람할 수 있어요.",
+      "total_report": "통합 평판 보고서",
+      "total_career": "총 경력",
+      "total_evaluation": "총 받은 평가",
+      "admin_evaluation": "관리자 평가",
+      "member_evaluation": "동료 평가",
+      "client_evaluation": "클라이언트 평가",
+      "work_period": "작업 기간",
+      "project_part": "기여한 파트",
+      "s_evaluation": "님이 작성한 평가",
+      "total": "통합 ",
+      "reputation_report": "평판 보고서",
       "feedback_times": "피드백 반영도",
       "rate_requirements": "완성도",
-      "rate_time_schedule": "마감일 준수율"
+      "rate_time_schedule": "마감일 준수율",
+      "good_team_player": "긍정적인 영향",
+      "rate_contributions": "기여도",
+      "points": "점",
+      "total_points": "총점"
     }
   },
   "profile_filter": {
@@ -400,8 +417,8 @@
       "evaluation_contents": "평가 내용",
       "reject": "업무내용 사실여부 평가 사유",
       "reject_placeholder": "해당 업무내용이 사실과 다른 부분을 알려주시면 피평가자가 다시 작성할거에요.",
-      "eval_work_contribution": "성과/기여도 평가",
-      "work_contribution": {
+      "eval_rate_contributions": "성과/기여도 평가",
+      "rate_contributions": {
         "label": "위 업무에 대한 해당 팀원의 기여도를 알려주세요.",
         "messages": [
           "거의 기여하지 않음",
@@ -411,7 +428,7 @@
           "해당 파트 전체를 완벽하게 수행했어요."
         ]
       },
-      "meet_requirements": {
+      "rate_requirements": {
         "label": "해당 팀원의 결과물은 요구사항을 충족했나요?",
         "messages": [
           "누락 또는 하자가 20% 이상 (치명적인 하자 또는 누락)",
@@ -421,7 +438,7 @@
           "모든 요구사항을 만족시켰어요."
         ]
       },
-      "meet_schedule": {
+      "rate_time_schedule": {
         "label": "마일스톤에 따른 작업 일정을 준수했나요?",
         "messages": [
           "합의된 작업 기간에서 +4일 이상 지연",
@@ -584,9 +601,15 @@
     "create": {
       "title": "그룹 만들기",
       "required_text": "*는 필수입력 사항입니다.",
-      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.",
+      "description": "대표 이메일 인증이 필요해요. 대표 메일로 전송된 인증번호를 확인 후 입력해주세요.",
       "form": {
-        "type": "카테고리",
+        "email_placeholder": "이메일을 입력해주세요.",
+        "verify_code_placeholder": "인증번호 입력하세요.",
+        "resend": "다시 보내기",
+        "send_code": "인증번호 보내기",
+        "verify": "인증하기",
+        "seconds": "초",
+        "type": "그룹 성격 선택하기",
         "name": "그룹명",
         "name_placeholder": "그룹을 대표하는 이름을 입력하세요.",
         "desc": "그룹 설명",
@@ -599,7 +622,14 @@
         "check": "그룹 목록과 그룹상세보기에서 확인 가능합니다.",
         "links": "대표 사이트",
         "cancel": "취소",
-        "create_group": "만들기"
+        "create_group": "만들기",
+        "dialog_title": "그룹 만들기 요청 성공!",
+        "dialog_desc": "그룹 만들기 인증 절차를 위해 커리어젠 서포터팀에서 아래 이메일로 영업일 1일 이내에 메일을 보내드릴게요.",
+        "dialog_email": "인증 절차 안내받을 이메일",
+        "dialog_information": "문의사항 발생 시, 커리어젠 서포터팀으로 연락하세요.",
+        "ok": "확인",
+        "wait_for_auth": "인증 대기 중..",
+        "contact": "1:1 문의하기"
       }
     },
     "details": {

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -21,11 +22,24 @@ export default function SimpleBarChart({
   data,
   xKey,
   yKey,
+  onClickBar,
 }: {
   data: any;
   xKey: string;
   yKey: string;
+  onClickBar?: Function;
 }) {
+  const [positiveColor, setPositiveColor] = useState('');
+  const [commonColor, setCommonColor] = useState('');
+  const [nagativeColor, setNagativeColor] = useState('');
+
+  useEffect(() => {
+    const rootStyle = getComputedStyle(document.documentElement);
+    setPositiveColor(rootStyle.getPropertyValue('--accent-primary').trim());
+    setCommonColor(rootStyle.getPropertyValue('--border-input').trim());
+    setNagativeColor(rootStyle.getPropertyValue('--state-error-primary').trim());
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -40,17 +54,22 @@ export default function SimpleBarChart({
         barSize={36}
       >
         <CartesianGrid vertical={false} />
-        <XAxis dataKey={xKey} tickLine={false} />
+        <XAxis
+          dataKey={xKey}
+          tickLine={false}
+          className="text-title_s text-text-secondary"
+          />
         <YAxis
           tickCount={6}
           tickLine={false}
           axisLine={false}
           domain={[0, 100]}
+          className="text-label_m text-text-secondary"
         />
         <Tooltip
           contentStyle={{ backgroundColor: "black", color: "white" }}
           content={<CustomTooltip />}
-          cursor={{ fill: "#00D41D", fillOpacity: 0.2 }}
+          cursor={{ fill: positiveColor, fillOpacity: 0.2 }}
         />
         <Bar dataKey={yKey} radius={[8, 8, 0, 0]}>
           {data.map((entry: any, index: number) => (
@@ -58,14 +77,16 @@ export default function SimpleBarChart({
               key={`cell-${index}`}
               fill={
                 entry[yKey] < 30
-                  ? "#FF3939"
+                  ? nagativeColor
                   : entry[yKey] < 70
-                  ? "#BEC3CA"
-                  : "#00D41D"
+                  ? commonColor
+                  : positiveColor
               }
               className="cursor-pointer"
               onClick={() => {
-                console.log(entry);
+                if (onClickBar) {
+                  onClickBar(entry);
+                }
               }}
             />
           ))}

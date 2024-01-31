@@ -76,7 +76,7 @@ export default function GroupList({
 
       <TabsContent value="all" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filteredData].reverse().map((group: any, key: number) => {
+          {[...filteredData].reverse().map((group: any) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
@@ -84,7 +84,7 @@ export default function GroupList({
 
       <TabsContent value="created" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterJoinedGroups].reverse().map((group: any, key: number) => {
+          {[...filterJoinedGroups].reverse().map((group: any) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
@@ -92,7 +92,7 @@ export default function GroupList({
 
       <TabsContent value="joined" className="mx-0 mt-0 mb-16">
         <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterCreatedGroups].reverse().map((group: any, key: number) => {
+          {[...filterCreatedGroups].reverse().map((group: any) => {
             return <GroupListItem key={group.id} details={group} lang={lang} />;
           })}
         </div>
@@ -100,7 +100,7 @@ export default function GroupList({
 
       <Link
         href="groups/create"
-        className="px-10 py-10 max-w-[1028px] h-[217px] flex mx-auto bg-[url('/images/banner-create-group.png')]"
+        className="px-10 py-10 max-w-[1028px] min-h-[217px] flex mx-auto bg-[url('/images/banner-create-group.png')]"
       >
         <div className="max-w-[430px]">
           <div className="mb-1 text-subhead_m text-accent-primary">

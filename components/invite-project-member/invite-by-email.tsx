@@ -71,14 +71,12 @@ export default function InviteByEmail({
 
     if (result) {
       toast({
-        title: "Success",
-        description: "Project created successfully",
+        description: "Invitation sent successfully",
       });
       setLoading(false);
       cancelByEmail();
-      return
+      return;
     }
-
 
     setLoading(false);
   }

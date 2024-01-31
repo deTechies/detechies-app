@@ -19,7 +19,6 @@ export default function InlineMemberItem({
   active = false,
   info,
 }: MemberListDetails) {
-  console.log(info);
   if (!display_name)
     return (
       <div className="flex items-center py-4">

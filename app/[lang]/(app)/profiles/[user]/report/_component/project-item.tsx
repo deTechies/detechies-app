@@ -13,12 +13,11 @@ function TotalProjectItem({
   selected,
   onClick,
 }: {
-  projects: ProjectMember[];
+  projects: any[];
   lang: any;
   selected: boolean;
   onClick: Function;
 }) {
-
   return (
     <div
       className={`p-5 border rounded-md cursor-pointer transition-all ${
@@ -26,24 +25,28 @@ function TotalProjectItem({
       }`}
       onClick={() => onClick()}
     >
-      <h4 className="mb-3 text-title_l">통합 평판 보고서</h4>
+      <h4 className="mb-3 text-title_l">
+        {lang.profile.statistics.total_report}
+      </h4>
 
-      <div className="mb-2 text-label_m text-text-secondary">총경력 어쩌구</div>
+      <div className="mb-2 text-label_m text-text-secondary">
+        {lang.profile.statistics.total_career}:
+      </div>
 
       <div className="flex items-center gap-2">
-        <span>총 받은 평가 (어쩌구):</span>
+        <span>{lang.profile.statistics.total_evaluation} (어쩌구):</span>
 
         <div className="flex flex-wrap gap-2">
           <Badge variant="purple" shape="sm">
-            관리자 평가 {3}
+            {lang.profile.statistics.admin_evaluation} {3}
           </Badge>
 
           <Badge variant="accent" shape="sm">
-            동료 평가 {5}
+            {lang.profile.statistics.member_evaluation} {5}
           </Badge>
 
           <Badge variant="info" shape="sm">
-            클라이언트 평가 {2}
+            {lang.profile.statistics.client_evaluation} {2}
           </Badge>
         </div>
       </div>
@@ -57,7 +60,7 @@ function CommonProjectItem({
   selected,
   onClick,
 }: {
-  project: ProjectMember;
+  project: any;
   lang: any;
   selected: boolean;
   onClick: Function;
@@ -76,7 +79,7 @@ function CommonProjectItem({
       onClick={() => onClick()}
     >
       <div className="flex flex-wrap gap-5">
-        <div className="relative shrink-0">
+        <div className="relative shrink-0 w-[120px] h-[120px]">
           <Image
             src={`https://ipfs.io/ipfs/` + project.project.image}
             alt="Project Image"
@@ -90,7 +93,7 @@ function CommonProjectItem({
           <div className="mb-4 text-title_l">{project.project.name}</div>
 
           <div className="mb-2 text-label_m text-text-secondary">
-            작업 기간:{" "}
+            {lang.profile.statistics.work_period}:{" "}
             {beginEndDates(
               project.project.begin_date,
               project.project.end_date
@@ -98,12 +101,13 @@ function CommonProjectItem({
           </div>
 
           <div className="mb-2 text-label_m text-text-secondary">
-            기여한 파트: {project.works[0]?.role}
+            {lang.profile.statistics.project_part}:{" "}
+            {project.contribution[0].role}
           </div>
 
           <div className="flex gap-2">
-            {project.works[0].tags.length > 0 &&
-              project.works[0].tags.map((tag: string) => {
+            {project.contribution[0].tags.length > 0 &&
+              project.contribution[0].tags.map((tag: string) => {
                 return (
                   <Badge shape="outline" variant="placeholder" key={tag}>
                     <div className="truncate">{tag}</div>
@@ -116,15 +120,15 @@ function CommonProjectItem({
         <div className="flex flex-col items-end justify-between ml-auto">
           <div className="flex flex-wrap gap-2 mb-2">
             <Badge variant="purple" shape="sm">
-              관리자 평가 {3}
+              {lang.profile.statistics.admin_evaluation} {3}
             </Badge>
 
             <Badge variant="accent" shape="sm">
-              동료 평가 {5}
+              {lang.profile.statistics.member_evaluation} {5}
             </Badge>
 
             <Badge variant="info" shape="sm">
-              클라이언트 평가 {2}
+              {lang.profile.statistics.client_evaluation} {2}
             </Badge>
           </div>
 
@@ -132,7 +136,7 @@ function CommonProjectItem({
             className="flex gap-1 select-none text-icon-secondary text-label_m"
             onClick={onShowMore}
           >
-            {"Robin"}님이 작성한 평가
+            {"Robin"}{lang.profile.statistics.s_evaluation}
             <ChevronUp
               className={`w-5 h-5 transition ${showMore && "rotate-180"}`}
             ></ChevronUp>
@@ -143,7 +147,7 @@ function CommonProjectItem({
       {showMore && (
         <div className={`pt-4 transition-all`}>
           <div className="p-5 break-words border rounded-md border-border-div">
-            {project.works[0]?.description}
+            {project.contribution[0]?.description}
           </div>
         </div>
       )}

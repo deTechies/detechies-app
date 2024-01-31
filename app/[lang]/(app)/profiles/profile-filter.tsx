@@ -34,7 +34,7 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   const selectLimit = (limit: string) => {
     setLoading(true)
 
-      router.push(pathname + "?" + createQueryString("limit", limit));
+    router.push(pathname + "?" + createQueryString("limit", limit));
 
     setLoading(false)
   }
