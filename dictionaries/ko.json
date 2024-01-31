@@ -431,6 +431,20 @@
     }
   },
   "mypage": {
+    "topup": {
+      "charge": "charge", 
+      "points": "points",
+      "success_message": "Your payment was successful.", 
+      "top_up_title": "포인트 충전하기", 
+      "top_up_desc": "포인트를 사용해서 커리어젠에 있는 전문가의 평판 보고서를 열람해보세요!",
+      "input_amount_label": "충전하려는 금액 입력",
+      "amount": "amount", 
+      "total": "total", 
+      "current_balance": "보유 포인트:",
+      "card_details": "결제 카드 입력", 
+      "cancel": "충전하기", 
+      "pay": "충전하기"
+    }, 
     "awards": {
       "awards": "수상이력",
       "issuer": "발행자",

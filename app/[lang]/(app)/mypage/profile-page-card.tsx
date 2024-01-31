@@ -1,19 +1,21 @@
 "use client";
+import MyCredits from "@/components/profile/my-credits";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { useToast } from "@/components/ui/use-toast";
 import { updateUserAvatar } from "@/lib/data/user";
+import { useDictionary } from "@/lib/dictionaryProvider";
 import { User } from "@/lib/interfaces";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { useDictionary } from "@/lib/dictionaryProvider";
 
 export default function ProfilePageCard({
   text,
   profile,
+
 }: {
   text: any;
   profile: User;
@@ -158,6 +160,8 @@ export default function ProfilePageCard({
           </Link>
         </div>
       </div>
+      <MyCredits credits={profile.credits} dictionary={dictionary}/>
+      
       </div>
     </Card>
   );

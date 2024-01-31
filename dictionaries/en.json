@@ -433,6 +433,20 @@
     }
   },
   "mypage": {
+    "topup": {
+      "charge": "charge", 
+      "points": "points",
+      "success_message": "Your payment was successful.", 
+      "input_amount_label": "Enter the amount you charge", 
+      "top_up_title": "top_up_title", 
+      "top_up_desc": "top_up_desc",
+      "amount": "amount", 
+      "current_balance": "Current Balance",
+      "total": "total", 
+      "cancel": "Cancel", 
+      "card_details": "Card Details", 
+      "pay": "Pay"
+    }, 
     "awards": {
       "awards": "Awards",
       "issuer": "Issuer",
