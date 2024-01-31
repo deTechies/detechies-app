@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import GroupListItem from "./group-list-item";
+import { Button } from "@/components/ui/button";
 
 //TODO: Add type dependency
 export default function GroupList({
@@ -17,55 +18,51 @@ export default function GroupList({
   groups: Club[];
   lang: any;
 }) {
-  //const { search: searchValue } = searchParams as { [key: string]: string };
-
   const { data: user } = useSession();
-  //const resultsText = products.length > 1 ? 'results' : 'result';
-
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
-  const [sortedData, setSortedData] = useState<any>([]);
+  const [filteredData, setFilteredData] = useState(groups);
 
   useEffect(() => {
-    const data = groups.sort((a, b) => {
-      if ((a.members?.length as number) - (b.members?.length as number) == 0) {
-        return Number(new Date(a.created_at)) - Number(new Date(b.created_at));
+    // 검색어에 따라 필터링된 그룹 목록을 설정합니다.
+    const searchFilteredData = groups.filter(group => 
+      group.name.toLowerCase().includes(search?.toLowerCase() || '')
+    );
+
+    // 정렬된 데이터를 설정합니다.
+    const sortedData = searchFilteredData.sort((a, b) => {
+      if ((a.members?.length ?? 0) - (b.members?.length ?? 0) === 0) {
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
       }
-      return (a.members?.length as number) - (b.members?.length as number);
+      return (a.members?.length ?? 0) - (b.members?.length ?? 0);
     });
 
-    setSortedData(data);
-  }, [groups]);
+    setFilteredData(sortedData);
+  }, [groups, search]);
 
-  const filteredData = sortedData.filter((group: any) => {
-    return group.name
-      .toLowerCase()
-      .includes(search ? search.toLowerCase() : "");
+  const [currentTab, setCurrentTab] = useState('all');
+  const displayGroups = filteredData.filter(group => {
+    if (currentTab === 'joined') return group.isUserMember;
+    if (currentTab === 'created') return group.owner === user?.web3?.address;
+    return true;
   });
 
-  const filterJoinedGroups = filteredData.filter(
-    (group: any) => group.isUserMember
-  );
-  const filterCreatedGroups = filteredData.filter(
-    (group: any) => group.owner === user?.web3?.address
-  );
-
   return (
-    <Tabs defaultValue="all">
-      <TabsList className="justify-center" variant="button1">
-        <TabsTrigger value="all" variant="button2">
+    <div defaultValue="all">
+      <div className="flex flex-wrap gap-2">
+        <Button onClick={() => setCurrentTab("all")}>
           {lang.group.list.all}
-        </TabsTrigger>
+        </Button>
 
-        <TabsTrigger value="joined" variant="button2">
+        <Button onClick={() => setCurrentTab("joined")}>
           {lang.group.list.joined}
-        </TabsTrigger>
+        </Button>
 
-        <TabsTrigger value="created" variant="button2">
+        <Button onClick={() => setCurrentTab("created")}>
           {lang.group.list.created}
-        </TabsTrigger>
-      </TabsList>
+        </Button>
+      </div>
 
       <div className="w-full my-10 max-w-[27rem] mx-auto">
         <Search
@@ -74,29 +71,11 @@ export default function GroupList({
         />
       </div>
 
-      <TabsContent value="all" className="mx-0 mt-0 mb-16">
-        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filteredData].reverse().map((group: any) => {
-            return <GroupListItem key={group.id} details={group} lang={lang} />;
-          })}
-        </div>
-      </TabsContent>
-
-      <TabsContent value="created" className="mx-0 mt-0 mb-16">
-        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterJoinedGroups].reverse().map((group: any) => {
-            return <GroupListItem key={group.id} details={group} lang={lang} />;
-          })}
-        </div>
-      </TabsContent>
-
-      <TabsContent value="joined" className="mx-0 mt-0 mb-16">
-        <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {[...filterCreatedGroups].reverse().map((group: any) => {
-            return <GroupListItem key={group.id} details={group} lang={lang} />;
-          })}
-        </div>
-      </TabsContent>
+      <div className="grid items-stretch w-full gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {displayGroups.reverse().map((group: any) => (
+          <GroupListItem key={group.id} details={group} lang={lang} />
+        ))}
+      </div>
 
       <Link
         href="groups/create"
@@ -117,6 +96,6 @@ export default function GroupList({
           </div>
         </div>
       </Link>
-    </Tabs>
+    </div>
   );
 }
