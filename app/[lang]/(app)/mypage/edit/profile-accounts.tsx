@@ -51,8 +51,8 @@ export default function ProfileAccounts({profile}:IProfileAccountsProps) {
     {name: "reddit", src: "/images/socials/color/reddit.png", alt: "reddit verified", text: dictionary.mypage.edit_profile.social_networks.reddit },
     {name: "telegram", src: "/images/socials/color/telegram.png", alt: "telegram verified", text: dictionary.mypage.edit_profile.social_networks.telegram },
     {name: "youtube", src: "/images/socials/color/youtube.png", alt: "youtube verified", text: dictionary.mypage.edit_profile.social_networks.youtube },
-    { name:"kakao", src: "/images/socials/color/kakao.png", alt: "kakao verified", text: dictionary.mypage.edit_profile.social_networks.kakao },
-    { name:"twitter", src: "/images/socials/color/twitter.png", alt: "twitter verified", text: dictionary.mypage.edit_profile.social_networks.twitter },
+    // { name:"kakao", src: "/images/socials/color/kakao.png", alt: "kakao verified", text: dictionary.mypage.edit_profile.social_networks.kakao },
+    // { name:"twitter", src: "/images/socials/color/twitter.png", alt: "twitter verified", text: dictionary.mypage.edit_profile.social_networks.twitter },
   ];
 
   return (
