@@ -56,26 +56,26 @@ export default function ProfileAccounts({profile}:IProfileAccountsProps) {
   ];
 
   return (
-    <Card className="my-8">
-    <h1 className="text-subhead_m font-medium mb-6 text-primary ">
-      {dictionary.mypage.edit_profile.identity_authentication}
-    </h1>
-    <div className="flex flex-wrap justify-evenly gap-2">
-      {logos.map((logo, i) => {
+    <Card className="my-8 w-full">
+      <h1 className="text-subhead_m font-medium mb-6 text-primary ">
+        {dictionary.mypage.edit_profile.identity_authentication}
+      </h1>
+      <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 flex-wrap gap-2">
+        {logos.map((logo, i) => {
 
-        let verified = logo.name in profile;
+          let verified = logo.name in profile;
 
-        return(
-        <ConnectionCard 
-          key={i} 
-          logoSrc={verified ? logos[i].src : darkLogos[i].src} 
-          logoAlt={verified ? logos[i].alt : darkLogos[i].alt} 
-          label={verified ? logos[i].text : darkLogos[i].text}
-          sublabel={verified? profile[logo.name as keyof Profile] as string: dictionary.mypage.edit_profile.verify}
-          />
-        )
-    })}
-    </div>
+          return(
+          <ConnectionCard 
+            key={i} 
+            logoSrc={verified ? logos[i].src : darkLogos[i].src} 
+            logoAlt={verified ? logos[i].alt : darkLogos[i].alt} 
+            label={verified ? logos[i].text : darkLogos[i].text}
+            sublabel={verified? profile[logo.name as keyof Profile] as string: dictionary.mypage.edit_profile.verify}
+            />
+          )
+      })}
+      </div>
   </Card>
   )
 }

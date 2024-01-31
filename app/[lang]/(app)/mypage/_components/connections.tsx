@@ -50,8 +50,7 @@ export default async function Connections({
 
   //const {data} = await getUserConnections(address);
   return (
-    <section className={`w-full flex flex-wrap items-start justify-between`}>
-
+    <section className={`w-full flex items-start justify-between gap-3 2xl:gap-5`}>
       {networks.map((network: any, key: number) => (
         <ConnectionCard key={key} logoSrc={network.image} logoAlt={network.name} label={network.name} sublabel={"Coming soon"}/>
       ))}
