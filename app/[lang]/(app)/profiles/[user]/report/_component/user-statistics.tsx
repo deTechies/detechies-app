@@ -46,7 +46,7 @@ export default function UserStatistics({
   useEffect(() => {
     // matchingData transform
 
-    console.log(statistics);
+    // console.log(statistics);
 
     if (statistics.matching) {
       const transformed = Object.keys(statistics.matching)
@@ -252,7 +252,7 @@ export default function UserStatistics({
 
                 <SimpleBarChart
                   data={category_value.answers}
-                  xKey="question"
+                  xKey="id"
                   yKey="response"
                   onClickBar={(_test: any) => {
                     setStatisticsDetail({

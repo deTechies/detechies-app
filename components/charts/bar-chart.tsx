@@ -1,3 +1,4 @@
+import { useDictionary } from "@/lib/dictionaryProvider";
 import { useEffect, useState } from "react";
 import {
   BarChart,
@@ -29,16 +30,20 @@ export default function SimpleBarChart({
   yKey: string;
   onClickBar?: Function;
 }) {
-  const [positiveColor, setPositiveColor] = useState('');
-  const [commonColor, setCommonColor] = useState('');
-  const [nagativeColor, setNagativeColor] = useState('');
+  const [positiveColor, setPositiveColor] = useState("");
+  const [commonColor, setCommonColor] = useState("");
+  const [nagativeColor, setNagativeColor] = useState("");
 
   useEffect(() => {
     const rootStyle = getComputedStyle(document.documentElement);
-    setPositiveColor(rootStyle.getPropertyValue('--accent-primary').trim());
-    setCommonColor(rootStyle.getPropertyValue('--border-input').trim());
-    setNagativeColor(rootStyle.getPropertyValue('--state-error-primary').trim());
+    setPositiveColor(rootStyle.getPropertyValue("--accent-primary").trim());
+    setCommonColor(rootStyle.getPropertyValue("--border-input").trim());
+    setNagativeColor(
+      rootStyle.getPropertyValue("--state-error-primary").trim()
+    );
   }, []);
+
+  const lang = useDictionary() as any;
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -58,7 +63,8 @@ export default function SimpleBarChart({
           dataKey={xKey}
           tickLine={false}
           className="text-title_s text-text-secondary"
-          />
+          tickFormatter={(value: any) => lang.survey[value] || "조금긴텍스트"}
+        />
         <YAxis
           tickCount={6}
           tickLine={false}

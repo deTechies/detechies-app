@@ -56,7 +56,7 @@ export default function UserSummary({
 
           <div className="flex flex-wrap items-end gap-2">
             {profile.profile_details &&
-              profile.profile_details.skills.length > 0 &&
+              profile.profile_details.skills?.length > 0 &&
               profile.profile_details.skills.map((_skill: string) => {
                 return (
                   <Badge variant="accent" shape="outline" key={_skill}>

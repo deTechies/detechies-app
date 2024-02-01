@@ -959,5 +959,8 @@
     "drag": "Click to upload",
     "upload_image": "Upload Image",
     "delete_image": "Delete Image"
+  },
+  "survey": {
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
   }
 }

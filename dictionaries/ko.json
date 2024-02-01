@@ -954,5 +954,8 @@
     "drag": "여기로 이미지 드래그",
     "upload_image": "파일 올리기",
     "delete_image": "삭제하기"
+  },
+  "survey": {
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
   }
 }
