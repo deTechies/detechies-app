@@ -434,13 +434,13 @@
   },
   "mypage": {
     "topup": {
-      "charge": "charge", 
+      "charge": "Charge", 
       "points": "points",
       "success_message": "Your payment was successful.", 
       "input_amount_label": "Enter the amount you charge", 
-      "top_up_title": "top_up_title", 
-      "top_up_desc": "top_up_desc",
-      "amount": "amount", 
+      "top_up_title": "Recharge points", 
+      "top_up_desc": "Use your points to view the reputation reports of experts on CareerZen.",
+      "amount": "Amount", 
       "current_balance": "Current Balance",
       "total": "total", 
       "cancel": "Cancel", 

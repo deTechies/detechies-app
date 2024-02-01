@@ -33,14 +33,28 @@ export default function PaymentForm({
 
     try {
       if (!stripe || !cardElement) return null;
+      
+      
+      if(amount < 10000){
+        toast({
+            title: "Amount is too low",
+            description: "Please enter an amount higher than 10000.",
+            });
+        return;
+        }
 
       setLoading(true);
       const { data } = await axios.post("/api/create-payment-intent", {
         data: { amount: amount },
       });
+      
+      
       const result = await stripe?.confirmCardPayment(data, {
         payment_method: { card: cardElement },
       });
+      
+      
+      
 
       if (result.paymentIntent?.status == "succeeded") {
         const paymentResult = await postServer(
@@ -53,7 +67,16 @@ export default function PaymentForm({
             description:
               "Payment has succesfully been created and added to your account.",
           });
+          
+          onClose();
         }
+        setLoading(false);
+      }else{
+        toast({
+          title:
+            "Payment has failed. Please try again.",
+            description: result.error?.message,
+        });
         setLoading(false);
       }
     } catch (error) {
@@ -79,8 +102,8 @@ export default function PaymentForm({
             placeholder="10"
             className="w-full"
             defaultValue={0}
-            min={0}
-            max={1000000}
+            min={10000}
+            max={1000000000}
           />
         </div>
       </section>

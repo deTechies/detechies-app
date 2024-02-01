@@ -27,7 +27,7 @@ export default function TopUpTrigger({
     <Dialog open={isOpen} onOpenChange={(value) => setIsOpen(value)}>
       <DialogTrigger>
         <Button variant={"secondary"} size="ts" >
-          Charge
+          {dictionary.mypage.topup.charge}
         </Button>
       </DialogTrigger>
       <DialogContent>
