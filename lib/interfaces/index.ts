@@ -1,3 +1,4 @@
+import { Address } from "viem";
 
 export interface User {
     id: string;
@@ -13,7 +14,7 @@ export interface User {
     verified: boolean;
     profile_details: ProfileDetails;
     projects: ProjectMember[];
-    clubs: Member[];
+    clubs: ClubMember[];
     projectsCount: number;
     clubsCount: number;
     achievementsCount: number;
@@ -135,7 +136,7 @@ export interface User {
     contract: string;
     blockchain_address?: string;
     files?: File[];
-    members?: Member[];
+    members?: ClubMember[];
     achievements: Achievement[];
     created_at: Date;
     updated_at?: Date;
@@ -229,13 +230,13 @@ export enum GROUP_TYPE {
     CIRCLES = 'circles',
   }
   
-  export interface Member {
-    id: string;
-    user: string;
+  export interface ClubMember {
+    created_at: Date;
+    memberId: Address;
     role: string;
+    user: User;
     joined_at: Date;
     verified: boolean;
-    club: Club;
   }
   
   export interface File {

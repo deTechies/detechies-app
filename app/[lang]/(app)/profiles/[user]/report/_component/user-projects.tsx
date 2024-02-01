@@ -47,7 +47,7 @@ export default function UserProjects({
                 // name => id
                 selected={selectedProject?.project.name == project.project.name}
                 onClick={() => {
-                  setSelectedProject(project.project.id);
+                  setSelectedProject(project);
                 }}
                 key={project.project.name}
               ></CommonProjectItem>

@@ -19,7 +19,6 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function ProjectFilter({ lang }: { lang: any }) {
-
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -72,8 +71,9 @@ export default function ProjectFilter({ lang }: { lang: any }) {
   return (
     <Card className="flex justify-between gap-5 px-8 pb-8 pt-7">
       <h1 className="text-subhead_s">{lang.project.list.projects}</h1>
-      <div className="flex justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-5 flex-wrap">
+      
+      <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap items-center gap-5 grow">
           <Select onValueChange={onSelectType}>
             <SelectTrigger className="w-[180px] px-3 py-3.5">
               <SelectValue placeholder={lang.project.list.all_project} />
@@ -83,6 +83,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
               <SelectItem key="all" value="all">
                 {lang.interface.project_type["all"]}
               </SelectItem>
+
               {Object.values(ProjectType).map((type) => (
                 <SelectItem key={type} value={type}>
                   {lang.interface.project_type[type]}
@@ -107,17 +108,24 @@ export default function ProjectFilter({ lang }: { lang: any }) {
             </SelectContent>
           </Select>
 
-          <Search placeholder={lang.project.list.search} size="md" />
+          <div className="max-w-[335px] w-full">
+            <Search
+              placeholder={lang.project.list.search}
+              size="md"
+              className="w-full"
+            />
+          </div>
 
           <div className="flex items-center gap-3">
             <Checkbox onCheckedChange={onChangeMyProject} />
+
             <Label className="text-title_m">
               {lang.project.list.my_project}
             </Label>
           </div>
         </div>
 
-        <Link href="/project/create" role="link">
+        <Link href="/project/create" role="link" className="ml-auto">
           <Button size="lg">{lang.project.list.create_project.create}</Button>
         </Link>
       </div>
