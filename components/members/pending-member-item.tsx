@@ -22,7 +22,7 @@ export default function PendingMemberItem({
   async function acceptMember() {
     setIsLoading(true);
     const result = await postServer(
-      `/project-member/accept/invite/${member.id}`,
+      `/project-member/accept/member/${member.id}`,
       ""
     );
 

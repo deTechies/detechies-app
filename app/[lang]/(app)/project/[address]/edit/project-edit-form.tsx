@@ -178,8 +178,18 @@ export default function ProjectEditForm({
     };
   
     fetchMyGroupsData();
+
   }, [selectGroupDialog, myGroups.length]);
   
+  useEffect(() => {
+    if(defaultValues?.end_date){
+      setPresent(false)
+    } else {
+      setPresent(true)
+
+    }
+  }, [defaultValues]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -247,12 +257,12 @@ export default function ProjectEditForm({
           )}
         />
 
-        <FormInlineItem className="items-start relative">
+        <FormInlineItem className="relative items-start">
           <FormInlineLabel className="mt-5">
             {lang.project.list.create_project.period}
             <span className="ml-1 text-state-error">*</span>
           </FormInlineLabel>
-          <div className="flex flex-row gap-2 items-center w-full flex-wrap sm:flex-nowrap">
+          <div className="flex flex-row flex-wrap items-center w-full gap-2 sm:flex-nowrap">
             <FormField
               control={form.control}
               name="begin_date"
@@ -275,7 +285,7 @@ export default function ProjectEditForm({
                 >
                   <Input type="date" {...field} disabled={present} />
                   {present && (
-                    <div className="text-title_m text-text-placeholder px-4 py-5 absolute inset-0 bg-background-layer-2 rounded-sm">
+                    <div className="absolute inset-0 px-4 py-5 rounded-sm text-title_m text-text-placeholder bg-background-layer-2">
                       {lang.project.list.create_project.in_progress}
                     </div>
                   )}
@@ -285,16 +295,11 @@ export default function ProjectEditForm({
             />
           </div>
 
-          <div className="flex justify-end absolute bottom-full right-0 gap-1 pb-3">
+          <div className="absolute right-0 flex justify-end gap-1 pb-3 bottom-full">
             <Checkbox
               id="present"
               onCheckedChange={(_value: boolean) => {
-                if (_value) {
-                  form.setValue("end_date", "2099-12-31");
-                } else {
-                  form.setValue("end_date", "");
-                }
-
+                form.setValue("end_date", "");
                 setPresent(!present);
               }}
             />
@@ -383,7 +388,7 @@ export default function ProjectEditForm({
 
                 
 
-                <div className="mt-3 flex flex-wrap gap-2 items-start">
+                <div className="flex flex-wrap items-start gap-2 mt-3">
                   {form.getValues("tags") &&
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
@@ -392,9 +397,9 @@ export default function ProjectEditForm({
                         shape="md"
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        <div className="truncate w-full">{tag}</div>
+                        <div className="w-full truncate">{tag}</div>
                         <X
-                          className="cursor-pointer w-5 h-5"
+                          className="w-5 h-5 cursor-pointer"
                           onClick={() => {
                             const currentTags = form.getValues("tags") || [];
                             const newTags = currentTags.filter(
@@ -418,7 +423,7 @@ export default function ProjectEditForm({
           name="scope"
           render={({ field }) => (
             <FormInlineItem className="items-start">
-              <FormInlineLabel className="h-10 flex items-center">
+              <FormInlineLabel className="flex items-center h-10">
                 {lang.project.list.create_project.scope}
                 <span className="ml-1 text-state-error">*</span>
 
@@ -430,7 +435,7 @@ export default function ProjectEditForm({
                   <PopoverContent className="max-w-full p-0">
                     {/* plan to make variant */}
                     <Card className="max-w-[500px] bg-background-tooltip rounded-sm p-4 ">
-                      <ul className="text-body_m space-y-2 text-accent-on-primary">
+                      <ul className="space-y-2 text-body_m text-accent-on-primary">
                         {Object.values(PRIVACY_TYPE).map((type, index) => (
                           <li key={index}>
                             {lang.interface.privacy_type[type]}:{" "}
@@ -506,7 +511,7 @@ export default function ProjectEditForm({
                             className="gap-2 my-1.5"
                             key={index}
                           >
-                            <div className="shrink-0 w-5 h-5 rounded-full overflow-hidden">
+                            <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
                               <Image
                                 src={`https://ipfs.io/ipfs/${group.image}`}
                                 alt={group.name}
@@ -520,7 +525,7 @@ export default function ProjectEditForm({
                             </div>
 
                             <X
-                              className="shrink-0 w-5 h-5 cursor-pointer text-text-secondary"
+                              className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
                               onClick={() => onClickDeleteClub(group)}
                             ></X>
                           </Badge>

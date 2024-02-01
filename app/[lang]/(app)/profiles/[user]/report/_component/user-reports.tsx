@@ -36,6 +36,8 @@ export default function UserReports({
   userReport: any;
 }) {
 
+  console.log(userReport);
+
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [contributionNumber, setContributionNumber] = useState(0);
 
