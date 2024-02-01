@@ -33,6 +33,66 @@ export interface User {
     categories: { [key: string]: number }[];
   }
   
+  export interface Profile{
+    id: string;
+    wallet: string | null;
+    tba: string | null;
+    email: string | null;
+    display_name: string;
+    credits: number;
+    avatar: string[];
+    avatar_link: string | null;
+    login_method: string | null;
+    verified: boolean;
+    verification_code: number;
+    created_at: string;
+    updated_at: string;
+    projects: {
+      memberId: string;
+      role: string;
+      created_at: string;
+      tokenId: string | null;
+      level: number;
+      verified: boolean;
+      project: Project;
+      works: ProjectWork[];
+    }[];
+    profile_details: {
+      id: 3,
+      full_name: null | string;
+      profession: null | string;
+      specialisation: null | string;
+      description: null | string;
+      skills: string;
+      updated_at: string;
+    };
+    achievement_rewards: {
+      id: string;
+      data: string;
+      tokenId: null | string;
+      collected: boolean;
+      status: 'open' | 'closed' | 'pending' | 'granted' | 'requested';
+      distributed: boolean;
+      created_at: string;
+      updated_at: string;
+      receivingWallet: null | string;
+      achievement: Achievement
+    }[];
+    twitter?: null | string;
+    kakao?: null | string;
+    google?: null | string;
+    bitcoin?: null | string;
+    figma?: null | string;
+    facebook?: null | string;
+    github?: null | string;
+    linkedin?: null | string;
+    phone?: null | string;
+    pinterest?: null | string;
+    reddit?: null | string;
+    telegram?: null | string;
+    youtube?: null | string;
+  }
+
   export interface ProfileDetails {
     id: number;
     full_name: string;
