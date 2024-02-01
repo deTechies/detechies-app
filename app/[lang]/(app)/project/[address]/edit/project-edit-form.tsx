@@ -298,6 +298,7 @@ export default function ProjectEditForm({
           <div className="absolute right-0 flex justify-end gap-1 pb-3 bottom-full">
             <Checkbox
               id="present"
+              checked={present}
               onCheckedChange={(_value: boolean) => {
                 form.setValue("end_date", "");
                 setPresent(!present);
