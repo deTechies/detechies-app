@@ -338,12 +338,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
             <Checkbox
               id="present"
               onCheckedChange={(_value: boolean) => {
-                if (_value) {
-                  form.setValue("end_date", "2099-12-31");
-                } else {
-                  form.setValue("end_date", "");
-                }
-
+                form.setValue("end_date", "");
                 setPresent(!present);
               }}
             />

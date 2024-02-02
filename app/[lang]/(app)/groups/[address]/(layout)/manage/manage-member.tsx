@@ -5,7 +5,7 @@ import PendingMemberListItem from "@/components/group/pending-member-list-item";
 import MemberCard from "@/components/card/member-card";
 import Search from "@/components/extra/search";
 import { getPendingMembers } from "@/lib/data/groups";
-import { Member } from "../members/page";
+import { ClubMember } from "@/lib/interfaces";
 
 export default async function ManageMember({
   details,
@@ -117,7 +117,7 @@ export default async function ManageMember({
 
         <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {filteredData &&
-            filteredData.map((item: Member, index: any) => {
+            filteredData.map((item: ClubMember, index: any) => {
               if (index > 4) {
                 return;
               }

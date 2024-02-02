@@ -3,6 +3,7 @@ import Search from "@/components/extra/search";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getClub } from "@/lib/data/groups";
+import { ClubMember } from "@/lib/interfaces";
 import { Address } from "wagmi";
 interface Profile {
   id: string;
@@ -14,15 +15,6 @@ interface Profile {
   organisation: string;
   image: string;
   industry: string;
-}
-
-export interface Member {
-  memberId: Address;
-  role: string;
-  status: any;
-  created_at: string;
-  verified: boolean;
-  user: any;
 }
 
 export default async function GroupMember({
@@ -56,7 +48,7 @@ export default async function GroupMember({
 
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
         {filteredData &&
-          filteredData.map((item: Member, index: any) => {
+          filteredData.map((item: ClubMember, index: any) => {
             return (
               <MemberCard
                 address={item.memberId}

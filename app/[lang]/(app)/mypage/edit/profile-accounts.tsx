@@ -1,49 +1,81 @@
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
+"use client";
 
-const logos = [
-    { src: "/images/socials/dark/google.png", alt: "Icon 1", text: "구글 계정"  },
-    { src: "/images/socials/dark/bitcoin.png", alt: "Icon 2", text: "전화번호" },
-    { src: "/images/socials/dark/email.png", alt: "Icon 3", text: "텔레그램" },
-    { src: "/images/socials/dark/figma.png", alt: "Icon 4", text: "이메일" },
-    {
+import { Card } from "@/components/ui/card";
+import { useDictionary } from "@/lib/dictionaryProvider";
+import ConnectionCard from "../_components/connections-card";
+import { Profile } from "@/lib/interfaces";
+
+interface IProfileAccountsProps {
+  profile: Profile;
+}
+
+export default function ProfileAccounts({profile}:IProfileAccountsProps) {
+  const dictionary = useDictionary();
+
+  const darkLogos = [
+    { name:"google", src: "/images/socials/dark/google.png", alt: "google unverified", text: dictionary.mypage.edit_profile.social_networks.google },
+    { name:"bitcoin", src: "/images/socials/dark/bitcoin.png", alt: "bitcoin unverified", text: dictionary.mypage.edit_profile.social_networks.web3_wallet },
+    { name:"email", src: "/images/socials/dark/email.png", alt: "email unverified", text: dictionary.mypage.edit_profile.social_networks.email },
+    { name:"figma", src: "/images/socials/dark/figma.png", alt: "figma unverified", text: dictionary.mypage.edit_profile.social_networks.figma },
+    { name:"facebook",
       src: "/images/socials/dark/facebook.png",
-      alt: "Icon 1",
-      text: "탈중앙화 개인지갑",
+      alt: "facebook unverified",
+      text: dictionary.mypage.edit_profile.social_networks.facebook,
     },
-    { src: "/images/socials/dark/github.png", alt: "Icon 2", text: "Github" },
-    { src: "/images/socials/dark/linkedin.png", alt: "Icon 3", text: "피그마" },
-    { src: "/images/socials/dark/phone.png", alt: "Icon 4", text: "핀터레스트" },
-    { src: "/images/socials/dark/pinterest.png", alt: "Icon 1", text: "유튜브" },
-    { src: "/images/socials/dark/reddit.png", alt: "Icon 2", text: "링크드인" },
-    { src: "/images/socials/dark/telegram.png", alt: "Icon 3", text: "페이스북" },
-    { src: "/images/socials/dark/youtube.png", alt: "Icon 4", text: "레딧" },
+    { name:"github", src: "/images/socials/dark/github.png", alt: "github unverified", text: dictionary.mypage.edit_profile.social_networks.github },
+    { name:"linkedin", src: "/images/socials/dark/linkedin.png", alt: "linkedin unverified", text: dictionary.mypage.edit_profile.social_networks.linkedin },
+    { name:"phone", src: "/images/socials/dark/phone.png", alt: "phone unverified", text: dictionary.mypage.edit_profile.social_networks.phone_number },
+    { name:"pinterest", src: "/images/socials/dark/pinterest.png", alt: "pinterest unverified", text: dictionary.mypage.edit_profile.social_networks.pinterest },
+    { name:"reddit", src: "/images/socials/dark/reddit.png", alt: "reddit unverified", text: dictionary.mypage.edit_profile.social_networks.reddit },
+    { name:"telegram", src: "/images/socials/dark/telegram.png", alt: "telegram unverified", text: dictionary.mypage.edit_profile.social_networks.telegram },
+    { name:"youtube", src: "/images/socials/dark/youtube.png", alt: "youtube unverified", text: dictionary.mypage.edit_profile.social_networks.youtube },
+    { name:"kakao", src: "/images/socials/dark/kakao.png", alt: "kakao unverified", text: dictionary.mypage.edit_profile.social_networks.kakao },
+    { name:"twitter", src: "/images/socials/dark/twitter.png", alt: "twitter unverified", text: dictionary.mypage.edit_profile.social_networks.twitter },
+
   ];
 
-  
-export default function ProfileAccounts() {
+  const logos = [
+    {name: "google", src: "/images/socials/color/google.png", alt: "google verified", text: dictionary.mypage.edit_profile.social_networks.google },
+    {name: "bitcoin", src: "/images/socials/color/bitcoin.png", alt: "bitcoin verified", text: dictionary.mypage.edit_profile.social_networks.web3_wallet },
+    {name: "email", src: "/images/socials/color/email.png", alt: "email verified", text: dictionary.mypage.edit_profile.social_networks.email },
+    {name: "figma", src: "/images/socials/color/figma.png", alt: "figma verified", text: dictionary.mypage.edit_profile.social_networks.figma },
+    {name: "facebook",
+      src: "/images/socials/color/facebook.png",
+      alt: "facebook verified",
+      text: dictionary.mypage.edit_profile.social_networks.facebook,
+    },
+    {name: "github", src: "/images/socials/color/github.png", alt: "github verified", text: dictionary.mypage.edit_profile.social_networks.github },
+    {name: "linkedin", src: "/images/socials/color/linkedin.png", alt: "linkedin verified", text: dictionary.mypage.edit_profile.social_networks.linkedin },
+    {name: "phone", src: "/images/socials/color/phone.png", alt: "phone verified", text: dictionary.mypage.edit_profile.social_networks.phone_number },
+    {name: "pinterest", src: "/images/socials/color/pinterest.png", alt: "pinterest verified", text: dictionary.mypage.edit_profile.social_networks.pinterest },
+    {name: "reddit", src: "/images/socials/color/reddit.png", alt: "reddit verified", text: dictionary.mypage.edit_profile.social_networks.reddit },
+    {name: "telegram", src: "/images/socials/color/telegram.png", alt: "telegram verified", text: dictionary.mypage.edit_profile.social_networks.telegram },
+    {name: "youtube", src: "/images/socials/color/youtube.png", alt: "youtube verified", text: dictionary.mypage.edit_profile.social_networks.youtube },
+    // { name:"kakao", src: "/images/socials/color/kakao.png", alt: "kakao verified", text: dictionary.mypage.edit_profile.social_networks.kakao },
+    // { name:"twitter", src: "/images/socials/color/twitter.png", alt: "twitter verified", text: dictionary.mypage.edit_profile.social_networks.twitter },
+  ];
+
   return (
-    <Card className="my-8">
-    <h1 className="text-2xl font-medium mb-6 text-primary">
-      아이덴티티 인증
-    </h1>
-    {/* 4개씩 3줄짜리 테이블 */}
-    <div className="flex flex-wrap justify-evenly gap-2">
-      {logos.map((logo, i) => (
-        <div
-          key={i}
-          className={`flex w-[209px] border border-border-div rounded-sm p-4 pb-5 gap-4`}
-        >
-          <div className="flex justify-center relative aspect-square w-[48px] h-[48px] rounded-full ">
-            <Image src={logo.src} fill={true} sizes={"48"} alt={logo.alt} className="aspect-square"/>
-          </div>
-          <div className="flex flex-col justify-center gap-2">
-            <p className="text-title_s">{logo.text}</p>
-            <p className="text-label_s text-text-secondary">인증하기</p>
-          </div>
-        </div>
-      ))}
-    </div>
+    <Card className="my-8 w-full">
+      <h1 className="text-subhead_m font-medium mb-6 text-primary ">
+        {dictionary.mypage.edit_profile.identity_authentication}
+      </h1>
+      <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 flex-wrap gap-2">
+        {logos.map((logo, i) => {
+
+          let verified = logo.name in profile;
+
+          return(
+          <ConnectionCard 
+            key={i} 
+            logoSrc={verified ? logos[i].src : darkLogos[i].src} 
+            logoAlt={verified ? logos[i].alt : darkLogos[i].alt} 
+            label={verified ? logos[i].text : darkLogos[i].text}
+            sublabel={verified? profile[logo.name as keyof Profile] as string: dictionary.mypage.edit_profile.verify}
+            />
+          )
+      })}
+      </div>
   </Card>
   )
 }

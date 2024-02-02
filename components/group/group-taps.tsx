@@ -44,7 +44,7 @@ export default function GroupTaps({
   ] as any;
 
   return (
-    <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 overflow-x-auto rounded-none">
+    <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 overflow-x-auto border-b rounded-none">
       {links.map((link: any, index: number) => {
         if (link.isAdmin && details.userRole != ROLE_TYPE.ADMIN)  {
           return;
