@@ -10,6 +10,7 @@ import ProfileProjects from "../../mypage/_components/profile-projects";
 
 import NoProfileFound from "./_component/no-profile-found";
 import UserProfile from "./_component/user-profile";
+// import UserReport from "./_component/user-report";
 
 export default async function Dashboard({
   params,

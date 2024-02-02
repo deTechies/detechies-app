@@ -524,7 +524,6 @@
         "reset": "Reset",
         "save":  "Save"
     },
-    
     "edit_profile": {
       "edit_profile": "edit profile",
       "full_name": "full name",
@@ -537,7 +536,25 @@
       "profile_description_label": "Tell us a little bit about yourself",
       "skills": "skills",
       "username": "username",
-      "save_changes": "save changes"
+      "save_changes": "save changes",
+      "identity_authentication": "Linked Accounts",
+      "verify":"Coming soon",
+      "social_networks":{
+        "google":"Google",
+        "phone_number":"Phone Number",
+        "telegram":"Telegram",
+        "email":"Email",
+        "web3_wallet":"Web3 Wallet",
+        "github":"Github",
+        "figma":"Figma",
+        "pinterest":"Pinterest",
+        "youtube":"Youtube",
+        "linkedin":"LinkedIn",
+        "facebook":"Facebook",
+        "reddit":"Reddit",
+        "kakao": "Kakaotalk",
+        "twitter": "X (Twitter)"
+      }
     },
     "project": {
       "projects": "Projects",
@@ -600,7 +617,8 @@
       "nfts": "NFTs",
       "banner": "Create your own group and",
       "banner2": "Award NFTs to projects and individuals and be an influential group!",
-      "banner3": "Go create a group"
+      "banner3": "Go create a group",
+      "view_more": "View More"
     },
     "create": {
       "title": "Create Group",
@@ -958,5 +976,8 @@
     "drag": "Click to upload",
     "upload_image": "Upload Image",
     "delete_image": "Delete Image"
+  },
+  "survey": {
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
   }
 }

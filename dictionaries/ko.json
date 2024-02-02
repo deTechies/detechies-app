@@ -533,7 +533,25 @@
       "profile_description_label": "익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다.",
       "skills": "스킬",
       "username": "닉네임",
-      "save_changes": "저장하기"
+      "save_changes": "저장하기",
+      "identity_authentication": "아이덴티티 인증",
+      "verify":"인증하기",
+      "social_networks":{
+        "google":"구글 계정",
+        "phone_number":"전화번호",
+        "telegram":"텔레그램",
+        "email":"이메일",
+        "web3_wallet":"탈중앙화 개인지갑",
+        "github":"Github",
+        "figma":"피그마",
+        "pinterest":"핀터레스트",
+        "youtube":"유튜브",
+        "linkedin":"링크드인",
+        "facebook":"페이스북",
+        "reddit":"레딧",
+        "kakao": "카카오톡",
+        "twitter": "트위터"
+      }
     },
     "project": {
       "projects": "프로젝트",
@@ -596,7 +614,8 @@
       "nfts": "받을 수 있는 NFT",
       "banner": "직접 그룹을 만들고",
       "banner2": "프로젝트와 개인에게 NFT를 부여하고 영향력 있는 그룹으로 활동해보세요!",
-      "banner3": "그룹 만들러 가기"
+      "banner3": "그룹 만들러 가기",
+      "view_more": "더 보기"
     },
     "create": {
       "title": "그룹 만들기",
@@ -953,5 +972,8 @@
     "drag": "여기로 이미지 드래그",
     "upload_image": "파일 올리기",
     "delete_image": "삭제하기"
+  },
+  "survey": {
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
   }
 }

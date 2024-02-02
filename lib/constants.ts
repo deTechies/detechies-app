@@ -18,10 +18,9 @@ const ABI = {
     project: project as any,
     group: group as any,
     profile: profile as any,
-
 }
 
-export const API_URL = process.env.NEXT_PUBLIC_API || 'http://localhost:4000'
+export const API_URL = process.env.NEXT_PUBLIC_API || 'https://staging.careerbadge.online'
 // export const API_URL = process.env.NEXT_PUBLIC_API || 'http://192.168.0.3:4000'
 
 
