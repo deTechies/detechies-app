@@ -109,10 +109,14 @@ export default async function ProjectMemberItem({
                             {/*    <DropdownMenuItem>
                               {lang.project.details.members.delegate_admin}
                             </DropdownMenuItem> */}
-                            <DeleteMember
+                            {
+                              userRole == "admin" &&
+                              <DeleteMember
                               memberId={details.memberId}
                               lang={lang}
                             />
+                            }
+                           
                           </div>
                         </DropdownMenuContent>
                       </DropdownMenu>
