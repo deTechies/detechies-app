@@ -1,14 +1,14 @@
 import { useDictionary } from "@/lib/dictionaryProvider";
 import { useEffect, useState } from "react";
 import {
-  BarChart,
   Bar,
-  XAxis,
-  YAxis,
+  BarChart,
   CartesianGrid,
-  Tooltip,
   Cell,
   ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 
 // const data_example = [
@@ -112,7 +112,7 @@ const CustomTooltip = ({
   if (active && payload && payload.length) {
     return (
       <div className="px-3 py-2 rounded-sm bg-background-tooltip text-text-fixed">
-        <p className="label text-accent-on-primary">{`${payload[0].value}점`}</p>
+        <p className="label text-accent-on-primary">{`${payload[0].value}`}</p>
       </div>
     );
   }

@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import Image from "@/components/ui/image";
-import { ProjectMember } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -126,23 +125,6 @@ function CommonProjectItem({
           </div>
 
           <div className="mb-2 text-label_m text-text-secondary">
-<<<<<<< Updated upstream
-            {lang.profile.statistics.project_part}:{" "}
-            {project.contribution[0].role}
-          </div>
-
-          <div className="flex gap-2">
-            {project.contribution[0].tags.length > 0 &&
-              project.contribution[0].tags.map((tag: string) => {
-=======
-<<<<<<< Updated upstream
-            기여한 파트: {project.works[0]?.role}
-          </div>
-
-          <div className="flex gap-2">
-            {project.works[0].tags.length > 0 &&
-              project.works[0].tags.map((tag: string) => {
-=======
             {lang.profile.statistics.project_part}:{" "}
             {project.role && project.role}
           </div>
@@ -150,8 +132,6 @@ function CommonProjectItem({
           <div className="flex gap-2">
             {project.tags.length > 0 &&
               project.tags.map((tag: string) => {
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                 return (
                   <Badge shape="outline" variant="placeholder" key={tag}>
                     <div className="truncate">{tag}</div>
@@ -163,25 +143,8 @@ function CommonProjectItem({
 
         <div className="flex flex-col items-end justify-between ml-auto">
           <div className="flex flex-wrap gap-2 mb-2">
-<<<<<<< Updated upstream
-            <Badge variant="purple" shape="sm">
-              {lang.profile.statistics.admin_evaluation} {3}
-            </Badge>
-
-            <Badge variant="accent" shape="sm">
-              {lang.profile.statistics.member_evaluation} {5}
-            </Badge>
-
-            <Badge variant="info" shape="sm">
-<<<<<<< Updated upstream
-              {lang.profile.statistics.client_evaluation} {2}
-=======
-              클라이언트 평가 {2}
-=======
             <Badge variant="accent" shape="sm">
               {lang.profile.statistics.evaluations} {project.evaluationCount}
->>>>>>> Stashed changes
->>>>>>> Stashed changes
             </Badge>
           </div>
 
@@ -189,17 +152,8 @@ function CommonProjectItem({
             className="flex gap-1 select-none text-icon-secondary text-label_m"
             onClick={onShowMore}
           >
-<<<<<<< Updated upstream
-            {"Robin"}{lang.profile.statistics.s_evaluation}
-=======
-<<<<<<< Updated upstream
-            {"Robin"}님이 작성한 평가
->>>>>>> Stashed changes
-            <ChevronUp
-=======
             {lang.profile.statistics.s_evaluation}
             <ChevronDown
->>>>>>> Stashed changes
               className={`w-5 h-5 transition ${showMore && "rotate-180"}`}
             />
           </div>
@@ -209,15 +163,8 @@ function CommonProjectItem({
       {showMore && (
         <div className={`pt-4 transition-all`}>
           <div className="p-5 break-words border rounded-md border-border-div">
-<<<<<<< Updated upstream
-            {project.contribution[0]?.description}
-=======
-<<<<<<< Updated upstream
-            {project.works[0]?.description}
-=======
             {project.description && project.description}
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
           </div>
         </div>
       )}

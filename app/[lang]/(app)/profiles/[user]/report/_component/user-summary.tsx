@@ -10,11 +10,9 @@ import { useState } from "react";
 export default function UserSummary({
   profile,
   lang,
-  survey,
 }: {
   profile: any;
   lang: any;
-  survey: any;
 }) {
   const [showMore, setShowMore] = useState(false);
 
@@ -42,7 +40,7 @@ export default function UserSummary({
             }
           </div>
 
-          <div className="text-body_s mb-2.5 flex flex-wrap gap-2">
+          {/*     <div className="text-body_s mb-2.5 flex flex-wrap gap-2">
             <span>{lang.profile.summary.billing}</span>
             <span className="text-title_s">
               {survey.matching.hourly_rate} {lang.profile.summary.billing_unit}{" "}
@@ -52,7 +50,7 @@ export default function UserSummary({
             <span className="text-title_s">
               {survey.matching.weekly_hours} {lang.profile.summary.hours_unit}
             </span>
-          </div>
+          </div> */}
 
           <div className="flex flex-wrap items-end gap-2">
             {profile.profile_details &&
@@ -65,30 +63,23 @@ export default function UserSummary({
                 );
               })}
 
-            <div
-              className="flex gap-1 ml-auto cursor-pointer text-label_m text-text-secondary"
-              onClick={onShowMore}
-            >
-<<<<<<< Updated upstream
-              {lang.profile.summary.introduction}
-=======
-<<<<<<< Updated upstream
-              소개글
->>>>>>> Stashed changes
-              <ChevronUp
-=======
-              {lang.profile.summary.introduction}
-              <ChevronDown
->>>>>>> Stashed changes
-                className={`w-5 h-5 transition ${showMore && "rotate-180"}`}
-              />
-            </div>
+            {profile.profile_details?.description && (
+              <div
+                className="flex gap-1 ml-auto cursor-pointer text-label_m text-text-secondary"
+                onClick={onShowMore}
+              >
+                {lang.profile.summary.introduction}
+                <ChevronDown
+                  className={`w-5 h-5 transition ${showMore && "rotate-180"}`}
+                />
+              </div>
+            )}
           </div>
 
           {showMore && (
             <div className={`pt-4 transition-all`}>
               <div className="p-5 break-words border rounded-md border-border-div">
-                {profile.profile_details.description}
+                {profile.profile_details?.description}
               </div>
             </div>
           )}
