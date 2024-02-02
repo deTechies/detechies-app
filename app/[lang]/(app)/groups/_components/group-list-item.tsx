@@ -1,38 +1,57 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
-import { getClub } from "@/lib/data/groups";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Club } from "@/lib/interfaces";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const GroupListItem = React.memo(
-  ({ details, lang }: { details: Club; lang: any }) => {
-    return (
-      <Link href={`groups/${details.id}`} className="truncate">
-        <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] pb-6 px-6 gap-0">
-          <section className="flex flex-col items-center justify-center max-w-full text-center">
-            <Avatar className="w-24 h-24 mb-2 aspect-square bg-state-info-secondary">
-              <AvatarImage
-                src={`https://ipfs.io/ipfs/${details.image}`}
-                alt={details.name}
-                className="rounded-full"
+  ({
+    details,
+    lang,
+    isPending,
+  }: {
+    details: Club;
+    lang: any;
+    isPending?: boolean;
+    // The group on Pending is only visiable for owner (not implemented yet)
+  }) => {
+    
+    const renderCardContent = () => (
+      <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] h-full pb-6 px-6 gap-0">
+        <section className="flex flex-col items-center justify-center w-full max-w-full text-center">
+          <Avatar className="w-24 h-24 mb-2 aspect-square bg-state-info-secondary">
+            <AvatarImage
+              src={`https://ipfs.io/ipfs/${details.image}`}
+              alt={details.name}
+              className="rounded-full"
+            />
+
+            <AvatarFallback className="relative">
+              <Image
+                src="/images/careerzen.png"
+                alt="no-item"
+                fill={true}
+                className="object-contain bg-no-repeat"
               />
+            </AvatarFallback>
+          </Avatar>
 
-              <AvatarFallback className="relative">
-                <Image
-                  src="/images/careerzen.png"
-                  alt="no-item"
-                  fill={true}
-                  className="object-contain bg-no-repeat"
-                />
-              </AvatarFallback>
-            </Avatar>
+          <h5 className="max-w-full mb-1 truncate text-heading_s">
+            {details.name}
+          </h5>
 
-            <h5 className="max-w-full mb-1 truncate text-heading_s">
-              {details.name}
-            </h5>
+          {isPending ? (
+            <Badge shape="loading" variant="opacity" className="mb-4">
+              <div className="flex items-center gap-2">
+                <Loader className="w-5 h-5 animate-[spin_5s_linear_infinite]"></Loader>
+                <span>{lang.group.create.form.wait_for_auth}</span>
+              </div>
+            </Badge>
+          ) : (
             <div className="text-title_m mb-[46px] flex items-center gap-1">
               {/* {details.type != "community" && (
                 <Image
@@ -44,9 +63,21 @@ const GroupListItem = React.memo(
               )} */}
 
               {/* {lang.group.list[details.type]} */}
-              {lang.interface.group_type[details.type] || "　"}
-            </div>
 
+              {lang.interface.group_type[details.type] || details.type}
+            </div>
+          )}
+
+          {isPending ? (
+            <Link
+              href="https://t.me/Careerzen_org"
+              target="_blank"
+              passHref
+              className="max-w-[212px] w-full"
+            >
+              <Button size="lg">{lang.group.create.form.contact}</Button>
+            </Link>
+          ) : (
             <div className="flex divide-x">
               <div className="px-4">
                 <div className="mb-1 text-label_s">
@@ -63,8 +94,16 @@ const GroupListItem = React.memo(
                 </div>
               </div>
             </div>
-          </section>
-        </Card>
+          )}
+        </section>
+      </Card>
+    );
+
+    return isPending ? (
+      <div className="truncate">{renderCardContent()}</div>
+    ) : (
+      <Link href={`groups/${details.id}`} className="truncate">
+        {renderCardContent()}
       </Link>
     );
   }

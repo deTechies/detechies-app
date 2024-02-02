@@ -4,6 +4,7 @@ import { Address } from "wagmi";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ClubMember } from "@/lib/interfaces";
 
 export default function GroupMember({
   address,
@@ -12,11 +13,17 @@ export default function GroupMember({
   lang,
 }: {
   address: any;
-  members: any[];
+  members: ClubMember[];
   isCreator?: boolean;
   lang: any;
 }) {
   const pathName = usePathname();
+
+  const sortedMemberList = members?.sort((a, b) => {
+    const dateA = new Date(a.created_at).getTime();
+    const dateB = new Date(b.created_at).getTime();
+    return dateB - dateA;
+  });
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -36,8 +43,8 @@ export default function GroupMember({
       </div>
 
       <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-        {members &&
-          members.map(
+        {sortedMemberList &&
+          sortedMemberList.map(
             (item: any, index: any) => {
               if (index > 4) {
                 return;

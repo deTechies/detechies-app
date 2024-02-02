@@ -3,22 +3,49 @@ import Image from "next/image";
 export default function StarRating({ score }: { score: number }) {
   const totalStars = 5;
 
-  // 점수에 따라 꽉 찬 별의 개수를 계산하는 함수
-  const fullStars = (score: number) => {
-    if (score >= 90) return 5;
-    if (score >= 70) return 4;
-    if (score >= 50) return 3;
-    if (score >= 30) return 2;
-    if (score >= 10) return 1;
-    return 0;
+  // 점수에 따라 별의 상태를 계산하는 함수
+  const calculateStars = (score: number) => {
+    const stars = {
+      full: 0,
+      half: 0,
+      empty: totalStars
+    };
+
+    if (score >= 91) {
+      stars.full = 5;
+    } else if (score >= 81) {
+      stars.full = 4;
+      stars.half = 1;
+    } else if (score >= 71) {
+      stars.full = 4;
+    } else if (score >= 61) {
+      stars.full = 3;
+      stars.half = 1;
+    } else if (score >= 51) {
+      stars.full = 3;
+    } else if (score >= 41) {
+      stars.full = 2;
+      stars.half = 1;
+    } else if (score >= 31) {
+      stars.full = 2;
+    } else if (score >= 21) {
+      stars.full = 1;
+      stars.half = 1;
+    } else if (score >= 11) {
+      stars.full = 1;
+    } else if (score >= 1) {
+      stars.half = 1;
+    }
+
+    stars.empty = totalStars - stars.full - stars.half;
+    return stars;
   };
 
-  const filledStars = fullStars(score); // 꽉 찬 별의 개수
-  const emptyStars = totalStars - filledStars; // 빈 별의 개수
+  const { full, half, empty } = calculateStars(score);
 
   return (
     <div className="flex flex-wrap gap-2">
-      {Array(filledStars)
+      {Array(full)
         .fill(null)
         .map((_, index) => (
           <Image
@@ -29,7 +56,18 @@ export default function StarRating({ score }: { score: number }) {
             height="24"
           />
         ))}
-      {Array(emptyStars)
+      {Array(half)
+        .fill(null)
+        .map((_, index) => (
+          <Image
+            key={`half-star-${index}`}
+            src="/icons/star_half.png"
+            alt="Half Star"
+            width="24"
+            height="24"
+          />
+        ))}
+      {Array(empty)
         .fill(null)
         .map((_, index) => (
           <Image

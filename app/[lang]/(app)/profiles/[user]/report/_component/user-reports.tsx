@@ -1,81 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import UserProjects from "./user-projects";
-import UserStatistics from "./user-statistics";
+import { serverApi } from "@/lib/data/general";
+import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { ChevronDown } from "lucide-react";
-import { ProjectMember, SurveyResponse } from "@/lib/interfaces";
+import UserStatistics from "./user-statistics";
 
-export default function UserReports({
-  projects,
-  survey,
+interface ReportContribution {
+  description: string;
+  end_date: string | null;
+  role: PROFESSION_TYPE;
+  start_date: Date;
+  surveyResults: any[];
+  tags: string[];
+}
+interface ReportProject {
+  begin_date: string;
+  end_date: string | null;
+  description: string;
+  name: string;
+  recommendScoresByRole: { [key: string]: number };
+}
+
+interface ReportContribution {
+  description: string;
+  end_date: string | null;
+  role: PROFESSION_TYPE;
+  start_date: Date;
+  surveyResults: any[];
+  tags: string[];
+}
+interface ReportProject {
+  begin_date: string;
+  end_date: string | null;
+  description: string;
+  name: string;
+  recommendScoresByRole: { [key: string]: number };
+}
+
+export default async function UserReports({
   lang,
-  totalResult,
+  selectedProject,
+
 }: {
-  projects: ProjectMember[];
-  survey: any;
   lang: any;
-  totalResult: any;
+  selectedProject: any;
 }) {
-
-  const [selectedProject, setSelectedProject] = useState<ProjectMember | null>(
-    null
+  const report = await serverApi(
+    `/survey-report/getUserReport?address=0xe8654C95b77e4E8fb1E4A88098bF193259B31DD9&&projectId=${selectedProject}`
   );
-  const [selectedProjectSurvey, setSelectedProjectSurvey] = useState<
-    any | undefined
-  >(null);
-  const workIds = new Set(survey.map((item: any) => item.projectWork.workId));
-  const evaluated_projects = projects.filter((item: any) => {
-    return workIds.has(item.works[0]?.workId);
-  });
-
-  useEffect(() => {
-    const selected =
-      survey &&
-      survey.find((item: any) => {
-        return item.projectWork.workId === selectedProject?.works[0].workId;
-      });
-
-    if (selected) {
-      setSelectedProjectSurvey([selected]);
-    } else {
-      setSelectedProjectSurvey(survey);
-    }
-  }, [selectedProject]);
-
-  
-  useEffect(() => {
-    // console.log(totalResult);
-    // console.log(selectedProjectSurvey);
-  }, [selectedProjectSurvey]);
 
   return (
     <div>
-      <UserProjects
-        projects={evaluated_projects}
-        lang={lang}
-        selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
-      />
-
+     
       <h3 className="mt-[60px] mb-4 text-heading_s text-center">
-        {selectedProject ? selectedProject.project.name : "통합 "}
+        {selectedProject ? "FIXME" : lang.profile.statistics.total}
         {selectedProject && <br />}
-        평판 보고서
+        {lang.profile.statistics.reputation_report}
       </h3>
 
       <div className="mb-5 text-center text-title_m text-text-secondary">
-        총 받은 평가 ({12})
+        {lang.profile.statistics.total_evaluation} (0 fix me)
       </div>
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>
 
-      <UserStatistics
-        projects={projects}
-        lang={lang}
-        statistics={totalResult}
-      ></UserStatistics>
+      {report?.data && 
+      report.data.surveyReports ?
+      <UserStatistics lang={lang} statistics={report.data} />
+      : <div className="text-center text-body_m">No Results found</div>
+    }
+      
+      
+      
+      {/* <pre className="max-h-[500px] overflow-auto">{JSON.stringify(report, null, 2)}</pre> */}
     </div>
   );
 }
-
