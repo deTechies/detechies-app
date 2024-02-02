@@ -59,7 +59,7 @@ export default function ProjectContribution({
               projectId={project.id}
               lang={lang}
               workDetails={defaultValues}
-              workId={defaultValues.workId}
+              workId={defaultValues?.workId}
             />
           )}
         </section>
