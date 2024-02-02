@@ -39,19 +39,19 @@ interface ReportProject {
 
 export default async function UserReports({
   lang,
+  address,
   selectedProject,
-
 }: {
   lang: any;
+  address: string;
   selectedProject: any;
 }) {
   const report = await serverApi(
-    `/survey-report/getUserReport?address=0xe8654C95b77e4E8fb1E4A88098bF193259B31DD9&&projectId=${selectedProject}`
+    `/survey-report/getUserReport?address=${address}&projectId=${selectedProject}`
   );
 
   return (
     <div>
-     
       <h3 className="mt-[60px] mb-4 text-heading_s text-center">
         {selectedProject ? "FIXME" : lang.profile.statistics.total}
         {selectedProject && <br />}
@@ -64,14 +64,12 @@ export default async function UserReports({
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>
 
-      {report?.data && 
-      report.data.surveyReports ?
-      <UserStatistics lang={lang} statistics={report.data} />
-      : <div className="text-center text-body_m">No Results found</div>
-    }
-      
-      
-      
+      {report?.data && report.data.surveyReports ? (
+        <UserStatistics lang={lang} statistics={report.data} />
+      ) : (
+        <div className="text-center text-body_m">No Results found</div>
+      )}
+
       {/* <pre className="max-h-[500px] overflow-auto">{JSON.stringify(report, null, 2)}</pre> */}
     </div>
   );

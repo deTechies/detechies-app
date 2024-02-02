@@ -45,9 +45,9 @@ export default async function ProfileReport({
       )}
       <Suspense fallback={<div>Loading reports.....</div>}>
         <UserReports
-          address={params.user}
           selectedProject={project}
           lang={dictionary}
+          address={params.user}
         />
       </Suspense>
     </div>
