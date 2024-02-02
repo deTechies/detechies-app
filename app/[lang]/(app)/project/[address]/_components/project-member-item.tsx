@@ -78,7 +78,7 @@ export default async function ProjectMemberItem({
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
                         <ProjectContribution project={details.project} lang={lang} defaultValues={details.works[0]}/>
-                        <DeleteWorks projectId={projectId} lang={lang} />
+                        <DeleteWorks projectId={details.works[0].workId} lang={lang} />
                       </div>
                     )}
                   </>
