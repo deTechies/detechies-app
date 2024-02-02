@@ -39,6 +39,11 @@
       "Profile Items": "profile items"
     }
   },
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
   "profile": {
     "report_card": {
       "title": "의 평판보고서",
@@ -74,6 +79,10 @@
       "total_career": "총 경력",
       "total_evaluation": "총 받은 평가",
       "admin_evaluation": "관리자 평가",
+<<<<<<< Updated upstream
+=======
+      "evaluations": "kr_evaluations",
+>>>>>>> Stashed changes
       "member_evaluation": "동료 평가",
       "client_evaluation": "클라이언트 평가",
       "work_period": "작업 기간",
@@ -90,6 +99,10 @@
       "total_points": "총점"
     }
   },
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   "profile_filter": {
     "profiles": "전문가 찾기",
     "all": "All",

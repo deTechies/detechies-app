@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
-import { ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export default function UserSummary({
@@ -69,10 +69,19 @@ export default function UserSummary({
               className="flex gap-1 ml-auto cursor-pointer text-label_m text-text-secondary"
               onClick={onShowMore}
             >
+<<<<<<< Updated upstream
               {lang.profile.summary.introduction}
+=======
+<<<<<<< Updated upstream
+              소개글
+>>>>>>> Stashed changes
               <ChevronUp
+=======
+              {lang.profile.summary.introduction}
+              <ChevronDown
+>>>>>>> Stashed changes
                 className={`w-5 h-5 transition ${showMore && "rotate-180"}`}
-              ></ChevronUp>
+              />
             </div>
           </div>
 
