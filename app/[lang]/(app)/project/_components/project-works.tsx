@@ -75,7 +75,7 @@ const WorkItem = ({
 
   return (
     <li className="flex gap-4 justify-between items-center overflow-auto">
-      <div className="flex flex-col">
+      <div className="flex flex-col overflow-auto">
         {isValidLink(description) ? (
           <Link
             href={description}
