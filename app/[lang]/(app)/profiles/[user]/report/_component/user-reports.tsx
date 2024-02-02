@@ -1,14 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import UserProjects from "./user-projects";
-import UserStatistics from "./user-statistics";
+import { serverApi } from "@/lib/data/general";
+import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { ChevronDown } from "lucide-react";
-import {
-  PROFESSION_TYPE,
-  ProjectMember,
-  SurveyResponse,
-} from "@/lib/interfaces";
+import UserStatistics from "./user-statistics";
 
 interface ReportContribution {
   description: string;
@@ -26,67 +21,58 @@ interface ReportProject {
   recommendScoresByRole: { [key: string]: number };
 }
 
-export default function UserReports({
+interface ReportContribution {
+  description: string;
+  end_date: string | null;
+  role: PROFESSION_TYPE;
+  start_date: Date;
+  surveyResults: any[];
+  tags: string[];
+}
+interface ReportProject {
+  begin_date: string;
+  end_date: string | null;
+  description: string;
+  name: string;
+  recommendScoresByRole: { [key: string]: number };
+}
+
+export default async function UserReports({
   lang,
-  totalResult,
-  userReport,
+  selectedProject,
+
 }: {
   lang: any;
-  totalResult: any;
-  userReport: any;
+  selectedProject: any;
 }) {
-
-  console.log(userReport);
-
-  const [selectedProject, setSelectedProject] = useState<any | null>(null);
-  const [contributionNumber, setContributionNumber] = useState(0);
-
-  useEffect(() => {
-    if (selectedProject) {
-      const contributionNumber = selectedProject.contribution.length;
-      setContributionNumber(contributionNumber);
-    } else {
-      const contributionNumber = userReport.projects.reduce(
-        (acc: number, project: any) => {
-          return acc + project.contribution.length;
-        },
-        0
-      );
-      setContributionNumber(contributionNumber);
-    }
-
-    // console.log(selectedProject);
-  }, [selectedProject]);
+  const report = await serverApi(
+    `/survey-report/getUserReport?address=0xe8654C95b77e4E8fb1E4A88098bF193259B31DD9&&projectId=${selectedProject}`
+  );
 
   return (
     <div>
-      <UserProjects
-        projects={userReport.projects}
-        lang={lang}
-        selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
-      />
-
+     
       <h3 className="mt-[60px] mb-4 text-heading_s text-center">
-        {selectedProject
-          ? selectedProject.project.name
-          : lang.profile.statistics.total}
+        {selectedProject ? "FIXME" : lang.profile.statistics.total}
         {selectedProject && <br />}
         {lang.profile.statistics.reputation_report}
       </h3>
 
       <div className="mb-5 text-center text-title_m text-text-secondary">
-        {lang.profile.statistics.total_evaluation} ({contributionNumber})
+        {lang.profile.statistics.total_evaluation} (0 fix me)
       </div>
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>
 
-      <UserStatistics
-        lang={lang}
-        statistics={
-          totalResult
-        }
-      />
+      {report?.data && 
+      report.data.surveyReports ?
+      <UserStatistics lang={lang} statistics={report.data} />
+      : <div className="text-center text-body_m">No Results found</div>
+    }
+      
+      
+      
+      {/* <pre className="max-h-[500px] overflow-auto">{JSON.stringify(report, null, 2)}</pre> */}
     </div>
   );
 }

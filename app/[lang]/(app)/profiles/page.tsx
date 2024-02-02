@@ -20,7 +20,7 @@ export default async function ProfilePage({
   return (
     <main className="flex flex-col w-full gap-6 p-4 ">
       <ProfileFilter lang={dictionary}></ProfileFilter>
-      <div className="w-screen flex flex-col gap-2" >
+      <div className="flex flex-col gap-2 " >
         <Suspense fallback={<ProfilesLoading />}>
         <ListProfiles  lang={dictionary} searchParams={searchParams}/>
         </Suspense>

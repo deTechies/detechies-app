@@ -39,6 +39,7 @@
       "Profile Items": "profile items"
     }
   },
+
   "profile": {
     "report_card": {
       "title": "Reputation Report",
@@ -76,6 +77,7 @@
       "total_evaluation": "Total evaluation received",
       "admin_evaluation": "Admin",
       "member_evaluation": "Member",
+      "evaluations": "Evaluations",
       "client_evaluation": "Client",
       "work_period": "Work period",
       "project_part": "Contributed Part",
@@ -91,6 +93,7 @@
       "total_points": "Total"
     }
   },
+
   "profile_filter": {
     "profiles": "Profiles", 
     "all": "All",

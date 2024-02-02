@@ -1,12 +1,13 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import ScoreCard from "./score-card";
-import SimpleRadarChart from "@/components/charts/radar-chart";
-import StarRating from "@/components/charts/star-rating";
 import SimpleBarChart from "@/components/charts/bar-chart";
 import SimplePosNagChart from "@/components/charts/pos-nag-chart";
+import SimpleRadarChart from "@/components/charts/radar-chart";
+import StarRating from "@/components/charts/star-rating";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import ScoreCard from "./score-card";
 
 export default function UserStatistics({
   lang,
@@ -18,6 +19,7 @@ export default function UserStatistics({
   const [totalData, setTotalData] = useState<any>([]);
   const [totalAverage, setTotalAverage] = useState(0);
   const [matchingData, setMatchingData] = useState<any>([]);
+  const params = useParams();
   const [matchingAverage, setMatchingAverage] = useState(0);
   const [statisticsDetail, setStatisticsDetail] = useState<any>({});
 
@@ -127,58 +129,42 @@ export default function UserStatistics({
 
       <Card className="gap-8 p-8">
         <CardHeader className="justify-center text-subhead_m">
-          평판 점수
+          Reputation Score
         </CardHeader>
 
         <CardContent className="text-center">
           <div className="mb-3 text-text-secondary text-title_l">
-            추천 리뷰 총점
+            Recommendation Score
           </div>
 
           <div className="text-accent-primary text-heading_m mb-[60px]">
             {70} 점
           </div>
 
-          <div className="flex flex-wrap items-center mb-4">
-            <div className="text-title_m min-w-[100px] text-left">관리자</div>
-            <div className="flex flex-wrap items-center justify-between gap-2 grow">
-              <div className="text-title_m">20%</div>
-              <div className="text-label_s text-text-placeholder">
-                (총 3개 평가)
-              </div>
-              <StarRating score={20} />
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center mb-4">
-            <div className="text-title_m min-w-[100px] text-left">멤버</div>
-
-            <div className="flex flex-wrap items-center justify-between gap-2 grow">
-              <div className="text-title_m">5%</div>
-
-              <div className="text-label_s text-text-placeholder">
-                (총 155개 평가)
-              </div>
-
-              <StarRating score={5} />
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center">
-            <div className="text-title_m min-w-[100px] text-left">
-              클라이언트
-            </div>
-
-            <div className="flex flex-wrap items-center justify-between gap-2 grow">
-              <div className="text-title_m">99%</div>
-
-              <div className="text-label_s text-text-placeholder">
-                (총 155개 평가)
-              </div>
-
-              <StarRating score={99} />
-            </div>
-          </div>
+          {statistics.swotReports?.recommendScoresByRole?.admin &&
+            recommendItem(
+              "admin",
+              statistics.swotReports?.recommendScoresByRole.admin
+                .totalRecommendScore,
+              statistics.swotReports?.recommendScoresByRole.admin
+                .totalRecommendations
+            )}
+          {statistics.swotReports?.recommendScoresByRole?.member &&
+            recommendItem(
+              "member",
+              statistics.swotReports?.recommendScoresByRole.member
+                .totalRecommendScore,
+              statistics.swotReports?.recommendScoresByRole.member
+                .totalRecommendations
+            )}
+          {statistics.swotReports?.recommendScoresByRole?.client &&
+            recommendItem(
+              "client",
+              statistics.swotReports?.recommendScoresByRole.client
+                .totalRecommendScore,
+              statistics.swotReports?.recommendScoresByRole.client
+                .totalRecommendations
+            )}
         </CardContent>
       </Card>
 
@@ -233,6 +219,63 @@ export default function UserStatistics({
       )}
 
       {/* categories */}
+      {statistics.surveyReports && statistics.surveyReports.averageResponses &&
+        statistics.surveyReports.averageResponses.map(
+          (averageResponse: any) => {
+            
+            return (
+              <Card className="col-span-3 gap-10" key={averageResponse.id}>
+                <CardHeader className="justify-center text-subhead_m">
+                  {averageResponse.category}
+                </CardHeader>
+                <div className="flex gap-8">
+                    <ScoreCard
+                    score={averageResponse.categoryAverage}
+                    lang={lang}
+                    className="min-h-[234px] mb-7"
+                  />
+
+                  <SimpleBarChart
+                    data={averageResponse.answers}
+                    xKey="id"
+                    yKey="averageAnswer"
+                    onClickBar={(_test: any) => {
+                      setStatisticsDetail({
+                        ...statisticsDetail,
+                        [averageResponse.answers]: _test,
+                      });
+                    }}
+                  /> 
+                </div>
+
+                  {
+                    statisticsDetail[averageResponse.answers] && (
+                      <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
+                        <h3 className="mb-3 text-title_m">
+                          Q. {statisticsDetail[averageResponse.answers].en.question}
+                        </h3>
+
+                        <div className="text-body_m">
+                          {statisticsDetail[averageResponse.answers].en.answer}
+                        </div>
+                      </div>
+                    )
+                  }
+               {/*   {statisticsDetail[category_key] && (
+                  <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
+                    <h3 className="mb-3 text-title_m">
+                      Q. {statisticsDetail[category_key]["en"].question}
+                    </h3>
+
+                    <div className="text-body_m">
+                      {statisticsDetail[category_key]["en"].answer}
+                    </div>
+                  </div>
+                )}  */}
+              </Card>
+            );
+          }
+        )}
       {statistics.categories &&
         Object.keys(statistics.categories).map((category_key: any) => {
           const category_value = statistics.categories[category_key];
@@ -278,46 +321,68 @@ export default function UserStatistics({
           );
         })}
 
-      {/* assessmentReport */}
-      {statistics.assessmentReport && (
+      {/* assesdment */}
+      {statistics.assessments && statistics.assessments.averageRanksByCriterion && (
         <Card className="col-span-3 gap-10">
           <CardHeader className="justify-center text-subhead_m">
-            성향 평가
+            Propensity
           </CardHeader>
 
           <div className="grid gap-8 sm:grid-cols-2">
-            {Object.keys(statistics.assessmentReport).map(
-              (assessment_key: any) => {
-                const transformedArray = statistics.assessmentReport[
-                  assessment_key
-                ].criteria.map((item: any) => ({
-                  minText: item.criterion.minText,
-                  maxText: item.criterion.maxText,
-                  value: rankToScore(item.criterion.ranks, item.rank),
-                  value2: 0,
-                }));
+            {statistics.assessments.byCategory.map((byCategory: any) => {
+              const chartData = byCategory.averageRanks.map(
+                (averageRank: any) => ({
+                  minText:
+                    params.lang === "en"
+                      ? averageRank.en.minValue
+                      : averageRank.ko?.minValue, // Category name for the Y-axis
+                  maxText:
+                    params.lang === "en"
+                      ? averageRank.en.maxValue
+                      : averageRank.ko?.maxValue, // Additional information, not directly used for the bar
+                  value: rankToScore(5, averageRank.averageRank), // The actual value for the bar
+                  value2: 0, // If not used, ensure it's set to a default or omitted
+                })
+              );
+              return (
+                <div key={byCategory.category}>
+                  <h3 className="mb-5 text-center text-subhead_s capitalize">
+                    {byCategory.category}
+                  </h3>
+                  <div className=" h-[300px] overflow-auto">
+                    <SimplePosNagChart
+                      data={chartData}
+                      xKey="value"
+                      xKey2="value2"
+                      yKey="minText"
+                      yKey2="maxText"
+                    />
 
-                return (
-                  <div key={assessment_key}>
-                    <h3 className="mb-5 text-center text-subhead_s">
-                      {assessment_key}
-                    </h3>
-                    <div className=" h-[300px]">
-                      <SimplePosNagChart
-                        data={transformedArray}
-                        xKey="value"
-                        xKey2="value2"
-                        yKey="minText"
-                        yKey2="maxText"
-                      />
-                    </div>
+                    {/*   <pre>
+                      {JSON.stringify(byCategory, null, 2)}
+                    </pre> */}
                   </div>
-                );
-              }
-            )}
+                </div>
+              );
+            })}
           </div>
         </Card>
       )}
     </div>
   );
 }
+
+const recommendItem = (role: string, score: number, total: number) => {
+  return (
+    <div className="flex flex-wrap items-center mb-4">
+      <div className="text-title_m min-w-[100px] text-left">{role}</div>
+      <div className="flex flex-wrap items-center justify-between gap-2 grow">
+        <div className="text-title_m">{score * 20}%</div>
+        <div className="text-label_s text-text-placeholder">
+          (총 {total}개 평가)
+        </div>
+        <StarRating score={score * 20} />
+      </div>
+    </div>
+  );
+};
