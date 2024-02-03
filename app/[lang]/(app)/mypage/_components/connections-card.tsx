@@ -1,8 +1,7 @@
-"useClient";
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
 import { useDictionary } from '@/lib/dictionaryProvider';
+import Image from 'next/image';
 
 interface IConnectionCardProps {
     key: number | string;
