@@ -1,10 +1,14 @@
 "use client";
+import { useDictionary } from "@/lib/dictionaryProvider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function MyPageMenu({ links }: { links: any }) {
+export default function MyPageMenu() {
   const pathName = usePathname();
+  
+  const dictionary = useDictionary();
 
+  const links = dictionary.mypage.menu;
   
   const menuItems = [
     {
@@ -38,7 +42,7 @@ export default function MyPageMenu({ links }: { links: any }) {
               href={item.link}
               as={item.link}
               className={`
-              text-title_m  py-[18px] px-6 first:rounded-t-md first:pt-[22px] last:pb-[22px] last:rounded-b-md  capitalize
+              text-title_m  py-[18px] px-6 first:rounded-t-md first:pt-[22px] last:pb-[22px] last:rounded-b-md hover:text-text-primary  capitalize
               ${pathName.endsWith(item.link) ? 'bg-accent-tertiary text-text-primary' : "text-text-secondary"}
               `}
             >
