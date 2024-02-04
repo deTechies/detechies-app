@@ -45,7 +45,7 @@ export default function PendingMemberItem({
     const hours = Math.floor(timeDiff / 3600000);
     const days = Math.floor(timeDiff / 86400000);
 
-    if (status === "pending") {
+    if (status === "joined") {
       if (minutes < 1) {
         return lang.project.details.waiting.just_now_joined;
       } else if (minutes < 60) {
