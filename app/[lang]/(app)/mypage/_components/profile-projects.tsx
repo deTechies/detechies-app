@@ -1,121 +1,62 @@
-"use client"
-import { Badge } from "@/components/ui/badge";
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
 // import Image from "next/image";
-import Image from "@/components/ui/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import ProjectDetailItem from "./project-detail-item";
 
 export default function ProfileProjects({
   projects,
   text,
-  visiting=false,
+  lang,
+  visiting = false,
 }: {
   projects: any;
   text: any;
-  visiting?:boolean;
+  lang: any;
+  visiting?: boolean;
 }) {
   //get all the projects the user the user is part of
   const router = useRouter();
-  
+
   return (
     <div className="flex flex-col gap-3">
       <Card className="flex flex-row items-center justify-between">
         <h5 className="text-subhead_s">{text?.projects}</h5>
-        {
-          !visiting &&
-          <Button size="sm" variant="secondary" onClick={()=>{
-            router.push("/project/create")
-          }}>
+        {!visiting && (
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() => {
+              router.push("/project/create");
+            }}
+          >
             {text?.new_project}{" "}
             <PlusIcon size="16" className="ml-2 text-text-secondary" />
           </Button>
-        }
-       
+        )}
       </Card>
-        
       {projects &&
-        projects.map((project: any, index:number) => {
-          return (
-            <Link
-            href={`/project/${project.project.id}`}
-            key={index}
-            >
-              <Card key={index} className="flex flex-row">
-                  {/* Image on the left */}
-                  <div className="w-[100px] h-[100px] relative aspect-square rounded-[12px] overflow-hidden">
-                    <Image
-                      src={`https://cloudflare-ipfs.com/ipfs/${project.project.image}`}
-                      alt="project image"
-                      width={68}
-                      height={68}
-                      className="rounded-sm"
-                    />
-                  </div>
-                  {/* Text on the right */}
-                  <div className="flex flex-col items-start gap-[16px] relative flex-1 self-stretch grow w-full">
-                    {/* <header className="flex items-center gap-2 bg-orange-100">
-                      
-                      <span className="text-text-secondary text-label_m ">
-                        {project.project.type}|{" "}
-                        {formatDate(project.project.begin_date)} ~{" "}
-                        {project.project.end_date
-                          ? formatDate(project.project.end_date)
-                          : text?.present}{" "}
-                      </span>
-                      <Badge>{text?.evaluation} (0)</Badge>
-                    </header> */}
-                    <div className="flex items-start gap-[16px] relative self-stretch">
-                      <div className="flex flex-col gap-[16px] flex-1 grow items-start relative">
-                        <h5 className="text-subhead_s">{project.project.name}</h5>
-                        <div className="flex h-[48px] gap-[8px] self-stretch w-full items-start relative">
-                          <div className="flex flex-col w-[240px] gap-[8px] items-start relative">
-                            <div className="flex gap-[8px] self-stretch w-full flex-[0_0_auto] items-start relative">
-                              <span className="text-[#6B7684] text-sm">{project.project.type}</span>
-                              <span className="text-[#6B7684] text-sm">| {formatDate(project.project.begin_date)} ~ {project.project.end_date
-                          ? formatDate(project.project.end_date)
-                          : text?.present}{" "}</span>
-                            </div>
-                            <div className="flex flex-col gap-[8px]">
-                              {project.works.map((work: any, index: number)=>{
-                                return(
-                                  <div className="flex flex-row gap-[8px] self-stretch w-full flex[0_0_auto] items-start relative" key={index}>
-                                    <span className="text-[#6B7684] text-sm">{work.name}</span>
-                                    <span className="text-[#6B7684] text-sm">{"| "} {work.percentage} %</span>
-                                  </div>
-                                )
-
-                              })}
-                            </div>
-                          </div>
-                          <span className="self-stretch flex-1 flex grow text-[#6B7684] text-sm">{project.project.description}</span>
-                        </div>
-                      </div>
-                      <div className="inline-flex gap-[12px] self-stretch flex-[0_0_auto] items-start relative">
-                        <Badge className="!flex-[0_0_auto] !px-[10px] !py-[8px]">{text?.evaluation} {project.level}</Badge>
-                      </div>
-                    </div>
-                    <div className="inline-flex items-start gap-[12px] relative">
-                      {project.project?.tags && project.project?.tags.map((tag: string, index: number)=>{
-                        return(
-                          <div className="inline-flex relative h-[32px] py-[8px] px-[10px] justify-center items-center rounded-[20px] border-[1px] border-[#BEC3CA]" key={index}>
-                            <span className="text-[#A2A9B3] text-[12px]">{tag}</span>
-                          </div>
-                        )
-                      })}
-                      {/* {project.works && (
-                        <ProjectWorkDetail data={project.works[0]} />
-                      )} */}
-                    </div>
-                  </div>
-              </Card>
-            </Link>
-          );
-        })}
+        projects.map((project: any, index: number) => (
+            <ProjectDetailItem
+              data={{
+                link: `/project/${project.project.id}`,
+                image: project.project.image,
+                description: project.project.description,
+                role: project.works[0]?.role,
+                type: project.project.type,
+                contribution: project.works[0]?.percentage,
+                tags: project.project.tags,
+                title: project.project.name,
+                begin_date: project.project.begin_date,
+                end_date: project.project.end_date,
+                work_name: project.project.work_name,
+              }}
+              lang={lang}
+              key={index}
+            />
+          ))}
     </div>
   );
 }

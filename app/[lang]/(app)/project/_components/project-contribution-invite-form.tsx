@@ -30,6 +30,7 @@ import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
+import { postServer } from "@/lib/data/postRequest";
 import { addMembersWork } from "@/lib/data/project";
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { useRef, useState } from "react";
@@ -43,7 +44,7 @@ const contributionFormSchema = z.object({
   }),
   present: z.boolean().default(false),
   valid: z.boolean().optional(),
-  tags: z.array(z.string()).optional(),
+  tags: z.array(z.string()),
 });
 
 export type ContributionFormData = z.infer<typeof contributionFormSchema>;
@@ -55,11 +56,13 @@ type ProjectContributionFormProps = {
 export default function ProjectContributionInviteForm({
   projectId,
   lang,
-  setInvite,
+  defaultValues,
+  workId,
 }: {
   projectId: string;
   lang: any;
-  setInvite: () => void;
+  defaultValues?: ContributionFormData;
+  workId?: string;
 }) {
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
@@ -96,26 +99,44 @@ export default function ProjectContributionInviteForm({
   };
 
   const onSubmit = async (values: ContributionFormData) => {
-    console.log(values);
+    setLoading(true);
 
-    try {
+    if (workId) {
+      const data = JSON.stringify({
+        projectId,
+        ...values,
+        percentage: values.percentage[0],
+        workId: workId,
+      });
+      const result = await postServer(`/project-work/${workId}`, data);
+
+      if (result) {
+        toast({
+          description: "You contribution has been added, thank you.",
+        });
+      }
+    } else {
       const result = await addMembersWork(values, projectId);
 
-      toast({
-        title: "Success",
-        description: "Your contribution has been added.",
-      });
-
-      if (closeButtonRef.current) {
-        // closeButtonRef.current.click();
-        setInvite();
+      if (result.status === "success") {
+        toast({
+          title: "Success",
+          description: "Your contribution has been added.",
+        });
+      } else {
+        toast({
+          title: "Failed",
+          description: result.codeMessage,
+        });
       }
-    } catch (error) {
-      toast({
-        title: "error",
-      });
+    }
+
+    setLoading(false);
+    if (closeButtonRef.current) {
+      closeButtonRef.current.click();
     }
   };
+
 
   return (
     <Form {...form}>
@@ -175,11 +196,7 @@ export default function ProjectContributionInviteForm({
                   name="begin_date"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <Input
-                        type="date"
-                        placeholder="Select a type"
-                        {...field}
-                      />
+                      <Input type="date" {...field} />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -192,7 +209,6 @@ export default function ProjectContributionInviteForm({
                     <FormItem className="w-full">
                       <Input
                         type="date"
-                        placeholder="Select a type"
                         {...field}
                         disabled={form.watch("present", false)}
                       />
@@ -210,24 +226,30 @@ export default function ProjectContributionInviteForm({
 
               <FormControl>
                 <Input
-                  placeholder="Type and press enter"
+                  placeholder={lang.project.details.members.add_works.type}
                   value={newTag}
                   onChange={handleNewTagChange}
                   onKeyDown={handleKeyDown}
+                  disabled={
+                    form.getValues("tags") && form.getValues("tags").length > 4
+                  }
                 />
               </FormControl>
-              <div>
+
+              <div className="flex flex-wrap gap-3">
+                {/* py-4 px-5 border border-border-div rounded-sm */}
                 {form.watch("tags")?.map((tag: any, index) => (
                   <Badge
                     key={index}
-                    className="px-3 py-2 mr-2 text-xs border rounded-full bg-background-layer-1 border-accent-primary"
+                    shape="outline"
+                    variant="accent"
                     onClick={() => {
                       const currentTags = form.getValues("tags") || [];
                       const newTags = currentTags.filter((t) => t !== tag);
                       form.setValue("tags", newTags, { shouldValidate: true });
                     }}
                   >
-                    {tag}
+                    <div className="truncate">{tag}</div>
                   </Badge>
                 ))}
               </div>
@@ -241,11 +263,6 @@ export default function ProjectContributionInviteForm({
                   <FormLabel>
                     {lang.project.details.members.add_works.attribute}
                   </FormLabel>
-                  <div className="flex justify-between w-full text-xs text-text-secondary">
-                    <span>0</span>
-                    <span className="content-center w-full text-right">50</span>
-                    <span className="w-full text-right content-right">100</span>
-                  </div>
                   <FormControl>
                     <Slider
                       {...field}
@@ -255,9 +272,6 @@ export default function ProjectContributionInviteForm({
                   </FormControl>
                   <FormDescription className="flex">
                     <FormMessage className="w-full" />
-                    {/* <span className="w-full text-right content-right">
-                      {currentPercentage[0]} of 100
-                    </span> */}
                   </FormDescription>
                 </FormItem>
               )}
@@ -296,20 +310,17 @@ export default function ProjectContributionInviteForm({
 
         <div className="flex items-center justify-center gap-2">
           <DialogClose asChild>
-            <Button
-              variant={"secondary"}
-              className="grow max-w-[212px]"
-              ref={closeButtonRef}
-            >
+            <Button variant={"secondary"} ref={closeButtonRef} size="lg">
               {lang.project.details.members.add_works.later}
             </Button>
           </DialogClose>
+
           <Button
             type="submit"
             disabled={loading || !form.formState.isValid}
             loading={loading}
             variant="default"
-            className="grow max-w-[212px]"
+            size="lg"
           >
             {lang.project.details.members.add_works.add}
           </Button>

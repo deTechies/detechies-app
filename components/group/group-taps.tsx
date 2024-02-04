@@ -44,7 +44,7 @@ export default function GroupTaps({
   ] as any;
 
   return (
-    <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 rounded-none">
+    <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 overflow-x-auto border-b rounded-none">
       {links.map((link: any, index: number) => {
         if (link.isAdmin && details.userRole != ROLE_TYPE.ADMIN)  {
           return;
@@ -55,7 +55,7 @@ export default function GroupTaps({
             <Link
               href={`/${params.lang}/groups/${details.id}/${link.href}`}
               aria-disabled={link?.disabled}
-              className={`inline-flex items-center border-b-[3px] capitalize pb-3 text-subhead_m
+              className={`inline-flex items-center truncate border-b-[3px] capitalize pb-3 text-subhead_m
             ${
               (link.href === "" &&
                 !pathname.includes(`/groups/${details.id}/`)) ||

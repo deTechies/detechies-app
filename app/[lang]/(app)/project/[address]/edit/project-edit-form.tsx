@@ -1,15 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
+import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { updateProject } from "@/lib/data/project";
 
 import MediaUploader from "@/components/extra/media-uploader";
 
+import Image from "@/components/ui/image";
+import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -18,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/use-toast";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
@@ -35,10 +38,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { X } from "lucide-react";
+import { AlertCircle, X } from "lucide-react";
+import { serverApi } from "@/lib/data/general";
+import SelectGroupInScope from "../../create/select-group-in-scope";
 
 const projectFormSchema = z.object({
   name: z
@@ -79,10 +88,16 @@ export default function ProjectEditForm({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [present, setPresent] = useState(false);
-  const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
   const [file, setFile] = useState<File | null>(null);
+  const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
 
   const [createObjectURL, setCreateObjectURL] = useState(null);
+
+  const [selectGroupDialog, setSelectGroupDialog] = useState<boolean>(false);
+  const [myGroups, setMyGroups] = useState<Club[]>([]);
+  const [selectedGroup, setSelectedGroup] = useState<Club[]>([]);
+  const [noticeGroupSelectOpen, setNoticeGroupSelectOpen] =
+    useState<boolean>(false);
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
@@ -137,6 +152,43 @@ export default function ProjectEditForm({
   const selectFile = (file: File | null, base64: string | null) => {
     setFile(file);
   };
+
+  // Select Group
+  const onSelectGroup = (_groups: Club[]) => {
+    setSelectedGroup(_groups);
+  };
+
+  const onClickDeleteClub = (clickedGroup: Club) => {
+    setSelectedGroup(
+      selectedGroup.filter((_group) => {
+        return _group.id !== clickedGroup.id;
+      })
+    );
+  };
+
+  useEffect(() => {
+    const fetchMyGroupsData = async () => {
+      if (selectGroupDialog && myGroups.length < 1) {
+        const result = await serverApi(`/clubs/my`);
+  
+        if (result.status === "success") {
+          setMyGroups(result.data);
+        }
+      }
+    };
+  
+    fetchMyGroupsData();
+
+  }, [selectGroupDialog, myGroups.length]);
+  
+  useEffect(() => {
+    if(defaultValues?.end_date){
+      setPresent(false)
+    } else {
+      setPresent(true)
+
+    }
+  }, [defaultValues]);
 
   return (
     <Form {...form}>
@@ -205,12 +257,12 @@ export default function ProjectEditForm({
           )}
         />
 
-        <FormInlineItem className="items-start relative">
+        <FormInlineItem className="relative items-start">
           <FormInlineLabel className="mt-5">
             {lang.project.list.create_project.period}
             <span className="ml-1 text-state-error">*</span>
           </FormInlineLabel>
-          <div className="flex flex-row gap-2 items-center w-full flex-wrap sm:flex-nowrap">
+          <div className="flex flex-row flex-wrap items-center w-full gap-2 sm:flex-nowrap">
             <FormField
               control={form.control}
               name="begin_date"
@@ -233,7 +285,7 @@ export default function ProjectEditForm({
                 >
                   <Input type="date" {...field} disabled={present} />
                   {present && (
-                    <div className="text-title_m text-text-placeholder px-4 py-5 absolute inset-0 bg-background-layer-2 rounded-sm">
+                    <div className="absolute inset-0 px-4 py-5 rounded-sm text-title_m text-text-placeholder bg-background-layer-2">
                       {lang.project.list.create_project.in_progress}
                     </div>
                   )}
@@ -243,16 +295,12 @@ export default function ProjectEditForm({
             />
           </div>
 
-          <div className="flex justify-end absolute bottom-full right-0 gap-1 pb-3">
+          <div className="absolute right-0 flex justify-end gap-1 pb-3 bottom-full">
             <Checkbox
               id="present"
+              checked={present}
               onCheckedChange={(_value: boolean) => {
-                if (_value) {
-                  form.setValue("end_date", "2099-12-31");
-                } else {
-                  form.setValue("end_date", "");
-                }
-
+                form.setValue("end_date", "");
                 setPresent(!present);
               }}
             />
@@ -339,7 +387,9 @@ export default function ProjectEditForm({
                   />
                 </FormControl>
 
-                <div className="mt-3 flex flex-wrap gap-2 items-start">
+                
+
+                <div className="flex flex-wrap items-start gap-2 mt-3">
                   {form.getValues("tags") &&
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
@@ -348,9 +398,9 @@ export default function ProjectEditForm({
                         shape="md"
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        <div className="truncate w-full">{tag}</div>
+                        <div className="w-full truncate">{tag}</div>
                         <X
-                          className="cursor-pointer w-5 h-5"
+                          className="w-5 h-5 cursor-pointer"
                           onClick={() => {
                             const currentTags = form.getValues("tags") || [];
                             const newTags = currentTags.filter(
@@ -373,32 +423,118 @@ export default function ProjectEditForm({
           control={form.control}
           name="scope"
           render={({ field }) => (
-            <FormInlineItem className="h-12">
-              <FormInlineLabel>
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="flex items-center h-10">
                 {lang.project.list.create_project.scope}
                 <span className="ml-1 text-state-error">*</span>
+
+                <Popover>
+                  <PopoverTrigger className="ml-2">
+                    <AlertCircle className="w-4 h-4"></AlertCircle>
+                  </PopoverTrigger>
+
+                  <PopoverContent className="max-w-full p-0">
+                    {/* plan to make variant */}
+                    <Card className="max-w-[500px] bg-background-tooltip rounded-sm p-4 ">
+                      <ul className="space-y-2 text-body_m text-accent-on-primary">
+                        {Object.values(PRIVACY_TYPE).map((type, index) => (
+                          <li key={index}>
+                            {lang.interface.privacy_type[type]}:{" "}
+                            {
+                              lang.project.list.create_project[
+                                `tooltip_${type}`
+                              ]
+                            }
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </PopoverContent>
+                </Popover>
               </FormInlineLabel>
 
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex flex-row flex-wrap gap-6"
-              >
-                {Object.values(PRIVACY_TYPE).map((type) => (
-                  <FormItem
-                    key={type}
-                    className="flex flex-wrap items-center space-y-0"
-                  >
-                    <FormControl>
-                      <RadioGroupItem value={type} />
-                    </FormControl>
+              <div>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-row flex-wrap gap-6"
+                >
+                  {Object.values(PRIVACY_TYPE).map((type) => (
+                    <FormItem
+                      key={type}
+                      className="flex flex-wrap items-center space-y-0"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value={type} />
+                      </FormControl>
 
-                    <FormLabel className="font-normal capitalize">
-                      {lang.interface.privacy_type[type]}
-                    </FormLabel>
-                  </FormItem>
-                ))}
-              </RadioGroup>
+                      <FormLabel className="font-normal capitalize">
+                        {lang.interface.privacy_type[type]}
+                      </FormLabel>
+                    </FormItem>
+                  ))}
+
+                  {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
+                    <>
+                      <Dialog
+                        open={selectGroupDialog}
+                        onOpenChange={setSelectGroupDialog}
+                      >
+                        <DialogTrigger>
+                          <Badge className="cursor-pointer">
+                            {
+                              lang.project.list.create_project.select_group
+                                .button
+                            }
+                          </Badge>
+                        </DialogTrigger>
+
+                        <DialogContent className="max-w-[720px] gap-0 px-8">
+                          <SelectGroupInScope
+                            lang={lang}
+                            myGroups={myGroups}
+                            selectedGroup={selectedGroup}
+                            onSelectGroup={onSelectGroup}
+                          ></SelectGroupInScope>
+                        </DialogContent>
+                      </Dialog>
+                    </>
+                  )}
+                </RadioGroup>
+
+                {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {selectedGroup.length > 0 &&
+                      selectedGroup.map((group: Club, index: number) => {
+                        return (
+                          <Badge
+                            shape="outline"
+                            className="gap-2 my-1.5"
+                            key={index}
+                          >
+                            <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
+                              <Image
+                                src={`https://ipfs.io/ipfs/${group.image}`}
+                                alt={group.name}
+                                width="20"
+                                height="20"
+                              ></Image>
+                            </div>
+
+                            <div className="text-label_m max-w-[120px] truncate">
+                              {group.name}
+                            </div>
+
+                            <X
+                              className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
+                              onClick={() => onClickDeleteClub(group)}
+                            ></X>
+                          </Badge>
+                        );
+                      })}
+                  </div>
+                )}
+              </div>
 
               <FormMessage />
             </FormInlineItem>

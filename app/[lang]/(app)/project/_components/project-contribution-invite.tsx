@@ -1,15 +1,14 @@
 "use client";
+import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
+import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Project } from "@/lib/interfaces";
-import ProjectContributionForm, {
+import { useState } from "react";
+import {
   ContributionFormData,
 } from "./project-contribution-form";
-import ProjectSwitcher from "./project-switcher";
-import { Button } from "@/components/ui/button";
-import InviteContributionMember from "@/components/invite-project-member/invite-contribution-member";
-import { useState } from "react";
 import ProjectContributionInviteForm from "./project-contribution-invite-form";
-import useFetchData from "@/lib/useFetchData";
+import ProjectSwitcher from "./project-switcher";
 const newContribution = {
   valid: false,
 } as ContributionFormData;
@@ -20,10 +19,12 @@ type ProjectContributionProps = {
 export default function ProjectContributionInvite({
   project,
   lang,
+  onlyOne,
 }: {
   // ProjectContributionProp
   project: Project;
   lang: any;
+  onlyOne?: boolean;
 }) {
   const [invite, setInvite] = useState<boolean>(false);
 
@@ -48,14 +49,14 @@ export default function ProjectContributionInvite({
             </header>
 
             <section>
-              <h4 className="text-subhead_s mb-5">
+              <h4 className="mb-5 text-subhead_s">
                 {lang.project.details.members.add_works.project}
               </h4>
               <ProjectSwitcher project={project} lang={lang}/>
             </section>
 
             <section>
-              <h4 className="text-subhead_s mb-5">
+              <h4 className="mb-5 text-subhead_s">
                 {lang.project.details.members.add_works.my_work}
               </h4>
 
@@ -63,7 +64,6 @@ export default function ProjectContributionInvite({
                 <ProjectContributionInviteForm
                   projectId={project.id}
                   lang={lang}
-                  setInvite={() => setInvite(true)}
                 />
               )}
             </section>

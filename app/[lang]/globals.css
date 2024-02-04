@@ -41,13 +41,15 @@
     --accent-primary: #00D41D;
     --accent-on-primary: #F4F4F4;
     --accent-secondary: #DEFFD9;
+    --accent-tertiary: #F1FFF6;
     --accent-on-secondary: #00D41D;
 
     --background-base: #F2F3F5;
     --background-layer-1: #FEFEFE;
     --background-layer-2: #F6F7F8;
     --background-input-inactive: #A2A9B3;
-    
+    --background-tooltip: #101A28;
+
     --text-primary: #101113;
     --text-secondary: #6B7684;
     --text-placeholder: #A2A9B3;
@@ -124,10 +126,13 @@
     --accent-on-primary: #FEFEFE;
     --accent-secondary: #0B5700;
     --accent-on-secondary: #00C71B;
+    --accent-tertiary: #909993;
     
     --background-base: #000000;
     --background-layer-1: #101113;
     --background-layer-2: #1F2226;
+    --background-input-inactive: #A2A9B3;
+    --background-tooltip: #101A28;
     
     --text-primary: #FEFEFE;
     --text-secondary: #6B7684;
@@ -225,4 +230,17 @@ html {
     content: '•';
     margin-right: 4px; /* 간격 조정 */
   }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.bg-animate {
+  animation: fadeInOut 2s ease-in-out infinite;
 }

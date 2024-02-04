@@ -41,6 +41,6 @@ export const useHandleSign = async () => {
       }
 
   } catch (error) {
-    console.log("Error Occurred", error);
+    console.log(error);
   }
 };

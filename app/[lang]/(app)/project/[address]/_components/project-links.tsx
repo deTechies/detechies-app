@@ -24,7 +24,7 @@ export default async function ProjectLinks({
         )}
       </CardHeader>
 
-      <CardContent> 
+      <CardContent > 
         {details.links.length > 0 ? (
           <Links works={details.links} />
         ) : (

@@ -4,37 +4,38 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
 
 export default function UserProfile({
-    profile,
-    text,
-
-    }: {
-    profile: any;
-    text: any;
-    }) {
-    return (
-        <Card className="flex flex-col gap-5 w-[328px]">
+  profile,
+  text,
+}: {
+  profile: any;
+  text: any;
+}) {
+  return (
+    <Card className="flex flex-col gap-5 w-[328px]">
       <div className="flex flex-col gap-4">
-        <div className="relative w-full aspect-square rounded-md bg-background-layer-2">
-          <IPFSImageLayer hashes={profile.avatar ? profile.avatar : defaultAvatar} />
+        <div className="relative w-full rounded-md aspect-square bg-background-layer-2">
+          <IPFSImageLayer
+            hashes={profile.avatar ? profile.avatar : defaultAvatar}
+          />
         </div>
-        <div className="flex flex-col justify-between basis-auto ml-4">
+        <div className="flex flex-col justify-between ml-4 basis-auto">
           <div className="flex flex-col gap-3">
             <p className="text-title_l"># {profile.display_name}</p>
           </div>
         </div>
       </div>
 
-      <div className="grid px-5 py-3  border rounded-sm border-border-div">
+      <div className="grid px-5 py-3 border rounded-sm border-border-div">
         <div className="flex p-1">
-          <div className="basis-1/2 gap-2">
-            <p className="text-subhead_s font-semibold">0</p>
-            <p className="text-title_m text-text-secondary capitalize">
+          <div className="gap-2 basis-1/2">
+            <p className="font-semibold text-subhead_s">0</p>
+            <p className="capitalize text-title_m text-text-secondary">
               {text?.following}
             </p>
           </div>
           <div className="basis-1/2">
-            <p className="text-subhead_s font-semibold">0</p>
-            <p className="text-title_m text-text-secondary capitalize">
+            <p className="font-semibold text-subhead_s">0</p>
+            <p className="capitalize text-title_m text-text-secondary">
               {text?.followers}
             </p>
           </div>
@@ -42,7 +43,7 @@ export default function UserProfile({
       </div>
 
       <div className="grid border rounded-sm border-border-div">
-        <div className="flex justify-between p-5 items-center">
+        <div className="flex items-center justify-between p-5">
           <div className="flex items-center mr-4 text-nowrap">
             {text?.address}
           </div>
@@ -58,6 +59,5 @@ export default function UserProfile({
         </div>
       </div>
     </Card>
-    );
-
-    };
+  );
+}

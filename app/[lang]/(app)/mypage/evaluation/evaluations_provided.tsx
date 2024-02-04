@@ -2,7 +2,11 @@ import { Card } from "@/components/ui/card";
 import { serverApi } from "@/lib/data/general";
 import RequestedEvaluationCard from "./_components/requested-evaluation-card";
 
-export default async function EvaluationProvided() {
+export default async function EvaluationProvided({
+  lang
+}: {
+  lang: any;
+}) {
   const queries = {
     provided: "true",
     status: "finished",
@@ -11,27 +15,27 @@ export default async function EvaluationProvided() {
 
   const { data } = await serverApi(`/survey-response/filtered?${filters}`);
 
-  console.log(data);
+  // console.log(data);
   const stats = [
     {
-      title: "평가 완료",
+      title: lang.mypage.evaluations.stats.total_reviews,
       value: data.length,
       subtext: "",
     },
     {
-      title: "평가 대기",
-      value: "coming soon",
+      title: lang.mypage.evaluations.stats.total_earned,
+      value: lang.mypage.evaluations.coming_soon,
       subtext: "0 CAZ",
     },
     {
-      title: "평가 요청",
-      value: "coming soon",
+      title: lang.mypage.evaluations.stats.average_rewards,
+      value: lang.mypage.evaluations.coming_soon,
       subtext: "0 CAZ",
     },
   ];
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <div className="flex gap-6">
         {stats.map((stat, index) => (
           <EvaluationStat key={index} {...stat} />
@@ -40,7 +44,7 @@ export default async function EvaluationProvided() {
       <div className="flex flex-col gap-4">
         {data &&
           data.map((item: any, index: number) => (
-            <RequestedEvaluationCard key={index} data={item} />
+            <RequestedEvaluationCard key={index} data={item} lang={lang} provided={true} />
           ))}
       </div>
     </div>

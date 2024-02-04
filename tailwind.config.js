@@ -30,6 +30,7 @@ module.exports = {
           secondary: "var(--accent-secondary)",
           "on-primary": "var(--accent-on-primary)",
           "on-secondary": "var(--accent-on-secondary)",
+          tertiary: "var(--accent-tertiary)",
         },
         text: {
           primary: "var(--text-primary)",
@@ -46,6 +47,7 @@ module.exports = {
           "layer-1": "var(--background-layer-1)",
           "layer-2": "var(--background-layer-2)",
           "input-inactive": "var(--background-input-inactive)",
+          "tooltip": "var(--background-tooltip)",
         },
         border: {
           input: "var(--border-input)",

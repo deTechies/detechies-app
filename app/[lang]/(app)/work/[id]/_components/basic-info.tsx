@@ -108,17 +108,17 @@ export default function BasicEvaluationInfo({
     const result = await postServer(url, sendingData);
 
     if (result.status == "success") {
-      if(data.match == "100") {
+      if (data.match == "100") {
         router.push(`/work/${workId}/survey`);
       }
 
       if (data.match == "80") {
-        router.push(`/project/${projectId}/`);
+        // router.push(`/project/${projectId}/`);
+        router.back();
       }
     } else {
       setIsLoading(false);
     }
-
   }
 
   const onClickGoBack = () => {
@@ -248,7 +248,7 @@ export default function BasicEvaluationInfo({
             <Card>
               <section className="space-y-7 mb-7">
                 <h4 className="text-subhead_s mb-7">
-                  {text.eval_work_contribution}
+                  {text.eval_rate_contributions}
                 </h4>
 
                 <PercentageSliderField
@@ -256,16 +256,16 @@ export default function BasicEvaluationInfo({
                   form={form}
                   steps={10}
                   text={text}
-                  label={text.work_contribution.label}
-                  messages={text.work_contribution.messages}
+                  label={text.rate_contributions.label}
+                  messages={text.rate_contributions.messages}
                   disabled={result}
                 />
                 <PercentageSliderField
                   name="rate_requirements"
                   form={form}
                   steps={10}
-                  label={text.meet_requirements.label}
-                  messages={text.meet_requirements.messages}
+                  label={text.rate_requirements.label}
+                  messages={text.rate_requirements.messages}
                   text={text}
                   disabled={result}
                 />
@@ -275,8 +275,8 @@ export default function BasicEvaluationInfo({
                   form={form}
                   steps={10}
                   text={text}
-                  label={text.meet_schedule.label}
-                  messages={text.meet_schedule.messages}
+                  label={text.rate_time_schedule.label}
+                  messages={text.rate_time_schedule.messages}
                   disabled={result}
                 />
                 <PercentageSliderField

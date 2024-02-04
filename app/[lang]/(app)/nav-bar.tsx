@@ -2,22 +2,23 @@
 
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-import { BellRing, Menu, Send, X } from "lucide-react";
+import { BellRing, Globe, Menu, Send, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 
 export default function Navbar({ lang }: { lang: any }) {
   //check if the current one is active
   const pathname = usePathname();
   const params = useParams();
+  const router = useRouter();
 
   const links = [
     {
-      name: lang.find_expert,
-      href: `/${params.lang}/profiles`,
+      name: lang.my_profile,
+      href: `/${params.lang}/mypage`,
     },
     {
       name: lang.project,
@@ -28,10 +29,18 @@ export default function Navbar({ lang }: { lang: any }) {
       href: `/${params.lang}/groups`,
     },
     {
-      name: lang.my_profile,
-      href: `/${params.lang}/mypage`,
+      name: lang.find_expert,
+      href: `/${params.lang}/profiles`,
     },
   ];
+  
+  function changeLanguage() {
+    const value = params.lang === "en" ? "ko" : "en";
+    //change the value in the path name
+    const segments = pathname.split("/").filter(Boolean);
+    const newPath = "/" + value + "/" + segments.slice(1).join("/");
+    router.replace(newPath);
+  }
 
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
 
@@ -46,7 +55,7 @@ export default function Navbar({ lang }: { lang: any }) {
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
    
                   <Image
-                    className="block object-contain h-12 dark:hidden"
+                    className="block object-contain dark:hidden"
                     src="/images/careerzen.png"
                     alt="Careerzen"
                     width={150}
@@ -77,7 +86,7 @@ export default function Navbar({ lang }: { lang: any }) {
                     key={index}
                     href={link.href}
                     aria-disabled={link?.disabled}
-                    className={`inline-flex items-center border-b-[3px] capitalize 
+                    className={`inline-flex items-center truncate border-b-[3px] capitalize 
                       ${
                         pathname.includes(link.href)
                           ? "border-accent-primary text-text-primary"
@@ -96,6 +105,9 @@ export default function Navbar({ lang }: { lang: any }) {
                 </div>
                 <div className="mx-3">
                   <BellRing className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
+                </div>
+                <div className="mx-3">
+                  <Globe className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" onClick={changeLanguage} />
                 </div>
                 <div className="relative ml-3 cursor-pointer text-text-secondary hover:text-text-primary">
                   <Login lang={lang.my_account}/>

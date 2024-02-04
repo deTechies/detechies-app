@@ -58,11 +58,11 @@ export default async function RootLayout({
   if(!session){
     redirect("/onboard");
   }
-  if(!session?.web3?.user) {
+  if(!session?.web3?.user?.verified) {
     signOut();
     redirect("/onboard");
   }
-  
+
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body

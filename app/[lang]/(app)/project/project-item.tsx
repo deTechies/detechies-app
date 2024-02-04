@@ -26,7 +26,8 @@ export default function ProjectItem({
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
-          fill={true}
+          width={100}
+          height={100}
           className="rounded-sm"
         />
       </figure>
@@ -65,7 +66,7 @@ export default function ProjectItem({
           ></p>
         </div>
 
-        <div className="flex gap-3 justify-self-end">
+        <div className="flex flex-wrap gap-3 justify-self-end">
           {details.tags &&
             details.tags?.map((tag) => (
               <Badge
@@ -74,7 +75,9 @@ export default function ProjectItem({
                 variant="placeholder"
                 className="text-label_s"
               >
-                {tag}
+                <div className="truncate">
+                  {tag}
+                </div>
               </Badge>
             ))}
 

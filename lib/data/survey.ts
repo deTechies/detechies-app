@@ -87,6 +87,30 @@ export async function getAllMyEvaluations() {
   return response.json();
 }
 
+export async function getAllSurveyAboutUser(id: string) {
+  const session = await auth();
+  const url = new URL(
+    `${API_URL}/survey-response/users/${id}`
+  );
+
+  if (!session?.web3?.accessToken) {
+    throw new Error("No access token found");
+  }
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch the survey id");
+  }
+
+  return response.json();
+}
+
 export async function getEvaluationSurvey(id: string) {
   const session = await auth();
   const url = new URL(`${API_URL}/survey/match/${id}`);
@@ -104,7 +128,6 @@ export async function getEvaluationSurvey(id: string) {
 
   if (!response.ok) {
     const result= await response.json();
-    console.log(result)
     throw new Error("Failed to fetch the survey id");
   }
 
@@ -117,3 +140,5 @@ function transformToAnswerDto(data: { [key: string]: number }): any[] {
     response: response ? response.toString() : "", // Safe check for null/undefined
   }));
 }
+
+

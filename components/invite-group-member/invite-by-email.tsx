@@ -14,7 +14,7 @@ import * as z from "zod";
 
 import { toast } from "@/components/ui/use-toast";
 
-import { inviteByEmail } from "@/lib/data/project";
+import { postServer } from "@/lib/data/postRequest";
 import { useState } from "react";
 import { Label } from "../ui/label";
 
@@ -58,22 +58,23 @@ export default function InviteByEmail({
 
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
-
-    const result = await inviteByEmail(data.name, data.email, id);
-
+    const submitData = JSON.stringify({
+      name: data.name + " " + data.last_name,
+      message: "You have been invited to join a club on Careerzen",
+      email: data.email,
+      entity_type: "club",
+      entity_id: id,
+    });
+    const result = await postServer(`/referral`, submitData);
 
     if (result) {
       toast({
-        title: "Success",
-        description: "Project created successfully",
+        description: "Invitation sent successfully to " + data.email + ".",
       });
+      setLoading(false);
+      cancelByEmail();
+      return;
     }
-
-    toast({
-      title: "Not yet implemented",
-      description: "Sorry, this function is coming sooon!",
-      variant: "destructive",
-    });
 
     setLoading(false);
   }
@@ -114,13 +115,11 @@ export default function InviteByEmail({
             />
           </div>
 
-          <Label>
-            {lang.details.profile_card.invite.email}
-          </Label>
+          <Label>{lang.details.profile_card.invite.email}</Label>
 
           <FormField
             control={form.control}
-            name={lang.details.profile_card.invite.email}
+            name={"email"}
             render={({ field }) => (
               <FormItem className="mb-2">
                 <FormControl className="h-[60px]">

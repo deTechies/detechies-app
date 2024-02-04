@@ -80,10 +80,6 @@ export default function PendingNFT({ details }: any) {
           status: "accepted",
         }),
       })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err: Error) => console.log(err));
       
     }
 

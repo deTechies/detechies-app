@@ -1,6 +1,5 @@
 "use client";
 
-import { joinProject } from "@/lib/data/project";
 import { useRef, useState } from "react";
 
 import {
@@ -18,6 +17,7 @@ import { Textarea } from "../ui/textarea";
 
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { postServer } from "@/lib/data/postRequest";
 import { ROLE_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogClose } from "@radix-ui/react-dialog";
@@ -85,11 +85,13 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
       });
       return;
     }
-    const result = await joinProject({
+    
+    const postData = JSON.stringify({
       projectId: address,
       message: data.message,
       role: data.role,
-    });
+    })
+    const result = await postServer(`/project-member/join`, postData);
 
     if (result) {
       toast({

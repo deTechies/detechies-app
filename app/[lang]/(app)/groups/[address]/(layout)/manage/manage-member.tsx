@@ -5,7 +5,7 @@ import PendingMemberListItem from "@/components/group/pending-member-list-item";
 import MemberCard from "@/components/card/member-card";
 import Search from "@/components/extra/search";
 import { getPendingMembers } from "@/lib/data/groups";
-import { Member } from "../members/page";
+import { ClubMember } from "@/lib/interfaces";
 
 export default async function ManageMember({
   details,
@@ -16,7 +16,7 @@ export default async function ManageMember({
   searchParams: { [key: string]: string | string[] | undefined };
   lang: any;
 }) {
-  const {data: pendingData} = await getPendingMembers(details.id);
+  const { data: pendingData } = await getPendingMembers(details.id);
 
   const searchItem = searchParams.search as string;
 
@@ -73,17 +73,21 @@ export default async function ManageMember({
       </div>
 
       <h3 className="mb-4 text-subhead_s">
-      {lang.group.details.manage.member.waiting_invite} ({invited?.length})
+        {lang.group.details.manage.member.waiting_invite} ({invited?.length})
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">
         <div className="grid grid-cols-[1fr_90px_144px] gap-4 text-text-placeholder text-title_s">
           <div>{lang.group.details.manage.member.user_info}</div>
-          <div className="text-center ">{lang.group.details.manage.member.request_date}</div>
-          <div className="text-center ">{lang.group.details.manage.member.actions}</div>
+          <div className="text-center ">
+            {lang.group.details.manage.member.request_date}
+          </div>
+          <div className="text-center ">
+            {lang.group.details.manage.member.actions}
+          </div>
         </div>
 
-        {details.members.length > 0 ? (
+        {invited.length > 0 ? (
           invited.map((item: any, index: number) => {
             return (
               <InvitingMemberListItem
@@ -102,7 +106,8 @@ export default async function ManageMember({
       </div>
 
       <h3 className="mb-4 text-subhead_s">
-      {lang.group.details.manage.member.all_members} ({details.members.length})
+        {lang.group.details.manage.member.all_members} ({details.members.length}
+        )
       </h3>
 
       <div className="overflow-auto max-w-[90vw]">
@@ -112,7 +117,7 @@ export default async function ManageMember({
 
         <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {filteredData &&
-            filteredData.map((item: Member, index: any) => {
+            filteredData.map((item: ClubMember, index: any) => {
               if (index > 4) {
                 return;
               }

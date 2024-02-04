@@ -1,34 +1,32 @@
-"use client"
+"use client";
 
+import { useTheme } from "next-themes";
 
-import { useTheme } from "next-themes"
-
-import { Select } from "@radix-ui/react-select"
-import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
+import { Moon, Sun } from "lucide-react";
 
 interface IThemeToggleProps {
-  text: any
+  text: any;
 }
 
-export function ThemeToggle({text}: IThemeToggleProps) {
-  const { setTheme, theme } = useTheme()
-  
+export function ThemeToggle({ text }: IThemeToggleProps) {
+  const { setTheme, theme } = useTheme();
 
+  const toggleTheme = () => {
+    if (theme == "dark") {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  };
 
   return (
-    <Select
-    onValueChange={(value) => setTheme(value)}
-    defaultValue={theme}
-  > 
-    <SelectTrigger className="w-[100px] bg-background-layer-1 border !p-[8px]">
-      <SelectValue placeholder={text.placeholder} />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="light">{text.light}</SelectItem>
-      <SelectItem value="dark">{text.dark}</SelectItem>
-      <SelectItem value="system">{text.system}</SelectItem>
-    </SelectContent>
-  </Select>
-
-  )
+    <div className="flex gap-2 rounded-[6px] bg-background-layer-2 items-center justify-evenly">
+      <div onClick={() => toggleTheme()} className={`${theme == 'light' ? 'bg-background-layer-1 text-accent-primary rounded-[4px] ': 'text-text-primary'} m-1 p-1 `}>
+        <Sun size="24" />
+      </div>
+      <div onClick={() => toggleTheme()} className={`${theme == 'dark' && 'bg-background-layer-1 rounded-[4px]' } m-1 p-1`}>
+        <Moon size="24" className="text-text-primary" />
+      </div>
+    </div>
+  );
 }

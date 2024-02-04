@@ -33,7 +33,6 @@ export async function postServer(endpoint: string, body?: string) {
     });
     
     console.log(result);
-    
     return;
   } else {
     toast({

@@ -10,6 +10,7 @@ import ProfileProjects from "../../mypage/_components/profile-projects";
 
 import NoProfileFound from "./_component/no-profile-found";
 import UserProfile from "./_component/user-profile";
+// import UserReport from "./_component/user-report";
 
 export default async function Dashboard({
   params,
@@ -19,23 +20,21 @@ export default async function Dashboard({
   const {data:profile} = await getUserProfile(params.user) as any;
   const dictionary = (await getDictionary(params.lang)) as any;
   
-  
   //TODO: Create a profile not found page. 
   if(!profile.id) return <NoProfileFound />
   
-  
-
   return (
-    <div className="flex sm:flex-row flex-col m-8 gap-20">
+    <div className="flex flex-col gap-20 m-8 sm:flex-row">
       {/* LeftSide */}
       <div className="min-w-[330px] flex flex-col gap-8">
         <UserProfile profile={profile} text={dictionary.mypage.profile}  />
+        {/*  <UserReport profile={profile} text={dictionary} />  */}
       </div>
       {/* main */}
       <div className="grow">
         <main className="flex flex-col gap-6">
-          <ProfileDetails profile={profile} text={dictionary.mypage.main} visiting={true}/>
-          <ProfileProjects projects={profile?.projects} text={dictionary.mypage.project} visiting={true} />
+          <ProfileDetails profile={profile} text={dictionary} visiting={true}/>
+          <ProfileProjects projects={profile?.projects} text={dictionary.mypage.project} visiting={true} lang={dictionary} />
           <ProfileCertificates achievement_rewards={profile?.achievement_rewards} text={dictionary.mypage.education} />
           <ProfileAwards achievement_rewards={profile?.achievement_rewards} text={dictionary.mypage.awards}/>
         </main>

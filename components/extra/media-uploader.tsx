@@ -67,7 +67,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
   );
 
   return (
-    <div className="flex gap-4 flex-wrap">
+    <div className="flex flex-wrap gap-4">
       <div
         className="relative flex items-center justify-center overflow-hidden border-2 border-dashed rounded-sm cursor-pointer border-border-input media-uploader bg-background-layer-2 hover:bg-background-layer-1"
         onClick={() => document.getElementById(random.toString())?.click()}

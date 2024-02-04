@@ -15,6 +15,7 @@ export async function uploadContent(content: any) {
   
   try{
     const cid = await client.storeBlob(imageFile);
+
     toast({
       title: "Upload complete",
       description: "Your content has been uploaded with cid: " + cid,
@@ -22,7 +23,6 @@ export async function uploadContent(content: any) {
     return cid as string;
     
   }catch(e){
-    console.log(e);
     toast({
       title: "Upload failed",
       description: "Your content could not be uploaded",

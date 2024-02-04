@@ -49,7 +49,7 @@ export default async function EvaluationResult({
       {/* RIGHT SIDE */}
       <section className="flex mb-10 grow shrink">
         <div className="space-y-8 grow">
-          {details.matching && details.matching.meet_requirements > 0 ? (
+          {details.matching && details.matching.rate_requirements > 0 ? (
             <BasicEvaluationInfo
               text={dictionary.project.evaluate}
               workId={params.id}
@@ -76,6 +76,7 @@ export default async function EvaluationResult({
               defaultValues={details.answers}
               result={true}
               lang={dictionary}
+              selectedLanguage={params.lang}
             />
           )}
 

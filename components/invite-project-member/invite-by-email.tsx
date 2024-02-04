@@ -5,7 +5,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,7 @@ import * as z from "zod";
 
 import { toast } from "@/components/ui/use-toast";
 
-import { inviteByEmail } from "@/lib/data/project";
+import { postServer } from "@/lib/data/postRequest";
 import { useState } from "react";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
@@ -60,22 +60,23 @@ export default function InviteByEmail({
 
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
-
-    const result = await inviteByEmail(data.name, data.email, projectId);
-
+    const submitData = JSON.stringify({
+      name: data.name + " " + data.last_name,
+      message: "You have been invited to join a project",
+      email: data.email,
+      entity_type: "project",
+      entity_id: projectId,
+    });
+    const result = await postServer(`/referral`, submitData);
 
     if (result) {
       toast({
-        title: "Success",
-        description: "Project created successfully",
+        description: "Invitation sent successfully",
       });
+      setLoading(false);
+      cancelByEmail();
+      return;
     }
-
-    toast({
-      title: "Not yet implemented",
-      description: "Sorry, this function is coming sooon!",
-      variant: "destructive",
-    });
 
     setLoading(false);
   }
@@ -83,7 +84,10 @@ export default function InviteByEmail({
   return (
     <main className="flex flex-col gap-4">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-3"
+        >
           <Label>{lang.project.details.invite_member.name}</Label>
 
           <div className="flex gap-4 mb-2">
@@ -94,7 +98,9 @@ export default function InviteByEmail({
                 <FormItem className="grow">
                   <FormControl>
                     <Input
-                      placeholder={lang.project.details.invite_member.first_name}
+                      placeholder={
+                        lang.project.details.invite_member.first_name
+                      }
                       {...field}
                     />
                   </FormControl>
@@ -124,7 +130,6 @@ export default function InviteByEmail({
           <FormField
             control={form.control}
             name="email"
-            
             render={({ field }) => (
               <FormItem className="mb-2">
                 <FormControl>

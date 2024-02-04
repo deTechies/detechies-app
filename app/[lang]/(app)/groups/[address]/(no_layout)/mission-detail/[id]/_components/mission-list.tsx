@@ -51,13 +51,11 @@ export default function MissionList({
     setLoading(false);
   };
 
-  console.log(mission);
-  console.log(userProgress);
 
   if (userProgress.length > 0) {
     return (
       <div className="flex flex-col gap-3">
-        <Card className="flex flex-row items-center justify-between px-8 py-7">
+        <Card className="flex flex-row flex-wrap items-center justify-between px-8 py-7">
           <>
             <span className="text-subhead_s">
               {lang.mission.detail.all_mission} ({userProgress.length})
@@ -111,7 +109,7 @@ export default function MissionList({
 
   return (
     <div className="flex flex-col gap-3">
-      <Card className="flex flex-row items-center justify-between px-8 py-7">
+      <Card className="flex flex-row flex-wrap items-center justify-between px-8 py-7">
         <Button
           onClick={startCampaign}
           loading={loading}

@@ -16,21 +16,25 @@ const badgeVariants = cva(
         warning: "border-state-warning bg-state-warning-secondary text-state-warning",
         placeholder: "border-border-input text-text-placeholder",
         secondary:
-          "bg-text-secondary",
+          "bg-button-secondary",
         tertiary: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
         purple: "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
+        outline: "text-text-primary",
         ghost: "text-text-primary border border-text-secondary hover:bg-background-layer-2/80",
+        opacity: "text-text-primary bg-white/50",
       },
       shape: {
         default: "text-label_s rounded-md px-3 py-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
         md: "py-2 px-2.5 rounded-md text-title_s",
         sm: "py-2 px-2.5 rounded-md text-label_s",
         category: "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
-        outline: "max-w-[200px] truncate py-2 px-2.5 border rounded-md bg-background-transparent text-title_s",
+        outline: "max-w-[200px] truncate py-[8px] px-[10px] border rounded-md bg-background-transparent text-title_s",
         outline_sm: "h-[22px] px-2.5 border rounded-full text-label_s",
+        icon: "py-1.5 px-[10px] rounded-md text-label_m flex items-center justify-center",
+        skill: "text-label_s bg-background-layer-2 rounded-[5px] px-2 py-1",
+        loading: "text-title_m rounded-md px-1.5 py-1",
       },
     },
     defaultVariants: {

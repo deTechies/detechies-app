@@ -11,14 +11,12 @@ import Link from "next/link";
 import Garderobe from "./avatar/garderobe";
 
 export async function PopoverEvent() {
-  
-  const {data:user}  = await getUserProfile();
-  
+  const { data: user } = await getUserProfile();
+
   //check if user is member of club named Careerzen
   //if yes, return null
   //if no, return the following
 
-  
   return (
     <Popover>
       <PopoverTrigger asChild className="z-10 fixed right-5 bottom-5">
@@ -43,43 +41,48 @@ export async function PopoverEvent() {
             <Garderobe />
 
             <div className="grid grid-cols-3 gap-4">
-                <Link href="https://x.com/careerzen" target="_blank" passHref>
-              <div className="flex flex-col items-center justify-center gap-2 border border-text-primary hover:bg-[#afafb2] p-3 rounded-sm">
-                <Image
-                  src="/images/socials/color/twitter.png"
-                  width={32}
-                  height={32}
-                  alt="twitter_icon"
-                />
-                  
-              </div>
-                </Link>
-              <Link href="https://open.kakao.com/o/gGdZ76If" target="_blank" passHref>
-              <div className="flex flex-col items-center justify-center gap-2 border border-[#fbe948] p-3 rounded-sm hover:bg-[#fbe948]">
-                <Image
-                  src="/images/socials/color/kakao.png"
-                  width={32}
-                  height={32}
-                  alt="twitter_icon"
-                />
-              </div>
+              <Link href="https://x.com/careerzen" target="_blank" passHref>
+                <div className="flex flex-col items-center justify-center gap-2 border border-text-primary hover:bg-[#afafb2] p-3 rounded-sm">
+                  <Image
+                    src="/images/socials/color/twitter.png"
+                    width={32}
+                    height={32}
+                    alt="twitter_icon"
+                  />
+                </div>
               </Link>
-              <Link href="https://t.me/Careerzen_org/1" target="_blank" passHref>
-              <div className="flex flex-col items-center justify-center gap-2 border border-[#A9C9DD] hover:bg-[#A9C9DD] p-3 rounded-sm">
-                <Image
-                  src="/images/socials/color/telegram.png"
-                  width={32}
-                  height={32}
-                  alt="twitter_icon"
-                />
-               
-             
-              </div>
+              <Link
+                href="https://open.kakao.com/o/gGdZ76If"
+                target="_blank"
+                passHref
+              >
+                <div className="flex flex-col items-center justify-center gap-2 border border-[#fbe948] p-3 rounded-sm hover:bg-[#fbe948]">
+                  <Image
+                    src="/images/socials/color/kakao.png"
+                    width={32}
+                    height={32}
+                    alt="twitter_icon"
+                  />
+                </div>
+              </Link>
+              <Link
+                href="https://t.me/Careerzen_org/1"
+                target="_blank"
+                passHref
+              >
+                <div className="flex flex-col items-center justify-center gap-2 border border-[#A9C9DD] hover:bg-[#A9C9DD] p-3 rounded-sm">
+                  <Image
+                    src="/images/socials/color/telegram.png"
+                    width={32}
+                    height={32}
+                    alt="twitter_icon"
+                  />
+                </div>
               </Link>
             </div>
+            
             <div>
-              <Button variant="primary" className="w-full"
-              >
+              <Button variant="primary" className="w-full">
                 Purchase
               </Button>
             </div>

@@ -42,9 +42,7 @@ export default function PendingProfileCard({
       `${url}/polybase/nft/accepted/${profile.profile.id}`,
       {}
     ).then((res) => {
-      console.log(res)
     })
-    .catch((err: Error) => console.log(err));
 
     
     await write({ args: [profile.profile.id] });

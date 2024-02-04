@@ -2,7 +2,15 @@ import { Badge } from "@/components/ui/badge";
 import { ProjectWork } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 
-export default function ProjectWorkDetail({ data, showTags=true }: { data: ProjectWork, showTags?: boolean }) {
+export default function ProjectWorkDetail({
+  data,
+  showTags = true,
+  lang,
+}: {
+  data: ProjectWork;
+  showTags?: boolean;
+  lang?: any;
+}) {
   if (!data) return null;
 
   return (
@@ -10,7 +18,10 @@ export default function ProjectWorkDetail({ data, showTags=true }: { data: Proje
       <div className="inline-flex flex-wrap items-start justify-start gap-4 text-text-secondary">
         <div className="inline-flex flex-col items-start justify-start gap-2">
           <div className="divide-x">
-            <span className="pr-2 capitalize text-label_m">{data.name}</span>
+            <span className="pr-2 capitalize text-label_m">
+              {" "}
+              {data?.role && lang?.interface.profession_type[data?.role]}
+            </span>
             <span className="pl-2 text-label_m">{data.percentage} %</span>
           </div>
           <span className="text-label_m">
@@ -19,22 +30,17 @@ export default function ProjectWorkDetail({ data, showTags=true }: { data: Proje
           </span>
         </div>
 
-        <div className="self-stretch grow shrink basis-0 line-clamp-2">
-          <span className="text-label_m">
-            {data.description}
-          </span>
+        <div className="self-stretch text-label_m grow shrink basis-0 line-clamp-2">
+          {data.description}
         </div>
       </div>
 
       <div className="inline-flex flex-wrap items-start justify-start gap-2">
-        {showTags && data.tags?.length > 0 &&
+        {showTags &&
+          data.tags?.length > 0 &&
           data.tags.map((tag: string, index: number) => (
-            <Badge
-              variant="secondary"
-              shape="outline"
-              key={index}
-            >
-              {tag}
+            <Badge variant="secondary" shape="outline" key={index}>
+              <div className="truncate">{tag}</div>
             </Badge>
           ))}
       </div>

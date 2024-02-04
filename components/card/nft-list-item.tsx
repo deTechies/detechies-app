@@ -44,7 +44,6 @@ export default function NftListItem({
       : url;
   }
 
-  // console.log(item);
 
   return (
     <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">

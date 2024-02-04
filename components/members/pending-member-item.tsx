@@ -45,7 +45,7 @@ export default function PendingMemberItem({
     const hours = Math.floor(timeDiff / 3600000);
     const days = Math.floor(timeDiff / 86400000);
 
-    if (status === "joined") {
+    if (status === "pending") {
       if (minutes < 1) {
         return lang.project.details.waiting.just_now_joined;
       } else if (minutes < 60) {
@@ -93,12 +93,11 @@ export default function PendingMemberItem({
             </div>
 
             <div className="flex flex-wrap items-center justify-end gap-3 ml-auto">
-              {member.status == "joined" && (
+              {(member.status == "pending")  && (
                 <>
                   <Button
                     size="sm"
                     variant="secondary"
-                    loading={isLoading}
                     disabled={isLoading}
                   >
                     {lang.project.details.waiting.reject}

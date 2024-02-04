@@ -4,27 +4,28 @@
     "project": "프로젝트",
     "groups": "그룹",
     "my_profile": "내 프로필",
-    "my_account":{
+    "my_account": {
       "my_account_title": "내 계정",
       "my_encrypted_account_address": "내 암호화 계정 주소",
       "copy_label": "복사하기",
       "change_account": "계정 변경",
       "blockchain_network": "블록체인 네트워크",
-      "chains":{
+      "chains": {
         "polygon_mainnet": "폴리곤 메인 네트워크",
         "polygon_mumbai": "폴리곤 테스트 네트워크"
       },
-      "language":{
-        "placeholder":"언어",
+      "language": {
+        "placeholder": "언어",
         "english": "English",
         "korean": "한국어"
       },
-      "theme":{
+      "theme": {
         "placeholder": "주제",
         "light": "빛",
         "dark": "어두운",
         "system": "체계"
       },
+      "sign_in": "로그인",
       "sign_out": "로그아웃",
       "my_profile": "내 프로필",
       "not_connected": "연결되지 않은"
@@ -38,27 +39,94 @@
       "Profile Items": "profile items"
     }
   },
+
+  "profile": {
+    "report_card": {
+      "title": "의 평판보고서",
+      "total_experience": "총 경력",
+      "total_evalucation": "총 받은 평가",
+      "admin_evalu": "관리자 평가",
+      "member_evalu": "동료 평가",
+      "client_evalu": "클라이언트 평가",
+      "view": "열람하기"
+    },
+    "report_popup": {
+      "title": "통합 평판 보고서 열람하기",
+      "desc": "통합 평판 보고서 열람하고, 전문가가 프로젝트에서 받은 성과 평가를 확인해보세요.",
+      "this_report": "열람하려는 보고서",
+      "total_report": "통합 평판 보고서",
+      "point_to_need": "열람에 필요한 포인트",
+      "points_held": "보유 포인트",
+      "back": "뒤로가기",
+      "view": "열람하기"
+    },
+    "summary": {
+      "title": "전문가 평판 보고서",
+      "billing": "청구시급",
+      "billing_unit": "원",
+      "hours": "투입시간",
+      "hours_unit": "시간/주",
+      "introduction": "소개글"
+    },
+    "statistics": {
+      "joined_projects": "참여한 프로젝트",
+      "joined_projects_desc": "프로젝트를 클릭하면 프로젝트 별 받은 성과 평가를 열람할 수 있어요.",
+      "total_report": "통합 평판 보고서",
+      "total_career": "총 경력",
+      "total_evaluation": "총 받은 평가",
+      "admin_evaluation": "관리자 평가",
+      "evaluations": "kr_evaluations",
+      "member_evaluation": "동료 평가",
+      "client_evaluation": "클라이언트 평가",
+      "work_period": "작업 기간",
+      "project_part": "기여한 파트",
+      "s_evaluation": "님이 작성한 평가",
+      "total": "통합 ",
+      "reputation_report": "평판 보고서",
+      "feedback_times": "피드백 반영도",
+      "rate_requirements": "완성도",
+      "rate_time_schedule": "마감일 준수율",
+      "good_team_player": "긍정적인 영향",
+      "rate_contributions": "기여도",
+      "points": "점",
+      "total_points": "총점"
+    }
+  },
+
+  "profile_filter": {
+    "profiles": "전문가 찾기",
+    "all": "All",
+    "search": "찾다", 
+    "filter": "Filter",
+    "sort": "Sort",
+    "info_text": "혹시 찾고 계신 전문가가 없으신가요?"
+  },
   "profile_detail_card": {
-    "example": "example"
+    "example": "example",
+    "achievements": "참가한 프로젝트",
+    "certificates": "평가받은 횟수",
+    "projects": "참가한 프로젝트",
+    "groups": "groups",
+    "no role": "no role"
   },
   "onboard": {
     "welcome": {
       "title": "전문가들의 커리어 인증은 다르다.",
       "body": "이미 계정이 있다면 기존 계정을 사용해 Careerzen에 로그인 합니다.",
       "web3": "소셜 계정으로 계속하기",
-      "browser": "메타마스크 지갑", 
-      "sign_out": "로그아웃", 
-      "sign_in_as": "이 지갑주소로 로그인", 
-      "sign_in_title": "sign_in_title", 
+      "browser": "메타마스크 지갑",
+      "sign_out": "로그아웃",
+      "sign_in_as": "이 지갑주소로 로그인",
+      "sign_in_title": "sign_in_title",
       "sign_in_body": "sign_in_body"
     },
     "verify_email": {
       "title": "회원가입",
       "body": "전문가 개인 회원은 반드시 개인 이메일을 인증해주세요. 직장 이메일은 퇴사하는 경우 계정을 찾기 어려워요.",
-      "username": "이름",
-      "username_placeholder": "이름을 입력하세요.",
+      "username": "닉네임",
+      "username_placeholder": "모두에게 공개되는 사용자 이름이에요.",
       "email": "메일주소",
-      "email_placeholder": "메일주소를 입력하세요.",
+      "email_placeholder": "email@example.com",
       "email_desc": "메일주소를 입력하세요.",
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
@@ -90,6 +158,11 @@
         "client_desc": "우리 프로젝트에 맞는 전문가 찾기",
         "admin": "기업, 기관, 커뮤니티 운영자",
         "admin_desc": "우리 조직만의 NFT 생성하기"
+      },
+      "block_web3auth": {
+        "title": "새로운 소셜계정 가입은 위핀을 이용해주세요.",
+        "desc": "새로 가입을 원하시는 회원님은 시작 화면에서 “소셜 계정으로 계속하기”를 클릭해주세요. Web3auth 계정 이용은 기존 회원님만 가능합니다.",
+        "button": "소셜 계정으로 가입하기"
       }
     }
   },
@@ -114,53 +187,64 @@
       "my_project": "내 프로젝트",
       "no_projects_found": "검색 결과가 없습니다.",
       "view_more": "더 보기",
-      "create_project" : {
-        "create" : "프로젝트 생성하기",
-        "name" : "프로젝트명",
-        "name_placeholder" : "프로젝트명을 입력하세요",
-        "type" : "프로젝트 종류",
-        "type_placeholder" : "선택하세요",
-        "period" : "기간",
+      "create_project": {
+        "create": "프로젝트 생성하기",
+        "name": "프로젝트명",
+        "name_placeholder": "프로젝트명을 입력하세요",
+        "type": "프로젝트 종류",
+        "type_placeholder": "선택하세요",
+        "period": "기간",
         "in_progress": "진행중",
-        "describe" : "프로젝트 설명",
-        "describe_placeholder" : "프로젝트 설명을 입력하세요",
-        "image" : "대표 이미지",
+        "describe": "프로젝트 설명",
+        "describe_placeholder": "프로젝트 설명을 입력하세요",
+        "image": "대표 이미지",
         "image_guide1": "가로 세로 비율이 1:1인 이미지 업로드",
         "image_guide2": "저작권에 위배되지 않는 이미지만 업로드",
-        "category" : "프로젝트 카테고리",
-        "scope" : "공개 범위",
-        "back" : "뒤로가기",
-        "make" : "생성하기",
-        "name_dsc" : "프리랜서 전용 평판 조회 서비스 - 커리어젠",
+        "category": "프로젝트 카테고리",
+        "scope": "공개 범위",
+        "back": "뒤로가기",
+        "make": "생성하기",
+        "name_dsc": "프리랜서 전용 평판 조회 서비스 - 커리어젠",
         "type_dsc": "종류 선택",
-        "describe_dsc" : "프로젝트 설명을 입력해 주세요",
-        "category_dsc" : "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
-        "public" : "모든 유저",
-        "private": "프로젝트 멤버",
-        "team" : "그룹멤버"
+        "describe_dsc": "프로젝트 설명을 입력해 주세요",
+        "category_dsc": "프로젝트 카테고리를 입력해 주세요(ex 앱 개발)",
+        "tooltip_public": "커리어젠에 있는 모든 유저가 프로젝트를 열람할 수 있어요",
+        "tooltip_private": "프로젝트 멤버만 프로젝트를 열람할 수 있어요",
+        "tooltip_group": "프로젝트 및 그룹 멤버만 프로젝트를 열람할 수 있어요",
+        "select_group": {
+          "button": "공개그룹 선택",
+          "subtitle": "공개할 그룹을 선택해 주세요",
+          "subdesc": "공개할 그룹을 선택하지 않았어요. 프로젝트를 공개할 그룹을 적용하면, 적용된 그룹 멤버만 프로젝트를 볼 수 있어요.",
+          "close": "닫기",
+          "select_group": "그룹 선택하기",
+          "title": "공개할 그룹 선택하기",
+          "desc": "내가 참여중인 그룹을 선택하면, 해당 그룹 멤버만 이 프로젝트를 볼 수 있어요.",
+          "back": "뒤로가기"
+        }
       },
-      "edit_project":"프로젝트 수정하기",
-      "edit" : "수정하기",
-      "delete_project":{
-        "delete" : "삭제하기",
-        "delete_confirm" : "프로젝트를 삭제할까요?",
+      "edit_project": "프로젝트 수정하기",
+      "edit": "수정하기",
+      "delete_project": {
+        "delete": "삭제하기",
+        "delete_confirm": "프로젝트를 삭제할까요?",
         "delete_dsc": "삭제할 경우 리더님과 다른 멤버의 프로젝트 활동 정보가 모두 삭제 돼요. 정말로 프로젝트를 삭제하고 싶다면 프로젝트명:",
-        "delete_project_name" : "을 입력해 주세요.",
+        "delete_project_name": "을 입력해 주세요.",
         "placeholder": "정말로 삭제를 원할 시, 프로젝트명을 입력해주세요.",
-        "cancel" : "취소하기"
+        "cancel": "취소하기"
       },
-      "add_work":{
-        "work":"Add Work"
+      "add_work": {
+        "work": "Add Work"
       }
     },
     "details": {
       "summary": {
         "edit": "수정하기",
-        "desc": "프로젝트 설명"
+        "desc": "프로젝트 설명",
+        "show_more": "자세히 보기",
+        "hide": "숨기기"
       },
       "members": {
         "title": "프로젝트 멤버",
-        "delete": "삭제하기",
         "contribution": "기여도",
         "delegate_admin": "관리자 권한 위임",
         "unregistered": "성과 미등록",
@@ -179,6 +263,12 @@
           "later": "나중에 할게요",
           "go_eval": "평가하러 가기"
         },
+        "expel": {
+          "button": "내보내기",
+          "title": "선택한 구성원을 프로젝트에서 내보낼까요?",
+          "desc": "내보낼 경우 멤버의 프로젝트 활동 정보가 모두 삭제돼요. 정말로 내보낼까요?",
+          "back": "뒤로가기"
+        },
         "add_works": {
           "button": "내 성과 등록하기",
           "title": "내 성과 등록하기",
@@ -189,13 +279,21 @@
           "date": "내 업무 기간",
           "detail_work": "상세 업무 종류",
           "detail_work_placeholder": "프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)",
+          "type": "프로젝트에서 진행한 업무 카테고리를 입력해주세요.(ex 데이터 분석)",
           "attribute": "업무 기여도",
           "job_desc": "업무 내용",
           "job_desc_placeholder": "DB 데이터 엑셀 업로드 및 일별 마케팅 대시보드 업데이트",
           "later": "나중에 할게요",
           "add": "등록하기",
           "in_progress": "진행중"
-        } 
+        },
+        "delete_works": {
+          "button": "삭제하기",
+          "title": "작성했던 성과내역을 삭제할까요?",
+          "desc": "성과내역을 삭제한다면, 다시 작성해야 합니다.",
+          "back": "뒤로가기",
+          "delete": "삭제하기"
+        }
       },
       "links": {
         "title": "작업물",
@@ -215,8 +313,8 @@
       },
       "request": {
         "request_a_review": "평가 요청하기",
-        "card_title": "내 성과 평가 요청을 보낼까요?", 
-        "card_description": "내가 작성한 성과를 다른 구성원에게 평가받고 내 커리어를 인증해보세요. 선택한 프로젝트 구성원에게 성과 평가 요청을 보낼까요?", 
+        "card_title": "내 성과 평가 요청을 보낼까요?",
+        "card_description": "내가 작성한 성과를 다른 구성원에게 평가받고 내 커리어를 인증해보세요. 선택한 프로젝트 구성원에게 성과 평가 요청을 보낼까요?",
         "card_button": " 평가 요청하기",
         "card_back": "뒤로가기"
       },
@@ -224,6 +322,7 @@
         "title": "그룹 평가",
         "request": "요청하기",
         "no_evalu": "받은 그룹 평가 또는 NFT 수상이 없어요.",
+        "created_at": "발행일자:",
         "request_title": "그룹에게 NFT 수상 요청하기",
         "request_desc": "공신력있는 그룹을 선택하고, 해당 그룹이 발행 가능한 NFT 상장을 요청해보세요.",
         "search_placeholder": "그룹 이름을 검색해보세요",
@@ -241,17 +340,16 @@
         "reject": "거절하기",
         "accept": "승인하기",
         "position": "포지션",
-        "send_note":"초대 알림 보내기",
+        "send_note": "초대 알림 보내기",
         "just_now_joined": "방금 전 참여요청",
         "min_ago_joined": "분 전 참여요청",
         "hour_ago_joined": "시간 전 참여요청",
         "day_aog_joined": "일 전 참여요청",
-        "just_now_invited": "방금 전 초대됨", 
+        "just_now_invited": "방금 전 초대됨",
         "min_ago_invited": "분 전 초대됨",
         "hour_ago_invited": "시간 전 초대됨",
         "day_aog_invited": "일 전 초대됨"
       },
-
       "join_project": {
         "title": "프로젝트 참여하기",
         "body": "프로젝트에서 어떤 역할을 했는지 선택하고, 리더에게 참여 요청 메세지를 보내세요. 리더가 승인하면 프로젝트 멤버가 될 수 있어요.",
@@ -277,7 +375,6 @@
         "first_name": "이름",
         "email": "이메일"
       },
-      
       "invited_to_project": {
         "title": "프로젝트에 초대되었습니다!",
         "desc": "프로젝트에 대해 자세히 알아보려면 회원 가입을 수락하세요.",
@@ -295,9 +392,9 @@
       "evaluatee": "평가받는 사람"
     },
     "evaluate": {
-      "evaluate_performance": "성과 평가하기", 
-      "evaluate_performance_description": "이 프로젝트에서 ", 
-      "evaluate_performance_description2": "님의 역할과 성과를 평가해주세요.", 
+      "evaluate_performance": "성과 평가하기",
+      "evaluate_performance_description": "이 프로젝트에서 ",
+      "evaluate_performance_description2": "님의 역할과 성과를 평가해주세요.",
       "evaluate_specialty": "전문성 평가하기",
       "evaluate_specialty_description": "프로젝트에서 동료가 보여준 전문분야 능력을 평가해주세요.",
       "evaluate_propensity": "성향 평가하기",
@@ -305,15 +402,15 @@
       "last_feedback": "마지막 피드백",
       "last_feedback_description": "동료의 장점, 단점 등에 대한 자유로운 피드백을 알려주세요.",
       "basic_information": "기본 정보",
-      "billable_hourly_wage":  "청구시급", 
-      "time_weekly": "투입시간 (주 평균)", 
-      "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.", 
-      "does_the_work_details_match_the_facts": "해당 팀원이 기재한 업무내용이 사실과 일치하나요?", 
+      "billable_hourly_wage": "청구시급",
+      "time_weekly": "투입시간 (주 평균)",
+      "please_evaluate_users_role_and_performance_in_this_project": "팀원에게 책정된 시급을 입력하세요.",
+      "does_the_work_details_match_the_facts": "해당 팀원이 기재한 업무내용이 사실과 일치하나요?",
       "not_true": "사실과 다른 내용이 있어요. (코멘트 필요)",
-      "more_than_20": "기재한 내용 중 사실과 다른 부분이 20% 이상", 
-      "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상", 
+      "more_than_20": "기재한 내용 중 사실과 다른 부분이 20% 이상",
+      "more_than_15": "기재한 내용 중 사실과 다른 부분이 15% 이상",
       "more_than_10": "기재한 내용 중 사실과 다른 부분이 10% 이상",
-      "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상", 
+      "more_than_5": "기재한 내용 중 사실과 다른 부분이 5% 이상",
       "all_match": "네, 사실과 일치합니다.",
       "go_back": "뒤로가기",
       "save": "저장하기",
@@ -323,8 +420,8 @@
       "evaluation_contents": "평가 내용",
       "reject": "업무내용 사실여부 평가 사유",
       "reject_placeholder": "해당 업무내용이 사실과 다른 부분을 알려주시면 피평가자가 다시 작성할거에요.",
-      "eval_work_contribution": "성과/기여도 평가",
-      "work_contribution": {
+      "eval_rate_contributions": "성과/기여도 평가",
+      "rate_contributions": {
         "label": "위 업무에 대한 해당 팀원의 기여도를 알려주세요.",
         "messages": [
           "거의 기여하지 않음",
@@ -334,7 +431,7 @@
           "해당 파트 전체를 완벽하게 수행했어요."
         ]
       },
-      "meet_requirements": {
+      "rate_requirements": {
         "label": "해당 팀원의 결과물은 요구사항을 충족했나요?",
         "messages": [
           "누락 또는 하자가 20% 이상 (치명적인 하자 또는 누락)",
@@ -344,7 +441,7 @@
           "모든 요구사항을 만족시켰어요."
         ]
       },
-      "meet_schedule": {
+      "rate_time_schedule": {
         "label": "마일스톤에 따른 작업 일정을 준수했나요?",
         "messages": [
           "합의된 작업 기간에서 +4일 이상 지연",
@@ -357,21 +454,21 @@
       "feedback_times": {
         "label": "피드백 또는 수정사항이 발생했을 때 평균적으로 몇 일 이내에 반영하나요?",
         "messages": [
-        "5일 이상",
-        "4일 이내",
-        "2일 이내",
-        "1일 이내",
-        "발생 당시에 바로 개선"
+          "5일 이상",
+          "4일 이내",
+          "2일 이내",
+          "1일 이내",
+          "발생 당시에 바로 개선"
         ]
       },
       "good_team_player": {
         "label": "타 팀원들에게 긍정적인 영향을 미치는 편이었나요?",
         "messages": [
-        "팀원들에게 부정적 영향을 미침",
-        "팀원들에게 부정적 영향을 미침",
-        "보통임",
-        "보통임",
-        "매우 그러함"
+          "팀원들에게 부정적 영향을 미침",
+          "팀원들에게 부정적 영향을 미침",
+          "보통임",
+          "보통임",
+          "매우 그러함"
         ]
       },
       "feedback_title": "해당 유저에게 남기는 마지막 피드백",
@@ -379,8 +476,8 @@
       "weakness": "개선할 점(필수)",
       "feedback": "피평가자에게 남기는 피드백 (피평가자에게만 공개) (선택)",
       "again": "해당 팀원과 다시 프로젝트를 함께 하고 싶으신가요? (필수)",
-      "no_team_building":"팀빌딩 의사 없음",
-      "love_to":"꼭 다시 함께 하고싶어요",
+      "no_team_building": "팀빌딩 의사 없음",
+      "love_to": "꼭 다시 함께 하고싶어요",
       "register": "평가 등록하기",
       "exactly": "평가가 모두 정확한가요?",
       "exactly_desc": "사실과 다른 평가를 하는 경우 피평가자의 커리어에 불이익이 생길 수 있어요.",
@@ -393,55 +490,83 @@
       "issuer": "발행자",
       "issue_date": "발행일자"
     },
-    "club":{
+    "club": {
       "clubs": "교육",
       "new_club": "추가하기",
       "group_type": "발행자",
       "date_joined": "발행일자",
       "training_certificate": "교육 수료증",
-      "certificate":{
+      "certificate": {
         "certificate_type": "NFT 유형",
         "certificate_attribute": "NFT 속성",
-        "certificate_issuer":"발행자",
+        "certificate_issuer": "발행자",
         "certificate_description": "NFT 설명"
       }
     },
-    "education":{
+    "education": {
       "education": "교육",
       "issuer": "발행자",
       "issue_date": "발행일자"
     },
     "profile": {
-      "following": "팔로잉", 
-      "followers": "팔로워", 
-      "token": "토큰", 
+      "following": "팔로잉",
+      "followers": "팔로워",
+      "token": "토큰",
       "avatar_settings": "아바타 설정",
       "name": "이름",
-      "address":"블록체인 계정주소"
+      "address": "블록체인 계정주소"
+    },
+    "edit_avatar": {
+      "tab_all": "전체",
+      "tab_career": "커리어 NFT",
+      "tab_avatar": "한정판 NFT",
+      "not_approved": "발행 대기중",
+      "reset": "초기화",
+      "save": "저장하기"
     },
     "edit_profile": {
-      "edit_profile": "프로필 수정", 
-      "full_name": "본명 (비공개)", 
+      "edit_profile": "프로필 수정",
+      "full_name": "본명 (비공개)",
       "first_name": "이름",
       "last_name": "성",
-      "profession": "직업", 
-      "specialisation": "전문분야", 
+      "profession": "직업",
+      "email": "email",
+      "specialisation": "전문분야",
       "profile_description": "내 소개",
+      "profile_description_label": "익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다.",
       "skills": "스킬",
-      "username": "닉네임", 
-      "save_changes": "저장하기"
+      "username": "닉네임",
+      "save_changes": "저장하기",
+      "identity_authentication": "아이덴티티 인증",
+      "verify":"인증하기",
+      "social_networks":{
+        "google":"구글 계정",
+        "phone_number":"전화번호",
+        "telegram":"텔레그램",
+        "email":"이메일",
+        "web3_wallet":"탈중앙화 개인지갑",
+        "github":"Github",
+        "figma":"피그마",
+        "pinterest":"핀터레스트",
+        "youtube":"유튜브",
+        "linkedin":"링크드인",
+        "facebook":"페이스북",
+        "reddit":"레딧",
+        "kakao": "카카오톡",
+        "twitter": "트위터"
+      }
     },
     "project": {
       "projects": "프로젝트",
-      "new_project": "추가하기", 
-      "evaluation": "성과 평가 ", 
+      "new_project": "추가하기",
+      "evaluation": "성과 평가 ",
       "present": "present",
       "view_project": "자세히 보기 "
     },
     "main": {
       "profile": "프로필",
       "edit": "수정하기",
-      "description": "설명"
+      "description": "내 소개"
     },
     "menu": {
       "portfolio": "포트폴리오",
@@ -452,11 +577,28 @@
     },
     "evaluations": {
       "menu": {
-        "evaluation_requested": "내가 요청한 평가", 
-        "evaluation_requests": "요청받은 평가", 
+        "evaluation_requested": "내가 요청한 평가",
+        "evaluation_requests": "요청받은 평가",
         "evaluation_received": "내가 요청한 평가",
         "evaluation_wrote": "내가 작성한 평가"
-      }
+      },
+      "stats": {
+        "total_reviews": "내가 작성한 평가",
+        "total_earned": "누적 보상",
+        "average_rewards": "조회 당 평균 보상"
+      },
+      "status": {
+        "pending": "보류 중",
+        "draft": "검토 중",
+        "completed": "완료",
+        "reviewed": "검토됨",
+        "rejected": "거부됨",
+        "requested": "요청 중"
+      },
+      "coming_soon": "곧 출시 예정",
+      "reviewed_by": "평가 작성자",
+      "reviewing": "윤창진",
+      "score": "총점"
     }
   },
   "group": {
@@ -464,8 +606,8 @@
       "message": "커뮤니티에 가입하고",
       "message2": "나만의 커리어 증명 NFT을 소유하세요!",
       "all": "전체보기",
-      "created": "참여중인 그룹",
-      "joined": "내가 만든 그룹",
+      "created": "내가 만든 그룹",
+      "joined": "참여중인 그룹",
       "search_placeholder": "그룹명을 검색해보세요.",
       "agency": "기업 인증 완료",
       "authority": "기관 인증 완료",
@@ -475,14 +617,21 @@
       "nfts": "받을 수 있는 NFT",
       "banner": "직접 그룹을 만들고",
       "banner2": "프로젝트와 개인에게 NFT를 부여하고 영향력 있는 그룹으로 활동해보세요!",
-      "banner3": "그룹 만들러 가기"
+      "banner3": "그룹 만들러 가기",
+      "view_more": "더 보기"
     },
     "create": {
-      "title": "그룹 만들기", 
-      "required_text": "*는 필수입력 사항입니다.", 
-      "description": "학교, 회사, 기관은 대표 이메일 인증 후, 그룹을 생성할 수 있어요.", 
+      "title": "그룹 만들기",
+      "required_text": "*는 필수입력 사항입니다.",
+      "description": "대표 이메일 인증이 필요해요. 대표 메일로 전송된 인증번호를 확인 후 입력해주세요.",
       "form": {
-        "type": "카테고리", 
+        "email_placeholder": "이메일을 입력해주세요.",
+        "verify_code_placeholder": "인증번호 입력하세요.",
+        "resend": "다시 보내기",
+        "send_code": "인증번호 보내기",
+        "verify": "인증하기",
+        "seconds": "초",
+        "type": "그룹 성격 선택하기",
         "name": "그룹명",
         "name_placeholder": "그룹을 대표하는 이름을 입력하세요.",
         "desc": "그룹 설명",
@@ -495,17 +644,48 @@
         "check": "그룹 목록과 그룹상세보기에서 확인 가능합니다.",
         "links": "대표 사이트",
         "cancel": "취소",
-        "create_group": "만들기"
+        "create_group": "만들기",
+        "dialog_title": "그룹 만들기 요청 성공!",
+        "dialog_desc": "그룹 만들기 인증 절차를 위해 커리어젠 서포터팀에서 아래 이메일로 영업일 1일 이내에 메일을 보내드릴게요.",
+        "dialog_email": "인증 절차 안내받을 이메일",
+        "dialog_information": "문의사항 발생 시, 커리어젠 서포터팀으로 연락하세요.",
+        "ok": "확인",
+        "wait_for_auth": "인증 대기 중..",
+        "contact": "1:1 문의하기"
       }
     },
     "details": {
       "profile_card": {
-        "create_nft": "NFT 생성하기",
+        "create_nft": {
+          "title": "새로운 NFT 생성하기",
+          "required_text": "*는 필수입력 사항입니다.",
+          "nft_type": "NFT 유형",
+          "nft_prop": "NFT 속성",
+          "guide_title": "이미지 가이드",
+          "guide1": "1:1 비율 권장",
+          "guide2": "배경이 없는 PNG 형식의 이미지 권장",
+          "guide3": "NFT 증명서 페이지에서 확인 가능합니다.",
+          "sbt_type": "증명서 타입",
+          "sbt_name": "증명서 이름",
+          "sbt_desc": "증명서 설명",
+          "avatar_type": "아바타 타입",
+          "avatar_image": "아바타 이미지",
+          "sbt_image": "증명서 이미지",
+          "back": "뒤로가기",
+          "create_nft": "NFT 생성하기"
+        },
         "group_contract": {
           "title": "블록체인 그룹 계정 등록하기",
           "desc": " 한번만 블록체인 그룹 계정으로 등록하면 수료증, 자격증, 멤버십 등 원하는 모든 종류의 NFT 증명서를 발행할 수 있어요. (계정 등록을 위해서는 MATIC 토큰이 필요해요. ",
           "anchor": "MATIC 토큰 받기",
           "button": "등록하기"
+        },
+        "completed_success": {
+          "title": "한정판 NFT가 생성되었습니다!",
+          "desc1": "생성하신 NFT의 관리는 그룹 관리에서 가능하고,",
+          "desc2": "NFT 증명서에서는 적용 여부를 확인하실수 있어요.",
+          "go_manage:": "그룹 관리 바로가기",
+          "go_nft": "NFT 증명서 바로가기"
         },
         "join_group": {
           "title": "그룹 가입하기",
@@ -568,6 +748,26 @@
           "info": "그룹 정보"
         },
         "nft": {
+          "create": {
+            "create_new_nft_title": "새로운 NFT 생성하기",
+            "this_is_required": "*는 필수입력 사항입니다.",
+            "nft_type": "NFT 종류",
+            "nft_properties": "NFT 속성 *",
+            "career_nft": "커리어 NFT",
+            "certificate_type": "증명서 타입*",
+            "certificate_name": "증명서 이름",
+            "certificate_description": "증명서 설명",
+            "avatar_type": "아바타 타입",
+            "avatar_image": "아바타 이미지",
+            "image_guides": "이미지 가이드",
+            "image_guides_desc": "1:1 비율 권장",
+            "images_guides_desc_2": "배경이 없는 PNG 형식의 이미지 권장",
+            "images_guides_nft": "NFT 증명서 페이지에서 확인 가능합니다.",
+            "upload_image": "upload image",
+            "delete_image": "Delete image",
+            "create_nft": "Create NFT",
+            "cancel": "Cancel"
+          },
           "waiting": "NFT 발행 대기 중",
           "published": "생성된 NFT",
           "no_published": "최근 생성한 NFT가 없습니다.",
@@ -727,22 +927,20 @@
       "Planner": "기획자",
       "Designer": "디자이너",
       "Marketer": "마케팅",
-
       "developer": "개발자",
       "pm": "PM",
       "pa_engineer": "QA 엔지니어",
       "planner": "기획자",
       "designer": "디자이너",
-      "marketer": "마케팅"
+      "marketer": "마케팅",
+      "all": "전체"
     },
-
     "project_type": {
       "all": "전체",
       "company": "사내 프로젝트",
       "freelance": "외주 프로젝트",
       "side": "사이드 프로젝트"
     },
-    
     "role_type": {
       "admin": "관리자",
       "member": "팀원",
@@ -751,19 +949,25 @@
       "invited": "초대됨",
       "none": "행인"
     },
-
     "privacy_type": {
       "public": "모든 유저",
       "private": "프라이빗",
       "group": "그룹 멤버"
+    },
+    "avatar_type": {
+      "clothes": "의상",
+      "background": "배경",
+      "accessory": "액세서리",
+      "hair": "머리모양",
+      "face": "얼굴모양"
     }
-  }, 
+  },
   "footer": {
     "copywrite": "© 2021 CareerZen. All rights reserved.",
     "privacy_policy": "개인정보처리방침",
     "terms_and_conditions": "이용약관",
     "whitepaper": "백서",
-    "contact_us": "Contact Us", 
+    "contact_us": "Contact Us",
     "faq": "FAQ",
     "user_guide": "이용 가이드"
   },
@@ -771,5 +975,8 @@
     "drag": "여기로 이미지 드래그",
     "upload_image": "파일 올리기",
     "delete_image": "삭제하기"
+  },
+  "survey": {
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
   }
 }

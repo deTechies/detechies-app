@@ -16,6 +16,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+
 import { Input } from "@/components/ui/input";
 
 import { Textarea } from "@/components/ui/textarea";
@@ -24,33 +26,38 @@ import { toast } from "@/components/ui/use-toast";
 import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { createGroup } from "@/lib/data/groups";
+import { useDictionary } from "@/lib/dictionaryProvider";
 import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const profileFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Your groups name must be at least 2 characters.",
-    })
-    .max(30, {
-      message: "Your groups name must not be longer than 30 characters.",
-    }),
-  type: z.nativeEnum(GROUP_TYPE),
-  description: z.string().max(4000).min(4),
-});
+export const GroupForm = () => {
+  type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
+  // This can come from your database or API.
+  const defaultValues: Partial<ProfileFormValues> = {
+    type: GROUP_TYPE.COMMUNITY,
+    description: "",
+  };
 
-// This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-  type: GROUP_TYPE.COMMUNITY,
-  description: "",
-};
+  const profileFormSchema = z.object({
+    //email: z.string().email(),
+    //   certification_number: z.string().refine((data) => data === code, {
+    //    message: "Invalid code",
+    //  }),
+    name: z
+      .string()
+      .min(2, {
+        message: "Your groups name must be at least 2 characters.",
+      })
+      .max(30, {
+        message: "Your groups name must not be longer than 30 characters.",
+      }),
+    type: z.nativeEnum(GROUP_TYPE),
+    description: z.string().max(4000).min(4),
+  });
 
-export const GroupForm = ({ lang }: { lang: any }) => {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -62,31 +69,94 @@ export const GroupForm = ({ lang }: { lang: any }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-/*   const { fields, append } = useFieldArray({
+  // email Verify
+  const [isEmailLoading, setIsEmailLoading] = useState(false);
+  const [code, setCode] = useState("");
+  const [timer, setTimer] = useState(180);
+  const [clickedSend, setClickedSend] = useState(false);
+  const [verified, setVerified] = useState(false);
+
+  // Dialog
+  const [requestedCreate, onRequestedCreate] = useState(false);
+
+  const lang = useDictionary();
+  /*   const { fields, append } = useFieldArray({
     control: form.control,
     name: "urls",
   });
  */
+
+  useEffect(() => {
+    let interval = null as any;
+
+    if (isEmailLoading) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else if (!isEmailLoading && timer === 0) {
+      setTimer(180);
+    }
+
+    if (timer === 0) {
+      clearInterval(interval);
+      setIsEmailLoading(false);
+    }
+
+    return () => clearInterval(interval);
+  }, [isEmailLoading, timer]);
+
+  async function onSendEmail(
+    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    _event.preventDefault();
+    setIsEmailLoading(true);
+    setClickedSend(true);
+
+    // ==================================
+    // send Verify Email
+    const result = { status: "success" };
+    // ==================================
+
+    if (result.status !== "success") {
+      setClickedSend(false);
+      setIsEmailLoading(false);
+    }
+  }
+
+  async function onVerifyCode(
+    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    _event.preventDefault();
+
+    // ==================================
+    // Verify Code
+    const result = { status: "success" };
+    // ==================================
+
+    if (result.status == "success") {
+      setVerified(true);
+    }
+  }
+
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
-    
-    
-   let image = "" as any;
-   
-   if(icon){
-     image = await uploadContent(icon);
-   }
 
-    
+    let image = "" as any;
+
+    if (icon) {
+      image = await uploadContent(icon);
+    }
 
     //const urls = data?.urls?.map((url) => url.value);
 
     const result = await createGroup({
       image: image,
+      email: " data.email",
+      certification_number: "data.certification_number",
       name: data.name,
       description: data.description,
       type: data.type,
-      urls: []
+      urls: [],
     });
 
     if (result.status === "success") {
@@ -95,7 +165,8 @@ export const GroupForm = ({ lang }: { lang: any }) => {
         description: "Group created successfully",
       });
 
-      router.push(`/groups/${result.data.id}`);
+      // router.push(`/groups/${result.data.id}`);
+      onRequestedCreate(true);
     } else {
       if (!result.ok) {
         toast({
@@ -114,7 +185,8 @@ export const GroupForm = ({ lang }: { lang: any }) => {
   const selectCover = (file: File | null, base64: string | null) => {
     setCover(file);
   };
-/* 
+
+  /* 
   const clickAddLinks = (
     _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -139,151 +211,246 @@ export const GroupForm = ({ lang }: { lang: any }) => {
     },
   ];
  */
+
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col justify-center space-y-8"
-      >
-        <div className="flex flex-col space-y-8 ">
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <FormInlineItem className="h-12">
-                <FormInlineLabel>
-                  {lang.group.create.form.type}
-                  <span className="ml-1 text-state-error">*</span>
-                </FormInlineLabel>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-row flex-wrap gap-6"
-                >
-                  {Object.values(GROUP_TYPE).map((type) => (
-                    <FormItem
-                      key={type}
-                      className="flex flex-wrap items-center space-y-0"
+    <>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col justify-center space-y-8"
+        >
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4">
+              <FormField
+                control={form.control}
+                name="type"
+                render={({ field }) => (
+                  <FormInlineItem>
+                    <FormInlineLabel>
+                      {lang.group.create.form.type}
+                      <span className="ml-1 text-state-error">*</span>
+                    </FormInlineLabel>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-row flex-wrap gap-6"
                     >
+                      {Object.values(GROUP_TYPE).map((type) => (
+                        <FormItem
+                          key={type}
+                          className="flex flex-wrap items-center space-y-0"
+                        >
+                          <FormControl>
+                            <RadioGroupItem
+                              value={type}
+                              disabled={type !== "community"}
+                            />
+                          </FormControl>
+
+                          <FormLabel className="font-normal capitalize">
+                            {lang.interface.group_type[type]}
+                          </FormLabel>
+                        </FormItem>
+                      ))}
+                    </RadioGroup>
+
+                    <FormMessage />
+                  </FormInlineItem>
+                )}
+              />
+
+              {/*   <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormInlineItem className="items-start">
+                    <FormInlineLabel />
+
+                    <div className="grow">
                       <FormControl>
-                        <RadioGroupItem
-                          value={type}
-                          disabled={type !== "community"}
-                        />
+                        <div className="flex flex-wrap items-center gap-3">
+                          <Input
+                            className="max-w-[335px]"
+                            placeholder={
+                              lang.group.create.form.email_placeholder
+                            }
+                            {...field}
+                            disabled={isEmailLoading || verified}
+                          />
+
+                          <div className="flex flex-col items-center">
+                            {isEmailLoading && !verified && (
+                              <span className="mb-2 text-title_s">
+                                {timer}
+                                {lang.group.create.form.seconds}
+                              </span>
+                            )}
+
+                            <Button
+                              size="sm"
+                              onClick={onSendEmail}
+                              className="shrink-0"
+                              disabled={
+                                isEmailLoading ||
+                                form.getFieldState("email").invalid ||
+                                verified ||
+                                !form.getValues("email")
+                              }
+                            >
+                              {clickedSend
+                                ? lang.group.create.form.resend
+                                : lang.group.create.form.send_code}
+                            </Button>
+                          </div>
+                        </div>
                       </FormControl>
 
-                      <FormLabel className="font-normal capitalize">
-                        {lang.interface.group_type[type]}
-                      </FormLabel>
-                    </FormItem>
-                  ))}
-                </RadioGroup>
+                      <FormMessage />
+                    </div>
+                  </FormInlineItem>
+                )}
+              /> */}
 
-                <FormMessage />
-              </FormInlineItem>
-            )}
-          />
+              {/*         <FormField
+                control={form.control}
+                name="certification_number"
+                render={({ field }) => (
+                  <FormInlineItem className="items-start">
+                    <FormInlineLabel />
 
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormInlineItem className="items-start">
-                <FormInlineLabel className="mt-5">
-                  {lang.group.create.form.name}
-                  <span className="ml-1 text-state-error">*</span>
-                </FormInlineLabel>
+                    <div className="grow">
+                      <FormControl>
+                        <div className="flex flex-wrap items-center gap-3">
+                          <Input
+                            className="max-w-[335px]"
+                            placeholder={
+                              lang.group.create.form.verify_code_placeholder
+                            }
+                            {...field}
+                            disabled={verified}
+                            type="password"
+                          />
 
-                <div className="grow">
-                  <FormControl className="mb-2">
-                    <Input
-                      placeholder={lang.group.create.form.name_placeholder}
-                      {...field}
-                    />
-                  </FormControl>
+                          {clickedSend && (
+                            <Button
+                              size="sm"
+                              onClick={onVerifyCode}
+                              disabled={verified}
+                            >
+                              {lang.group.create.form.verify}
+                            </Button>
+                          )}
+                        </div>
+                      </FormControl>
 
-                  <FormMessage />
+                      <FormMessage />
+                    </div>
+                  </FormInlineItem>
+                )}
+              />
+              */}
+            </div>
+
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormInlineItem className="items-start">
+                  <FormInlineLabel className="mt-5">
+                    {lang.group.create.form.name}
+                    <span className="ml-1 text-state-error">*</span>
+                  </FormInlineLabel>
+
+                  <div className="grow">
+                    <FormControl className="mb-2">
+                      <Input
+                        placeholder={lang.group.create.form.name_placeholder}
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </div>
+                </FormInlineItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormInlineItem className="items-start">
+                  <FormInlineLabel>
+                    {lang.group.create.form.desc}
+                    <span className="ml-1 text-state-error">*</span>
+                  </FormInlineLabel>
+
+                  <div className="grow">
+                    <FormControl className="mb-1">
+                      <Textarea
+                        placeholder={lang.group.create.form.desc_placeholder}
+                        className="p-4 resize-none min-h-[132px]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                </FormInlineItem>
+              )}
+            />
+
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="justify-start">
+                {lang.group.create.form.image}
+              </FormInlineLabel>
+
+              <MediaUploader
+                key="icon"
+                onFileSelected={selectIcon}
+                width={140}
+                height={140}
+              >
+                <div>
+                  <div className="mb-1 text-title_s text-text-secondary">
+                    {lang.group.create.form.image_guide}
+                  </div>
+
+                  <li className="mb-1 text-text-placeholder text-label_s">
+                    {lang.group.create.form.guird}
+                  </li>
                 </div>
-              </FormInlineItem>
-            )}
-          />
+              </MediaUploader>
+            </FormInlineItem>
 
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormInlineItem className="items-start">
-                <FormInlineLabel>
-                  {lang.group.create.form.desc}
-                  <span className="ml-1 text-state-error">*</span>
-                </FormInlineLabel>
+            <FormInlineItem className="items-start">
+              <FormInlineLabel className="items-start">
+                {lang.group.create.form.cover_image}
+              </FormInlineLabel>
+              <MediaUploader
+                key="cover"
+                onFileSelected={selectCover}
+                width={256}
+                height={192}
+              >
+                <div>
+                  <div className="mb-1 text-title_s text-text-secondary">
+                    {lang.group.create.form.image_guide}
+                  </div>
 
-                <div className="grow">
-                  <FormControl className="mb-1">
-                    <Textarea
-                      placeholder={lang.group.create.form.desc_placeholder}
-                      className="p-4 resize-none min-h-[132px]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
+                  <li className="text-text-placeholder text-label_s">
+                    {lang.group.create.form.rect}
+                  </li>
+
+                  <li className="text-text-placeholder text-label_s">
+                    {lang.group.create.form.check}
+                  </li>
                 </div>
-              </FormInlineItem>
-            )}
-          />
+              </MediaUploader>
+            </FormInlineItem>
+          </div>
 
-          <FormInlineItem className="items-start">
-            <FormInlineLabel className="justify-start">
-              {lang.group.create.form.image}
-            </FormInlineLabel>
-
-            <MediaUploader
-              key="icon"
-              onFileSelected={selectIcon}
-              width={140}
-              height={140}
-            >
-              <div>
-                <div className="mb-1 text-title_s text-text-secondary">
-                  {lang.group.create.form.image_guide}
-                </div>
-
-                <li className="mb-1 text-text-placeholder text-label_s">
-                  {lang.group.create.form.guird}
-                </li>
-              </div>
-            </MediaUploader>
-          </FormInlineItem>
-
-          <FormInlineItem className="items-start">
-            <FormInlineLabel className="items-start">
-              {lang.group.create.form.cover_image}
-            </FormInlineLabel>
-            <MediaUploader
-              key="cover"
-              onFileSelected={selectCover}
-              width={256}
-              height={192}
-            >
-              <div>
-                <div className="mb-1 text-title_s text-text-secondary">
-                  {lang.group.create.form.image_guide}
-                </div>
-
-                <li className="text-text-placeholder text-label_s">
-                  {lang.group.create.form.rect}
-                </li>
-
-                <li className="text-text-placeholder text-label_s">
-                  {lang.group.create.form.check}
-                </li>
-              </div>
-            </MediaUploader>
-          </FormInlineItem>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          {/* {[...fields].reverse().map((field, index) => {
+          <div className="flex flex-col gap-2">
+            {/* {[...fields].reverse().map((field, index) => {
             const reversedIndex = fields.length - 1 - index;
 
             const handleSelectChange = (selectedValue: string) => {
@@ -359,7 +526,7 @@ export const GroupForm = ({ lang }: { lang: any }) => {
             );
           })} */}
 
-          {/* <div className="items-end justify-right align-end">
+            {/* <div className="items-end justify-right align-end">
             <Button
               type="button"
               variant="outline"
@@ -370,28 +537,59 @@ export const GroupForm = ({ lang }: { lang: any }) => {
               Add URL
             </Button>
           </div> */}
-        </div>
+          </div>
 
-        <div className="flex items-center justify-end gap-2">
-          <Button
-            type="button"
-            size="lg"
-            variant="secondary"
-            onClick={() => router.back()}
-          >
-            {lang.group.create.form.cancel}
-          </Button>
+          <div className="flex items-center justify-end gap-2">
+            <Button
+              type="button"
+              size="lg"
+              variant="secondary"
+              onClick={() => router.back()}
+            >
+              {lang.group.create.form.cancel}
+            </Button>
 
-          <Button
-            type="submit"
-            size="lg"
-            loading={isLoading}
-            disabled={isLoading || !form.formState.isValid}
-          >
-            {lang.group.create.form.create_group}
-          </Button>
-        </div>
-      </form>
-    </Form>
+            <Button
+              type="submit"
+              size="lg"
+              loading={isLoading}
+              disabled={isLoading || !form.formState.isValid}
+            >
+              {lang.group.create.form.create_group}
+            </Button>
+          </div>
+        </form>
+      </Form>
+      <Dialog open={requestedCreate} onOpenChange={onRequestedCreate}>
+        <DialogContent>
+          <header className="flex flex-col gap-4">
+            <h3 className="text-subhead_s">
+              {lang.group.create.form.dialog_title}
+            </h3>
+            <div className="flex flex-col gap-6">
+              <h6 className="text-body_m">
+                {lang.group.create.form.dialog_desc}
+              </h6>
+
+              <div className="text-center text-title_s">
+                {lang.group.create.form.dialog_email}
+              </div>
+
+              <div className="text-center text-title_s text-text-secondary">
+                <div>{lang.group.create.form.dialog_information}</div>
+              </div>
+
+              <Button
+                size="lg"
+                className="mx-auto"
+                onClick={() => router.push("/groups")}
+              >
+                {lang.group.create.form.ok}
+              </Button>
+            </div>
+          </header>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };

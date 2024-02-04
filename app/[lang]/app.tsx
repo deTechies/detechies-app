@@ -3,17 +3,27 @@
 import { Toaster } from "@/components/ui/toaster";
 import { polygonMumbai } from "@/helpers/mumbai";
 import SessionProvider from "@/lib/SessionProvider";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
-import { WagmiConfig, configureChains, createConfig } from "wagmi";
+import { WagmiConfig, WindowProvider, configureChains, createConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
+
+import type { WepinConnectorOptions } from "@wepin/wagmi-connector";
+import { WepinConnector } from "@wepin/wagmi-connector";
+
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
   [publicProvider()]
 );
+
+declare global {
+  interface Window {
+    ethereum?: WindowProvider
+  }
+}
 
 export const web3AuthInstance =
   typeof window !== "undefined"
@@ -33,6 +43,21 @@ export const web3AuthInstance =
       })
     : null;
 
+// Wepin
+
+
+
+const testAppKey = "ak_test_YwTTMVZ0M6PXZQxEqdpeJ9kMGVuZUPLVZJxxfqEFDj1";
+export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
+// const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키 
+// const testAppId = 'app_id_eg12sf3491azgs520' // 테스트용 앱 ID
+
+const connectorOptions: WepinConnectorOptions = {
+  appId: testAppId,
+  appKey: testAppKey,
+  defaultChainId: 80001,
+};
+
 const config = createConfig({
   autoConnect: true,
   connectors: [
@@ -49,13 +74,20 @@ const config = createConfig({
       options: { web3AuthInstance, name: "Social Login" },
       name: "Social Login",
     }),
+    new WepinConnector({
+      chains,
+      options: connectorOptions,
+    }),
     //Web3AuthConnectorInstance(chains) as any,
   ],
   publicClient,
   webSocketPublicClient,
 });
 
+
+
 export default function App({ children }: { children: any }) {
+
   return (
     <WagmiConfig config={config}>
       <SessionProvider>

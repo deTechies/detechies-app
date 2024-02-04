@@ -1,4 +1,5 @@
 "use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
@@ -6,7 +7,6 @@ import { acceptProjectInvitation } from "@/lib/data/project";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function AcceptInvitation({
   name,
@@ -76,7 +76,6 @@ export default function AcceptInvitation({
             variant="destructive"
             size="lg"
             onClick={rejectInvitation}
-            loading={loading}
             disabled={loading}
           >
             {lang.project.details.invited_to_project.reject}
