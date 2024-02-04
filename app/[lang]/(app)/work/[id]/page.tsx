@@ -45,7 +45,7 @@ export default async function ProjectMemberEvaluation({
       {/* RIGHT SIDE */}
       <section className="flex grow shrink">
         <div className="space-y-8 grow">
-          {details.data.evaluator.role === "admin" && (
+          {details.data?.evaluator?.role === "admin" && (
             <BasicEvaluationInfo
               text={dictionary.project.evaluate}
               workId={params.id}
@@ -55,7 +55,7 @@ export default async function ProjectMemberEvaluation({
               projectId={""}
             />
           )}
-          {details.data.evaluator.role != "admin" && (
+          {details.data.evaluator?.role != "admin" && (
             <NonAdminContributionForm
               workId={params.id}
               text={dictionary.project.evaluate}
