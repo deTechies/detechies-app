@@ -26,11 +26,11 @@ import { toast } from "@/components/ui/use-toast";
 import MediaUploader from "@/components/extra/media-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { createGroup } from "@/lib/data/groups";
+import { useDictionary } from "@/lib/dictionaryProvider";
 import { GROUP_TYPE } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDictionary } from "@/lib/dictionaryProvider";
 
 export const GroupForm = () => {
   type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -42,10 +42,10 @@ export const GroupForm = () => {
   };
 
   const profileFormSchema = z.object({
-    email: z.string().email(),
-    certification_number: z.string().refine((data) => data === code, {
-      message: "Invalid code",
-    }),
+    //email: z.string().email(),
+    //   certification_number: z.string().refine((data) => data === code, {
+    //    message: "Invalid code",
+    //  }),
     name: z
       .string()
       .min(2, {
@@ -151,8 +151,8 @@ export const GroupForm = () => {
 
     const result = await createGroup({
       image: image,
-      email: data.email,
-      certification_number: data.certification_number,
+      email: " data.email",
+      certification_number: "data.certification_number",
       name: data.name,
       description: data.description,
       type: data.type,
@@ -259,7 +259,7 @@ export const GroupForm = () => {
                 )}
               />
 
-              <FormField
+              {/*   <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
@@ -309,9 +309,9 @@ export const GroupForm = () => {
                     </div>
                   </FormInlineItem>
                 )}
-              />
+              /> */}
 
-              <FormField
+              {/*         <FormField
                 control={form.control}
                 name="certification_number"
                 render={({ field }) => (
@@ -348,6 +348,7 @@ export const GroupForm = () => {
                   </FormInlineItem>
                 )}
               />
+              */}
             </div>
 
             <FormField
@@ -574,13 +575,8 @@ export const GroupForm = () => {
                 {lang.group.create.form.dialog_email}
               </div>
 
-              <div className="text-center text-title_m">
-                {form.getValues("email")}
-              </div>
-
               <div className="text-center text-title_s text-text-secondary">
                 <div>{lang.group.create.form.dialog_information}</div>
-                <div>Robin@Careerzen.org</div>
               </div>
 
               <Button
