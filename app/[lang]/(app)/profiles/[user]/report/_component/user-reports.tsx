@@ -1,8 +1,7 @@
-"use client";
-
 import { serverApi } from "@/lib/data/general";
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { ChevronDown } from "lucide-react";
+import { Suspense } from "react";
 import UserStatistics from "./user-statistics";
 
 interface ReportContribution {
@@ -64,11 +63,13 @@ export default async function UserReports({
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>
 
-      {report?.data && report.data.surveyReports ? (
-        <UserStatistics lang={lang} statistics={report.data} />
-      ) : (
-        <div className="text-center text-body_m">No Results found</div>
-      )}
+      <Suspense fallback={<div>Loading reports.....</div>}>
+        {report?.data && report.data ? (
+          <UserStatistics lang={lang} statistics={report.data} />
+        ) : (
+          <div className="text-center text-body_m">No Results found</div>
+        )}
+      </Suspense>
 
       {/* <pre className="max-h-[500px] overflow-auto">{JSON.stringify(report, null, 2)}</pre> */}
     </div>

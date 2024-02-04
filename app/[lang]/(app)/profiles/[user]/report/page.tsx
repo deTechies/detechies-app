@@ -20,9 +20,9 @@ export default async function ProfileReport({
     `/project-work/${params.user}/finished`
   );
 
-
   const project = searchParams.project as string;
 
+  //TOOD: fix this so we don't get all the users profiles immediately but only parts of it. 
   const { data: profile } = (await getUserProfile(params.user)) as any;
 
   return (
@@ -31,16 +31,16 @@ export default async function ProfileReport({
         {dictionary.profile.summary.title}
       </h4>
       <Suspense fallback={<div>Loading profile...</div>}>
-      <UserSummary lang={dictionary} profile={profile}  />
+        <UserSummary lang={dictionary} profile={profile} />
       </Suspense>
 
       {projects && projects.length > 0 && (
         <Suspense fallback={<div>Loading proejcts ...</div>}>
-        <UserProjects
-          projects={projects}
-          lang={dictionary}
-          selectedProject={project}
-        />
+          <UserProjects
+            projects={projects}
+            lang={dictionary}
+            selectedProject={project}
+          />
         </Suspense>
       )}
       <Suspense fallback={<div>Loading reports.....</div>}>
