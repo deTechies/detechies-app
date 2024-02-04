@@ -16,13 +16,16 @@ function TotalProjectItem({
   lang: any;
   selected: boolean;
 }) {
-
+const router = useRouter();
+const pathName = usePathname();
   
   function selectAll() {
     //settings searchParams for this
-/*     router.push(
+    
+    //remove if there is a project query
+    router.push(
       pathName
-    ); */
+    ); 
   }
 
   return (
