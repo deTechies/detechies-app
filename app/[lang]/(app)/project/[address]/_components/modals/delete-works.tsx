@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { removeProjectWork } from "@/lib/data/project";
-import {} from "@radix-ui/react-dialog";
+import { } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -28,13 +28,13 @@ export default function DeleteWorks({
 
     if (result.status === "success") {
       toast({
-        description: <pre>{JSON.stringify(result, null, 3)}</pre>,
+        description: "Succesfully delete your work."
       });
 
       router.refresh();
     } else {
       toast({
-        description: <pre>{JSON.stringify(result, null, 3)}</pre>,
+        description: "you cannot delete your work",
       });
       setLoading(false);
     }

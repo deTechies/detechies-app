@@ -39,6 +39,61 @@
       "Profile Items": "profile items"
     }
   },
+
+  "profile": {
+    "report_card": {
+      "title": "Reputation Report",
+      "total_experience": "Total experience",
+      "total_evalucation": "Total evaluations received",
+      "admin_evalu": "Administrator evaluation",
+      "member_evalu": "Member evaluation",
+      "client_evalu": "Client evaluation",
+      "view": "View"
+    },
+    "report_popup": {
+      "title": "View reputation report",
+      "desc": "View the consolidated reputation report and see the performance ratings experts have received on projects.",
+      "this_report": "The report you want to view",
+      "total_report": "Consolidated Reputation Report",
+      "point_to_need": "Points needed to view",
+      "points_held": "Points held",
+      "back": "Back",
+      "view": "View"
+    },
+    "summary": {
+      "title": "Expert Reputation Report",
+      "billing": "Billed hourly rate",
+      "billing_unit": "Won",
+      "hours": "Input hours",     
+      "hours_unit": "hours per week",
+
+      "introduction": "Introduction"
+    },
+    "statistics": {
+      "joined_projects": "Joined projects",
+      "joined_projects_desc": "Click on a project to view the performance evaluations received for each project.",
+      "total_report": "Total reputation report",
+      "total_career": "Total career",
+      "total_evaluation": "Total evaluation received",
+      "admin_evaluation": "Admin",
+      "member_evaluation": "Member",
+      "evaluations": "Evaluations",
+      "client_evaluation": "Client",
+      "work_period": "Work period",
+      "project_part": "Contributed Part",
+      "s_evaluation": "'s works",
+      "total": "Total ",
+      "reputation_report": "Reputation Report",
+      "feedback_times": "Feedback Times",
+      "rate_requirements": "Rate Requirements",
+      "rate_time_schedule": "Rate Time Schedule",
+      "good_team_player": "Good Team Player",
+      "rate_contributions": "Rate Contributions",
+      "points": "",
+      "total_points": "Total"
+    }
+  },
+
   "profile_filter": {
     "profiles": "Profiles", 
     "all": "All",
@@ -368,8 +423,8 @@
       "evaluation_contents": "Evaluation Contents",
       "reject": "Reason of rejection",
       "reject_placeholder": "If you inform us of any parts of the work that are different from the facts, the appraised person will write it again.",
-      "eval_work_contribution": "Performance/Contribution Evaluation",
-      "work_contribution": {
+      "eval_rate_contributions": "Performance/Contribution Evaluation",
+      "rate_contributions": {
         "label": "Please tell us about this team member's contribution to the work.",
         "messages": [
           "Barely contributed",
@@ -379,7 +434,7 @@
           "Completely performed the entire part."
         ]
       },
-      "meet_requirements": {
+      "rate_requirements": {
         "label": "Did this team member's output meet the requirements?",
         "messages": [
           "More than 20% omissions or defects (critical errors or omissions)",
@@ -389,7 +444,7 @@
           "Met all the requirements."
         ]
       },
-      "meet_schedule": {
+      "rate_time_schedule": {
         "label": "Did they adhere to the work schedule according to the milestones?",
         "messages": [
           "Delayed more than +4 days from the agreed work period",
@@ -486,7 +541,6 @@
         "reset": "Reset",
         "save":  "Save"
     },
-    
     "edit_profile": {
       "edit_profile": "edit profile",
       "full_name": "full name",
@@ -499,7 +553,25 @@
       "profile_description_label": "Tell us a little bit about yourself",
       "skills": "skills",
       "username": "username",
-      "save_changes": "save changes"
+      "save_changes": "save changes",
+      "identity_authentication": "Linked Accounts",
+      "verify":"Coming soon",
+      "social_networks":{
+        "google":"Google",
+        "phone_number":"Phone Number",
+        "telegram":"Telegram",
+        "email":"Email",
+        "web3_wallet":"Web3 Wallet",
+        "github":"Github",
+        "figma":"Figma",
+        "pinterest":"Pinterest",
+        "youtube":"Youtube",
+        "linkedin":"LinkedIn",
+        "facebook":"Facebook",
+        "reddit":"Reddit",
+        "kakao": "Kakaotalk",
+        "twitter": "X (Twitter)"
+      }
     },
     "project": {
       "projects": "Projects",
@@ -562,14 +634,21 @@
       "nfts": "NFTs",
       "banner": "Create your own group and",
       "banner2": "Award NFTs to projects and individuals and be an influential group!",
-      "banner3": "Go create a group"
+      "banner3": "Go create a group",
+      "view_more": "View More"
     },
     "create": {
       "title": "Create Group",
       "required_text": "* indicates required fields.",
-      "description": "Schools, companies, and institutions can create groups after verifying their official email.",
+      "description": "Representative email verification is required. Please check and enter the authentication number sent to your main email address.",
       "form": {
-        "type": "Category",
+        "email_placeholder": "Enter email.",
+        "verify_code_placeholder": "Enter verification code.",
+        "resend": "Resend",
+        "send_code": "Send Code",
+        "verify": "Verify",
+        "seconds": "s",
+        "type": "Group Type",
         "name": "Group Name",
         "name_placeholder": "Enter Group Name",
         "desc": "Description",
@@ -582,7 +661,14 @@
         "check": "Can be checked in the group list and group detail view.",
         "links": "Official Website",
         "cancel": "Cancel",
-        "create_group": "Create"
+        "create_group": "Create",
+        "dialog_title": "Group creation request successful!",
+        "dialog_desc": "The CareerGen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
+        "dialog_email": "Email to receive authentication process instructions",
+        "dialog_information": "If you have any questions, please contact the CareerGen Support Team.",
+        "ok": "I understand",
+        "wait_for_auth": "Waiting for auth..",
+        "contact": "Contact Us"
       }
     },
     "details": {
@@ -907,5 +993,8 @@
     "drag": "Click to upload",
     "upload_image": "Upload Image",
     "delete_image": "Delete Image"
+  },
+  "survey": {
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
   }
 }

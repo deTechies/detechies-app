@@ -20,7 +20,7 @@ export default function ProjectMemberWorkDetails({
         </h4>
 
         <div className="flex flex-col gap-4">
-          <section>
+          <section className="flex flex-wrap gap-2">
             {projectWork?.tags?.map((skill, index) => (
               <Badge key={index} shape="outline" variant="accent">
                 {skill}

@@ -1,56 +1,52 @@
-"use client";
 
 import { Card } from "@/components/ui/card";
-import {
-  MemoizedCommonProjectItem as CommonProjectItem,
-  MemoizedTotalProjectItem as TotalProjectItem,
-} from "./project-item";
 
-export default function UserProjects({
-  profile,
+import { serverApi } from "@/lib/data/general";
+import { CommonProjectItem, TotalProjectItem } from "./project-item";
+
+
+export default async function UserProjects({
+  user,
   lang,
-  selectProject,
-  setSelectProject,
+  selectedProject,
 }: {
-  profile: any;
+  user: string  
   lang: any;
-  selectProject: any;
-  setSelectProject: Function;
+  selectedProject: any;
+
 }) {
+  const { data: projects } = await serverApi(
+    `/project-work/${user}/finished`
+  );
+
   return (
     <Card className="flex gap-0 px-8 pb-8 pt-7">
       <h3 className="mb-4 text-subhead_s">
-        참여한 프로젝트 ({profile.projects.length})
+        {lang.profile.statistics.joined_projects} ({projects && projects.length})
       </h3>
 
       <div className="mb-6 text-text-secondary text-body_m">
-        프로젝트를 클릭하면 프로젝트 별 받은 성과 평가를 열람할 수 있어요.
+        {lang.profile.statistics.joined_projects_desc}
       </div>
 
       <div className="mb-3">
         <TotalProjectItem
-          profile={profile}
+          projects={projects}
           lang={lang}
-          selected={!selectProject}
-          onClick={() => setSelectProject(null)}
-        ></TotalProjectItem>
+          selected={!selectedProject}
+        />
       </div>
 
       <div className="overflow-y-auto max-h-[400px] flex flex-col gap-3">
-        {profile.projects &&
-          profile.projects.map((project: any) => {
-            if (project.works.length < 1) return;
-
+        {projects &&
+          projects.map((project: any) => {
             return (
               <CommonProjectItem
                 project={project}
                 lang={lang}
-                selected={selectProject == project.project.id}
-                onClick={() => {
-                  setSelectProject(project.project.id);
-                }}
-                key={project.project.id}
-              ></CommonProjectItem>
+                selected={selectedProject == project.project?.id}
+                key={project.project?.name}
+              />
             );
           })}
       </div>

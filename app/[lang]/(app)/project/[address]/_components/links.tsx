@@ -17,12 +17,12 @@ const Links = ({ works }: { works: any[] }) => {
                 rel="noopener noreferrer"
                 passHref
               >
-                <div className="flex items-center gap-4 py-4 border-b-2 border-border-div hover:text-text-secondary">
+                <div className="flex items-center gap-4 py-4 border-b-2 border-border-div hover:text-text-secondary overflow-auto">
                   <div className="flex items-center justify-center w-9 h-9 rounded-full bg-background-layer-2 p-2">
                     <File className="text-text-primary" />
                   </div>
 
-                  <div className="truncate text-title_s">{work.name}</div>
+                  <div className="truncate text-title_s overflow-auto">{work.name}</div>
                 </div>
               </Link>
             );
@@ -31,7 +31,7 @@ const Links = ({ works }: { works: any[] }) => {
           return (
             <Link
               key={index}
-              className="flex items-center gap-4 py-3 border-b-2 border-border-div hover:text-text-secondary"
+              className="flex items-center gap-4 py-3 border-b-2 border-border-div hover:text-text-secondary overflow-auto"
               href={work.link}
               target="_blank"
               rel="noopener noreferrer"

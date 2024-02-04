@@ -52,8 +52,7 @@ export default async function ProjectMemberItem({
             <header className="flex items-center justify-between h-full gap-3">
               <h5 className="text-title_m">
                 {details.user?.display_name} |{" "}
-                {details.role == "admin" &&
-                  lang.interface.role_type[details.role]}
+                 {lang.interface.role_type[details.role]}
                 {details.works.length < 1 ? (
                   <Badge shape="sm" className="px-1.5 py-0.5 ml-3">
                     {lang.project.details.members.unregistered}
@@ -79,7 +78,7 @@ export default async function ProjectMemberItem({
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
                         <ProjectContribution project={details.project} lang={lang} defaultValues={details.works[0]}/>
-                        <DeleteWorks projectId={projectId} lang={lang} />
+                        <DeleteWorks projectId={details.works[0].workId} lang={lang} />
                       </div>
                     )}
                   </>
@@ -109,10 +108,14 @@ export default async function ProjectMemberItem({
                             {/*    <DropdownMenuItem>
                               {lang.project.details.members.delegate_admin}
                             </DropdownMenuItem> */}
-                            <DeleteMember
+                            {
+                              userRole == "admin" &&
+                              <DeleteMember
                               memberId={details.memberId}
                               lang={lang}
                             />
+                            }
+                           
                           </div>
                         </DropdownMenuContent>
                       </DropdownMenu>

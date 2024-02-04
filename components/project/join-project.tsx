@@ -91,7 +91,7 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
       message: data.message,
       role: data.role,
     })
-    const result = await postServer(`/project-member/request/join`, postData);
+    const result = await postServer(`/project-member/join`, postData);
 
     if (result) {
       toast({

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { removeProjectMember } from "@/lib/data/project";
-import {} from "@radix-ui/react-dialog";
+import { } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -34,7 +34,7 @@ export default function DeleteMember({
     }
 
     toast({
-      description: <pre>{JSON.stringify(result, null, 3)}</pre>,
+      description: "Succesfully removed member",
     });
   }
   return (

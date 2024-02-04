@@ -29,7 +29,7 @@ export default async function CreateGroup({
           </span>
         </header>
 
-        <GroupForm lang={dictionary} />
+        <GroupForm />
       </Card>
     </main>
   );
