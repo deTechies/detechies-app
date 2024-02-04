@@ -485,6 +485,12 @@
       "exactly": "Is the evaluation completely accurate?",
       "exactly_desc": "Submitting an evaluation that is not factually accurate can negatively impact the career of the evaluatee.",
       "go_to_project": "Go to Project"
+    },
+    "private": {
+      "title": "Private Project",
+      "desc": "This project is set to private, you can see the details when you become a member of the project, do you want to join this project?",
+      "back": "Back",
+      "waiting": "Waiting for acceptance."
     }
   },
   "mypage": {
