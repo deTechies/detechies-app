@@ -1,4 +1,5 @@
 "use client";
+import MyCredits from "@/components/profile/my-credits";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
@@ -28,6 +29,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
       <div className="flex flex-col gap-3">
         <ProfileCardFollow dictionary={dictionary} />
         <ProfileCardWallet wallet={profile.wallet} dictionary={dictionary} />
+        <MyCredits credits={profile.credits} dictionary={dictionary} />
       </div>
     </Card>
   );
