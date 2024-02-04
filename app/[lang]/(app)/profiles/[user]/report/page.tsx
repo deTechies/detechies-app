@@ -42,6 +42,7 @@ export default async function ProfileReport({
         <UserReports
           selectedProject={project}
           lang={dictionary}
+          selectedLang={params.lang}
           address={params.user}
         />
       </Suspense>

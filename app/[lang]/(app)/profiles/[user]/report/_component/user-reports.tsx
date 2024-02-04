@@ -39,10 +39,12 @@ interface ReportProject {
 export default async function UserReports({
   lang,
   address,
+  selectedLang,
   selectedProject,
 }: {
   lang: any;
   address: string;
+  selectedLang: any;
   selectedProject: any;
 }) {
   const report = await serverApi(
@@ -65,7 +67,7 @@ export default async function UserReports({
 
       <Suspense fallback={<div>Loading reports.....</div>}>
         {report?.data && report.data ? (
-          <UserStatistics lang={lang} statistics={report.data} />
+          <UserStatistics lang={lang} statistics={report.data} selectedLang={selectedLang} />
         ) : (
           <div className="text-center text-body_m">No Results found</div>
         )}

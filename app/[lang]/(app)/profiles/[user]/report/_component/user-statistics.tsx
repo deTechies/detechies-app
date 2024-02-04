@@ -11,9 +11,11 @@ import ScoreCard from "./score-card";
 
 export default function UserStatistics({
   lang,
+  selectedLang,
   statistics,
 }: {
   lang: any;
+  selectedLang: string;
   statistics: any;
 }) {
   const [totalData, setTotalData] = useState<any>([]);
@@ -46,6 +48,8 @@ export default function UserStatistics({
   }
   useEffect(() => {
     let totalResult = [] as any[];
+    
+    console.log(selectedLang);
 
     // Transform surveyResponses category data
     if (statistics.surveyReports && statistics.surveyReports.averageResponses) {
@@ -63,8 +67,14 @@ export default function UserStatistics({
     if (statistics.assessments && statistics.assessments.byCategory) {
       const assessmentCategoryData = statistics.assessments.byCategory.map(
         (assessment: any) => {
+          if(selectedLang == "en"){
+            return {
+              dataKey: assessment.averageRanks[0].en.category,
+              dataValue: assessment.categoryAverageRank * 20,
+            };
+          }
           return {
-            dataKey: assessment.category,
+            dataKey: assessment.averageRanks[0].ko.category,
             dataValue: assessment.categoryAverageRank * 20,
           };
         }
@@ -77,7 +87,7 @@ export default function UserStatistics({
     // Calculate and set the average of totalData if needed
     const average = getObjectArrayAverage(totalResult, "dataValue");
     setTotalAverage(average);
-  }, [statistics]);
+  }, [statistics, selectedLang]);
 
   useEffect(() => {
     // matchingData average
@@ -87,7 +97,7 @@ export default function UserStatistics({
   }, [matchingData]);
 
   return (
-    <div className="grid grid-cols-[2fr_5fr_5fr] gap-4">
+    <div className="grid grid-cols-[2fr_5fr_5fr] gap-4" key="unqiye">
       <ScoreCard score={totalAverage} lang={lang} />
 
       <Card className="gap-8 px-0 pt-8 pb-0">
