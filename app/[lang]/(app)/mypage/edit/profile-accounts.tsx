@@ -1,17 +1,16 @@
-"use client";
+
 
 import { Card } from "@/components/ui/card";
-import { useDictionary } from "@/lib/dictionaryProvider";
+
+import { getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n.config";
 import ConnectionCard from "../_components/connections-card";
-import { Profile } from "@/lib/interfaces";
 
-interface IProfileAccountsProps {
-  profile: Profile;
-}
 
-export default function ProfileAccounts({profile}:IProfileAccountsProps) {
-  const dictionary = useDictionary();
 
+
+export default async function ProfileAccounts({lang}: {lang: Locale}) {
+  const dictionary = await getDictionary(lang);
   const darkLogos = [
     { name:"google", src: "/images/socials/dark/google.png", alt: "google unverified", text: dictionary.mypage.edit_profile.social_networks.google },
     { name:"bitcoin", src: "/images/socials/dark/bitcoin.png", alt: "bitcoin unverified", text: dictionary.mypage.edit_profile.social_networks.web3_wallet },
@@ -31,9 +30,9 @@ export default function ProfileAccounts({profile}:IProfileAccountsProps) {
     { name:"youtube", src: "/images/socials/dark/youtube.png", alt: "youtube unverified", text: dictionary.mypage.edit_profile.social_networks.youtube },
     { name:"kakao", src: "/images/socials/dark/kakao.png", alt: "kakao unverified", text: dictionary.mypage.edit_profile.social_networks.kakao },
     { name:"twitter", src: "/images/socials/dark/twitter.png", alt: "twitter unverified", text: dictionary.mypage.edit_profile.social_networks.twitter },
-
+  
   ];
-
+  
   const logos = [
     {name: "google", src: "/images/socials/color/google.png", alt: "google verified", text: dictionary.mypage.edit_profile.social_networks.google },
     {name: "bitcoin", src: "/images/socials/color/bitcoin.png", alt: "bitcoin verified", text: dictionary.mypage.edit_profile.social_networks.web3_wallet },
@@ -63,7 +62,7 @@ export default function ProfileAccounts({profile}:IProfileAccountsProps) {
       <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 flex-wrap gap-2">
         {logos.map((logo, i) => {
 
-          let verified = logo.name in profile;
+          let verified = false;
 
           return(
           <ConnectionCard 
@@ -71,7 +70,7 @@ export default function ProfileAccounts({profile}:IProfileAccountsProps) {
             logoSrc={verified ? logos[i].src : darkLogos[i].src} 
             logoAlt={verified ? logos[i].alt : darkLogos[i].alt} 
             label={verified ? logos[i].text : darkLogos[i].text}
-            sublabel={verified? profile[logo.name as keyof Profile] as string: dictionary.mypage.edit_profile.verify}
+            sublabel={dictionary.mypage.edit_profile.verify}
             />
           )
       })}

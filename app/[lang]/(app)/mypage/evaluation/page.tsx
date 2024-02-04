@@ -1,6 +1,8 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
+import { Suspense } from "react";
 import Evaluations from "./evaluations";
 import EvaluationProvided from "./evaluations_provided";
 
@@ -27,15 +29,20 @@ export default async function Evaluation({
           </TabsTrigger>
         </TabsList>
         <TabsContent value="requested">
-          <Evaluations queries={{ status: "requested" }} lang={dictionary} />
+          <Suspense fallback={<Skeleton />}>
+            <Evaluations queries={{ status: "requested" }} lang={dictionary} />
+          </Suspense>
         </TabsContent>
         <TabsContent value="received">
-          <Evaluations queries={{ status: "finished"}} lang={dictionary} />
+          <Suspense fallback={<Skeleton />}>
+            <Evaluations queries={{ status: "finished" }} lang={dictionary} />
+          </Suspense>
         </TabsContent>
         <TabsContent value="evaluations">
-          <EvaluationProvided lang={dictionary} />
+          <Suspense fallback={<Skeleton />}>
+            <EvaluationProvided lang={dictionary} />
+          </Suspense>
         </TabsContent>
-  
       </Tabs>
     </main>
   );

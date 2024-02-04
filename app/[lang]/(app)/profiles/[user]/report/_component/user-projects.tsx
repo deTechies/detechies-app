@@ -1,20 +1,24 @@
-"use client";
 
 import { Card } from "@/components/ui/card";
 
+import { serverApi } from "@/lib/data/general";
 import { CommonProjectItem, TotalProjectItem } from "./project-item";
 
 
-export default function UserProjects({
-  projects,
+export default async function UserProjects({
+  user,
   lang,
   selectedProject,
 }: {
-  projects: any[];
+  user: string  
   lang: any;
   selectedProject: any;
 
 }) {
+  const { data: projects } = await serverApi(
+    `/project-work/${user}/finished`
+  );
+
   return (
     <Card className="flex gap-0 px-8 pb-8 pt-7">
       <h3 className="mb-4 text-subhead_s">

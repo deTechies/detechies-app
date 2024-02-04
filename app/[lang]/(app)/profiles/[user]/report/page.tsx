@@ -1,7 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { serverApi } from "@/lib/data/general";
-import { getUserProfile } from "@/lib/data/user";
 import { Suspense } from "react";
 import UserProjects from "./_component/user-projects";
 import UserReports from "./_component/user-reports";
@@ -16,14 +15,12 @@ export default async function ProfileReport({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
 
-  const { data: projects } = await serverApi(
-    `/project-work/${params.user}/finished`
-  );
-
-
+ 
   const project = searchParams.project as string;
 
-  const { data: profile } = (await getUserProfile(params.user)) as any;
+  //TOOD: fix this so we don't get all the users profiles immediately but only parts of it. 
+  const { data: profile } = (await serverApi(`/users/profile-details/${params.user}`)) as any;
+  
 
   return (
     <div className="flex flex-col gap-4 my-10 mx-auto max-w-[80rem] m-10">
@@ -31,22 +28,21 @@ export default async function ProfileReport({
         {dictionary.profile.summary.title}
       </h4>
       <Suspense fallback={<div>Loading profile...</div>}>
-      <UserSummary lang={dictionary} profile={profile}  />
+        <UserSummary lang={dictionary} profile={profile} />
       </Suspense>
 
-      {projects && projects.length > 0 && (
         <Suspense fallback={<div>Loading proejcts ...</div>}>
-        <UserProjects
-          projects={projects}
-          lang={dictionary}
-          selectedProject={project}
-        />
+          <UserProjects
+            user={params.user}
+            lang={dictionary}
+            selectedProject={project}
+          />
         </Suspense>
-      )}
       <Suspense fallback={<div>Loading reports.....</div>}>
         <UserReports
           selectedProject={project}
           lang={dictionary}
+          selectedLang={params.lang}
           address={params.user}
         />
       </Suspense>

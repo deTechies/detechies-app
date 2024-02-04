@@ -11,9 +11,11 @@ import ScoreCard from "./score-card";
 
 export default function UserStatistics({
   lang,
+  selectedLang,
   statistics,
 }: {
   lang: any;
+  selectedLang: string;
   statistics: any;
 }) {
   const [totalData, setTotalData] = useState<any>([]);
@@ -44,63 +46,48 @@ export default function UserStatistics({
     );
     return arr_data.length > 0 ? sum / arr_data.length : 0;
   }
-
   useEffect(() => {
-    // matchingData transform
-
-    // console.log(statistics);
-
-    if (statistics.matching) {
-      const transformed = Object.keys(statistics.matching)
-        .map((key) => {
-          if (!lang.profile.statistics[key]) {
-            return null;
-          }
-
-          return {
-            question: lang.profile.statistics[key],
-            response: statistics.matching[key].toString(),
-            key: key,
-          };
-        })
-        .filter((item) => !!item);
-
-      setMatchingData(transformed);
-    }
-
-    // make totalData
     let totalResult = [] as any[];
+    
+    console.log(selectedLang);
 
-    if (statistics.categories) {
-      totalResult = Object.keys(statistics.categories).map((category: any) => {
-        return {
-          dataKey: category,
-          dataValue: statistics.categories[category].average,
-        };
-      });
+    // Transform surveyResponses category data
+    if (statistics.surveyReports && statistics.surveyReports.averageResponses) {
+      const surveyCategoryData = statistics.surveyReports.averageResponses.map(
+        (averageResponse: any) => {
+          return {
+            dataKey: averageResponse.category,
+            dataValue: averageResponse.categoryAverage,
+          };
+        }
+      );
 
-      totalResult = [
-        ...totalResult,
-        {
-          dataKey: lang.profile.statistics.rate_requirements,
-          dataValue: statistics.matching.rate_requirements,
-        },
-        {
-          dataKey: lang.profile.statistics.rate_time_schedule,
-          dataValue: statistics.matching.rate_time_schedule,
-        },
-        {
-          dataKey: lang.profile.statistics.feedback_times,
-          dataValue: statistics.matching.feedback_times,
-        },
-      ];
+      totalResult = [...surveyCategoryData];
+    }
+    if (statistics.assessments && statistics.assessments.byCategory) {
+      const assessmentCategoryData = statistics.assessments.byCategory.map(
+        (assessment: any) => {
+          if(selectedLang == "en"){
+            return {
+              dataKey: assessment.averageRanks[0].en.category,
+              dataValue: assessment.categoryAverageRank * 20,
+            };
+          }
+          return {
+            dataKey: assessment.averageRanks[0].ko.category,
+            dataValue: assessment.categoryAverageRank * 20,
+          };
+        }
+      );
+      totalResult = [...totalResult, ...assessmentCategoryData];
     }
 
     setTotalData(totalResult);
 
+    // Calculate and set the average of totalData if needed
     const average = getObjectArrayAverage(totalResult, "dataValue");
     setTotalAverage(average);
-  }, [statistics]);
+  }, [statistics, selectedLang]);
 
   useEffect(() => {
     // matchingData average
@@ -110,7 +97,7 @@ export default function UserStatistics({
   }, [matchingData]);
 
   return (
-    <div className="grid grid-cols-[2fr_5fr_5fr] gap-4">
+    <div className="grid grid-cols-[2fr_5fr_5fr] gap-4" key="unqiye">
       <ScoreCard score={totalAverage} lang={lang} />
 
       <Card className="gap-8 px-0 pt-8 pb-0">
@@ -219,17 +206,17 @@ export default function UserStatistics({
       )}
 
       {/* categories */}
-      {statistics.surveyReports && statistics.surveyReports.averageResponses &&
+      {statistics.surveyReports &&
+        statistics.surveyReports.averageResponses &&
         statistics.surveyReports.averageResponses.map(
           (averageResponse: any) => {
-            
             return (
               <Card className="col-span-3 gap-10" key={averageResponse.id}>
                 <CardHeader className="justify-center text-subhead_m">
                   {averageResponse.category}
                 </CardHeader>
                 <div className="flex gap-8">
-                    <ScoreCard
+                  <ScoreCard
                     score={averageResponse.categoryAverage}
                     lang={lang}
                     className="min-h-[234px] mb-7"
@@ -245,23 +232,21 @@ export default function UserStatistics({
                         [averageResponse.answers]: _test,
                       });
                     }}
-                  /> 
+                  />
                 </div>
 
-                  {
-                    statisticsDetail[averageResponse.answers] && (
-                      <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
-                        <h3 className="mb-3 text-title_m">
-                          Q. {statisticsDetail[averageResponse.answers].en.question}
-                        </h3>
+                {statisticsDetail[averageResponse.answers] && (
+                  <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
+                    <h3 className="mb-3 text-title_m">
+                      Q. {statisticsDetail[averageResponse.answers].en.question}
+                    </h3>
 
-                        <div className="text-body_m">
-                          {statisticsDetail[averageResponse.answers].en.answer}
-                        </div>
-                      </div>
-                    )
-                  }
-               {/*   {statisticsDetail[category_key] && (
+                    <div className="text-body_m">
+                      {statisticsDetail[averageResponse.answers].en.answer}
+                    </div>
+                  </div>
+                )}
+                {/*   {statisticsDetail[category_key] && (
                   <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
                     <h3 className="mb-3 text-title_m">
                       Q. {statisticsDetail[category_key]["en"].question}
@@ -322,7 +307,7 @@ export default function UserStatistics({
         })}
 
       {/* assesdment */}
-      {statistics.assessments && statistics.assessments.averageRanksByCriterion && (
+      {statistics.assessments && statistics.assessments.byCategory && (
         <Card className="col-span-3 gap-10">
           <CardHeader className="justify-center text-subhead_m">
             Propensity
