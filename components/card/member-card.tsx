@@ -19,6 +19,7 @@ export default function MemberCard({
   lang?: any;
   isOwner?: boolean;
 }) {
+
   const router = useRouter();
   // const { data, loading, error } = useFetchData<any>(`/polybase/${address}`);
 

@@ -992,6 +992,23 @@
     "delete_image": "Delete Image"
   },
   "survey": {
-    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "Technology stack.understanding",
+    "8377fabd-d8a0-4d86-9e75-2b1fa11557d5": "Technical.problem-solving",
+    "d76072de-a69b-4153-983f-0eb27c088e68": "Optimize.performance",
+    "d9126a37-f40c-49f8-80a9-a614b2d531f3": "Development.Completeness",
+    "39d5a720-915e-4bda-96e7-5c6f96daf077": "Bug.resolution",
+    "39e61ded-827c-43de-8e9e-c5e75a865245": "Development language.proficiency",
+    "3c769495-f076-4cc6-b77a-4d2839ae47e1": "Reference.literacy",
+    "f25d06a9-585a-4200-b317-0b1d8c873958": "Task.management",
+    "dd724199-8830-44cd-8371-64907e9a37af": "Technical.communication",
+    "5f2bcd1c-bbf6-4735-bac0-175e84e9baf7": "Code Convention.compliance rate",
+    "b088af39-6957-4b2d-a3fd-350f560a2ab4": "Commit.Standards",
+    "cefa7ae0-3623-41dd-940f-623fccf16f84": "Architecture.compliance rate",
+    "b9c8ad2e-5fb2-4478-964b-5d6ec20fe8d8": "Meeting.participation rate",
+    "6580670e-edb7-4541-bdd3-3b060794b4a2": "Requirements.literacy",
+    "be9c36e4-8642-4858-83ed-b2e17b700c4e": "Ability to.analyze feedback",
+    "c16b6d4a-e5d4-4858-ad7a-f21dc1a6a033": "Ability to.propose technical improvements",
+    "12ba046c-e307-4479-a84f-132b5de3ea0f": "Mentoring.frequency",
+    "6d33bef7-0b6c-4348-9cd7-a26eac20827d": "Technical.Proposal Power"
   }
 }

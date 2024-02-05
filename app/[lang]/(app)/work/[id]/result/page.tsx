@@ -23,8 +23,11 @@ export default async function EvaluationResult({
   const { data: details } = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
   const { data: surveyData } = await getEvaluationSurvey(params.id);
-
+  
+  console.log("TEST!");
+  console.log(details);
   if (!details) redirect(`/work/${params.id}`);
+
 
   return (
     <main className="flex gap-4">

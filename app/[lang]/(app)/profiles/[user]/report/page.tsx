@@ -30,8 +30,6 @@ export default async function ProfileReport({
     (projectItem: any) => projectItem.project.id === project
   );
 
-    console.log(profile);
-
   return (
     <div className="flex flex-col gap-4 my-10 mx-auto max-w-[80rem] px-4">
       <h4 className="mb-10 text-center text-heading_s">

@@ -28,7 +28,7 @@ export default async function Dashboard({
       {/* LeftSide */}
       <div className="min-w-[330px] flex flex-col gap-8">
         <UserProfile profile={profile} text={dictionary.mypage.profile}  />
-        {/*  <UserReport profile={profile} text={dictionary} />  */}
+         {/* <UserReport profile={profile} text={dictionary} />  */}
       </div>
       {/* main */}
       <div className="grow">

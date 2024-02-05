@@ -84,7 +84,6 @@ export default function UserStatistics({
 
     setTotalData(totalResult);
 
-
     // Calculate and set the average of totalData if needed
     const average = getObjectArrayAverage(totalResult, "dataValue");
     setTotalAverage(average);
@@ -131,14 +130,16 @@ export default function UserStatistics({
         <CardContent className="text-center">
           <RecommendedScore
             lang={lang}
-            recommendScoresByRole={statistics.swotReports.recommendScoresByRole}
+            recommendScoresByRole={
+              statistics.swotReports?.recommendScoresByRole
+            }
           />
         </CardContent>
       </Card>
 
       {/* project accomplishment */}
-      {matchingData.length > 0 && (
-        <Card className="col-span-3 gap-10">
+      {/* {matchingData.length > 0 && (
+        <Card className="col-span-3 gap-8">
           <CardHeader className="justify-center text-subhead_m">
             프로젝트 성과
           </CardHeader>
@@ -184,71 +185,67 @@ export default function UserStatistics({
             </div>
           )}
         </Card>
-      )}
+      )} */}
 
       {/* categories */}
-      {statistics.surveyReports &&
-        statistics.surveyReports.averageResponses &&
-        statistics.surveyReports.averageResponses.map(
-          (averageResponse: any, index: number) => {
-            return (
-              <Card className="col-span-3 gap-10" key={index}>
-                <CardHeader className="justify-center text-subhead_m">
-                  {averageResponse.category}
-                </CardHeader>
-                <div className="flex gap-8">
-                  <ScoreCard
-                    score={averageResponse.categoryAverage}
-                    lang={lang}
-                    className="min-h-[234px] mb-7"
-                  />
+      {statistics.surveyReports?.averageResponses?.map(
+        (averageResponse: any, index: number) => {
+          return (
+            <Card className="col-span-3 gap-8" key={index}>
+              <CardHeader className="justify-center text-subhead_m">
+                {averageResponse.category}
+              </CardHeader>
+              <div className="flex gap-8">
+                <ScoreCard
+                  score={averageResponse.categoryAverage}
+                  lang={lang}
+                  className="min-h-[234px] mb-7"
+                />
 
-                  <SimpleBarChart
-                    data={averageResponse.answers}
-                    xKey="id"
-                    yKey="averageAnswer"
-                    onClickBar={(_test: any) => {
-                      setStatisticsDetail({
-                        ...statisticsDetail,
-                        [averageResponse.answers]: _test,
-                      });
-                    }}
-                  />
+                <SimpleBarChart
+                  data={averageResponse.answers}
+                  xKey="questionId"
+                  yKey="averageAnswer"
+                  onClickBar={(_test: any) => {
+                    setStatisticsDetail({
+                      ...statisticsDetail,
+                      [averageResponse.answers]: _test,
+                    });
+                  }}
+                />
+              </div>
+
+              {statisticsDetail[averageResponse.answers] && (
+                <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
+                  <h3 className="mb-3 text-title_m">
+                    Q.{" "}
+                    {
+                      statisticsDetail[averageResponse.answers][
+                        `${params.lang}`
+                      ].question
+                    }
+                  </h3>
+
+                  <div className="text-body_m">
+                    {
+                      statisticsDetail[averageResponse.answers][
+                        `${params.lang}`
+                      ].answer
+                    }
+                  </div>
                 </div>
-
-                {statisticsDetail[averageResponse.answers] && (
-                  <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
-                    <h3 className="mb-3 text-title_m">
-                      Q. {statisticsDetail[averageResponse.answers].en.question}
-                    </h3>
-
-                    <div className="text-body_m">
-                      {statisticsDetail[averageResponse.answers].en.answer}
-                    </div>
-                  </div>
-                )}
-                {/*   {statisticsDetail[category_key] && (
-                  <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
-                    <h3 className="mb-3 text-title_m">
-                      Q. {statisticsDetail[category_key]["en"].question}
-                    </h3>
-
-                    <div className="text-body_m">
-                      {statisticsDetail[category_key]["en"].answer}
-                    </div>
-                  </div>
-                )}  */}
-              </Card>
-            );
-          }
-        )}
+              )}
+            </Card>
+          );
+        }
+      )}
       {statistics.categories &&
         Object.keys(statistics.categories).map(
           (category_key: any, index: number) => {
             const category_value = statistics.categories[category_key];
 
             return (
-              <Card className="col-span-3 gap-10" key={index}>
+              <Card className="col-span-3 gap-8" key={index}>
                 <CardHeader className="justify-center text-subhead_m">
                   {category_key}
                 </CardHeader>
@@ -291,7 +288,7 @@ export default function UserStatistics({
 
       {/* assesdment */}
       {statistics.assessments && statistics.assessments.byCategory && (
-        <Card className="col-span-3 gap-10">
+        <Card className="col-span-3 gap-8">
           <CardHeader className="justify-center text-subhead_m">
             Propensity
           </CardHeader>

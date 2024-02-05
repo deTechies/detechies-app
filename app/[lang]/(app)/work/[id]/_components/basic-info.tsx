@@ -141,6 +141,7 @@ export default function BasicEvaluationInfo({
                     <FormLabel>{text.billable_hourly_wage}</FormLabel>
                     <Input
                       {...field}
+                      type="number"
                       placeholder={
                         text.please_evaluate_users_role_and_performance_in_this_project
                       }
@@ -158,6 +159,7 @@ export default function BasicEvaluationInfo({
                     <FormLabel>{text.time_weekly}</FormLabel>
                     <Input
                       {...field}
+                      type="number"
                       placeholder={
                         text.please_evaluate_users_role_and_performance_in_this_project
                       }
