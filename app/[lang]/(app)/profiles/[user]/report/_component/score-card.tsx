@@ -34,7 +34,7 @@ export default function ScoreCard({
           : "border-state-error text-state-error"
       } ${className}`}
     >
-      <CardHeader className="text-title_m">
+      <CardHeader className="flex-col items-start justify-start text-title_m">
         {children && <div>{children}</div>}
 
         <div>{lang.profile.statistics.total_points}:</div>

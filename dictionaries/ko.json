@@ -75,12 +75,12 @@
       "total_career": "총 경력",
       "total_evaluation": "총 받은 평가",
       "admin_evaluation": "관리자 평가",
-      "evaluations": "kr_evaluations",
+      "evaluations": "평가",
       "member_evaluation": "동료 평가",
       "client_evaluation": "클라이언트 평가",
       "work_period": "작업 기간",
       "project_part": "기여한 파트",
-      "s_evaluation": "님이 작성한 평가",
+      "s_evaluation": "본인이 작성한 성과",
       "total": "통합 ",
       "reputation_report": "평판 보고서",
       "feedback_times": "피드백 반영도",
@@ -89,7 +89,12 @@
       "good_team_player": "긍정적인 영향",
       "rate_contributions": "기여도",
       "points": "점",
-      "total_points": "총점"
+      "total_points": "총점",
+      "total_report_summary": "평판 보고서 요약",
+      "reputation_score": "평판 점수",
+      "recommendation_score": "추천 리뷰 총점",
+      "total_review_1": "총",
+      "total_review_2": "개 평가"
     }
   },
 

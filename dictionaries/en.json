@@ -81,7 +81,7 @@
       "client_evaluation": "Client",
       "work_period": "Work period",
       "project_part": "Contributed Part",
-      "s_evaluation": "'s works",
+      "s_evaluation": "Self-Reported Works",
       "total": "Total ",
       "reputation_report": "Reputation Report",
       "feedback_times": "Feedback Times",
@@ -90,7 +90,12 @@
       "good_team_player": "Good Team Player",
       "rate_contributions": "Rate Contributions",
       "points": "",
-      "total_points": "Total"
+      "total_points": "Total",
+      "total_report_summary": "Reputation report summary",
+      "reputation_score": "Reputation score",
+      "recommendation_score": "Recommendation review total score",
+      "total_review_1": "Total",
+      "total_review_2": "reviews"
     }
   },
 

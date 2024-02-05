@@ -15,6 +15,8 @@ export default function PendingMemberItem({
   lang,
   onSuccessInvite,
 }: PendingMemberItemProps) {
+
+  console.log(member);
   //if accept then we need to put in
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);

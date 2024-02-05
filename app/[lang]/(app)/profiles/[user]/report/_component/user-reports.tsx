@@ -20,22 +20,6 @@ interface ReportProject {
   recommendScoresByRole: { [key: string]: number };
 }
 
-interface ReportContribution {
-  description: string;
-  end_date: string | null;
-  role: PROFESSION_TYPE;
-  start_date: Date;
-  surveyResults: any[];
-  tags: string[];
-}
-interface ReportProject {
-  begin_date: string;
-  end_date: string | null;
-  description: string;
-  name: string;
-  recommendScoresByRole: { [key: string]: number };
-}
-
 export default async function UserReports({
   lang,
   address,
@@ -48,26 +32,33 @@ export default async function UserReports({
   selectedProject: any;
 }) {
   const report = await serverApi(
-    `/survey-report/getUserReport?address=${address}&projectId=${selectedProject}`
+    `/survey-report/getUserReport?address=${address}&projectId=${selectedProject?.project?.id}`
   );
 
   return (
     <div>
       <h3 className="mt-[60px] mb-4 text-heading_s text-center">
-        {selectedProject ? "FIXME" : lang.profile.statistics.total}
+        {selectedProject
+          ? selectedProject.project.name
+          : lang.profile.statistics.total}
         {selectedProject && <br />}
         {lang.profile.statistics.reputation_report}
       </h3>
 
       <div className="mb-5 text-center text-title_m text-text-secondary">
-        {lang.profile.statistics.total_evaluation} (0 fix me)
+        {lang.profile.statistics.total_evaluation} (
+        {selectedProject?.evaluationCount || 0})
       </div>
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>
 
       <Suspense fallback={<div>Loading reports.....</div>}>
         {report?.data && report.data ? (
-          <UserStatistics lang={lang} statistics={report.data} selectedLang={selectedLang} />
+          <UserStatistics
+            lang={lang}
+            statistics={report.data}
+            selectedLang={selectedLang}
+          />
         ) : (
           <div className="text-center text-body_m">No Results found</div>
         )}

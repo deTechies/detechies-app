@@ -33,6 +33,8 @@ export default function UserReport({
     // setLoading(false);
   }
 
+  console.log(profile);
+
   return (
     <Card className="flex flex-col gap-0 w-[328px] px-6 pt-6 pb-7">
       <CardHeader className="mb-6 text-subhead_s">

@@ -46,7 +46,6 @@ export default async function ProjectDetailPage({
 
   const dictionary = (await getDictionary(params.lang)) as any;
 
-  console.log(data);
   if (
     data.scope === "private" &&
     (data.userRole === "none" || data.userRole === "joined")
