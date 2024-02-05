@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image";
 import ConnectionCard from "./connections-card";
 const networks = [
   {
@@ -37,7 +36,7 @@ interface Data {
   updatedAt: number;
 }
 
-export default async function Connections({
+export default function Connections({
   address,
   row,
   github,
@@ -50,7 +49,7 @@ export default async function Connections({
 
   //const {data} = await getUserConnections(address);
   return (
-    <section className={`w-full flex items-start justify-between gap-3 2xl:gap-5`}>
+    <section className={`flex flex-wrap justify-between gap-2 2xl:gap-5`}>
       {networks.map((network: any, key: number) => (
         <ConnectionCard key={key} logoSrc={network.image} logoAlt={network.name} label={network.name} sublabel={"Coming soon"}/>
       ))}

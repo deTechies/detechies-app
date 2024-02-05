@@ -1,6 +1,5 @@
 "use client";
 
-import { useDictionary } from '@/lib/dictionaryProvider';
 import Image from 'next/image';
 
 interface IConnectionCardProps {
@@ -12,12 +11,11 @@ interface IConnectionCardProps {
 }
 
 const ConnectionCard = ({key, logoSrc, logoAlt, label, sublabel}: IConnectionCardProps) => {
-    const dictionary = useDictionary();
 
     return (
         <div
             key={key}
-            className={`flex border w-full border-border-div rounded-sm p-4 pb-5 gap-4`}
+            className={`flex border border-border-div rounded-sm p-4 pb-5 gap-4`}
         >
             <div className="flex justify-center relative aspect-square w-[48px] h-[48px] rounded-full ">
                 <Image src={logoSrc} fill={true} sizes={"48"} alt={logoAlt} className="aspect-square"/>
