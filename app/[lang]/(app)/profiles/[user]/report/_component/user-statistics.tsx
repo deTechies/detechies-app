@@ -53,8 +53,14 @@ export default function UserStatistics({
     // Transform surveyResponses category data
     if (statistics.surveyReports && statistics.surveyReports.averageResponses) {
       const surveyCategoryData = statistics.surveyReports.averageResponses.map(
+        
         (averageResponse: any) => {
-          // console.log(averageResponse);
+          if(selectedLang == "en"){
+            return {
+              dataKey: averageResponse.category,
+              dataValue: averageResponse.categoryAverage,
+            };
+          }
           return {
             dataKey: averageResponse.category,
             dataValue: averageResponse.categoryAverage,
