@@ -55,7 +55,7 @@ export default async function ProjectMemberEvaluation({
               projectId={""}
             />
           )}
-          {details.data.evaluator?.role != "admin" && (
+          {details.data?.evaluator?.role != "admin" && (
             <NonAdminContributionForm
               workId={params.id}
               text={dictionary.project.evaluate}

@@ -93,7 +93,7 @@ export default function PendingMemberItem({
             </div>
 
             <div className="flex flex-wrap items-center justify-end gap-3 ml-auto">
-              {(member.status == "pending")  && (
+              {(member.status == "joined")  && (
                 <>
                   <Button
                     size="sm"
