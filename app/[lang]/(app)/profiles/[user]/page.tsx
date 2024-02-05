@@ -10,7 +10,6 @@ import ProfileProjects from "../../mypage/_components/profile-projects";
 
 import NoProfileFound from "./_component/no-profile-found";
 import UserProfile from "./_component/user-profile";
-import UserReport from "./_component/user-report";
 // import UserReport from "./_component/user-report";
 
 export default async function Dashboard({
@@ -29,7 +28,7 @@ export default async function Dashboard({
       {/* LeftSide */}
       <div className="min-w-[330px] flex flex-col gap-8">
         <UserProfile profile={profile} text={dictionary.mypage.profile}  />
-         <UserReport profile={profile} text={dictionary} /> 
+        {/*  <UserReport profile={profile} text={dictionary} />  */}
       </div>
       {/* main */}
       <div className="grow">
