@@ -61,19 +61,19 @@ export default function RecommendedScore({
       </div>
 
       {recommendScoresByRole?.admin &&
-        recommendItem(
+        RecommendItem(
           lang.interface.role_type.admin,
           recommendScoresByRole.admin.totalRecommendScore,
           recommendScoresByRole.admin.totalRecommendations
         )}
       {recommendScoresByRole?.member &&
-        recommendItem(
+        RecommendItem(
           lang.interface.role_type.member,
           recommendScoresByRole.member.totalRecommendScore,
           recommendScoresByRole.member.totalRecommendations
         )}
       {recommendScoresByRole?.client &&
-        recommendItem(
+        RecommendItem(
           lang.interface.role_type.client,
           recommendScoresByRole.client.totalRecommendScore,
           recommendScoresByRole.client.totalRecommendations
@@ -82,7 +82,7 @@ export default function RecommendedScore({
   );
 }
 
-const recommendItem = (role: string, score: number, total: number) => {
+const RecommendItem = (role: string, score: number, total: number) => {
   const [recommendScore, setRecommendScore] = useState(0);
   const [recommendTotal, setRecommendTotal] = useState(0);
 
