@@ -52,8 +52,8 @@ export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
 // const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키 
 // const testAppId = 'app_id_eg12sf3491azgs520' // 테스트용 앱 ID
 
-const wepin_key = process.env.WEPIN_APP;
-const wepin_app = process.env.WEPIN_APP_ID;
+const wepin_key = process.env.NEXT_PUBLIC_WEPIN_APP;
+const wepin_app = process.env.NEXT_PUBLIC_WEPIN_APP_ID;
 
 const connectorOptions: WepinConnectorOptions = {
   appId: wepin_key || testAppId,
