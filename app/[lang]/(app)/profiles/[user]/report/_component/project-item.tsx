@@ -16,17 +16,20 @@ function TotalProjectItem({
   lang: any;
   selected: boolean;
 }) {
-const router = useRouter();
-const pathName = usePathname();
-  
+  const router = useRouter();
+  const pathName = usePathname();
+
   function selectAll() {
     //settings searchParams for this
-    
+
     //remove if there is a project query
-    router.push(
-      pathName
-    ); 
+    router.push(pathName);
   }
+
+  const totalEvaluationCount = projects.reduce(
+    (acc, project) => acc + project.evaluationCount,
+    0
+  );
 
   return (
     <div
@@ -44,9 +47,10 @@ const pathName = usePathname();
       </div>
 
       <div className="flex items-center gap-2">
-        <span>{lang.profile.statistics.total_evaluation} (어쩌구):</span>
+        <span>{lang.profile.statistics.total_evaluation} ({totalEvaluationCount}):</span>
 
         <div className="flex flex-wrap gap-2">
+          
           <Badge variant="purple" shape="sm">
             {lang.profile.statistics.admin_evaluation} {3}
           </Badge>
@@ -77,16 +81,16 @@ function CommonProjectItem({
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
-  
+
   const onShowMore = (_event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     _event.stopPropagation();
     setShowMore(!showMore);
   };
 
   function onSelectProject() {
-    const params = createQueryString("project", project.project.id)
-    
-    console.log("params", params)
+    const params = createQueryString("project", project.project.id);
+
+    console.log("params", params);
 
     router.push(pathName + "?" + params);
   }
@@ -169,7 +173,6 @@ function CommonProjectItem({
         <div className={`pt-4 transition-all`}>
           <div className="p-5 break-words border rounded-md border-border-div">
             {project.description && project.description}
-
           </div>
         </div>
       )}

@@ -33,6 +33,7 @@ export default function SimpleBarChart({
   const [positiveColor, setPositiveColor] = useState("");
   const [commonColor, setCommonColor] = useState("");
   const [nagativeColor, setNagativeColor] = useState("");
+  const [borderColor, setBorderColor] = useState("");
 
   useEffect(() => {
     const rootStyle = getComputedStyle(document.documentElement);
@@ -41,6 +42,7 @@ export default function SimpleBarChart({
     setNagativeColor(
       rootStyle.getPropertyValue("--state-error-primary").trim()
     );
+    setBorderColor(rootStyle.getPropertyValue("--border-div").trim());
   }, []);
 
   const lang = useDictionary() as any;
@@ -54,16 +56,17 @@ export default function SimpleBarChart({
           top: 5,
           right: 0,
           left: 0,
-          bottom: 5,
+          bottom: 8,
         }}
         barSize={36}
       >
-        <CartesianGrid vertical={false} />
+        <CartesianGrid vertical={false} stroke={borderColor} />
         <XAxis
           dataKey={xKey}
           tickLine={false}
-          className="text-title_s text-text-secondary"
-          tickFormatter={(value: any) => lang.survey[value] || "조금긴텍스트"}
+          tick={<CustomTick />}
+          className="text-label_s text-text-secondary"
+          tickFormatter={(value: any) => " "}
         />
         <YAxis
           tickCount={6}
@@ -118,4 +121,36 @@ const CustomTooltip = ({
   }
 
   return null;
+};
+
+const CustomTick = (props: any) => {
+  const { x, y, payload } = props;
+  const lang = useDictionary() as any;
+
+  const text = lang.survey[payload.value]?.split(".").join("\n") || "0";
+  const [textColor, setTextColor] = useState("");
+
+  useEffect(() => {
+    const rootStyle = getComputedStyle(document.documentElement);
+    setTextColor(rootStyle.getPropertyValue("--state-text-secondary").trim());
+  }, []);
+
+  return (
+    <g transform={`translate(${x},${y + 8})`}>
+      <text x={0} y={0} dy={0} textAnchor="middle" fill={textColor}>
+        {/* {text} */}
+        {text.split("\n").map((line: string, index: number) => {
+          let dy = 0;
+          if (index != 0) {
+            dy = 16;
+          }
+          return (
+            <tspan x="0" dy={dy} key={index}>
+              {line}
+            </tspan>
+          );
+        })}
+      </text>
+    </g>
+  );
 };

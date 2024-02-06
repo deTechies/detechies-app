@@ -75,12 +75,12 @@
       "total_career": "총 경력",
       "total_evaluation": "총 받은 평가",
       "admin_evaluation": "관리자 평가",
-      "evaluations": "kr_evaluations",
+      "evaluations": "평가",
       "member_evaluation": "동료 평가",
       "client_evaluation": "클라이언트 평가",
       "work_period": "작업 기간",
       "project_part": "기여한 파트",
-      "s_evaluation": "님이 작성한 평가",
+      "s_evaluation": "본인이 작성한 성과",
       "total": "통합 ",
       "reputation_report": "평판 보고서",
       "feedback_times": "피드백 반영도",
@@ -89,7 +89,12 @@
       "good_team_player": "긍정적인 영향",
       "rate_contributions": "기여도",
       "points": "점",
-      "total_points": "총점"
+      "total_points": "총점",
+      "total_report_summary": "평판 보고서 요약",
+      "reputation_score": "평판 점수",
+      "recommendation_score": "추천 리뷰 총점",
+      "total_review_1": "총",
+      "total_review_2": "개 평가"
     }
   },
 
@@ -482,6 +487,12 @@
       "exactly": "평가가 모두 정확한가요?",
       "exactly_desc": "사실과 다른 평가를 하는 경우 피평가자의 커리어에 불이익이 생길 수 있어요.",
       "go_to_project": "프로젝트로 가기"
+    },
+    "private": {
+      "title": "프라이빗 프로젝트",
+      "desc": "해당 프로젝트는 비공개로 설정되어 있어, 프로젝트 멤버가 되면 상세내용을 볼 수 있어요. 이 프로젝트에 참여해볼까요?",
+      "back": "뒤로가기",
+      "waiting": "수락 대기중"
     }
   },
   "mypage": {
@@ -991,6 +1002,23 @@
     "delete_image": "삭제하기"
   },
   "survey": {
-    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "기술 스택.이해도",
+    "8377fabd-d8a0-4d86-9e75-2b1fa11557d5": "기술 문제.해결력",
+    "d76072de-a69b-4153-983f-0eb27c088e68": "성능.최적화",
+    "d9126a37-f40c-49f8-80a9-a614b2d531f3": "개발.완성도",
+    "39d5a720-915e-4bda-96e7-5c6f96daf077": "버그.해결",
+    "39e61ded-827c-43de-8e9e-c5e75a865245": "개발 언어.숙련도",
+    "3c769495-f076-4cc6-b77a-4d2839ae47e1": "레퍼런스.활용",
+    "f25d06a9-585a-4200-b317-0b1d8c873958": "작업.관리",
+    "dd724199-8830-44cd-8371-64907e9a37af": "기술.정보전달",
+    "5f2bcd1c-bbf6-4735-bac0-175e84e9baf7": "코드 컨벤션.준수율",
+    "b088af39-6957-4b2d-a3fd-350f560a2ab4": "커밋 컨벤션.준수율",
+    "cefa7ae0-3623-41dd-940f-623fccf16f84": "아키텍처.준수율",
+    "b9c8ad2e-5fb2-4478-964b-5d6ec20fe8d8": "회의.참여율",
+    "6580670e-edb7-4541-bdd3-3b060794b4a2": "요구사항.이해력",
+    "be9c36e4-8642-4858-83ed-b2e17b700c4e": "피드백.분석",
+    "c16b6d4a-e5d4-4858-ad7a-f21dc1a6a033": "기술개선.제안력",
+    "12ba046c-e307-4479-a84f-132b5de3ea0f": "멘토링.빈도",
+    "6d33bef7-0b6c-4348-9cd7-a26eac20827d": "기술.제안력"
   }
 }

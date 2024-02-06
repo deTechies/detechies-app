@@ -1,28 +1,20 @@
-
 import { Card } from "@/components/ui/card";
-
-import { serverApi } from "@/lib/data/general";
 import { CommonProjectItem, TotalProjectItem } from "./project-item";
 
-
 export default async function UserProjects({
-  user,
   lang,
+  projects,
   selectedProject,
 }: {
-  user: string  
   lang: any;
+  projects: any;
   selectedProject: any;
-
 }) {
-  const { data: projects } = await serverApi(
-    `/project-work/${user}/finished`
-  );
-
   return (
     <Card className="flex gap-0 px-8 pb-8 pt-7">
       <h3 className="mb-4 text-subhead_s">
-        {lang.profile.statistics.joined_projects} ({projects && projects.length})
+        {lang.profile.statistics.joined_projects} ({projects && projects.length}
+        )
       </h3>
 
       <div className="mb-6 text-text-secondary text-body_m">

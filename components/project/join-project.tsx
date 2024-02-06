@@ -107,18 +107,18 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="max-w-[212px] w-full">
         <Button variant="primary" size="lg" className="px-5">
           {lang.project.details.join_project.button}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="gap-0">
-        <h3 className="text-subhead_s mb-4">
+        <h3 className="mb-4 text-subhead_s">
           {lang.project.details.join_project.title}
         </h3>
 
-        <p className="text-body_m mb-6">
+        <p className="mb-6 text-body_m">
           {lang.project.details.join_project.body}
         </p>
 
@@ -177,7 +177,7 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
                 </FormItem>
               )}
             />
-            <div className="flex  flex-row justify-center gap-2 mx-auto">
+            <div className="flex flex-row justify-center gap-2 mx-auto">
               <DialogClose asChild>
                 <Button
                   variant="secondary"
