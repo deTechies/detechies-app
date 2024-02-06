@@ -59,8 +59,8 @@ const wepin_prod_key = process.env.WEPIN_PROD_APP;
 const wepin_prod_app = process.env.WEPIN_PROD_APP_ID;
 
 const connectorOptions: WepinConnectorOptions = {
-  appId: wepin_key ||wepin_prod_key || testAppId,
-  appKey: wepin_app || wepin_prod_app || testAppKey,
+  appId: wepin_app || wepin_prod_app || testAppId,
+  appKey: wepin_key || wepin_prod_key|| testAppKey,
   defaultChainId: 80001,
 };
 
