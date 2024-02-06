@@ -55,6 +55,10 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {};
 
+const wepin_app = process.env.NEXT_PUBLIC_WEPIN_APP_ID;
+const wepin_prod_app = process.env.WEPIN_PROD_APP_ID;
+
+
 export default function CreateProfile({ lang }: { lang: any }) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -92,7 +96,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
   useEffect(() => {
     if (localStorage.getItem("wagmi.wallet") === `"wepin"`) {
       const storageWepinData = localStorage.getItem(
-        `wepin:widget:${testAppId}`
+        `wepin:widget:${wepin_app || wepin_prod_app || testAppId}`
       );
       if (storageWepinData !== null) {
         const obj_wepin = JSON.parse(storageWepinData);

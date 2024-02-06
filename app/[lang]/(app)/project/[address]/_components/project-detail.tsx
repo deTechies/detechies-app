@@ -1,5 +1,4 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -48,27 +47,15 @@ export default function ProjectDetail({
   return (
     <Card className="w-full gap-8 px-8 pt-8 pb-5">
       <header className="flex items-start gap-9">
-        <Avatar className="rounded-[6px] w-[100px] h-[100px] mb-2 aspect-square bg-state-info-secondary">
-          <AvatarImage
-            src={`${
-              details.image
-                ? "https://ipfs.io/ipfs/" + details.image
-                : "/images/no-item.png"
-            }`}
-            alt="project_image_holder"
-            width={100}
-            height={100}
-          />
-
-          <AvatarFallback className="relative">
-            <Image
-              src="/images/careerzen.png"
-              alt="no-item"
-              fill={true}
-              className="object-contain bg-no-repeat"
-            />
-          </AvatarFallback>
-        </Avatar>
+      <figure className="shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square bg-accent-secondary">
+        <Image
+          src={`https://ipfs.io/ipfs/${data.image}`}
+          alt={`Project ${data.name}`}
+          width={100}
+          height={100}
+          className="rounded-sm"
+        />
+      </figure>
 
         <div className="flex flex-col gap-4 grow">
           <div className="flex flex-wrap items-start justify-between gap-3">
