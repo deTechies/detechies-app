@@ -28,7 +28,7 @@ async function PendingMemberListComponent({
           ))}
 
         {(!pendingMembers?.length || pendingMembers.length < 1) && (
-          <p className="text-center text-label_m text-text-secondary">
+          <p className="text-center truncate text-label_m text-text-secondary">
             {lang.project.details.waiting.no_people}
           </p>
         )}

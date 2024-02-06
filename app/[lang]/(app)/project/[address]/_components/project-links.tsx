@@ -28,7 +28,7 @@ export default async function ProjectLinks({
         {details.links.length > 0 ? (
           <Links works={details.links} />
         ) : (
-          <p className="text-center text-label_m text-text-secondary">
+          <p className="text-center truncate text-label_m text-text-secondary">
             {lang.project.details.links.no_links}
           </p>
         )}

@@ -57,13 +57,13 @@ export default function ProfessionTagType({
   });
 
   return (
-    <div className="flex flex-wrap gap-2 border border-border-div rounded-sm py-4 px-5 cursor-pointer">
+    <div className="flex flex-wrap gap-2 px-5 py-4 border rounded-sm cursor-pointer border-border-div">
       <Badge
         shape="outline"
         variant="accent"
         onClick={() => onClickJobBadge(newTag)}
       >
-        <div className="truncate">{newTag}</div>
+        {newTag}
       </Badge>
 
       {filtered_job_list.map((_job_item, _index) => {
@@ -78,7 +78,7 @@ export default function ProfessionTagType({
             onClick={() => onClickJobBadge(_job_item.en)}
             key={_index}
           >
-            <div className="truncate">{_job_item.en}</div>
+            {_job_item.en}
           </Badge>
         );
       })}

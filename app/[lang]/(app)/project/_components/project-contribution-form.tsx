@@ -255,7 +255,7 @@ export default function ProjectContributionInviteForm({
                       form.setValue("tags", newTags, { shouldValidate: true });
                     }}
                   >
-                    <div className="truncate">{tag}</div>
+                    {tag}
                   </Badge>
                 ))}
               </div>

@@ -151,7 +151,7 @@ function CommonProjectItem({
               project.tags.map((tag: string) => {
                 return (
                   <Badge shape="outline" variant="placeholder" key={tag}>
-                    <div className="truncate">{tag}</div>
+                    {tag}
                   </Badge>
                 );
               })}

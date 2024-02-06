@@ -15,7 +15,7 @@ export default function ProjectWorkDetail({
 
   return (
     <>
-      <div className="inline-flex flex-wrap items-start justify-start gap-4 text-text-secondary">
+      <div className="inline-flex flex-wrap items-start justify-start gap-4 md:flex-nowrap text-text-secondary">
         <div className="inline-flex flex-col items-start justify-start gap-2">
           <div className="divide-x">
             <span className="pr-2 capitalize text-label_m">
@@ -30,9 +30,7 @@ export default function ProjectWorkDetail({
           </span>
         </div>
 
-        <div className="self-stretch text-label_m grow shrink basis-0 line-clamp-2">
-          {data.description}
-        </div>
+        <div className="truncate text-label_m">{data.description}</div>
       </div>
 
       <div className="inline-flex flex-wrap items-start justify-start gap-2">
@@ -40,7 +38,7 @@ export default function ProjectWorkDetail({
           data.tags?.length > 0 &&
           data.tags.map((tag: string, index: number) => (
             <Badge variant="secondary" shape="outline" key={index}>
-              <div className="truncate">{tag}</div>
+              {tag}
             </Badge>
           ))}
       </div>
