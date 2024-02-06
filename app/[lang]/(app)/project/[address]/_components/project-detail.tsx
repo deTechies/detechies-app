@@ -49,7 +49,7 @@ export default function ProjectDetail({
       <header className="flex items-start gap-9">
       <figure className="shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square bg-accent-secondary">
         <Image
-          src={`https://ipfs.io/ipfs/${data.image}`}
+          src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${data.name}`}
           width={100}
           height={100}
