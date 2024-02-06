@@ -53,9 +53,8 @@ export default function UserStatistics({
     // Transform surveyResponses category data
     if (statistics.surveyReports && statistics.surveyReports.averageResponses) {
       const surveyCategoryData = statistics.surveyReports.averageResponses.map(
-        
         (averageResponse: any) => {
-          if(selectedLang == "en"){
+          if (selectedLang == "en") {
             return {
               dataKey: averageResponse.category,
               dataValue: averageResponse.categoryAverage,
@@ -201,24 +200,26 @@ export default function UserStatistics({
               <CardHeader className="justify-center text-subhead_m">
                 {averageResponse.category}
               </CardHeader>
-              <div className="flex gap-8">
+              <div className="flex flex-wrap gap-8 md:flex-nowrap">
                 <ScoreCard
                   score={averageResponse.categoryAverage}
                   lang={lang}
-                  className="min-h-[234px] mb-7"
+                  className="min-h-[234px] mb-7 grow"
                 />
 
-                <SimpleBarChart
-                  data={averageResponse.answers}
-                  xKey="questionId"
-                  yKey="averageAnswer"
-                  onClickBar={(_test: any) => {
-                    setStatisticsDetail({
-                      ...statisticsDetail,
-                      [averageResponse.answers]: _test,
-                    });
-                  }}
-                />
+                <div className="min-h-[234px] grow">
+                  <SimpleBarChart
+                    data={averageResponse.answers}
+                    xKey="questionId"
+                    yKey="averageAnswer"
+                    onClickBar={(_test: any) => {
+                      setStatisticsDetail({
+                        ...statisticsDetail,
+                        [averageResponse.answers]: _test,
+                      });
+                    }}
+                  />
+                </div>
               </div>
 
               {statisticsDetail[averageResponse.answers] && (

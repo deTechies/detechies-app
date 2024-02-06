@@ -1005,6 +1005,9 @@
     "upload_image": "Upload Image",
     "delete_image": "Delete Image"
   },
+  "beginEndDates": {
+    "ongoing": "Present"
+  },
   "survey": {
     "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "Tech Stack",
     "8377fabd-d8a0-4d86-9e75-2b1fa11557d5": "Problem-Solving",
@@ -1018,7 +1021,7 @@
     "5f2bcd1c-bbf6-4735-bac0-175e84e9baf7": "Code Standards",
     "b088af39-6957-4b2d-a3fd-350f560a2ab4": "Commit Quality",
     "cefa7ae0-3623-41dd-940f-623fccf16f84": "Arch Compliance",
-    "b9c8ad2e-5fb2-4478-964b-5d6ec20fe8d8": "Meetings",
+    "b9c8ad2e-5fb2-4478-964b-5d6ec20fe8d8": "Meeting Attendance",
     "6580670e-edb7-4541-bdd3-3b060794b4a2": "Req Understanding",
     "be9c36e4-8642-4858-83ed-b2e17b700c4e": "Feedback Analysis",
     "c16b6d4a-e5d4-4858-ad7a-f21dc1a6a033": "Tech Proposals",
@@ -1077,6 +1080,8 @@
     "c226c748-9762-486f-9001-5c88bc6f4b41": "Feedback Analysis",	
     "4cf09a47-48f0-4e2a-9fa2-c14bb2dc952f": "Domain Knowledge",	
     "d202e601-94d3-4e93-9837-b31780ba7f9b": "Trend Awareness",
-    "b788d4f5-c2c9-49b0-9de5-0e36888c4a77": "Tool Proficiency"  
+    "b788d4f5-c2c9-49b0-9de5-0e36888c4a77": "Tool Proficiency",
+    "39c8f1de-b220-4d0c-b5ef-c39512f441a1": "Meeting Attendance",
+    "46219e8b-574c-42d8-9762-df318d8bb478": "Req Understanding"  
   }
 }

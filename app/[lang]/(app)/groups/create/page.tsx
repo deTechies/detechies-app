@@ -13,7 +13,7 @@ export default async function CreateGroup({
   // const text = dictionary?.group?.create;
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
-    <main className="w-full max-w-[60rem] mx-auto my-10">
+    <main className="w-full max-w-[60rem] mx-auto">
       <Card className="gap-0 py-10 px-14">
         <header className="flex flex-col mb-10">
           <h4 className="mb-3 text-heading_s">

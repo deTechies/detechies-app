@@ -70,7 +70,7 @@ export default async function ProjectDetailPage({
     );
 
   return (
-    <main className="grid w-full gap-6 px-4 my-10 md:grid-cols-3">
+    <main className="grid w-full gap-6 px-4 md:grid-cols-3">
       <section className="flex flex-col gap-5 md:col-span-2">
         <ProjectDetail details={data} lang={dictionary} />
         <ProjectMembers

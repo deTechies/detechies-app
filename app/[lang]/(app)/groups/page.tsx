@@ -19,7 +19,7 @@ export default async function GroupsPage({
   
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
-    <main className="flex flex-col w-full max-w-[97rem] gap-6 m-12">
+    <main className="flex flex-col w-full max-w-[97rem] gap-6 mx-auto">
       <GroupListHeader lang={dictionary} />
 
       {groups?.length > 0 ? (

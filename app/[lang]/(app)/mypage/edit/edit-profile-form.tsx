@@ -212,6 +212,7 @@ export default function EditProfileForm({
                 </div>
               </div>
             </section>
+            
             <section className="my-10">
               <div>
                 <FormItem>
@@ -228,7 +229,7 @@ export default function EditProfileForm({
                     {form.watch("skills")?.map((tag, index) => (
                       <Badge
                         key={index}
-                        className="px-3 py-2 mr-2 text-xs border rounded-full  text-accent-primary bg-accent-secondary border-accent-primary cursor-pointer hover:border-state-error hover:text-state-error hover:bg-state-error-secondary"
+                        className="px-3 py-2 mr-2 text-xs border rounded-full cursor-pointer text-accent-primary bg-accent-secondary border-accent-primary hover:border-state-error hover:text-state-error hover:bg-state-error-secondary"
                         onClick={() => {
                           const currentTags = form.getValues("skills") || [];
                           const newTags = currentTags.filter((t) => t !== tag);

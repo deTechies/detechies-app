@@ -17,7 +17,7 @@ export default async function MissionDetailPage({
   const {data: club} = await getClub(params.address);
 
   return (
-    <main className="grid md:grid-cols-3 gap-6 w-full my-10 mx-8">
+    <main className="grid w-full gap-6 mx-8 md:grid-cols-3">
       <div>
         <SearchMember membersList={missionDetails.userProgress} lang={dictionary} />
       </div>
