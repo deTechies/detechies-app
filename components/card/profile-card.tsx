@@ -56,7 +56,7 @@ export default function ProfileCard({ profile, lang }: ProfileProps) {
             </div>
             <div className="flex items-center gap-1">
               <span className="text-text-secondary text-label_s">
-                {lang.profile_detail_card.achievements}
+                {lang.profile_detail_card.certificates}
               </span>
               <span className="text-title_s">{profile.achievementsCount}</span>
             </div>

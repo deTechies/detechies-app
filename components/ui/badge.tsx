@@ -58,7 +58,7 @@ function Badge({ className, variant, shape, children, ...props }: BadgeProps) {
       className={cn(badgeVariants({ variant, shape }), className)}
       {...props}
     >
-      <div className="truncate">{children}</div>
+      <div className="flex truncate">{children}</div>
     </div>
   );
 }

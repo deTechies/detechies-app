@@ -22,22 +22,22 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   const [loading, setLoading] = useState(false);
 
   const onSelectType = (event: PROFESSION_TYPE | "all") => {
-    setLoading(true)
+    setLoading(true);
     if (event == "all") {
       router.push(pathname + "?" + createQueryString("role", ""));
     } else {
       router.push(pathname + "?" + createQueryString("role", event));
     }
-    setLoading(false)
+    setLoading(false);
   };
-  
+
   const selectLimit = (limit: string) => {
-    setLoading(true)
+    setLoading(true);
 
     router.push(pathname + "?" + createQueryString("limit", limit));
 
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -52,11 +52,14 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   return (
     <Card className="flex justify-between gap-5 px-8 pb-8 pt-7">
       <h1 className="text-subhead_s">{lang.profile_filter.profiles}</h1>
-      <div className="flex justify-between items-center flex-wrap gap-4">
-        <div className="flex items-center gap-5 flex-wrap">
-          <Select onValueChange={onSelectType} >
-            <SelectTrigger className="w-[180px] px-3 py-3.5" >
-              <SelectValue placeholder={lang.profile_filter.filter}  className={`${loading && 'animate-pulse'}`}/>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-5 grow">
+          <Select onValueChange={onSelectType}>
+            <SelectTrigger className="w-[138px] px-3 py-3">
+              <SelectValue
+                placeholder={lang.profile_filter.filter}
+                className={`${loading && "animate-pulse"}`}
+              />
             </SelectTrigger>
 
             <SelectContent>
@@ -70,30 +73,33 @@ export default function ProfileFilter({ lang }: { lang: any }) {
               ))}
             </SelectContent>
           </Select>
-          
-          <Select onValueChange={selectLimit} >
-            <SelectTrigger className="w-[100px] px-3 py-3.5" >
-              <SelectValue placeholder="25" className={`${loading && 'animate-pulse'}`}/>
+
+          <Select onValueChange={selectLimit}>
+            <SelectTrigger className="w-[100px] px-3 py-3">
+              <SelectValue
+                placeholder="25"
+                className={`${loading && "animate-pulse"}`}
+              />
             </SelectTrigger>
 
-            <SelectContent >
-
-                <SelectItem  value={"25"}>
-                  25
-                </SelectItem>
-                <SelectItem value={"50"}>
-                  50
-                </SelectItem>
-                <SelectItem value={"100"}>
-                  100
-                </SelectItem>
+            <SelectContent>
+              <SelectItem value={"25"}>25</SelectItem>
+              <SelectItem value={"50"}>50</SelectItem>
+              <SelectItem value={"100"}>100</SelectItem>
             </SelectContent>
           </Select>
 
-          <Search placeholder={lang.profile_filter.search} size="md" />
+          <div className="max-w-[335px] w-full">
+            <Search
+              placeholder={lang.profile_filter.search}
+              size="md"
+              className="w-full"
+            />
+          </div>
         </div>
+
         <div className="flex items-end">
-          <div className="text-[#BEC3CA] text-[14px] not-italic font-semibold leading-4 underline">
+          <div className="underline text-border-input">
             {lang.profile_filter.info_text}
           </div>
         </div>

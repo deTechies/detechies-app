@@ -75,7 +75,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-wrap items-center gap-5 grow">
           <Select onValueChange={onSelectType}>
-            <SelectTrigger className="w-[180px] px-3 py-3.5">
+            <SelectTrigger className="w-[180px] px-3 py-3">
               <SelectValue placeholder={lang.project.list.all_project} />
             </SelectTrigger>
 
@@ -93,7 +93,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
           </Select>
 
           <Select onValueChange={onSelectPrivacy}>
-            <SelectTrigger className="w-[180px] px-3 py-3.5">
+            <SelectTrigger className="w-[180px] px-3 py-3">
               <SelectValue
                 placeholder={lang.project.list.scope_of_disclosure}
               />

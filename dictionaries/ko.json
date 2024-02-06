@@ -101,16 +101,16 @@
   "profile_filter": {
     "profiles": "전문가 찾기",
     "all": "All",
-    "search": "찾다", 
-    "filter": "Filter",
+    "search": "찾으시는 이름으로 검색해주세요.", 
+    "filter": "전체 직무",
     "sort": "Sort",
     "info_text": "혹시 찾고 계신 전문가가 없으신가요?"
   },
   "profile_detail_card": {
     "example": "example",
-    "achievements": "참가한 프로젝트",
+    "achievements": "보유 NFT 수",
     "certificates": "평가받은 횟수",
-    "projects": "참가한 프로젝트",
+    "projects": "참여한 프로젝트",
     "groups": "groups",
     "no role": "no role"
   },
@@ -958,7 +958,7 @@
       "planner": "기획자",
       "designer": "디자이너",
       "marketer": "마케팅",
-      "all": "전체"
+      "all": "전체 직무"
     },
     "project_type": {
       "all": "전체",
