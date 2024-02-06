@@ -127,7 +127,7 @@ const CustomTick = (props: any) => {
   const { x, y, payload } = props;
   const lang = useDictionary() as any;
 
-  const text = lang.survey[payload.value]?.split(".").join("\n") || "0";
+  const text = lang.survey[payload.value]?.split(" ").join("\n") || "0";
   const [textColor, setTextColor] = useState("");
 
   useEffect(() => {
