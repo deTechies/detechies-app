@@ -653,7 +653,7 @@
       "required_text": "* indicates required fields.",
       "description": "Representative email verification is required. Please check and enter the authentication number sent to your main email address.",
       "form": {
-        "email_placeholder": "Enter email.",
+        "email_placeholder": "Enter Group Delegate Email.",
         "verify_code_placeholder": "Enter verification code.",
         "resend": "Resend",
         "send_code": "Send Code",

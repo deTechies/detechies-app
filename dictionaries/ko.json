@@ -650,7 +650,7 @@
       "required_text": "*는 필수입력 사항입니다.",
       "description": "대표 이메일 인증이 필요해요. 대표 메일로 전송된 인증번호를 확인 후 입력해주세요.",
       "form": {
-        "email_placeholder": "이메일을 입력해주세요.",
+        "email_placeholder": "조직 대표 이메일을 입력해주세요.",
         "verify_code_placeholder": "인증번호 입력하세요.",
         "resend": "다시 보내기",
         "send_code": "인증번호 보내기",

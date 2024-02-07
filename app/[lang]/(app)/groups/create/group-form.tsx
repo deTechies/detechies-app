@@ -42,7 +42,7 @@ export const GroupForm = () => {
   };
 
   const profileFormSchema = z.object({
-    //email: z.string().email(),
+    owner_email: z.string().email(),
     //   certification_number: z.string().refine((data) => data === code, {
     //    message: "Invalid code",
     //  }),
@@ -86,57 +86,57 @@ export const GroupForm = () => {
   });
  */
 
-  useEffect(() => {
-    let interval = null as any;
+  // useEffect(() => {
+  //   let interval = null as any;
 
-    if (isEmailLoading) {
-      interval = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-    } else if (!isEmailLoading && timer === 0) {
-      setTimer(180);
-    }
+  //   if (isEmailLoading) {
+  //     interval = setInterval(() => {
+  //       setTimer((prevTimer) => prevTimer - 1);
+  //     }, 1000);
+  //   } else if (!isEmailLoading && timer === 0) {
+  //     setTimer(180);
+  //   }
 
-    if (timer === 0) {
-      clearInterval(interval);
-      setIsEmailLoading(false);
-    }
+  //   if (timer === 0) {
+  //     clearInterval(interval);
+  //     setIsEmailLoading(false);
+  //   }
 
-    return () => clearInterval(interval);
-  }, [isEmailLoading, timer]);
+  //   return () => clearInterval(interval);
+  // }, [isEmailLoading, timer]);
 
-  async function onSendEmail(
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    _event.preventDefault();
-    setIsEmailLoading(true);
-    setClickedSend(true);
+  // async function onSendEmail(
+  //   _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) {
+  //   _event.preventDefault();
+  //   setIsEmailLoading(true);
+  //   setClickedSend(true);
 
-    // ==================================
-    // send Verify Email
-    const result = { status: "success" };
-    // ==================================
+  //   // ==================================
+  //   // send Verify Email
+  //   const result = { status: "success" };
+  //   // ==================================
 
-    if (result.status !== "success") {
-      setClickedSend(false);
-      setIsEmailLoading(false);
-    }
-  }
+  //   if (result.status !== "success") {
+  //     setClickedSend(false);
+  //     setIsEmailLoading(false);
+  //   }
+  // }
 
-  async function onVerifyCode(
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    _event.preventDefault();
+  // async function onVerifyCode(
+  //   _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) {
+  //   _event.preventDefault();
 
-    // ==================================
-    // Verify Code
-    const result = { status: "success" };
-    // ==================================
+  //   // ==================================
+  //   // Verify Code
+  //   const result = { status: "success" };
+  //   // ==================================
 
-    if (result.status == "success") {
-      setVerified(true);
-    }
-  }
+  //   if (result.status == "success") {
+  //     setVerified(true);
+  //   }
+  // }
 
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
@@ -151,8 +151,7 @@ export const GroupForm = () => {
 
     const result = await createGroup({
       image: image,
-      email: " data.email",
-      certification_number: "data.certification_number",
+      owner_email: data.owner_email,
       name: data.name,
       description: data.description,
       type: data.type,
@@ -230,10 +229,11 @@ export const GroupForm = () => {
                       {lang.group.create.form.type}
                       <span className="ml-1 text-state-error">*</span>
                     </FormInlineLabel>
+
                     <RadioGroup
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      className="flex flex-row flex-wrap gap-6"
+                      className="flex flex-row flex-wrap gap-6 "
                     >
                       {Object.values(GROUP_TYPE).map((type) => (
                         <FormItem
@@ -243,7 +243,6 @@ export const GroupForm = () => {
                           <FormControl>
                             <RadioGroupItem
                               value={type}
-                              disabled={type !== "community"}
                             />
                           </FormControl>
 
@@ -258,10 +257,9 @@ export const GroupForm = () => {
                   </FormInlineItem>
                 )}
               />
-
-              {/*   <FormField
+              <FormField
                 control={form.control}
-                name="email"
+                name="owner_email"
                 render={({ field }) => (
                   <FormInlineItem className="items-start">
                     <FormInlineLabel />
@@ -286,21 +284,21 @@ export const GroupForm = () => {
                               </span>
                             )}
 
-                            <Button
+                            {/* <Button
                               size="sm"
                               onClick={onSendEmail}
                               className="shrink-0"
                               disabled={
                                 isEmailLoading ||
-                                form.getFieldState("email").invalid ||
+                                form.getFieldState("owner_email").invalid ||
                                 verified ||
-                                !form.getValues("email")
+                                !form.getValues("owner_email")
                               }
                             >
                               {clickedSend
                                 ? lang.group.create.form.resend
                                 : lang.group.create.form.send_code}
-                            </Button>
+                            </Button> */}
                           </div>
                         </div>
                       </FormControl>
@@ -309,7 +307,7 @@ export const GroupForm = () => {
                     </div>
                   </FormInlineItem>
                 )}
-              /> */}
+              />
 
               {/*         <FormField
                 control={form.control}

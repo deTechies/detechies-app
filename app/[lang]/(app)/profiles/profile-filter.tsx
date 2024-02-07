@@ -23,21 +23,27 @@ export default function ProfileFilter({ lang }: { lang: any }) {
 
   const onSelectType = (event: PROFESSION_TYPE | "all") => {
     setLoading(true);
-    if (event == "all") {
-      router.push(pathname + "?" + createQueryString("role", ""));
+
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.delete("limit");
+
+    if (event === "all") {
+      searchParams.set("role", "");
     } else {
-      router.push(pathname + "?" + createQueryString("role", event));
+      searchParams.set("role", event);
     }
+
+    router.push(`${pathname}?${searchParams.toString()}`);
     setLoading(false);
   };
 
-  const selectLimit = (limit: string) => {
-    setLoading(true);
+  // const selectLimit = (limit: string) => {
+  //   setLoading(true);
 
-    router.push(pathname + "?" + createQueryString("limit", limit));
+  //   router.push(pathname + "?" + createQueryString("limit", limit));
 
-    setLoading(false);
-  };
+  //   setLoading(false);
+  // };
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -74,7 +80,7 @@ export default function ProfileFilter({ lang }: { lang: any }) {
             </SelectContent>
           </Select>
 
-          <Select onValueChange={selectLimit}>
+          {/* <Select onValueChange={selectLimit}>
             <SelectTrigger className="w-[100px] px-3 py-3">
               <SelectValue
                 placeholder="25"
@@ -87,7 +93,7 @@ export default function ProfileFilter({ lang }: { lang: any }) {
               <SelectItem value={"50"}>50</SelectItem>
               <SelectItem value={"100"}>100</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
 
           <div className="max-w-[335px] w-full">
             <Search

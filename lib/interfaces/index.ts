@@ -119,14 +119,12 @@ export interface User {
   }
   
   export interface CreateClub {
-    email: string;
-    certification_number: string;
+    owner_email? : string;
     name: string;
     image: string;
     type: GROUP_TYPE;
     description: string;
     urls: string[];
-    owner_email? : string;
   }
   
   export interface Club extends CreateClub{
