@@ -2,17 +2,18 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
+import { postServer } from "@/lib/data/postRequest";
 import { ScrollText } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function UserReport({
   profile,
@@ -25,13 +26,25 @@ export default function UserReport({
 
   const router = useRouter();
 
-  const onClickView = () => {
+  const onClickView = async () => {
     setLoading(true);
-    router.push(`${profile.wallet}/report`);
 
-    // using points
-    // setLoading(false);
-  }
+    window.alert(profile.wallet);
+    const result = await postServer(
+      `/survey-access/requestReportAccess/${profile.wallet}`,
+      ""
+    );
+
+    console.log(result);
+
+    toast({
+      description: text.profile.report_popup.toast
+        ? text.profile.report_popup.toast
+        : "You have requested access to the report",
+    });
+
+    setLoading(false);
+  };
 
   console.log(profile);
 

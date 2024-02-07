@@ -6,8 +6,8 @@ import SimpleRadarChart from "@/components/charts/radar-chart";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ScoreCard from "./score-card";
 import RecommendedScore from "./recommended-score";
+import ScoreCard from "./score-card";
 
 export default function UserStatistics({
   lang,
@@ -249,6 +249,8 @@ export default function UserStatistics({
         Object.keys(statistics.categories).map(
           (category_key: any, index: number) => {
             const category_value = statistics.categories[category_key];
+            
+            category_value.answers[0].ko
 
             return (
               <Card className="col-span-3 gap-8" key={index}>
