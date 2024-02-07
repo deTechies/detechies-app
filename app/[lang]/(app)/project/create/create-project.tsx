@@ -1,37 +1,24 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
-import { uploadContent } from "@/lib/upload";
-import { createProject } from "@/lib/data/project";
 import { serverApi } from "@/lib/data/general";
+import { createProject } from "@/lib/data/project";
+import { uploadContent } from "@/lib/upload";
 
 import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
-import NoticeGroupSelect from "./notice-group-select";
-import SelectGroupInScope from "./select-group-in-scope";
 import MediaUploader from "@/components/extra/media-uploader";
+import NoticeGroupSelect from "./notice-group-select";
 import ProfessionTagType from "./profession-tag-type";
+import SelectGroupInScope from "./select-group-in-scope";
 
-import Image from "@/components/ui/image";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
 import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -42,11 +29,24 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Image from "@/components/ui/image";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
@@ -175,7 +175,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
     }
 
     const computedName = data.name.replace(/\s+/g, " ").trim();
-
+    
+    const clubs: string[] = selectedGroup.map((group) => group.id);
     const result = await createProject({
       image: data.image,
       name: computedName,
@@ -185,6 +186,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
       tags: data.tags,
       scope: data.scope,
       type: data.type,
+      clubs: clubs,
     });
 
     if (result.status === "success") {
