@@ -21,16 +21,16 @@ import { Label } from "../ui/label";
 const projectFormSchema = z.object({
   name: z
     .string()
-    .min(2, {
-      message: "Your groups name must be at least 2 characters.",
+    .min(1, {
+      message: "Your groups name must be at least 1 character.",
     })
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
   last_name: z
     .string()
-    .min(2, {
-      message: "Your groups name must be at least 2 characters.",
+    .min(1, {
+      message: "Your groups name must be at least 1 character.",
     })
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",

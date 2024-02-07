@@ -81,7 +81,12 @@ export default function GroupList({
 
       <div className="grid items-stretch w-full gap-5 mb-10 md:grid-cols-2 lg:grid-cols-3">
         {groupList.reverse().map((group: any) => (
-          <GroupListItem key={group.id} details={group} lang={lang} />
+          <GroupListItem
+            key={group.id}
+            details={group}
+            lang={lang}
+            isPending={!group.verified}
+          />
         ))}
       </div>
 

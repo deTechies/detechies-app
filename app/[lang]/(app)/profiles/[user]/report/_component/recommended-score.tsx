@@ -57,7 +57,7 @@ export default function RecommendedScore({
             : "border-state-error text-state-error"
         }`}
       >
-        {totalScore} {lang.profile.statistics.points}
+        {totalScore.toFixed(1) } {lang.profile.statistics.points}
       </div>
 
       {recommendScoresByRole?.admin &&
@@ -97,7 +97,7 @@ const RecommendItem = (role: string, score: number, total: number) => {
     <div className="flex flex-wrap items-center mb-4">
       <div className="text-title_m min-w-[100px] text-left">{role}</div>
       <div className="flex flex-wrap items-center justify-between gap-2 grow">
-        <div className="text-title_m">{recommendScore}%</div>
+        <div className="text-title_m">{recommendScore.toFixed(1)}%</div>
         <div className="text-label_s text-text-placeholder">
           ({lang.profile.statistics.total_review_1} {recommendTotal} {" "}
           {lang.profile.statistics.total_review_2})

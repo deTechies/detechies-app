@@ -16,7 +16,6 @@ export default async function GroupsPage({
 
   const {data:groups} = await serverApi(`/clubs`)
   
-  
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
     <main className="flex flex-col w-full max-w-[97rem] gap-6 mx-auto">

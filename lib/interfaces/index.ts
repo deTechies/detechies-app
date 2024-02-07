@@ -298,6 +298,7 @@ export enum GROUP_TYPE {
     
   }
   export interface Project extends CreateProject {
+    projectId: string;
     id: string;
     onchain_id: string
     isCreator: boolean;

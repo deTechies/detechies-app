@@ -32,8 +32,9 @@ import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
 import { postServer } from "@/lib/data/postRequest";
 import { addMembersWork } from "@/lib/data/project";
-import { PROFESSION_TYPE } from "@/lib/interfaces";
+import { PROFESSION_TYPE, Project } from "@/lib/interfaces";
 import { useRef, useState } from "react";
+
 const contributionFormSchema = z.object({
   begin_date: z.string(),
   end_date: z.string().optional(),
@@ -49,38 +50,36 @@ const contributionFormSchema = z.object({
 
 export type ContributionFormData = z.infer<typeof contributionFormSchema>;
 
-type ProjectContributionFormProps = {
-  projectId: string;
-};
-
 export default function ProjectContributionInviteForm({
-  projectId,
+  project,
   lang,
   workDetails,
   workId,
 }: {
-  projectId: string;
+  project: Project;
   lang: any;
   workDetails?: any;
   workId?: string;
 }) {
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
-    defaultValues: workDetails ? {
-      role: workDetails.role,
-      begin_date: workDetails.begin_date,
-      end_date: workDetails.end_date,
-      description: workDetails.description,
-      present: workDetails.present,
-      percentage: [workDetails.percentage],
-      tags: workDetails.tags ? workDetails.tags : [],
-    } : {
-      role: PROFESSION_TYPE.DEVELOPMENT,
-      percentage: [0],
-      present: false,
-      valid: false,
-      tags: [],
-    },
+    defaultValues: workDetails
+      ? {
+          role: workDetails.role,
+          begin_date: workDetails.begin_date.split("T")[0],
+          end_date: workDetails.end_date.split("T")[0],
+          description: workDetails.description,
+          present: workDetails.present,
+          percentage: [workDetails.percentage],
+          tags: workDetails.tags ? workDetails.tags : [],
+        }
+      : {
+          role: PROFESSION_TYPE.DEVELOPMENT,
+          percentage: [0],
+          present: false,
+          valid: false,
+          tags: [],
+        },
     mode: "onChange",
   });
   const messageValue = form.watch("description", "");
@@ -123,7 +122,7 @@ export default function ProjectContributionInviteForm({
         });
       }
     } else {
-      const result = await addMembersWork(values, projectId);
+      const result = await addMembersWork(values, project.projectId);
 
       if (result.status === "success") {
         toast({
@@ -168,6 +167,7 @@ export default function ProjectContributionInviteForm({
                           <SelectValue placeholder="Select a type" />
                         </SelectTrigger>
                       </FormControl>
+
                       <SelectContent>
                         {Object.values(PROFESSION_TYPE).map((type) => (
                           <SelectItem key={type} value={type}>
@@ -181,16 +181,23 @@ export default function ProjectContributionInviteForm({
                 )}
               />
             </div>
+
             <div className="flex flex-col w-full gap-3">
               <div className="flex justify-between">
                 <Label>{lang.project.details.members.add_works.date}</Label>
+
                 <div className="flex items-center gap-1">
                   <Checkbox
+                    id="present"
+                    name="present"
+                    defaultChecked={form.getValues("present")}
                     onCheckedChange={(e: boolean) => {
+                      form.setValue("end_date", undefined);
                       form.setValue("present", e.valueOf());
                     }}
                   />
-                  <Label>
+
+                  <Label htmlFor="present">
                     {lang.project.details.members.add_works.in_progress}
                   </Label>
                 </div>
@@ -202,7 +209,12 @@ export default function ProjectContributionInviteForm({
                   name="begin_date"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <Input type="date" {...field} />
+                      <Input
+                        type="date"
+                        {...field}
+                        min={project.begin_date}
+                        max={project.end_date}
+                      />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -212,12 +224,23 @@ export default function ProjectContributionInviteForm({
                   control={form.control}
                   name="end_date"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem
+                      className={`w-full relative space-y-0 ${
+                        form.getValues("present") && "opacity-40"
+                      }`}
+                    >
                       <Input
                         type="date"
-                        {...field}
+                        min={project.begin_date}
+                        max={project.end_date}
                         disabled={form.watch("present", false)}
+                        {...field}
                       />
+                      {form.getValues("present") && (
+                        <div className="absolute inset-0 px-4 py-5 rounded-sm text-title_m text-text-placeholder bg-background-layer-2">
+                          {lang.project.list.create_project.in_progress}
+                        </div>
+                      )}
                       <FormMessage />
                     </FormItem>
                   )}

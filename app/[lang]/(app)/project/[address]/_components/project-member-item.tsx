@@ -37,7 +37,7 @@ export default async function ProjectMemberItem({
 
   return (
     <Card className="flex flex-row gap-5 p-6 truncate flex-start">
-      <div className="flex w-full gap-5 flex-nowrap md:flex-wrap">
+      <div className="flex flex-wrap w-full gap-5 md:flex-nowrap">
         <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
           <IPFSImageLayer
             hashes={
