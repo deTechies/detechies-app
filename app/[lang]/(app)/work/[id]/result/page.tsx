@@ -24,8 +24,7 @@ export default async function EvaluationResult({
   const dictionary = await getDictionary(params.lang);
   const { data: surveyData } = await getEvaluationSurvey(params.id);
   
-  console.log("TEST!");
-  console.log(details);
+
   if (!details) redirect(`/work/${params.id}`);
 
 

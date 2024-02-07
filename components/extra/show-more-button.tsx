@@ -3,17 +3,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Button } from "../ui/button";
 
-export default function NextPageButton({ lang }: { lang: any }) {
+export default function ShowMoreButton({ lang }: { lang: any }) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const nextPage = () => {
-    const page = searchParams.get("page")
-      ? parseInt(searchParams.get("page") as string) + 1
-      : 2;
+  const showMore = () => {
+    const limit = searchParams.get("limit")
+      ? parseInt(searchParams.get("limit") as string) + 10
+      : 20;
 
-    router.push(pathName + "?" + createQueryString("page", page.toString()));
+    router.push(pathName + "?" + createQueryString("limit", limit.toString()));
   };
 
   const createQueryString = useCallback(
@@ -25,9 +25,10 @@ export default function NextPageButton({ lang }: { lang: any }) {
     },
     [searchParams]
   );
+  
   return (
-    <Button className="w-full" variant={"secondary"} onClick={nextPage}>
-      Next Page
+    <Button className="w-full" variant={"secondary"} onClick={showMore}>
+      {lang.achievement.display_nft.show_more}
     </Button>
   );
 }

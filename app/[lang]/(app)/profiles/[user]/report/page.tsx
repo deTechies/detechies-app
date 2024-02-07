@@ -31,7 +31,7 @@ export default async function ProfileReport({
   );
 
   return (
-    <div className="flex flex-col gap-4 my-10 mx-auto max-w-[80rem] px-4">
+    <main className="flex flex-col gap-4 mx-auto max-w-[80rem] px-4">
       <h4 className="mb-10 text-center text-heading_s">
         {dictionary.profile.summary.title}
       </h4>
@@ -55,6 +55,6 @@ export default async function ProfileReport({
           address={params.user}
         />
       </Suspense>
-    </div>
+    </main>
   );
 }

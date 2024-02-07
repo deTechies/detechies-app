@@ -31,6 +31,14 @@ function TotalProjectItem({
     0
   );
 
+  const oldestDate = projects.reduce((oldest, current) => {
+    return new Date(oldest.begin_date) < new Date(current.begin_date) ? oldest : current;
+  }, projects[0]).begin_date;
+
+  const latestDate = projects.reduce((oldest, current) => {
+    return new Date(oldest.end_date) < new Date(current.end_date) ? oldest : current;
+  }, projects[0]).end_date;
+
   return (
     <div
       className={`p-5 border rounded-md cursor-pointer transition-all ${
@@ -43,13 +51,13 @@ function TotalProjectItem({
       </h4>
 
       <div className="mb-2 text-label_m text-text-secondary">
-        {lang.profile.statistics.total_career}:
+        {lang.profile.statistics.total_career}: {beginEndDates(oldestDate, latestDate)}
       </div>
 
       <div className="flex items-center gap-2">
-        <span>{lang.profile.statistics.total_evaluation} ({totalEvaluationCount}):</span>
+        <span>{lang.profile.statistics.total_evaluation} ({totalEvaluationCount})</span>
 
-        <div className="flex flex-wrap gap-2">
+        {/* <div className="flex flex-wrap gap-2">
           
           <Badge variant="purple" shape="sm">
             {lang.profile.statistics.admin_evaluation} {3}
@@ -62,7 +70,7 @@ function TotalProjectItem({
           <Badge variant="info" shape="sm">
             {lang.profile.statistics.client_evaluation} {2}
           </Badge>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -90,7 +98,7 @@ function CommonProjectItem({
   function onSelectProject() {
     const params = createQueryString("project", project.project.id);
 
-    console.log("params", params);
+    // console.log("params", params);
 
     router.push(pathName + "?" + params);
   }
@@ -128,8 +136,8 @@ function CommonProjectItem({
           <div className="mb-2 text-label_m text-text-secondary">
             {lang.profile.statistics.work_period}:{" "}
             {beginEndDates(
-              project.project?.begin_date,
-              project.project?.end_date
+              project?.begin_date,
+              project?.end_date
             )}
           </div>
 
@@ -143,7 +151,7 @@ function CommonProjectItem({
               project.tags.map((tag: string) => {
                 return (
                   <Badge shape="outline" variant="placeholder" key={tag}>
-                    <div className="truncate">{tag}</div>
+                    {tag}
                   </Badge>
                 );
               })}

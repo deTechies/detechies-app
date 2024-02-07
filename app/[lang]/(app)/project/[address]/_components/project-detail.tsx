@@ -90,7 +90,7 @@ export default function ProjectDetail({
               {details.tags &&
                 details.tags?.map((tag) => (
                   <Badge key={tag} shape="outline" variant="accent">
-                    <div className="truncate">{tag}</div>
+                    {tag}
                   </Badge>
                 ))}
             </div>

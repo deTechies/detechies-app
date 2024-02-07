@@ -6,6 +6,8 @@ import * as React from 'react';
 import { twMerge, extendTailwindMerge } from "tailwind-merge";
 import { WalletClient } from "viem";
 import { useWalletClient } from 'wagmi';
+import { useDictionary } from "@/lib/dictionaryProvider";
+
 
 const customTwMerge = extendTailwindMerge({
   classGroups: {
@@ -90,7 +92,9 @@ export function formatDate(stringDate: string | Date):string {
 }
 
 export function beginEndDates(beginDate: string | Date, endDate?: string | Date):string {
-  return endDate ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}` : `${formatDate(beginDate)} - ongoing`
+  const lang = useDictionary();
+
+  return endDate ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}` : `${formatDate(beginDate)} - ${lang.beginEndDates.ongoing}`
 }
 
 /* export function walletClientToSigner(walletClient: any) {

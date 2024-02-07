@@ -36,8 +36,8 @@ export default async function ProjectMemberItem({
   const session = await auth();
 
   return (
-    <Card className="flex flex-row gap-5 p-6 flex-start">
-      <div className="flex flex-wrap w-full gap-5">
+    <Card className="flex flex-row gap-5 p-6 truncate flex-start">
+      <div className="flex flex-wrap w-full gap-5 md:flex-nowrap">
         <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
           <IPFSImageLayer
             hashes={
@@ -47,9 +47,9 @@ export default async function ProjectMemberItem({
           />
         </figure>
 
-        <div className="flex items-start gap-4 grow basis-0">
-          <div className="flex flex-col h-full gap-4 grow shrink">
-            <header className="flex items-center justify-between h-full gap-3">
+        <div className="flex items-start gap-4 truncate grow">
+          <div className="flex flex-col h-full gap-4 truncate grow shrink">
+            <header className="flex flex-wrap items-center justify-between h-full gap-3">
               <h5 className="text-title_m">
                 {details.user?.display_name} |{" "}
                  {lang.interface.role_type[details.role]}
@@ -65,7 +65,7 @@ export default async function ProjectMemberItem({
                 )}
               </h5>
 
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center gap-3 ml-auto shrink-0">
                 {session?.web3.address == details.user.wallet ? (
                   <>
                     {userRole != "client" && details.works.length < 1 && (

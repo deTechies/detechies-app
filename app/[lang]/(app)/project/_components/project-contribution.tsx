@@ -20,6 +20,7 @@ export default function ProjectContribution({
   lang,
   defaultValues,
 }: ProjectContributionProps) {
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -56,7 +57,7 @@ export default function ProjectContribution({
 
           {project?.id && (
             <ProjectContributionForm
-              projectId={project.id}
+              project={project}
               lang={lang}
               workDetails={defaultValues}
               workId={defaultValues?.workId}

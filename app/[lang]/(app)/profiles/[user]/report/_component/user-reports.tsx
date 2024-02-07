@@ -4,22 +4,6 @@ import { ChevronDown } from "lucide-react";
 import { Suspense } from "react";
 import UserStatistics from "./user-statistics";
 
-interface ReportContribution {
-  description: string;
-  end_date: string | null;
-  role: PROFESSION_TYPE;
-  start_date: Date;
-  surveyResults: any[];
-  tags: string[];
-}
-interface ReportProject {
-  begin_date: string;
-  end_date: string | null;
-  description: string;
-  name: string;
-  recommendScoresByRole: { [key: string]: number };
-}
-
 export default async function UserReports({
   lang,
   address,
@@ -35,6 +19,12 @@ export default async function UserReports({
     `/survey-report/getUserReport?address=${address}&projectId=${selectedProject?.project?.id}`
   );
 
+  const totalRecommendationsSum = Object.values(
+    report.data.swotReports.recommendScoresByRole
+  ).reduce((sum: number, current: any) => {
+    return sum + current.totalRecommendations;
+  }, 0);
+
   return (
     <div>
       <h3 className="mt-[60px] mb-4 text-heading_s text-center">
@@ -47,7 +37,7 @@ export default async function UserReports({
 
       <div className="mb-5 text-center text-title_m text-text-secondary">
         {lang.profile.statistics.total_evaluation} (
-        {selectedProject?.evaluationCount || 0})
+        {totalRecommendationsSum || 0})
       </div>
 
       <ChevronDown className="mb-[60px] w-5 h-5 mx-auto"></ChevronDown>

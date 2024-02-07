@@ -17,12 +17,12 @@ const Links = ({ works }: { works: any[] }) => {
                 rel="noopener noreferrer"
                 passHref
               >
-                <div className="flex items-center gap-4 py-4 border-b-2 border-border-div hover:text-text-secondary overflow-auto">
-                  <div className="flex items-center justify-center w-9 h-9 rounded-full bg-background-layer-2 p-2">
+                <div className="flex items-center gap-4 py-4 overflow-auto border-b-2 border-border-div hover:text-text-secondary">
+                  <div className="flex items-center justify-center p-2 rounded-full w-9 h-9 bg-background-layer-2">
                     <File className="text-text-primary" />
                   </div>
 
-                  <div className="truncate text-title_s overflow-auto">{work.name}</div>
+                  <div className="overflow-auto truncate text-title_s">{work.name}</div>
                 </div>
               </Link>
             );
@@ -31,24 +31,24 @@ const Links = ({ works }: { works: any[] }) => {
           return (
             <Link
               key={index}
-              className="flex items-center gap-4 py-3 border-b-2 border-border-div hover:text-text-secondary overflow-auto"
+              className="flex items-center gap-4 py-3 overflow-auto border-b-2 border-border-div hover:text-text-secondary"
               href={work.link}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="flex items-center justify-center w-9 h-9 rounded-full bg-background-layer-2 p-2">
+              <div className="flex items-center justify-center p-2 rounded-full w-9 h-9 bg-background-layer-2">
                 {site === "unknown" ? (
                   <File className="text-text-primary" />
                 ) : (
                   <Avatar>
                     <AvatarImage
                       src={`/icons/${site}.png`}
-                      className=" scale-down h-5 w-5 m-auto"
+                      className="w-5 h-5 m-auto  scale-down"
                     />
                   </Avatar>
                 )}
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 truncate">
               <span className="truncate text-title_s">{work.name}</span>
               <span className="truncate text-label_s">{work.link}</span>
                 

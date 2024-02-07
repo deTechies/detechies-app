@@ -18,11 +18,11 @@ export default function UserStatistics({
   selectedLang: string;
   statistics: any;
 }) {
+  const params = useParams();
   const [totalData, setTotalData] = useState<any>([]);
   const [totalAverage, setTotalAverage] = useState(0);
   const [matchingData, setMatchingData] = useState<any>([]);
-  const params = useParams();
-  const [matchingAverage, setMatchingAverage] = useState(0);
+  const [matchingAverage, setMatchingAverage] = useState<any>(0);
   const [statisticsDetail, setStatisticsDetail] = useState<any>({});
 
   // utils
@@ -51,11 +51,10 @@ export default function UserStatistics({
     let totalResult = [] as any[];
 
     // Transform surveyResponses category data
-    if (statistics.surveyReports && statistics.surveyReports.averageResponses) {
+    if (statistics.surveyReports?.averageResponses) {
       const surveyCategoryData = statistics.surveyReports.averageResponses.map(
-        
         (averageResponse: any) => {
-          if(selectedLang == "en"){
+          if (selectedLang == "en") {
             return {
               dataKey: averageResponse.category,
               dataValue: averageResponse.categoryAverage,
@@ -70,39 +69,53 @@ export default function UserStatistics({
 
       totalResult = [...surveyCategoryData];
     }
-    // if (statistics.assessments && statistics.assessments.byCategory) {
-    //   const assessmentCategoryData = statistics.assessments.byCategory.map(
-    //     (assessment: any) => {
-    //       if (selectedLang == "en") {
-    //         return {
-    //           dataKey: assessment.averageRanks[0].en.category,
-    //           dataValue: assessment.categoryAverageRank * 20,
-    //         };
-    //       }
-    //       return {
-    //         dataKey: assessment.averageRanks[0].ko.category,
-    //         dataValue: assessment.categoryAverageRank * 20,
-    //       };
-    //     }
-    //   );
-    //   totalResult = [...totalResult, ...assessmentCategoryData];
-    // }
+
+    const matchReport =
+      statistics?.matching?.matchingReportAverage?.matchReport;
+
+    const matchReportDataForTotalResult = [
+      "feedback_times",
+      "rate_requirements",
+      "rate_time_schedule",
+    ];
+
+    matchReportDataForTotalResult.forEach((_matchReportData: string) => {
+      if (matchReport[_matchReportData]) {
+        totalResult.push({
+          dataKey: _matchReportData,
+          dataValue: matchReport[_matchReportData],
+        });
+      }
+    });
 
     setTotalData(totalResult);
 
     // Calculate and set the average of totalData if needed
-    const average = getObjectArrayAverage(totalResult, "dataValue");
-    setTotalAverage(average);
+    const total_average = getObjectArrayAverage(totalResult, "dataValue");
+    setTotalAverage(total_average);
+
+    const matchReportDataForWork = [
+      "rate_contributions",
+      "rate_requirements",
+      "rate_time_schedule",
+      "feedback_times",
+      "good_team_player",
+    ];
+
+    const matchingData = matchReportDataForWork.map(
+      (_matchReportData: string) => {
+        return {
+          dataKey: _matchReportData,
+          dataValue: matchReport[_matchReportData],
+        };
+      }
+    );
+
+    setMatchingData(matchingData);
+
+    const matching_average = getObjectArrayAverage(matchingData, "dataValue");
+    setMatchingAverage(matching_average);
   }, [statistics, selectedLang]);
-
-  useEffect(() => {
-    // matchingData average
-    const average = getObjectArrayAverage(matchingData, "response");
-
-    setMatchingAverage(average);
-  }, [matchingData]);
-
-  console.log(statistics);
 
   return (
     <div className="grid grid-cols-[2fr_5fr_5fr] gap-4">
@@ -144,7 +157,7 @@ export default function UserStatistics({
       </Card>
 
       {/* project accomplishment */}
-      {/* {matchingData.length > 0 && (
+      {matchingData.length > 0 && (
         <Card className="col-span-3 gap-8">
           <CardHeader className="justify-center text-subhead_m">
             프로젝트 성과
@@ -159,39 +172,35 @@ export default function UserStatistics({
 
             <SimpleBarChart
               data={matchingData}
-              xKey="question"
-              yKey="response"
+              xKey="dataKey"
+              yKey="dataValue"
               onClickBar={(_test: any) => {
                 setStatisticsDetail({
                   ...statisticsDetail,
-                  accomplishment: _test,
+                  matching: _test,
                 });
               }}
             />
           </div>
 
-          {statisticsDetail.accomplishment && (
+          {statisticsDetail.matching && (
             <div className="p-5 text-center border rounded-md bg-border-div border-border-input">
               <h3 className="mb-3 text-title_m">
                 Q.
-                {
-                  lang.project.evaluate[statisticsDetail.accomplishment.key]
-                    .label
-                }
+                {JSON.stringify(
+                  lang.project.evaluate[statisticsDetail.matching.dataKey].label
+                )}
               </h3>
 
               <div className="text-body_m">
                 {
-                  lang.project.evaluate[statisticsDetail.accomplishment.key]
-                    .messages[
-                    scoreToRank(statisticsDetail.accomplishment.response)
-                  ]
+                  lang.project.evaluate[statisticsDetail.matching.dataKey].messages[scoreToRank(statisticsDetail.matching.dataValue)]
                 }
               </div>
             </div>
           )}
         </Card>
-      )} */}
+      )}
 
       {/* categories */}
       {statistics.surveyReports?.averageResponses?.map(
@@ -201,24 +210,26 @@ export default function UserStatistics({
               <CardHeader className="justify-center text-subhead_m">
                 {averageResponse.category}
               </CardHeader>
-              <div className="flex gap-8">
+              <div className="flex flex-wrap gap-8 md:flex-nowrap">
                 <ScoreCard
                   score={averageResponse.categoryAverage}
                   lang={lang}
-                  className="min-h-[234px] mb-7"
+                  className="min-h-[234px] mb-7 grow"
                 />
 
-                <SimpleBarChart
-                  data={averageResponse.answers}
-                  xKey="questionId"
-                  yKey="averageAnswer"
-                  onClickBar={(_test: any) => {
-                    setStatisticsDetail({
-                      ...statisticsDetail,
-                      [averageResponse.answers]: _test,
-                    });
-                  }}
-                />
+                <div className="min-h-[234px] grow">
+                  <SimpleBarChart
+                    data={averageResponse.answers}
+                    xKey="questionId"
+                    yKey="averageAnswer"
+                    onClickBar={(_test: any) => {
+                      setStatisticsDetail({
+                        ...statisticsDetail,
+                        [averageResponse.answers]: _test,
+                      });
+                    }}
+                  />
+                </div>
               </div>
 
               {statisticsDetail[averageResponse.answers] && (

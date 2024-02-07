@@ -442,7 +442,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
                         key={index}
-                        variant="accent"
+                        variant="secondary"
                         shape="md"
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >

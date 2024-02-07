@@ -75,9 +75,7 @@ export default function ProjectItem({
                 variant="placeholder"
                 className="text-label_s"
               >
-                <div className="truncate">
-                  {tag}
-                </div>
+                {tag}
               </Badge>
             ))}
 

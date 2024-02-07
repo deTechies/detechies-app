@@ -16,7 +16,7 @@ export default async function MissionDetailPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
-    <main className="grid w-full gap-6 mx-8 my-10 md:grid-cols-3">
+    <main className="grid w-full gap-6 mx-8 md:grid-cols-3">
       <section className="flex flex-col gap-5 truncate md:col-span-2">
         <MissionSummary details={missionDetails.data} lang={dictionary} />
 
