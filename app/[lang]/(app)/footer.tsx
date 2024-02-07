@@ -4,7 +4,7 @@ import Link from "next/link";
 export default async function Footer({ lang }: { lang: any }) {
   //const dictionary = (await getDictionary(params.lang)) as any;
   return (
-    <div className="flex flex-col justify-center items-center mx-auto w-full my-[32px] gap-8 px-4">
+    <div className="flex flex-col justify-center items-center mx-auto w-full my-[32px] gap-8 px-4 border-t border-border-div">
       <Image
         src={`/images/careerzen.png`}
         className="dark:hidden max-w-[360px] w-full"
