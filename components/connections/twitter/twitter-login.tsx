@@ -1,8 +1,7 @@
 "use client"
-import { Button } from "@/components/ui/button";
 
 
-import { LucideGithub, LucideTwitter } from "lucide-react";
+import { LucideTwitter, Twitter } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
@@ -13,18 +12,17 @@ const TwitterLogin = () => {
   const pathName = usePathname();
 
 
-  const linkedinAccess = sessionData?.linkedin?.accessToken;
+  const twitterAccess = sessionData?.twitter?.account;
 
 
-  if (linkedinAccess) {
+  if (twitterAccess) {
     return (
-        <Button
-          className="w-full bg-black text-white flex gap-8"
-
-        >
-          <LucideGithub />
+        <span
+          className="flex gap-2">
+          <Twitter />
+          {sessionData?.twitter.user.name}
           Succesfull connected
-        </Button>
+        </span>
       );
   }
 

@@ -20,6 +20,7 @@ export default async function Dashboard({
   // const {data: myProfile} = await serverApi(`/users/me`);
 
   return (
+    
     <main className="flex flex-col gap-6">
       <Suspense fallback={<Skeleton className="h-20 animate-pulse" />}>
         <ProfileDetails profile={profile} text={dictionary}  />

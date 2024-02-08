@@ -19,12 +19,32 @@ declare module "next-auth" {
           theme: string;
         }
       };
+      github?: {
+        account: any, 
+        user: any,
+        id: string;
+        expires: string;
+      };
+      twitter: {
+        account:any, 
+        user:any
+      };
+      linkedin: {
+        account:any, 
+        user:any
+      };
     };
     github?: {
+      account: any, 
+      user: any,
       id: string;
       expires: string;
     };
     twitter: {
+      account:any, 
+      user:any
+    }
+    linkedin: {
       account:any, 
       user:any
     }

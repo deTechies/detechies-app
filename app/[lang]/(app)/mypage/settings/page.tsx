@@ -1,10 +1,12 @@
-'use client'
+import { serverApi } from "@/lib/data/general";
+import ConnectionsList from "./connections";
 
-export default function UsersSettings() {
-
+export default async function UsersSettings() {
+  const result = await serverApi("/socials/user/me");
   return (
-    <div>
-        for testing purposes like sesison clients and data. can be used to set other seettings later.. 
-    </div>
-  )
+    <main>
+      <pre>{JSON.stringify(result, null, 2)}</pre>
+      <ConnectionsList connections={result.data} />
+    </main>
+  );
 }
