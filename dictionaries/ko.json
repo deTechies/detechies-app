@@ -136,12 +136,13 @@
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
       "accordion": {
+        "agree_with_all": "모두 동의",
         "terms_of_services": "서비스 이용약관 (필수)",
         "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "개인정보처리방침 (필수)",
         "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "보상 및 이벤트 알림 (선택)",
-        "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+        "reward_notification_description": "보상 지급, 프로모션, 혜택 등의 알림"
       },
       "cancel": "뒤로가기",
       "next": "다음",
@@ -676,6 +677,12 @@
         "contact": "1:1 문의하기"
       }
     },
+    "accept_group_invitation": {
+      "title": "You have been invited to the group",
+      "desc": "To see more about the project please accept the membership",
+      "reject": "Reject",
+      "Accept": "Accept"
+    },
     "details": {
       "profile_card": {
         "create_nft": {
@@ -1090,6 +1097,22 @@
     "Situation": "어떤 상황에서 최고의 성과를 내나요?",
     "Work Orientation": "업무 성향",
     "General Tendency": "개인 성향"
+  },
+  "validation": {
+    "onboard": {
+      "username": {
+        "already_use": "이미 사용중인 닉네임입니다. 다른 닉네임을 이용해주세요.",
+        "require": "닉네임을 입력해주세요.",
+        "min": "공백없는 2~20자의 문자로 작성해주세요.",
+        "max": "공백없는 2~20자의 문자로 작성해주세요.",
+        "regex": "공백없는 2~20자의 문자로 작성해주세요."
+      },
+      "email": {
+        "already_use": "이미 사용중인 이메일입니다. 다른 이메일을 이용해주세요.",
+        "require": "이메일을 입력해주세요.",
+        "email": "이메일 주소를 다시 확인해주세요. (이메일 아이디@서비스 도메인)"
+      }
+    }
   }
 }
 

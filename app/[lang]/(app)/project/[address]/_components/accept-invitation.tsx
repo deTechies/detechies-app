@@ -40,7 +40,7 @@ export default function AcceptInvitation({
   };
 
   const rejectInvitation = async () => {
-    router.push("/projects");
+    router.push("/project");
   };
   return (
     <Card className="flex flex-col max-w-md gap-6 m-8 mx-auto">

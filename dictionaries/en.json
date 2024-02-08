@@ -138,12 +138,13 @@
       "alert_title": "Complete privacy protection",
       "alert_body": "All personal information is stored encrypted and remains private, and can only be seen by others with your permission.",
       "accordion": {
+        "agree_with_all": "Agree with all",
         "terms_of_services": "Terms of Services (required)",
         "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "Privacy Policy (required)",
         "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "In-app notification (optional)",
-        "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+        "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more"
       },
       "cancel": "Cancel",
       "next": "Create Profile",
@@ -679,6 +680,12 @@
         "contact": "Contact Us"
       }
     },
+    "accept_group_invitation": {
+      "title": "You have been invited to the group",
+      "desc": "To see more about the project please accept the membership",
+      "reject": "Reject",
+      "Accept": "Accept"
+    },
     "details": {
       "profile_card": {
         "create_nft": {
@@ -1094,5 +1101,21 @@
     "Situation": "Situation",
     "Work Orientation": "Work Orientation",
     "General Tendency": "General Tendency"
+  },
+  "validation": {
+    "onboard": {
+      "username": {
+        "already_use": "The username is already in use. Please use a different username.",
+        "require": "Enter your username.",
+        "min": "Please use 2-20 characters with no spaces.",
+        "max": "Please use 2-20 characters with no spaces.",
+        "regex": "Please use 2-20 characters with no spaces."
+      },
+      "email": {
+        "already_use": "The email is already in use. Please use a different email.",
+        "require": "Enter your email.",
+        "email": "Please enter a valid email address."
+      }
+    }
   }
 }

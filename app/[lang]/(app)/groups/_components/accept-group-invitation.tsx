@@ -35,7 +35,7 @@ export default function AcceptInvitation({
   };
 
   const rejectInvitation = async () => {
-    router.push("/projects");
+    router.push("/groups");
   };
   return (
     <Card className="flex flex-col max-w-md gap-8 m-8 mx-auto">

@@ -11,6 +11,7 @@ import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
 import { useState } from "react";
+import { postServer } from "@/lib/data/postRequest";
 
 export default function PendingMemberListItem({
   profile,
@@ -23,6 +24,7 @@ export default function PendingMemberListItem({
 }) {
   const router = useRouter();
   const [acceptLoading, setAcceptLoading] = useState(false);
+  const [rejectLoading, setRejectLoading] = useState(false);
 
   // if (error) return <div>{JSON.stringify(error)}</div>;
 
@@ -67,14 +69,20 @@ export default function PendingMemberListItem({
   };
 
   const rejectEmployee = async () => {
-    if (!profile.id) {
-      toast({
-        title: "Error minting ",
-        description:
-          "You have provided an invalid address, please check if the user still exists",
-        variant: "destructive",
-      });
+    setRejectLoading(true);
+
+    const result = await postServer(`/members/reject/member/${profile.id}`, "");
+    
+    if (result.status === "success") {
+      router.refresh();
+    } else {
+      setRejectLoading(false);
     }
+
+    toast({
+      title: `Accept ${result.status}`,
+      description: result.message,
+    });
   };
 
   return (
@@ -119,6 +127,8 @@ export default function PendingMemberListItem({
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
+          loading={rejectLoading}
+          disabled={rejectLoading}
         >
           <X className="w-6 h-6"></X>
         </Button>
