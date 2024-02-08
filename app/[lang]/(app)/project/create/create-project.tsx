@@ -174,11 +174,13 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
       data.end_date = "";
     }
 
-    const computedName = data.name.replace(/\s+/g, " ").trim();
+    const formattedName = data.name.replace(/\s+/g, " ").trim();
+    // delete space 
+    // "  asdf   asdf " => "asdf asdf"
 
     const result = await createProject({
       image: data.image,
-      name: computedName,
+      name: formattedName,
       description: data.description,
       begin_date: data.begin_date,
       end_date: data.end_date,

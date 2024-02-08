@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { postServer } from "@/lib/data/postRequest";
+import { Project } from "@/lib/interfaces";
+import { beginEndDates } from "@/lib/utils";
 import { ScrollText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,9 +20,11 @@ import { useState } from "react";
 export default function UserReport({
   profile,
   text,
+  projects,
 }: {
   profile: any;
   text: any;
+  projects: any[];
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -46,24 +50,45 @@ export default function UserReport({
     setLoading(false);
   };
 
-  console.log(profile);
+  const oldestDate = projects.reduce((oldest, current) => {
+    if (!oldest.begin_date || !current.begin_date) return undefined;
+    return new Date(oldest.begin_date) < new Date(current.begin_date)
+      ? oldest
+      : current;
+  }, projects[0])?.begin_date;
+
+  const latestDate = projects.reduce((oldest: any, current: any) => {
+    if (!oldest.end_date || !current.end_date) return undefined;
+    return new Date(oldest.end_date) < new Date(current.end_date)
+      ? oldest
+      : current;
+  }, projects[0])?.end_date;
+
+  const totalEvaluationCount = projects.reduce(
+    (acc, project) => acc + project.evaluationCount,
+    0
+  );
 
   return (
     <Card className="flex flex-col gap-0 w-[328px] px-6 pt-6 pb-7">
       <CardHeader className="mb-6 text-subhead_s">
         {profile.display_name} {text.profile.report_card.title}
       </CardHeader>
+
       <CardContent>
         <div className="mb-3">
-          {text.profile.report_card.total_experience}{" "}
-          <span>ㅁㄴㅇㄻㄹㅇㄴ</span>
+          {text.profile.report_card.total_experience}
+          {": "}
+          {totalEvaluationCount === 0
+            ? "-"
+            : beginEndDates(oldestDate, latestDate)}
         </div>
 
         <div className="mb-3 text-title_s">
-          {text.profile.report_card.total_evalucation}
+          {text.profile.report_card.total_evalucation} ({totalEvaluationCount})
         </div>
 
-        <div className="flex flex-wrap gap-2 mb-6">
+        {/* <div className="flex flex-wrap gap-2 mb-6">
           <Badge variant="purple" shape="sm">
             {text.profile.report_card.admin_evalu}
           </Badge>
@@ -73,11 +98,18 @@ export default function UserReport({
           <Badge variant="info" shape="sm">
             {text.profile.report_card.client_evalu}
           </Badge>
-        </div>
+        </div> */}
 
         <Dialog>
-          <DialogTrigger className="w-full max-w-full">
-            <Button size="lg" className="max-w-full">
+          <DialogTrigger
+            className="w-full max-w-full"
+            disabled={totalEvaluationCount === 0}
+          >
+            <Button
+              size="lg"
+              className="max-w-full"
+              disabled={totalEvaluationCount === 0}
+            >
               {text.profile.report_card.view}
             </Button>
           </DialogTrigger>

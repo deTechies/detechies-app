@@ -48,7 +48,7 @@
       "admin_evalu": "Administrator evaluation",
       "member_evalu": "Member evaluation",
       "client_evalu": "Client evaluation",
-      "view": "View"
+      "view": "Request to View"
     },
     "report_popup": {
       "title": "View reputation report",
@@ -152,6 +152,7 @@
         "desc": "We have send you an email to",
         "desc2": "with a 6-digit code. You can use this code to verify your email address.",
         "resend": "resend",
+        "sign_out": "Sign out",
         "code": "Verification code",
         "code_placeholder": "Enter 6-digit code"
       },
@@ -184,11 +185,6 @@
         "side": "Side",
         "hackathon": "Hackathon",
         "other": "Other"
-      },
-      "privacy_type": {
-        "public": "All users",
-        "private": "Private",
-        "group": "Group members"
       },
       "search": "Search",
       "my_project": "My Project",
@@ -677,6 +673,7 @@
         "dialog_desc": "The CareerGen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
         "dialog_email": "Email to receive authentication process instructions",
         "dialog_information": "If you have any questions, please contact the CareerGen Support Team.",
+        "dialog_information2": "Robin@Careerzen.org",
         "ok": "I understand",
         "wait_for_auth": "Waiting for auth..",
         "contact": "Contact Us"
@@ -979,7 +976,8 @@
       "none": "None"
     },
     "privacy_type": {
-      "public": "All users",
+      "all": "All",
+      "public": "Public",
       "private": "Private",
       "group": "Group members"
     },
@@ -1087,6 +1085,14 @@
     "rate_requirements": "Requirements",
     "rate_time_schedule": "Schedule",
     "good_team_player": "Teamwork",
-    "rate_contributions": "Contributions"
+    "rate_contributions": "Contributions",
+    "Knowledge": "Knowledge",
+    "Communication": "Communication",
+    "Technical Proficiency": "Technical Proficiency",
+    "Project achievements": "Project achievements",
+    "propensity": "Propensity",
+    "Situation": "Situation",
+    "Work Orientation": "Work Orientation",
+    "General Tendency": "General Tendency"
   }
 }

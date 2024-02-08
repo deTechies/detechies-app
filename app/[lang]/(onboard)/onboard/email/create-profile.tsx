@@ -240,7 +240,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <div className="w-full space-y-1 leading-none">
+                  <div className="w-full ml-3 space-y-1 leading-none">
                     <Label className="text-title_m">
                       {lang.onboard.verify_email.accordion.terms_of_services}
                     </Label>
@@ -261,7 +261,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       className="my-auto"
                     />
                   </FormControl>
-                  <div className="w-full space-y-1 leading-none">
+                  <div className="w-full ml-3 space-y-1 leading-none">
                     <Label className="text-title_m flex-stretch">
                       {lang.onboard.verify_email.accordion.privacy_policy}
                     </Label>
@@ -282,7 +282,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       className="my-auto"
                     />
                   </FormControl>
-                  <div className="w-full space-y-1 leading-none flex-stretch">
+                  <div className="w-full ml-3 space-y-1 leading-none flex-stretch">
                     <FormLabel className="text-title_m">
                       {lang.onboard.verify_email.accordion.reward_notification}
                     </FormLabel>

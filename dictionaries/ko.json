@@ -48,7 +48,7 @@
       "admin_evalu": "관리자 평가",
       "member_evalu": "동료 평가",
       "client_evalu": "클라이언트 평가",
-      "view": "열람하기"
+      "view": "열람 요청하기"
     },
     "report_popup": {
       "title": "통합 평판 보고서 열람하기",
@@ -150,6 +150,7 @@
         "desc": "여섯자리 코드가 포함된 이메일을 ",
         "desc2": " 으로 보내드렸습니다. 이 코드를 사용하여 이메일 주소를 인증할 수 있습니다.",
         "resend": "재전송",
+        "sign_out": "로그아웃",
         "code": "인증코드",
         "code_placeholder": "여섯자리 코드"
       },
@@ -182,11 +183,6 @@
         "side": "사이드 프로젝트",
         "hackathon": "해커톤",
         "other": "기타"
-      },
-      "privacy_type": {
-        "public": "모든 유저",
-        "private": "프라이빗",
-        "group": "그룹 멤버"
       },
       "search": "키워드를 한글자 이상 입력해주세요.",
       "my_project": "내 프로젝트",
@@ -674,6 +670,7 @@
         "dialog_desc": "그룹 만들기 인증 절차를 위해 커리어젠 서포터팀에서 아래 이메일로 영업일 1일 이내에 메일을 보내드릴게요.",
         "dialog_email": "인증 절차 안내받을 이메일",
         "dialog_information": "문의사항 발생 시, 커리어젠 서포터팀으로 연락하세요.",
+        "dialog_information2": "Robin@Careerzen.org",
         "ok": "확인",
         "wait_for_auth": "인증 대기 중..",
         "contact": "1:1 문의하기"
@@ -975,6 +972,7 @@
       "none": "행인"
     },
     "privacy_type": {
+      "all": "전체",
       "public": "모든 유저",
       "private": "프라이빗",
       "group": "그룹 멤버"
@@ -1083,7 +1081,15 @@
     "rate_requirements": "완성도",
     "rate_time_schedule": "마감일 준수율",
     "good_team_player": "긍정적인 영향",
-    "rate_contributions": "기여도"
+    "rate_contributions": "기여도",
+    "Knowledge": "업무 지식",
+    "Communication": "협업 및 커뮤니케이션",
+    "Technical Proficiency": "기술 전문성",
+    "project_achievements": "프로젝트 성과",
+    "propensity": "성향 평가",
+    "Situation": "어떤 상황에서 최고의 성과를 내나요?",
+    "Work Orientation": "업무 성향",
+    "General Tendency": "개인 성향"
   }
 }
 

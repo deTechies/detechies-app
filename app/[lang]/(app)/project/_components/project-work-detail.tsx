@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { ProjectWork } from "@/lib/interfaces";
-import { formatDate } from "@/lib/utils";
+import { beginEndDates, formatDate } from "@/lib/utils";
 
 export default function ProjectWorkDetail({
   data,
@@ -17,20 +17,24 @@ export default function ProjectWorkDetail({
     <>
       <div className="inline-flex flex-wrap items-start justify-start gap-4 md:flex-nowrap text-text-secondary">
         <div className="inline-flex flex-col items-start justify-start gap-2">
-          <div className="divide-x">
-            <span className="pr-2 capitalize text-label_m">
+          <div className="divide-x shrink-0 text-label_m">
+            <span className="pr-2 capitalize">
               {" "}
-              {data?.role && lang?.interface.profession_type[data?.role]}
+              {(data?.role && lang?.interface?.profession_type[data?.role]) ||
+                "Unknown"}
             </span>
-            <span className="pl-2 text-label_m">{data.percentage} %</span>
+
+            <span className="pl-2 shrink-0">{data.percentage || 0}%</span>
           </div>
+
           <span className="text-label_m">
-            {formatDate(data.begin_date)} ~{" "}
-            {data.end_date ? formatDate(data.end_date) : "Present"}
+            {beginEndDates(data.begin_date, data.end_date)}
           </span>
         </div>
 
-        <div className="truncate text-label_m">{data.description}</div>
+        <div className="break-all whitespace-break-spaces line-clamp-2 text-label_m">
+          <span>{data.description}</span>
+        </div>
       </div>
 
       <div className="inline-flex flex-wrap items-start justify-start gap-2">

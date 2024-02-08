@@ -1,3 +1,4 @@
+import { useDictionary } from "@/lib/dictionaryProvider";
 import {
   Radar,
   RadarChart,
@@ -23,6 +24,10 @@ export default function SimpleRadarChart({
   dataKey: string;
   dataValue: string;
 }) {
+
+  const lang = useDictionary() as any;
+
+
   return (
     <RadarChart
       cx="50%"
@@ -51,7 +56,7 @@ export default function SimpleRadarChart({
             y={y}
             className="text-text-secondary text-title_s"
           >
-            {payload.value}
+            {lang.survey[payload.value] || payload.value}
           </text>
         )}
       />

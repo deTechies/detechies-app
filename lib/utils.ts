@@ -92,9 +92,13 @@ export function formatDate(stringDate: string | Date):string {
 }
 
 export function beginEndDates(beginDate: string | Date, endDate?: string | Date):string {
-  const lang = useDictionary();
+  // const lang = useDictionary();
+  // lang.beginEndDates.ongoing
+  if(!beginDate) {
+    return "Not Set Date";
+  }
 
-  return endDate ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}` : `${formatDate(beginDate)} - ${lang.beginEndDates.ongoing}`
+  return endDate ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}` : `${formatDate(beginDate)} ~ 진행중`
 }
 
 /* export function walletClientToSigner(walletClient: any) {

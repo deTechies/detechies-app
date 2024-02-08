@@ -22,14 +22,6 @@ export default async function ProfileReport({
     `/users/profile-details/${params.user}`
   )) as any;
 
-  const { data: projects } = await serverApi(
-    `/project-work/${params.user}/finished`
-  );
-
-  const selectedProject = projects.find(
-    (projectItem: any) => projectItem.project.id === project
-  );
-
   return (
     <main className="flex flex-col gap-4 mx-auto max-w-[80rem] px-4">
       <h4 className="mb-10 text-center text-heading_s">
@@ -42,17 +34,17 @@ export default async function ProfileReport({
       <Suspense fallback={<div>Loading proejcts ...</div>}>
         <UserProjects
           lang={dictionary}
-          projects={projects}
-          selectedProject={project}
+          user={params.user}
+          project={project}
         />
       </Suspense>
 
       <Suspense fallback={<div>Loading reports.....</div>}>
         <UserReports
           lang={dictionary}
-          selectedProject={selectedProject}
           selectedLang={params.lang}
           address={params.user}
+          project={project}
         />
       </Suspense>
     </main>

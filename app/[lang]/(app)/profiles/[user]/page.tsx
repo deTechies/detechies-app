@@ -23,6 +23,10 @@ export default async function Dashboard({
   const {data: hasAccess }  = await serverApi(`/survey-access/hasReportAccess/${params.user}`);
   const dictionary = (await getDictionary(params.lang)) as any;
 
+  const { data: projects } = await serverApi(
+    `/project-work/${params.user}/finished`
+  );
+
   //TODO: Create a profile not found page.
   if (!profile.id) return <NoProfileFound />;
 
@@ -32,15 +36,14 @@ export default async function Dashboard({
       <div className="min-w-[330px] flex flex-col gap-8">
         <UserProfile profile={profile} text={dictionary.mypage.profile} />
 
-        <UserReport profile={profile} text={dictionary} />
+        <UserReport profile={profile} text={dictionary} projects={projects}/>
 
-        
-        {hasAccess}
-        {
+        {/* {hasAccess} */}
+        {/* {
           hasAccess === 'accepted' && <span> You have access to the report </span> ||
           hasAccess === 'pending' && <span>pending </span> ||
           hasAccess === 'no_access' && <UserReport profile={profile} text={dictionary} />
-        }
+        } */}
 
       </div>
       {/* main */}

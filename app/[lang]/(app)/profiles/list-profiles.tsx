@@ -33,7 +33,15 @@ export default async function ListProfiles({
           ))}
       </div>
 
-      {users.length >= limit_number && <ShowMoreButton lang={lang} />}
+      {users?.length < 1 && (
+        <div className="py-24 text-center text-text-secondary text-subhead_s">
+          {lang.group.details.manage.member.no_result}
+        </div>
+      )}
+
+      {users?.length > 0 && users.length >= limit_number && (
+        <ShowMoreButton lang={lang} />
+      )}
     </>
   );
 }

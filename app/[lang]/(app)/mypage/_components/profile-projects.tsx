@@ -20,6 +20,8 @@ export default function ProfileProjects({
   //get all the projects the user the user is part of
   const router = useRouter();
 
+  console.log(projects);
+
   return (
     <div className="flex flex-col gap-3">
       <Card className="flex flex-row items-center justify-between">
@@ -49,8 +51,8 @@ export default function ProfileProjects({
                 contribution: project.works[0]?.percentage,
                 tags: project.project.tags,
                 title: project.project.name,
-                begin_date: project.project.begin_date,
-                end_date: project.project.end_date,
+                begin_date: project.works[0]?.begin_date,
+                end_date: project.works[0]?.end_date,
                 work_name: project.project.work_name,
               }}
               lang={lang}
