@@ -4,9 +4,8 @@ import { useState } from "react";
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogTrigger,
+  DialogTrigger
 } from "@/components/ui/dialog";
 
 import {
@@ -17,13 +16,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/components/ui/use-toast";
+import { postServer } from "@/lib/data/postRequest";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { postServer } from "@/lib/data/postRequest";
-import { Label } from "@/components/ui/label";
 
 const inviteExportFormSchema = z.object({
   name: z
@@ -55,18 +55,28 @@ export default function InviteExperts({ lang }: { lang: any }) {
   };
 
   async function onSubmit(data: InviteExpertsFormValues) {
-    // setLoading(true);
-    // const result = await postServer( ~~~ );
-    // if(result.status === "success") {
-    //     setOpenDialog(false);
-    //     form.reset();
-    // }
-    //
-    // toast({
-    //     title: result.status,
-    //     description: result.message,
-    //   });
-    // setLoading(false);
+    
+    
+     setLoading(true);
+     
+     const postData = JSON.stringify({
+        name: data.name,
+        email: data.email,
+        message: "I would like to invite you to join careerzen, so we can join projects together.", 
+        entity_type: "users", 
+        entity_id: 0
+     });
+     const result = await postServer('/referral', postData);
+     if(result.status === "success") {
+         setOpenDialog(false);
+         form.reset();
+     }
+    
+     toast({
+         title: result.status,
+         description: result.message,
+       });
+     setLoading(false);
   }
 
   return (
