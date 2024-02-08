@@ -4,6 +4,7 @@ import { polygonMumbai } from "@/helpers/mumbai";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 
 
+import { defaultAvatar } from "@/lib/constants";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
@@ -91,7 +92,7 @@ export default function Login({ lang }: ILoginProps) {
           onClick={() => setShowModal(!showModal)}
         >
           <IPFSImageLayer
-            hashes={session?.web3?.user?.avatar ? session.web3.user.avatar : []}
+            hashes={session?.web3?.user?.avatar ? session.web3.user.avatar : defaultAvatar}
           />
         </Avatar>
 
