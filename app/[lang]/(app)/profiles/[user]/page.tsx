@@ -31,7 +31,7 @@ export default async function Dashboard({
   if (!profile.id) return <NoProfileFound />;
 
   return (
-    <div className="flex flex-col gap-20 m-8 sm:flex-row">
+    <main className="flex flex-col gap-20 sm:flex-row">
       {/* LeftSide */}
       <div className="min-w-[330px] flex flex-col gap-8">
         <UserProfile profile={profile} text={dictionary.mypage.profile} />
@@ -68,6 +68,6 @@ export default async function Dashboard({
 
         {/* <EditProfile /> */}
       </div>
-    </div>
+    </main>
   );
 }

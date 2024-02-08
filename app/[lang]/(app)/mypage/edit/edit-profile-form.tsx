@@ -1,22 +1,23 @@
 "use client";
 
+import ProfessionTagType from "@/components/extra/profession-tag-type";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
@@ -24,7 +25,7 @@ import { updateUserProfile } from "@/lib/data/profile";
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@radix-ui/react-select";
-import { XIcon } from "lucide-react";
+import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
@@ -64,7 +65,7 @@ interface EditProfileProps {
 export default function EditProfileForm({
   text,
   username,
-  email, 
+  email,
   currentValues,
 }: EditProfileProps) {
   const form = useForm<ProfileFormValues>({
@@ -77,6 +78,31 @@ export default function EditProfileForm({
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
 
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter" && newTag.trim() !== "") {
+      e.preventDefault();
+      const currentTags = form.getValues("skills") || [];
+      !currentTags.includes(newTag.trim()) &&
+        form.setValue("skills", [...currentTags, newTag.trim()], {
+          shouldValidate: true,
+        });
+      setNewTag(""); // Clear the input field for new tag
+    }
+  };
+
+  const handleNewTagChange = (e: any) => {
+    setNewTag(e.target.value);
+  };
+
+  const clickTagsBadge = (_job_item: string) => {
+    const currentTags = form.getValues("skills") || [];
+    !currentTags.includes(_job_item.trim()) &&
+      form.setValue("skills", [...currentTags, _job_item.trim()], {
+        shouldValidate: true,
+      });
+    setNewTag(""); // Clear the input field for new tag
+  };
+
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
     await updateUserProfile(data);
@@ -84,7 +110,7 @@ export default function EditProfileForm({
       title: "Updated your profile",
       description: "You will be redirected shortly.",
     });
-    
+
     router.refresh();
     router.push("/mypage?updated=true", { scroll: true });
 
@@ -99,21 +125,6 @@ export default function EditProfileForm({
       form.setValue("last_name", name[1]);
     }
   }, [currentValues?.full_name, form]);
-
-  const handleKeyDown = (e: any) => {
-    if (e.key === "Enter" && newTag.trim() !== "") {
-      e.preventDefault();
-      const currentTags = form.getValues("skills") || [];
-      form.setValue("skills", [...currentTags, newTag.trim()], {
-        shouldValidate: true,
-      });
-      setNewTag(""); // Clear the input field for new tag
-    }
-  };
-
-  const handleNewTagChange = (e: any) => {
-    setNewTag(e.target.value);
-  };
 
   return (
     <>
@@ -212,41 +223,64 @@ export default function EditProfileForm({
                 </div>
               </div>
             </section>
-            
+
             <section className="my-10">
-              <div>
-                <FormItem>
-                  <FormLabel>{text?.skills ? text.skills : "Skills"}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Type and press enter"
-                      value={newTag}
-                      onChange={handleNewTagChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </FormControl>
-                  <div>
-                    {form.watch("skills")?.map((tag, index) => (
+              <FormItem className="space-y-">
+                <FormLabel>
+                  <div className="mb-2">
+                    {text?.skills}
+                  </div>
+                </FormLabel>
+                
+                <FormControl>
+                  <Input
+                    placeholder="Type and press enter"
+                    value={newTag}
+                    onChange={handleNewTagChange}
+                    onKeyDown={handleKeyDown}
+                  />
+                </FormControl>
+
+                {newTag && (
+                  <ProfessionTagType
+                    newTag={newTag}
+                    onClickJobBadge={clickTagsBadge}
+                    category="skill"
+                  ></ProfessionTagType>
+                )}
+
+                <div className="flex flex-wrap items-start gap-2 mt-3">
+                  {form.getValues("skills") &&
+                    form.getValues("skills")?.map((tag, index) => (
                       <Badge
                         key={index}
-                        className="px-3 py-2 mr-2 text-xs border rounded-full cursor-pointer text-accent-primary bg-accent-secondary border-accent-primary hover:border-state-error hover:text-state-error hover:bg-state-error-secondary"
-                        onClick={() => {
-                          const currentTags = form.getValues("skills") || [];
-                          const newTags = currentTags.filter((t) => t !== tag);
-                          form.setValue("skills", newTags, {
-                            shouldValidate: true,
-                          });
-                        }}
+                        variant="secondary"
+                        shape="md"
+                        className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        {tag}
+                        <div className="flex">
+                          <div className="w-full truncate">{tag}</div>
 
-                        <XIcon className="ml-1" size={16} />
+                          <X
+                            className="w-5 h-5 cursor-pointer"
+                            onClick={() => {
+                              const currentTags =
+                                form.getValues("skills") || [];
+                              const newTags = currentTags.filter(
+                                (t) => t !== tag
+                              );
+                              form.setValue("skills", newTags, {
+                                shouldValidate: true,
+                              });
+                            }}
+                          ></X>
+                        </div>
                       </Badge>
                     ))}
-                  </div>
-                </FormItem>
-              </div>
+                </div>
+              </FormItem>
             </section>
+
             <section className="my-10">
               <div>
                 <FormField

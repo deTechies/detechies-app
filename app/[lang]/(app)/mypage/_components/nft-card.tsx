@@ -47,7 +47,7 @@ export const NftCard = ({ id, achievement }: INftCardProps) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col items-start">
         <Badge variant="info" shape="category">
           {achievement?.type &&
             dictionary.interface.sbt_type[

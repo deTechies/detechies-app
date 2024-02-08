@@ -20,8 +20,6 @@ export default function ProfileProjects({
   //get all the projects the user the user is part of
   const router = useRouter();
 
-  console.log(projects);
-
   return (
     <div className="flex flex-col gap-3">
       <Card className="flex flex-row items-center justify-between">

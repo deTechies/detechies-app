@@ -22,13 +22,15 @@ export default async function Dashboard({
   return (
     <main className="flex flex-col gap-6">
       <Suspense fallback={<Skeleton className="h-20 animate-pulse" />}>
-        <ProfileDetails profile={profile} text={dictionary}  />
+        <ProfileDetails profile={profile} text={dictionary} />
       </Suspense>
+
       <ProfileProjects
         projects={profile.projects}
         text={dictionary.mypage.project}
         lang={dictionary}
       />
+      
       {profile?.achievement_rewards && (
         <div className="flex flex-col gap-6">
           <ProfileCertificates
