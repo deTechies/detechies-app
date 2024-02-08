@@ -1,4 +1,5 @@
 "use client";
+
 import PaymentForm from "@/components/stipre/payment-form";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -12,7 +13,7 @@ const stripePromise = loadStripe(
 export default function Home() {
   return (
     <Elements stripe={stripePromise}>
-      <PaymentForm />
+      <PaymentForm dictionary={""} onClose={() => console.log("close")} />
     </Elements>
   );
 }

@@ -119,14 +119,12 @@ export interface User {
   }
   
   export interface CreateClub {
-    email: string;
-    certification_number: string;
+    owner_email? : string;
     name: string;
     image: string;
     type: GROUP_TYPE;
     description: string;
     urls: string[];
-    owner_email? : string;
   }
   
   export interface Club extends CreateClub{
@@ -298,6 +296,7 @@ export enum GROUP_TYPE {
     
   }
   export interface Project extends CreateProject {
+    projectId: string;
     id: string;
     onchain_id: string
     isCreator: boolean;

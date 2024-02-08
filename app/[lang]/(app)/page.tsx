@@ -14,30 +14,28 @@ export default async function ProfileDashboard({
   params: { lang: Locale };
 }) {
   return (
-    <div>
-      <div className="flex flex-col gap-20 m-8 md:flex-row">
-        <div className="md:w-[376px] shrink-0 flex flex-col gap-8">
-          <Suspense fallback={<LoadingProfileCard />}>
-            <ProfilePageCard lang={params.lang} />
-          </Suspense>
-          <Suspense
-            fallback={
-              <Skeleton className="animate-pulse bg-background-layer-1" />
-            }
-          >
-            <MyPageMenu />
-          </Suspense>
-        </div>
+    <div className="flex flex-col gap-20 md:flex-row">
+      <div className="md:w-[376px] shrink-0 flex flex-col gap-8">
+        <Suspense fallback={<LoadingProfileCard />}>
+          <ProfilePageCard lang={params.lang} />
+        </Suspense>
         <Suspense
           fallback={
-            <Skeleton className="grow shrink h-24 animate-pulse bg-background-layer-1" />
+            <Skeleton className="animate-pulse bg-background-layer-1" />
           }
         >
-          <div className="grow shrink">
-            <Dashboard params={params} />
-          </div>
+          <MyPageMenu />
         </Suspense>
       </div>
+      <Suspense
+        fallback={
+          <Skeleton className="h-24 grow shrink animate-pulse bg-background-layer-1" />
+        }
+      >
+        <div className="grow shrink">
+          <Dashboard params={params} />
+        </div>
+      </Suspense>
     </div>
   );
 }

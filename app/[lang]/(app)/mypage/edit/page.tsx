@@ -11,9 +11,10 @@ export default async function EditProfilePage({
 }) {
   return (
     <>
-    <Suspense fallback={<Skeleton className="h-24 animate-pulse" />}>
-      <EditProfile lang={params.lang} />
+      <Suspense fallback={<Skeleton className="h-24 animate-pulse" />}>
+        <EditProfile lang={params.lang} />
       </Suspense>
+      
       <Suspense fallback={<Skeleton className="h-24 animate-pulse" />}>
         <ProfileAccounts lang={params.lang} />
       </Suspense>

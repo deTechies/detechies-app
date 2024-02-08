@@ -10,6 +10,8 @@ import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
+import { useState } from "react";
+import { postServer } from "@/lib/data/postRequest";
 
 export default function PendingMemberListItem({
   profile,
@@ -21,6 +23,8 @@ export default function PendingMemberListItem({
   lang: any;
 }) {
   const router = useRouter();
+  const [acceptLoading, setAcceptLoading] = useState(false);
+  const [rejectLoading, setRejectLoading] = useState(false);
 
   // if (error) return <div>{JSON.stringify(error)}</div>;
 
@@ -37,6 +41,8 @@ export default function PendingMemberListItem({
 
   const acceptEmployee = async () => {
     //in here we want to have the profile.id
+    setAcceptLoading(true);
+
     if (!profile.id) {
       toast({
         title: "Error minting ",
@@ -48,24 +54,35 @@ export default function PendingMemberListItem({
 
     const result = await acceptClubMember(profile.id);
 
-    toast({
-      title: "Success",
-      description: "Succesfully accepted member.",
-    });
+    if (result.status === "success") {
+      router.refresh();
+    } else {
+      setAcceptLoading(false);
+    }
 
-    router.refresh();
+    toast({
+      title: `Accept ${result.status}`,
+      description: result.message,
+    });
 
     //await write();
   };
+
   const rejectEmployee = async () => {
-    if (!profile.id) {
-      toast({
-        title: "Error minting ",
-        description:
-          "You have provided an invalid address, please check if the user still exists",
-        variant: "destructive",
-      });
+    setRejectLoading(true);
+
+    const result = await postServer(`/members/reject/member/${profile.id}`, "");
+    
+    if (result.status === "success") {
+      router.refresh();
+    } else {
+      setRejectLoading(false);
     }
+
+    toast({
+      title: `Accept ${result.status}`,
+      description: result.message,
+    });
   };
 
   return (
@@ -101,9 +118,7 @@ export default function PendingMemberListItem({
       </Card>
 
       <div className="text-center">
-        <span className="text-label_m">
-          {formatDate(profile.created_at)}
-        </span>
+        <span className="text-label_m">{formatDate(profile.created_at)}</span>
       </div>
 
       <div className="flex gap-3">
@@ -112,6 +127,8 @@ export default function PendingMemberListItem({
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
+          loading={rejectLoading}
+          disabled={rejectLoading}
         >
           <X className="w-6 h-6"></X>
         </Button>
@@ -120,6 +137,8 @@ export default function PendingMemberListItem({
           onClick={acceptEmployee}
           className="p-2 rounded-md w-14 h-14"
           size="icon"
+          loading={acceptLoading}
+          disabled={acceptLoading}
         >
           <Check className="w-6 h-6"></Check>
         </Button>

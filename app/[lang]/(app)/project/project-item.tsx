@@ -46,11 +46,11 @@ export default function ProjectItem({
 
           {details.scope === "private" ? (
             <Badge shape="sm" variant="purple">
-              {lang.project.list.privacy_type.private}
+              {lang.interface.privacy_type.private}
             </Badge>
           ) : details.scope === "group" ? (
             <Badge shape="sm" variant="info">
-              {lang.project.list.privacy_type.group}
+              {lang.interface.privacy_type.group}
             </Badge>
           ) : null}
         </header>
@@ -75,9 +75,7 @@ export default function ProjectItem({
                 variant="placeholder"
                 className="text-label_s"
               >
-                <div className="truncate">
-                  {tag}
-                </div>
+                {tag}
               </Badge>
             ))}
 

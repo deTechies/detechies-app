@@ -48,7 +48,7 @@
       "admin_evalu": "관리자 평가",
       "member_evalu": "동료 평가",
       "client_evalu": "클라이언트 평가",
-      "view": "열람하기"
+      "view": "열람 요청하기"
     },
     "report_popup": {
       "title": "통합 평판 보고서 열람하기",
@@ -75,12 +75,12 @@
       "total_career": "총 경력",
       "total_evaluation": "총 받은 평가",
       "admin_evaluation": "관리자 평가",
-      "evaluations": "kr_evaluations",
+      "evaluations": "평가",
       "member_evaluation": "동료 평가",
       "client_evaluation": "클라이언트 평가",
       "work_period": "작업 기간",
       "project_part": "기여한 파트",
-      "s_evaluation": "님이 작성한 평가",
+      "s_evaluation": "본인이 작성한 성과",
       "total": "통합 ",
       "reputation_report": "평판 보고서",
       "feedback_times": "피드백 반영도",
@@ -89,23 +89,36 @@
       "good_team_player": "긍정적인 영향",
       "rate_contributions": "기여도",
       "points": "점",
-      "total_points": "총점"
+      "total_points": "총점",
+      "total_report_summary": "평판 보고서 요약",
+      "reputation_score": "평판 점수",
+      "recommendation_score": "추천 리뷰 총점",
+      "total_review_1": "총",
+      "total_review_2": "개 평가"
     }
   },
 
   "profile_filter": {
     "profiles": "전문가 찾기",
     "all": "All",
-    "search": "찾다", 
-    "filter": "Filter",
+    "search": "찾으시는 이름으로 검색해주세요.", 
+    "filter": "전체 직무",
     "sort": "Sort",
-    "info_text": "혹시 찾고 계신 전문가가 없으신가요?"
+    "info_text": "혹시 찾고 계신 전문가가 없으신가요?",
+    "popup_title": "내가 아는 전문가 평판 조회하기",
+    "popup_desc": "평판을 알아보고 싶은 전문가의 이름과 이메일만 입력하고 요청해주세요. 해당 전문가분에게 평판 등록 요청 메일이 전송된 후, 평균 4일 내로 평판을 확인하실 수 있어요.",
+    "name": "이름",
+    "name_placeholder": "조회할 전문가의 이름을 입력해주세요.",
+    "email": "이메일",
+    "email_placeholder": "조회할 전문가의 이메일을 입력해주세요.",
+    "reject": "나중에 할게요",
+    "request": "조회 요청하기"
   },
   "profile_detail_card": {
     "example": "example",
-    "achievements": "참가한 프로젝트",
+    "achievements": "보유 NFT 수",
     "certificates": "평가받은 횟수",
-    "projects": "참가한 프로젝트",
+    "projects": "참여한 프로젝트",
     "groups": "groups",
     "no role": "no role"
   },
@@ -131,12 +144,13 @@
       "alert_title": "완벽한 개인정보 보안",
       "alert_body": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
       "accordion": {
+        "agree_with_all": "모두 동의",
         "terms_of_services": "서비스 이용약관 (필수)",
         "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "개인정보처리방침 (필수)",
         "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "보상 및 이벤트 알림 (선택)",
-        "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+        "reward_notification_description": "보상 지급, 프로모션, 혜택 등의 알림"
       },
       "cancel": "뒤로가기",
       "next": "다음",
@@ -145,6 +159,7 @@
         "desc": "여섯자리 코드가 포함된 이메일을 ",
         "desc2": " 으로 보내드렸습니다. 이 코드를 사용하여 이메일 주소를 인증할 수 있습니다.",
         "resend": "재전송",
+        "sign_out": "로그아웃",
         "code": "인증코드",
         "code_placeholder": "여섯자리 코드"
       },
@@ -177,11 +192,6 @@
         "side": "사이드 프로젝트",
         "hackathon": "해커톤",
         "other": "기타"
-      },
-      "privacy_type": {
-        "public": "모든 유저",
-        "private": "프라이빗",
-        "group": "그룹 멤버"
       },
       "search": "키워드를 한글자 이상 입력해주세요.",
       "my_project": "내 프로젝트",
@@ -377,9 +387,12 @@
       },
       "invited_to_project": {
         "title": "프로젝트에 초대되었습니다!",
-        "desc": "프로젝트에 대해 자세히 알아보려면 회원 가입을 수락하세요.",
+        "desc": "프로젝트에 참여하고 내성과를 등록해 보세요. 팀원에게 평가받고 내 커리어를 확고하게 인증할 수 있어요!",
         "reject": "거절하기",
-        "accept": "수락하기"
+        "accept": "수락하기",
+        "popup_title": "프로젝트 초대를 거절할까요?",
+        "popup_content": "지금 초대를 거절하면 다시 수락할 기회가 없어져요. 조금 더 생각해보고 싶다면 “나중에 할게요”를 클릭해주세요.",
+        "later": "나중에 할게요"
       },
       "role_type": {
         "admin": "관리자",
@@ -482,9 +495,29 @@
       "exactly": "평가가 모두 정확한가요?",
       "exactly_desc": "사실과 다른 평가를 하는 경우 피평가자의 커리어에 불이익이 생길 수 있어요.",
       "go_to_project": "프로젝트로 가기"
+    },
+    "private": {
+      "title": "프라이빗 프로젝트",
+      "desc": "해당 프로젝트는 비공개로 설정되어 있어, 프로젝트 멤버가 되면 상세내용을 볼 수 있어요. 이 프로젝트에 참여해볼까요?",
+      "back": "뒤로가기",
+      "waiting": "수락 대기중"
     }
   },
   "mypage": {
+    "topup": {
+      "charge": "charge", 
+      "points": "points",
+      "success_message": "Your payment was successful.", 
+      "top_up_title": "포인트 충전하기", 
+      "top_up_desc": "포인트를 사용해서 커리어젠에 있는 전문가의 평판 보고서를 열람해보세요!",
+      "input_amount_label": "충전하려는 금액 입력",
+      "amount": "amount", 
+      "total": "total", 
+      "current_balance": "보유 포인트:",
+      "card_details": "결제 카드 입력", 
+      "cancel": "충전하기", 
+      "pay": "충전하기"
+    }, 
     "awards": {
       "awards": "수상이력",
       "issuer": "발행자",
@@ -625,7 +658,7 @@
       "required_text": "*는 필수입력 사항입니다.",
       "description": "대표 이메일 인증이 필요해요. 대표 메일로 전송된 인증번호를 확인 후 입력해주세요.",
       "form": {
-        "email_placeholder": "이메일을 입력해주세요.",
+        "email_placeholder": "조직 대표 이메일을 입력해주세요.",
         "verify_code_placeholder": "인증번호 입력하세요.",
         "resend": "다시 보내기",
         "send_code": "인증번호 보내기",
@@ -649,10 +682,17 @@
         "dialog_desc": "그룹 만들기 인증 절차를 위해 커리어젠 서포터팀에서 아래 이메일로 영업일 1일 이내에 메일을 보내드릴게요.",
         "dialog_email": "인증 절차 안내받을 이메일",
         "dialog_information": "문의사항 발생 시, 커리어젠 서포터팀으로 연락하세요.",
+        "dialog_information2": "Robin@Careerzen.org",
         "ok": "확인",
         "wait_for_auth": "인증 대기 중..",
         "contact": "1:1 문의하기"
       }
+    },
+    "accept_group_invitation": {
+      "title": "You have been invited to the group",
+      "desc": "To see more about the project please accept the membership",
+      "reject": "Reject",
+      "Accept": "Accept"
     },
     "details": {
       "profile_card": {
@@ -719,6 +759,15 @@
           "back": "뒤로가기",
           "send": "가입 요청하기"
         }
+      },
+      "invited_to_group": {
+        "title": "그룹에 가입 요청을 받았어요!",
+        "desc": "그룹에 가입하고 커리어젠에서 영향력있는 그룹으로 활동해보세요!",
+        "reject": "거절하기",
+        "accept": "수락하기",
+        "popup_title": "그룹 가입을 거절할까요?",
+        "popup_content": "지금 초대를 거절하면 다시 수락할 기회가 없어져요. 조금 더 생각해보고 싶다면 “나중에 할게요”를 클릭해주세요.",
+        "later": "나중에 할게요"
       },
       "about": {
         "all": "전체보기",
@@ -788,7 +837,7 @@
           "request_date": "요청한 날짜",
           "actions": "승인 여부",
           "all_accept": "모두 승인하기",
-          "announce_invite": "초대 알리기",
+          "announce_invite": "초대 알림 보내기",
           "search": "닉네임 또는 직업을 검색해보세요.",
           "no_result": "검색 결과가 없습니다.",
           "waiting": "대기 중",
@@ -933,7 +982,7 @@
       "planner": "기획자",
       "designer": "디자이너",
       "marketer": "마케팅",
-      "all": "전체"
+      "all": "전체 직무"
     },
     "project_type": {
       "all": "전체",
@@ -950,6 +999,7 @@
       "none": "행인"
     },
     "privacy_type": {
+      "all": "전체",
       "public": "모든 유저",
       "private": "프라이빗",
       "group": "그룹 멤버"
@@ -963,7 +1013,7 @@
     }
   },
   "footer": {
-    "copywrite": "© 2021 CareerZen. All rights reserved.",
+    "copywrite": "© 2024 Careerzen. All rights reserved.",
     "privacy_policy": "개인정보처리방침",
     "terms_and_conditions": "이용약관",
     "whitepaper": "백서",
@@ -976,7 +1026,113 @@
     "upload_image": "파일 올리기",
     "delete_image": "삭제하기"
   },
+  "beginEndDates": {
+    "ongoing": "진행중"
+  },
   "survey": {
-    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "기술스택 이해도",
+    "8377fabd-d8a0-4d86-9e75-2b1fa11557d5": "기술 문제해결",
+    "d76072de-a69b-4153-983f-0eb27c088e68": "성능 최적화",
+    "d9126a37-f40c-49f8-80a9-a614b2d531f3": "개발 완성도",
+    "39d5a720-915e-4bda-96e7-5c6f96daf077": "버그해결",
+    "39e61ded-827c-43de-8e9e-c5e75a865245": "개발언어 숙련도",
+    "3c769495-f076-4cc6-b77a-4d2839ae47e1": "레퍼런스 활용",
+    "f25d06a9-585a-4200-b317-0b1d8c873958": "작업관리",
+    "dd724199-8830-44cd-8371-64907e9a37af": "기술 정보전달",
+    "5f2bcd1c-bbf6-4735-bac0-175e84e9baf7": "코드 컨벤션",
+    "b088af39-6957-4b2d-a3fd-350f560a2ab4": "커밋 컨벤션",
+    "cefa7ae0-3623-41dd-940f-623fccf16f84": "아키텍처",
+    "b9c8ad2e-5fb2-4478-964b-5d6ec20fe8d8": "회의참여",
+    "6580670e-edb7-4541-bdd3-3b060794b4a2": "요구사항 이해",
+    "be9c36e4-8642-4858-83ed-b2e17b700c4e": "피드백 분석",
+    "c16b6d4a-e5d4-4858-ad7a-f21dc1a6a033": "기술개선 제안",
+    "12ba046c-e307-4479-a84f-132b5de3ea0f": "멘토링 빈도",
+    "6d33bef7-0b6c-4348-9cd7-a26eac20827d": "기술제안",
+    "b95a8a55-40fb-4d08-8867-235a00acc3e6": "목표 달성",
+    "4a398680-0f39-485e-87f0-b5c992fc6af6": "업무 지시",
+    "e45bd2c0-1cb3-4f6d-bdbb-9526f19d2d7d": "계획서 완성도",
+    "79126a18-05d3-452d-bd89-d1ce64d1add5": "우선순위 설정",
+    "444d2390-12bb-4083-b445-58b50c4b819e": "프로젝트 관리",
+    "66b05ffb-0165-432e-bde8-6d3d6cb94c6a": "업무 배분",
+    "a505002f-5fa8-40e4-9beb-db3bf4ade751": "히스토리 관리",
+    "677cac32-33fd-4236-89e3-e385333cdb0a": "규정 준수",
+    "27f95d3a-160d-48d9-86bd-f28d3b08e656": "의견 조율",
+    "c383b90b-a41c-473e-bf1f-3d8c7cc460ab": "이슈 대처",
+    "f09907ee-3bed-493d-a1b7-e8be9f0a321a": "업무 지시",
+    "b7aa62cc-a687-4790-a487-c5bf681c3100": "도메인 이해",
+    "2ed25967-3f03-4f31-b7ce-b158308bf153": "협업 툴 활용",
+    "0dc99a15-e1ca-472d-8283-2dc7b2a2ac45": "시나리오 정확도", 
+    "976ea4d7-35c8-4ab7-aff3-fad4fbd82935": "테스트문서 가독성",  
+    "eefa33b9-c9b5-466c-85b2-d78223b87605": "테스트 효율성",  
+    "6d73a72c-bdae-4ac0-9f4a-14b307825d85": "커버리지 고려",  
+    "ee5046b8-d221-4e28-a42a-cf8eb36551d8": "작성 소요시간",  
+    "715eb419-8197-415d-a272-bb5a3ffdd9a2": "결함리포트 가독성",  
+    "6906cffb-1517-45bf-a567-b6e56b56b6a9": "프로세스 관리",  
+    "814633bf-92c5-4f72-b011-558940a59e4a": "보고 소요시간",  
+    "29d69872-08c3-4069-9c95-12f8157108f0": "이슈전달",  
+    "f618001c-c790-4d87-ad5c-e17e8dfb4c7e": "피드백 분석", 
+    "503cbe1e-92c8-49f8-89a6-da066cd7d5f4": "프레임워크 활용", 
+    "34dad790-065a-494f-9a10-6374bded3bb3": "코드 이해",
+    "31a45a9e-142d-4383-90ba-cdab2a9f66df": "기획서 명확성",
+    "4977734e-64ec-4388-8d12-a8828fd9f88f": "기획서 완결성",
+    "53d26eb0-4f55-466a-a118-e0a698ac3856": "유저 페르소나",
+    "18bc7a62-1d26-46f1-b92a-26641a1644d2": "요구사항 정의",
+    "10b04c64-ceb5-434f-a95e-0c1ca5dd424f": "UX설계 논리성",
+    "9d4a08a2-c7aa-430f-98f5-367a662cfd8d": "기능정의 정확도",
+    "f63a5163-9381-41b5-be98-28d88e191317": "정책정의 정확도",
+    "8fbd4d3d-dc71-4782-846f-5ad38c7c449b": "IA설계 숙련도",
+    "292853ae-762c-45df-8d5f-6af619308a62": "버전 관리",
+    "820fba48-a70e-4ad8-bf49-fbbe91d6250e": "기획 전달력",
+    "a106d326-7875-4436-9bd9-59e2360e0710": "의견 조율",
+    "b43eaa2e-6140-4a07-8f50-7d4261deab76": "피드백 분석",
+    "6cf218b4-a5ff-4fed-b3ab-d6c9cd6423d4": "도메인 이해도",
+    "df894fff-3a67-45b7-ab0f-a26654a16163": "문서툴 활용력",
+    "786b8c46-d001-42b4-bd30-a7007006bb8b": "디자인 전략정의",
+    "b0d145e5-abfd-44e9-ba54-c0421a4df8b9": "디자인 프로세스",
+    "ff26bf69-4f87-48ea-b8b2-c09eed7f7dfe": "사용자 리서치",
+    "a097386a-411c-442a-84fd-a5417bb825cb": "벤치마킹",
+    "5fc82dab-0c67-4ac3-aa69-4233789a89ec": "디자인 컨셉",
+    "1f7b5168-792f-4695-b95f-396428e2a9f7": "디자인 시스템",
+    "34d44d6d-761f-4561-b16f-f1c3a2eab6b3": "UI디자인",
+    "2d3a8a1f-713a-4d69-9eb2-5b8f95cde33a": "UX디자인",
+    "e99b518b-f89a-44ab-bbe0-bd4780462b6c": "프로토타입 제작",
+    "18887fef-b8f2-40c9-a7f2-5e9ea5495903": "버전관리",
+    "c1f1f8d8-c06b-469c-b5bf-b3982b7de6a2": "의도전달",
+    "c226c748-9762-486f-9001-5c88bc6f4b41": "피드백 분석",	
+    "4cf09a47-48f0-4e2a-9fa2-c14bb2dc952f": "도메인 이해",	
+    "d202e601-94d3-4e93-9837-b31780ba7f9b": "트렌드 이해",
+    "b788d4f5-c2c9-49b0-9de5-0e36888c4a77": "디자인 툴",
+    "39c8f1de-b220-4d0c-b5ef-c39512f441a1": "회의 참여",
+    "46219e8b-574c-42d8-9762-df318d8bb478": "요구사항 이해",
+    "feedback_times": "피드백 반영도",
+    "rate_requirements": "완성도",
+    "rate_time_schedule": "마감일 준수율",
+    "good_team_player": "긍정적인 영향",
+    "rate_contributions": "기여도",
+    "Knowledge": "업무 지식",
+    "Communication": "협업 및 커뮤니케이션",
+    "Technical Proficiency": "기술 전문성",
+    "project_achievements": "프로젝트 성과",
+    "propensity": "성향 평가",
+    "Situation": "어떤 상황에서 최고의 성과를 내나요?",
+    "Work Orientation": "업무 성향",
+    "General Tendency": "개인 성향"
+  },
+  "validation": {
+    "onboard": {
+      "username": {
+        "already_use": "이미 사용중인 닉네임입니다. 다른 닉네임을 이용해주세요.",
+        "require": "닉네임을 입력해주세요.",
+        "min": "공백없는 2~20자의 문자로 작성해주세요.",
+        "max": "공백없는 2~20자의 문자로 작성해주세요.",
+        "regex": "공백없는 2~20자의 문자로 작성해주세요."
+      },
+      "email": {
+        "already_use": "이미 사용중인 이메일입니다. 다른 이메일을 이용해주세요.",
+        "require": "이메일을 입력해주세요.",
+        "email": "이메일 주소를 다시 확인해주세요. (이메일 아이디@서비스 도메인)"
+      }
+    }
   }
 }
+

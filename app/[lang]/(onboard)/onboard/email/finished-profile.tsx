@@ -4,6 +4,7 @@ import { defaultAvatar } from "@/lib/constants";
 import { getUserProfile } from "@/lib/data/user";
 import { Building2, ChevronRight, SearchCheck, UserCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -18,19 +19,40 @@ export default function FinishedProfile({ lang }: { lang: any }) {
   const { data, update } = useSession();
   const items = [
     {
-      icon: <UserCircle size="32" />,
+      icon: (
+        <Image
+          src="/icons/profile_career.png"
+          alt="career"
+          width={40}
+          height={40}
+        />
+      ),
       title: lang.onboard.verify_email.finished_profile.expert,
       description: lang.onboard.verify_email.finished_profile.expert_desc,
       link: "/mypage/edit",
     },
     {
-      icon: <SearchCheck size="32" />,
+      icon: (
+        <Image
+          src="/icons/profile_client.png"
+          alt="client"
+          width={40}
+          height={40}
+        />
+      ),
       title: lang.onboard.verify_email.finished_profile.client,
       description: lang.onboard.verify_email.finished_profile.client_desc,
       link: "/profiles",
     },
     {
-      icon: <Building2 size="32" />,
+      icon: (
+        <Image
+          src="/icons/profile_admin.png"
+          alt="admin"
+          width={40}
+          height={40}
+        />
+      ),
       title: lang.onboard.verify_email.finished_profile.admin,
       description: lang.onboard.verify_email.finished_profile.admin_desc,
       link: "/groups",
@@ -39,7 +61,7 @@ export default function FinishedProfile({ lang }: { lang: any }) {
 
   useEffect(() => {
     const updateUserSession = async () => {
-      const {data:user} = await getUserProfile();
+      const { data: user } = await getUserProfile();
 
       if (!data || !data.web3.user) {
         return;
@@ -59,9 +81,9 @@ export default function FinishedProfile({ lang }: { lang: any }) {
   }, [data, update]);
 
   return (
-    <section className="flex flex-col gap-8 max-w-sm">
+    <section className="flex flex-col max-w-sm gap-8">
       <header>
-        <h1 className="text-heading_s mb-3">
+        <h1 className="mb-3 text-heading_s">
           {lang.onboard.verify_email.finished_profile.title}
         </h1>
         <h5 className="text-text-secondary text-body_s">
@@ -91,18 +113,14 @@ type LinkItemProps = {
 
 export function LinkItem({ item }: LinkItemProps) {
   return (
-    <Link
-      href={item.link}
-      className="group flex gap-6 hover:text-accent-primary items-center"
-    >
+    <Link href={item.link} className="flex items-center gap-6 group">
       <div className="shrink-0">{item.icon}</div>
-      <div className="flex flex-col grow text-left">
+      <div className="flex flex-col text-left grow">
         <h5 className="text-title_m">{item.title}</h5>
-        <h6 className="text-label_m group-hover:text-accent-primary">
-          {item.description}
-        </h6>
+        <h6 className="text-label_m text-secondary">{item.description}</h6>
       </div>
-      <ChevronRight className="h-8 shrink-0 w-8 group-hover:text-accent-primary" />
+
+      <ChevronRight className="w-8 h-8 shrink-0 text-icon-secondary" />
     </Link>
   );
 }

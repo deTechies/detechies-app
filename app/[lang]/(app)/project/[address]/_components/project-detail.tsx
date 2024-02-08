@@ -90,7 +90,7 @@ export default function ProjectDetail({
               {details.tags &&
                 details.tags?.map((tag) => (
                   <Badge key={tag} shape="outline" variant="accent">
-                    <div className="truncate">{tag}</div>
+                    {tag}
                   </Badge>
                 ))}
             </div>
@@ -107,13 +107,13 @@ export default function ProjectDetail({
 
         <div className="relative">
           <div
-            className={`text-body_m ${showFull ? "" : "line-clamp-3"}`}
+            className={`text-body_m whitespace-break-spaces break-all ${showFull ? "" : "line-clamp-3"}`}
             dangerouslySetInnerHTML={{ __html: details.description }}
           ></div>
           
           <div
             ref={detailDescriptionRef}
-            className="absolute top-0 left-0 right-0 invisible opacity-0 pointer-events-none select-none text-body_m"
+            className="absolute top-0 left-0 right-0 invisible opacity-0 pointer-events-none select-none whitespace-break-spaces text-body_m"
             dangerouslySetInnerHTML={{ __html: details.description }}
           ></div>
         </div>

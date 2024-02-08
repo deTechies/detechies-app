@@ -38,10 +38,11 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     router.replace(`${pathname}${query}`);
   };
 
-  const onSelectPrivacy = (_type: PRIVACY_TYPE) => {
+  const onSelectPrivacy = (_type: PRIVACY_TYPE | "all") => {
+
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
-    if (!_type || _type == PRIVACY_TYPE.PUBLIC) {
+    if (!_type || _type == "all") {
       current.delete("privacy");
     } else {
       current.set("privacy", _type);
@@ -75,7 +76,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-wrap items-center gap-5 grow">
           <Select onValueChange={onSelectType}>
-            <SelectTrigger className="w-[180px] px-3 py-3.5">
+            <SelectTrigger className="w-[180px] px-3 py-3">
               <SelectValue placeholder={lang.project.list.all_project} />
             </SelectTrigger>
 
@@ -93,16 +94,20 @@ export default function ProjectFilter({ lang }: { lang: any }) {
           </Select>
 
           <Select onValueChange={onSelectPrivacy}>
-            <SelectTrigger className="w-[180px] px-3 py-3.5">
+            <SelectTrigger className="w-[180px] px-3 py-3">
               <SelectValue
                 placeholder={lang.project.list.scope_of_disclosure}
               />
             </SelectTrigger>
 
             <SelectContent>
+              <SelectItem value="all">
+                {lang.interface.privacy_type.all}
+              </SelectItem>
+
               {Object.values(PRIVACY_TYPE).map((type) => (
                 <SelectItem key={type} value={type}>
-                  {lang.project.list.privacy_type[type]}
+                  {lang.interface.privacy_type[type]}
                 </SelectItem>
               ))}
             </SelectContent>

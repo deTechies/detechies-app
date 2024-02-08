@@ -40,11 +40,11 @@ export default async function ProjectListPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
-    <main className="flex flex-col w-full gap-6 p-4 mx-auto my-4">
+    <main className="flex flex-col w-full gap-6 mx-auto">
       <ProjectFilter lang={dictionary}></ProjectFilter>
 
       <Suspense fallback={<div>Loading...</div>}>
-        <section className="grid w-full gap-4 md:grid-cols-2 truncate">
+        <section className="grid w-full gap-4 truncate md:grid-cols-2">
           {filteredData.length > 0 &&
             filteredData.map((item: Project) => (
               <ProjectItem key={item.id} details={item} lang={dictionary} />

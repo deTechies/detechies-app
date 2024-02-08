@@ -72,11 +72,11 @@ const ProjectDisplay = ({
         <div>
           {project.scope === "private" ? (
             <Badge shape="sm" variant="purple">
-              {lang.project.list.privacy_type.private}
+              {lang.interface.privacy_type.private}
             </Badge>
           ) : project.scope === "group" ? (
             <Badge shape="sm" variant="info">
-              {lang.project.list.privacy_type.group}
+              {lang.interface.privacy_type.group}
             </Badge>
           ) : null}
         </div>
