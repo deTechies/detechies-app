@@ -81,21 +81,6 @@ export default function ProfileFilter({ lang }: { lang: any }) {
             </SelectContent>
           </Select>
 
-          {/* <Select onValueChange={selectLimit}>
-            <SelectTrigger className="w-[100px] px-3 py-3">
-              <SelectValue
-                placeholder="25"
-                className={`${loading && "animate-pulse"}`}
-              />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem value={"25"}>25</SelectItem>
-              <SelectItem value={"50"}>50</SelectItem>
-              <SelectItem value={"100"}>100</SelectItem>
-            </SelectContent>
-          </Select> */}
-
           <div className="max-w-[335px] w-full">
             <Search
               placeholder={lang.profile_filter.search}
@@ -105,11 +90,9 @@ export default function ProfileFilter({ lang }: { lang: any }) {
           </div>
         </div>
 
-        {/* <div className="flex items-end">
-          <InviteExperts
-            lang={lang}
-          />
-        </div> */}
+        <div className="flex items-end">
+          <InviteExperts lang={lang} />
+        </div>
       </div>
     </Card>
   );
