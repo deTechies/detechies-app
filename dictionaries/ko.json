@@ -104,7 +104,15 @@
     "search": "찾으시는 이름으로 검색해주세요.", 
     "filter": "전체 직무",
     "sort": "Sort",
-    "info_text": "혹시 찾고 계신 전문가가 없으신가요?"
+    "info_text": "혹시 찾고 계신 전문가가 없으신가요?",
+    "popup_title": "내가 아는 전문가 평판 조회하기",
+    "popup_desc": "평판을 알아보고 싶은 전문가의 이름과 이메일만 입력하고 요청해주세요. 해당 전문가분에게 평판 등록 요청 메일이 전송된 후, 평균 4일 내로 평판을 확인하실 수 있어요.",
+    "name": "이름",
+    "name_placeholder": "조회할 전문가의 이름을 입력해주세요.",
+    "email": "이메일",
+    "email_placeholder": "조회할 전문가의 이메일을 입력해주세요.",
+    "reject": "나중에 할게요",
+    "request": "조회 요청하기"
   },
   "profile_detail_card": {
     "example": "example",
@@ -829,7 +837,7 @@
           "request_date": "요청한 날짜",
           "actions": "승인 여부",
           "all_accept": "모두 승인하기",
-          "announce_invite": "초대 알리기",
+          "announce_invite": "초대 알림 보내기",
           "search": "닉네임 또는 직업을 검색해보세요.",
           "no_result": "검색 결과가 없습니다.",
           "waiting": "대기 중",

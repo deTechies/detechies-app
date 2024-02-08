@@ -30,12 +30,8 @@ export default function InvitingMemberListItem({
     setSendLoading(true);
 
     const result = await postServer(`/members/remind/${profile.id}`, "");
-    console.log(result);
-    // if (result.status === "success") {
-    //   router.refresh();
-    // } else {
-      setSendLoading(false);
-    // }
+
+    setSendLoading(false);
 
     toast({
       title: result.status,

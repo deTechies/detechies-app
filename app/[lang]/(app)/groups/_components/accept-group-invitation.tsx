@@ -41,23 +41,19 @@ export default function AcceptGroupInvitation({
   };
 
   const rejectInvitation = async () => {
-    // setLoading(true);
-    // const result = await postServer(`/members/reject/invite/${id}`, "");
+    setLoading(true);
+    const result = await postServer(`/members/reject/invite/${id}`, "");
     
-    // console.log(result);
-    // setLoading(false);
-    // if(result.status == "success") {
+    if(result.status == "success") {
       router.push("/groups");
+    } else {
+      setLoading(false);
+    }
 
-    // } else {
-    //   console.log("TEST");
-    //   setLoading(false);
-    // }
-
-    // toast({
-    //   title: result.status,
-    //   description: result.message,
-    // });
+    toast({
+      title: result.status,
+      description: result.message,
+    });
   };
 
   const doItLater = async () => {

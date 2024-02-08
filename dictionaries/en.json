@@ -105,8 +105,14 @@
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
-    "info_text": "You can search for profiles by name, profession, or skills."
-    
+    "info_text": "You can search for profiles by name, profession, or skills.",
+    "popup_title": "Look up the reputation of professionals you know",
+    "popup_desc": "Just enter the name and email of the expert whose reputation you'd like to check. The expert will be sent a request to register their reputation, and you can check their reputation in an average of 4 days.",    "name": "Name",
+    "name_placeholder": "Please enter the name of the expert to look up",
+    "email": "Email",
+    "email_placeholder": "Please enter the email of the expert to look up.",
+    "reject": "Do it later",
+    "request": "Request to view"
   },
   "profile_detail_card": {
     "example": "example", 
@@ -344,7 +350,7 @@
         "reject": "Reject",
         "accept": "Accept",
         "position": "Position",
-        "send_note": "Send Note",
+        "send_note": "Send Noti",
         "just_now_joined": "Just now",
         "min_ago_joined": "minutes ago",
         "hour_ago_joined": "hours ago",
@@ -833,7 +839,7 @@
           "request_date": "Date",
           "actions": "Status",
           "all_accept": "Accept All",
-          "announce_invite": "Announce",
+          "announce_invite": "Send Noti",
           "search": "Search by Nickname or Profession",
           "no_result": "No result",
           "waiting": "Waiting",
