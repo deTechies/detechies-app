@@ -6,13 +6,18 @@ import SessionProvider from "@/lib/SessionProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
-import { WagmiConfig, WindowProvider, configureChains, createConfig } from "wagmi";
+import {
+  WagmiConfig,
+  WindowProvider,
+  configureChains,
+  createConfig,
+} from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
 
+import PushProvider from "@/lib/usePushProtocol";
 import type { WepinConnectorOptions } from "@wepin/wagmi-connector";
 import { WepinConnector } from "@wepin/wagmi-connector";
-
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
@@ -21,7 +26,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 
 declare global {
   interface Window {
-    ethereum?: WindowProvider
+    ethereum?: WindowProvider;
   }
 }
 
@@ -45,11 +50,9 @@ export const web3AuthInstance =
 
 // Wepin
 
-
-
 const testAppKey = "ak_test_YwTTMVZ0M6PXZQxEqdpeJ9kMGVuZUPLVZJxxfqEFDj1";
 export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
-// const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키 
+// const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키
 // const testAppId = 'app_id_eg12sf3491azgs520' // 테스트용 앱 ID
 
 const wepin_key = process.env.NEXT_PUBLIC_WEPIN_APP;
@@ -60,7 +63,7 @@ const wepin_prod_app = process.env.WEPIN_PROD_APP_ID;
 
 const connectorOptions: WepinConnectorOptions = {
   appId: wepin_app || wepin_prod_app || testAppId,
-  appKey: wepin_key || wepin_prod_key|| testAppKey,
+  appKey: wepin_key || wepin_prod_key || testAppKey,
   defaultChainId: 80001,
 };
 
@@ -90,15 +93,14 @@ const config = createConfig({
   webSocketPublicClient,
 });
 
-
-
 export default function App({ children }: { children: any }) {
-
   return (
     <WagmiConfig config={config}>
       <SessionProvider>
-        {children}
-        <Toaster />
+        <PushProvider>
+          {children}
+          <Toaster />
+        </PushProvider>
       </SessionProvider>
       <Analytics />
     </WagmiConfig>

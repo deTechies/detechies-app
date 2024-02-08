@@ -1,7 +1,9 @@
+import UserChat from "@/components/extra/chat/user-chat";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
+import { Address } from "wagmi";
 
 export default function UserProfile({
   profile,
@@ -58,6 +60,7 @@ export default function UserProfile({
           </a>
         </div>
       </div>
+      <UserChat to={profile.address as Address} />
     </Card>
   );
 }

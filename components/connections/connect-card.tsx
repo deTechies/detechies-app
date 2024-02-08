@@ -37,9 +37,11 @@ export default function ConnectCard({
     const postData = JSON.stringify({
       social: item.connection,
       user_id: user.id,
-      display_name: user.name,
+      display_name: user.display_name,
       verified: true,
     });
+    
+    //do it differently and get the right profile with more detailed information
     const result = await postServer("/socials", postData);
 
     if (result) {
@@ -77,6 +79,8 @@ export default function ConnectCard({
         connected ? (
           <>
           <p className="text-title_s">{user.display_name}</p>
+          <div className="flex gap-2">
+            
           <Button
             className="text-label_s text-text-primary"
             size="sm"
@@ -93,7 +97,9 @@ export default function ConnectCard({
           }
           >
             Change
-          </Button>
+          </Button>  
+          </div>
+          
           </>
         ) : (
           <>

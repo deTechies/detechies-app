@@ -118,7 +118,10 @@ export const authOptions = {
               accessToken: account.access_token,
               expires: expirationTime,
               account: account,
-              user: user,
+              user: {
+                ...user, 
+                name: user.firstname + " " + user.lastname,
+              }
             };
             token.web3 = sessionData;
           case "github":
@@ -127,10 +130,7 @@ export const authOptions = {
               accessToken: account.access_token,
               expires: expirationTime,
               account: account,
-              user: {
-                ...user,
-                name: user.login,
-              }
+              user: user
             };
             token.web3 = sessionData;
             break;
