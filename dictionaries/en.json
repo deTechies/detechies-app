@@ -212,7 +212,7 @@
         "type_dsc": "Select a type",
         "describe_dsc": "Tell more about your project",
         "category_dsc": "Type and press enter",
-        "tooltip_public": "All users on CareerGen can view the project",
+        "tooltip_public": "All users on Careerzen can view the project",
         "tooltip_private": "Only project members can view the project",
         "tooltip_group": "Only project and group members can view the project",
         "select_group": {
@@ -381,9 +381,12 @@
       },
       "invited_to_project": {
         "title": "You have been invited to the project!",
-        "desc": "To see more about the project please accept the membership.",
+        "desc": "Join a project and register your tolerance - you'll be evaluated by your teammates and your career will be solidly validated!",
         "reject": "Reject",
-        "accept": "Accept"
+        "accept": "Accept",
+        "popup_title": "Do you want to decline the project invitation?",
+        "popup_content": "If you decline the invitation now, you won't have a chance to accept it again. If you'd like to think about it a bit more, please click “Do it later”",
+        "later": "Do it later"
       },
       "role_type": {
         "admin": "Admin",
@@ -634,7 +637,7 @@
       "created": "Created",
       "joined": "Joined",
       "search_placeholder": "Search for a group name.",
-      "agency": "Corporation Verified",
+      "agency": "Company Verified",
       "authority": "Authority Verified",
       "education": "School Verified",
       "community": "Community",
@@ -671,9 +674,9 @@
         "cancel": "Cancel",
         "create_group": "Create",
         "dialog_title": "Group creation request successful!",
-        "dialog_desc": "The CareerGen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
+        "dialog_desc": "The Careerzen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
         "dialog_email": "Email to receive authentication process instructions",
-        "dialog_information": "If you have any questions, please contact the CareerGen Support Team.",
+        "dialog_information": "If you have any questions, please contact the Careerzen Support Team.",
         "dialog_information2": "Robin@Careerzen.org",
         "ok": "I understand",
         "wait_for_auth": "Waiting for auth..",
@@ -751,6 +754,15 @@
           "back": "Go Back",
           "send": "Request to Join"
         }
+      },
+      "invited_to_group": {
+        "title": "You've been asked to join a group!",
+        "desc": "Join the group and become an influencer on Careerzen!",
+        "reject": "Reject",
+        "accept": "Accept",
+        "popup_title": "Do you want to reject joining the group?",
+        "popup_content": "If you decline the invitation now, you won't have a chance to accept it again. If you'd like to think about it a bit more, please click “Do it later”",
+        "later": "Do it later"
       },
       "about": {
         "all": "View All",
