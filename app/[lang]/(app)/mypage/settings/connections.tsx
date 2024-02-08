@@ -35,7 +35,7 @@ export default async function ConnectionsList({
 
   // we want to check if the session contains web3.[network] and if it does, we want to set the connected and verified to true
   // we also want to check if the session contains github or twitter and if it does, we want to set the connected and verified to true
-  const isConnectionSaved = (network: string, display_name: string) => {
+  const isConnectionSaved = (network: string, display_name?: string) => {
     // Check if the connection is saved in the database
     const connection = connections.find((conn: any) => conn.social === network && conn.display_name === display_name);
     console.log(connection)
@@ -46,16 +46,25 @@ export default async function ConnectionsList({
     // Check for web3 connections
   
     // Check for GitHub connection
-    if (network.name === 'github' && session.web3?.github) {
-      return {
-        ...network,
-        verified: isConnectionSaved('twitter', session.web3.github.user.name),
-        connected: true, // Assuming there's a verified field; adjust as needed
-        user: {
-          display_name: session.web3.github.user.name, // Adjust according to your session structure
-          id: session.web3.github.user.id,
-        },
-      };
+    if (network.name === 'github' ) {
+      if(session.web3?.github) {
+        return {
+          ...network,
+          verified: isConnectionSaved('github', session.web3?.github?.user.name),
+          connected: true, // Assuming there's a verified field; adjust as needed
+          user: {
+            display_name: session.web3.github.user.name, // Adjust according to your session structure
+            id: session.web3.github.user.id,
+          },
+        };
+      }
+      else {
+        return {
+          ...network,
+          connected: false,
+          verified: isConnectionSaved('github'),
+        };
+      }
     }
   
     // Check for Twitter connection

@@ -44,7 +44,7 @@ export default function ConnectCard({
 
     if (result) {
       toast({
-        description: "verified your account congratutations",
+        description: "You successfully verified your account, Congratutations",
       });
       router.refresh();
       return;
@@ -84,6 +84,15 @@ export default function ConnectCard({
             onClick={verifyMe}
           >
             Verify
+          </Button>
+          <Button size="sm" variant="secondary" 
+           onClick={() =>
+            signIn(item.connection, {
+              callbackUrl: `http://localhost:3000/${pathName}`,
+            })
+          }
+          >
+            Change
           </Button>
           </>
         ) : (
