@@ -22,6 +22,7 @@ export default async function GroupDetailLayout({
       <main className="w-full m-8">
         <AcceptGroupInvitation
           id={params.address}
+          name={data.name}
           image={data.image}
           lang={dictionary}
         />

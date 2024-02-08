@@ -48,7 +48,7 @@
       "admin_evalu": "Administrator evaluation",
       "member_evalu": "Member evaluation",
       "client_evalu": "Client evaluation",
-      "view": "View"
+      "view": "Request to View"
     },
     "report_popup": {
       "title": "View reputation report",
@@ -105,8 +105,14 @@
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
-    "info_text": "You can search for profiles by name, profession, or skills."
-    
+    "info_text": "You can search for profiles by name, profession, or skills.",
+    "popup_title": "Look up the reputation of professionals you know",
+    "popup_desc": "Just enter the name and email of the expert whose reputation you'd like to check. The expert will be sent a request to register their reputation, and you can check their reputation in an average of 4 days.",    "name": "Name",
+    "name_placeholder": "Please enter the name of the expert to look up",
+    "email": "Email",
+    "email_placeholder": "Please enter the email of the expert to look up.",
+    "reject": "Do it later",
+    "request": "Request to view"
   },
   "profile_detail_card": {
     "example": "example", 
@@ -138,12 +144,13 @@
       "alert_title": "Complete privacy protection",
       "alert_body": "All personal information is stored encrypted and remains private, and can only be seen by others with your permission.",
       "accordion": {
+        "agree_with_all": "Agree with all",
         "terms_of_services": "Terms of Services (required)",
         "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "Privacy Policy (required)",
         "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "In-app notification (optional)",
-        "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+        "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more"
       },
       "cancel": "Cancel",
       "next": "Create Profile",
@@ -152,6 +159,7 @@
         "desc": "We have send you an email to",
         "desc2": "with a 6-digit code. You can use this code to verify your email address.",
         "resend": "resend",
+        "sign_out": "Sign out",
         "code": "Verification code",
         "code_placeholder": "Enter 6-digit code"
       },
@@ -185,11 +193,6 @@
         "hackathon": "Hackathon",
         "other": "Other"
       },
-      "privacy_type": {
-        "public": "All users",
-        "private": "Private",
-        "group": "Group members"
-      },
       "search": "Search",
       "my_project": "My Project",
       "no_projects_found": "No projects found",
@@ -215,7 +218,7 @@
         "type_dsc": "Select a type",
         "describe_dsc": "Tell more about your project",
         "category_dsc": "Type and press enter",
-        "tooltip_public": "All users on CareerGen can view the project",
+        "tooltip_public": "All users on Careerzen can view the project",
         "tooltip_private": "Only project members can view the project",
         "tooltip_group": "Only project and group members can view the project",
         "select_group": {
@@ -347,7 +350,7 @@
         "reject": "Reject",
         "accept": "Accept",
         "position": "Position",
-        "send_note": "Send Note",
+        "send_note": "Send Noti",
         "just_now_joined": "Just now",
         "min_ago_joined": "minutes ago",
         "hour_ago_joined": "hours ago",
@@ -384,9 +387,12 @@
       },
       "invited_to_project": {
         "title": "You have been invited to the project!",
-        "desc": "To see more about the project please accept the membership.",
+        "desc": "Join a project and register your tolerance - you'll be evaluated by your teammates and your career will be solidly validated!",
         "reject": "Reject",
-        "accept": "Accept"
+        "accept": "Accept",
+        "popup_title": "Do you want to decline the project invitation?",
+        "popup_content": "If you decline the invitation now, you won't have a chance to accept it again. If you'd like to think about it a bit more, please click “Do it later”",
+        "later": "Do it later"
       },
       "role_type": {
         "admin": "Admin",
@@ -637,7 +643,7 @@
       "created": "Created",
       "joined": "Joined",
       "search_placeholder": "Search for a group name.",
-      "agency": "Corporation Verified",
+      "agency": "Company Verified",
       "authority": "Authority Verified",
       "education": "School Verified",
       "community": "Community",
@@ -674,13 +680,20 @@
         "cancel": "Cancel",
         "create_group": "Create",
         "dialog_title": "Group creation request successful!",
-        "dialog_desc": "The CareerGen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
+        "dialog_desc": "The Careerzen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
         "dialog_email": "Email to receive authentication process instructions",
-        "dialog_information": "If you have any questions, please contact the CareerGen Support Team.",
+        "dialog_information": "If you have any questions, please contact the Careerzen Support Team.",
+        "dialog_information2": "Robin@Careerzen.org",
         "ok": "I understand",
         "wait_for_auth": "Waiting for auth..",
         "contact": "Contact Us"
       }
+    },
+    "accept_group_invitation": {
+      "title": "You have been invited to the group",
+      "desc": "To see more about the project please accept the membership",
+      "reject": "Reject",
+      "Accept": "Accept"
     },
     "details": {
       "profile_card": {
@@ -747,6 +760,15 @@
           "back": "Go Back",
           "send": "Request to Join"
         }
+      },
+      "invited_to_group": {
+        "title": "You've been asked to join a group!",
+        "desc": "Join the group and become an influencer on Careerzen!",
+        "reject": "Reject",
+        "accept": "Accept",
+        "popup_title": "Do you want to reject joining the group?",
+        "popup_content": "If you decline the invitation now, you won't have a chance to accept it again. If you'd like to think about it a bit more, please click “Do it later”",
+        "later": "Do it later"
       },
       "about": {
         "all": "View All",
@@ -817,7 +839,7 @@
           "request_date": "Date",
           "actions": "Status",
           "all_accept": "Accept All",
-          "announce_invite": "Announce",
+          "announce_invite": "Send Noti",
           "search": "Search by Nickname or Profession",
           "no_result": "No result",
           "waiting": "Waiting",
@@ -979,7 +1001,8 @@
       "none": "None"
     },
     "privacy_type": {
-      "public": "All users",
+      "all": "All",
+      "public": "Public",
       "private": "Private",
       "group": "Group members"
     },
@@ -992,7 +1015,7 @@
     }
   },
   "footer": {
-    "copywrite": "© 2021 CareerZen. All rights reserved.",
+    "copywrite": "© 2024 Careerzen. All rights reserved.",
     "terms_and_conditions": "Terms of Service",
     "privacy_policy": "Privacy Policy",
     "whitepaper": "Whitepaper",
@@ -1087,6 +1110,30 @@
     "rate_requirements": "Requirements",
     "rate_time_schedule": "Schedule",
     "good_team_player": "Teamwork",
-    "rate_contributions": "Contributions"
+    "rate_contributions": "Contributions",
+    "Knowledge": "Knowledge",
+    "Communication": "Communication",
+    "Technical Proficiency": "Technical Proficiency",
+    "Project achievements": "Project achievements",
+    "propensity": "Propensity",
+    "Situation": "Situation",
+    "Work Orientation": "Work Orientation",
+    "General Tendency": "General Tendency"
+  },
+  "validation": {
+    "onboard": {
+      "username": {
+        "already_use": "The username is already in use. Please use a different username.",
+        "require": "Enter your username.",
+        "min": "Please use 2-20 characters with no spaces.",
+        "max": "Please use 2-20 characters with no spaces.",
+        "regex": "Please use 2-20 characters with no spaces."
+      },
+      "email": {
+        "already_use": "The email is already in use. Please use a different email.",
+        "require": "Enter your email.",
+        "email": "Please enter a valid email address."
+      }
+    }
   }
 }

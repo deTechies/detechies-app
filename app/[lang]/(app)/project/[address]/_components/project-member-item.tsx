@@ -50,35 +50,43 @@ export default async function ProjectMemberItem({
         <div className="flex items-start gap-4 truncate grow">
           <div className="flex flex-col h-full gap-4 truncate grow shrink">
             <header className="flex flex-wrap items-center justify-between h-full gap-3">
-              <h5 className="text-title_m">
-                {details.user?.display_name} |{" "}
-                 {lang.interface.role_type[details.role]}
-                {details.works.length < 1 ? (
-                  <Badge shape="sm" className="px-1.5 py-0.5 ml-3">
-                    {lang.project.details.members.unregistered}
-                  </Badge>
-                ) : (
-                  <Badge shape="sm" className="px-1.5 py-0.5 ml-3">
-                    {lang.project.details.members.registered} (
-                    {details.works.length})
-                  </Badge>
-                )}
-              </h5>
+              <div className="flex gap-3">
+                <h5 className="text-title_m">
+                  {details.user?.display_name} |{" "}
+                  {lang.interface.role_type[details.role]}
+                </h5>
+                
+                <Badge shape="sm" className="px-1.5 py-0.5">
+                  {details.works.length < 1
+                    ? lang.project.details.members.unregistered
+                    : `${lang.project.details.members.registered} (${details.works.length})`}
+                </Badge>
+              </div>
 
               <div className="flex items-center gap-3 ml-auto shrink-0">
                 {session?.web3.address == details.user.wallet ? (
                   <>
                     {userRole != "client" && details.works.length < 1 && (
-                    /*   <AddProjectContribution
+                      /*   <AddProjectContribution
                         project={details.project}
                         lang={lang}
                       /> */
-                       <ProjectContribution project={details.project} lang={lang}/>
+                      <ProjectContribution
+                        project={details.project}
+                        lang={lang}
+                      />
                     )}
                     {details.works.length > 0 && (
                       <div className="flex gap-3">
-                        <ProjectContribution project={details.project} lang={lang} defaultValues={details.works[0]}/>
-                        <DeleteWorks projectId={details.works[0].workId} lang={lang} />
+                        <ProjectContribution
+                          project={details.project}
+                          lang={lang}
+                          defaultValues={details.works[0]}
+                        />
+                        <DeleteWorks
+                          projectId={details.works[0].workId}
+                          lang={lang}
+                        />
                       </div>
                     )}
                   </>
@@ -108,14 +116,12 @@ export default async function ProjectMemberItem({
                             {/*    <DropdownMenuItem>
                               {lang.project.details.members.delegate_admin}
                             </DropdownMenuItem> */}
-                            {
-                              userRole == "admin" &&
+                            {userRole == "admin" && (
                               <DeleteMember
-                              memberId={details.memberId}
-                              lang={lang}
-                            />
-                            }
-                           
+                                memberId={details.memberId}
+                                lang={lang}
+                              />
+                            )}
                           </div>
                         </DropdownMenuContent>
                       </DropdownMenu>

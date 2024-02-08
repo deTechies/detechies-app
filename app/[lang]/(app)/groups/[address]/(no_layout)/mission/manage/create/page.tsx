@@ -32,7 +32,7 @@ export default async function CreateMissionPage({
 
   return (
     // Temporarily insert fixed values ​​(to work with grid later)
-    <main className="m-8  w-full max-w-[60rem] flex">
+    <main className="w-full max-w-[60rem] flex">
       <Wizard
         clubId={params.address}
         achievements={achievements.data}

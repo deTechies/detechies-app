@@ -34,6 +34,8 @@ import { postServer } from "@/lib/data/postRequest";
 import { addMembersWork } from "@/lib/data/project";
 import { PROFESSION_TYPE, Project } from "@/lib/interfaces";
 import { useRef, useState } from "react";
+import ProfessionTagType from "@/components/extra/profession-tag-type";
+import { X } from "lucide-react";
 
 const contributionFormSchema = z.object({
   begin_date: z.string(),
@@ -50,7 +52,7 @@ const contributionFormSchema = z.object({
 
 export type ContributionFormData = z.infer<typeof contributionFormSchema>;
 
-export default function ProjectContributionInviteForm({
+export default function ProjectContributionForm({
   project,
   lang,
   workDetails,
@@ -103,6 +105,15 @@ export default function ProjectContributionInviteForm({
 
   const handleNewTagChange = (e: any) => {
     setNewTag(e.target.value);
+  };
+
+  const clickTagsBadge = (_job_item: string) => {
+    const currentTags = form.getValues("tags") || [];
+    !currentTags.includes(_job_item.trim()) &&
+      form.setValue("tags", [...currentTags, _job_item.trim()], {
+        shouldValidate: true,
+      });
+    setNewTag(""); // Clear the input field for new tag
   };
 
   const onSubmit = async (values: ContributionFormData) => {
@@ -248,9 +259,11 @@ export default function ProjectContributionInviteForm({
               </div>
             </div>
 
-            <FormItem>
+            <FormItem className="space-y-">
               <FormLabel>
-                {lang.project.details.members.add_works.detail_work}
+                <div className="mb-2">
+                  {lang.project.details.members.add_works.detail_work}
+                </div>
               </FormLabel>
 
               <FormControl>
@@ -265,22 +278,41 @@ export default function ProjectContributionInviteForm({
                 />
               </FormControl>
 
-              <div className="flex flex-wrap gap-3">
-                {/* py-4 px-5 border border-border-div rounded-sm */}
-                {form.watch("tags")?.map((tag: any, index) => (
-                  <Badge
-                    key={index}
-                    shape="outline"
-                    variant="accent"
-                    onClick={() => {
-                      const currentTags = form.getValues("tags") || [];
-                      const newTags = currentTags.filter((t) => t !== tag);
-                      form.setValue("tags", newTags, { shouldValidate: true });
-                    }}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
+              {newTag && (
+                <ProfessionTagType
+                  newTag={newTag}
+                  onClickJobBadge={clickTagsBadge}
+                  category="skill"
+                ></ProfessionTagType>
+              )}
+
+              <div className="flex flex-wrap items-start gap-2 mt-3">
+                {form.getValues("tags") &&
+                  form.getValues("tags")?.map((tag, index) => (
+                    <Badge
+                      key={index}
+                      variant="secondary"
+                      shape="md"
+                      className="flex items-center gap-1.5 max-w-[200px]"
+                    >
+                      <div className="flex">
+                        <div className="w-full truncate">{tag}</div>
+
+                        <X
+                          className="w-5 h-5 cursor-pointer"
+                          onClick={() => {
+                            const currentTags = form.getValues("tags") || [];
+                            const newTags = currentTags.filter(
+                              (t) => t !== tag
+                            );
+                            form.setValue("tags", newTags, {
+                              shouldValidate: true,
+                            });
+                          }}
+                        ></X>
+                      </div>
+                    </Badge>
+                  ))}
               </div>
             </FormItem>
 

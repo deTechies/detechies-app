@@ -22,8 +22,8 @@ const IPFSImageLayer: React.FC<IPFSImageLayerProps> = ({ hashes, className }) =>
                     alt={`Layer ${url}`} 
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
                     className={`${className==='rounded-full' ? `rounded-full` : `rounded-sm   ${className}`}`}
-                    width={100}
-                    height={100}
+                    width={300}
+                    height={300}
                     priority={true}
                 />
             ))

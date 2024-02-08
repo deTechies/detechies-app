@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
+import { beginEndDates, formatDate } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -31,12 +31,11 @@ export default function ProjectDetailItem({
     <Link href={`${data.link}`} >
       <Card >
       <div className="flex w-full gap-5">
-        <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square rounded-[6px] flex justify-center items-center">
+        <figure className="relative bg-background-layer-2 w-20 h-20 aspect-square overflow-hidden shrink-0 rounded-[6px] flex justify-center items-center">
           <Image
             src={`https://ipfs.io/ipfs/`+data.image}
             alt="Project Image"
-            objectFit="cover"
-            className="rounded-sm"
+            className="object-cover rounded-sm"
             width={80}
             height={80}
           />
@@ -50,30 +49,31 @@ export default function ProjectDetailItem({
               </h5>
 
               <div className="flex items-center gap-3 shrink-0">
-              <Badge>{lang?.evaluation} (0)</Badge>
+              <Badge>{lang?.mypage.project.evaluation} (0)</Badge>
               </div>
             </header>
               <div className="flex flex-col flex-wrap gap-5">
                 <div className="flex flex-col items-start justify-start gap-4 md:flex-row text-text-secondary">
-                  <div className="flex flex-col items-start justify-start gap-2">
-                    <div className="divide-x shrink-0">
-                      <span className="pr-2 capitalize text-label_m">
+                  <div className="flex flex-col items-start justify-start gap-2 shrink-0">
+                    <div className="divide-x shrink-0 text-label_m">
+                      <span className="pr-2 capitalize">
                         {" "}
                         {data?.role &&
-                          lang?.interface?.profession_type[data?.role]}
+                          lang?.interface?.profession_type[data?.role] || "Unknown"}
                       </span>
-                      <span className="pl-2 text-label_m shrink-0">
-                        {data.contribution}%
+
+                      <span className="pl-2 shrink-0">
+                        {data.contribution || 0}%
                       </span>
                     </div>
+                    
                     <span className="text-label_m shrink-0">
-                      {formatDate(data.begin_date)} ~{" "}
-                      {data.end_date ? formatDate(data.end_date) : "Present"}
+                      {beginEndDates(data.begin_date, data.end_date)}
                     </span>
                   </div>
 
-                  <div className="grow line-clamp-3">
-                    <span className="text-label_m">{data.description}</span>
+                  <div className="break-all line-clamp-2 text-label_m whitespace-break-spaces">
+                    <span>{data.description}</span>
                   </div>
                 </div>
 

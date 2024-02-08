@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ConnectionCard from "./connections-card";
 const networks = [
   {
@@ -15,12 +15,12 @@ const networks = [
     image: "/icons/instagram.png",
     name: "instagram",
     link: "https://www.instagram.com/",
-  }, 
+  },
   {
     image: "/icons/github.png",
     name: "github",
     link: "https://www.github.com/",
-  }
+  },
 ];
 interface Identity {
   platform: string;
@@ -49,9 +49,15 @@ export default function Connections({
 
   //const {data} = await getUserConnections(address);
   return (
-    <section className={`flex flex-wrap justify-between gap-2 2xl:gap-5`}>
+    <section className={`flex flex-wrap justify-between gap-5`}>
       {networks.map((network: any, key: number) => (
-        <ConnectionCard key={key} logoSrc={network.image} logoAlt={network.name} label={network.name} sublabel={"Coming soon"}/>
+        <ConnectionCard
+          key={key}
+          logoSrc={network.image}
+          logoAlt={network.name}
+          label={network.name}
+          sublabel={"Coming soon"}
+        />
       ))}
     </section>
   );

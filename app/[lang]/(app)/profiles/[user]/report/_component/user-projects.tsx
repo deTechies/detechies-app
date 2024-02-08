@@ -1,15 +1,25 @@
 import { Card } from "@/components/ui/card";
 import { CommonProjectItem, TotalProjectItem } from "./project-item";
+import { serverApi } from "@/lib/data/general";
 
 export default async function UserProjects({
   lang,
-  projects,
-  selectedProject,
+  user,
+  project
 }: {
   lang: any;
-  projects: any;
-  selectedProject: any;
+  user: any;
+  project: string;
 }) {
+
+  const { data: projects } = await serverApi(
+    `/project-work/${user}/finished`
+  );
+
+  const selectedProject = projects.find(
+    (projectItem: any) => projectItem.project.id === project
+  );
+
   return (
     <Card className="flex gap-0 px-8 pb-8 pt-7">
       <h3 className="mb-4 text-subhead_s">

@@ -14,6 +14,7 @@ import { PROFESSION_TYPE } from "@/lib/interfaces";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
+import InviteExperts from "./invite_experts";
 
 export default function ProfileFilter({ lang }: { lang: any }) {
   const router = useRouter();
@@ -104,11 +105,11 @@ export default function ProfileFilter({ lang }: { lang: any }) {
           </div>
         </div>
 
-        <div className="flex items-end">
-          <div className="underline text-border-input">
-            {lang.profile_filter.info_text}
-          </div>
-        </div>
+        {/* <div className="flex items-end">
+          <InviteExperts
+            lang={lang}
+          />
+        </div> */}
       </div>
     </Card>
   );

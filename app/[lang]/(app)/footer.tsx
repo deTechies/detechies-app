@@ -19,23 +19,23 @@ export default async function Footer({ lang }: { lang: any }) {
         height={60}
         alt={"Logo"}
       />
-      <div className="flex flex-wrap items-center justify-center my-5 text-title_m text-text-secondary">
-        <Link href="#" className="px-4 hover:text-accent-primary">
+      <div className="flex flex-wrap items-center justify-center text-title_m text-text-secondary">
+        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.terms_and_conditions}
         </Link>
-        <Link href="#" className="px-4 hover:text-accent-primary">
+        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.faq}
         </Link>
-        <Link href="#" className="px-4 hover:text-accent-primary">
+        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.privacy_policy}
         </Link>
-        <Link href="#" className="px-4 hover:text-accent-primary">
+        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.whitepaper}
         </Link>
-        <Link href="#" className="px-4 hover:text-accent-primary">
+        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.contact_us}
         </Link>
-        <Link href="#" className="px-4 hover:text-accent-primary">
+        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.user_guide}
         </Link>
       </div>
@@ -72,7 +72,7 @@ export default async function Footer({ lang }: { lang: any }) {
           </Link>
         </div>
       </div>
-      <p className="text-text-secondary text-body_m">{lang.footer.copywrite}</p>
+      <p className="text-center text-text-secondary text-body_m">{lang.footer.copywrite}</p>
     </div>
   );
 }

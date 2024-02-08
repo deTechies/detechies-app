@@ -32,12 +32,18 @@ function TotalProjectItem({
   );
 
   const oldestDate = projects.reduce((oldest, current) => {
-    return new Date(oldest.begin_date) < new Date(current.begin_date) ? oldest : current;
-  }, projects[0]).begin_date;
+    if (!oldest.begin_date || !current.begin_date) return undefined;
+    return new Date(oldest.begin_date) < new Date(current.begin_date)
+      ? oldest
+      : current;
+  }, projects[0])?.begin_date;
 
   const latestDate = projects.reduce((oldest, current) => {
-    return new Date(oldest.end_date) < new Date(current.end_date) ? oldest : current;
-  }, projects[0]).end_date;
+    if (!oldest.end_date || !current.end_date) return undefined;
+    return new Date(oldest.end_date) < new Date(current.end_date)
+      ? oldest
+      : current;
+  }, projects[0])?.end_date;
 
   return (
     <div
@@ -51,11 +57,14 @@ function TotalProjectItem({
       </h4>
 
       <div className="mb-2 text-label_m text-text-secondary">
-        {lang.profile.statistics.total_career}: {beginEndDates(oldestDate, latestDate)}
+        {lang.profile.statistics.total_career}:{" "}
+        {beginEndDates(oldestDate, latestDate)}
       </div>
 
       <div className="flex items-center gap-2">
-        <span>{lang.profile.statistics.total_evaluation} ({totalEvaluationCount})</span>
+        <span>
+          {lang.profile.statistics.total_evaluation} ({totalEvaluationCount})
+        </span>
 
         {/* <div className="flex flex-wrap gap-2">
           
@@ -135,10 +144,7 @@ function CommonProjectItem({
 
           <div className="mb-2 text-label_m text-text-secondary">
             {lang.profile.statistics.work_period}:{" "}
-            {beginEndDates(
-              project?.begin_date,
-              project?.end_date
-            )}
+            {beginEndDates(project?.begin_date, project?.end_date)}
           </div>
 
           <div className="mb-2 text-label_m text-text-secondary">

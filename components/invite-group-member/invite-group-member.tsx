@@ -56,8 +56,17 @@ export default function InviteGroupMember({
     setCompleteInviting(false);
   };
 
+
+
+  const onOpenChange = (open: boolean) => {
+    if(!open) {
+      setSelected(null);
+      setCompleteInviting(false);
+    }
+  }
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={onOpenChange}>
       <DialogTrigger className="max-w-[212px] grow rounded-full">
         <Button size="lg" variant="primary" className="w-full">
           {lang.details.profile_card.invite.invite_member}

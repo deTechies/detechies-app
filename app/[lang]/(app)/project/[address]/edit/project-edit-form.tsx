@@ -9,6 +9,7 @@ import { uploadContent } from "@/lib/upload";
 import { updateProject } from "@/lib/data/project";
 
 import MediaUploader from "@/components/extra/media-uploader";
+import ProfessionTagType from "@/components/extra/profession-tag-type";
 
 import Image from "@/components/ui/image";
 import { Card } from "@/components/ui/card";
@@ -103,15 +104,25 @@ export default function ProjectEditForm({
     if (e.key === "Enter" && newTag.trim() !== "") {
       e.preventDefault();
       const currentTags = form.getValues("tags") || [];
-      form.setValue("tags", [...currentTags, newTag.trim()], {
-        shouldValidate: true,
-      });
+      !currentTags.includes(newTag.trim()) &&
+        form.setValue("tags", [...currentTags, newTag.trim()], {
+          shouldValidate: true,
+        });
       setNewTag(""); // Clear the input field for new tag
     }
   };
 
   const handleNewTagChange = (e: any) => {
     setNewTag(e.target.value);
+  };
+
+  const clickTagsBadge = (_job_item: string) => {
+    const currentTags = form.getValues("tags") || [];
+    !currentTags.includes(_job_item.trim()) &&
+      form.setValue("tags", [...currentTags, _job_item.trim()], {
+        shouldValidate: true,
+      });
+    setNewTag(""); // Clear the input field for new tag
   };
 
   async function onSubmit(data: ProfileFormValues) {
@@ -170,23 +181,21 @@ export default function ProjectEditForm({
     const fetchMyGroupsData = async () => {
       if (selectGroupDialog && myGroups.length < 1) {
         const result = await serverApi(`/clubs/my`);
-  
+
         if (result.status === "success") {
           setMyGroups(result.data);
         }
       }
     };
-  
+
     fetchMyGroupsData();
-
   }, [selectGroupDialog, myGroups.length]);
-  
-  useEffect(() => {
-    if(defaultValues?.end_date){
-      setPresent(false)
-    } else {
-      setPresent(true)
 
+  useEffect(() => {
+    if (defaultValues?.end_date) {
+      setPresent(false);
+    } else {
+      setPresent(true);
     }
   }, [defaultValues]);
 
@@ -387,30 +396,39 @@ export default function ProjectEditForm({
                   />
                 </FormControl>
 
-                
+                {newTag && (
+                  <ProfessionTagType
+                    newTag={newTag}
+                    onClickJobBadge={clickTagsBadge}
+                    category="project"
+                  ></ProfessionTagType>
+                )}
 
                 <div className="flex flex-wrap items-start gap-2 mt-3">
                   {form.getValues("tags") &&
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
                         key={index}
-                        variant="accent"
+                        variant="secondary"
                         shape="md"
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        <div className="w-full truncate">{tag}</div>
-                        <X
-                          className="w-5 h-5 cursor-pointer"
-                          onClick={() => {
-                            const currentTags = form.getValues("tags") || [];
-                            const newTags = currentTags.filter(
-                              (t) => t !== tag
-                            );
-                            form.setValue("tags", newTags, {
-                              shouldValidate: true,
-                            });
-                          }}
-                        ></X>
+                        <div className="flex">
+                          <div className="w-full truncate">{tag}</div>
+
+                          <X
+                            className="w-5 h-5 cursor-pointer"
+                            onClick={() => {
+                              const currentTags = form.getValues("tags") || [];
+                              const newTags = currentTags.filter(
+                                (t) => t !== tag
+                              );
+                              form.setValue("tags", newTags, {
+                                shouldValidate: true,
+                              });
+                            }}
+                          ></X>
+                        </div>
                       </Badge>
                     ))}
                 </div>

@@ -22,7 +22,6 @@ export default async function ProfilePage({
       <Suspense fallback={<ProfilesLoading />}>
         <ListProfiles lang={dictionary} searchParams={searchParams} />
       </Suspense>
-
     </main>
   );
 }

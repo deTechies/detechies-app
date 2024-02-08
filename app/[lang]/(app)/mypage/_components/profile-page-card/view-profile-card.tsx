@@ -16,7 +16,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
     return <AvatarUpdate profile={profile} />;
   }
   return (
-    <Card className="flex flex-col gap-5 w-full pt-[24px] pb-[28px] px-5 max-w-[376px]">
+    <Card className="flex flex-col gap-5 w-full pt-[24px] pb-[28px] px-5 md:max-w-[376px]">
       <div className="flex gap-4">
         <div className="relative w-[120px] aspect-square rounded-[8px] bg-background-layer-2">
           <IPFSImageLayer
