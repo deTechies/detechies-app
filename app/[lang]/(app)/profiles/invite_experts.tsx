@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import {
   Form,
@@ -55,28 +51,35 @@ export default function InviteExperts({ lang }: { lang: any }) {
   };
 
   async function onSubmit(data: InviteExpertsFormValues) {
-    
-    
-     setLoading(true);
-     
-     const postData = JSON.stringify({
-        name: data.name,
-        email: data.email,
-        message: "I would like to invite you to join careerzen, so we can join projects together.", 
-        entity_type: "users", 
-        entity_id: 0
-     });
-     const result = await postServer('/referral', postData);
-     if(result.status === "success") {
-         setOpenDialog(false);
-         form.reset();
-     }
-    
-     toast({
-         title: result.status,
-         description: result.message,
-       });
-     setLoading(false);
+    setLoading(true);
+
+    const postData = JSON.stringify({
+      name: data.name,
+      email: data.email,
+      message:
+        "I would like to invite you to join careerzen, so we can join projects together.",
+      entity_type: "users",
+      entity_id: 0,
+    });
+
+    let result = null;
+
+    try {
+      result = await postServer("/referral", postData);
+
+      if (result.status === "success") {
+        setOpenDialog(false);
+        form.reset();
+      }
+    } catch (error) {
+      //
+    } finally {
+      setLoading(false);
+      toast({
+        title: result.status,
+        description: result.message,
+      });
+    }
   }
 
   return (
