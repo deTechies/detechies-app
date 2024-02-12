@@ -11,7 +11,7 @@ import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import NoticeGroupSelect from "./notice-group-select";
-import ProfessionTagType from "@/components/extra/profession-tag-type"; 
+import ProfessionTagType from "@/components/extra/profession-tag-type";
 import SelectGroupInScope from "./select-group-in-scope";
 
 import { Badge } from "@/components/ui/badge";
@@ -124,6 +124,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
 
   const [selectGroupDialog, setSelectGroupDialog] = useState<boolean>(false);
   const [myGroups, setMyGroups] = useState<Club[]>([]);
+  const [myGroupsLoading, setMyGroupsLoading] = useState<boolean>(false);
   const [selectedGroup, setSelectedGroup] = useState<Club[]>([]);
   const [noticeGroupSelectOpen, setNoticeGroupSelectOpen] =
     useState<boolean>(false);
@@ -222,11 +223,13 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
   useEffect(() => {
     const fetchMyGroupsData = async () => {
       if (selectGroupDialog && myGroups.length < 1) {
+        setMyGroupsLoading(true);
         const result = await serverApi(`/clubs/my`);
 
         if (result.status === "success") {
           setMyGroups(result.data);
         }
+        setMyGroupsLoading(false);
       }
     };
 
@@ -450,9 +453,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >
                         <div className="flex">
-                          <div className="w-full truncate">
-                            {tag}
-                          </div>
+                          <div className="w-full truncate">{tag}</div>
 
                           <X
                             className="w-5 h-5 cursor-pointer"
@@ -551,7 +552,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                             myGroups={myGroups}
                             selectedGroup={selectedGroup}
                             onSelectGroup={onSelectGroup}
-                          ></SelectGroupInScope>
+                            loading={myGroupsLoading}
+                          />
                         </DialogContent>
                       </Dialog>
                     </>
@@ -568,23 +570,25 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                             className="gap-2 my-1.5"
                             key={index}
                           >
-                            <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
-                              <Image
-                                src={`https://ipfs.io/ipfs/${group.image}`}
-                                alt={group.name}
-                                width="20"
-                                height="20"
-                              ></Image>
-                            </div>
+                            <div className="flex gap-2">
+                              <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
+                                <Image
+                                  src={`https://ipfs.io/ipfs/${group.image}`}
+                                  alt={group.name}
+                                  width="20"
+                                  height="20"
+                                ></Image>
+                              </div>
 
-                            <div className="text-label_m max-w-[120px] truncate">
-                              {group.name}
-                            </div>
+                              <div className="text-label_m max-w-[120px] truncate">
+                                {group.name}
+                              </div>
 
-                            <X
-                              className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
-                              onClick={() => onClickDeleteClub(group)}
-                            ></X>
+                              <X
+                                className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
+                                onClick={() => onClickDeleteClub(group)}
+                              ></X>
+                            </div>
                           </Badge>
                         );
                       })}

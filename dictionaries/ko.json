@@ -707,7 +707,9 @@
           "guide3": "NFT 증명서 페이지에서 확인 가능합니다.",
           "sbt_type": "증명서 타입",
           "sbt_name": "증명서 이름",
+          "sbt_name_placeholder": "NFT 증명서 이름을 작성해주세요.",
           "sbt_desc": "증명서 설명",
+          "sbt_desc_placeholder": "NFT 증명서에 대한 설명을 작성해주세요.",
           "avatar_type": "아바타 타입",
           "avatar_image": "아바타 이미지",
           "sbt_image": "증명서 이미지",
@@ -724,7 +726,7 @@
           "title": "한정판 NFT가 생성되었습니다!",
           "desc1": "생성하신 NFT의 관리는 그룹 관리에서 가능하고,",
           "desc2": "NFT 증명서에서는 적용 여부를 확인하실수 있어요.",
-          "go_manage:": "그룹 관리 바로가기",
+          "go_manage": "그룹 관리 바로가기",
           "go_nft": "NFT 증명서 바로가기"
         },
         "join_group": {

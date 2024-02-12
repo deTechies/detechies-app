@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react"; // 추가된 부분
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import { ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useDictionary } from "@/lib/dictionaryProvider";
+import { NFT_TYPE, SBT_TYPE } from "@/lib/interfaces";
 
 const RequestNftListItem = React.memo(
   ({
@@ -14,6 +18,10 @@ const RequestNftListItem = React.memo(
     onClick?: Function;
     type?: string;
   }) => {
+    const lang = useDictionary();
+
+    console.log(achievement);
+
     return (
       <div
         className={`flex items-center py-4 truncate ${
@@ -44,10 +52,16 @@ const RequestNftListItem = React.memo(
         <div className="truncate">
           <div className="mb-2 truncate text-title_m">{achievement.name}</div>
 
-          <div>
+          <div className="flex flex-wrap gap-2">
             <Badge shape="category" variant="info">
-              {achievement.type === "edu" ? "에듀" : "수상"}
+              {lang.interface.nft_type[achievement.nft_type as NFT_TYPE]}
             </Badge>
+
+            {achievement.type && (
+              <Badge shape="category" variant="info">
+                {lang.interface.sbt_type[achievement.type as SBT_TYPE]}
+              </Badge>
+            )}
           </div>
         </div>
 

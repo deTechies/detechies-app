@@ -28,6 +28,8 @@ export default function ProfileCertificates({
   }: IProfileClubsProps) {
   const dictionary = useDictionary();
 
+    console.log(achievement_rewards);
+
   return (  
     <div className="flex flex-col gap-2">
       <Card className="flex flex-row items-center justify-between">

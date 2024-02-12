@@ -7,7 +7,7 @@ import { uploadMissionChanges } from "@/lib/data/mission";
 import { postServer } from "@/lib/data/postRequest";
 import { getUserById } from "@/lib/data/user";
 import { Club, Mission, MissionDetails } from "@/lib/interfaces";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Address, useContractWrite } from "wagmi";
 import ManageMissionReward from "./manage-mission-reward";
@@ -22,9 +22,12 @@ export default function MissionDetail({
   club: Club;
   lang?: any;
 }) {
+  const router = useRouter();
+
   const [initialSelectedMissions, setInitialSelectedMissions] = useState<
     Mission[]
   >([]);
+  const [loading, setLoading] = useState(false);
 
   const [missionState, setMissionState] = useState({
     selectedMissions: [] as Mission[],
@@ -46,8 +49,10 @@ export default function MissionDetail({
       (item) => item.completed && item.user.id === selectedMember
     );
 
-    const missionIds: Mission[] = completedMissions.length > 0 &&
-      completedMissions?.map((item) => item.mission as Mission) || [];
+    const missionIds: Mission[] =
+      (completedMissions.length > 0 &&
+        completedMissions?.map((item) => item.mission as Mission)) ||
+      [];
 
     const totalPoints = missionIds.reduce(
       (accumulator, currentItem) => accumulator + currentItem.score,
@@ -105,25 +110,36 @@ export default function MissionDetail({
       .map((mission) => mission.missionId);
 
     if (!selectedMember) return;
+
+    setLoading(true);
+
     const result = await uploadMissionChanges(
       addedMissionsIds,
       removedMissionsIds,
       selectedMember
     );
-    
-    const {data: getUser} = await getUserById(selectedMember);
+
+    if(result){
+      toast({
+        title: result.title,
+        description: result.description,
+      });
+    }
+
+    const { data: getUser } = await getUserById(selectedMember);
     for (const achievement of details.achievements) {
       if (missionState.totalPoints >= achievement.min_score) {
         const data = JSON.stringify({
           userId: getUser.id,
           achievementId: achievement.achievement.id,
-          tokenId:achievement.achievement.tokenId,
+          tokenId: achievement.achievement.tokenId,
         });
-        
+
         const result = await postServer(
-          `/achievement-rewards/nft-reward`, data
-        )
-     /*    const result = await rewardMissionNFT(
+          `/achievement-rewards/nft-reward`,
+          data
+        );
+        /*    const result = await rewardMissionNFT(
           getUser.id,
           achievement.achievement.id,
           achievement.achievement.tokenId,
@@ -134,14 +150,15 @@ export default function MissionDetail({
           toast({
             description: "Succcesfully request.",
           });
-          
+
           await distributeAchievement({
             args: [achievement.achievement.tokenId, getUser.wallet, 1],
           });
         }
-       
       }
     }
+
+    setLoading(false);
   }
 
   return (
@@ -156,7 +173,7 @@ export default function MissionDetail({
         <CardHeader>
           <h2 className="text-subhead_m">{lang.mission.manage.evalu}</h2>
         </CardHeader>
-        
+
         <CardContent className="flex flex-col gap-7 mt-7">
           <MissionList
             missions={details.missions}
@@ -181,10 +198,16 @@ export default function MissionDetail({
           </section>
 
           <section className="flex justify-between">
-            <Button size="lg" variant="secondary">
+            <Button size="lg" variant="secondary" onClick={() => router.back()}>
               {lang.mission.manage.back}
             </Button>
-            <Button size="lg" onClick={uploadSelectedMissions}>
+
+            <Button
+              size="lg"
+              loading={loading}
+              disabled={!selectedMember || loading}
+              onClick={uploadSelectedMissions}
+            >
               {lang.mission.manage.save}
             </Button>
           </section>
