@@ -493,6 +493,11 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
       metadataUpdate.image = "https://ipfs.io/ipfs/" + uploadData.image;
       metadataUpdate.avatar = "https://ipfs.io/ipfs/" + uploadData.avatar;
     }
+
+    if(uploadData.nft_type == NFT_TYPE.ERC721) {
+      metadataUpdate.attributes.type = undefined;
+    }
+
     const metadata = await uploadContent(JSON.stringify(metadataUpdate));
 
     const tradeable = NFT_TYPE.SBT == uploadData.nft_type ? false : true;
