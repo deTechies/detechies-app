@@ -1,34 +1,21 @@
 "use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
+import { updateProject } from "@/lib/data/project";
 import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
-import { updateProject } from "@/lib/data/project";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import ProfessionTagType from "@/components/extra/profession-tag-type";
 
-import Image from "@/components/ui/image";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "@/components/ui/use-toast";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -39,15 +26,28 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Image from "@/components/ui/image";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { AlertCircle, X } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 import { serverApi } from "@/lib/data/general";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AlertCircle, X } from "lucide-react";
+import * as z from "zod";
 import SelectGroupInScope from "../../create/select-group-in-scope";
 
 const projectFormSchema = z.object({
@@ -513,7 +513,8 @@ export default function ProjectEditForm({
                             myGroups={myGroups}
                             selectedGroup={selectedGroup}
                             onSelectGroup={onSelectGroup}
-                          ></SelectGroupInScope>
+                            loading={loading}
+                            />
                         </DialogContent>
                       </Dialog>
                     </>
