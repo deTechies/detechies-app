@@ -708,7 +708,9 @@
           "guide3": "Available on the NFT certificate page",
           "sbt_type": "Career type",
           "sbt_name": "Certificate name",
+          "sbt_name_placeholder": "Please write the name of the NFT certificate",
           "sbt_desc": "Certificate description",
+          "sbt_desc_placeholder": "Please write a description of the NFT certificate",
           "avatar_type": "Avatar type",
           "avatar_image": "Avatar image",
           "sbt_image": "SBT image",
@@ -725,7 +727,7 @@
           "title": "Your limited edition NFT has been created!",
           "desc1": "You can manage the created NFT in group management.",
           "desc2": "You can check the application status in the NFT certificate.",
-          "go_manage:": "Go to group management",
+          "go_manage": "Go to group management",
           "go_nft": "Go to NFT certificate"
         },
         "join_group": {

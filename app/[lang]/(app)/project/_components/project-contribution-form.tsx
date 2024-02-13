@@ -127,13 +127,15 @@ export default function ProjectContributionForm({
       });
       const result = await postServer(`/project-work`, data);
 
+      console.log(result);
+
       if (result) {
         toast({
           description: "You contribution has been added, thank you.",
         });
       }
     } else {
-      const result = await addMembersWork(values, project.projectId);
+      const result = await addMembersWork(values, project.id);
 
       if (result.status === "success") {
         toast({

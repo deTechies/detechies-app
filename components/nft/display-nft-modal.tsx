@@ -119,6 +119,7 @@ export default function DisplayNFTModal({
                 alt="avatar"
                 width="48"
                 height="48"
+                className="bg-transparent"
               ></Image>
             </Button>
           )}

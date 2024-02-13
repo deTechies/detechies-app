@@ -48,7 +48,7 @@ export default function MemberCard({
     }
   };
 
-  const createBadgeArr = (data: any[]) => {
+  const badgeList = (data: any[]) => {
     const resultArr = new Set();
     let hasImage = false;
     let hasAvatar = false;
@@ -79,16 +79,16 @@ export default function MemberCard({
   const content = children || (
     <div>
       {/* NO NFT */}
-      {createBadgeArr(info.achievements) &&
-        createBadgeArr(info.achievements)?.length < 1 && (
+      {badgeList(info.achievements) &&
+        badgeList(info.achievements)?.length < 1 && (
           <Badge shape="category">No NFT</Badge>
         )}
 
-      {createBadgeArr(info.achievements) &&
-      createBadgeArr(info.achievements)?.length <= 3 ? (
+      {badgeList(info.achievements) &&
+      badgeList(info.achievements)?.length <= 3 ? (
         // If there are 3 or less rewards
         <div className="flex flex-wrap gap-2 text-title_m">
-          {createBadgeArr(info.achievements).map(
+          {badgeList(info.achievements).map(
             (chip: string, index: number) => {
               return (
                 <Badge variant={"info"} shape="category" key={index}>
@@ -101,7 +101,7 @@ export default function MemberCard({
       ) : (
         // If there are more than 4 rewards
         <div className="flex flex-wrap gap-2 text-title_m">
-          {createBadgeArr(info.achievements)
+          {badgeList(info.achievements)
             ?.slice(0, 2)
             .map((chip: string, index: number) => {
               return (
@@ -112,7 +112,7 @@ export default function MemberCard({
             })}
 
           <Badge shape="category">
-            +{createBadgeArr(info.achievements)?.length - 2}
+            +{badgeList(info.achievements)?.length - 2}
           </Badge>
         </div>
       )}
@@ -123,7 +123,7 @@ export default function MemberCard({
 
   return (
     <Card
-      className="gap-1 p-0 overflow-hidden border rounded-md cursor-pointer border-border-div bg-bacound-layer-1 hover:shadow-lg aspect-[3/4]"
+      className="gap-1 p-0 overflow-hidden border rounded-md cursor-pointer border-border-div bg-bacound-layer-1 hover:shadow-lg"
       onClick={onClickCard}
     >
       <div className="relative w-full m-0">
@@ -136,6 +136,8 @@ export default function MemberCard({
         ></Image>
       </div>
 
+      <div className="grow"/>
+      
       <div className="flex flex-col gap-3 p-5">
         <h5 className="text-title_l">{info.name}</h5>
         <div className="text-label_l">{getDaysUntilEnd(info.end_date)}</div>

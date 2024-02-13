@@ -103,7 +103,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
     return false;
   };
 
-  const text = lang.group.details.manage.nft.create
+  const text = lang.group.details.manage.nft.create;
   return (
     <main>
       <Form {...form}>
@@ -251,7 +251,13 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
 
                     <div className="grow">
                       <FormControl className="mb-2">
-                        <Input placeholder="Enter your name" {...field} />
+                        <Input
+                          placeholder={
+                            lang.group.details.profile_card.create_nft
+                              .sbt_name_placeholder
+                          }
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </div>
@@ -270,7 +276,7 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                     <FormControl>
                       <div className="flex flex-col w-full gap-2">
                         <Textarea
-                          placeholder="Tell us a little bit about your group here"
+                          placeholder={lang.group.details.profile_card.create_nft.sbt_desc_placeholder}
                           className="resize-none"
                           {...field}
                         />
@@ -343,11 +349,11 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                        {lang.group.details.profile_card.create_nft.guide2}
+                          {lang.group.details.profile_card.create_nft.guide2}
                         </li>
 
                         <li className="mb-1 text-text-placeholder text-label_s">
-                        {lang.group.details.profile_card.create_nft.guide3}
+                          {lang.group.details.profile_card.create_nft.guide3}
                         </li>
                       </div>
                     </MediaUploader>

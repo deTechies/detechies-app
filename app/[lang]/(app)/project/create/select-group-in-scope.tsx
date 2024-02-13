@@ -13,11 +13,13 @@ export default function SelectGroupInScope({
   myGroups,
   selectedGroup,
   onSelectGroup,
+  loading,
 }: {
   lang: any;
-  myGroups: Club[]; 
+  myGroups: Club[];
   selectedGroup: Club[];
   onSelectGroup: Function;
+  loading: boolean;
 }) {
   const [selectedTempGroup, setSelectedTempGroup] = useState<Club[]>([]);
 
@@ -52,7 +54,12 @@ export default function SelectGroupInScope({
       </div>
 
       <div className="h-[232px] mb-6 overflow-auto">
-        {myGroups && myGroups.length > 0 &&
+        {loading && (
+          <div className="py-5 text-center text-text-secondary">loading...</div>
+        )}
+
+        {myGroups &&
+          myGroups.length > 0 &&
           myGroups.map((_group: Club) => {
             return (
               <GroupCheckboxListItem
@@ -63,24 +70,19 @@ export default function SelectGroupInScope({
               ></GroupCheckboxListItem>
             );
           })}
+
+        {!loading && myGroups?.length < 1 && <div>가입된 그룹이 없습니다.</div>}
       </div>
 
-      <div className="flex gap-2 justify-center">
+      <div className="flex justify-center gap-2">
         <DialogClose className="max-w-[212px] w-full">
-          <Button
-            size="lg"
-            variant="secondary"
-          >
+          <Button size="lg" variant="secondary">
             {lang.project.list.create_project.select_group.back}
           </Button>
         </DialogClose>
 
         <DialogClose className="max-w-[212px] w-full">
-          <Button
-            size="lg"
-            variant="primary"
-            onClick={onClickSelectGroup}
-          >
+          <Button size="lg" variant="primary" onClick={onClickSelectGroup}>
             {lang.project.list.create_project.select_group.select_group}
           </Button>
         </DialogClose>

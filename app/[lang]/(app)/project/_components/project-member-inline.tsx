@@ -17,12 +17,14 @@ export default function ProjectMemberInline({
   return (
     <div className="self-stretch p-5 border rounded-md bg-background-layer-1 border-border-div">
       {title && <div className="mb-5 text-subhead_s">{title}</div>}
-      
+
       <div className="inline-flex gap-5 ">
         <div className="relative w-20 h-20 rounded-xl bg-background-layer-2">
           <IPFSImageLayer
             hashes={
-              projectMember?.user?.avatar ? projectMember.user.avatar : defaultAvatar
+              projectMember?.user?.avatar
+                ? projectMember.user.avatar
+                : defaultAvatar
             }
           />
         </div>
@@ -37,9 +39,7 @@ export default function ProjectMemberInline({
               <span className="text-text-secondary text-label_m">
                 {
                   lang.interface.profession_type[
-                    projectWork?.role ||
-                      projectMember.works[0].name ||
-                      projectMember.works[0].role
+                    projectWork?.role || projectMember.works[0].role
                   ]
                 }
               </span>
@@ -55,7 +55,7 @@ export default function ProjectMemberInline({
               </div>
 
               <div className="tracking-wide text-text-secondary text-label_m">
-                {projectMember && beginEndDates(projectMember.created_at)}
+                {projectMember && beginEndDates(projectMember.works[0].begin_date, projectMember.works[0].end_date)}
               </div>
             </div>
           </div>
