@@ -32,10 +32,18 @@ export default async function Footer({ lang }: { lang: any }) {
         <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.whitepaper}
         </Link>
-        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
+        <Link
+          href="https://t.me/Careerzen_org"
+          target="_blank"
+          className="px-4 my-5 hover:text-accent-primary"
+        >
           {lang.footer.contact_us}
         </Link>
-        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
+        <Link
+          href="https://tall-hound-177.notion.site/a57f5354c57e4d07bc4d6750e7902d4b"
+          target="_blank"
+          className="px-4 my-5 hover:text-accent-primary"
+        >
           {lang.footer.user_guide}
         </Link>
       </div>
@@ -72,7 +80,9 @@ export default async function Footer({ lang }: { lang: any }) {
           </Link>
         </div>
       </div>
-      <p className="text-center text-text-secondary text-body_m">{lang.footer.copywrite}</p>
+      <p className="text-center text-text-secondary text-body_m">
+        {lang.footer.copywrite}
+      </p>
     </div>
   );
 }
