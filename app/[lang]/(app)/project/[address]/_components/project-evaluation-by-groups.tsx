@@ -29,7 +29,6 @@ export default async function ProjectEvaluationByGroups({
 
   if (!groups) return null;
 
-
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">
       <CardHeader className="flex flex-wrap items-center justify-between">
@@ -74,7 +73,7 @@ export default async function ProjectEvaluationByGroups({
                         {achievementReward.achievement.name}
                       </div>
 
-                      <Badge variant="info" shape="category">
+                      <Badge variant="info" shape="sm" className="px-1.5 py-0.5">
                         {
                           lang.interface.sbt_type[
                             achievementReward.achievement.type

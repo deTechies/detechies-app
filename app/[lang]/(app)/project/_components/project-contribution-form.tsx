@@ -68,8 +68,8 @@ export default function ProjectContributionForm({
     defaultValues: workDetails
       ? {
           role: workDetails.role,
-          begin_date: workDetails.begin_date.split("T")[0],
-          end_date: workDetails.end_date.split("T")[0],
+          begin_date: workDetails.begin_date?.split("T")[0],
+          end_date: workDetails.end_date?.split("T")[0],
           description: workDetails.description,
           present: workDetails.present,
           percentage: [workDetails.percentage],
