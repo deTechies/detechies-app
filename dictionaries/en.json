@@ -41,6 +41,11 @@
   },
 
   "profile": {
+    "list": {
+      "banner": "When you invite a professional to CareerGen",
+      "banner2": "You can look up the career of an expert!",
+      "banner3": "Invite an expert"
+    },
     "report_card": {
       "title": "Reputation Report",
       "total_experience": "Total experience",
@@ -553,7 +558,7 @@
     "edit_avatar":{
         "tab_all": "All",
         "tab_career": "Career NFT",
-        "tab_avatar": "Avatar NFT",
+        "tab_limited": "Limited NFT",
         "not_approved": "Not Approved",
         "reset": "Reset",
         "save":  "Save"

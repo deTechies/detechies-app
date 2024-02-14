@@ -41,6 +41,11 @@
   },
 
   "profile": {
+    "list": {
+      "banner": "커리어젠으로 전문가를 초대하면",
+      "banner2": "전문가의 커리어를 조회 할 수 있어요!",
+      "banner3": "전문가 초대하기"
+    },
     "report_card": {
       "title": "의 평판보고서",
       "total_experience": "총 경력",
@@ -552,7 +557,7 @@
     "edit_avatar": {
       "tab_all": "전체",
       "tab_career": "커리어 NFT",
-      "tab_avatar": "한정판 NFT",
+      "tab_limited": "한정판 NFT",
       "not_approved": "발행 대기중",
       "reset": "초기화",
       "save": "저장하기"
@@ -1132,7 +1137,7 @@
       "email": {
         "already_use": "이미 사용중인 이메일입니다. 다른 이메일을 이용해주세요.",
         "require": "이메일을 입력해주세요.",
-        "email": "이메일 주소를 다시 확인해주세요. (이메일 아이디@서비스 도메인)"
+        "email": "이메일 주소를 다시 확인해주세요."
       }
     }
   }
