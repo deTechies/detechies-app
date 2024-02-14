@@ -534,23 +534,25 @@ export default function ProjectEditForm({
                             className="gap-2 my-1.5"
                             key={index}
                           >
-                            <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
-                              <Image
-                                src={`https://ipfs.io/ipfs/${group.image}`}
-                                alt={group.name}
-                                width="20"
-                                height="20"
-                              ></Image>
-                            </div>
+                            <div className="flex gap-2">
+                              <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
+                                <Image
+                                  src={`https://ipfs.io/ipfs/${group.image}`}
+                                  alt={group.name}
+                                  width="20"
+                                  height="20"
+                                ></Image>
+                              </div>
 
-                            <div className="text-label_m max-w-[120px] truncate">
-                              {group.name}
-                            </div>
+                              <div className="text-label_m max-w-[120px] truncate">
+                                {group.name}
+                              </div>
 
-                            <X
-                              className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
-                              onClick={() => onClickDeleteClub(group)}
-                            ></X>
+                              <X
+                                className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
+                                onClick={() => onClickDeleteClub(group)}
+                              ></X>
+                            </div>
                           </Badge>
                         );
                       })}

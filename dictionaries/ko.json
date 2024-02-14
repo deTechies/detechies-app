@@ -117,7 +117,7 @@
   "profile_detail_card": {
     "example": "example",
     "achievements": "보유 NFT 수",
-    "certificates": "평가받은 횟수",
+    "certificates": "평가받은 개수",
     "projects": "참여한 프로젝트",
     "groups": "groups",
     "no role": "no role"
