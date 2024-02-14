@@ -91,11 +91,12 @@ export default function ProjectEditForm({
   const [present, setPresent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
-
+  
   const [createObjectURL, setCreateObjectURL] = useState(null);
-
+  
   const [selectGroupDialog, setSelectGroupDialog] = useState<boolean>(false);
   const [myGroups, setMyGroups] = useState<Club[]>([]);
+  const [myGroupsLoading, setMyGroupsLoading] = useState<boolean>(false);
   const [selectedGroup, setSelectedGroup] = useState<Club[]>([]);
   const [noticeGroupSelectOpen, setNoticeGroupSelectOpen] =
     useState<boolean>(false);
@@ -180,11 +181,13 @@ export default function ProjectEditForm({
   useEffect(() => {
     const fetchMyGroupsData = async () => {
       if (selectGroupDialog && myGroups.length < 1) {
+        setMyGroupsLoading(true);
         const result = await serverApi(`/clubs/my`);
 
         if (result.status === "success") {
           setMyGroups(result.data);
         }
+        setMyGroupsLoading(false);
       }
     };
 
@@ -513,8 +516,8 @@ export default function ProjectEditForm({
                             myGroups={myGroups}
                             selectedGroup={selectedGroup}
                             onSelectGroup={onSelectGroup}
-                            loading={loading}
-                            />
+                            loading={myGroupsLoading}
+                          />
                         </DialogContent>
                       </Dialog>
                     </>

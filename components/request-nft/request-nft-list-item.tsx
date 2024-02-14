@@ -20,8 +20,6 @@ const RequestNftListItem = React.memo(
   }) => {
     const lang = useDictionary();
 
-    console.log(achievement);
-
     return (
       <div
         className={`flex items-center py-4 truncate ${
