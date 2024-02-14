@@ -46,7 +46,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
       })
       .regex(/^\S*$/, { message: lang.validation.onboard.username.regex }),
     email: z.string().email({
-      message: "Please enter a valid email address.",
+      message: lang.validation.onboard.email.email,
     }),
     agree_with_all: z.boolean().optional(),
     terms_of_service: z.boolean().refine((val) => val === true, {
@@ -374,6 +374,8 @@ export default function CreateProfile({ lang }: { lang: any }) {
               disabled={
                 isLoading ||
                 blockPopupOpen ||
+                !form.watch("display_name") ||
+                !form.watch("email") ||
                 !form.watch("terms_of_service") ||
                 !form.watch("privacy_policy")
               }
