@@ -127,8 +127,6 @@ export default function ProjectContributionForm({
       });
       const result = await postServer(`/project-work`, data);
 
-      console.log(result);
-
       if (result) {
         toast({
           description: "You contribution has been added, thank you.",
