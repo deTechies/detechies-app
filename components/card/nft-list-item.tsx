@@ -71,7 +71,7 @@ export default function NftListItem({
               : DEFAULT_IPFS_URL + item.avatar
           }
           alt="nft_list_item"
-          className="object-contain rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
+          className="object-contain rounded-t-sm bg-[url('/images/bg-nft.png')] bg-[length:232px_232px]"
           fill={true}
           priority={true}
         />

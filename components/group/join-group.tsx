@@ -100,7 +100,7 @@ export default function InviteProjectMember({
         </div>
 
         <Card className="flex-row gap-5 p-6 border border-border-div">
-          <Avatar className="w-[68px] h-[68px] mb-2 aspect-square bg-state-info-secondary">
+          <Avatar className="w-[68px] h-[68px] mb-2">
             <AvatarImage
               src={details.image
                 ? `https://ipfs.io/ipfs/${details.image}`

@@ -164,7 +164,7 @@ export default function PendingMemberListItem({
       // onClick={() => router.push(`/nfts/${nft.user.id}`)}
     >
       <div className="flex items-center gap-3">
-        <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
+        <div className="relative w-20 h-20 rounded-sm aspect-square bg-background-layer-2">
           {nft.project?.image ? (
             <Image
               src={`https://ipfs.io/ipfs/${nft.project.image}`}

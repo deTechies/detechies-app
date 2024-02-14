@@ -29,7 +29,7 @@ const RequestNftListItem = React.memo(
         }`}
         onClick={() => onClick?.()}
       >
-        <Avatar className="w-[52px] h-[52px] mr-4 overflow-hidden rounded-sm shrink-0 aspect-square bg-state-info-secondary">
+        <Avatar className="w-[52px] h-[52px] mr-4 rounded-sm">
           <AvatarImage
             src={`https://ipfs.io/ipfs/${
               achievement.image || achievement.avatar

@@ -23,7 +23,7 @@ export default function MissionSummary({
           src="/images/mission.png"
           width={100}
           height={100}
-          className="rounded-[6px] bg-accent-secondary max-h-[100px]"
+          className="rounded-[6px] max-h-[100px]"
           alt="mission"
         />
         <div className="flex flex-col justify-end gap-2 truncate">

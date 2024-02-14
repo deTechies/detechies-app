@@ -43,7 +43,7 @@ const Links = ({ works }: { works: any[] }) => {
                   <Avatar>
                     <AvatarImage
                       src={`/icons/${site}.png`}
-                      className="w-5 h-5 m-auto  scale-down"
+                      className="w-5 h-5 m-auto scale-down"
                     />
                   </Avatar>
                 )}

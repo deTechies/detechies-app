@@ -47,7 +47,7 @@ export default async function ProjectEvaluationByGroups({
             rewardedAchievements.map(
               (achievementReward: AchievementReward, index: number) => (
                 <div className="flex gap-5 truncate" key={index}>
-                  <Avatar className="w-20 h-20 mb-2 overflow-hidden rounded-sm aspect-square bg-state-info-secondary">
+                  <Avatar className="w-20 h-20 mb-2 rounded-sm">
                     <AvatarImage
                       alt={achievementReward.achievement.name}
                       src={`https://ipfs.io/ipfs/${

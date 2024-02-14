@@ -23,7 +23,7 @@ const RequestGroupListItem = React.memo(
         onClick={() => (onClick ? onClick() : {})}
       >
         <div className="shrink-0">
-          <Avatar className="w-[52px] h-[52px] mr-4 overflow-hidden rounded-full shrink-0 aspect-square bg-state-info-secondary">
+          <Avatar className="w-[52px] h-[52px] mr-4">
             <AvatarImage
               src={`https://ipfs.io/ipfs/${_group.image}`}
               alt={_group.name}
