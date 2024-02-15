@@ -4,18 +4,21 @@ import { useRouter, useParams } from "next/navigation";
 import React from "react";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
+import { beginEndDates } from "@/lib/utils";
 
 export default function MemberCard({
   address,
   info,
   manage = false,
   children,
+  dateFormat = "default",
   lang,
 }: {
   address: string;
   manage?: boolean;
   info?: any;
   children?: React.ReactNode;
+  dateFormat?: string;
   lang: any;
 }) {
   const router = useRouter();
@@ -26,10 +29,14 @@ export default function MemberCard({
     // router.push(`/en/groups/${address}/missions/${info.seq}`);
 
     if (manage) {
-      router.push(`/${params.lang}/groups/${address}/mission/manage/${info.campaignId}`);
+      router.push(
+        `/${params.lang}/groups/${address}/mission/manage/${info.campaignId}`
+      );
       return;
     }
-    router.push(`/${params.lang}/groups/${address}/mission-detail/${info.campaignId}`);
+    router.push(
+      `/${params.lang}/groups/${address}/mission-detail/${info.campaignId}`
+    );
   };
 
   const getDaysUntilEnd = (dateEndString: string): string => {
@@ -88,15 +95,13 @@ export default function MemberCard({
       badgeList(info.achievements)?.length <= 3 ? (
         // If there are 3 or less rewards
         <div className="flex flex-wrap gap-2 text-title_m">
-          {badgeList(info.achievements).map(
-            (chip: string, index: number) => {
-              return (
-                <Badge variant={"info"} shape="category" key={index}>
-                  {chip}
-                </Badge>
-              );
-            }
-          )}
+          {badgeList(info.achievements).map((chip: string, index: number) => {
+            return (
+              <Badge variant={"info"} shape="category" key={index}>
+                {chip}
+              </Badge>
+            );
+          })}
         </div>
       ) : (
         // If there are more than 4 rewards
@@ -136,11 +141,15 @@ export default function MemberCard({
         ></Image>
       </div>
 
-      <div className="grow"/>
-      
+      <div className="grow" />
+
       <div className="flex flex-col gap-3 p-5">
         <h5 className="text-title_l">{info.name}</h5>
-        <div className="text-label_l">{getDaysUntilEnd(info.end_date)}</div>
+        <div className="text-label_l text-text-secondary">
+          {dateFormat == "beginEndDates"
+            ? beginEndDates(info.begin_date, info.end_date)
+            : getDaysUntilEnd(info.end_date)}
+        </div>
         {content}
       </div>
     </Card>

@@ -84,7 +84,7 @@ export default function UserReport({
             : beginEndDates(oldestDate, latestDate)}
         </div>
 
-        <div className="mb-3 text-title_s">
+        <div className="mb-6 text-title_s">
           {text.profile.report_card.total_evalucation} ({totalEvaluationCount})
         </div>
 
