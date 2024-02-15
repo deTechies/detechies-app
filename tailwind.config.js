@@ -54,6 +54,7 @@ module.exports = {
           primary: "var(--border-primary)",
           secondary: "var(--border-secondary)",
           div: "var(--border-div)",
+          "on-base": "var(--border-on-base)",
         },
         button: {
           secondary: "var(--button-secondary)",

@@ -72,7 +72,6 @@ export default function Login({ lang }: ILoginProps) {
         <Button
           size="sm"
           variant={"primary"}
-          className="text-md"
           onClick={() => signOut()}
         >
           {lang.sign_in}
@@ -88,7 +87,7 @@ export default function Login({ lang }: ILoginProps) {
     return (
       <div className="flex items-center gap-2 rounded-md">
         <Avatar
-          className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:outline hover:outline-accent-primary"
+          className="bg-background-layer-2 hover:outline hover:outline-accent-primary"
           onClick={() => setShowModal(!showModal)}
         >
           <IPFSImageLayer
@@ -116,13 +115,13 @@ export default function Login({ lang }: ILoginProps) {
   return (
     <div className="flex items-center gap-4">
       <Button
-        size="sm"
-        className="text-md"
+        size="md"
+        variant="success"
         onClick={() => {
           setLoginModal(!loginModal);
         }}
       >
-        Sign up
+        {lang.sign_up}
       </Button>
       {loginModal && (
         <ConnectModal

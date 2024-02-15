@@ -64,6 +64,7 @@
     --border-input-focus: #00D41D;
     --border-input-error: #FF0000;
     --border-input-disabled: #EFF0F2;
+    --border-on-base: #E1E3E7;
     
     --button-secondary: #EFF0F2;
     --button-secondary-hover: #BEC3CA;
@@ -148,6 +149,7 @@
     --border-input-focus: #00D41D;
     --border-input-error: #FF0000;
     --border-input-disabled: 1F2226;
+    --border-on-base: #2E3339;
     
     --button-secondary: #454C55;
     --button-secondary-hover: #5C6571;
