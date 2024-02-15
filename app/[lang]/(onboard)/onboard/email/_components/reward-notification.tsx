@@ -19,7 +19,7 @@ export default function RewardNotification({
 }) {
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger disabled={true}>
         <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
       </DialogTrigger>
 

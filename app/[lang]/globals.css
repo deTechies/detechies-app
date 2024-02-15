@@ -246,3 +246,7 @@ html {
 .bg-animate {
   animation: fadeInOut 2s ease-in-out infinite;
 }
+
+p.mmt {
+  min-height: 21px;
+}
