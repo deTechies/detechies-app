@@ -560,7 +560,8 @@
       "tab_limited": "한정판 NFT",
       "not_approved": "발행 대기중",
       "reset": "초기화",
-      "save": "저장하기"
+      "save": "저장하기",
+      "no_avatar": "아바타가 없어요."
     },
     "edit_profile": {
       "edit_profile": "프로필 수정",

@@ -26,8 +26,9 @@ export default function NftListItem({
 
   const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
 
-  
-  const isSelected = item.avatar_type ? searchParams.get(item?.avatar_type) === item.avatar : false;
+  const isSelected = item.avatar_type
+    ? searchParams.get(item?.avatar_type) === item.avatar
+    : false;
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -43,7 +44,6 @@ export default function NftListItem({
       ? url.substring(DEFAULT_IPFS_URL.length)
       : url;
   }
-
 
   return (
     <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
@@ -62,6 +62,7 @@ export default function NftListItem({
                   )
               );
             }}
+            onClick={(event) => event.stopPropagation()}
           />
         )}
         <Image

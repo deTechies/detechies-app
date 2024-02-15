@@ -561,7 +561,8 @@
         "tab_limited": "Limited NFT",
         "not_approved": "Not Approved",
         "reset": "Reset",
-        "save":  "Save"
+        "save": "Save",
+        "no_avatar": "No avatar"
     },
     "edit_profile": {
       "edit_profile": "edit profile",
