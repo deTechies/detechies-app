@@ -2,7 +2,6 @@
 import { AchievementReward, NFT_TYPE } from "@/lib/interfaces";
 import { useMemo } from "react";
 import ListAvatarItem from "./list-avatars-item";
-import ListAvatarItemTrigger from "./list-avatars-item-trigger";
 
 export default function ListAvatars({
   rewards,
@@ -48,7 +47,7 @@ export default function ListAvatars({
         {filteredAchievements.pending &&
           filteredAchievements.pending.map(
             (achievementReward: AchievementReward, index: number) => (
-              <div className="max-w-[174px] w-full">
+              <div className="max-w-[174px] w-full" key={index}>
                 <ListAvatarItem
                   key={index}
                   details={achievementReward.achievement}
