@@ -320,7 +320,7 @@ export default function UserStatistics({
                 return (
                   <div key={index}>
                     <h3 className="mb-5 text-center capitalize text-subhead_s">
-                      {lang.survey[byCategory.category] || byCategory.category}
+                      {lang.survey[byCategory.category.trim().toLowerCase()] || byCategory.category}
                     </h3>
 
                     <div className=" h-[300px] overflow-auto">

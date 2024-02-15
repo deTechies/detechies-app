@@ -1126,7 +1126,11 @@
     "propensity": "Propensity",
     "Situation": "Situation",
     "Work Orientation": "Work Orientation",
-    "General Tendency": "General Tendency"
+    "General Tendency": "General Tendency",
+    "situation": "Situation",
+    "work orientation": "Work Orientation",
+    "general tendency": "General Tendency",
+    "communication": "Communication"
   },
   "validation": {
     "onboard": {

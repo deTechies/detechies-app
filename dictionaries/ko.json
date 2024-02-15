@@ -1124,7 +1124,11 @@
     "propensity": "성향 평가",
     "Situation": "어떤 상황에서 최고의 성과를 내나요?",
     "Work Orientation": "업무 성향",
-    "General Tendency": "개인 성향"
+    "General Tendency": "개인 성향",
+    "situation": "어떤 상황에서 최고의 성과를 내나요?",
+    "work orientation": "업무 성향",
+    "general tendency": "개인 성향",
+    "communication": "협업 및 커뮤니케이션"
   },
   "validation": {
     "onboard": {
