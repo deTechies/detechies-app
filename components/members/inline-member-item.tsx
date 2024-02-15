@@ -22,7 +22,7 @@ export default function InlineMemberItem({
   if (!display_name)
     return (
       <div className="flex items-center py-4">
-        <Avatar className="w-10 h-10 bg-background-layer-2">
+        <Avatar className="w-10 h-10">
           <IPFSImageLayer hashes={avatar? avatar : defaultAvatar} />
         </Avatar>
 
@@ -44,7 +44,7 @@ export default function InlineMemberItem({
         active && "bg-accent-secondary"
       }`}
     >
-      <Avatar className="w-10 h-10 bg-background-layer-2">
+      <Avatar className="w-10 h-10">
         <IPFSImageLayer hashes={avatar ? avatar : defaultAvatar} />
       </Avatar>
 

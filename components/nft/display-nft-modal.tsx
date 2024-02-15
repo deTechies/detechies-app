@@ -96,7 +96,7 @@ export default function DisplayNFTModal({
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="relative object-scale-down w-full rounded-sm aspect-square bg-gradient-to-b from-state-info to-accent-primary">
+        <div className="relative object-scale-down w-full rounded-sm aspect-square bg-background-layer-2">
           <Image
             src={DEFAULT_IPFS_URL + showingImage}
             alt={details.name}

@@ -54,6 +54,7 @@ module.exports = {
           primary: "var(--border-primary)",
           secondary: "var(--border-secondary)",
           div: "var(--border-div)",
+          "on-base": "var(--border-on-base)",
         },
         button: {
           secondary: "var(--button-secondary)",
@@ -121,6 +122,7 @@ module.exports = {
       },
       boxShadow: {
         custom: "2px 2px 10px 0px rgba(0, 0, 0, 0.05)",
+        switch: "0px 1px 1px 0px rgba(0, 0, 0, 0.16), 0px 3px 8px 0px rgba(0, 0, 0, 0.15)",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

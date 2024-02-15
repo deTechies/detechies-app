@@ -91,7 +91,11 @@ export default function ProfileFilter({ lang }: { lang: any }) {
         </div>
 
         <div className="flex items-end">
-          <InviteExperts lang={lang} />
+          <InviteExperts lang={lang}>
+            <div className="underline text-border-input">
+              {lang.profile_filter.info_text}
+            </div>
+          </InviteExperts>
         </div>
       </div>
     </Card>

@@ -1,66 +1,74 @@
 "use client";
-import { AchievementReward } from "@/lib/interfaces";
+import { AchievementReward, NFT_TYPE } from "@/lib/interfaces";
 import { useMemo } from "react";
 import ListAvatarItem from "./list-avatars-item";
 import ListAvatarItemTrigger from "./list-avatars-item-trigger";
+
 export default function ListAvatars({
   rewards,
   status,
   lang,
-  sbt,
-  avatar,
+  nft_type,
 }: {
   rewards: AchievementReward[];
   status: string;
   lang: any;
-  sbt?: boolean;
-  avatar?: boolean;
+  nft_type?: NFT_TYPE;
 }) {
   const filteredAchievements = useMemo(() => {
     let pending = rewards.filter(
       (achievement) => achievement.status === status
     );
 
-    if (avatar) {
+    if (nft_type) {
       pending = rewards.filter(
         (achievement) =>
           achievement.status === "granted" &&
-          achievement.achievement.avatar != null
+          achievement.achievement.nft_type === nft_type
       );
-      
-      if(sbt){
-        pending = rewards.filter(
-          (achievement) =>
-            achievement.status === "granted" &&
-            achievement.achievement.nft_type === "sbt"
-        );
-      }
     }
+
+    const seenAchievement = new Set();
+
+    // If an item has duplicate achievement.avatar, only the first one is shown.
+    pending = pending.filter(obj => {
+      if (!seenAchievement.has(obj.achievement.avatar)) {
+        seenAchievement.add(obj.achievement.avatar);
+        return true;
+      }
+      return false;
+    });
+
     return { pending };
-  }, [rewards, avatar, sbt, status]);
+  }, [rewards, nft_type, status]);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-[11px]">
-      {!avatar ? filteredAchievements.pending &&
-        filteredAchievements.pending.map(
-          (achievementReward: AchievementReward, index: number) => (
-            <ListAvatarItem
-              key={index}
-              details={achievementReward.achievement}
-              showSelect={avatar}
-              lang={lang}
-              showMintButton={true}
-              blockRequest={true}
-            />
-          )
-        ) : filteredAchievements.pending.map(
-          (achievementReward: AchievementReward, index: number) => (
-            <ListAvatarItemTrigger
-              key={index}
-              showSelect={true} 
-              item={achievementReward.achievement} 
-              lang={lang}
-            />
-          ))}
-    </div>
+    <>
+      <div className="flex flex-wrap gap-[11px]">
+        {filteredAchievements.pending &&
+          filteredAchievements.pending.map(
+            (achievementReward: AchievementReward, index: number) => (
+              <div className="max-w-[174px] w-full">
+                <ListAvatarItem
+                  key={index}
+                  details={achievementReward.achievement}
+                  showSelect={status === "granted"}
+                  lang={lang}
+                  showMintButton={true}
+                  blockRequest={true}
+                />
+              </div>
+            )
+          )}
+      </div>
+
+      <div>
+        {filteredAchievements.pending?.length === 0 && (
+          <div className="py-24 text-center text-text-secondary text-subhead_s">
+            {lang.mypage.edit_avatar.no_avatar}
+          </div>
+        )}
+      </div>
+    </>
   );
 }

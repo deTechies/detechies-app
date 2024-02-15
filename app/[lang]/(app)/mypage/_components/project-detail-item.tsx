@@ -35,7 +35,6 @@ export default function ProjectDetailItem({
           <Image
             src={`https://ipfs.io/ipfs/`+data.image}
             alt="Project Image"
-            className="object-cover rounded-sm"
             width={80}
             height={80}
           />

@@ -2,7 +2,8 @@ import ProfileCard from "@/components/card/profile-card";
 import { serverApi } from "@/lib/data/general";
 import { User } from "@/lib/interfaces";
 import ShowMoreButton from "@/components/extra/show-more-button";
-import { user } from "@pushprotocol/restapi";
+import { Button } from "@/components/ui/button";
+import InviteExperts from "./invite_experts";
 
 export default async function ListProfiles({
   lang,
@@ -42,6 +43,28 @@ export default async function ListProfiles({
       {users?.length > 0 && users.length >= limit_number && (
         <ShowMoreButton lang={lang} />
       )}
+
+      <div className="px-10 py-10 max-w-[1028px] w-full min-h-[199px] rounded-md bg-no-repeat bg-cover flex mx-auto bg-[url('/images/banner-invite-user.png')]">
+        <div className="max-w-[430px] mx-auto text-center">
+          <div className="mb-1 text-subhead_m text-accent-primary">
+            {lang.profile.list.banner}
+          </div>
+
+          <div className="mb-5 text-subhead_m text-text-fixed">
+            {lang.profile.list.banner2}
+          </div>
+
+          <InviteExperts lang={lang}>
+            <Button
+              size="lg"
+              variant="primary"
+              className="flex items-center w-full gap-1 text-title_m"
+            >
+              {lang.profile.list.banner3}
+            </Button>
+          </InviteExperts>
+        </div>
+      </div>
     </>
   );
 }

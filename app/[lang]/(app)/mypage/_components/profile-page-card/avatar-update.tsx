@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
@@ -9,11 +9,9 @@ import { updateUserAvatar } from "@/lib/data/user";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-
 const AvatarUpdate = ({ profile }: any) => {
   const pathName = usePathname();
   const searchParams = useSearchParams()!;
-
 
   const [avatar, setAvatar] = useState(profile.avatar);
   const [refresh, setRefresh] = useState<boolean>(false);
@@ -25,9 +23,15 @@ const AvatarUpdate = ({ profile }: any) => {
   const face = searchParams.get("face") || profile.avatar[1];
   const head = searchParams.get("eyes") || profile.avatar[2];
   const hair = searchParams.get("hair") || profile.avatar[3];
-  
-  const hashes = [clothes, face, head, hair, profile.avatar[4], profile.avatar[5]];
 
+  const hashes = [
+    clothes,
+    face,
+    head,
+    hair,
+    profile.avatar[4],
+    profile.avatar[5],
+  ];
 
   const handleUpdateAvatar = async () => {
     setRefresh(true);
@@ -65,14 +69,13 @@ const AvatarUpdate = ({ profile }: any) => {
     setRefresh(false);
   };
 
-
   // Component UI
   return (
-    <Card className="flex w-full flex-col gap-5">
-      <div className="relative max-w-[320px] aspect-square bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-[8px]">
-      <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
-
+    <Card className="flex flex-col w-full gap-5">
+      <div className="relative max-w-[320px] aspect-square bg-background-layer-2 rounded-[8px]">
+        <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
       </div>
+
       <div className="flex gap-4">
         <Button
           size="lg"

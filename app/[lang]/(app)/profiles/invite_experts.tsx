@@ -35,7 +35,7 @@ const inviteExportFormSchema = z.object({
 
 type InviteExpertsFormValues = z.infer<typeof inviteExportFormSchema>;
 
-export default function InviteExperts({ lang }: { lang: any }) {
+export default function InviteExperts({ children, lang }: { children: React.ReactNode; lang: any; }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const form = useForm<InviteExpertsFormValues>({
@@ -85,9 +85,7 @@ export default function InviteExperts({ lang }: { lang: any }) {
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger>
-        <div className="underline text-border-input">
-          {lang.profile_filter.info_text}
-        </div>
+        {children}
       </DialogTrigger>
 
       <DialogContent className="gap-0">

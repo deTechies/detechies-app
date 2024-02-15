@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Project } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import { ChevronDown, ChevronUp, PenSquare } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -47,13 +47,14 @@ export default function ProjectDetail({
   return (
     <Card className="w-full gap-8 px-8 pt-8 pb-5">
       <header className="flex items-start gap-9">
-      <figure className="shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square bg-accent-secondary">
+      <figure className="overflow-hidden shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex justify-center items-center">
+      {/* <figure className="shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex items-center justify-center"> */}
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
           width={100}
           height={100}
-          className="rounded-sm aspect-square"
+          className="object-contain"
         />
       </figure>
 

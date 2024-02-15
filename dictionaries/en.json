@@ -25,6 +25,7 @@
         "dark": "Dark",
         "system": "System"
       },
+      "sign_up": "Sign up",
       "sign_in": "Sign in",
       "sign_out": "Sign out",
       "my_profile": "My Profile",
@@ -41,6 +42,11 @@
   },
 
   "profile": {
+    "list": {
+      "banner": "When you invite a professional to CareerGen",
+      "banner2": "You can look up the career of an expert!",
+      "banner3": "Invite an expert"
+    },
     "report_card": {
       "title": "Reputation Report",
       "total_experience": "Total experience",
@@ -146,11 +152,11 @@
       "accordion": {
         "agree_with_all": "Agree with all",
         "terms_of_services": "Terms of Services (required)",
-        "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "Privacy Policy (required)",
-        "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "In-app notification (optional)",
-        "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more"
+        "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more",
+        "back": "Back",
+        "agree": "I agree"
       },
       "cancel": "Cancel",
       "next": "Create Profile",
@@ -553,10 +559,11 @@
     "edit_avatar":{
         "tab_all": "All",
         "tab_career": "Career NFT",
-        "tab_avatar": "Avatar NFT",
+        "tab_limited": "Limited NFT",
         "not_approved": "Not Approved",
         "reset": "Reset",
-        "save":  "Save"
+        "save": "Save",
+        "no_avatar": "No avatar"
     },
     "edit_profile": {
       "edit_profile": "edit profile",
@@ -1120,7 +1127,11 @@
     "propensity": "Propensity",
     "Situation": "Situation",
     "Work Orientation": "Work Orientation",
-    "General Tendency": "General Tendency"
+    "General Tendency": "General Tendency",
+    "situation": "Situation",
+    "work orientation": "Work Orientation",
+    "general tendency": "General Tendency",
+    "communication": "Communication"
   },
   "validation": {
     "onboard": {

@@ -25,6 +25,7 @@
         "dark": "어두운",
         "system": "체계"
       },
+      "sign_up": "간편 로그인",
       "sign_in": "로그인",
       "sign_out": "로그아웃",
       "my_profile": "내 프로필",
@@ -41,6 +42,11 @@
   },
 
   "profile": {
+    "list": {
+      "banner": "커리어젠으로 전문가를 초대하면",
+      "banner2": "전문가의 커리어를 조회 할 수 있어요!",
+      "banner3": "전문가 초대하기"
+    },
     "report_card": {
       "title": "의 평판보고서",
       "total_experience": "총 경력",
@@ -117,7 +123,7 @@
   "profile_detail_card": {
     "example": "example",
     "achievements": "보유 NFT 수",
-    "certificates": "평가받은 횟수",
+    "certificates": "평가받은 개수",
     "projects": "참여한 프로젝트",
     "groups": "groups",
     "no role": "no role"
@@ -146,11 +152,11 @@
       "accordion": {
         "agree_with_all": "모두 동의",
         "terms_of_services": "서비스 이용약관 (필수)",
-        "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "개인정보처리방침 (필수)",
-        "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "보상 및 이벤트 알림 (선택)",
-        "reward_notification_description": "보상 지급, 프로모션, 혜택 등의 알림"
+        "reward_notification_description": "보상 지급, 프로모션, 혜택 등의 알림",
+        "back": "뒤로가기",
+        "agree": "동의하기"
       },
       "cancel": "뒤로가기",
       "next": "다음",
@@ -336,7 +342,7 @@
         "request_title": "그룹에게 NFT 수상 요청하기",
         "request_desc": "공신력있는 그룹을 선택하고, 해당 그룹이 발행 가능한 NFT 상장을 요청해보세요.",
         "search_placeholder": "그룹 이름을 검색해보세요",
-        "no_search_result": "검색 결과가 없습니다.",
+        "no_search_result": "발행 가능한 NFT가 없습니다.",
         "later": "다음에 할게요",
         "request_group": "요청하려는 그룹",
         "request_nft": "발행 가능한 NFT",
@@ -552,10 +558,11 @@
     "edit_avatar": {
       "tab_all": "전체",
       "tab_career": "커리어 NFT",
-      "tab_avatar": "한정판 NFT",
+      "tab_limited": "한정판 NFT",
       "not_approved": "발행 대기중",
       "reset": "초기화",
-      "save": "저장하기"
+      "save": "저장하기",
+      "no_avatar": "아바타가 없어요."
     },
     "edit_profile": {
       "edit_profile": "프로필 수정",
@@ -877,7 +884,7 @@
       "nft_desc": "NFT 설명",
       "show_more": "더 보기",
       "hide": "숨기기",
-      "close": "다음에 할래요",
+      "close": "닫기",
       "send_request": "발행 요청",
       "complete_request": "요청 완료"
     }
@@ -887,7 +894,7 @@
       "end_date_1": "미션 종료",
       "end_date_2": "일 전",
       "end": "미션 종료일",
-      "before_end": "미션 종료"
+      "before_end": "종료됨"
     },
     "detail": {
       "all_mission": "총 미션",
@@ -1118,7 +1125,11 @@
     "propensity": "성향 평가",
     "Situation": "어떤 상황에서 최고의 성과를 내나요?",
     "Work Orientation": "업무 성향",
-    "General Tendency": "개인 성향"
+    "General Tendency": "개인 성향",
+    "situation": "어떤 상황에서 최고의 성과를 내나요?",
+    "work orientation": "업무 성향",
+    "general tendency": "개인 성향",
+    "communication": "협업 및 커뮤니케이션"
   },
   "validation": {
     "onboard": {
@@ -1132,7 +1143,7 @@
       "email": {
         "already_use": "이미 사용중인 이메일입니다. 다른 이메일을 이용해주세요.",
         "require": "이메일을 입력해주세요.",
-        "email": "이메일 주소를 다시 확인해주세요. (이메일 아이디@서비스 도메인)"
+        "email": "이메일 주소를 다시 확인해주세요."
       }
     }
   }

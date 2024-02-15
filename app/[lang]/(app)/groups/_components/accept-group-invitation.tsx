@@ -61,11 +61,10 @@ export default function AcceptGroupInvitation({
   };
   return (
     <Card className="flex flex-col max-w-md gap-0 px-8 mx-auto text-center py-7">
-      <Avatar className="rounded-sm mx-auto w-[200px] h-[200px] mb-6 aspect-square bg-state-info-secondary">
+      <Avatar className="rounded-sm mx-auto w-[200px] h-[200px] mb-6">
         <AvatarImage
           src={"https://ipfs.io/ipfs/" + image}
-          alt="project_image"
-          className=""
+          alt="group_image"
         />
 
         <AvatarFallback className="relative">

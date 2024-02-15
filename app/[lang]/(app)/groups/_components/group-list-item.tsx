@@ -23,7 +23,7 @@ const GroupListItem = React.memo(
     const renderCardContent = () => (
       <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] h-full pb-6 px-6 gap-0">
         <section className="flex flex-col items-center justify-center w-full max-w-full text-center">
-          <Avatar className="w-24 h-24 mb-2 aspect-square bg-state-info-secondary">
+          <Avatar className="w-24 h-24 mb-2">
             <AvatarImage
               src={`https://ipfs.io/ipfs/${details.image}`}
               alt={details.name}

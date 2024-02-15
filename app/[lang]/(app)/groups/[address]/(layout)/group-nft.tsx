@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Achievement } from "@/lib/interfaces";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import NftList from "./nft/nft-list";
 
 export default function GroupNFT({
   address,
@@ -22,9 +23,7 @@ export default function GroupNFT({
   lang: any;
 }) {
   const pathName = usePathname();
-
-  const user_achievements = userAchievements.map(item => item.achievement.id);
-
+  const user_achievements = userAchievements.map((item) => item.achievement.id);
 
   return (
     <div className="overflow-auto max-w-[90vw]">
@@ -40,27 +39,13 @@ export default function GroupNFT({
         </Link>
       </div>
 
-      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-        {achievements &&
-          achievements
-            .slice(0, 5)
-            .map((item: Achievement, index: number) => (
-              <DisplayNFT
-                details={item}
-                key={index}
-                lang={lang}
-                contract={contract}
-                showMintButton={true}
-                blockRequest={user_achievements.includes(item.id)}
-              />
-            ))}
-      </div>
-
-      {achievements && achievements.length < 1 && (
-        <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-          {lang.group.details.about.no_latest_nft}
-        </div>
-      )}
+      <NftList
+        achievements={achievements}
+        lang={lang}
+        useTab={false}
+        limit={5}
+        userAchievements={user_achievements}
+      />
     </div>
   );
 }
