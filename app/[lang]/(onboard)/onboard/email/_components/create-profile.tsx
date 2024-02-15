@@ -27,6 +27,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAccount, useDisconnect } from "wagmi";
 import * as z from "zod";
+import PrivacyPolicy from "./privacy-policy";
+import TermsOfService from "./terms-of-service";
+import RewardNotification from "./reward-notification";
 
 const wepin_app = process.env.NEXT_PUBLIC_WEPIN_APP_ID;
 const wepin_prod_app = process.env.WEPIN_PROD_APP_ID;
@@ -274,7 +277,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       {lang.onboard.verify_email.accordion.agree_with_all}
                     </Label>
                   </div>
-                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
                 </FormItem>
               )}
             />
@@ -294,7 +296,10 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       {lang.onboard.verify_email.accordion.terms_of_services}
                     </Label>
                   </div>
-                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+                  <TermsOfService
+                    onClickAgree={() => form.setValue("terms_of_service", true)}
+                    lang={lang}
+                  />
                 </FormItem>
               )}
             />
@@ -315,7 +320,11 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       {lang.onboard.verify_email.accordion.privacy_policy}
                     </Label>
                   </div>
-                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+
+                  <PrivacyPolicy
+                    onClickAgree={() => form.setValue("privacy_policy", true)}
+                    lang={lang}
+                  />
                 </FormItem>
               )}
             />
@@ -347,7 +356,11 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       </div>
                     </FormLabel>
                   </div>
-                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+
+                  <RewardNotification
+                    onClickAgree={() => form.setValue("email_policy", true)}
+                    lang={lang}
+                  />
                 </FormItem>
               )}
             />

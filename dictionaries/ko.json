@@ -151,11 +151,11 @@
       "accordion": {
         "agree_with_all": "모두 동의",
         "terms_of_services": "서비스 이용약관 (필수)",
-        "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "개인정보처리방침 (필수)",
-        "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "보상 및 이벤트 알림 (선택)",
-        "reward_notification_description": "보상 지급, 프로모션, 혜택 등의 알림"
+        "reward_notification_description": "보상 지급, 프로모션, 혜택 등의 알림",
+        "back": "뒤로가기",
+        "agree": "동의하기"
       },
       "cancel": "뒤로가기",
       "next": "다음",

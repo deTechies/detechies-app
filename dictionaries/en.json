@@ -151,11 +151,11 @@
       "accordion": {
         "agree_with_all": "Agree with all",
         "terms_of_services": "Terms of Services (required)",
-        "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "Privacy Policy (required)",
-        "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "reward_notification": "In-app notification (optional)",
-        "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more"
+        "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more",
+        "back": "Back",
+        "agree": "I agree"
       },
       "cancel": "Cancel",
       "next": "Create Profile",
