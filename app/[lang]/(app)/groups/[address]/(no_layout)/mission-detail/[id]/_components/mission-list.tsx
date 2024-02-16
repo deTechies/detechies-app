@@ -53,6 +53,22 @@ export default function MissionList({
     setLoading(false);
   };
 
+  const isTodayWithinRange = () => {
+    const today = new Date();
+    const beginDate = new Date(mission.begin_date);
+    const endDate = new Date(mission.end_date);
+
+    if (today < beginDate) {
+      return "before";
+    }
+
+    if (today > endDate) {
+      return "after";
+    }
+
+    return "within";
+  };
+
   if (userProgress.length > 0) {
     return (
       <div className="flex flex-col gap-3">
@@ -110,17 +126,30 @@ export default function MissionList({
 
   return (
     <div className="flex flex-col gap-3">
-      {(userRole == "admin" || userRole == "member") && (
-        <Card className="flex flex-row flex-wrap items-center justify-between px-8 py-7">
-          <Button
-            onClick={startCampaign}
-            loading={loading}
-            disabled={loading || userProgress.length > 0}
-          >
-            {lang.mission.detail.start}
-          </Button>
-        </Card>
-      )}
+      <Card className="flex flex-row flex-wrap items-center justify-end px-8 py-7">
+        {(userRole == "admin" || userRole == "member") &&
+          isTodayWithinRange() === "before" && <div>미션 시작 전입니다.</div>}
+
+        {(userRole == "admin" || userRole == "member") &&
+          isTodayWithinRange() === "after" && (
+            <div>미션이 이미 종료되었습니다.</div>
+          )}
+
+        {(userRole == "admin" || userRole == "member") &&
+          isTodayWithinRange() === "within" && (
+            <Button
+              onClick={startCampaign}
+              loading={loading}
+              disabled={
+                loading ||
+                userProgress.length > 0 ||
+                (userRole != "admin" && userRole != "member")
+              }
+            >
+              {lang.mission.detail.start}
+            </Button>
+          )}
+      </Card>
 
       {mission.missions &&
         mission.missions.map((item: Mission, index: number) => {

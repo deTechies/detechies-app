@@ -47,9 +47,9 @@ export default function ProjectDetailItem({
                 {data.title}
               </h5>
 
-              <div className="flex items-center gap-3 shrink-0">
+              {/* <div className="flex items-center gap-3 shrink-0">
               <Badge>{lang?.mypage.project.evaluation} (0)</Badge>
-              </div>
+              </div> */}
             </header>
               <div className="flex flex-col flex-wrap gap-5">
                 <div className="flex flex-col items-start justify-start gap-4 md:flex-row text-text-secondary">
@@ -71,7 +71,7 @@ export default function ProjectDetailItem({
                     </span>
                   </div>
 
-                  <div className="break-all line-clamp-2 text-label_m whitespace-break-spaces">
+                  <div className="break-all text-label_m whitespace-break-spaces">
                     <span>{data.description}</span>
                   </div>
                 </div>

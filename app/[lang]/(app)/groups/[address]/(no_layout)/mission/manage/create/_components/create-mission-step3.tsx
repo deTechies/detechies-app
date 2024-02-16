@@ -14,7 +14,7 @@ import Image from "@/components/ui/image";
 // import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-const RewardForm = ({
+const CreateMissionStep3 = ({
   achievements,
   selectedAchievements,
   onSelectAchievement,
@@ -251,4 +251,4 @@ const RewardForm = ({
     </div>
   );
 };
-export default RewardForm;
+export default CreateMissionStep3;

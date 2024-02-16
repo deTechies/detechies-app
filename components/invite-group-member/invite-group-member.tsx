@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
 import { User } from "@/lib/interfaces";
-import useFetchData from "@/lib/useFetchData";
 import PersonItem from "../extra/add-member-item";
 import Search from "../extra/search";
 import {
@@ -17,6 +16,7 @@ import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
 import SelectedGroupMember from "./selected-group-member";
 import { useRouter, useSearchParams } from "next/navigation";
+import { serverApi } from "@/lib/data/general";
 
 export default function InviteGroupMember({
   groupId,
@@ -27,28 +27,41 @@ export default function InviteGroupMember({
   lang: any;
   groupMembers: any[];
 }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const text = searchParams.get("search") || "";
+
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [completeInviting, setCompleteInviting] = useState<boolean>(false);
-  const { data: members, loading, error } = useFetchData<any[]>("/users");
 
-  const router = useRouter();
-
-  if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
-  if (error) return <div>{JSON.stringify(error)}</div>;
-  // if (!members) return <div>{lang.group.details.invite_member.no_members_found}</div>;
-  if (!members) return <div>no_members_found</div>;
+  const [userList, setUserList] = useState<any[]>([]);
 
   const array_member_id = groupMembers.map((member: any) => member.user.id);
 
-  const filteredData = members.filter((member: any) => {
-    return (
-      !array_member_id.includes(member.id) &&
-      member.display_name.toLowerCase().includes(text.toLowerCase() || "")
-    );
-  });
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+
+      const newUrl = new URLSearchParams();
+      const paramValue = searchParams.get("search") || "";
+      newUrl.set("display_name", paramValue);
+
+      const { data: users } = await serverApi(`/users`, newUrl.toString());
+      const filteredUsers = users.filter((userItem: any) => {
+        return (
+          !array_member_id.includes(userItem.id) &&
+          userItem.display_name.toLowerCase().includes(text.toLowerCase() || "")
+        );
+      });
+
+      setUserList(filteredUsers);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [text]);
 
   const onClickGoManage = () => {
     router.push(`/groups/${groupId}/manage`);
@@ -56,14 +69,12 @@ export default function InviteGroupMember({
     setCompleteInviting(false);
   };
 
-
-
   const onOpenChange = (open: boolean) => {
-    if(!open) {
+    if (!open) {
       setSelected(null);
       setCompleteInviting(false);
     }
-  }
+  };
 
   return (
     <Dialog onOpenChange={onOpenChange}>
@@ -108,8 +119,15 @@ export default function InviteGroupMember({
               />
 
               <div className="rounded-sm max-h-[30vh] overflow-x-auto">
-                {filteredData &&
-                  filteredData.map((member: User, index: number) => (
+                {loading && (
+                  <div className="pt-2 pb-5 text-center text-label_m text-text-secondary animate-pulse">
+                    Loading...
+                  </div>
+                )}
+
+                {!loading &&
+                  userList &&
+                  userList.map((member: User, index: number) => (
                     <PersonItem
                       key={index}
                       member={member}
@@ -118,13 +136,21 @@ export default function InviteGroupMember({
                       }}
                     />
                   ))}
+
+                {!loading && userList.length < 1 && (
+                  <div className="pt-2 pb-5 text-center text-label_m text-text-secondary">
+                    {lang.group.details.profile_card.invite.no_members_found}
+                  </div>
+                )}
               </div>
 
               <button
                 onClick={() => setByEmail(true)}
                 className="flex gap-2 mx-auto text-center"
               >
-                <span>{lang.group.details.profile_card.invite.no_name_found}</span>
+                <span>
+                  {lang.group.details.profile_card.invite.no_name_found}
+                </span>
                 <span className="text-accent-primary">
                   {lang.group.details.profile_card.invite.invite_by_email}
                 </span>

@@ -32,7 +32,7 @@ export default function ProjectWorkDetail({
           </span>
         </div>
 
-        <div className="break-all whitespace-break-spaces line-clamp-2 text-label_m">
+        <div className="break-all whitespace-break-spaces text-label_m">
           <span>{data.description}</span>
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, XIcon } from "lucide-react";
@@ -19,7 +20,7 @@ interface Mission {
   essential: boolean;
 }
 
-export const StepTwo: React.FC<StepTwoProps> = ({
+const CreateMissionStep2: React.FC<StepTwoProps> = ({
   updateMission,
   removeMission,
   missions,
@@ -33,6 +34,18 @@ export const StepTwo: React.FC<StepTwoProps> = ({
     const updatedMission = {
       ...missions[index],
       [name]: type === "checkbox" ? checked : value,
+    };
+    updateMission(index, updatedMission);
+  };
+
+  const handleCheckboxChange = (
+    name: string,
+    index: number,
+    checked: boolean
+  ) => {
+    const updatedMission = {
+      ...missions[index],
+      [name]: checked,
     };
     updateMission(index, updatedMission);
   };
@@ -69,7 +82,7 @@ export const StepTwo: React.FC<StepTwoProps> = ({
               <Input
                 type="text"
                 name="name"
-                placeholder="Mission Name"
+                placeholder={lang.mission.create.detail_placeholder}
                 value={mission.name}
                 onChange={(e) => handleMissionInputChange(index, e)}
                 className="flex grow h-[60px]"
@@ -96,13 +109,20 @@ export const StepTwo: React.FC<StepTwoProps> = ({
             </div>
 
             <div className="flex items-center gap-1 shrink-0">
-              <Input
+              <Checkbox
+                name="essential"
+                checked={mission.essential}
+                onCheckedChange={(e: boolean) =>
+                  handleCheckboxChange("essential", index, e)
+                }
+              />
+              {/* <Input
                 type="checkbox"
                 name="essential"
                 checked={mission.essential}
                 className="rounded-[4px] h-5 w-5 border-2 border-border-primary"
                 onChange={(e) => handleMissionInputChange(index, e)}
-              />
+              /> */}
 
               <Label className="text-label_s shrink-0">
                 {lang.mission.create.required_mission}
@@ -148,3 +168,5 @@ export const StepTwo: React.FC<StepTwoProps> = ({
     </section>
   );
 };
+
+export default CreateMissionStep2;

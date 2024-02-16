@@ -335,7 +335,6 @@ export default function PrivacyPolicy({
           <p className="text-body_s text-text-secondary mmt"></p>
           <p className="text-body_s text-text-secondary mmt"></p>
           <h2 className="mb-2 text-title_s">8. 회원의 권리와 의무</h2>
-          <p className="text-body_s text-text-secondary mmt"> </p>
           <p className="text-body_s text-text-secondary mmt">
             - 회원은 개인정보를 보호받을 권리와 함께 스스로를 보호하고 타인의
             정보를 침해하지 않을 의무도 가지고 있습니다. 비밀번호를 포함한
@@ -357,7 +356,6 @@ export default function PrivacyPolicy({
           <h2 className="mb-2 text-title_s">
             9. 개인정보의 기술적·관리적 보호대책
           </h2>
-          <p className="text-body_s text-text-secondary mmt"> </p>
           <p className="text-body_s text-text-secondary mmt">
             - 회사는 회원의 개인정보를 처리함에 있어 개인정보가 분실, 도난,
             유출, 변조 또는 훼손되지 않도록 안전성 확보를 위하여 다음과 같은

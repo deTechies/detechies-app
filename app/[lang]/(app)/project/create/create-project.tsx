@@ -325,7 +325,9 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               name="end_date"
               render={({ field }) => (
                 <FormItem
-                  className={`w-full relative ${present && "opacity-40"}`}
+                  className={`w-full relative space-y-0 ${
+                    present && "opacity-40"
+                  }`}
                 >
                   <Input type="date" {...field} disabled={present} />
                   {present && (

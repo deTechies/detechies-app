@@ -20,7 +20,7 @@ export default function QuitMission({
 
   async function onClickQuit() {
     setLoading(true);
-
+    //
     setLoading(false);
   }
 
@@ -64,6 +64,8 @@ export default function QuitMission({
             variant="error"
             className="grow max-w-[212px]"
             onClick={onClickQuit}
+            loading={loading}
+            disabled={loading}
           >
             {lang.group.details.manage.mission.mission_quit}
           </Button>

@@ -250,7 +250,7 @@ export default function PendingMemberListItem({
           size="icon"
           disabled={isLoading || projectLoading || loading}
         >
-          <X className="w-6 h-6"></X>
+          <X className="w-6 h-6 text-icon-secondary"/>
         </Button>
 
         <Button
@@ -259,7 +259,7 @@ export default function PendingMemberListItem({
           size="icon"
           disabled={isLoading || projectLoading || loading}
         >
-          <Check className="w-6 h-6"></Check>
+          <Check className="w-6 h-6"/>
         </Button>
       </div>
     </div>
