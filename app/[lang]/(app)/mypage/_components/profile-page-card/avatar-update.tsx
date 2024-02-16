@@ -9,7 +9,7 @@ import { updateUserAvatar } from "@/lib/data/user";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const AvatarUpdate = ({ profile }: any) => {
+const AvatarUpdate = ({ profile, lang }: any) => {
   const pathName = usePathname();
   const searchParams = useSearchParams()!;
 
@@ -82,10 +82,10 @@ const AvatarUpdate = ({ profile }: any) => {
           variant="secondary"
           onClick={() => setAvatar(profile.avatar)}
         >
-          Reset
+          {lang.mypage.edit_avatar.reset}
         </Button>
         <Button size="lg" onClick={handleUpdateAvatar} loading={refresh}>
-          Save
+          {lang.mypage.edit_avatar.save}
         </Button>
       </div>
     </Card>

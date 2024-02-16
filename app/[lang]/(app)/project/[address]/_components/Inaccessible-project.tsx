@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import JoinProject from "@/components/project/join-project";
 
-export default async function InaccessibleProject({
+export default function InaccessibleProject({
   projectId,
   isJoined,
   lang,
@@ -25,7 +25,7 @@ export default async function InaccessibleProject({
 
       <div className="flex items-center justify-center mb-8">
         <Image
-          src="/images/mission.png"
+          src="/images/private-project.png"
           alt="private project"
           width="280"
           height="280"

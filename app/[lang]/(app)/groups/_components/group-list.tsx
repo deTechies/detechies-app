@@ -90,7 +90,13 @@ export default function GroupList({
         ))}
       </div>
 
-      {/* <div className="mb-10"></div> */}
+      {groupList.length < 1 && (
+        <div className="mb-24 text-center text-text-secondary text-subhead_s">
+          {currentTab === TAB_BUTTONS.JOINED
+            ? lang.group.list.no_joined
+            : lang.group.list.no_created}
+        </div>
+      )}
 
       {/* 
       To be added later

@@ -305,9 +305,9 @@
         },
         "delete_works": {
           "button": "Delete",
-          "title": "Do you want to delete the works you created?",
-          "desc": "If you deleted it, you'll have to recreate it.?",
-          "back": "Back",
+          "title": "Do you want to delete my project achievements?",
+          "desc": "If I delete it, I won't be able to recover the project performance I created, do you really want to delete it?",
+          "back": "I'll do it later",
           "delete": "Delete"
         }
       },
@@ -576,6 +576,7 @@
       "profile_description": "profile description",
       "profile_description_label": "Tell us a little bit about yourself",
       "skills": "skills",
+      "skills_placeholder": "enter your skills.",
       "username": "username",
       "save_changes": "save changes",
       "identity_authentication": "Linked Accounts",
@@ -659,7 +660,9 @@
       "banner": "Create your own group and",
       "banner2": "Award NFTs to projects and individuals and be an influential group!",
       "banner3": "Go create a group",
-      "view_more": "View More"
+      "view_more": "View More",
+      "no_created": "No groups have been created",
+      "no_joined": "There are no groups I am joining."
     },
     "create": {
       "title": "Create Group",
@@ -751,7 +754,7 @@
           "sended_desc": "Once the user receives the message and accepts the invitation, they will be added as a new member. You can check the status of the invitation in member management.",
           "go_manage": "Go to Member Management",
           "invite_group_member": "Invite Group Member",
-          "search_placeholder": "Search by email",
+          "search_placeholder": "Search by nickname",
           "no_name_found": "Nickname not found.",
           "invite_by_email": "Invite by Email",
           "message": "Message",
@@ -760,14 +763,6 @@
           "invite": "Invite",
           "name": "Name",
           "email": "E-mail"
-        },
-        "join": {
-          "join_group": "Join Group",
-          "join_group_desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
-          "message": "Request Message",
-          "message_placeholder": "Hello, I am Gil-dong Hong, a front-end developer.",
-          "back": "Go Back",
-          "send": "Request to Join"
         }
       },
       "invited_to_group": {
@@ -921,6 +916,7 @@
       "name_placeholder": "Enter Campaign Name",
       "desc": "Description",
       "desc_placeholder": "Enter Campaign Description",
+      "detail_placeholder": "Enter detail mission name.",
       "date": "Duration",
       "begin_date": "Start Date",
       "end_date": "End Date",
@@ -965,7 +961,8 @@
       "company": "Company",
       "school": "School",
       "community": "Community",
-      "authority": "Authority"
+      "authority": "Authority",
+      "agency": "Authority"
     },
     "nft_type": {
       "sbt": "Career",

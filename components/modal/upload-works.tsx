@@ -171,7 +171,7 @@ export default function UploadWorks({
                     <div className="flex justify-between px-8 py-5 rounded-sm text-accent-on-secondary bg-background-layer-2">
                       {file.name}
                       <X
-                        className="ml-2 mr-4 cursor-pointer hover:text-state-error text-text-secondary"
+                        className="ml-2 cursor-pointer hover:text-state-error text-text-secondary"
                         onClick={() => setFile(null)}
                         size="1.5rem"
                       />

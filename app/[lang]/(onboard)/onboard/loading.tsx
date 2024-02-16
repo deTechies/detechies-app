@@ -2,21 +2,21 @@ import Image from "next/image";
 
 export default function OnboardLoading() {
   return (
-    <div className="h-[100vh] w-[100vw]">
-      <div className="flex w-full flex-col items-center justify-center h-full">
+    <div className="h-[100vh] w-[100vw] absolute top-0 left-0">
+      <div className="flex flex-col items-center justify-center w-full h-full">
         <Image
           src="/images/careerzen.png"
           alt="Careerzen"
           width={300}
           height={50}
-          className="block h-12 object-contain dark:hidden animate-pulse mx-auto"
+          className="block object-contain h-12 mx-auto dark:hidden animate-pulse"
         />
         <Image
           src="/images/logo-invert.png"
           alt="Careerzen"
           width={300}
           height={50}
-          className="h-12 object-contain hidden dark:block animate-pulse mx-auto"
+          className="hidden object-contain h-12 mx-auto dark:block animate-pulse"
         />
       </div>
     </div>

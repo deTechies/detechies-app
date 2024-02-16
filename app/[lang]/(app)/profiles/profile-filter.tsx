@@ -14,7 +14,7 @@ import { PROFESSION_TYPE } from "@/lib/interfaces";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
-import InviteExperts from "./invite_experts";
+import InviteExperts from "./invite-experts";
 
 export default function ProfileFilter({ lang }: { lang: any }) {
   const router = useRouter();

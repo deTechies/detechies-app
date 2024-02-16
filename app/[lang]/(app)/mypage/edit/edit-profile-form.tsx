@@ -36,7 +36,7 @@ const profileFormSchema = z.object({
   first_name: z
     .string()
     .min(1, {
-      message: "Your first name must be at least 2 characters.",
+      message: "Your first name must be at least 1 characters.",
     })
     .optional(),
   last_name: z
@@ -56,14 +56,14 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 const defaultValues: Partial<ProfileFormValues> = {};
 
 interface EditProfileProps {
-  text: any;
+  lang: any;
   currentValues: Partial<any>;
   email: string;
   username: string;
 }
 
 export default function EditProfileForm({
-  text,
+  lang,
   username,
   email,
   currentValues,
@@ -133,14 +133,14 @@ export default function EditProfileForm({
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <section className="mb-8">
               <h1 className="capitalize text-text-primary text-subhead_s">
-                {text.edit_profile}
+                {lang.mypage.edit_profile.edit_profile}
               </h1>
             </section>
             <section className="my-2">
               <div className="flex flex-col gap-10">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="w-full">
-                    <Label className="">{text?.full_name}</Label>
+                    <Label className="">{lang.mypage.edit_profile?.full_name}</Label>
                     <div className="flex items-center gap-2 mt-2">
                       <FormField
                         control={form.control}
@@ -149,7 +149,7 @@ export default function EditProfileForm({
                           <FormItem>
                             <FormControl>
                               <Input
-                                placeholder={text?.first_name}
+                                placeholder={lang.mypage.edit_profile?.first_name}
                                 {...field}
                               />
                             </FormControl>
@@ -162,7 +162,7 @@ export default function EditProfileForm({
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
-                              <Input placeholder={text?.last_name} {...field} />
+                              <Input placeholder={lang.mypage.edit_profile?.last_name} {...field} />
                             </FormControl>
                           </FormItem>
                         )}
@@ -176,7 +176,7 @@ export default function EditProfileForm({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="capitalize">
-                            {text?.profession}
+                            {lang.mypage.edit_profile?.profession}
                           </FormLabel>
                           <Select
                             onValueChange={field.onChange}
@@ -190,7 +190,7 @@ export default function EditProfileForm({
                             <SelectContent>
                               {Object.values(PROFESSION_TYPE).map((type) => (
                                 <SelectItem key={type} value={type}>
-                                  {type}
+                                  {lang.interface.profession_type[type] || type}
                                 </SelectItem>
                               ))}
                             </SelectContent>
@@ -203,7 +203,7 @@ export default function EditProfileForm({
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="">
-                    <Label className="mb-2 capitalize">{text?.username}</Label>
+                    <Label className="mb-2 capitalize">{lang.mypage.edit_profile?.username}</Label>
                     <Input
                       placeholder={username}
                       value={username}
@@ -212,7 +212,7 @@ export default function EditProfileForm({
                     />
                   </div>
                   <div className="">
-                    <Label className="mb-2 capitalize">{text?.email}</Label>
+                    <Label className="mb-2 capitalize">{lang.mypage.edit_profile?.email}</Label>
                     <Input
                       placeholder={email}
                       value={email}
@@ -228,13 +228,13 @@ export default function EditProfileForm({
               <FormItem className="space-y-">
                 <FormLabel>
                   <div className="mb-2">
-                    {text?.skills}
+                    {lang.mypage.edit_profile?.skills}
                   </div>
                 </FormLabel>
                 
                 <FormControl>
                   <Input
-                    placeholder="Type and press enter"
+                    placeholder={lang.mypage.edit_profile?.skills_placeholder}
                     value={newTag}
                     onChange={handleNewTagChange}
                     onKeyDown={handleKeyDown}
@@ -289,11 +289,11 @@ export default function EditProfileForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="capitalize">
-                        {text?.profile_description}
+                        {lang.mypage.edit_profile?.profile_description}
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder={text?.profile_description.label}
+                          placeholder={lang.mypage.edit_profile?.profile_description_label}
                           style={{ height: "200px" }}
                           {...field}
                         />
@@ -311,7 +311,7 @@ export default function EditProfileForm({
                 disabled={loading}
                 loading={loading}
               >
-                {text?.save_changes}
+                {lang.mypage.edit_profile?.save_changes}
               </Button>
             </div>
           </form>

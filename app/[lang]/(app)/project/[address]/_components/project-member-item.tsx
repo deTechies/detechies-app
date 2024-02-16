@@ -25,13 +25,11 @@ export default async function ProjectMemberItem({
   projectId,
   lang,
   userRole,
-  onlyOne,
 }: {
   details: ProjectMember;
   projectId: string;
   lang: any;
   userRole: string;
-  onlyOne?: boolean;
 }) {
   const session = await auth();
 
@@ -55,11 +53,12 @@ export default async function ProjectMemberItem({
                   {details.user?.display_name} |{" "}
                   {lang.interface.role_type[details.role]}
                 </h5>
-                
+
                 <Badge shape="sm" className="px-1.5 py-0.5">
                   {details.works.length < 1
                     ? lang.project.details.members.unregistered
-                    : `${lang.project.details.members.registered} (${details.works.length})`}
+                    : `${lang.project.details.members.registered}`}
+                  {/* (${details.works.length}) */}
                 </Badge>
               </div>
 

@@ -46,7 +46,6 @@ export default async function ProjectMembers({
               userRole={details.userRole}
               lang={lang}
               details={member}
-              onlyOne={details.members.length == 1}
             />
           ))}
       </div>

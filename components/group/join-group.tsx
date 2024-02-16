@@ -32,7 +32,7 @@ import Image from "next/image";
 import { Card } from "../ui/card";
 import { Textarea } from "../ui/textarea";
 
-export default function InviteProjectMember({
+export default function JoinGroup({
   groupId,
   details,
   lang,
@@ -51,7 +51,7 @@ export default function InviteProjectMember({
     resolver: zodResolver(FormSchema),
   });
 
-  const [ openDialog, setOpenDialog ] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { data: session } = useSession();
 
@@ -84,27 +84,29 @@ export default function InviteProjectMember({
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger className="max-w-[230px] grow">
         <Button size="lg" variant="primary" className="w-full">
-          {lang.details.profile_card.join_group.title}
+          {lang.group.details.profile_card.join_group.title}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="gap-6">
         <div className="flex flex-col gap-4">
           <h5 className="text-subhead_m">
-            {lang.details.profile_card.join_group.title}
+            {lang.group.details.profile_card.join_group.title}
           </h5>
 
           <p className="text-body_m">
-            {lang.details.profile_card.join_group.desc}
+            {lang.group.details.profile_card.join_group.desc}
           </p>
         </div>
 
         <Card className="flex-row gap-5 p-6 border border-border-div">
           <Avatar className="w-[68px] h-[68px] mb-2">
             <AvatarImage
-              src={details.image
-                ? `https://ipfs.io/ipfs/${details.image}`
-                : "/icons/group_default.png"}
+              src={
+                details.image
+                  ? `https://ipfs.io/ipfs/${details.image}`
+                  : "/icons/group_default.png"
+              }
               alt={details.name}
               className="rounded-md"
             />
@@ -125,7 +127,9 @@ export default function InviteProjectMember({
             </h3>
 
             <h4 className="truncate text-label_m">
-              {details?.type ? details?.type : "Type not found"}
+              {details?.type
+                ? lang.interface.group_type[details?.type]
+                : "Type not found"}
             </h4>
           </div>
         </Card>
@@ -141,12 +145,12 @@ export default function InviteProjectMember({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="mb-3">
-                    {lang.details.profile_card.join_group.message}
+                    {lang.group.details.profile_card.join_group.message}
                   </FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder={
-                        lang.details.profile_card.join_group.message_placeholder
+                        lang.group.details.profile_card.join_group.message_placeholder
                       }
                       className="resize-none"
                       {...field}
@@ -164,7 +168,7 @@ export default function InviteProjectMember({
                   size="lg"
                   className="max-w-[212px] grow px-0"
                 >
-                  {lang.details.profile_card.join_group.back}
+                  {lang.group.details.profile_card.join_group.back}
                 </Button>
               </DialogClose>
 
@@ -174,7 +178,7 @@ export default function InviteProjectMember({
                 disabled={loading}
                 loading={loading}
               >
-                {lang.details.profile_card.join_group.send}
+                {lang.group.details.profile_card.join_group.send}
               </Button>
             </div>
           </form>

@@ -16,10 +16,11 @@ export default async function ProjectMemberEvaluation({
   const details = await getProjectWork(params.id);
   const dictionary = await getDictionary(params.lang);
 
+  
   if (!details.data) {
     return <InvalidWorkAccess details={details} />;
   }
-
+  
   return (
     <main className="flex gap-4">
       {/* LEFT SIDE  */}

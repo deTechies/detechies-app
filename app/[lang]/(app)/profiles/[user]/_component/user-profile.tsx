@@ -11,7 +11,7 @@ export default function UserProfile({
   text: any;
 }) {
   return (
-    <Card className="flex flex-col gap-5 w-[328px]">
+    <Card className="flex flex-col gap-5">
       <div className="flex flex-col gap-4">
         <div className="relative w-full rounded-md aspect-square bg-background-layer-2">
           <IPFSImageLayer

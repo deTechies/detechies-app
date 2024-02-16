@@ -3,7 +3,7 @@ import { serverApi } from "@/lib/data/general";
 import { User } from "@/lib/interfaces";
 import ShowMoreButton from "@/components/extra/show-more-button";
 import { Button } from "@/components/ui/button";
-import InviteExperts from "./invite_experts";
+import InviteExperts from "./invite-experts";
 
 export default async function ListProfiles({
   lang,
@@ -44,7 +44,7 @@ export default async function ListProfiles({
         <ShowMoreButton lang={lang} />
       )}
 
-      <div className="px-10 py-10 max-w-[1028px] w-full min-h-[199px] rounded-md bg-no-repeat bg-cover flex mx-auto bg-[url('/images/banner-invite-user.png')]">
+      <div className="px-10 py-10 mt-10 max-w-[1028px] w-full min-h-[199px] rounded-md bg-no-repeat bg-cover flex mx-auto bg-[url('/images/banner-invite-user.png')]">
         <div className="max-w-[430px] mx-auto text-center">
           <div className="mb-1 text-subhead_m text-accent-primary">
             {lang.profile.list.banner}
