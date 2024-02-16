@@ -1130,7 +1130,29 @@
       "email": {
         "already_use": "이미 사용중인 이메일입니다. 다른 이메일을 이용해주세요.",
         "require": "이메일을 입력해주세요.",
-        "email": "이메일 주소를 다시 확인해주세요. (이메일 아이디@서비스 도메인)"
+        "email": "이메일 주소를 다시 확인해주세요. (이메일 아이디@서비스 도메인)",
+        "invalid_verification_code": "인증번호가 일치 하지 않습니다. 다시 입력해주세요."
+      }
+    },
+    "mypage":{
+      "edit_profile":{
+          "saved_edits": "내 프로필 정보가 성공적으로 수정되었어요."
+      }
+    },
+    "project":{
+      "new_project":{
+        "missing_name": "프로젝트명을 입력해주세요.",
+        "too_short_name": "프로젝트 이름은 2자 이상이어야 합니다.",
+        "too_long_name": "프로젝트 이름은 30자를 넘지 않아야 합니다.",
+        "consecutive_spaces": "프로젝트 이름은 2~30자로 작성해주세요.",
+        "missing_type": "프로젝트 종류를 선택해주세요.",
+        "missing_category": "카테고리를 선택해주세요.",
+        "too_many_categories":"카테고리는 5개까지만 추가할 수 있어요.",
+        "missing_start_date": "프로젝트 시작 날짜를 지정하세요.",
+        "missing_end_date":"프로젝트 종료 날짜를 지정하세요.",
+        "missing_description": "프로젝트 설명을 입력해주세요.",
+        "too_short_description":"프로젝트 설명은 10자 이상 작성해주세요.",
+        "too_long_description":"프로젝트 설명은 1000자 까지 작성 가능해요."
       }
     }
   }

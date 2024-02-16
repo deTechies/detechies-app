@@ -31,6 +31,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useDictionary } from "@/lib/dictionaryProvider";
 
 const profileFormSchema = z.object({
   first_name: z
@@ -77,6 +78,7 @@ export default function EditProfileForm({
 
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
+  const lang = useDictionary();
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
@@ -106,9 +108,9 @@ export default function EditProfileForm({
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
     await updateUserProfile(data);
+
     toast({
-      title: "Updated your profile",
-      description: "You will be redirected shortly.",
+      description: lang.validation.mypage.edit_profile.saved_edits
     });
 
     router.refresh();

@@ -1132,7 +1132,29 @@
       "email": {
         "already_use": "The email is already in use. Please use a different email.",
         "require": "Enter your email.",
-        "email": "Please enter a valid email address."
+        "email": "Please enter a valid email address.",
+        "invalid_verification_code": "The verification code you entered was invalid."
+      }
+    },
+    "mypage":{
+      "edit_profile":{
+        "saved_edits": "Your changes have been saved successfully!"
+      }
+    },
+    "project":{
+      "new_project":{
+        "missing_name": "Enter project name.",
+        "too_short_name": "Project name must be at least 2 characters long.",
+        "too_long_name": "Project name must not be longer than 30 characters.",
+        "consecutive_spaces": "Project name must be between 2 and 30 characters, consecutive spaces are counted as one.",
+        "missing_type": "Select a project type.",
+        "missing_category": "Add a project category.",
+        "too_many_categories":"No more than 5 categories can be added.",
+        "missing_start_date": "Specify project start date.",
+        "missing_end_date":"Specify project end date.",
+        "missing_description": "Add a project description.",
+        "too_short_description": "Project description must be at least 10 characters long.",
+        "too_long_description": "Project name must not be longer than 1000 characters."
       }
     }
   }

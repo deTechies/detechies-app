@@ -49,73 +49,72 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-
+import { useDictionary } from "@/lib/dictionaryProvider";
 import { AlertCircle, X } from "lucide-react";
 
-const projectFormSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, {
-      message: "Enter project name.", // 필수 필드에 대한 사용자 정의 메시지
-    })
-    .min(2, {
-      message: "Your group's name must be at least 2 characters.",
-    })
-    .max(30, {
-      message: "Your group's name must not be longer than 30 characters.",
-    })
-    .refine(
-      (val) => {
-        const trimmed = val.replace(/\s+/g, " ");
-        return trimmed.length >= 2 && trimmed.length <= 30;
-      },
-      {
-        message:
-          "Your group's name must be between 2 and 30 characters, consecutive spaces are counted as one.",
-      }
-    ),
-  begin_date: z.string(),
-  end_date: z.string(),
-  description: z
-    .string()
-    .trim()
-    .min(10, {
-      message: "Your groups description must be at least 10 characters.",
-    })
-    .max(1000, {
-      message:
-        "Your groups description must not be longer than 1000 characters.",
-    }),
-  tags: z
-    .array(z.string())
-    .min(1, {
-      message: "At least one tag is required.",
-    })
-    .max(5, {
-      message: "No more than 5 tags are allowed.",
-    }),
-  scope: z.string(),
-  image: z.string().optional(),
-  type: z.nativeEnum(ProjectType, {
-    required_error: "You need to select a type.",
-  }),
-});
 
-type CreateProjectFormValues = z.infer<typeof projectFormSchema>;
-
-// This can come from your database or API.
-const defaultValues: Partial<CreateProjectFormValues> = {
-  scope: PRIVACY_TYPE.PUBLIC,
-};
 
 export default function CreateProjectForm({ lang }: { lang: any }) {
+
+  // -- START ---
+  // These functions used to be outside the component function
+  // but were transferred inside to have access to `lang`
+  const projectFormSchema = z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, {
+        message: lang.validation.project.new_project.missing_name, // 필수 필드에 대한 사용자 정의 메시지
+      })
+      .min(2, {
+        message: lang.validation.project.new_project.too_short_name,
+      })
+      .max(30, {
+        message: lang.validation.project.new_project.too_long_name,
+      })
+      .refine(
+        (val) => {
+          const trimmed = val.replace(/\s+/g, " ");
+          return trimmed.length >= 2 && trimmed.length <= 30;
+        },
+        {
+          message:
+            lang.validation.project.new_project.consecutive_spaces,
+        }
+      ),
+    begin_date: z.string({required_error: lang.validation.project.new_project.missing_start_date,}),
+    end_date: z.string({required_error: lang.validation.project.new_project.missing_end_date,}),
+    description: z
+      .string({required_error:lang.validation.project.new_project.missing_description})
+      .trim()
+      .min(10, lang.validation.project.new_project.too_short_description)
+      .max(1000, lang.validation.project.new_project.too_long_description),
+    tags: z
+      .array(z.string(), {required_error: lang.validation.project.new_project.missing_category,})
+      .max(5, lang.validation.project.new_project.too_many_categories),
+    scope: z.string(),
+    image: z.string().optional(),
+    type: z.nativeEnum(ProjectType, {
+      required_error: lang.validation.project.new_project.missing_type,
+    }),
+  });
+  
+  type CreateProjectFormValues = z.infer<typeof projectFormSchema>;
+  
+  // This can come from your database or API.
+  const defaultValues: Partial<CreateProjectFormValues> = {
+    scope: PRIVACY_TYPE.PUBLIC,
+  };
+
+  // -- END --
+
   const form = useForm<CreateProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues,
     mode: "onChange",
   });
 
+  
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [present, setPresent] = useState(false);
@@ -234,8 +233,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
   }, [selectGroupDialog, myGroups.length]);
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <Form {...form} >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" noValidate>
         <FormField
           control={form.control}
           name="name"
@@ -311,7 +310,9 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               name="begin_date"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <Input type="date" {...field} />
+                  <Input 
+                    type="date" 
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -324,7 +325,10 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                 <FormItem
                   className={`w-full relative ${present && "opacity-40"}`}
                 >
-                  <Input type="date" {...field} disabled={present} />
+                  <Input 
+                    type="date" {...field} 
+                    disabled={present} 
+                    />
                   {present && (
                     <div className="absolute inset-0 px-4 py-5 rounded-sm text-title_m text-text-placeholder bg-background-layer-2">
                       {lang.project.list.create_project.in_progress}
@@ -404,6 +408,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
         </FormInlineItem>
 
         <FormField
+        
           control={form.control}
           name="tags"
           render={({ field }) => (
@@ -414,9 +419,10 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               </FormInlineLabel>
 
               <div className="grow">
-                <FormControl>
+                <FormControl >
                   <div>
                     <Input
+                      
                       placeholder={
                         lang.project.list.create_project.category_dsc
                       }
@@ -427,6 +433,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                         form.getValues("tags") &&
                         form.getValues("tags").length > 4
                       }
+                      
                     />
 
                     {newTag && (
@@ -557,7 +564,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                     </>
                   )}
                 </RadioGroup>
-
+ 
                 {form.getValues("scope") == PRIVACY_TYPE.GROUP && (
                   <div className="flex flex-wrap gap-2 mt-3">
                     {selectedGroup.length > 0 &&
