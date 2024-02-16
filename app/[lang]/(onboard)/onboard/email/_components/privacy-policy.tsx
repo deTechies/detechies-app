@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export default function PrivacyPolicy({
   lang,
@@ -30,13 +29,13 @@ export default function PrivacyPolicy({
 
         <div className="max-h-[calc(90vh-182px)] overflow-y-auto">
           <li className="text-body_s text-text-secondary mmt">
-            프로젝트 팀 커리어젠(이하 '회사'라 함)는 개인정보보호법 등 회사가
+            프로젝트 팀 커리어젠(이하 &apos;회사&apos;라 함)는 개인정보보호법 등 회사가
             준수하여야 할 국내 개인정보 보호 법령을 준수하며, 관련 법령에 의거한
             개인정보처리방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다.
           </li>
           <li className="text-body_s text-text-secondary mmt">
             본 개인정보처리방침은 회사가 운영하는 커리어젠(Careerzen) 관련 제반
-            서비스(이하 '커리어젠'라 함)에 적용되며 다음과 같은 내용을 담고
+            서비스(이하 &apos;커리어젠&apos;라 함)에 적용되며 다음과 같은 내용을 담고
             있습니다.
           </li>
           <li className="text-body_s text-text-secondary mmt">
@@ -320,8 +319,8 @@ export default function PrivacyPolicy({
           </p>
           <p className="text-body_s text-text-secondary mmt">1. 쿠키의 사용 목적</p>
           <p className="text-body_s text-text-secondary mmt">
-            - 커리어젠이 쿠키를 통해 수집하는 정보는 '수집하는 개인정보의
-            항목'과 같으며 '개인정보의 수집 및 이용목적' 외의 용도로는 이용되지
+            - 커리어젠이 쿠키를 통해 수집하는 정보는 &apos;수집하는 개인정보의
+            항목&apos;과 같으며 &apos;개인정보의 수집 및 이용목적&apos; 외의 용도로는 이용되지
             않습니다.
           </p>
           <p className="text-body_s text-text-secondary mmt">2. 쿠키 설정 거부</p>
@@ -440,7 +439,7 @@ export default function PrivacyPolicy({
           <p className="text-body_s text-text-secondary mmt">
             현 개인정보처리방침 내용 추가, 삭제 및 수정이 있을 시에는 시행일
             최소 7일전부터 커리어젠 웹사이트(https://www.careerzen.org) 또는
-            서비스 내 '공지사항'을 통해 공지할 것입니다. 다만, 이용자 권리의
+            서비스 내 &apos;공지사항&apos;을 통해 공지할 것입니다. 다만, 이용자 권리의
             중대한 변경이 발생할 때에는 최소 30일 전에 공지하도록 하며 필요 시
             이용자의 동의를 다시 받을 수도 있습니다.
           </p>
