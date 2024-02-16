@@ -31,7 +31,7 @@ export default async function GroupDetailLayout({
 
   return (
     <main className="w-full m-8">
-      <GroupProfileCard id={params.address} lang={dictionary.group} />
+      <GroupProfileCard id={params.address} lang={dictionary} />
       <GroupTabs details={data} lang={dictionary.group}></GroupTabs>
 
       <Card className="px-10 pt-8 rounded-t-none">

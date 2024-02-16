@@ -305,9 +305,9 @@
         },
         "delete_works": {
           "button": "삭제하기",
-          "title": "작성했던 성과내역을 삭제할까요?",
-          "desc": "성과내역을 삭제한다면, 다시 작성해야 합니다.",
-          "back": "뒤로가기",
+          "title": "내 프로젝트 성과를 삭제할까요?",
+          "desc": "삭제할 경우 내가 작성했던 프로젝트 성과 내용을 복구할 수 없어요. 정말로 삭제할까요?",
+          "back": "나중에 할게요",
           "delete": "삭제하기"
         }
       },
@@ -570,15 +570,16 @@
       "first_name": "이름",
       "last_name": "성",
       "profession": "직업",
-      "email": "email",
+      "email": "이메일",
       "specialisation": "전문분야",
       "profile_description": "내 소개",
       "profile_description_label": "익명으로 나를 소개할 정보를 입력해주세요. (이름, 연락처) 등의 개인정보를 입력할 경우, 강제 삭제될 수 있습니다.",
-      "skills": "스킬",
+      "skills": "전문 분야/스킬",
+      "skills_placeholder": "전문 분야/스킬을 입력하세요.",
       "username": "닉네임",
       "save_changes": "저장하기",
       "identity_authentication": "아이덴티티 인증",
-      "verify":"인증하기",
+      "verify": "준비 중",
       "social_networks":{
         "google":"구글 계정",
         "phone_number":"전화번호",
@@ -658,7 +659,9 @@
       "banner": "직접 그룹을 만들고",
       "banner2": "프로젝트와 개인에게 NFT를 부여하고 영향력 있는 그룹으로 활동해보세요!",
       "banner3": "그룹 만들러 가기",
-      "view_more": "더 보기"
+      "view_more": "더 보기",
+      "no_created": "만든 그룹이 없습니다.",
+      "no_joined": "참여중인 그룹이 없습니다."
     },
     "create": {
       "title": "그룹 만들기",
@@ -759,14 +762,6 @@
           "invite": "초대하기",
           "name": "이름",
           "email": "이메일"
-        },
-        "join": {
-          "join_group": "그롭 가입하기",
-          "join_group_desc": "해당 그룹의 리더에게 가입 요청 메세지를 보내세요. 리더가 승인하면 그룹 멤버가 될 수 있어요.",
-          "message": "요청 메시지",
-          "message_placeholder": "안녕하세요. 프론트엔드 개발자 홍길동 입니다.",
-          "back": "뒤로가기",
-          "send": "가입 요청하기"
         }
       },
       "invited_to_group": {
@@ -963,7 +958,8 @@
       "company": "기업",
       "school": "학교",
       "community": "커뮤니티",
-      "authority": "기관"
+      "authority": "기관",
+      "agency": "기관"
     },
     "nft_type": {
       "sbt": "커리어",

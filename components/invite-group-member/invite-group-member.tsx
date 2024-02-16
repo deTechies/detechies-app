@@ -38,7 +38,7 @@ export default function InviteGroupMember({
 
   if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
   if (error) return <div>{JSON.stringify(error)}</div>;
-  // if (!members) return <div>{lang.details.invite_member.no_members_found}</div>;
+  // if (!members) return <div>{lang.group.details.invite_member.no_members_found}</div>;
   if (!members) return <div>no_members_found</div>;
 
   const array_member_id = groupMembers.map((member: any) => member.user.id);
@@ -69,7 +69,7 @@ export default function InviteGroupMember({
     <Dialog onOpenChange={onOpenChange}>
       <DialogTrigger className="max-w-[212px] grow rounded-full">
         <Button size="lg" variant="primary" className="w-full">
-          {lang.details.profile_card.invite.invite_member}
+          {lang.group.details.profile_card.invite.invite_member}
         </Button>
       </DialogTrigger>
 
@@ -78,22 +78,22 @@ export default function InviteGroupMember({
           {completeInviting ? (
             <div className="flex flex-col items-center">
               <h5 className="mb-4 text-subhead_s">
-                {lang.details.profile_card.invite.sended}
+                {lang.group.details.profile_card.invite.sended}
               </h5>
 
               <div className="mb-6 text-center text-body_m">
-                {lang.details.profile_card.invite.sended_desc}
+                {lang.group.details.profile_card.invite.sended_desc}
               </div>
 
               <DialogClose>
                 <Button size="lg" onClick={onClickGoManage}>
-                  {lang.details.profile_card.invite.go_manage}
+                  {lang.group.details.profile_card.invite.go_manage}
                 </Button>
               </DialogClose>
             </div>
           ) : (
             <h5 className="mb-6 text-subhead_m">
-              {lang.details.profile_card.invite.invite_group_member}
+              {lang.group.details.profile_card.invite.invite_group_member}
             </h5>
           )}
         </div>
@@ -103,7 +103,7 @@ export default function InviteGroupMember({
             <>
               <Search
                 placeholder={
-                  lang.details.profile_card.invite.search_placeholder
+                  lang.group.details.profile_card.invite.search_placeholder
                 }
               />
 
@@ -124,9 +124,9 @@ export default function InviteGroupMember({
                 onClick={() => setByEmail(true)}
                 className="flex gap-2 mx-auto text-center"
               >
-                <span>{lang.details.profile_card.invite.no_name_found}</span>
+                <span>{lang.group.details.profile_card.invite.no_name_found}</span>
                 <span className="text-accent-primary">
-                  {lang.details.profile_card.invite.invite_by_email}
+                  {lang.group.details.profile_card.invite.invite_by_email}
                 </span>
               </button>
 
@@ -137,12 +137,12 @@ export default function InviteGroupMember({
                     size="lg"
                     className="max-w-[212px] grow px-0"
                   >
-                    {lang.details.profile_card.invite.back}
+                    {lang.group.details.profile_card.invite.back}
                   </Button>
                 </DialogClose>
 
                 <Button size="lg" className="max-w-[212px] grow px-0" disabled>
-                  {lang.details.profile_card.invite.invite}
+                  {lang.group.details.profile_card.invite.invite}
                 </Button>
               </div>
             </>

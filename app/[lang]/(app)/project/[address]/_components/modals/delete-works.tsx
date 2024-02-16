@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { removeProjectWork } from "@/lib/data/project";
-import { } from "@radix-ui/react-dialog";
+import {} from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -22,13 +22,13 @@ export default function DeleteWorks({
   const [loading, setLoading] = useState<boolean>(false);
 
   const router = useRouter();
-  async function deleteMember() {
+  async function deleteProjectWork() {
     setLoading(true);
     const result = await removeProjectWork(projectId);
 
     if (result.status === "success") {
       toast({
-        description: "Succesfully delete your work."
+        description: "Succesfully delete your work.",
       });
 
       router.refresh();
@@ -57,21 +57,21 @@ export default function DeleteWorks({
         </p>
 
         <div className="flex justify-center gap-2">
-          <DialogClose className="w-full max-w-[212px]">
-            <Button size="lg" variant="secondary" className="w-full">
-              {lang.project.details.members.delete_works.back}
-            </Button>
-          </DialogClose>
-
           <Button
             size="lg"
-            variant="destructive"
-            onClick={deleteMember}
+            variant="secondary"
+            onClick={deleteProjectWork}
             loading={loading}
             disabled={loading}
           >
             {lang.project.details.members.delete_works.delete}
           </Button>
+          
+          <DialogClose className="w-full max-w-[212px]">
+            <Button size="lg" className="w-full">
+              {lang.project.details.members.delete_works.back}
+            </Button>
+          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>

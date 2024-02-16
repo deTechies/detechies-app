@@ -41,8 +41,6 @@ export default function NftList({
       );
     } else if (currentTab === TAB_BUTTONS.AVATAR) {
       filtered = filtered.filter((achievement) => achievement.avatar);
-    } else {
-      filtered = achievements;
     }
 
     const sorted = filtered.sort(

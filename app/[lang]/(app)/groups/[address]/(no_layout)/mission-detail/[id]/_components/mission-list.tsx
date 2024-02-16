@@ -12,10 +12,12 @@ import { useState } from "react";
 export default function MissionList({
   mission,
   userProgress,
+  userRole,
   lang,
 }: {
   mission: MissionDetails;
   userProgress: UserProgress[] | [];
+  userRole: string;
   lang: any;
 }) {
   const router = useRouter();
@@ -50,7 +52,6 @@ export default function MissionList({
 
     setLoading(false);
   };
-
 
   if (userProgress.length > 0) {
     return (
@@ -109,15 +110,17 @@ export default function MissionList({
 
   return (
     <div className="flex flex-col gap-3">
-      <Card className="flex flex-row flex-wrap items-center justify-between px-8 py-7">
-        <Button
-          onClick={startCampaign}
-          loading={loading}
-          disabled={loading || userProgress.length > 0}
-        >
-          {lang.mission.detail.start}
-        </Button>
-      </Card>
+      {(userRole == "admin" || userRole == "member") && (
+        <Card className="flex flex-row flex-wrap items-center justify-between px-8 py-7">
+          <Button
+            onClick={startCampaign}
+            loading={loading}
+            disabled={loading || userProgress.length > 0}
+          >
+            {lang.mission.detail.start}
+          </Button>
+        </Card>
+      )}
 
       {mission.missions &&
         mission.missions.map((item: Mission, index: number) => {

@@ -139,6 +139,7 @@ export interface User {
     created_at: Date;
     updated_at?: Date;
     isUserMember?: boolean;
+    userRole?: string;
   }
   
 export enum GROUP_TYPE {
