@@ -16,7 +16,7 @@ export default function ProjectWorkDetail({
   return (
     <>
       <div className="inline-flex flex-wrap items-start justify-start gap-4 md:flex-nowrap text-text-secondary">
-        <div className="inline-flex flex-col items-start justify-start gap-2">
+        <div className="inline-flex flex-col items-start justify-start gap-2 min-w-[15rem]">
           <div className="divide-x shrink-0 text-label_m">
             <span className="pr-2 capitalize">
               {" "}
@@ -24,17 +24,20 @@ export default function ProjectWorkDetail({
                 "Unknown"}
             </span>
 
-            <span className="pl-2 shrink-0">{data.percentage || 0}%</span>
+            <span className="pl-2 shrink-0">
+              {lang.project.details.members.contribution} {data.percentage || 0}
+              %
+            </span>
           </div>
 
           <span className="text-label_m">
             {beginEndDates(data.begin_date, data.end_date)}
           </span>
         </div>
-
-        <div className="break-all whitespace-break-spaces text-label_m">
-          <span>{data.description}</span>
-        </div>
+      </div>
+      
+      <div className="break-all whitespace-break-spaces text-label_m">
+        <span>{data.description}</span>
       </div>
 
       <div className="inline-flex flex-wrap items-start justify-start gap-2">

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import JoinProject from "@/components/project/join-project";
 
-export default async function InaccessibleProject({
+export default function InaccessibleProject({
   projectId,
   isJoined,
   lang,
