@@ -22,9 +22,6 @@ export default async function ListProfiles({
     }
   });
 
-  console.log("NEW URL:");
-  console.log(newUrl.toString());
-
   const { data: users } = await serverApi(`/users`, newUrl.toString());
   const limit_number = searchParams.limit ? parseInt(searchParams.limit) : 10;
 
