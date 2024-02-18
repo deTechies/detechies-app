@@ -650,9 +650,10 @@
       "created": "내가 만든 그룹",
       "joined": "참여중인 그룹",
       "search_placeholder": "그룹명을 검색해보세요.",
+      "company": "기업 인증 완료",
       "agency": "기업 인증 완료",
       "authority": "기관 인증 완료",
-      "education": "학교 인증 완료",
+      "school": "학교 인증 완료",
       "community": "커뮤니티",
       "members": "멤버수",
       "nfts": "받을 수 있는 NFT",
@@ -692,7 +693,6 @@
         "dialog_desc": "그룹 만들기 인증 절차를 위해 커리어젠 서포터팀에서 아래 이메일로 영업일 1일 이내에 메일을 보내드릴게요.",
         "dialog_email": "인증 절차 안내받을 이메일",
         "dialog_information": "문의사항 발생 시, 커리어젠 서포터팀으로 연락하세요.",
-        "dialog_information2": "Robin@Careerzen.org",
         "ok": "확인",
         "wait_for_auth": "인증 대기 중..",
         "contact": "1:1 문의하기"
@@ -761,6 +761,8 @@
           "back": "뒤로가기",
           "invite": "초대하기",
           "name": "이름",
+          "first_name": "이름",
+          "last_name": "성",
           "email": "이메일"
         }
       },

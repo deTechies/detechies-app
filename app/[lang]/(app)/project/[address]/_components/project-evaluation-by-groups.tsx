@@ -22,12 +22,13 @@ export default async function ProjectEvaluationByGroups({
   //we want top check if we own any of the data is pending..
 
   const { data: groups } = await getGroups();
+  const verifiedGroups = groups.filter((group: any) => group.verified);
 
   const { data: rewardedAchievements } = await serverApi(
     `/achievement-rewards/project-rewards/${details.id}`
   );
 
-  if (!groups) return null;
+  if (!verifiedGroups) return null;
 
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">
@@ -37,7 +38,7 @@ export default async function ProjectEvaluationByGroups({
         {(details.userRole === "member" ||
           details.userRole === "admin" ||
           details.userRole === "client") && (
-          <RequestNFTModal groups={groups} lang={lang} />
+          <RequestNFTModal groups={verifiedGroups} lang={lang} />
         )}
       </CardHeader>
 

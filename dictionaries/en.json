@@ -651,9 +651,10 @@
       "created": "Created",
       "joined": "Joined",
       "search_placeholder": "Search for a group name.",
+      "company": "Company Verified",
       "agency": "Company Verified",
       "authority": "Authority Verified",
-      "education": "School Verified",
+      "school": "School Verified",
       "community": "Community",
       "members": "Members",
       "nfts": "NFTs",
@@ -693,7 +694,6 @@
         "dialog_desc": "The Careerzen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
         "dialog_email": "Email to receive authentication process instructions",
         "dialog_information": "If you have any questions, please contact the Careerzen Support Team.",
-        "dialog_information2": "Robin@Careerzen.org",
         "ok": "I understand",
         "wait_for_auth": "Waiting for auth..",
         "contact": "Contact Us"
@@ -762,6 +762,8 @@
           "back": "Go Back",
           "invite": "Invite",
           "name": "Name",
+          "first_name": "First Name",
+          "last_name": "Last Name",
           "email": "E-mail"
         }
       },

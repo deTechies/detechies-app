@@ -57,11 +57,11 @@ export default function SelectedGroupMember({
       </div>
 
       <div className="mb-3 text-title_s text-state-">
-        {lang.details.profile_card.invite.message}
+        {lang.group.details.profile_card.invite.message}
       </div>
 
       <Textarea
-        placeholder={lang.details.profile_card.invite.message_placeholder}
+        placeholder={lang.group.details.profile_card.invite.message_placeholder}
         className="resize-none"
         onChange={(e) => {
           if (setMessage) {
@@ -84,7 +84,7 @@ export default function SelectedGroupMember({
           className="max-w-[212px] grow px-0"
           onClick={onClickBack}
         >
-          {lang.details.profile_card.invite.back}
+          {lang.group.details.profile_card.invite.back}
         </Button>
         {/* </DialogClose> */}
 
@@ -94,7 +94,7 @@ export default function SelectedGroupMember({
           className="max-w-[212px] grow px-0"
           disabled={message.length > 100 || loading}
         >
-          {lang.details.profile_card.invite.invite}
+          {lang.group.details.profile_card.invite.invite}
         </Button>
       </div>
     </section>
