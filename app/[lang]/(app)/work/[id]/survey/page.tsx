@@ -25,7 +25,7 @@ export default async function EvaluateAsTeamLead({
   }
 
   return (
-    <div className="flex flex-col max-w-3xl gap-4 mx-auto mb-20">
+    <div className="flex flex-col gap-4 mx-auto mb-20">
       {/* <Card>
         You are evaluating a frontend developer as a project lead. with the
         following form: {surveyData.name}
