@@ -508,7 +508,8 @@
       "register": "Save",
       "exactly": "Is the evaluation completely accurate?",
       "exactly_desc": "Submitting an evaluation that is not factually accurate can negatively impact the career of the evaluatee.",
-      "go_to_project": "Go to Project"
+      "edit_assessment": "Edit an assessment",
+      "go_to_project": "Yes, all correct"
     },
     "private": {
       "title": "Private Project",

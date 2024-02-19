@@ -507,7 +507,8 @@
       "register": "평가 등록하기",
       "exactly": "평가가 모두 정확한가요?",
       "exactly_desc": "사실과 다른 평가를 하는 경우 피평가자의 커리어에 불이익이 생길 수 있어요.",
-      "go_to_project": "프로젝트로 가기"
+      "edit_assessment": "평가 수정하기",
+      "go_to_project": "네, 모두 정확해요"
     },
     "private": {
       "title": "프라이빗 프로젝트",
