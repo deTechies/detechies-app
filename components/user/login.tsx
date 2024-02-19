@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import AccountSettings from "./account-settings";
 import ModalLayout from "./modal-layout";
+import { useRouter } from "next/navigation";
 
 interface ILoginProps {
   lang: any;
@@ -33,6 +34,8 @@ export default function Login({ lang }: ILoginProps) {
   const [showModal, setShowModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const { data: session } = useSession();
+  const router = useRouter();
+
 
   // Eager connection
   useEffect(() => {
@@ -118,123 +121,124 @@ export default function Login({ lang }: ILoginProps) {
         size="md"
         variant="success"
         onClick={() => {
-          setLoginModal(!loginModal);
+          router.push("/onboard");
+          // setLoginModal(!loginModal);
         }}
       >
         {lang.sign_up}
       </Button>
-      {loginModal && (
+      {/* {loginModal && (
         <ConnectModal
           showModal={showModal}
           setShowModal={() => {
             setLoginModal(!loginModal);
           }}
         />
-      )}
+      )} */}
     </div>
   );
 }
 
-const ConnectModal = ({
-  showModal,
-  setShowModal,
-}: {
-  showModal: boolean;
-  setShowModal: any;
-}) => {
-  const [mounted, setMounted] = React.useState(false);
-  const { address, isConnected } = useAccount();
-  const { signMessageAsync } = useSignMessage();
-  const [hasSigned, setHasSigned] = React.useState(false);
-  const { connect, connectors } = useConnect();
+// const ConnectModal = ({
+//   showModal,
+//   setShowModal,
+// }: {
+//   showModal: boolean;
+//   setShowModal: any;
+// }) => {
+//   const [mounted, setMounted] = React.useState(false);
+//   const { address, isConnected } = useAccount();
+//   const { signMessageAsync } = useSignMessage();
+//   const [hasSigned, setHasSigned] = React.useState(false);
+//   const { connect, connectors } = useConnect();
 
-  React.useEffect(() => setMounted(true), []);
-  if (!mounted) return <></>;
+//   React.useEffect(() => setMounted(true), []);
+//   if (!mounted) return <></>;
 
-  const handleSign = async () => {
-    try {
-      const message = new SiweMessage({
-        domain: window.location.host,
-        uri: window.location.origin,
-        version: "1",
-        address: address,
-        statement: process.env.NEXT_PUBLIC_SIGNIN_MESSAGE,
-        nonce: await getCsrfToken(),
-        chainId: polygonMumbai.id,
-      });
+//   const handleSign = async () => {
+//     try {
+//       const message = new SiweMessage({
+//         domain: window.location.host,
+//         uri: window.location.origin,
+//         version: "1",
+//         address: address,
+//         statement: process.env.NEXT_PUBLIC_SIGNIN_MESSAGE,
+//         nonce: await getCsrfToken(),
+//         chainId: polygonMumbai.id,
+//       });
 
-      const signedMessage = await signMessageAsync({
-        message: message.prepareMessage(),
-      });
+//       const signedMessage = await signMessageAsync({
+//         message: message.prepareMessage(),
+//       });
 
-      setHasSigned(true);
+//       setHasSigned(true);
 
-      const response = await signIn("web3", {
-        message: JSON.stringify(message),
-        signedMessage,
-        redirect: true,
-      });
-      if (response?.error) {
-        console.log("Error occured:", response.error);
-      }
-    } catch (error) {
-      console.log("Error Occured", error);
-    }
-  };
-  //after connecting you should be able to create a profile.
-  return (
-    <ModalLayout title="Sign Up" showModal={showModal}>
-      <span>
-        By connecting a wallet, you agree to Careerzen’s Terms of Service
-      </span>
-      <div className="flex flex-col gap-2 my-4">
-        {!isConnected && (
-          <>
-            <div className="flex flex-col gap-4 space-y-1">
-              <div
-                key={connectors[0].id}
-                className="flex items-center gap-6 px-6 py-4 text-lg font-medium border rounded-sm cursor-pointer border-border-div hover:border-blue-500"
-                onClick={() => connect({ connector: connectors[1] })}
-              >
-                <Image
-                  src={`/icons/web3auth.png`}
-                  height={44}
-                  width={44}
-                  alt={connectors[1].name}
-                />
-                Social Login
-              </div>
+//       const response = await signIn("web3", {
+//         message: JSON.stringify(message),
+//         signedMessage,
+//         redirect: true,
+//       });
+//       if (response?.error) {
+//         console.log("Error occured:", response.error);
+//       }
+//     } catch (error) {
+//       console.log("Error Occured", error);
+//     }
+//   };
+//   //after connecting you should be able to create a profile.
+//   return (
+//     <ModalLayout title="Sign Up" showModal={showModal}>
+//       <span>
+//         By connecting a wallet, you agree to Careerzen’s Terms of Service
+//       </span>
+//       <div className="flex flex-col gap-2 my-4">
+//         {!isConnected && (
+//           <>
+//             <div className="flex flex-col gap-4 space-y-1">
+//               <div
+//                 key={connectors[0].id}
+//                 className="flex items-center gap-6 px-6 py-4 text-lg font-medium border rounded-sm cursor-pointer border-border-div hover:border-blue-500"
+//                 onClick={() => connect({ connector: connectors[1] })}
+//               >
+//                 <Image
+//                   src={`/icons/web3auth.png`}
+//                   height={44}
+//                   width={44}
+//                   alt={connectors[1].name}
+//                 />
+//                 Social Login
+//               </div>
 
-              <div
-                key={connectors[1].id}
-                className="flex items-center gap-6 px-6 py-4 text-lg font-medium border rounded-sm cursor-pointer border-border-div hover:border-orange-500"
-                onClick={() => connect({ connector: connectors[0] })}
-              >
-                <Image
-                  src={`/icons/browser.png`}
-                  height={44}
-                  width={44}
-                  alt={connectors[1].name}
-                />
-                MetaMask
-              </div>
-            </div>
-          </>
-        )}
-        {isConnected && !hasSigned && (
-          <>
-            <p className="text-xl font-semibold text-gray-400">
-              Welcome {address?.slice(0, 8)}...
-            </p>
-            <Button className="" onClick={handleSign}>
-              Sign Message to Login
-            </Button>
-          </>
-        )}
-        {isConnected && hasSigned && (
-          <p>You are being authenticated. Please wait...</p>
-        )}
-      </div>
-    </ModalLayout>
-  );
-};
+//               <div
+//                 key={connectors[1].id}
+//                 className="flex items-center gap-6 px-6 py-4 text-lg font-medium border rounded-sm cursor-pointer border-border-div hover:border-orange-500"
+//                 onClick={() => connect({ connector: connectors[0] })}
+//               >
+//                 <Image
+//                   src={`/icons/browser.png`}
+//                   height={44}
+//                   width={44}
+//                   alt={connectors[1].name}
+//                 />
+//                 MetaMask
+//               </div>
+//             </div>
+//           </>
+//         )}
+//         {isConnected && !hasSigned && (
+//           <>
+//             <p className="text-xl font-semibold text-gray-400">
+//               Welcome {address?.slice(0, 8)}...
+//             </p>
+//             <Button className="" onClick={handleSign}>
+//               Sign Message to Login
+//             </Button>
+//           </>
+//         )}
+//         {isConnected && hasSigned && (
+//           <p>You are being authenticated. Please wait...</p>
+//         )}
+//       </div>
+//     </ModalLayout>
+//   );
+// };
