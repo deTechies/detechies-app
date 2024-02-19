@@ -46,7 +46,7 @@ export default async function UserProjects({
               <CommonProjectItem
                 project={project}
                 lang={lang}
-                selected={selectedProject == project.project?.id}
+                selected={selectedProject?.project?.id == project.project?.id}
                 key={project.project?.name}
               />
             );
