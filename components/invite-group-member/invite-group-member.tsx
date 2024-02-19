@@ -64,7 +64,7 @@ export default function InviteGroupMember({
   }, [text]);
 
   const onClickGoManage = () => {
-    router.push(`/groups/${groupId}/manage`);
+    router.push(`/groups/${groupId}/manage?tab=members`);
     setSelected(null);
     setCompleteInviting(false);
   };
