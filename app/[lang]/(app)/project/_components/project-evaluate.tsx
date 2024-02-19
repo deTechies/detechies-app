@@ -75,7 +75,7 @@ export default function ProjectMemberEvaluate({
                   className="p-5 border rounded-md border-border-div"
                   key={index}
                 >
-                  <div className="flex gap-2 mb-5">
+                  <div className="flex flex-wrap gap-2 mb-5">
                     {work.tags.length > 0 &&
                       work.tags.map((tag: string, index: number) => (
                         <Badge shape="outline" variant="accent" key={index}>
