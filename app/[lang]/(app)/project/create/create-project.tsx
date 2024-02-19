@@ -312,6 +312,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                 <FormItem className="w-full">
                   <Input 
                     type="date" 
+                    {...field}
                   />
                   <FormMessage />
                 </FormItem>
@@ -326,7 +327,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                   className={`w-full relative ${present && "opacity-40"}`}
                 >
                   <Input 
-                    type="date" {...field} 
+                    type="date" 
+                    {...field} 
                     disabled={present} 
                     />
                   {present && (
