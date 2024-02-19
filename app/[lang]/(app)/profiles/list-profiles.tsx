@@ -45,7 +45,7 @@ export default async function ListProfiles({
       )}
 
       <div className="px-10 py-10 mt-10 max-w-[1028px] w-full min-h-[199px] rounded-md bg-no-repeat bg-cover flex mx-auto bg-[url('/images/banner-invite-user.png')]">
-        <div className="max-w-[430px] mx-auto text-center">
+        <div className="max-w-[500px] mx-auto text-center">
           <div className="mb-1 text-subhead_m text-accent-primary">
             {lang.profile.list.banner}
           </div>

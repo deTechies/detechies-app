@@ -21,7 +21,6 @@ export default async function ProjectListPage({
   const profile = await auth() as Session;
   const {data:projects} = await getProjects()
 
-
   const searchItem = searchParams.search as string;
 
   let filteredData = projects.filter((item: any) => {
@@ -33,12 +32,14 @@ export default async function ProjectListPage({
       !searchParams.project || item.type === searchParams.project;
     const privateMatch =
       !searchParams.privacy || item.scope === searchParams.privacy;
-    const myProjectMatch = !searchParams.me || item.owner === profile.web3?.address
+    const myProjectMatch = !searchParams.me || item.joined
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 
   const dictionary = (await getDictionary(params.lang)) as any;
 
+
+  
   return (
     <main className="flex flex-col w-full gap-6 mx-auto">
       <ProjectFilter lang={dictionary}></ProjectFilter>

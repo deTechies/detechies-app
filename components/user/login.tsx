@@ -86,7 +86,8 @@ export default function Login({ lang }: ILoginProps) {
     );
   }
 
-  if (!isConnecting && address == session?.web3?.address) {
+  if (!isConnecting && address && address == session?.web3?.address) {
+    
     return (
       <div className="flex items-center gap-2 rounded-md">
         <Avatar
