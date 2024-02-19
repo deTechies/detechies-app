@@ -35,7 +35,7 @@ export default function WorkTitle({
   }
 
   return (
-    <header className="my-10 text-center">
+    <header className="mb-10 text-center">
       <h2 className="mb-4 text-heading_m">{title}</h2>
       <h5 className="text-title_m text-text-secondary">{subTitle}</h5>
     </header>

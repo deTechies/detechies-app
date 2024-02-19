@@ -57,7 +57,12 @@ export default async function ProjectMemberItem({
                 <Badge shape="sm" className="px-1.5 py-0.5">
                   {details.works.length < 1
                     ? lang.project.details.members.unregistered
-                    : `${lang.project.details.members.registered}`}
+                    : `${lang.project.details.members.registered} (${
+                        details.works[0].surveyResponses
+                          ? details.works[0].surveyResponses.length
+                          : 0
+                      })`}
+
                   {/* (${details.works.length}) */}
                 </Badge>
               </div>

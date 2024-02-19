@@ -32,6 +32,13 @@
       "not_connected": "연결되지 않은"
     }
   },
+  "not_found": {
+    "desc": "페이지를 찾을 수 없어요.",
+    "desc2": "페이지의 주소가 잘못되었거나, 변경 혹은 삭제된 거 같아요.",
+    "desc3": "주소를 수정하거나 고객센터로 문의해주세요.",
+    "back": "뒤로가기",
+    "contact_us": "고객센터"
+  },
   "user": {
     "details": {
       "followers": "followers",
@@ -500,13 +507,21 @@
       "register": "평가 등록하기",
       "exactly": "평가가 모두 정확한가요?",
       "exactly_desc": "사실과 다른 평가를 하는 경우 피평가자의 커리어에 불이익이 생길 수 있어요.",
-      "go_to_project": "프로젝트로 가기"
+      "edit_assessment": "평가 수정하기",
+      "go_to_project": "네, 모두 정확해요"
     },
     "private": {
       "title": "프라이빗 프로젝트",
       "desc": "해당 프로젝트는 비공개로 설정되어 있어, 프로젝트 멤버가 되면 상세내용을 볼 수 있어요. 이 프로젝트에 참여해볼까요?",
       "back": "뒤로가기",
       "waiting": "수락 대기중"
+    },
+    "group": {
+      "title": "그룹 공개 프로젝트",
+      "desc": "해당 프로젝트는 그룹 공개로 설정되어 있어, 그룹 멤버가 되면 상세내용을 볼 수 있어요. 이 그룹에 가입 해볼까요?",
+      "back": "뒤로가기",
+      "waiting": "수락 대기중",
+      "not_set_group": "설정한 그룹이 없습니다."
     }
   },
   "mypage": {
@@ -962,7 +977,7 @@
       "school": "학교",
       "community": "커뮤니티",
       "authority": "기관",
-      "agency": "기관"
+      "agency": "기업"
     },
     "nft_type": {
       "sbt": "커리어",

@@ -251,9 +251,7 @@ export default function EvaluateTeamForm({
 
   return (
     <main
-      className={`max-w-[1000px] ${
-        result && "max-w-full"
-      } mx-auto my-10 px-auto`}
+      className={`max-w-full mx-auto mb-10 px-auto`}
     >
       <section className="flex flex-col gap-5">
         {Object.entries(criteriaByCategory).map(

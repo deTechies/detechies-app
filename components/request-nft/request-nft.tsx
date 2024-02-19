@@ -157,7 +157,7 @@ export default function RequestNFTModal({
                       key={_index}
                       type="click"
                       onClick={() => onClickGroupItem(_group)}
-                    ></RequestGroupListItem>
+                    />
                   );
                 })}
 
@@ -189,7 +189,8 @@ export default function RequestNFTModal({
             <div className="mb-5">
               <RequestGroupListItem
                 _group={selectedGroup}
-              ></RequestGroupListItem>
+                useChevron={false}
+              />
             </div>
 
             <div className="mb-3 text-title_s">
@@ -247,7 +248,8 @@ export default function RequestNFTModal({
             <div className="mb-5">
               <RequestGroupListItem
                 _group={selectedGroup}
-              ></RequestGroupListItem>
+                useChevron={false}
+              />
             </div>
 
             <div className="mb-3 text-title_s">

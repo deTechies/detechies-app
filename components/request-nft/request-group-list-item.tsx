@@ -2,17 +2,23 @@ import React from "react";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useDictionary } from "@/lib/dictionaryProvider";
+import { Club } from "@/lib/interfaces";
 
 const RequestGroupListItem = React.memo(
   ({
     _group,
     onClick,
     type,
+    useChevron = true
   }: {
-    _group: any;
+    _group: Club;
     onClick?: Function;
     type?: string;
+    useChevron?: boolean;
   }) => {
+    const lang = useDictionary();
+
     return (
       <div
         className={`flex items-center py-4 truncate ${
@@ -42,14 +48,16 @@ const RequestGroupListItem = React.memo(
 
         <div className="truncate">
           <div className="mb-2 truncate text-title_m">{_group.name}</div>
-          <div className="text-label_m text-text-secondary">{_group.type}</div>
+          <div className="text-label_m text-text-secondary">
+            {lang.interface.group_type[_group.type]}
+          </div>
         </div>
 
         <div className="grow" />
 
-        {type === "click" && (
+        {useChevron && (
           <div>
-            <ChevronRight className="text-icon-secondary"></ChevronRight>
+            <ChevronRight className="text-icon-secondary" />
           </div>
         )}
       </div>

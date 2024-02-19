@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
-import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { getCsrfToken, signIn, useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ export default function LoginButtons({ text }: { text?: any }) {
     if (session && session.web3?.accessToken) {
       if (session.web3.address == address) {
         if (session.web3.user?.verified) {
-          redirect("/project");
+          redirect("/mypage");
         }
         redirect("/onboard/email");
       }
@@ -144,7 +144,10 @@ export default function LoginButtons({ text }: { text?: any }) {
             <Button
               variant={"destructive"}
               className="rounded-none rounded-r-sm"
-              onClick={() => disconnect()}
+              onClick={() => {
+                signOut();
+                disconnect()
+              }}
             >
               {text.sign_out ? text.sign_out : "Sign Out"}
             </Button>

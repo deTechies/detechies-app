@@ -90,7 +90,7 @@ export default function ProfileFilter({ lang }: { lang: any }) {
           </div>
         </div>
 
-        <div className="flex items-end">
+        <div className="flex items-end ml-auto">
           <InviteExperts lang={lang}>
             <div className="underline text-border-input">
               {lang.profile_filter.info_text}

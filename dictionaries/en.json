@@ -32,6 +32,13 @@
       "not_connected": "Not Connected"
     }
   },
+  "not_found": {
+    "desc": "Page not found",
+    "desc2": "I think the page's address is incorrect, changed, or deleted",
+    "desc3": "Please correct the address or contact customer support",
+    "back": "Back",
+    "contact_us": "Contact Us"
+  },
   "user": {
     "details": {
       "followers": "followers",
@@ -43,7 +50,7 @@
 
   "profile": {
     "list": {
-      "banner": "When you invite a professional to CareerGen",
+      "banner": "When you invite a professional to Careerzen",
       "banner2": "You can look up the career of an expert!",
       "banner3": "Invite an expert"
     },
@@ -501,13 +508,21 @@
       "register": "Save",
       "exactly": "Is the evaluation completely accurate?",
       "exactly_desc": "Submitting an evaluation that is not factually accurate can negatively impact the career of the evaluatee.",
-      "go_to_project": "Go to Project"
+      "edit_assessment": "Edit an assessment",
+      "go_to_project": "Yes, all correct"
     },
     "private": {
       "title": "Private Project",
       "desc": "This project is set to private, you can see the details when you become a member of the project, do you want to join this project?",
       "back": "Back",
       "waiting": "Waiting for acceptance."
+    },
+    "group": {
+      "title": "Group public project",
+      "desc": "This project is set to group public, which means you can see the details if you become a group member, why not join this group?",
+      "back": "Back",
+      "waiting": "Waiting for acceptance",
+      "not_set_group": "No groups are set."
     }
   },
   "mypage": {
