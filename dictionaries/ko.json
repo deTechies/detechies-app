@@ -32,6 +32,13 @@
       "not_connected": "연결되지 않은"
     }
   },
+  "not_found": {
+    "desc": "페이지를 찾을 수 없어요.",
+    "desc2": "페이지의 주소가 잘못되었거나, 변경 혹은 삭제된 거 같아요.",
+    "desc3": "주소를 수정하거나 고객센터로 문의해주세요.",
+    "back": "뒤로가기",
+    "contact_us": "고객센터"
+  },
   "user": {
     "details": {
       "followers": "followers",

@@ -32,6 +32,13 @@
       "not_connected": "Not Connected"
     }
   },
+  "not_found": {
+    "desc": "Page not found",
+    "desc2": "I think the page's address is incorrect, changed, or deleted",
+    "desc3": "Please correct the address or contact customer support",
+    "back": "Back",
+    "contact_us": "Contact Us"
+  },
   "user": {
     "details": {
       "followers": "followers",
