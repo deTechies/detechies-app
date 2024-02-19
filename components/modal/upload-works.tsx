@@ -119,7 +119,7 @@ export default function UploadWorks({
       </DialogTrigger>
 
       <DialogContent>
-        <h3 className="text-subhead_m">
+        <h3 className="text-subhead_s">
           {lang.project.details.links.dialog.title}
         </h3>
         <section className="flex flex-col gap-8 my-4">
