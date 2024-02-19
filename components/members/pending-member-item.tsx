@@ -35,6 +35,22 @@ export default function PendingMemberItem({
     }
     //TODO: make sure that the data is only reloaded.
   }
+  
+  async function rejectMember() {
+    setIsLoading(true);
+    const result = await postServer(
+      `/project-member/reject/member/${member.id}`,
+      ""
+    );
+
+    if (result && result.status === "success") {
+      onSuccessInvite && onSuccessInvite(member.id);
+      router.refresh();
+    } else {
+      setIsLoading(false);
+    }
+    //TODO: make sure that the data is only reloaded.
+  }
 
   //TODO: move this in a global util file do it can be used anywhere.
   function formatInviteTime(inviteTimeStr: string, status: string) {
@@ -100,6 +116,7 @@ export default function PendingMemberItem({
                     size="sm"
                     variant="secondary"
                     disabled={isLoading}
+                    onClick={rejectMember}
                   >
                     {lang.project.details.waiting.reject}
                   </Button>
