@@ -10,10 +10,12 @@ const RequestGroupListItem = React.memo(
     _group,
     onClick,
     type,
+    useChevron = true
   }: {
     _group: Club;
     onClick?: Function;
     type?: string;
+    useChevron?: boolean;
   }) => {
     const lang = useDictionary();
 
@@ -53,7 +55,7 @@ const RequestGroupListItem = React.memo(
 
         <div className="grow" />
 
-        {type === "click" && (
+        {useChevron && (
           <div>
             <ChevronRight className="text-icon-secondary" />
           </div>
