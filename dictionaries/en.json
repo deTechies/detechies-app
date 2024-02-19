@@ -515,6 +515,13 @@
       "desc": "This project is set to private, you can see the details when you become a member of the project, do you want to join this project?",
       "back": "Back",
       "waiting": "Waiting for acceptance."
+    },
+    "group": {
+      "title": "Group public project",
+      "desc": "This project is set to group public, which means you can see the details if you become a group member, why not join this group?",
+      "back": "Back",
+      "waiting": "Waiting for acceptance",
+      "not_set_group": "No groups are set."
     }
   },
   "mypage": {

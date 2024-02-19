@@ -15,7 +15,8 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import InaccessibleProject from "./_components/Inaccessible-project";
+import PrivateProject from "./_components/private-project";
+import GroupProject from "./_components/group-project";
 
 export default async function ProjectDetailPage({
   params,
@@ -47,11 +48,25 @@ export default async function ProjectDetailPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   if (
+    data.scope === "group" &&
+    (data.userRole === "none" || data.userRole === "joined")
+  ) {
+    return (
+      <GroupProject
+        lang={dictionary}
+        groups={data.club}
+        projectId={params.address}
+        isJoined={data.userRole === "joined"}
+      />
+    );
+  }
+
+  if (
     data.scope === "private" &&
     (data.userRole === "none" || data.userRole === "joined")
   ) {
     return (
-      <InaccessibleProject
+      <PrivateProject
         lang={dictionary}
         projectId={params.address}
         isJoined={data.userRole === "joined"}

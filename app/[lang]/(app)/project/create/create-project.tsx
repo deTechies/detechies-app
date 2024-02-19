@@ -178,7 +178,11 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
     // delete space
     // "  asdf   asdf " => "asdf asdf"
 
-    const clubs: string[] = selectedGroup.map((group) => group.id);
+    let clubs;
+    
+    if(data.scope === PRIVACY_TYPE.GROUP) {
+      clubs = selectedGroup.map((group) => group.id);
+    }
 
     const result = await createProject({
       image: data.image,
