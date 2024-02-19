@@ -31,9 +31,14 @@ export default function GroupProject({
 
       <div className="flex flex-col gap-3 mb-6">
         {groups &&
-          groups.map((group) => {
+          groups.map((group, index) => {
             return (
-              <JoinGroup groupId={group.id} details={group} lang={lang}>
+              <JoinGroup
+                groupId={group.id}
+                details={group}
+                lang={lang}
+                key={index}
+              >
                 <DialogTrigger className="w-full text-start">
                   <RequestGroupListItem _group={group} />
                 </DialogTrigger>

@@ -49,7 +49,7 @@ const ListProfiles = React.memo(
         );
 
         // console.log(sorted);
-    
+
         setUserProfiles(sorted);
         setLoading(false);
       };
@@ -60,7 +60,7 @@ const ListProfiles = React.memo(
       <>
         <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 ">
           {userProfiles?.length > 0 &&
-            userProfiles.map((profile: User, index: number) => (
+            userProfiles.map((profile: any, index: number) => (
               <ProfileCard key={index} profile={profile} lang={lang} />
             ))}
         </div>
