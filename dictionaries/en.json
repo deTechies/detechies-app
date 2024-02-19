@@ -1154,7 +1154,16 @@
         "missing_end_date":"Specify project end date.",
         "missing_description": "Add a project description.",
         "too_short_description": "Project description must be at least 10 characters long.",
-        "too_long_description": "Project name must not be longer than 1000 characters."
+        "too_long_description": "Project description must not be longer than 1000 characters."
+      },
+      "details":{
+        "members":{
+          "add_works":{
+            "no_0_contribution": "Contribution percentage cannot be 0%.",
+            "too_short_description": "Contribution description must be at least 5 characters long.",
+            "too_long_description": "Contribution description must not be longer than 5000 characters."
+          }
+        }
       }
     }
   }
