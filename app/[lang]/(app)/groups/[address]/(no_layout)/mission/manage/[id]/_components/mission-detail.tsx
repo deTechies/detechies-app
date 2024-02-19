@@ -6,7 +6,7 @@ import { ABI } from "@/lib/constants";
 import { uploadMissionChanges } from "@/lib/data/mission";
 import { postServer } from "@/lib/data/postRequest";
 import { getUserById } from "@/lib/data/user";
-import { Club, Mission, MissionDetails } from "@/lib/interfaces";
+import { Mission, MissionDetails } from "@/lib/interfaces";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Address, useContractWrite } from "wagmi";
@@ -15,11 +15,9 @@ import MissionList from "./mission-list";
 
 export default function MissionDetail({
   details,
-  club,
   lang,
 }: {
   details: MissionDetails;
-  club: Club;
   lang?: any;
 }) {
   const router = useRouter();
@@ -35,7 +33,7 @@ export default function MissionDetail({
   });
 
   const { write: distributeAchievement, data } = useContractWrite({
-    address: club.contract as Address,
+    address: details.club.contract as Address,
     abi: ABI.group,
     functionName: "distributeAchievement",
   });

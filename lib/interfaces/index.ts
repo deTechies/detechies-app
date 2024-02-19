@@ -375,6 +375,8 @@ export interface Survey {
 export interface MissionDetails {
   campaignId:string;
   name:string;
+  club: Club;
+  isMember?: boolean;
   description: string;
   begin_date: string;
   end_date: string;
