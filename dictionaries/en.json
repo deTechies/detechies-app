@@ -160,6 +160,7 @@
         "agree_with_all": "Agree with all",
         "terms_of_services": "Terms of Services (required)",
         "privacy_policy": "Privacy Policy (required)",
+        "privacy_policy_title": "Privacy Policy",
         "reward_notification": "In-app notification (optional)",
         "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more",
         "back": "Back",
