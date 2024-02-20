@@ -12,31 +12,36 @@ import { ChevronRight } from "lucide-react";
 export default function PrivacyPolicy({
   lang,
   onClickAgree,
+  children,
 }: {
   lang: any;
-  onClickAgree: Function;
+  onClickAgree?: Function;
+  children?: React.ReactNode;
 }) {
+  const content = children || (
+    <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+  );
+
   return (
     <Dialog>
-      <DialogTrigger>
-        <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
-      </DialogTrigger>
+      <DialogTrigger>{content}</DialogTrigger>
 
       <DialogContent className="max-w-[500px] gap-6 px-8">
         <h3 className="text-subhead_s">
-          {lang.onboard.verify_email.accordion.privacy_policy}
+          {lang.onboard.verify_email.accordion.privacy_policy_title}
         </h3>
 
         <div className="max-h-[calc(90vh-182px)] overflow-y-auto">
           <li className="text-body_s text-text-secondary mmt">
-            프로젝트 팀 커리어젠(이하 &apos;회사&apos;라 함)는 개인정보보호법 등 회사가
-            준수하여야 할 국내 개인정보 보호 법령을 준수하며, 관련 법령에 의거한
-            개인정보처리방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다.
+            프로젝트 팀 커리어젠(이하 &apos;회사&apos;라 함)는 개인정보보호법 등
+            회사가 준수하여야 할 국내 개인정보 보호 법령을 준수하며, 관련 법령에
+            의거한 개인정보처리방침을 정하여 이용자 권익 보호에 최선을 다하고
+            있습니다.
           </li>
           <li className="text-body_s text-text-secondary mmt">
             본 개인정보처리방침은 회사가 운영하는 커리어젠(Careerzen) 관련 제반
-            서비스(이하 &apos;커리어젠&apos;라 함)에 적용되며 다음과 같은 내용을 담고
-            있습니다.
+            서비스(이하 &apos;커리어젠&apos;라 함)에 적용되며 다음과 같은 내용을
+            담고 있습니다.
           </li>
           <li className="text-body_s text-text-secondary mmt">
             이 개인정보처리방침에서 사용하는 용어의 의미는 관련 법령 및 회사의
@@ -214,7 +219,9 @@ export default function PrivacyPolicy({
             개인정보를 안전하게 처리하도록 필요한 사항을 규정하고 관리와 감독을
             실시하고 있습니다.
           </p>
-          <p className="text-body_s text-text-secondary mmt">수탁업체: Supabase</p>
+          <p className="text-body_s text-text-secondary mmt">
+            수탁업체: Supabase
+          </p>
           <p className="text-body_s text-text-secondary mmt">
             위탁업무내용: 서비스 제공 및 분석을 위한 인프라 관리
           </p>
@@ -317,13 +324,17 @@ export default function PrivacyPolicy({
             애플리케이션과 같이 쿠키 기술을 사용할 수 없는 경우에는 쿠키와
             유사한 기능을 수행하는 기술(광고식별자 등)을 사용할 수도 있습니다.
           </p>
-          <p className="text-body_s text-text-secondary mmt">1. 쿠키의 사용 목적</p>
+          <p className="text-body_s text-text-secondary mmt">
+            1. 쿠키의 사용 목적
+          </p>
           <p className="text-body_s text-text-secondary mmt">
             - 커리어젠이 쿠키를 통해 수집하는 정보는 &apos;수집하는 개인정보의
-            항목&apos;과 같으며 &apos;개인정보의 수집 및 이용목적&apos; 외의 용도로는 이용되지
-            않습니다.
+            항목&apos;과 같으며 &apos;개인정보의 수집 및 이용목적&apos; 외의
+            용도로는 이용되지 않습니다.
           </p>
-          <p className="text-body_s text-text-secondary mmt">2. 쿠키 설정 거부</p>
+          <p className="text-body_s text-text-secondary mmt">
+            2. 쿠키 설정 거부
+          </p>
           <p className="text-body_s text-text-secondary mmt">
             - 이용자는 쿠키에 대한 선택권을 가지고 있습니다. 웹 브라우저
             옵션(option)을 선택함으로써 모든 쿠키의 허용, 동의를 통한 쿠키의
@@ -439,9 +450,9 @@ export default function PrivacyPolicy({
           <p className="text-body_s text-text-secondary mmt">
             현 개인정보처리방침 내용 추가, 삭제 및 수정이 있을 시에는 시행일
             최소 7일전부터 커리어젠 웹사이트(https://www.careerzen.org) 또는
-            서비스 내 &apos;공지사항&apos;을 통해 공지할 것입니다. 다만, 이용자 권리의
-            중대한 변경이 발생할 때에는 최소 30일 전에 공지하도록 하며 필요 시
-            이용자의 동의를 다시 받을 수도 있습니다.
+            서비스 내 &apos;공지사항&apos;을 통해 공지할 것입니다. 다만, 이용자
+            권리의 중대한 변경이 발생할 때에는 최소 30일 전에 공지하도록 하며
+            필요 시 이용자의 동의를 다시 받을 수도 있습니다.
           </p>
           <p className="text-body_s text-text-secondary mmt"></p>
           <p className="text-body_s text-text-secondary mmt">
@@ -452,18 +463,20 @@ export default function PrivacyPolicy({
           </p>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex justify-center gap-2">
           <DialogClose className="max-w-[212px] w-full">
             <Button size="lg" variant="secondary">
               {lang.onboard.verify_email.accordion.back}
             </Button>
           </DialogClose>
 
-          <DialogClose className="max-w-[212px] w-full">
-            <Button size="lg" onClick={() => onClickAgree()}>
-              {lang.onboard.verify_email.accordion.agree}
-            </Button>
-          </DialogClose>
+          {onClickAgree && (
+            <DialogClose className="max-w-[212px] w-full">
+              <Button size="lg" onClick={() => onClickAgree()}>
+                {lang.onboard.verify_email.accordion.agree}
+              </Button>
+            </DialogClose>
+          )}
         </div>
       </DialogContent>
     </Dialog>

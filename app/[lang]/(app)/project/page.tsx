@@ -19,7 +19,7 @@ export default async function ProjectListPage({
 
   const searchItem = searchParams.search as string;
 
-  let filteredData = projects.filter((item: any) => {
+  let filteredData = projects.filter((item: Project) => {
     const matchesSearch = searchParams.search
       ? item.name.toLowerCase().includes(searchItem.toLowerCase())
       : true;
@@ -32,6 +32,11 @@ export default async function ProjectListPage({
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 
+  const sortedData = filteredData.sort(
+    (a: Project, b: Project) =>
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
+
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
@@ -40,19 +45,19 @@ export default async function ProjectListPage({
 
       <Suspense fallback={<div>Loading...</div>}>
         <section className="grid w-full gap-4 truncate md:grid-cols-2">
-          {filteredData.length > 0 &&
-            filteredData.map((item: Project) => (
+          {sortedData.length > 0 &&
+            sortedData.map((item: Project) => (
               <ProjectItem key={item.id} details={item} lang={dictionary} />
             ))}
         </section>
 
-        {filteredData.length < 1 && (
+        {sortedData.length < 1 && (
           <div className="text-center text-title_m text-text-secondary">
             {dictionary.project.list.no_projects_found}
           </div>
         )}
 
-        {/* {filteredData.length > 0 && (
+        {/* {sortedData.length > 0 && (
           <Button variant="secondary" className="flex w-full mx-auto">
             {dictionary.project.list.view_more}
           </Button>

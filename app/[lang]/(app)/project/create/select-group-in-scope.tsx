@@ -61,14 +61,16 @@ export default function SelectGroupInScope({
         {myGroups &&
           myGroups.length > 0 &&
           myGroups.map((_group: Club) => {
-            return (
-              <GroupCheckboxListItem
-                group={_group}
-                isChecked={selectedTempGroup.includes(_group)}
-                onClick={() => onClickGroupListItem(_group)}
-                key={_group.id}
-              ></GroupCheckboxListItem>
-            );
+            if (_group.verified) {
+              return (
+                <GroupCheckboxListItem
+                  group={_group}
+                  isChecked={selectedTempGroup.includes(_group)}
+                  onClick={() => onClickGroupListItem(_group)}
+                  key={_group.id}
+                ></GroupCheckboxListItem>
+              );
+            }
           })}
 
         {!loading && myGroups?.length < 1 && <div>가입된 그룹이 없습니다.</div>}

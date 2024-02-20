@@ -31,7 +31,7 @@ export default function CompletedSuccess({
         </h5>
 
         <section className="flex justify-center gap-2 mt-4 shrink-0">
-          <Link href={`/groups/${groupId}/manage`} passHref>
+          <Link href={`/groups/${groupId}/manage?tab=members`} passHref>
             <Button variant="secondary" size="lg">
               {lang.group.details.profile_card.completed_success.go_manage}
             </Button>

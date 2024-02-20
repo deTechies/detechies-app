@@ -160,6 +160,7 @@
         "agree_with_all": "모두 동의",
         "terms_of_services": "서비스 이용약관 (필수)",
         "privacy_policy": "개인정보처리방침 (필수)",
+        "privacy_policy_title": "개인정보처리방침",
         "reward_notification": "보상 및 이벤트 알림 (선택)",
         "reward_notification_description": "보상 지급, 프로모션, 혜택 등의 알림",
         "back": "뒤로가기",
@@ -447,6 +448,11 @@
       "reject": "업무내용 사실여부 평가 사유",
       "reject_placeholder": "해당 업무내용이 사실과 다른 부분을 알려주시면 피평가자가 다시 작성할거에요.",
       "eval_rate_contributions": "성과/기여도 평가",
+      "invalid_access": {
+        "title": "내 성과 등록하기",
+        "desc": "다른 멤버의 성과를 평가하기 위해서, 내 성과를 등록해주세요.",
+        "go_back": "성과 등록하기"
+      },
       "rate_contributions": {
         "label": "위 업무에 대한 해당 팀원의 기여도를 알려주세요.",
         "messages": [

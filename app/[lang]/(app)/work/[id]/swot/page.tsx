@@ -17,7 +17,7 @@ export default async function FinalFeedbackPage({
   if(!details) redirect(`/work/${id}`)
 
   return (
-    <Card className="mx-auto">
+    <Card className="mx-auto max-w-[1027px]">
       <FinalFeedbackForm
         text={dictionary}
         workId={id}

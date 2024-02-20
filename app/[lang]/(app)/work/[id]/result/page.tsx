@@ -29,10 +29,11 @@ export default async function EvaluationResult({
 
 
   return (
-    <main className="flex gap-4">
+    <main className="flex flex-wrap justify-center gap-4 md:flex-nowrap">
       {/* LEFT SIDE  */}
-      <section className="w-[360px] flex flex-col gap-8 shrink-0">
+      <section className="w-full md:w-[360px] shrink-0 flex flex-col gap-4">
         <ProjectSwitcher
+          title={dictionary.project.work.project}
           project={details.evaluator?.project ? details.evaluator.project : details.project}
           lang={dictionary}
         />
@@ -49,7 +50,7 @@ export default async function EvaluationResult({
       </section>
 
       {/* RIGHT SIDE */}
-      <section className="flex mb-10 grow shrink">
+      <section className="flex mb-10 grow shrink max-w-[1027px]">
         <div className="space-y-8 grow">
           {details.matching && details.matching.rate_requirements > 0 ? (
             <BasicEvaluationInfo

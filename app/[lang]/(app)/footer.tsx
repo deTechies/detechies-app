@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PrivacyPolicy from "../(onboard)/onboard/email/_components/privacy-policy";
 
 export default async function Footer({ lang }: { lang: any }) {
   //const dictionary = (await getDictionary(params.lang)) as any;
@@ -26,9 +27,12 @@ export default async function Footer({ lang }: { lang: any }) {
         <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.faq}
         </Link>
-        <Link href="#" className="px-4 my-5 hover:text-accent-primary">
+        <PrivacyPolicy lang={lang}>
+          <div className="px-4 my-5 hover:text-accent-primary">{lang.footer.privacy_policy}</div>
+        </PrivacyPolicy>
+        {/* <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.privacy_policy}
-        </Link>
+        </Link> */}
         <Link href="#" className="px-4 my-5 hover:text-accent-primary">
           {lang.footer.whitepaper}
         </Link>
