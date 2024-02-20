@@ -7,7 +7,7 @@ import { postServer } from "@/lib/data/postRequest";
 import { Club } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
 
 export default function CreateGroupContract({
@@ -22,7 +22,7 @@ export default function CreateGroupContract({
     abi: ABI.groupRegistry,
     functionName: "createGroup",
   });
-
+  const [loading, setLoading] = useState(false);
   const { isFetched } = useWaitForTransaction(data);
 
   const { refresh } = useRouter();
@@ -30,13 +30,18 @@ export default function CreateGroupContract({
   useEffect(() => {
     const submitGroup = async () => {
       //const result = await createGroupContract(group.id, "something");
-
       const result = await postServer(`/clubs/add-contract/${group.id}`, "");
-      if (result) {
+      if(result.status == "success") {
         toast({
           title: "Group Contract",
           description: "Group contract created successfully",
         });
+      } else {
+        toast({
+          title: result.status,
+          description: result.message,
+        });
+        setLoading(false);
       }
 
       refresh();
@@ -49,6 +54,7 @@ export default function CreateGroupContract({
 
   const createGroup = async () => {
     try {
+      setLoading(true);
       const groupDetails = await uploadContent(JSON.stringify(group));
 
       await write({
@@ -61,6 +67,7 @@ export default function CreateGroupContract({
         title: "Error",
         description: "Failed to create group contract",
       });
+      setLoading(false);
     }
   };
 
@@ -91,8 +98,8 @@ export default function CreateGroupContract({
           <Button
             size="lg"
             onClick={createGroup}
-            loading={isLoading}
-            disabled={isLoading}
+            loading={loading || isLoading}
+            disabled={loading || isLoading}
           >
             {lang.group.details.profile_card.group_contract.button}
           </Button>

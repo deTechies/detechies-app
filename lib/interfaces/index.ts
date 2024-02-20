@@ -311,6 +311,7 @@ export enum GROUP_TYPE {
     achievements: Achievement[]
     created_at: Date;
     updated_at: Date;
+    joined: boolean;
   }
   
   export interface ProjectLink{

@@ -25,7 +25,7 @@ export default async function EvaluateAsTeamLead({
   }
 
   return (
-    <div className="flex flex-col gap-4 mx-auto mb-20">
+    <main className="flex flex-col gap-4 mx-auto mb-20 max-w-[1027px]">
       {/* <Card>
         You are evaluating a frontend developer as a project lead. with the
         following form: {surveyData.name}
@@ -39,6 +39,6 @@ export default async function EvaluateAsTeamLead({
         lang={dictionary}
         selectedLanguage={params.lang}
       />
-    </div>
+    </main>
   );
 }

@@ -179,6 +179,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
 
   const onClickDisconnect = async () => {
     setIsLoading(true);
+    signOut();
     disconnect();
   };
 
