@@ -29,11 +29,12 @@ export default async function EvaluationResult({
 
 
   return (
-    <main className="flex justify-center gap-4">
+    <main className="flex flex-wrap justify-center gap-4 md:flex-nowrap">
       {/* LEFT SIDE  */}
-      <section className="w-[360px] flex flex-col gap-8 shrink-0">
+      <section className="w-full md:w-[360px] shrink-0 flex flex-col gap-4">
         <ProjectSwitcher
-          project={details.evaluator?.project}
+          title={dictionary.project.work.project}
+          project={details.projectWork?.projectMember?.project}
           lang={dictionary}
         />
         <ProjectMemberInline

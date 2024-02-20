@@ -449,6 +449,11 @@
       "reject": "Reason of rejection",
       "reject_placeholder": "If you inform us of any parts of the work that are different from the facts, the appraised person will write it again.",
       "eval_rate_contributions": "Performance/Contribution Evaluation",
+      "invalid_access": {
+        "title": "Register performance",
+        "desc": "In order to evaluate the performance of other members, please register your performance",
+        "go_back": "Register"
+      },
       "rate_contributions": {
         "label": "Please tell us about this team member's contribution to the work.",
         "messages": [
