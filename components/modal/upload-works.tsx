@@ -33,11 +33,13 @@ export default function UploadWorks({
   projectId?: string;
   lang: any;
 }) {
+  type WORK_TYPE = "file" | "link";
+
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [newLink, setNewLink] = useState(""); // State for the new link input
   const router = useRouter();
-  const [workType, setWorkType] = useState<string>("file");
+  const [workType, setWorkType] = useState<WORK_TYPE>("file");
   const [file, setFile] = useState<File | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -62,6 +64,7 @@ export default function UploadWorks({
           title: "Please select a file",
           description: "Please select a file",
         });
+        setLoading(false);
         return;
       }
       work = await uploadContent(file);
@@ -83,10 +86,9 @@ export default function UploadWorks({
       type: workType,
     });
 
-    const result = await postServer(
-      `/projects/${projectId}/add-link`,
-      body
-    );
+    const result = await postServer(`/projects/${projectId}/add-link`, body);
+
+    console.log(result);
 
     if (!result) {
       toast({
@@ -136,11 +138,14 @@ export default function UploadWorks({
           </div>
 
           <div className="flex items-center justify-center gap-4">
-            <Select onValueChange={(value) => setWorkType(value)}
+            <Select
+              onValueChange={(value: WORK_TYPE) => setWorkType(value)}
               defaultValue="file"
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder={lang.project.details.links.dialog.type} />
+                <SelectValue
+                  placeholder={lang.project.details.links.dialog.type}
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -205,7 +210,12 @@ export default function UploadWorks({
             size="lg"
             loading={loading}
             onClick={uploadWorks}
-            disabled={loading}
+            disabled={
+              loading ||
+              !name ||
+              (workType == "file" && !file) ||
+              (workType == "link" && !newLink)
+            }
           >
             {lang.project.details.links.dialog.upload_works}
           </Button>

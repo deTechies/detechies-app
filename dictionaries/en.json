@@ -428,6 +428,8 @@
       "evaluate_propensity_description": "Please assess the disposition of your colleague with whom you worked.",
       "last_feedback": "Evaluate Propensity",
       "last_feedback_description": "Please provide open feedback about the strengths and weaknesses of your colleague.",
+      "result": "Evaluation Confirm",
+      "result_description": "Please double-check that your rating for this coworker is correct. You cannot edit a rating once it has been posted",
       "basic_information": "Basic Information",
       "billable_hourly_wage": "Billable Hourly Wage",
       "time_weekly": "Total hour (weekly)",
