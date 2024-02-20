@@ -46,11 +46,11 @@ export default function FinalFeedbackForm({
     const submitData = JSON.stringify({
       ...data,
       projectWorkId: workId,
-      surveyResponseId: surveyResponseId, 
+      surveyResponseId: surveyResponseId,
       recommend: teamBuildingRank,
     });
-    
-    const result = await postServer('/survey-response/swot/create', submitData);
+
+    const result = await postServer("/survey-response/swot/create", submitData);
 
     if (result) {
       router.push(`/work/${workId}/result`);
@@ -59,8 +59,9 @@ export default function FinalFeedbackForm({
     }
   }
 
-  const [teamBuildingRank, setTeamBuildingRank] = useState(defaultValues?.recommend? defaultValues.recommend : 3);
-
+  const [teamBuildingRank, setTeamBuildingRank] = useState(
+    defaultValues?.recommend ? defaultValues.recommend : 3
+  );
 
   return (
     <Form {...form}>
@@ -139,7 +140,9 @@ export default function FinalFeedbackForm({
             variant={"primary"}
             size="lg"
             loading={isLoading}
-            disabled={isLoading}
+            disabled={
+              isLoading || !form.watch("strength") || !form.watch("weakness")
+            }
           >
             {text.project.evaluate.register}
           </Button>
