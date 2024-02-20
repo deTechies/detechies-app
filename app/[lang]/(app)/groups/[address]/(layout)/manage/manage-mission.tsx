@@ -64,7 +64,7 @@ export default function ManageNft({
                     <QuitMission
                       campaignId={details.campaignId}
                       lang={lang}
-                    ></QuitMission>
+                    />
 
                     <Link
                       href={`/groups/${details.id}/mission/manage/${item.campaignId}`}

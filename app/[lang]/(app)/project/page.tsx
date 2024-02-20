@@ -2,10 +2,10 @@ import { Suspense } from "react";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { getProjects } from "@/lib/data/project";
 import { Project } from "@/lib/interfaces";
 
 
+import { serverApi } from "@/lib/data/general";
 import { auth } from "@/lib/helpers/authOptions";
 import { Session } from "next-auth";
 import ProjectFilter from "./project-filter";
@@ -19,8 +19,12 @@ export default async function ProjectListPage({
   params: { lang: Locale };
 }) {
   const profile = await auth() as Session;
-  const {data:projects} = await getProjects()
+  const getProjects = await serverApi('/projects');
 
+  if(!getProjects.data){
+    return <div>{JSON.stringify(getProjects)}</div>
+  }
+  const projects = getProjects.data;
 
   const searchItem = searchParams.search as string;
 
