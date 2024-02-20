@@ -19,7 +19,7 @@ export default function ProfileCardWallet({
         {dictionary.mypage?.profile?.address}
       </div>
       <Link
-        href={`https://polygonscan.com/address/${wallet}`}
+        href={`https://mumbai.polygonscan.com/address/${wallet}`}
         target="_blank"
         passHref
       >
