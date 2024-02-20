@@ -2,14 +2,14 @@ import { Suspense } from "react";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { Project } from "@/lib/interfaces";
 
 
 import { serverApi } from "@/lib/data/general";
 import { auth } from "@/lib/helpers/authOptions";
 import { Session } from "next-auth";
+import ProfilesLoading from "../profiles/profiles-loading";
 import ProjectFilter from "./project-filter";
-import ProjectItem from "./project-item";
+import ProjectList from "./project-list";
 
 export default async function ProjectListPage({
   searchParams,
@@ -47,25 +47,8 @@ export default async function ProjectListPage({
     <main className="flex flex-col w-full gap-6 mx-auto">
       <ProjectFilter lang={dictionary}></ProjectFilter>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <section className="grid w-full gap-4 truncate md:grid-cols-2">
-          {filteredData.length > 0 &&
-            filteredData.map((item: Project) => (
-              <ProjectItem key={item.id} details={item} lang={dictionary} />
-            ))}
-        </section>
-
-        {filteredData.length < 1 && (
-          <div className="text-center text-title_m text-text-secondary">
-            {dictionary.project.list.no_projects_found}
-          </div>
-        )}
-
-        {/* {filteredData.length > 0 && (
-          <Button variant="secondary" className="flex w-full mx-auto">
-            {dictionary.project.list.view_more}
-          </Button>
-        )} */}
+      <Suspense fallback={<ProfilesLoading />}>
+         <ProjectList dictionary={dictionary} searchParams={searchParams}/>
       </Suspense>
     </main>
   );

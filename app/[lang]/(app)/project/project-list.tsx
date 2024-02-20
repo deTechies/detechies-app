@@ -1,20 +1,28 @@
-import { Button } from "@/components/ui/button";
+import ShowMoreButton from "@/components/extra/show-more-button";
 import { serverApi } from "@/lib/data/general";
 import { Project } from "@/lib/interfaces";
 import ProjectItem from "./project-item";
 
 export default async function ProjectList({
-    dictionary,
-    }: {
-    dictionary: any;
+  dictionary,
+  searchParams,
+}: {
+  dictionary: any;
+  searchParams: { [key: string]: string | undefined };
 }) {
-  const getProjects = await serverApi("/projects");
+  const newUrl = new URLSearchParams();
 
-  if (!getProjects.data) {
-    return <div>{JSON.stringify(getProjects)}</div>;
-  }
+  // Loop through searchParams and set them in newUrl
+  Object.entries(searchParams).forEach(([key, value]) => {
+    if (value) {
+      const paramName = key === "search" ? "name" : key;
+      newUrl.set(paramName, value);
+    }
+  });
 
-  const projects = getProjects.data;
+  const { data: projects } = await serverApi(`/projects`, newUrl.toString());
+  const limit_number = searchParams.limit ? parseInt(searchParams.limit) : 10;
+
   return (
     <>
       <section className="grid w-full gap-4 truncate md:grid-cols-2">
@@ -24,10 +32,8 @@ export default async function ProjectList({
           ))}
       </section>
 
-      {projects.length > 0 && (
-        <Button variant="secondary" className="flex w-full mx-auto">
-          {dictionary.project.list.view_more}
-        </Button>
+      {projects?.length > 0 && projects.length >= limit_number && (
+        <ShowMoreButton lang={dictionary} />
       )}
     </>
   );
