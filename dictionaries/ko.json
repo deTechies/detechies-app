@@ -1119,6 +1119,10 @@
     "General Tendency": "개인 성향"
   },
   "validation": {
+    "this_field_is_required": "이 필드는 필수입니다.",
+    "no_longer_than_x":"입력은 ${X}자를 초과할 수 없습니다.",
+    "only_letters": "입력에는 문자만 허용됩니다.",
+    "invalid_format": "입력이 유효한 형식이 아닙니다.",
     "onboard": {
       "username": {
         "already_use": "이미 사용중인 닉네임입니다. 다른 닉네임을 이용해주세요.",
@@ -1160,6 +1164,10 @@
             "no_0_contribution": "기여도 백분율은 0%일 수 없습니다.",
             "too_short_description": "기여 설명은 최소 5자 이상이어야 합니다.",
             "too_long_description": "기여 설명은 5000자를 초과할 수 없습니다."
+          },
+          "invite":{
+            "admin_invite_warning": "상대방을 관리자로 초대할 경우, 나의 관리자 권한은 소멸됩니다. 초대를 진행할까요?",
+            "only_1_client_warning": "이 프로젝트에는 이미 클라이언트가 있어요. 한 프로젝트에 클라이언트 한명만 등록될 수 있어요."
           }
         }
       }

@@ -1121,6 +1121,10 @@
     "General Tendency": "General Tendency"
   },
   "validation": {
+    "this_field_is_required": "This field is required.",
+    "no_longer_than_x":"Input must not be longer than ${X} characters.",
+    "only_letters": "Only letters are allowed in the input.",
+    "invalid_format": "Input is not a valid format.",
     "onboard": {
       "username": {
         "already_use": "The username is already in use. Please use a different username.",
@@ -1162,6 +1166,14 @@
             "no_0_contribution": "Contribution percentage cannot be 0%.",
             "too_short_description": "Contribution description must be at least 5 characters long.",
             "too_long_description": "Contribution description must not be longer than 5000 characters."
+          },
+          "invite":{
+            "admin_invite_warning": "Your admin privileges will be revoked if you assign someone else to be the admin. Would you like to proceed?",
+            "only_1_client_warning": "This project already has a client. Only one client per project is allowed."
+          },
+          "invite_by_email":{
+            "too_long_first_name": "",
+            "too_long_last_name": ""
           }
         }
       }

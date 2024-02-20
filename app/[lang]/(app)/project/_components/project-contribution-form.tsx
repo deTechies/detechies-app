@@ -50,10 +50,15 @@ export default function ProjectContributionForm({
   workDetails?: any;
   workId?: string;
 }) {
+
+  // --- Text & Labels ---
+  const descriptionTooLongText = lang.validation.project.details.members.add_works.too_long_description;
+  const descriptionTooShortText = lang.validation.project.details.members.add_works.too_short_description;
+
   const contributionFormSchema = z.object({
     begin_date: z.string(),
     end_date: z.string().optional(),
-    description: z.string().max(5000, lang.validation.project.details.members.add_works.too_long_description).min(4, lang.validation.project.details.members.add_works.too_short_description),
+    description: z.string().max(5000, descriptionTooLongText).min(4, descriptionTooShortText),
     percentage: z.array(z.number().max(100)),
     role: z.nativeEnum(PROFESSION_TYPE, {
       required_error: "You need to select a type.",
@@ -99,7 +104,6 @@ export default function ProjectContributionForm({
   let contributionPercentage = form.watch("percentage", [-1]);
   
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
-
   const [loading, setLoading] = useState(false);
   
   const handleKeyDown = (e: any) => {

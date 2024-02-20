@@ -1,4 +1,4 @@
-import { User } from "@/lib/interfaces";
+import { ProjectMember, User } from "@/lib/interfaces";
 
 import { postServer } from "@/lib/data/postRequest";
 import { DialogClose } from "@radix-ui/react-dialog";
@@ -16,12 +16,14 @@ export default function SelectedProjectMember({
   onSelectValue,
   lang,
   onInvite,
+  projectMembers
 }: {
   user: User;
   projectId: string;
   onSelectValue: (value: string) => void;
   lang: any;
   onInvite?: Function;
+  projectMembers?: ProjectMember[];
 }) {
   const [role, setRole] = useState<string>("member");
   const [loading, setLoading] = useState(false);
@@ -42,7 +44,7 @@ export default function SelectedProjectMember({
         title: "Invited team member",
         description: (
           <span>
-            You succesfully invited your team member, please wait for the member
+            You successfully invited your team member, please wait for the member
             to accept the invitation.
           </span>
         ),
@@ -58,6 +60,10 @@ export default function SelectedProjectMember({
     }
   }
 
+  // Check if this project already has a client
+  // Only one client per project is allowed
+  const hasClient = projectMembers ? projectMembers.some(member => member.role === "client") : false;
+  
   return (
     <section className="flex flex-col items-center justify-center">
       <div className="w-full mb-5">
@@ -93,10 +99,15 @@ export default function SelectedProjectMember({
         </div>
       </RadioGroup>
 
+      {/* ---------- WARNINGS ---------- */}
       {role == "admin" && (
         <div className="mb-6 text-state-error">
-          상대방을 관리자로 초대할 경우, 나의 관리자 권한은 소멸됩니다. 초대를
-          진행할까요?
+          {lang.validation.project.details.members.invite.admin_invite_warning}
+        </div>
+      )}
+      {(role == "client" && hasClient) && (
+        <div className="mb-6 text-state-error">
+          {lang.validation.project.details.members.invite.only_1_client_warning}
         </div>
       )}
 
@@ -115,7 +126,7 @@ export default function SelectedProjectMember({
           onClick={inviteMember}
           size="lg"
           className="max-w-[212px] grow px-0"
-          disabled={loading}
+          disabled={loading || (role == "client" && hasClient)}
           loading={loading}
         >
           {lang.project.details.invite_member.invite}

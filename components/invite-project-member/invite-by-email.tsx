@@ -19,27 +19,9 @@ import { useState } from "react";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
-const projectFormSchema = z.object({
-  name: z
-    .string()
-    .min(1, {
-      message: "Your groups name must be at least 1 character.",
-    })
-    .max(30, {
-      message: "Your groups name must not be longer than 30 characters.",
-    }),
-  last_name: z
-    .string()
-    .min(1, {
-      message: "Your groups name must be at least 1 character.",
-    })
-    .max(30, {
-      message: "Your groups name must not be longer than 30 characters.",
-    }),
-  email: z.string().email(),
-});
 
-type ProfileFormValues = z.infer<typeof projectFormSchema>;
+
+
 
 export default function InviteByEmail({
   projectId,
@@ -50,6 +32,35 @@ export default function InviteByEmail({
   cancelByEmail: () => void;
   lang: any;
 }) {
+  // --- Text & Labels ---
+  const firstNameIsRequiredText = lang.validation.this_field_is_required;
+  const lastNameIsRequiredText = lang.validation.this_field_is_required;
+  const firstNameTooLongText = lang.validation.no_longer_than_x.replace("${X}", "30");
+  const lastNameTooLongText = lang.validation.no_longer_than_x.replace("${X}", "30");
+  const onlyLettersText = lang.validation.only_letters;
+  const invalidEmailText = lang.validation.invalid_format;
+
+
+  const projectFormSchema = z.object({
+    name: z
+      .string()
+      .min(1, firstNameIsRequiredText)
+      .max(30, {
+        message: firstNameTooLongText,
+      })
+      .regex(/^[A-Za-z]+$/, onlyLettersText),
+    last_name: z
+      .string()
+      .min(1,lastNameIsRequiredText)
+      .max(30, {
+        message: lastNameTooLongText,
+      })
+      .regex(/^[A-Za-z]+$/, onlyLettersText),
+    email: z.string().email(invalidEmailText),
+  });
+  
+  type ProfileFormValues = z.infer<typeof projectFormSchema>;
+
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(projectFormSchema),
     mode: "onChange",
