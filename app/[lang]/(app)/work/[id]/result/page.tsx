@@ -33,7 +33,7 @@ export default async function EvaluationResult({
       {/* LEFT SIDE  */}
       <section className="w-[360px] flex flex-col gap-8 shrink-0">
         <ProjectSwitcher
-          project={details.evaluator?.project}
+          project={details.evaluator?.project ? details.evaluator.project : details.project}
           lang={dictionary}
         />
         <ProjectMemberInline
