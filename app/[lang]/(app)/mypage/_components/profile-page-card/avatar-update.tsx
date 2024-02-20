@@ -71,11 +71,11 @@ const AvatarUpdate = ({ profile, lang }: any) => {
   // Component UI
   return (
     <Card className="flex flex-col w-full gap-5">
-      <div className="relative max-w-[320px] aspect-square bg-background-layer-2 rounded-[8px]">
+      <div className="relative max-w-[320px] aspect-square bg-background-layer-2 rounded-[8px] w-full mx-auto">
         <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex justify-center gap-4">
         <Button
           size="lg"
           variant="secondary"
