@@ -1,6 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { getProjectWork } from "@/lib/data/project";
+import { serverApi } from "@/lib/data/general";
 import ProjectMemberInline from "../../project/_components/project-member-inline";
 import ProjectSwitcher from "../../project/_components/project-switcher";
 import BasicEvaluationInfo from "./_components/basic-info";
@@ -13,11 +13,12 @@ export default async function ProjectMemberEvaluation({
 }: {
   params: { lang: Locale; id: string };
 }) {
-  const details = await getProjectWork(params.id);
+  //const details = await getProjectWork(params.id);
+  const {data: details} = await serverApi(`/survey-response/surveyByWork/${params.id}`);
   const dictionary = await getDictionary(params.lang);
 
   
-  if (!details.data) {
+  if (!details) {
     return <InvalidWorkAccess details={details} />;
   }
   
@@ -27,18 +28,18 @@ export default async function ProjectMemberEvaluation({
       <section className="w-[360px] flex flex-col gap-4">
         <ProjectSwitcher
           title={dictionary.project.work.project}
-          project={details.data.projectWork?.projectMember?.project}
+          project={details.projectWork?.projectMember?.project}
           lang={dictionary}
         />
         <ProjectMemberInline
           title={dictionary.project.work.evaluatee}
-          projectMember={details.data.projectWork?.projectMember}
-          projectWork={details.data.projectWork}
+          projectMember={details.projectWork?.projectMember}
+          projectWork={details.projectWork}
           lang={dictionary}
         />
         <ProjectMemberWorkDetails
-          projectMember={details.data.projectMember}
-          projectWork={details.data.projectWork}
+          projectMember={details.projectMember}
+          projectWork={details.projectWork}
           lang={dictionary}
         />
       </section>
@@ -46,25 +47,25 @@ export default async function ProjectMemberEvaluation({
       {/* RIGHT SIDE */}
       <section className="flex grow shrink">
         <div className="space-y-8 grow">
-          {details.data?.evaluator?.role === "admin" && (
+          {details?.evaluator?.role === "admin" && (
             <BasicEvaluationInfo
               text={dictionary.project.evaluate}
               workId={params.id}
-              verified={details.data.matching != null}
-              defaultValues={details.data.matching}
+              verified={details.matching != null}
+              defaultValues={details.matching}
               // projectId={details.data.evaluator.project.id}
               projectId={""}
             />
           )}
-          {details.data?.evaluator?.role != "admin" && (
+          {details?.evaluator?.role != "admin" && (
             <NonAdminContributionForm
               workId={params.id}
               text={dictionary.project.evaluate}
-              defaultValues={details.data.matching}
-              verified={details.data.matching != null}
+              defaultValues={details.matching}
+              verified={details.matching != null}
               sameRole={
-                details.data.evaluator?.works[0].role ===
-                details.data.projectWork.role
+                details.evaluator?.works[0].role ===
+                details.projectWork.role
               }
             />
           )}
