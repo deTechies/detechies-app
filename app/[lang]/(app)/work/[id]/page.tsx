@@ -23,9 +23,9 @@ export default async function ProjectMemberEvaluation({
   }
   
   return (
-    <main className="flex gap-4">
+    <main className="flex flex-wrap gap-4 md:flex-nowrap">
       {/* LEFT SIDE  */}
-      <section className="w-[360px] flex flex-col gap-4">
+      <section className="w-full md:w-[360px] shrink-0 flex flex-col gap-4">
         <ProjectSwitcher
           title={dictionary.project.work.project}
           project={details.projectWork?.projectMember?.project}

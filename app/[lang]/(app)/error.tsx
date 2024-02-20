@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Error() {
   return (
-    <Card className="max-w-xl mx-auto my-auto mt-20">
+    <Card className="max-w-xl mx-auto my-auto mt-10">
       <h1 className="text-title_l text-state-error">Error</h1>
 
       <p>

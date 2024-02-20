@@ -43,7 +43,7 @@ export default function ProfileProjects({
               data={{
                 link: `/project/${project.project.id}`,
                 image: project.project.image,
-                description: project.project.description,
+                description: project.works[0]?.description,
                 role: project.works[0]?.role,
                 type: project.project.type,
                 contribution: project.works[0]?.percentage,

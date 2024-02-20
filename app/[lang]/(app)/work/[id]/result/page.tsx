@@ -107,7 +107,7 @@ export default async function EvaluationResult({
                 className="w-full max-w-[212px]"
               >
                 <Button size="lg" variant={"secondary"}>
-                  {dictionary.project.evaluate.go_back}
+                  {dictionary.project.evaluate.edit_assessment}
                 </Button>
               </Link>
               <Link

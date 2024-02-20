@@ -119,7 +119,7 @@ export default function UploadWorks({
       </DialogTrigger>
 
       <DialogContent>
-        <h3 className="text-subhead_m">
+        <h3 className="text-subhead_s">
           {lang.project.details.links.dialog.title}
         </h3>
         <section className="flex flex-col gap-8 my-4">
@@ -168,7 +168,7 @@ export default function UploadWorks({
               ) : (
                 <div>
                   {file ? (
-                    <div className="flex justify-between px-8 py-5 rounded-sm text-accent-on-secondary bg-background-layer-2">
+                    <div className="flex justify-between px-4 py-5 rounded-sm text-accent-on-secondary bg-background-layer-2">
                       {file.name}
                       <X
                         className="ml-2 cursor-pointer hover:text-state-error text-text-secondary"

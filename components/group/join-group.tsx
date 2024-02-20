@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -36,10 +36,12 @@ export default function JoinGroup({
   groupId,
   details,
   lang,
+  children,
 }: {
   groupId: string;
   details: any;
   lang: any;
+  children?: React.ReactNode;
 }) {
   const FormSchema = z.object({
     message: z.string().max(100, {
@@ -80,17 +82,21 @@ export default function JoinGroup({
     setLoading(false);
   };
 
+  const defaultTrigger = children || (
+    <DialogTrigger className="max-w-[212px] w-full">
+      <Button size="lg" variant="primary">
+        {lang.group.details.profile_card.join_group.title}
+      </Button>
+    </DialogTrigger>
+  );
+
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-      <DialogTrigger className="max-w-[230px] grow">
-        <Button size="lg" variant="primary" className="w-full">
-          {lang.group.details.profile_card.join_group.title}
-        </Button>
-      </DialogTrigger>
+      {defaultTrigger}
 
       <DialogContent className="gap-6">
         <div className="flex flex-col gap-4">
-          <h5 className="text-subhead_m">
+          <h5 className="text-subhead_s">
             {lang.group.details.profile_card.join_group.title}
           </h5>
 
@@ -150,7 +156,8 @@ export default function JoinGroup({
                   <FormControl>
                     <Textarea
                       placeholder={
-                        lang.group.details.profile_card.join_group.message_placeholder
+                        lang.group.details.profile_card.join_group
+                          .message_placeholder
                       }
                       className="resize-none"
                       {...field}

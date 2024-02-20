@@ -136,7 +136,7 @@ const CreateMissionStep2: React.FC<StepTwoProps> = ({
                   variant="secondary"
                   onClick={() => removeMission(index)}
                 >
-                  <XIcon />
+                  <XIcon className="text-icon-secondary"/>
                 </Button>
               )}
             </div>

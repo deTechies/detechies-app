@@ -15,7 +15,7 @@ export default async function ProjectListPage({
   searchParams,
   params,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | undefined };
   params: { lang: Locale };
 }) {
   const profile = await auth() as Session;
@@ -37,7 +37,7 @@ export default async function ProjectListPage({
       !searchParams.project || item.type === searchParams.project;
     const privateMatch =
       !searchParams.privacy || item.scope === searchParams.privacy;
-    const myProjectMatch = !searchParams.me || item.owner === profile.web3?.address
+    const myProjectMatch = !searchParams.me || item.joined;
     return matchesSearch && projectMatch && privateMatch && myProjectMatch;
   });
 

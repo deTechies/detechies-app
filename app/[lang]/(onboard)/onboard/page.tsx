@@ -17,7 +17,7 @@ export default async function OnboardPage({
   const session = await auth();
 
   if (session?.web3?.user?.verified) {
-    redirect("/project");
+    redirect("/mypage");
   }
   
 

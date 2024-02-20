@@ -23,6 +23,7 @@ const AvatarUpdate = ({ profile, lang }: any) => {
   const face = searchParams.get("face") || profile.avatar[1];
   const head = searchParams.get("eyes") || profile.avatar[2];
   const hair = searchParams.get("hair") || profile.avatar[3];
+  const background = searchParams.get("background") || profile.avatar[6];
 
   const hashes = [
     clothes,
@@ -31,26 +32,24 @@ const AvatarUpdate = ({ profile, lang }: any) => {
     hair,
     profile.avatar[4],
     profile.avatar[5],
+    background,
   ];
 
   const handleUpdateAvatar = async () => {
     setRefresh(true);
 
-    const avatar = [
-      clothes,
-      face,
-      head,
-      hair,
-      profile.avatar[4],
-      profile.avatar[5],
-    ];
-
-    const result = await updateUserAvatar(avatar);
-
-    toast({
-      title: "Avatar updated",
-      description: "settings avatar",
-    });
+    const result = await updateUserAvatar(hashes);
+    if (result.status == "success") {
+      toast({
+        title: "Avatar updated",
+        description: "settings avatar",
+      });
+    } else {
+      toast({
+        title: result.status,
+        description: result.message,
+      });
+    }
 
     if (!data || !data.web3.user) {
       return;
@@ -61,7 +60,7 @@ const AvatarUpdate = ({ profile, lang }: any) => {
         ...data.web3,
         user: {
           ...data?.web3?.user,
-          avatar: avatar,
+          avatar: hashes,
         },
       },
     });
@@ -84,7 +83,12 @@ const AvatarUpdate = ({ profile, lang }: any) => {
         >
           {lang.mypage.edit_avatar.reset}
         </Button>
-        <Button size="lg" onClick={handleUpdateAvatar} loading={refresh}>
+        <Button
+          size="lg"
+          onClick={handleUpdateAvatar}
+          disabled={refresh}
+          loading={refresh}
+        >
           {lang.mypage.edit_avatar.save}
         </Button>
       </div>

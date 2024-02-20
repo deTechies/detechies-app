@@ -64,7 +64,7 @@ export default function InviteGroupMember({
   }, [text]);
 
   const onClickGoManage = () => {
-    router.push(`/groups/${groupId}/manage`);
+    router.push(`/groups/${groupId}/manage?tab=members`);
     setSelected(null);
     setCompleteInviting(false);
   };
@@ -103,7 +103,7 @@ export default function InviteGroupMember({
               </DialogClose>
             </div>
           ) : (
-            <h5 className="mb-6 text-subhead_m">
+            <h5 className="mb-6 text-subhead_s">
               {lang.group.details.profile_card.invite.invite_group_member}
             </h5>
           )}
