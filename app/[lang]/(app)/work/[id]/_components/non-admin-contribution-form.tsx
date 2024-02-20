@@ -91,7 +91,7 @@ export default function NonAdminContributionForm({
   return (
     <main className="grow shrink">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <Card className="gap-0">
             <h4 className="text-subhead_s mb-7">{text.basic_information}</h4>
             <section>

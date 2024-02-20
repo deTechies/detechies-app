@@ -29,7 +29,7 @@ export default async function EvaluationResult({
 
 
   return (
-    <main className="flex gap-4">
+    <main className="flex justify-center gap-4">
       {/* LEFT SIDE  */}
       <section className="w-[360px] flex flex-col gap-8 shrink-0">
         <ProjectSwitcher
@@ -49,7 +49,7 @@ export default async function EvaluationResult({
       </section>
 
       {/* RIGHT SIDE */}
-      <section className="flex mb-10 grow shrink">
+      <section className="flex mb-10 grow shrink max-w-[1027px]">
         <div className="space-y-8 grow">
           {details.matching && details.matching.rate_requirements > 0 ? (
             <BasicEvaluationInfo

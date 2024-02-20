@@ -22,7 +22,7 @@ export default async function ProjectMemberEvaluation({
   }
   
   return (
-    <main className="flex flex-wrap gap-4 md:flex-nowrap">
+    <main className="flex flex-wrap justify-center gap-4 md:flex-nowrap">
       {/* LEFT SIDE  */}
       <section className="w-full md:w-[360px] shrink-0 flex flex-col gap-4">
         <ProjectSwitcher
@@ -44,7 +44,7 @@ export default async function ProjectMemberEvaluation({
       </section>
 
       {/* RIGHT SIDE */}
-      <section className="flex grow shrink">
+      <section className="flex grow shrink max-w-[1027px]">
         <div className="space-y-8 grow">
           {details.data?.evaluator?.role === "admin" && (
             <BasicEvaluationInfo

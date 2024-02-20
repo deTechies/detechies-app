@@ -24,7 +24,7 @@ export default async function GroupMember({
   params: { address: string; lang: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const {data} = await getClub(params.address);
+  const { data } = await getClub(params.address);
 
   const searchItem = searchParams.search as string;
 
@@ -59,12 +59,13 @@ export default async function GroupMember({
               />
             );
           })}
-        {filteredData < 1 && (
-          <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-            검색 결과가 없습니다.
-          </div>
-        )}
       </div>
+      
+      {filteredData < 1 && (
+        <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
+          검색 결과가 없습니다.
+        </div>
+      )}
     </div>
   );
 }
