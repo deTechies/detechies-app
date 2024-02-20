@@ -54,7 +54,13 @@ export default async function ProjectMemberItem({
                   {lang.interface.role_type[details.role]}
                 </h5>
 
-                <Badge shape="sm" className="px-1.5 py-0.5">
+                <Badge
+                  shape="sm"
+                  variant={
+                    details.works[0]?.surveyResponses.length > 1 ? "info" : "default"
+                  }
+                  className="px-1.5 py-0.5"
+                >
                   {details.works.length < 1
                     ? lang.project.details.members.unregistered
                     : `${lang.project.details.members.registered} (${
@@ -62,8 +68,6 @@ export default async function ProjectMemberItem({
                           ? details.works[0].surveyResponses.length
                           : 0
                       })`}
-
-                  {/* (${details.works.length}) */}
                 </Badge>
               </div>
 
