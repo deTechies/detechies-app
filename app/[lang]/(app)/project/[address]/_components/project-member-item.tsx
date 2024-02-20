@@ -33,6 +33,8 @@ export default async function ProjectMemberItem({
 }) {
   const session = await auth();
 
+  console.log(details.works[0]);
+
   return (
     <Card className="flex flex-row gap-5 p-6 truncate flex-start">
       <div className="flex flex-wrap w-full gap-5 md:flex-nowrap">
@@ -57,7 +59,13 @@ export default async function ProjectMemberItem({
                 <Badge
                   shape="sm"
                   variant={
-                    details.works[0]?.surveyResponses.length > 1 ? "info" : "default"
+                    details.works[0]?.surveyResponses.filter(
+                      (surveyResponse) => {
+                        return surveyResponse.status == "finished";
+                      }
+                    ).length > 1
+                      ? "info"
+                      : "default"
                   }
                   className="px-1.5 py-0.5"
                 >
@@ -65,7 +73,11 @@ export default async function ProjectMemberItem({
                     ? lang.project.details.members.unregistered
                     : `${lang.project.details.members.registered} (${
                         details.works[0].surveyResponses
-                          ? details.works[0].surveyResponses.length
+                          ? details.works[0].surveyResponses.filter(
+                              (surveyResponse) => {
+                                return surveyResponse.status == "finished";
+                              }
+                            ).length
                           : 0
                       })`}
                 </Badge>
