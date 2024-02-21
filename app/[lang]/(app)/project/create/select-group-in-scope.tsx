@@ -68,7 +68,7 @@ export default function SelectGroupInScope({
                   isChecked={selectedTempGroup.includes(_group)}
                   onClick={() => onClickGroupListItem(_group)}
                   key={_group.id}
-                ></GroupCheckboxListItem>
+                />
               );
             }
           })}
@@ -84,7 +84,12 @@ export default function SelectGroupInScope({
         </DialogClose>
 
         <DialogClose className="max-w-[212px] w-full">
-          <Button size="lg" variant="primary" onClick={onClickSelectGroup}>
+          <Button
+            size="lg"
+            variant="primary"
+            onClick={onClickSelectGroup}
+            disabled={selectedTempGroup.length < 1}
+          >
             {lang.project.list.create_project.select_group.select_group}
           </Button>
         </DialogClose>

@@ -2,22 +2,17 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import JoinProject from "@/components/project/join-project";
+// import JoinProject from "@/components/project/join-project";
 import { Club } from "@/lib/interfaces";
 import RequestGroupListItem from "@/components/request-nft/request-group-list-item";
 import JoinGroup from "@/components/group/join-group";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 
 export default function GroupProject({
-  projectId,
-  isJoined,
   lang,
   groups,
 }: {
-  projectId: string;
-  isJoined: boolean;
   lang: any;
   groups: Club[];
 }) {
@@ -57,14 +52,6 @@ export default function GroupProject({
         <Button size="lg" variant="secondary" onClick={() => router.back()}>
           {lang.project.group.back}
         </Button>
-
-        {isJoined ? (
-          <Button size="lg" disabled={true}>
-            {lang.project.group.waiting}
-          </Button>
-        ) : (
-          <JoinProject lang={lang} address={projectId} />
-        )}
       </div>
     </Card>
   );

@@ -185,18 +185,22 @@ export default function BasicEvaluationInfo({
                         className="flex flex-col gap-0 mt-4 space-y-1"
                         disabled={result}
                       >
-                        <FormItem className="flex items-center space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="80" />
-                          </FormControl>
-                          <FormLabel>{text.not_true}</FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="100" />
-                          </FormControl>
-                          <FormLabel>{text.all_match}</FormLabel>
-                        </FormItem>
+                        {(!result || form.getValues("match") == "80") && (
+                          <FormItem className="flex items-center space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="80" />
+                            </FormControl>
+                            <FormLabel>{text.not_true}</FormLabel>
+                          </FormItem>
+                        )}
+                        {(!result || form.getValues("match") == "100") && (
+                          <FormItem className="flex items-center space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="100" />
+                            </FormControl>
+                            <FormLabel>{text.all_match}</FormLabel>
+                          </FormItem>
+                        )}
                       </RadioGroup>
                     </FormControl>
                   </FormItem>

@@ -55,8 +55,6 @@ export default async function ProjectDetailPage({
       <GroupProject
         lang={dictionary}
         groups={data.club}
-        projectId={params.address}
-        isJoined={data.userRole === "joined"}
       />
     );
   }
