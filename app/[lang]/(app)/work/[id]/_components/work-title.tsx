@@ -32,6 +32,7 @@ export default function WorkTitle({
     case "result":
       title = lang.project.evaluate.result;
       subTitle = lang.project.evaluate.result_description;
+      break;
     default:
       title = lang.project.evaluate.evaluate_performance;
       subTitle = `${lang.project.evaluate.evaluate_performance_description} ${username} ${lang.project.evaluate.evaluate_performance_description2}`;

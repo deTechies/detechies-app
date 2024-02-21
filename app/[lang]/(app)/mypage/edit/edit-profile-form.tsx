@@ -26,7 +26,7 @@ import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@radix-ui/react-select";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -74,6 +74,7 @@ export default function EditProfileForm({
     mode: "onChange",
   });
   const router = useRouter();
+  const params = useParams();
 
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
@@ -105,15 +106,21 @@ export default function EditProfileForm({
 
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
-    await updateUserProfile(data);
-    toast({
-      title: "Updated your profile",
-      description: "You will be redirected shortly.",
-    });
+    const result = await updateUserProfile(data);
+    
+    if(result.status == "success") {
+      toast({
+        title: "Updated your profile",
+        description: "You will be redirected shortly.",
+      });
+    } else {
+      toast({
+        title: "Failed to update your profile",
+        description: "Please try again later.",
+      })
+    }
 
-    router.refresh();
-    router.push("/mypage?updated=true", { scroll: true });
-
+    router.push(`/${params.lang}/mypage?updated=true`, { scroll: true });
     setLoading(false);
   }
 

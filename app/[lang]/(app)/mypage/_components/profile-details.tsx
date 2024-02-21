@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -19,8 +19,15 @@ export default function ProfileDetails({
   profile,
   text,
 }: ProfileDetailsProps) {
-  
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("updated") === "true") {
+      router.refresh();
+    }
+  }, []);
 
   return (
     <Card className="pt-[28px] px-9 pb-[36px] gap-[20px]">
