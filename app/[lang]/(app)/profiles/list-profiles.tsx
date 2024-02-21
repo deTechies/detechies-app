@@ -2,12 +2,11 @@
 import React from "react";
 
 import ProfileCard from "@/components/card/profile-card";
-import { serverApi } from "@/lib/data/general";
-import { Profile, ProfileDetails, User } from "@/lib/interfaces";
-import ShowMoreButton from "@/components/extra/show-more-button";
 import { Button } from "@/components/ui/button";
-import InviteExperts from "./invite-experts";
+import { serverApi } from "@/lib/data/general";
+import { Profile } from "@/lib/interfaces";
 import { useEffect, useState } from "react";
+import InviteExperts from "./invite-experts";
 import ProfilesLoading from "./profiles-loading";
 
 const ListProfiles = React.memo(
@@ -18,22 +17,24 @@ const ListProfiles = React.memo(
     lang: any;
     searchParams: { [key: string]: string | undefined };
   }) => {
-    const newUrl = new URLSearchParams();
+    
 
     const [userProfiles, setUserProfiles] = useState<Profile[]>([]);
     const [limit, setLimit] = useState(10);
     const [loading, setLoading] = useState(false);
 
     // Loop through searchParams and set them in newUrl
-    Object.entries(searchParams).forEach(([key, value]) => {
-      if (value) {
-        const paramName = key === "search" ? "display_name" : key;
-        newUrl.set(paramName, value);
-      }
-    });
+   
 
     useEffect(() => {
       const fetchData = async () => {
+        const newUrl = new URLSearchParams();
+        Object.entries(searchParams).forEach(([key, value]) => {
+          if (value) {
+            const paramName = key === "search" ? "display_name" : key;
+            newUrl.set(paramName, value);
+          }
+        });
         setLoading(true);
         let urlString = newUrl.toString();
         if (!urlString) {
@@ -43,18 +44,13 @@ const ListProfiles = React.memo(
         }
         const { data: users } = await serverApi(`/users`, urlString);
 
-        const sorted = (users as Profile[]).sort(
-          (a, b) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
+        
 
-        // console.log(sorted);
-
-        setUserProfiles(sorted);
+        setUserProfiles(users);
         setLoading(false);
       };
       fetchData();
-    }, [limit, newUrl.toString()]);
+    }, [searchParams, limit]);
 
     return (
       <>
