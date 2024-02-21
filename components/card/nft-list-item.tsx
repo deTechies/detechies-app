@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Badge } from "../ui/badge";
 import { Switch } from "../ui/switch";
+import AchievementChips from "../extra/achievement-chips";
 
 interface NftListItemProps {
   showSelect?: boolean;
@@ -88,19 +89,11 @@ export default function NftListItem({
           {item?.name || "undefined"}
         </Link> */}
 
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="info" shape="category">
-            {lang && item.nft_type
-              ? lang.interface.nft_type[item.nft_type]
-              : "No Type"}
-          </Badge>
-
-          {item?.avatar && (
-            <Badge variant="warning" shape="category">
-              {lang.interface.nft_image_type.avatar}
-            </Badge>
-          )}
-        </div>
+        <AchievementChips
+          achievements={item}
+          limit={2}
+          truncate={true}
+        />
       </div>
     </section>
   );

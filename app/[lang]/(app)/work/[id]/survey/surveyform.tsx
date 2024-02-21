@@ -30,6 +30,7 @@ export function SurveyForm({
   lang: any;
 }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const createSurveySchema = (answers: any) => {
     const schemaFields = answers.questions.reduce((acc: any, question: any) => {
@@ -44,7 +45,17 @@ export function SurveyForm({
 
   const form = useForm<any>({
     resolver: zodResolver(surveySchema),
+    mode: "onChange",
   });
+
+  const allFields = form.watch();
+
+  useEffect(() => {
+    form.trigger().then((isValid) => {
+      setIsValid(isValid);
+    });
+  }, [JSON.stringify(allFields)]);
+
   //setting default values
 
   useEffect(() => {
@@ -65,7 +76,11 @@ export function SurveyForm({
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
-    if (Object.values(data).some((value) => value === null || value === "" || value === undefined)) {
+    if (
+      Object.values(data).some(
+        (value) => value === null || value === "" || value === undefined
+      )
+    ) {
       toast({ title: "Error", description: "Please fill in all the fields." });
 
       setIsLoading(false);
@@ -75,11 +90,9 @@ export function SurveyForm({
     const result = await submitEvaluationSurvey(data, workId, responseId);
 
     router.push(`/work/${workId}/feedback`);
-
   };
-  
-  const categoryOrder = ["기술 전문성", "협업 및 커뮤니케이션", "업무 지식"];
 
+  const categoryOrder = ["기술 전문성", "협업 및 커뮤니케이션", "업무 지식"];
 
   const questionsByCategory = survey.questions.reduce(
     (acc: any, question: any) => {
@@ -90,8 +103,8 @@ export function SurveyForm({
     },
     {}
   );
-  
-    const sortedCategories = Object.keys(questionsByCategory).sort(
+
+  const sortedCategories = Object.keys(questionsByCategory).sort(
     (a, b) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b)
   );
 
@@ -99,17 +112,17 @@ export function SurveyForm({
     <div className="flex flex-col gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
-         
-        {sortedCategories.map((category,index) => {
+          {sortedCategories.map((category, index) => {
             return (
               <Card key={category}>
                 <h5 className="text-subhead_s mb-7">{category}</h5>{" "}
                 {/* Display the category */}
                 <div className="flex flex-col gap-6">
                   {questionsByCategory[category].map((question: any) => {
-                    // Display the questions based on language 
+                    // Display the questions based on language
                     const existingTranslation = question.translations?.find(
-                      (translation: any) => translation.language === selectedLanguage
+                      (translation: any) =>
+                        translation.language === selectedLanguage
                     );
                     if (question.type === "input") {
                       return null;
@@ -119,9 +132,17 @@ export function SurveyForm({
                           key={question.id}
                           form={form}
                           name={question.id}
-                          label={existingTranslation?.content ? existingTranslation.content : question.content}
+                          label={
+                            existingTranslation?.content
+                              ? existingTranslation.content
+                              : question.content
+                          }
                           steps={100 / 10}
-                          messages={existingTranslation?.messages ? existingTranslation.messages : question.messages}
+                          messages={
+                            existingTranslation?.messages
+                              ? existingTranslation.messages
+                              : question.messages
+                          }
                           disabled={result}
                           text={lang}
                         />
@@ -139,7 +160,7 @@ export function SurveyForm({
                         type="submit"
                         size="lg"
                         loading={isLoading}
-                        disabled={isLoading}
+                        disabled={isLoading || !isValid}
                       >
                         {lang.project.evaluate.next}
                       </Button>

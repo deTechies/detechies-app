@@ -240,7 +240,7 @@
           "subtitle": "공개할 그룹을 선택해 주세요",
           "subdesc": "공개할 그룹을 선택하지 않았어요. 프로젝트를 공개할 그룹을 적용하면, 적용된 그룹 멤버만 프로젝트를 볼 수 있어요.",
           "close": "닫기",
-          "select_group": "그룹 선택하기",
+          "select_group": "선택 그룹 적용하기",
           "title": "공개할 그룹 선택하기",
           "desc": "내가 참여중인 그룹을 선택하면, 해당 그룹 멤버만 이 프로젝트를 볼 수 있어요.",
           "back": "뒤로가기"
@@ -428,6 +428,8 @@
       "evaluate_propensity_description": "함께한 동료의 성향을 평가해주세요.",
       "last_feedback": "마지막 피드백",
       "last_feedback_description": "동료의 장점, 단점 등에 대한 자유로운 피드백을 알려주세요.",
+      "result": "평가 최종 확인",
+      "result_description": "해당 동료에 대한 평가 내용이 정확한지 다시 한번 확인해주세요. 한번 등록된 평가는 수정/삭제할 수 없어요.",
       "basic_information": "기본 정보",
       "billable_hourly_wage": "청구시급",
       "time_weekly": "투입시간 (주 평균)",
@@ -887,7 +889,7 @@
       "nft": "NFT 증명서",
       "members": "멤버",
       "mission": "미션",
-      "manage": "그룹관리"
+      "manage": "그룹 관리"
     },
     "member": {
       "leader": "그룹 리더"

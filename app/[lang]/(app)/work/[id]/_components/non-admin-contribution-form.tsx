@@ -172,7 +172,7 @@ export default function NonAdminContributionForm({
                   loading={isLoading}
                   disabled={isLoading}
                 >
-                  {text.register_reason}
+                  {form.watch("match") === "80" ? text.register_reason : text.next}
                 </Button>
               </section>
             )}

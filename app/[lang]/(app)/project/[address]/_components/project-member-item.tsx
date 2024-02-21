@@ -34,6 +34,12 @@ export default async function ProjectMemberItem({
 }) {
   const session = await auth();
 
+  const finishedSurveyLength = details.works[0]?.surveyResponses.filter(
+    (surveyResponse) => {
+      return surveyResponse.status == "finished";
+    }
+  ).length;
+
   return (
     <>
       <Card className="flex flex-row gap-5 p-6 truncate flex-start">
@@ -58,51 +64,40 @@ export default async function ProjectMemberItem({
 
                   <Badge
                     shape="sm"
-                    variant={
-                      details.works[0]?.surveyResponses.filter(
-                        (surveyResponse) => {
-                          return surveyResponse.status == "finished";
-                        }
-                      ).length > 0
-                        ? "info"
-                        : "default"
-                    }
+                    variant={finishedSurveyLength > 0 ? "info" : "default"}
                     className="px-1.5 py-0.5"
                   >
                     {details.works.length < 1
                       ? lang.project.details.members.unregistered
                       : `${lang.project.details.members.registered} (${
                           details.works[0].surveyResponses
-                            ? details.works[0].surveyResponses.filter(
-                                (surveyResponse) => {
-                                  return surveyResponse.status == "finished";
-                                }
-                              ).length
+                            ? finishedSurveyLength
                             : 0
                         })`}
                   </Badge>
                 </div>
 
                 <div className="flex items-center gap-3 ml-auto shrink-0">
+                  {/* My work */}
                   {session?.web3.address == details.user.wallet ? (
                     <>
                       {userRole != "client" && details.works.length < 1 && (
-                        /*   <AddProjectContribution
-                        project={details.project}
-                        lang={lang}
-                      /> */
+                        // Add works
                         <ProjectContribution
                           project={details.project}
                           lang={lang}
                         />
                       )}
-                      {details.works.length > 0 && (
+                      {details.works.length > 0 && finishedSurveyLength < 1 && (
                         <div className="flex gap-3">
+                          {/* edit */}
                           <ProjectContribution
                             project={details.project}
                             lang={lang}
                             defaultValues={details.works[0]}
                           />
+
+                          {/* delete */}
                           <DeleteWorks
                             projectId={details.works[0].workId}
                             lang={lang}
@@ -112,25 +107,31 @@ export default async function ProjectMemberItem({
                     </>
                   ) : (
                     <>
+                      {/* Others works */}
+
                       {/* 
                         <Button size="sm" variant="secondary" disabled={true}>
                           평가완료
                         </Button>
                       */}
+
                       {userRole != "none" &&
                         userRole != "invited" &&
                         userRole != "joined" &&
                         details.works.length > 0 && (
+                          // Evaluate this member
                           <ProjectMemberEvaluate
                             projectMember={details}
                             lang={lang}
                           />
                         )}
+
                       {(userRole == "admin" || userRole == "member") && (
                         <DropdownMenu>
                           <DropdownMenuTrigger>
                             <MoreVertical className="w-6 h-6 text-text-secondary hover:text-text-primary" />
                           </DropdownMenuTrigger>
+
                           <DropdownMenuContent>
                             <div className="flex flex-col gap-3 px-3 my-4 text-left">
                               <RequestEvaluation
@@ -138,9 +139,9 @@ export default async function ProjectMemberItem({
                                 memberWallet={details.user.wallet}
                                 lang={lang}
                               />
-                              {/*    <DropdownMenuItem>
-                              {lang.project.details.members.delegate_admin}
-                            </DropdownMenuItem> */}
+                              {/* <DropdownMenuItem>
+                                {lang.project.details.members.delegate_admin}
+                                </DropdownMenuItem> */}
                               {userRole == "admin" && (
                                 <DeleteMember
                                   memberId={details.memberId}

@@ -7,6 +7,7 @@ import { ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDictionary } from "@/lib/dictionaryProvider";
 import { NFT_TYPE, SBT_TYPE } from "@/lib/interfaces";
+import AchievementChips from "../extra/achievement-chips";
 
 const RequestNftListItem = React.memo(
   ({
@@ -50,17 +51,11 @@ const RequestNftListItem = React.memo(
         <div className="truncate">
           <div className="mb-2 truncate text-title_m">{achievement.name}</div>
 
-          <div className="flex flex-wrap gap-2">
-            <Badge shape="category" variant="info">
-              {lang.interface.nft_type[achievement.nft_type as NFT_TYPE]}
-            </Badge>
-
-            {achievement.type && (
-              <Badge shape="category" variant="info">
-                {lang.interface.sbt_type[achievement.type as SBT_TYPE]}
-              </Badge>
-            )}
-          </div>
+          <AchievementChips
+            achievements={achievement}
+            limit={2}
+            truncate={true}
+          />
         </div>
 
         <div className="grow" />

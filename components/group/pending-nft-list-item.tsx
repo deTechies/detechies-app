@@ -3,7 +3,7 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { ABI, defaultAvatar } from "@/lib/constants";
 import { postServer } from "@/lib/data/postRequest";
 import { AchievementReward } from "@/lib/interfaces";
-import { formatDate, getNftChips } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import { Address, useContractWrite, useWaitForTransaction } from "wagmi";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
+import AchievementChips from "../extra/achievement-chips";
 
 export default function PendingMemberListItem({
   nft,
@@ -218,17 +219,11 @@ export default function PendingMemberListItem({
             {nft.achievement?.name && nft.achievement.name}
           </div>
 
-          <div className="flex gap-1">
-            {getNftChips(nft.achievement) &&
-              getNftChips(nft.achievement).map((item, index) => {
-                return (
-                  <Badge shape="category" variant={item.variant} key={index}>
-                    {lang.interface.nft_type[item.chip] ||
-                      lang.interface.nft_image_type[item.chip]}
-                  </Badge>
-                );
-              })}
-          </div>
+          <AchievementChips
+            achievements={nft.achievement}
+            limit={2}
+            truncate={true}
+          />
         </div>
       </div>
 

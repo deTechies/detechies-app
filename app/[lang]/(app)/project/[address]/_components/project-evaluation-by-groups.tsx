@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
 import { serverApi } from "@/lib/data/general";
-import { AchievementReward } from "@/lib/interfaces";
+import { AchievementReward, NFT_TYPE } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 
@@ -29,6 +29,8 @@ export default async function ProjectEvaluationByGroups({
   );
 
   if (!verifiedGroups) return null;
+
+  console.log(rewardedAchievements);
 
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">
@@ -74,13 +76,20 @@ export default async function ProjectEvaluationByGroups({
                         {achievementReward.achievement.name}
                       </div>
 
-                      <Badge variant="info" shape="sm" className="px-1.5 py-0.5">
-                        {
-                          lang.interface.sbt_type[
-                            achievementReward.achievement.type
-                          ]
-                        }
-                      </Badge>
+                      {achievementReward.achievement.nft_type ===
+                        NFT_TYPE.SBT && (
+                        <Badge
+                          variant="info"
+                          shape="sm"
+                          className="px-1.5 py-0.5"
+                        >
+                          {
+                            lang.interface.sbt_type[
+                              achievementReward.achievement.type
+                            ]
+                          }
+                        </Badge>
+                      )}
                     </div>
 
                     <div className="mb-2 truncate text-label_m text-text-secondary">
