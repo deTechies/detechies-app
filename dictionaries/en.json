@@ -1157,9 +1157,11 @@
   },
   "validation": {
     "this_field_is_required": "This field is required.",
-    "no_longer_than_x":"Input must not be longer than ${X} characters.",
+    "no_longer_than_x": "Input must not be longer than ${X} characters.",
+    "no_shorter_than_x": "Input must not be shorter than ${X} characters.",
     "only_letters": "Only letters are allowed in the input.",
-    "invalid_format": "Input is not a valid format.",
+    "invalid_format": "Input's format is invalid.",
+    "request_sent": "Request sent successfully.",
     "onboard": {
       "username": {
         "already_use": "The username is already in use. Please use a different username.",

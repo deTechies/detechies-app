@@ -1156,8 +1156,10 @@
   "validation": {
     "this_field_is_required": "이 필드는 필수입니다.",
     "no_longer_than_x":"입력은 ${X}자를 초과할 수 없습니다.",
+    "no_shorter_than_x":"입력은 ${X}자보다 짧을 수 없습니다",
     "only_letters": "입력에는 문자만 허용됩니다.",
-    "invalid_format": "입력이 유효한 형식이 아닙니다.",
+    "invalid_format": "입력 형식이 잘못되었습니다.",
+    "request_sent": "요청이 성공적으로 전송되었습니다.",
     "onboard": {
       "username": {
         "already_use": "이미 사용중인 닉네임입니다. 다른 닉네임을 이용해주세요.",
