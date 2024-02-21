@@ -27,9 +27,9 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
     if (!event || event == "all") {
-      current.delete("project");
+      current.delete("type");
     } else {
-      current.set("project", event);
+      current.set("type", event);
     }
 
     const search = current.toString();
@@ -43,9 +43,9 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
     if (!_type || _type == "all") {
-      current.delete("privacy");
+      current.delete("scope");
     } else {
-      current.set("privacy", _type);
+      current.set("scope", _type);
     }
 
     const search = current.toString();
