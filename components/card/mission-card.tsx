@@ -5,6 +5,7 @@ import React from "react";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import { beginEndDates } from "@/lib/utils";
+import AchievementChips from "../extra/achievement-chips";
 
 export default function MemberCard({
   address,
@@ -55,73 +56,13 @@ export default function MemberCard({
     }
   };
 
-  const badgeList = (data: any[]) => {
-    const resultArr = new Set();
-    let hasImage = false;
-    let hasAvatar = false;
-
-    data.forEach((item) => {
-      // Check for nft_type and type
-      if (item.achievement.nft_type) {
-        resultArr.add(lang.interface.nft_type[item.achievement.nft_type]);
-      }
-      if (item.achievement.type) {
-        resultArr.add(lang.interface.sbt_type[item.achievement.type]);
-      }
-
-      // Check for image and avatar
-      if (item.achievement.image && !hasImage) {
-        hasImage = true;
-        resultArr.add(lang.interface.nft_image_type.image);
-      }
-      if (item.achievement.avatar && !hasAvatar) {
-        hasAvatar = true;
-        resultArr.add(lang.interface.nft_image_type.avatar);
-      }
-    });
-
-    return Array.from(resultArr) as string[];
-  };
-
+  
   const content = children || (
-    <div>
-      {/* NO NFT */}
-      {badgeList(info.achievements) &&
-        badgeList(info.achievements)?.length < 1 && (
-          <Badge shape="category">No NFT</Badge>
-        )}
-
-      {badgeList(info.achievements) &&
-      badgeList(info.achievements)?.length <= 3 ? (
-        // If there are 3 or less rewards
-        <div className="flex flex-wrap gap-2 text-title_m">
-          {badgeList(info.achievements).map((chip: string, index: number) => {
-            return (
-              <Badge variant={"info"} shape="category" key={index}>
-                {chip}
-              </Badge>
-            );
-          })}
-        </div>
-      ) : (
-        // If there are more than 4 rewards
-        <div className="flex flex-wrap gap-2 text-title_m">
-          {badgeList(info.achievements)
-            ?.slice(0, 2)
-            .map((chip: string, index: number) => {
-              return (
-                <Badge variant={"info"} shape="category" key={index}>
-                  {chip}
-                </Badge>
-              );
-            })}
-
-          <Badge shape="category">
-            +{badgeList(info.achievements)?.length - 2}
-          </Badge>
-        </div>
-      )}
-    </div>
+    <AchievementChips
+      achievements={info.achievements}
+      limit={2}
+      truncate={true}
+    />
   );
 
   if (!info) return <div>no data</div>;
@@ -138,7 +79,7 @@ export default function MemberCard({
           className="object-cover"
           width="999"
           height="999"
-        ></Image>
+        />
       </div>
 
       <div className="grow" />

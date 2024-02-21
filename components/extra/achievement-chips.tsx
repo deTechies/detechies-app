@@ -1,86 +1,117 @@
-"use client";
-import { Achievement, NFT_TYPE, SBT_TYPE } from "@/lib/interfaces";
-import { Badge } from "../ui/badge";
-import { useDictionary } from "@/lib/dictionaryProvider";
 import React, { useEffect, useState } from "react";
 
+import { Achievement, NFT_TYPE, SBT_TYPE } from "@/lib/interfaces";
+import { useDictionary } from "@/lib/dictionaryProvider";
+
+import { Badge } from "@/components/ui/badge";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Card } from "@/components/ui/card";
+
 export default function AchievementChips({
-  achievement,
-  length,
+  achievements,
+  limit,
+  truncate = false,
 }: {
-  achievement: Achievement;
-  length?: number;
+  achievements: Achievement | { achievement: Achievement }[];
+  limit?: number;
+  truncate?: boolean;
 }) {
   const lang = useDictionary();
-
   const [chips, setChips] = useState<React.ReactNode[]>([]);
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    const chipsArray = [] as React.ReactNode[];
-    if (achievement.nft_type == NFT_TYPE.SBT) {
-      chipsArray.push(
-        <Badge variant="info" shape="category" key="sbt">
-          {lang.interface.nft_type[achievement.nft_type]}
-        </Badge>
-      );
-    }
+    const achievementsArray = Array.isArray(achievements)
+      ? achievements.map((item) => item.achievement || item)
+      : [achievements];
 
-    if (
-      achievement.nft_type == NFT_TYPE.SBT &&
-      achievement.type == SBT_TYPE.AWARDS
-    ) {
-      chipsArray.push(
-        <Badge variant="info" shape="category" key="sbt-awards">
-          {lang.interface.sbt_type[achievement.type]}
-        </Badge>
-      );
-    }
+    const chipSet = new Set<string>();
+    const chipsArray: React.ReactNode[] = [];
 
-    if (
-      achievement.nft_type == NFT_TYPE.SBT &&
-      achievement.type == SBT_TYPE.EDU
-    ) {
-      chipsArray.push(
-        <Badge variant="info" shape="category" key="sbt-edu">
-          {lang.interface.sbt_type[achievement.type]}
-        </Badge>
-      );
-    }
+    achievementsArray.forEach((achievement) => {
+      if (!chipSet.has(achievement.nft_type)) {
+        chipsArray.push(
+          <Badge
+            variant={achievement.nft_type == NFT_TYPE.SBT ? "info" : "purple"}
+            shape="category"
+            key={`${achievement.nft_type}`}
+          >
+            {lang.interface.nft_type[achievement.nft_type as NFT_TYPE]}
+          </Badge>
+        );
+        chipSet.add(achievement.nft_type);
+      }
 
-    if (achievement.nft_type == NFT_TYPE.ERC721) {
-      chipsArray.push(
-        <Badge variant="info" shape="category" key="erc721">
-          {lang.interface.nft_type[achievement.nft_type]}
-        </Badge>
-      );
-    }
+      if (
+        achievement.nft_type == NFT_TYPE.SBT &&
+        achievement.type &&
+        !chipSet.has(achievement.type)
+      ) {
+        chipsArray.push(
+          <Badge variant="info" shape="category" key={`${achievement.type}`}>
+            {lang.interface.sbt_type[achievement.type as SBT_TYPE]}
+          </Badge>
+        );
+        chipSet.add(achievement.type);
+      }
 
-    if (achievement.avatar) {
-      chipsArray.push(
-        <Badge variant="info" shape="category" key="avatar">
-          {lang.interface.nft_image_type.avatar}
-        </Badge>
-      );
-    }
+      if (achievement.avatar && !chipSet.has("avatar")) {
+        chipsArray.push(
+          <Badge variant="warning" shape="category" key="avatar">
+            {lang.interface.nft_image_type.avatar}
+          </Badge>
+        );
+        chipSet.add("avatar");
+      }
 
-    if (achievement.image) {
-      chipsArray.push(
-        <Badge variant="info" shape="category" key="image">
-          {lang.interface.nft_image_type.image}
-        </Badge>
-      );
-    }
+      if (achievement.image && !chipSet.has("image")) {
+        chipsArray.push(
+          <Badge variant="warning" shape="category" key="image">
+            {lang.interface.nft_image_type.image}
+          </Badge>
+        );
+        chipSet.add("image");
+      }
+    });
 
     setChips(chipsArray);
-  }, [achievement]);
+  }, [achievements]);
 
   return (
     <div className="flex gap-2">
-      {chips.map((chip, index) => {
-        if (length && index >= length) return null;
+      {chips.slice(0, limit)}
+      {truncate && limit && chips.length > limit && (
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger
+            asChild
+            onMouseEnter={() => {
+              setOpen(true);
+            }}
+            onMouseLeave={() => {
+              setOpen(false);
+            }}
+          >
+            <div className="bg-background-layer-2 py-1.5 px-2.5 rounded-[5px] text-text-primary text-title_s">
+              +{chips.length - limit}
+            </div>
+          </PopoverTrigger>
 
-        return chip;
-      })}
+          <PopoverContent className="max-w-full p-0" side="top">
+            <Card className="max-w-[500px] bg-background-tooltip rounded-sm p-4 flex-row gap-2">
+              {chips.slice(limit)}
+            </Card>
+          </PopoverContent>
+        </Popover>
+      )}
+      {chips.length === 0 && (
+        <Badge shape="category" className="text-border-input">
+          No NFT
+        </Badge>
+      )}
     </div>
   );
 }

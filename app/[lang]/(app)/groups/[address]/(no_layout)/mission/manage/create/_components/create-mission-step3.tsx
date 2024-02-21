@@ -206,7 +206,7 @@ const CreateMissionStep3 = ({
                   <div className="flex flex-col items-start">
                     <div className="mb-2 text-title_m">{achievement.name}</div>
                     
-                    <Badge variant={"info"} shape="category">
+                    <Badge variant="info" shape="category">
                       {lang.interface.nft_type[achievement.nft_type]}
                     </Badge>
                   </div>

@@ -261,37 +261,3 @@ export const jobList: Job[] = [
   { id: 65, groupName: "HR", name: "Head of Digital HR" },
   { id: 66, groupName: "HR", name: "Head Hunter" },
 ];
-
-export const getNftChips = ( nft : any) => {
-  const chip_array = [];
-
-  if(nft.nft_type == "sbt") {
-    chip_array.push({
-      chip: "sbt",
-      variant: "info"
-    });
-  }
-  
-  if(nft.nft_type == "erc721") {
-    chip_array.push({
-      chip: "erc721",
-      variant: "purple"
-    });
-  }
-
-// if(nft.image) {
-  //   chip_array.push({
-  //     //
-  //   })
-  // }
-
-  if(nft.avatar) {
-    chip_array.push({
-      chip: "avatar",
-      variant: "warning"
-    });
-  }
-
-
-  return chip_array as { chip: string; variant: "info" | "purple" | "warning" | "default" | "accent" | "success" | "secondary" | "tertiary" | "destructive" | "outline" | "ghost" | null | undefined }[];
-}
