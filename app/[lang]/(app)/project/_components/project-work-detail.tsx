@@ -35,7 +35,7 @@ export default function ProjectWorkDetail({
           </span>
         </div>
       </div>
-      
+
       <div className="break-all whitespace-break-spaces text-label_m">
         <span>{data.description}</span>
       </div>
@@ -44,7 +44,12 @@ export default function ProjectWorkDetail({
         {showTags &&
           data.tags?.length > 0 &&
           data.tags.map((tag: string, index: number) => (
-            <Badge variant="secondary" shape="outline" key={index}>
+            <Badge
+              variant="secondary"
+              shape="outline"
+              className="text-text-placeholder"
+              key={index}
+            >
               {tag}
             </Badge>
           ))}

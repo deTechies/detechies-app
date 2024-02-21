@@ -58,7 +58,7 @@ export default function ProjectDetailItem({
                     <div className="divide-x shrink-0 text-label_m">
                       <span className="pr-2 capitalize">
                         {" "}
-                        {(data?.role &&
+                        {(data?.type &&
                           lang?.interface?.project_type[data?.type]) ||
                           "Unknown"}
                       </span>
