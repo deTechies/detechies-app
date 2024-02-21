@@ -42,7 +42,7 @@ export default function GroupMember({
         } */}
       </div>
 
-      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {sortedMemberList &&
           sortedMemberList.map(
             (item: any, index: any) => {

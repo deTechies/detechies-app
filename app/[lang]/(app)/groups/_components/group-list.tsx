@@ -90,7 +90,13 @@ export default function GroupList({
         ))}
       </div>
 
-      {/* <div className="mb-10"></div> */}
+      {groupList.length < 1 && (
+        <div className="mb-24 text-center text-text-secondary text-subhead_s">
+          {currentTab === TAB_BUTTONS.JOINED
+            ? lang.group.list.no_joined
+            : lang.group.list.no_created}
+        </div>
+      )}
 
       {/* 
       To be added later
@@ -103,7 +109,7 @@ export default function GroupList({
 
       <Link
         href="groups/create"
-        className="px-10 py-10 max-w-[1028px] min-h-[217px] rounded-md bg-no-repeat bg-contain flex mx-auto bg-[url('/images/banner-create-group.png')]"
+        className="px-10 py-10 max-w-[1028px] min-h-[217px] rounded-md bg-no-repeat bg-cover flex mx-auto bg-[url('/images/banner-create-group.png')]"
       >
         <div className="max-w-[430px]">
           <div className="mb-1 text-subhead_m text-accent-primary">

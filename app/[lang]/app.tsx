@@ -62,6 +62,9 @@ const connectorOptions: WepinConnectorOptions = {
   appId: wepin_app || wepin_prod_app || testAppId,
   appKey: wepin_key || wepin_prod_key|| testAppKey,
   defaultChainId: 80001,
+  attributes: {
+    type: 'hide',
+  }
 };
 
 const config = createConfig({

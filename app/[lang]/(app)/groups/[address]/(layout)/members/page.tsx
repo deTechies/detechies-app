@@ -24,7 +24,7 @@ export default async function GroupMember({
   params: { address: string; lang: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const {data} = await getClub(params.address);
+  const { data } = await getClub(params.address);
 
   const searchItem = searchParams.search as string;
 
@@ -46,7 +46,7 @@ export default async function GroupMember({
         />
       </div>
 
-      <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {filteredData &&
           filteredData.map((item: ClubMember, index: any) => {
             return (
@@ -59,12 +59,13 @@ export default async function GroupMember({
               />
             );
           })}
-        {filteredData < 1 && (
-          <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
-            검색 결과가 없습니다.
-          </div>
-        )}
       </div>
+      
+      {filteredData < 1 && (
+        <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
+          검색 결과가 없습니다.
+        </div>
+      )}
     </div>
   );
 }

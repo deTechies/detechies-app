@@ -17,36 +17,36 @@ export default async function OnboardPage({
   const session = await auth();
 
   if (session?.web3?.user?.verified) {
-    redirect("/project");
+    redirect("/mypage");
   }
   
 
   return (
-    <main className="flex flex-col gap-12 items-center w-full max-w-[400px]">
+    <main className="flex flex-col gap-12 items-center w-full max-w-[400px] mx-auto">
       <div className="flex flex-col gap-8">
         <div className="relative w-[300px] h-[50px] mx-auto">
           <Image
-            className="block h-12 object-contain dark:hidden"
+            className="block object-contain h-12 dark:hidden"
             src="/images/careerzen.png"
             alt="Careerzen"
             fill={true}
             priority={true}
           />
           <Image
-            className="h-12 object-contain hidden dark:block"
+            className="hidden object-contain h-12 dark:block"
             src="/images/logo-invert.png"
             alt="Careerzen"
             fill={true}
             priority={true}
           />
         </div>
-        <h1 className="text-subhead_s text-center">
+        <h1 className="text-center text-subhead_s">
           {dictionary.onboard.welcome.title}
         </h1>
       </div>
 
-      <div className="flex flex-col space-y-1 gap-4 w-full">
-        <h5 className="text-body_s text-text-secondary text-center">
+      <div className="flex flex-col w-full gap-4 space-y-1">
+        <h5 className="text-center text-body_s text-text-secondary">
           {dictionary.onboard.welcome.body}
         </h5>
         <Suspense fallback={<p>Loading buttons...</p>}>

@@ -39,7 +39,7 @@ function TotalProjectItem({
   }, projects[0])?.begin_date;
 
   const latestDate = projects.reduce((oldest, current) => {
-    if (!oldest.end_date || !current.end_date) return undefined;
+    if (!oldest?.end_date || !current?.end_date) return undefined;
     return new Date(oldest.end_date) < new Date(current.end_date)
       ? oldest
       : current;

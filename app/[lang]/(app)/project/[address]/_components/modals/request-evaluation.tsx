@@ -54,15 +54,18 @@ export default function RequestEvaluation({
         <h4 className="text-subhead_s">
           {lang.project.details.request.card_title}
         </h4>
+        
         <p className="text-body_m">
           {lang.project.details.request.card_description}
         </p>
-        <div className="grid grid-cols-2 gap-4 mt-6">
+
+        <div className="flex justify-center gap-2">
           <DialogClose asChild>
             <Button size="lg" variant="secondary" ref={closeButtonRef}>
               {lang.project.details.request.card_back}
             </Button>
           </DialogClose>
+
           <Button
             size="lg"
             variant="primary"

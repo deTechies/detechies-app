@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
@@ -9,11 +9,9 @@ import { updateUserAvatar } from "@/lib/data/user";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-
-const AvatarUpdate = ({ profile }: any) => {
+const AvatarUpdate = ({ profile, lang }: any) => {
   const pathName = usePathname();
   const searchParams = useSearchParams()!;
-
 
   const [avatar, setAvatar] = useState(profile.avatar);
   const [refresh, setRefresh] = useState<boolean>(false);
@@ -25,28 +23,33 @@ const AvatarUpdate = ({ profile }: any) => {
   const face = searchParams.get("face") || profile.avatar[1];
   const head = searchParams.get("eyes") || profile.avatar[2];
   const hair = searchParams.get("hair") || profile.avatar[3];
-  
-  const hashes = [clothes, face, head, hair, profile.avatar[4], profile.avatar[5]];
+  const background = searchParams.get("background") || profile.avatar[6];
 
+  const hashes = [
+    clothes,
+    face,
+    head,
+    hair,
+    profile.avatar[4],
+    profile.avatar[5],
+    background,
+  ];
 
   const handleUpdateAvatar = async () => {
     setRefresh(true);
 
-    const avatar = [
-      clothes,
-      face,
-      head,
-      hair,
-      profile.avatar[4],
-      profile.avatar[5],
-    ];
-
-    const result = await updateUserAvatar(avatar);
-
-    toast({
-      title: "Avatar updated",
-      description: "settings avatar",
-    });
+    const result = await updateUserAvatar(hashes);
+    if (result.status == "success") {
+      toast({
+        title: "Avatar updated",
+        description: "settings avatar",
+      });
+    } else {
+      toast({
+        title: result.status,
+        description: result.message,
+      });
+    }
 
     if (!data || !data.web3.user) {
       return;
@@ -57,7 +60,7 @@ const AvatarUpdate = ({ profile }: any) => {
         ...data.web3,
         user: {
           ...data?.web3?.user,
-          avatar: avatar,
+          avatar: hashes,
         },
       },
     });
@@ -65,24 +68,28 @@ const AvatarUpdate = ({ profile }: any) => {
     setRefresh(false);
   };
 
-
   // Component UI
   return (
-    <Card className="flex w-full flex-col gap-5">
-      <div className="relative max-w-[320px] aspect-square bg-gradient-to-b from-[#7CFDCE] to-[#98E2F9] rounded-[8px]">
-      <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
-
+    <Card className="flex flex-col w-full gap-5">
+      <div className="relative max-w-[320px] aspect-square bg-background-layer-2 rounded-[8px] w-full mx-auto">
+        <IPFSImageLayer hashes={profile.avatar ? hashes : []} />
       </div>
-      <div className="flex gap-4">
+
+      <div className="flex justify-center gap-4">
         <Button
           size="lg"
           variant="secondary"
           onClick={() => setAvatar(profile.avatar)}
         >
-          Reset
+          {lang.mypage.edit_avatar.reset}
         </Button>
-        <Button size="lg" onClick={handleUpdateAvatar} loading={refresh}>
-          Save
+        <Button
+          size="lg"
+          onClick={handleUpdateAvatar}
+          disabled={refresh}
+          loading={refresh}
+        >
+          {lang.mypage.edit_avatar.save}
         </Button>
       </div>
     </Card>

@@ -52,12 +52,11 @@ export default function AcceptInvitation({
     router.push("/project");
   };
   return (
-    <Card className="flex flex-col max-w-md gap-0 px-8 mx-auto text-center py-7">
-      <Avatar className="rounded-sm mx-auto w-[200px] h-[200px] mb-6 aspect-square bg-state-info-secondary">
+    <Card className="flex flex-col max-w-[500px] gap-0 px-8 mx-auto text-center py-7">
+      <Avatar className="rounded-sm mx-auto w-[200px] h-[200px] mb-6">
         <AvatarImage
           src={"https://ipfs.io/ipfs/" + image}
           alt="project_image"
-          className=""
         />
 
         <AvatarFallback className="relative">
@@ -70,7 +69,7 @@ export default function AcceptInvitation({
         </AvatarFallback>
       </Avatar>
 
-      <div className="mb-2 text-heading_s">{name}</div>
+      <div className="text-heading_s">{name}</div>
 
       <div className="mb-4 text-heading_s">
         {lang.project.details.invited_to_project.title}

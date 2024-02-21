@@ -139,6 +139,7 @@ export interface User {
     created_at: Date;
     updated_at?: Date;
     isUserMember?: boolean;
+    userRole?: string;
   }
   
 export enum GROUP_TYPE {
@@ -310,6 +311,7 @@ export enum GROUP_TYPE {
     achievements: Achievement[]
     created_at: Date;
     updated_at: Date;
+    joined: boolean;
   }
   
   export interface ProjectLink{
@@ -374,6 +376,8 @@ export interface Survey {
 export interface MissionDetails {
   campaignId:string;
   name:string;
+  club: Club;
+  isMember?: boolean;
   description: string;
   begin_date: string;
   end_date: string;

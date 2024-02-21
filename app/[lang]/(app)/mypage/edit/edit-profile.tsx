@@ -13,7 +13,7 @@ export default async function EditProfile({ lang }: { lang: Locale }) {
       username={profile.display_name}
       currentValues={profile.profile_details}
       email={profile.email}
-      text={dictionary.mypage.edit_profile}
+      lang={dictionary}
     />
   );
 }

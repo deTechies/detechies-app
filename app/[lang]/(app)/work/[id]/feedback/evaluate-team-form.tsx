@@ -250,17 +250,13 @@ export default function EvaluateTeamForm({
   };
 
   return (
-    <main
-      className={`max-w-[1000px] ${
-        result && "max-w-full"
-      } mx-auto my-10 px-auto`}
-    >
+    <main className={`max-w-full mx-auto mb-10 px-auto`}>
       <section className="flex flex-col gap-5">
         {Object.entries(criteriaByCategory).map(
           ([category, criteria], index) => (
             <Card key={category} className="px-4 pb-10 md:px-9 pt-7">
               <div className="mb-10 text-center text-subhead_s">{category}</div>
-              <section className="flex flex-col gap-[60px] mx-auto">
+              <section className="flex flex-col gap-[60px] md:px-10 lg:px-20">
                 {criteria.map((criterion) => (
                   <Ranking
                     key={criterion.id}

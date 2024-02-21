@@ -14,7 +14,7 @@ interface ProfileDetailsProps {
   text: any;
 }
 
-export default async function ProfileDetails({
+export default function ProfileDetails({
   visiting = false,
   profile,
   text,

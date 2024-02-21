@@ -74,13 +74,13 @@ export default function PendingProfileCard({
         className="w-[64] aspect-square relative rounded-t-sm  m-0"
         href={`/profiles/${profile?.profile?.id}`}
       >
-        <div className="w-full aspect-square relative m-0 bg-accent-secondary rounded-t-sm">
+        <div className="relative w-full m-0 rounded-t-sm aspect-square bg-background-layer-2">
           <IPFSImageLayer hashes={profile.nft? profile.nft : defaultAvatar} />
         </div>
       </Link>
       <div className="text-center">
         <Link
-          className="font-semibold text-md capitalize mb-1 truncate"
+          className="mb-1 font-semibold capitalize truncate text-md"
           href={`/profiles/${profile?.profile?.id}`}
           target="_blank"
         >

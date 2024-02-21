@@ -34,7 +34,7 @@ const NewImage: React.FC<NewImageProps> = ({
       blurDataURL={placeholderSrc}
       placeholder="blur"
       onError={handleError}
-      className={`bg-state-info-secondary aspect-square ${currentSrc === defaultSrc ? "object-contain" : ""} ${props.className}`}
+      className={`bg-background-layer-2 aspect-square ${currentSrc === defaultSrc ? "object-contain" : ""} ${props.className}`}
     />
   );
 };

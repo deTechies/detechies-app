@@ -1,5 +1,5 @@
 "use client";
-import MyCredits from "@/components/profile/my-credits";
+// import MyCredits from "@/components/profile/my-credits";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
@@ -13,7 +13,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
   const pathName = usePathname();
 
   if (pathName.includes("avatar")) {
-    return <AvatarUpdate profile={profile} />;
+    return <AvatarUpdate profile={profile} lang={dictionary} />;
   }
   return (
     <Card className="flex flex-col gap-5 w-full pt-[24px] pb-[28px] px-5 md:max-w-[376px]">
@@ -29,7 +29,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
       <div className="flex flex-col gap-3">
         <ProfileCardFollow dictionary={dictionary} />
         <ProfileCardWallet wallet={profile.wallet} dictionary={dictionary} />
-        <MyCredits credits={profile.credits} dictionary={dictionary} />
+        {/* <MyCredits credits={profile.credits} dictionary={dictionary} /> */}
       </div>
     </Card>
   );

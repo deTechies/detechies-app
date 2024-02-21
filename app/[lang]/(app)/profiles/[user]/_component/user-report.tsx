@@ -58,7 +58,7 @@ export default function UserReport({
   }, projects[0])?.begin_date;
 
   const latestDate = projects.reduce((oldest: any, current: any) => {
-    if (!oldest.end_date || !current.end_date) return undefined;
+    if (!oldest?.end_date || !current?.end_date) return undefined;
     return new Date(oldest.end_date) < new Date(current.end_date)
       ? oldest
       : current;
@@ -84,7 +84,7 @@ export default function UserReport({
             : beginEndDates(oldestDate, latestDate)}
         </div>
 
-        <div className="mb-3 text-title_s">
+        <div className="mb-6 text-title_s">
           {text.profile.report_card.total_evalucation} ({totalEvaluationCount})
         </div>
 

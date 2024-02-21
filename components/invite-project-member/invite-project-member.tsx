@@ -64,7 +64,7 @@ export default function InviteProjectMember({
 
       <DialogContent className="gap-6">
         <div className="flex flex-col gap-4">
-          <h5 className="text-subhead_m">
+          <h5 className="text-subhead_s">
             {lang.project.details.invite_member.title}
           </h5>
 

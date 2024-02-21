@@ -11,7 +11,6 @@ interface MissionItemProps {
   lang: any;
 }
 
-
 export const MissionItem: React.FC<MissionItemProps> = ({
   mission,
   onSelect,
@@ -36,7 +35,9 @@ export const MissionItem: React.FC<MissionItemProps> = ({
       <div className="flex items-center gap-5 ml-auto">
         <div
           className={`min-w-[140px] p-3 text-center rounded-full text-title_l grow max-w-[140px] ${
-            isActive ? "bg-gradient-to-r from-accent-secondary to-state-success-secondary" : "bg-background-layer-2 text-text-secondary"
+            isActive
+              ? "bg-gradient-to-r from-accent-secondary to-state-success-secondary"
+              : "bg-background-layer-2 text-text-secondary"
           }`}
         >
           {`${mission.score} ${lang.mission.detail.point}`}

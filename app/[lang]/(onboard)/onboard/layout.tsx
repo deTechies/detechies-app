@@ -57,7 +57,7 @@ export default async function RootLayout({
         >
           <Suspense fallback={<Loading />}>
             <App>
-              <main className="mx-auto max-w-lg flex items-center min-h-[100vh]">
+              <main className="mx-auto max-w-lg flex items-center min-h-[100vh] px-4">
                 {children}
               </main>
             </App>

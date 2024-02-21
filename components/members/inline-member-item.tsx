@@ -22,7 +22,7 @@ export default function InlineMemberItem({
   if (!display_name)
     return (
       <div className="flex items-center py-4">
-        <Avatar className="h-10 w-10 bg-background-layer-2">
+        <Avatar className="w-10 h-10">
           <IPFSImageLayer hashes={avatar? avatar : defaultAvatar} />
         </Avatar>
 
@@ -44,12 +44,12 @@ export default function InlineMemberItem({
         active && "bg-accent-secondary"
       }`}
     >
-      <Avatar className="h-10 w-10 bg-background-layer-2">
+      <Avatar className="w-10 h-10">
         <IPFSImageLayer hashes={avatar ? avatar : defaultAvatar} />
       </Avatar>
 
-      <div className="ml-4 flex flex-col gap-2">
-        <span className="text-title_s">{display_name}</span>
+      <div className="flex flex-col items-start gap-2 ml-4">
+        <span className="text-title_s test-start">{display_name}</span>
 
         <Badge variant="outline" shape="outline_sm">
           {info.profile_details?.profession

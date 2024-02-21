@@ -60,7 +60,7 @@ export default function ProjectMemberEvaluate({
             <h3 className="text-title_m">
               {lang.project.details.members.evalu.evaluated}
             </h3>
-            <ProjectMemberInline projectMember={projectMember} lang={lang}/>
+            <ProjectMemberInline projectMember={projectMember} lang={lang} />
           </div>
           <div className="flex flex-col self-stretch gap-4">
             <div className="text-base font-semibold leading-tight tracking-tight text-neutral-900">
@@ -68,26 +68,22 @@ export default function ProjectMemberEvaluate({
             </div>
           </div>
 
-          {projectMember.works.length > 0 &&
-            projectMember.works.map((work, index: number) => {
-              return (
-                <div
-                  className="p-5 border rounded-md border-border-div"
-                  key={index}
-                >
-                  <div className="flex gap-2 mb-5">
-                    {work.tags.length > 0 &&
-                      work.tags.map((tag: string, index: number) => (
-                        <Badge shape="outline" variant="accent" key={index}>
-                          {tag}
-                        </Badge>
-                      ))}
-                  </div>
+          {projectMember.works.length > 0 && (
+            <div
+              className="p-5 border rounded-md border-border-div"
+            >
+              <div className="flex flex-wrap gap-2 mb-5">
+                {projectMember.works[0].tags.length > 0 &&
+                  projectMember.works[0].tags.map((tag: string, index: number) => (
+                    <Badge shape="outline" variant="accent" key={index}>
+                      {tag}
+                    </Badge>
+                  ))}
+              </div>
 
-                  <div className="text-body_m">{work.description}</div>
-                </div>
-              );
-            })}
+              <div className="text-body_m">{projectMember.works[0].description}</div>
+            </div>
+          )}
         </div>
         <div className="flex justify-center gap-2">
           <DialogClose className="max-w-[212px] grow w-full">

@@ -8,8 +8,17 @@ export default async function EvaluateTeamMember({
 }: {
   params: { lang: Locale; app: string; id: string; member: string };
 }) {
-  const {data: details} = await getProjectWork(id);
+  const { data: details } = await getProjectWork(id);
   const dictionary = await getDictionary(lang);
 
-  return <EvaluateTeamForm workId={id} surveyId={details.id} defaultValues={details.assessment} lang={dictionary} />;
+  return (
+    <main className="max-w-[1027px] mx-auto">
+      <EvaluateTeamForm
+        workId={id}
+        surveyId={details.id}
+        defaultValues={details.assessment}
+        lang={dictionary}
+      />
+    </main>
+  );
 }

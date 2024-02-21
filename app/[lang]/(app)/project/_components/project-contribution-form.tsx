@@ -76,8 +76,8 @@ export default function ProjectContributionForm({
     defaultValues: workDetails
       ? {
           role: workDetails.role,
-          begin_date: workDetails.begin_date.split("T")[0],
-          end_date: workDetails.end_date.split("T")[0],
+          begin_date: workDetails.begin_date?.split("T")[0],
+          end_date: workDetails.end_date?.split("T")[0],
           description: workDetails.description,
           present: workDetails.present,
           percentage: [workDetails.percentage],
@@ -147,7 +147,7 @@ export default function ProjectContributionForm({
         });
       }
     } else {
-      const result = await addMembersWork(values, project.projectId);
+      const result = await addMembersWork(values, project.id);
 
       if (result.status === "success") {
         toast({

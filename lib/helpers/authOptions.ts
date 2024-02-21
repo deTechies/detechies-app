@@ -121,11 +121,12 @@ export const authOptions = {
             accessToken: account.access_token,
             expires: expirationTime,
           };
-        } else if (account.provider === "web3") {
+        } 
+         if (account.provider === "web3") {
           token.web3 = {
             user: {
               ...user.user,
-              username: user.user.display_name,
+              username: user.user?.display_name,
             },
             address: user.user.wallet,
             accessToken: user.token,

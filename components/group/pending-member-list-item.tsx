@@ -91,7 +91,7 @@ export default function PendingMemberListItem({
       // onClick={() => router.push(`/profiles/${profile.user.wallet}`)}
     >
       <div className="flex items-center gap-3">
-        <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
+        <div className="relative w-20 h-20 rounded-sm aspect-square bg-background-layer-2">
           <IPFSImageLayer
             hashes={profile.user.avatar ? profile.user.avatar : defaultAvatar}
           />
@@ -130,7 +130,7 @@ export default function PendingMemberListItem({
           loading={rejectLoading}
           disabled={rejectLoading}
         >
-          <X className="w-6 h-6"></X>
+          <X className="w-6 h-6 text-icon-secondary"/>
         </Button>
 
         <Button
@@ -140,7 +140,7 @@ export default function PendingMemberListItem({
           loading={acceptLoading}
           disabled={acceptLoading}
         >
-          <Check className="w-6 h-6"></Check>
+          <Check className="w-6 h-6"/>
         </Button>
       </div>
     </div>

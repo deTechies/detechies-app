@@ -578,7 +578,7 @@ export const GroupForm = () => {
 
             <div className="mb-6 text-center text-label_m text-text-secondary">
               <div>{lang.group.create.form.dialog_information}</div>
-              <div>{lang.group.create.form.dialog_information2}</div>
+              <div>{"robin582@careerzen.org"}</div>
             </div>
 
             <div className="text-center">
