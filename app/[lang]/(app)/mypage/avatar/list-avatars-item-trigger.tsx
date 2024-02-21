@@ -20,6 +20,16 @@ interface INftTypeChipProps {
   theme: "warning" | "info";
 }
 
+interface DefaultAvatar {
+  clothes: string;
+  face: string;
+  head: string;
+  hair: string;
+  avatar4: string;
+  avatar5: string;
+  background: string;
+}
+
 export default function ListAvatarItemTrigger({
   showSelect,
   selected,
@@ -29,6 +39,7 @@ export default function ListAvatarItemTrigger({
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
   const isSelected = item.avatar_type
     ? searchParams.get(item?.avatar_type) === item.avatar
     : false;
@@ -48,6 +59,16 @@ export default function ListAvatarItemTrigger({
       : url;
   }
 
+  const defaultAvatar: DefaultAvatar = {
+    clothes: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
+    face: "bafkreidlzc4pnszwiyx73yqlbwgkchyuendxkfq63sp54vhnky3ruti5xu",
+    head: "bafkreihdqgem6jwebjyiahy6e4mgf5xdrqam3yaxq2ki2ew4hw6tjxq7du",
+    hair: "bafkreigjctpasi7b2ytsn7mx47wjobnqkvioi4vllg7dqwzzvw7u2lijme",
+    avatar4: "bafkreif6oi5pwrjzey5q4pmyd3zck6a53uoefozxydapiipgq2flsbldsi",
+    avatar5: "bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose",
+    background: "bafkreibgvactjvhexsx54qcxo32msz6vsimbwimp64sbvlawjol5e27kg4",
+  };
+
   return (
     <section className="p-0 border border-inherit rounded-xl shadow-custom">
       <div className="relative object-scale-down w-full m-0 aspect-square rounded-t-xl">
@@ -55,15 +76,30 @@ export default function ListAvatarItemTrigger({
           <div className="absolute z-10 top-3.5 right-3">
             <Switch
               checked={isSelected}
-              onCheckedChange={() => {
-                router.push(
-                  pathname +
-                    "?" +
-                    createQueryString(
-                      item.avatar_type ? item.avatar_type : "",
-                      removeIPFSPrefix(item.avatar)
-                    )
-                );
+              onCheckedChange={(_event) => {
+                if (_event) {
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString(
+                        item.avatar_type ? item.avatar_type : "",
+                        removeIPFSPrefix(item.avatar)
+                      )
+                  );
+                } else {
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString(
+                        item.avatar_type ? item.avatar_type : "",
+                        item.avatar_type
+                          ? defaultAvatar[
+                              item.avatar_type as keyof DefaultAvatar
+                            ]
+                          : ""
+                      )
+                  );
+                }
               }}
               onClick={(event) => event.stopPropagation()}
             />

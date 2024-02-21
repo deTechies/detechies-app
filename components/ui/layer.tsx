@@ -39,7 +39,7 @@ const IPFSImageLayer: React.FC<IPFSImageLayerProps> = ({
         className={`${
           className === "rounded-full"
             ? `rounded-full`
-            : `rounded-sm   ${className}`
+            : `${className}`
         }`}
         width={300}
         height={300}
