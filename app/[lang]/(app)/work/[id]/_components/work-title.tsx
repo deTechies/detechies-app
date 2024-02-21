@@ -25,9 +25,13 @@ export default function WorkTitle({
       title = lang.project.evaluate.evaluate_propensity;
       subTitle = lang.project.evaluate.evaluate_propensity_description;
       break;
-    case "result":
+    case "swot":
       title = lang.project.evaluate.last_feedback;
       subTitle = lang.project.evaluate.last_feedback_description;
+      break;
+    case "result":
+      title = lang.project.evaluate.result;
+      subTitle = lang.project.evaluate.result_description;
       break;
     default:
       title = lang.project.evaluate.evaluate_performance;
@@ -35,7 +39,7 @@ export default function WorkTitle({
   }
 
   return (
-    <header className="my-10 text-center">
+    <header className="mb-10 text-center">
       <h2 className="mb-4 text-heading_m">{title}</h2>
       <h5 className="text-title_m text-text-secondary">{subTitle}</h5>
     </header>

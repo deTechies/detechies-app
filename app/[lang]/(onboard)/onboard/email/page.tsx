@@ -2,9 +2,9 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
 import { getUserProfile } from "@/lib/data/user";
-import CreateProfile from "./create-profile";
-import EmailVerification from "./email-verify";
-import FinishedProfile from "./finished-profile";
+import CreateProfile from "./_components/create-profile";
+import EmailVerification from "./_components/email-verify";
+import FinishedProfile from "./_components/finished-profile";
 
 export default async function EmailVerify({
   params: { lang },
@@ -13,18 +13,16 @@ export default async function EmailVerify({
 }) {
   //reda here the lang and the dictionary
   const dictionary = await getDictionary(lang);
-  const text = dictionary.onboard.verify_email;
-
-  const {data:user} = await getUserProfile();
+  const { data: user } = await getUserProfile();
 
   return (
     <div>
       <section className="my-2">
         {!user.email && <CreateProfile lang={dictionary} />}
-        {user && !user.verified && user.email && (
+        {user?.email && !user.verified && (
           <EmailVerification lang={dictionary} user={user} />
         )}
-        {user && user.verified && <FinishedProfile lang={dictionary}/>}
+        {user?.verified && <FinishedProfile lang={dictionary} />}
       </section>
     </div>
   );

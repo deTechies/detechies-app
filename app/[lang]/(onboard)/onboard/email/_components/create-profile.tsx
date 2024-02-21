@@ -27,39 +27,46 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAccount, useDisconnect } from "wagmi";
 import * as z from "zod";
-
-const profileFormSchema = z.object({
-  display_name: z
-    .string()
-    .min(2, {
-      message: "Your name must be at least 2 characters.",
-    })
-    .max(30, {
-      message: "Your name must not be longer than 30 characters.",
-    }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  terms_of_service: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the terms of service.",
-  }),
-  privacy_policy: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the privacy policy.",
-  }),
-  email_policy: z.boolean().optional(),
-  verified: z.boolean().default(false),
-});
-
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
-
-// This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {};
+import PrivacyPolicy from "./privacy-policy";
+import TermsOfService from "./terms-of-service";
+import RewardNotification from "./reward-notification";
 
 const wepin_app = process.env.NEXT_PUBLIC_WEPIN_APP_ID;
 const wepin_prod_app = process.env.WEPIN_PROD_APP_ID;
 
-
 export default function CreateProfile({ lang }: { lang: any }) {
+  const profileFormSchema = z.object({
+    display_name: z
+      .string()
+      .min(1, {
+        message: lang.validation.onboard.username.require,
+      })
+      .min(2, {
+        message: lang.validation.onboard.username.min,
+      })
+      .max(20, {
+        message: lang.validation.onboard.username.max,
+      })
+      .regex(/^\S*$/, { message: lang.validation.onboard.username.regex }),
+    email: z.string().email({
+      message: lang.validation.onboard.email.email,
+    }),
+    agree_with_all: z.boolean().optional(),
+    terms_of_service: z.boolean().refine((val) => val === true, {
+      message: "You must agree to the terms of service.",
+    }),
+    privacy_policy: z.boolean().refine((val) => val === true, {
+      message: "You must agree to the privacy policy.",
+    }),
+    email_policy: z.boolean().optional(),
+    verified: z.boolean().default(false),
+  });
+
+  type ProfileFormValues = z.infer<typeof profileFormSchema>;
+
+  // This can come from your database or API.
+  const defaultValues: Partial<ProfileFormValues> = {};
+
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -140,10 +147,23 @@ export default function CreateProfile({ lang }: { lang: any }) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      toast({
-        title: "Error",
-        description: errorData.message,
-      });
+      if (errorData.messageCode === "username_already_exists") {
+        form.setError("display_name", {
+          type: "manual",
+          message: lang.validation.onboard.username.already_use,
+        });
+      } else if (errorData.messageCode === "email_already_exists") {
+        form.setError("email", {
+          type: "manual",
+          message: lang.validation.onboard.email.already_use,
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: errorData.message,
+        });
+      }
+
       setIsLoading(false);
       return;
     }
@@ -159,6 +179,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
 
   const onClickDisconnect = async () => {
     setIsLoading(true);
+    signOut();
     disconnect();
   };
 
@@ -231,6 +252,37 @@ export default function CreateProfile({ lang }: { lang: any }) {
           <section className="flex flex-col">
             <FormField
               control={form.control}
+              name="agree_with_all"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center py-3 space-y-0 border-b border-border-div ">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={(value) => {
+                        field.onChange(value);
+
+                        if (value) {
+                          form.setValue("terms_of_service", true);
+                          form.setValue("privacy_policy", true);
+                          form.setValue("email_policy", true);
+                        } else {
+                          form.setValue("terms_of_service", false);
+                          form.setValue("privacy_policy", false);
+                          form.setValue("email_policy", false);
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <div className="w-full ml-3 space-y-1 leading-none">
+                    <Label className="text-title_m">
+                      {lang.onboard.verify_email.accordion.agree_with_all}
+                    </Label>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="terms_of_service"
               render={({ field }) => (
                 <FormItem className="flex flex-row items-center py-3 space-y-0 border-b border-border-div ">
@@ -240,12 +292,15 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <div className="w-full space-y-1 leading-none">
+                  <div className="w-full ml-3 space-y-1 leading-none">
                     <Label className="text-title_m">
                       {lang.onboard.verify_email.accordion.terms_of_services}
                     </Label>
                   </div>
-                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+                  <TermsOfService
+                    onClickAgree={() => form.setValue("terms_of_service", true)}
+                    lang={lang}
+                  />
                 </FormItem>
               )}
             />
@@ -261,12 +316,16 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       className="my-auto"
                     />
                   </FormControl>
-                  <div className="w-full space-y-1 leading-none">
+                  <div className="w-full ml-3 space-y-1 leading-none">
                     <Label className="text-title_m flex-stretch">
                       {lang.onboard.verify_email.accordion.privacy_policy}
                     </Label>
                   </div>
-                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+
+                  <PrivacyPolicy
+                    onClickAgree={() => form.setValue("privacy_policy", true)}
+                    lang={lang}
+                  />
                 </FormItem>
               )}
             />
@@ -282,12 +341,27 @@ export default function CreateProfile({ lang }: { lang: any }) {
                       className="my-auto"
                     />
                   </FormControl>
-                  <div className="w-full space-y-1 leading-none flex-stretch">
-                    <FormLabel className="text-title_m">
-                      {lang.onboard.verify_email.accordion.reward_notification}
+                  <div className="w-full ml-3 space-y-1 leading-none flex-stretch">
+                    <FormLabel>
+                      <div className="text-title_m mb-1.5">
+                        {
+                          lang.onboard.verify_email.accordion
+                            .reward_notification
+                        }
+                      </div>
+                      <div className="text-text-secondary text-label_m">
+                        {
+                          lang.onboard.verify_email.accordion
+                            .reward_notification_description
+                        }
+                      </div>
                     </FormLabel>
                   </div>
-                  <ChevronRight className="w-6 h-6 cursor-pointer text-text-secondary hover:text-accent-primary" />
+
+                  <RewardNotification
+                    onClickAgree={() => form.setValue("email_policy", true)}
+                    lang={lang}
+                  />
                 </FormItem>
               )}
             />
@@ -311,7 +385,14 @@ export default function CreateProfile({ lang }: { lang: any }) {
               type="submit"
               className="w-full"
               size="lg"
-              disabled={isLoading || blockPopupOpen}
+              disabled={
+                isLoading ||
+                blockPopupOpen ||
+                !form.watch("display_name") ||
+                !form.watch("email") ||
+                !form.watch("terms_of_service") ||
+                !form.watch("privacy_policy")
+              }
               loading={isLoading}
             >
               {lang.onboard.verify_email.next}

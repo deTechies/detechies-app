@@ -6,6 +6,8 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { toast } from "@/components/ui/use-toast";
+import { postServer } from "@/lib/data/postRequest";
 
 import { useState } from "react";
 
@@ -20,7 +22,15 @@ export default function QuitMission({
 
   async function onClickQuit() {
     setLoading(true);
-
+    //
+    const result = await postServer(`/mission/stop/${campaignId}`, "");
+    
+    if(result){
+      toast({
+        title: "Success",
+        description: "Succesfully quit mission campaign.",
+      });
+    }
     setLoading(false);
   }
 
@@ -64,6 +74,8 @@ export default function QuitMission({
             variant="error"
             className="grow max-w-[212px]"
             onClick={onClickQuit}
+            loading={loading}
+            disabled={loading}
           >
             {lang.group.details.manage.mission.mission_quit}
           </Button>

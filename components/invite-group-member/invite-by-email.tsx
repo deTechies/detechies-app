@@ -21,16 +21,16 @@ import { Label } from "../ui/label";
 const projectFormSchema = z.object({
   name: z
     .string()
-    .min(2, {
-      message: "Your groups name must be at least 2 characters.",
+    .min(1, {
+      message: "Your groups name must be at least 1 character.",
     })
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
   last_name: z
     .string()
-    .min(2, {
-      message: "Your groups name must be at least 2 characters.",
+    .min(1, {
+      message: "Your groups name must be at least 1 character.",
     })
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
@@ -86,7 +86,7 @@ export default function InviteByEmail({
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-3"
         >
-          <Label>{lang.details.profile_card.invite.name}</Label>
+          <Label>{lang.group.details.profile_card.invite.name}</Label>
 
           <div className="flex gap-4 mb-2">
             <FormField
@@ -95,7 +95,12 @@ export default function InviteByEmail({
               render={({ field }) => (
                 <FormItem className="grow">
                   <FormControl className="h-[60px]">
-                    <Input placeholder="first_name" {...field} />
+                    <Input
+                      placeholder={
+                        lang.group.details.profile_card.invite.first_name
+                      }
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -107,7 +112,12 @@ export default function InviteByEmail({
               render={({ field }) => (
                 <FormItem className="grow">
                   <FormControl className="h-[60px]">
-                    <Input placeholder="last_name" {...field} />
+                    <Input
+                      placeholder={
+                        lang.group.details.profile_card.invite.last_name
+                      }
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -115,7 +125,7 @@ export default function InviteByEmail({
             />
           </div>
 
-          <Label>{lang.details.profile_card.invite.email}</Label>
+          <Label>{lang.group.details.profile_card.invite.email}</Label>
 
           <FormField
             control={form.control}
@@ -137,7 +147,7 @@ export default function InviteByEmail({
               className="max-w-[212px] grow px-0"
               onClick={() => cancelByEmail()}
             >
-              {lang.details.profile_card.invite.back}
+              {lang.group.details.profile_card.invite.back}
             </Button>
             <Button
               type="submit"
@@ -146,7 +156,7 @@ export default function InviteByEmail({
               disabled={loading || !form.formState.isValid}
               loading={loading}
             >
-              {lang.details.profile_card.invite.invite}
+              {lang.group.details.profile_card.invite.invite}
             </Button>
           </div>
         </form>

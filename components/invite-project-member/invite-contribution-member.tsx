@@ -32,7 +32,7 @@ export default function InviteContributionMember({
   return (
     <main className="flex flex-col gap-4">
       <div className="flex flex-col gap-4">
-        <h5 className="text-subhead_m">
+        <h5 className="text-subhead_s">
           {lang.project.details.invite_member.title}
         </h5>
 

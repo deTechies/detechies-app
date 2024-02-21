@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
 import { serverApi } from "@/lib/data/general";
-import { AchievementReward } from "@/lib/interfaces";
+import { AchievementReward, NFT_TYPE } from "@/lib/interfaces";
 import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 
@@ -22,13 +22,15 @@ export default async function ProjectEvaluationByGroups({
   //we want top check if we own any of the data is pending..
 
   const { data: groups } = await getGroups();
+  const verifiedGroups = groups.filter((group: any) => group.verified);
 
   const { data: rewardedAchievements } = await serverApi(
     `/achievement-rewards/project-rewards/${details.id}`
   );
 
-  if (!groups) return null;
+  if (!verifiedGroups) return null;
 
+  console.log(rewardedAchievements);
 
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">
@@ -38,7 +40,7 @@ export default async function ProjectEvaluationByGroups({
         {(details.userRole === "member" ||
           details.userRole === "admin" ||
           details.userRole === "client") && (
-          <RequestNFTModal groups={groups} lang={lang} />
+          <RequestNFTModal groups={verifiedGroups} lang={lang} />
         )}
       </CardHeader>
 
@@ -48,7 +50,7 @@ export default async function ProjectEvaluationByGroups({
             rewardedAchievements.map(
               (achievementReward: AchievementReward, index: number) => (
                 <div className="flex gap-5 truncate" key={index}>
-                  <Avatar className="w-20 h-20 mb-2 overflow-hidden rounded-sm aspect-square bg-state-info-secondary">
+                  <Avatar className="w-20 h-20 mb-2 rounded-sm">
                     <AvatarImage
                       alt={achievementReward.achievement.name}
                       src={`https://ipfs.io/ipfs/${
@@ -74,13 +76,20 @@ export default async function ProjectEvaluationByGroups({
                         {achievementReward.achievement.name}
                       </div>
 
-                      <Badge variant="info" shape="category">
-                        {
-                          lang.interface.sbt_type[
-                            achievementReward.achievement.type
-                          ]
-                        }
-                      </Badge>
+                      {achievementReward.achievement.nft_type ===
+                        NFT_TYPE.SBT && (
+                        <Badge
+                          variant="info"
+                          shape="sm"
+                          className="px-1.5 py-0.5"
+                        >
+                          {
+                            lang.interface.sbt_type[
+                              achievementReward.achievement.type
+                            ]
+                          }
+                        </Badge>
+                      )}
                     </div>
 
                     <div className="mb-2 truncate text-label_m text-text-secondary">

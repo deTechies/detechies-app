@@ -1,9 +1,8 @@
 "use client";
-import { useState } from "react";
 import { Club } from "@/lib/interfaces";
 import Image from "@/components/ui/image";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Check, Square } from "lucide-react";
+import { useDictionary } from "@/lib/dictionaryProvider";
 
 export default function GroupCheckboxListItem({
   group,
@@ -14,6 +13,8 @@ export default function GroupCheckboxListItem({
   isChecked: Boolean;
   onClick?: any;
 }) {
+  const lang = useDictionary();
+
   return (
     <div
       className="flex h-[84px] py-4 px-5 items-center hover:bg-background-layer-2 cursor-pointer"
@@ -25,19 +26,19 @@ export default function GroupCheckboxListItem({
           alt={group.name}
           width="52"
           height="52"
-        ></Image>
+        />
       </div>
 
       <div className="grow">
-        <div className="text-title_m mb-2">{group.name}</div>
-        <div className="text-text-secondary text-label_m">{group.type}</div>
+        <div className="mb-2 text-title_m">{group.name}</div>
+        <div className="text-text-secondary text-label_m">{lang.interface.group_type[group.type]}</div>
       </div>
 
       <div className="px-6">
         {isChecked ? (
-          <Check className="text-accent-primary"></Check>
+          <Check className="text-accent-primary"/>
         ) : (
-          <Square className="text-border-input"></Square>
+          <Square className="text-border-input"/>
         )}
       </div>
     </div>

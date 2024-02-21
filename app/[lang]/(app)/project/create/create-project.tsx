@@ -1,37 +1,24 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
-import { uploadContent } from "@/lib/upload";
-import { createProject } from "@/lib/data/project";
 import { serverApi } from "@/lib/data/general";
+import { createProject } from "@/lib/data/project";
+import { uploadContent } from "@/lib/upload";
 
 import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
-import NoticeGroupSelect from "./notice-group-select";
-import SelectGroupInScope from "./select-group-in-scope";
 import MediaUploader from "@/components/extra/media-uploader";
-import ProfessionTagType from "./profession-tag-type";
+import NoticeGroupSelect from "./notice-group-select";
+import ProfessionTagType from "@/components/extra/profession-tag-type";
+import SelectGroupInScope from "./select-group-in-scope";
 
-import Image from "@/components/ui/image";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
 import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -42,66 +29,78 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Image from "@/components/ui/image";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { AlertCircle, X } from "lucide-react";
 
-const projectFormSchema = z
-  .object({
-    name: z
-      .string()
-      .trim()
-      .min(1, {
-        message: "Enter project name.", // 필수 필드에 대한 사용자 정의 메시지
-      })
-      .min(2, {
-        message: "Your group's name must be at least 2 characters.",
-      })
-      .max(30, {
-        message: "Your group's name must not be longer than 30 characters.",
-      })
-      .refine(
-        (val) => {
-          const trimmed = val.replace(/\s+/g, " ");
-          return trimmed.length >= 2 && trimmed.length <= 30;
-        },
-        {
-          message:
-            "Your group's name must be between 2 and 30 characters, consecutive spaces are counted as one.",
-        }
-      ),
-    begin_date: z.string(),
-    end_date: z.string(),
-    description: z
-      .string()
-      .trim()
-      .min(10, {
-        message: "Your groups description must be at least 10 characters.",
-      })
-      .max(1000, {
+const projectFormSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, {
+      message: "Enter project name.", // 필수 필드에 대한 사용자 정의 메시지
+    })
+    .min(2, {
+      message: "Your group's name must be at least 2 characters.",
+    })
+    .max(30, {
+      message: "Your group's name must not be longer than 30 characters.",
+    })
+    .refine(
+      (val) => {
+        const trimmed = val.replace(/\s+/g, " ");
+        return trimmed.length >= 2 && trimmed.length <= 30;
+      },
+      {
         message:
-          "Your groups description must not be longer than 1000 characters.",
-      }),
-    tags: z
-      .array(z.string())
-      .min(1, {
-        message: "At least one tag is required.",
-      })
-      .max(5, {
-        message: "No more than 5 tags are allowed.",
-      }),
-    scope: z.string(),
-    image: z.string().optional(),
-    type: z.nativeEnum(ProjectType, {
-      required_error: "You need to select a type.",
+          "Your group's name must be between 2 and 30 characters, consecutive spaces are counted as one.",
+      }
+    ),
+  begin_date: z.string(),
+  end_date: z.string(),
+  description: z
+    .string()
+    .trim()
+    .min(10, {
+      message: "Your groups description must be at least 10 characters.",
+    })
+    .max(1000, {
+      message:
+        "Your groups description must not be longer than 1000 characters.",
     }),
-  });
+  tags: z
+    .array(z.string())
+    .min(1, {
+      message: "At least one tag is required.",
+    })
+    .max(5, {
+      message: "No more than 5 tags are allowed.",
+    }),
+  scope: z.string(),
+  image: z.string().optional(),
+  type: z.nativeEnum(ProjectType, {
+    required_error: "You need to select a type.",
+  }),
+});
 
 type CreateProjectFormValues = z.infer<typeof projectFormSchema>;
 
@@ -125,6 +124,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
 
   const [selectGroupDialog, setSelectGroupDialog] = useState<boolean>(false);
   const [myGroups, setMyGroups] = useState<Club[]>([]);
+  const [myGroupsLoading, setMyGroupsLoading] = useState<boolean>(false);
   const [selectedGroup, setSelectedGroup] = useState<Club[]>([]);
   const [noticeGroupSelectOpen, setNoticeGroupSelectOpen] =
     useState<boolean>(false);
@@ -174,17 +174,26 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
       data.end_date = "";
     }
 
-    const computedName = data.name.replace(/\s+/g, " ").trim();
+    const formattedName = data.name.replace(/\s+/g, " ").trim();
+    // delete space
+    // "  asdf   asdf " => "asdf asdf"
+
+    let clubs;
+    
+    if(data.scope === PRIVACY_TYPE.GROUP) {
+      clubs = selectedGroup.map((group) => group.id);
+    }
 
     const result = await createProject({
       image: data.image,
-      name: computedName,
+      name: formattedName,
       description: data.description,
       begin_date: data.begin_date,
       end_date: data.end_date,
       tags: data.tags,
       scope: data.scope,
       type: data.type,
+      clubs: clubs,
     });
 
     if (result.status === "success") {
@@ -218,11 +227,13 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
   useEffect(() => {
     const fetchMyGroupsData = async () => {
       if (selectGroupDialog && myGroups.length < 1) {
+        setMyGroupsLoading(true);
         const result = await serverApi(`/clubs/my`);
 
         if (result.status === "success") {
           setMyGroups(result.data);
         }
+        setMyGroupsLoading(false);
       }
     };
 
@@ -289,7 +300,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                     ))}
                   </SelectContent>
                 </Select>
-                
+
                 <FormMessage />
               </div>
             </FormInlineItem>
@@ -318,7 +329,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
               name="end_date"
               render={({ field }) => (
                 <FormItem
-                  className={`w-full relative ${
+                  className={`w-full relative space-y-0 ${
                     present && "opacity-40"
                   }`}
                 >
@@ -431,6 +442,7 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                       <ProfessionTagType
                         newTag={newTag}
                         onClickJobBadge={clickTagsBadge}
+                        category="project"
                       ></ProfessionTagType>
                     )}
                     <FormMessage />
@@ -442,23 +454,26 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                     form.getValues("tags")?.map((tag, index) => (
                       <Badge
                         key={index}
-                        variant="accent"
+                        variant="secondary"
                         shape="md"
                         className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        <div className="w-full truncate">{tag}</div>
-                        <X
-                          className="w-5 h-5 cursor-pointer"
-                          onClick={() => {
-                            const currentTags = form.getValues("tags") || [];
-                            const newTags = currentTags.filter(
-                              (t) => t !== tag
-                            );
-                            form.setValue("tags", newTags, {
-                              shouldValidate: true,
-                            });
-                          }}
-                        ></X>
+                        <div className="flex">
+                          <div className="w-full truncate">{tag}</div>
+
+                          <X
+                            className="w-5 h-5 cursor-pointer"
+                            onClick={() => {
+                              const currentTags = form.getValues("tags") || [];
+                              const newTags = currentTags.filter(
+                                (t) => t !== tag
+                              );
+                              form.setValue("tags", newTags, {
+                                shouldValidate: true,
+                              });
+                            }}
+                          ></X>
+                        </div>
                       </Badge>
                     ))}
                 </div>
@@ -543,7 +558,8 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                             myGroups={myGroups}
                             selectedGroup={selectedGroup}
                             onSelectGroup={onSelectGroup}
-                          ></SelectGroupInScope>
+                            loading={myGroupsLoading}
+                          />
                         </DialogContent>
                       </Dialog>
                     </>
@@ -560,23 +576,25 @@ export default function CreateProjectForm({ lang }: { lang: any }) {
                             className="gap-2 my-1.5"
                             key={index}
                           >
-                            <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
-                              <Image
-                                src={`https://ipfs.io/ipfs/${group.image}`}
-                                alt={group.name}
-                                width="20"
-                                height="20"
-                              ></Image>
-                            </div>
+                            <div className="flex gap-2">
+                              <div className="w-5 h-5 overflow-hidden rounded-full shrink-0">
+                                <Image
+                                  src={`https://ipfs.io/ipfs/${group.image}`}
+                                  alt={group.name}
+                                  width="20"
+                                  height="20"
+                                ></Image>
+                              </div>
 
-                            <div className="text-label_m max-w-[120px] truncate">
-                              {group.name}
-                            </div>
+                              <div className="text-label_m max-w-[120px] truncate">
+                                {group.name}
+                              </div>
 
-                            <X
-                              className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
-                              onClick={() => onClickDeleteClub(group)}
-                            ></X>
+                              <X
+                                className="w-5 h-5 cursor-pointer shrink-0 text-text-secondary"
+                                onClick={() => onClickDeleteClub(group)}
+                              ></X>
+                            </div>
                           </Badge>
                         );
                       })}

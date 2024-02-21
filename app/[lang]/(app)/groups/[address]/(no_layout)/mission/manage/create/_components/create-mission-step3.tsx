@@ -14,7 +14,7 @@ import Image from "@/components/ui/image";
 // import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-const RewardForm = ({
+const CreateMissionStep3 = ({
   achievements,
   selectedAchievements,
   onSelectAchievement,
@@ -206,7 +206,7 @@ const RewardForm = ({
                   <div className="flex flex-col items-start">
                     <div className="mb-2 text-title_m">{achievement.name}</div>
                     
-                    <Badge variant={"info"} shape="category">
+                    <Badge variant="info" shape="category">
                       {lang.interface.nft_type[achievement.nft_type]}
                     </Badge>
                   </div>
@@ -251,4 +251,4 @@ const RewardForm = ({
     </div>
   );
 };
-export default RewardForm;
+export default CreateMissionStep3;

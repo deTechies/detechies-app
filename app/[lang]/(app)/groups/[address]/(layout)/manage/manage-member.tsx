@@ -115,7 +115,7 @@ export default async function ManageMember({
           <Search placeholder={lang.group.details.manage.member.search} />
         </div>
 
-        <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {filteredData &&
             filteredData.map((item: ClubMember, index: any) => {
               if (index > 4) {

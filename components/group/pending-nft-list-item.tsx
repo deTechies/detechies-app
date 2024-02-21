@@ -3,7 +3,7 @@ import IPFSImageLayer from "@/components/ui/layer";
 import { ABI, defaultAvatar } from "@/lib/constants";
 import { postServer } from "@/lib/data/postRequest";
 import { AchievementReward } from "@/lib/interfaces";
-import { formatDate, getNftChips } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import { Address, useContractWrite, useWaitForTransaction } from "wagmi";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
+import AchievementChips from "../extra/achievement-chips";
 
 export default function PendingMemberListItem({
   nft,
@@ -164,7 +165,7 @@ export default function PendingMemberListItem({
       // onClick={() => router.push(`/nfts/${nft.user.id}`)}
     >
       <div className="flex items-center gap-3">
-        <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
+        <div className="relative w-20 h-20 rounded-sm aspect-square bg-background-layer-2">
           {nft.project?.image ? (
             <Image
               src={`https://ipfs.io/ipfs/${nft.project.image}`}
@@ -218,17 +219,11 @@ export default function PendingMemberListItem({
             {nft.achievement?.name && nft.achievement.name}
           </div>
 
-          <div className="flex gap-1">
-            {getNftChips(nft.achievement) &&
-              getNftChips(nft.achievement).map((item, index) => {
-                return (
-                  <Badge shape="category" variant={item.variant} key={index}>
-                    {lang.interface.nft_type[item.chip] ||
-                      lang.interface.nft_image_type[item.chip]}
-                  </Badge>
-                );
-              })}
-          </div>
+          <AchievementChips
+            achievements={nft.achievement}
+            limit={2}
+            truncate={true}
+          />
         </div>
       </div>
 
@@ -250,7 +245,7 @@ export default function PendingMemberListItem({
           size="icon"
           disabled={isLoading || projectLoading || loading}
         >
-          <X className="w-6 h-6"></X>
+          <X className="w-6 h-6 text-icon-secondary"/>
         </Button>
 
         <Button
@@ -259,7 +254,7 @@ export default function PendingMemberListItem({
           size="icon"
           disabled={isLoading || projectLoading || loading}
         >
-          <Check className="w-6 h-6"></Check>
+          <Check className="w-6 h-6"/>
         </Button>
       </div>
     </div>

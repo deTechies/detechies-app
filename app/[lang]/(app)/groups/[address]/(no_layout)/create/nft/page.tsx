@@ -19,7 +19,7 @@ export default async function CreateNFT({
     )
   }
   return (
-    <main className="w-full max-w-[60rem] m-8 mx-auto">
+    <main className="w-full max-w-[60rem] mx-auto">
       <CreateNFTForm group={group} lang={dictionary}/>
     </main>
   );

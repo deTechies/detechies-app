@@ -15,6 +15,7 @@ export default function PendingMemberItem({
   lang,
   onSuccessInvite,
 }: PendingMemberItemProps) {
+
   //if accept then we need to put in
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,6 +24,22 @@ export default function PendingMemberItem({
     setIsLoading(true);
     const result = await postServer(
       `/project-member/accept/member/${member.id}`,
+      ""
+    );
+
+    if (result && result.status === "success") {
+      onSuccessInvite && onSuccessInvite(member.id);
+      router.refresh();
+    } else {
+      setIsLoading(false);
+    }
+    //TODO: make sure that the data is only reloaded.
+  }
+  
+  async function rejectMember() {
+    setIsLoading(true);
+    const result = await postServer(
+      `/project-member/reject/member/${member.id}`,
       ""
     );
 
@@ -99,6 +116,7 @@ export default function PendingMemberItem({
                     size="sm"
                     variant="secondary"
                     disabled={isLoading}
+                    onClick={rejectMember}
                   >
                     {lang.project.details.waiting.reject}
                   </Button>

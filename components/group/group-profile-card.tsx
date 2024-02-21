@@ -120,7 +120,7 @@ export default async function GroupProfileCard({
               className="max-w-[212px] grow rounded-full"
             >
               <Button size="lg" variant="primary" className="w-full">
-                {lang.details.profile_card.create_nft.create_nft}
+                {lang.group.details.profile_card.create_nft.create_nft}
               </Button>
             </Link>
 
@@ -128,7 +128,7 @@ export default async function GroupProfileCard({
               groupId={id}
               lang={lang}
               groupMembers={groupDetail.members}
-            ></InviteGroupMember>
+            />
           </div>
         )}
 

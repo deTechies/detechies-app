@@ -83,13 +83,12 @@ export default function RequestNFTModal({
 
   useEffect(() => {
     const getAchievements = async () => {
-      
       if (!selectedGroup) return;
       setLoading(true);
       const { data: fetchedGroupAchievement } =
         await getGroupAchievementsClient(selectedGroup.id);
       setGroupAchievements(fetchedGroupAchievement);
-      setLoading(false)
+      setLoading(false);
     };
     if (selectedGroup) {
       setSelectedAchievement;
@@ -132,11 +131,11 @@ export default function RequestNFTModal({
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-[500px] flex flex-col  gap-4">
-        <h3 className="text-subhead_s">
+      <DialogContent className="max-w-[500px] flex flex-col gap-0">
+        <h3 className="mb-4 text-subhead_s">
           {lang.project.details.evalu.request_title}
         </h3>
-        <div className="text-body_m">
+        <div className="mb-4 text-body_m">
           {lang.project.details.evalu.request_desc}
         </div>
 
@@ -158,7 +157,7 @@ export default function RequestNFTModal({
                       key={_index}
                       type="click"
                       onClick={() => onClickGroupItem(_group)}
-                    ></RequestGroupListItem>
+                    />
                   );
                 })}
 
@@ -168,7 +167,12 @@ export default function RequestNFTModal({
             </div>
 
             <DialogClose className="flex" asChild>
-              <Button size="lg" variant="secondary" className="max-w-full" ref={closeButtonRef}>
+              <Button
+                size="lg"
+                variant="secondary"
+                className="max-w-full"
+                ref={closeButtonRef}
+              >
                 {lang.project.details.evalu.later}
               </Button>
             </DialogClose>
@@ -185,18 +189,22 @@ export default function RequestNFTModal({
             <div className="mb-5">
               <RequestGroupListItem
                 _group={selectedGroup}
-              ></RequestGroupListItem>
+                useChevron={false}
+              />
             </div>
 
             <div className="mb-3 text-title_s">
               {lang.project.details.evalu.request_nft}
             </div>
 
-            <div className="mb-6 h-[50vh] overflow-y-auto ">
-              {
-                loading && <div className="px-auto py-auto animate-pulse">Loading...</div>
-              }
-              {groupAchievements.length > 0 &&
+            <div className="mb-6 overflow-y-auto">
+              {loading && (
+                <div className="pt-2 pb-5 text-center text-label_m text-text-secondary animate-pulse">
+                  Loading...
+                </div>
+              )}
+              {!loading &&
+                groupAchievements.length > 0 &&
                 groupAchievements.map((nft: any, _index: number) => {
                   return (
                     <RequestNftListItem
@@ -209,7 +217,9 @@ export default function RequestNFTModal({
                 })}
 
               {groupAchievements.length < 1 && !loading && (
-                <div>{lang.project.details.evalu.no_search_result}</div>
+                <div className="pt-2 pb-5 text-center text-label_m text-text-secondary">
+                  {lang.project.details.evalu.no_search_result}
+                </div>
               )}
             </div>
 
@@ -238,7 +248,8 @@ export default function RequestNFTModal({
             <div className="mb-5">
               <RequestGroupListItem
                 _group={selectedGroup}
-              ></RequestGroupListItem>
+                useChevron={false}
+              />
             </div>
 
             <div className="mb-3 text-title_s">

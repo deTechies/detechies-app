@@ -25,7 +25,7 @@ export default function Search({
     // params 객체를 인덱스 시그니처를 가진 형태로 정의합니다.
     const params: { [key: string]: string } = {};
     searchParams.forEach((value, key) => {
-      if (key !== "search") {
+      if (key !== "search" && key !== "limit") {
         params[key] = value;
       }
     });

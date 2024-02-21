@@ -20,7 +20,7 @@ export default async function ProjectMemberEvaluationLayout({
   
 
   return (
-    <main className="flex flex-col gap-0 mx-8">
+    <main className="flex flex-col gap-0 mx-auto">
       <WorkTitle
         username={details.data.projectWork?.projectMember?.user?.display_name}
         lang={dictionary}

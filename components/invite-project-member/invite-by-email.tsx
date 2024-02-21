@@ -22,16 +22,16 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 const projectFormSchema = z.object({
   name: z
     .string()
-    .min(2, {
-      message: "Your groups name must be at least 2 characters.",
+    .min(1, {
+      message: "Your groups name must be at least 1 character.",
     })
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
     }),
   last_name: z
     .string()
-    .min(2, {
-      message: "Your groups name must be at least 2 characters.",
+    .min(1, {
+      message: "Your groups name must be at least 1 character.",
     })
     .max(30, {
       message: "Your groups name must not be longer than 30 characters.",
@@ -146,21 +146,21 @@ export default function InviteByEmail({
             </Label>
 
             <RadioGroup
-              className="flex gap-9 py-3"
+              className="flex py-3 gap-9"
               onValueChange={(value) => {
                 setRole(value);
               }}
               defaultValue="member"
             >
-              <div className="flex gap-3 items-center">
+              <div className="flex items-center gap-3">
                 <RadioGroupItem value="member" />
                 <Label>{lang.project.details.role_type.member}</Label>
               </div>
-              <div className="flex gap-3 items-center">
+              <div className="flex items-center gap-3">
                 <RadioGroupItem value="admin" />
                 <Label>{lang.project.details.role_type.admin}</Label>
               </div>
-              <div className="flex gap-3 items-center">
+              <div className="flex items-center gap-3">
                 <RadioGroupItem value="client" />
                 <Label>{lang.project.details.role_type.client}</Label>
               </div>

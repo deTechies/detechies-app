@@ -119,14 +119,12 @@ export interface User {
   }
   
   export interface CreateClub {
-    email: string;
-    certification_number: string;
+    owner_email? : string;
     name: string;
     image: string;
     type: GROUP_TYPE;
     description: string;
     urls: string[];
-    owner_email? : string;
   }
   
   export interface Club extends CreateClub{
@@ -141,6 +139,7 @@ export interface User {
     created_at: Date;
     updated_at?: Date;
     isUserMember?: boolean;
+    userRole?: string;
   }
   
 export enum GROUP_TYPE {
@@ -298,6 +297,7 @@ export enum GROUP_TYPE {
     
   }
   export interface Project extends CreateProject {
+    projectId: string;
     id: string;
     onchain_id: string
     isCreator: boolean;
@@ -311,6 +311,7 @@ export enum GROUP_TYPE {
     achievements: Achievement[]
     created_at: Date;
     updated_at: Date;
+    joined: boolean;
   }
   
   export interface ProjectLink{
@@ -375,6 +376,8 @@ export interface Survey {
 export interface MissionDetails {
   campaignId:string;
   name:string;
+  club: Club;
+  isMember?: boolean;
   description: string;
   begin_date: string;
   end_date: string;

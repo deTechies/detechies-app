@@ -207,7 +207,7 @@ export function RequestNftForm({
                                 )}
                               />
                               <div className="flex flex-col gap-2">
-                                <h5 className="font-medium">
+                                <h5>
                                   {achievement.metadata.name}
                                 </h5>
                                 <span className="text-text-secondary">

@@ -25,11 +25,19 @@
         "dark": "Dark",
         "system": "System"
       },
+      "sign_up": "Sign up",
       "sign_in": "Sign in",
       "sign_out": "Sign out",
       "my_profile": "My Profile",
       "not_connected": "Not Connected"
     }
+  },
+  "not_found": {
+    "desc": "Page not found",
+    "desc2": "I think the page's address is incorrect, changed, or deleted",
+    "desc3": "Please correct the address or contact customer support",
+    "back": "Back",
+    "contact_us": "Contact Us"
   },
   "user": {
     "details": {
@@ -41,6 +49,11 @@
   },
 
   "profile": {
+    "list": {
+      "banner": "When you invite a professional to Careerzen",
+      "banner2": "You can look up the career of an expert!",
+      "banner3": "Invite an expert"
+    },
     "report_card": {
       "title": "Reputation Report",
       "total_experience": "Total experience",
@@ -48,7 +61,7 @@
       "admin_evalu": "Administrator evaluation",
       "member_evalu": "Member evaluation",
       "client_evalu": "Client evaluation",
-      "view": "View"
+      "view": "Request to View"
     },
     "report_popup": {
       "title": "View reputation report",
@@ -81,7 +94,7 @@
       "client_evaluation": "Client",
       "work_period": "Work period",
       "project_part": "Contributed Part",
-      "s_evaluation": "'s works",
+      "s_evaluation": "Self-Reported Works",
       "total": "Total ",
       "reputation_report": "Reputation Report",
       "feedback_times": "Feedback Times",
@@ -90,7 +103,12 @@
       "good_team_player": "Good Team Player",
       "rate_contributions": "Rate Contributions",
       "points": "",
-      "total_points": "Total"
+      "total_points": "Total",
+      "total_report_summary": "Reputation report summary",
+      "reputation_score": "Reputation score",
+      "recommendation_score": "Recommendation review total score",
+      "total_review_1": "Total",
+      "total_review_2": "reviews"
     }
   },
 
@@ -100,8 +118,14 @@
     "search": "Search",
     "filter": "Filter",
     "sort": "Sort",
-    "info_text": "You can search for profiles by name, profession, or skills."
-    
+    "info_text": "You can search for profiles by name, profession, or skills.",
+    "popup_title": "Look up the reputation of professionals you know",
+    "popup_desc": "Just enter the name and email of the expert whose reputation you'd like to check. The expert will be sent a request to register their reputation, and you can check their reputation in an average of 4 days.",    "name": "Name",
+    "name_placeholder": "Please enter the name of the expert to look up",
+    "email": "Email",
+    "email_placeholder": "Please enter the email of the expert to look up.",
+    "reject": "Do it later",
+    "request": "Request to view"
   },
   "profile_detail_card": {
     "example": "example", 
@@ -133,12 +157,14 @@
       "alert_title": "Complete privacy protection",
       "alert_body": "All personal information is stored encrypted and remains private, and can only be seen by others with your permission.",
       "accordion": {
+        "agree_with_all": "Agree with all",
         "terms_of_services": "Terms of Services (required)",
-        "terms_of_services_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
         "privacy_policy": "Privacy Policy (required)",
-        "privacy_policy_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요.",
+        "privacy_policy_title": "Privacy Policy",
         "reward_notification": "In-app notification (optional)",
-        "reward_notification_description": "모든 개인정보는 암호화를 통해 저장되어 비공개 상태가 유지되요. 본인의 승인하에만 상대방에게 공개될 수 있어요."
+        "reward_notification_description": "Notifications of reward payouts, promotions, offers, and more",
+        "back": "Back",
+        "agree": "I agree"
       },
       "cancel": "Cancel",
       "next": "Create Profile",
@@ -147,6 +173,7 @@
         "desc": "We have send you an email to",
         "desc2": "with a 6-digit code. You can use this code to verify your email address.",
         "resend": "resend",
+        "sign_out": "Sign out",
         "code": "Verification code",
         "code_placeholder": "Enter 6-digit code"
       },
@@ -180,11 +207,6 @@
         "hackathon": "Hackathon",
         "other": "Other"
       },
-      "privacy_type": {
-        "public": "All users",
-        "private": "Private",
-        "group": "Group members"
-      },
       "search": "Search",
       "my_project": "My Project",
       "no_projects_found": "No projects found",
@@ -210,7 +232,7 @@
         "type_dsc": "Select a type",
         "describe_dsc": "Tell more about your project",
         "category_dsc": "Type and press enter",
-        "tooltip_public": "All users on CareerGen can view the project",
+        "tooltip_public": "All users on Careerzen can view the project",
         "tooltip_private": "Only project members can view the project",
         "tooltip_group": "Only project and group members can view the project",
         "select_group": {
@@ -291,9 +313,9 @@
         },
         "delete_works": {
           "button": "Delete",
-          "title": "Do you want to delete the works you created?",
-          "desc": "If you deleted it, you'll have to recreate it.?",
-          "back": "Back",
+          "title": "Do you want to delete my project achievements?",
+          "desc": "If I delete it, I won't be able to recover the project performance I created, do you really want to delete it?",
+          "back": "I'll do it later",
           "delete": "Delete"
         }
       },
@@ -342,7 +364,7 @@
         "reject": "Reject",
         "accept": "Accept",
         "position": "Position",
-        "send_note": "Send Note",
+        "send_note": "Send Noti",
         "just_now_joined": "Just now",
         "min_ago_joined": "minutes ago",
         "hour_ago_joined": "hours ago",
@@ -379,9 +401,12 @@
       },
       "invited_to_project": {
         "title": "You have been invited to the project!",
-        "desc": "To see more about the project please accept the membership.",
+        "desc": "Join a project and register your tolerance - you'll be evaluated by your teammates and your career will be solidly validated!",
         "reject": "Reject",
-        "accept": "Accept"
+        "accept": "Accept",
+        "popup_title": "Do you want to decline the project invitation?",
+        "popup_content": "If you decline the invitation now, you won't have a chance to accept it again. If you'd like to think about it a bit more, please click “Do it later”",
+        "later": "Do it later"
       },
       "role_type": {
         "admin": "Admin",
@@ -403,6 +428,8 @@
       "evaluate_propensity_description": "Please assess the disposition of your colleague with whom you worked.",
       "last_feedback": "Evaluate Propensity",
       "last_feedback_description": "Please provide open feedback about the strengths and weaknesses of your colleague.",
+      "result": "Evaluation Confirm",
+      "result_description": "Please double-check that your rating for this coworker is correct. You cannot edit a rating once it has been posted",
       "basic_information": "Basic Information",
       "billable_hourly_wage": "Billable Hourly Wage",
       "time_weekly": "Total hour (weekly)",
@@ -424,6 +451,11 @@
       "reject": "Reason of rejection",
       "reject_placeholder": "If you inform us of any parts of the work that are different from the facts, the appraised person will write it again.",
       "eval_rate_contributions": "Performance/Contribution Evaluation",
+      "invalid_access": {
+        "title": "Register performance",
+        "desc": "In order to evaluate the performance of other members, please register your performance",
+        "go_back": "Register"
+      },
       "rate_contributions": {
         "label": "Please tell us about this team member's contribution to the work.",
         "messages": [
@@ -484,10 +516,38 @@
       "register": "Save",
       "exactly": "Is the evaluation completely accurate?",
       "exactly_desc": "Submitting an evaluation that is not factually accurate can negatively impact the career of the evaluatee.",
-      "go_to_project": "Go to Project"
+      "edit_assessment": "Edit an assessment",
+      "go_to_project": "Yes, all correct"
+    },
+    "private": {
+      "title": "Private Project",
+      "desc": "This project is set to private, you can see the details when you become a member of the project, do you want to join this project?",
+      "back": "Back",
+      "waiting": "Waiting for acceptance."
+    },
+    "group": {
+      "title": "Group public project",
+      "desc": "This project is set to group public, which means you can see the details if you become a group member, why not join this group?",
+      "back": "Back",
+      "waiting": "Waiting for acceptance",
+      "not_set_group": "No groups are set."
     }
   },
   "mypage": {
+    "topup": {
+      "charge": "Charge", 
+      "points": "points",
+      "success_message": "Your payment was successful.", 
+      "input_amount_label": "Enter the amount you charge", 
+      "top_up_title": "Recharge points", 
+      "top_up_desc": "Use your points to view the reputation reports of experts on CareerZen.",
+      "amount": "Amount", 
+      "current_balance": "Current Balance",
+      "total": "total", 
+      "cancel": "Cancel", 
+      "card_details": "Card Details", 
+      "pay": "Pay"
+    }, 
     "awards": {
       "awards": "Awards",
       "issuer": "Issuer",
@@ -522,10 +582,11 @@
     "edit_avatar":{
         "tab_all": "All",
         "tab_career": "Career NFT",
-        "tab_avatar": "Avatar NFT",
+        "tab_limited": "Limited NFT",
         "not_approved": "Not Approved",
         "reset": "Reset",
-        "save":  "Save"
+        "save": "Save",
+        "no_avatar": "No avatar"
     },
     "edit_profile": {
       "edit_profile": "edit profile",
@@ -538,6 +599,7 @@
       "profile_description": "profile description",
       "profile_description_label": "Tell us a little bit about yourself",
       "skills": "skills",
+      "skills_placeholder": "enter your skills.",
       "username": "username",
       "save_changes": "save changes",
       "identity_authentication": "Linked Accounts",
@@ -612,23 +674,26 @@
       "created": "Created",
       "joined": "Joined",
       "search_placeholder": "Search for a group name.",
-      "agency": "Corporation Verified",
+      "company": "Company Verified",
+      "agency": "Company Verified",
       "authority": "Authority Verified",
-      "education": "School Verified",
+      "school": "School Verified",
       "community": "Community",
       "members": "Members",
       "nfts": "NFTs",
       "banner": "Create your own group and",
       "banner2": "Award NFTs to projects and individuals and be an influential group!",
       "banner3": "Go create a group",
-      "view_more": "View More"
+      "view_more": "View More",
+      "no_created": "No groups have been created",
+      "no_joined": "There are no groups I am joining."
     },
     "create": {
       "title": "Create Group",
       "required_text": "* indicates required fields.",
       "description": "Representative email verification is required. Please check and enter the authentication number sent to your main email address.",
       "form": {
-        "email_placeholder": "Enter email.",
+        "email_placeholder": "Enter Group Delegate Email.",
         "verify_code_placeholder": "Enter verification code.",
         "resend": "Resend",
         "send_code": "Send Code",
@@ -649,13 +714,19 @@
         "cancel": "Cancel",
         "create_group": "Create",
         "dialog_title": "Group creation request successful!",
-        "dialog_desc": "The CareerGen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
+        "dialog_desc": "The Careerzen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
         "dialog_email": "Email to receive authentication process instructions",
-        "dialog_information": "If you have any questions, please contact the CareerGen Support Team.",
+        "dialog_information": "If you have any questions, please contact the Careerzen Support Team.",
         "ok": "I understand",
         "wait_for_auth": "Waiting for auth..",
         "contact": "Contact Us"
       }
+    },
+    "accept_group_invitation": {
+      "title": "You have been invited to the group",
+      "desc": "To see more about the project please accept the membership",
+      "reject": "Reject",
+      "Accept": "Accept"
     },
     "details": {
       "profile_card": {
@@ -670,7 +741,9 @@
           "guide3": "Available on the NFT certificate page",
           "sbt_type": "Career type",
           "sbt_name": "Certificate name",
+          "sbt_name_placeholder": "Please write the name of the NFT certificate",
           "sbt_desc": "Certificate description",
+          "sbt_desc_placeholder": "Please write a description of the NFT certificate",
           "avatar_type": "Avatar type",
           "avatar_image": "Avatar image",
           "sbt_image": "SBT image",
@@ -687,7 +760,7 @@
           "title": "Your limited edition NFT has been created!",
           "desc1": "You can manage the created NFT in group management.",
           "desc2": "You can check the application status in the NFT certificate.",
-          "go_manage:": "Go to group management",
+          "go_manage": "Go to group management",
           "go_nft": "Go to NFT certificate"
         },
         "join_group": {
@@ -704,7 +777,7 @@
           "sended_desc": "Once the user receives the message and accepts the invitation, they will be added as a new member. You can check the status of the invitation in member management.",
           "go_manage": "Go to Member Management",
           "invite_group_member": "Invite Group Member",
-          "search_placeholder": "Search by email",
+          "search_placeholder": "Search by nickname",
           "no_name_found": "Nickname not found.",
           "invite_by_email": "Invite by Email",
           "message": "Message",
@@ -712,16 +785,19 @@
           "back": "Go Back",
           "invite": "Invite",
           "name": "Name",
+          "first_name": "First Name",
+          "last_name": "Last Name",
           "email": "E-mail"
-        },
-        "join": {
-          "join_group": "Join Group",
-          "join_group_desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
-          "message": "Request Message",
-          "message_placeholder": "Hello, I am Gil-dong Hong, a front-end developer.",
-          "back": "Go Back",
-          "send": "Request to Join"
         }
+      },
+      "invited_to_group": {
+        "title": "You've been asked to join a group!",
+        "desc": "Join the group and become an influencer on Careerzen!",
+        "reject": "Reject",
+        "accept": "Accept",
+        "popup_title": "Do you want to reject joining the group?",
+        "popup_content": "If you decline the invitation now, you won't have a chance to accept it again. If you'd like to think about it a bit more, please click “Do it later”",
+        "later": "Do it later"
       },
       "about": {
         "all": "View All",
@@ -792,7 +868,7 @@
           "request_date": "Date",
           "actions": "Status",
           "all_accept": "Accept All",
-          "announce_invite": "Announce",
+          "announce_invite": "Send Noti",
           "search": "Search by Nickname or Profession",
           "no_result": "No result",
           "waiting": "Waiting",
@@ -865,6 +941,7 @@
       "name_placeholder": "Enter Campaign Name",
       "desc": "Description",
       "desc_placeholder": "Enter Campaign Description",
+      "detail_placeholder": "Enter detail mission name.",
       "date": "Duration",
       "begin_date": "Start Date",
       "end_date": "End Date",
@@ -909,7 +986,8 @@
       "company": "Company",
       "school": "School",
       "community": "Community",
-      "authority": "Authority"
+      "authority": "Authority",
+      "agency": "Authority"
     },
     "nft_type": {
       "sbt": "Career",
@@ -954,7 +1032,8 @@
       "none": "None"
     },
     "privacy_type": {
-      "public": "All users",
+      "all": "All",
+      "public": "Public",
       "private": "Private",
       "group": "Group members"
     },
@@ -967,7 +1046,7 @@
     }
   },
   "footer": {
-    "copywrite": "© 2021 CareerZen. All rights reserved.",
+    "copywrite": "© 2024 Careerzen. All rights reserved.",
     "terms_and_conditions": "Terms of Service",
     "privacy_policy": "Privacy Policy",
     "whitepaper": "Whitepaper",
@@ -980,7 +1059,116 @@
     "upload_image": "Upload Image",
     "delete_image": "Delete Image"
   },
+  "beginEndDates": {
+    "ongoing": "Present"
+  },
   "survey": {
-    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "test"
+    "acc2f3a3-4c88-4da8-a674-c4b0cbc6dc24": "Tech Stack",
+    "8377fabd-d8a0-4d86-9e75-2b1fa11557d5": "Problem-Solving",
+    "d76072de-a69b-4153-983f-0eb27c088e68": "Performance",
+    "d9126a37-f40c-49f8-80a9-a614b2d531f3": "Dev Completion",
+    "39d5a720-915e-4bda-96e7-5c6f96daf077": "Bug Fixing",
+    "39e61ded-827c-43de-8e9e-c5e75a865245": "Dev Proficiency",
+    "3c769495-f076-4cc6-b77a-4d2839ae47e1": "Reference Skills",
+    "f25d06a9-585a-4200-b317-0b1d8c873958": "Task Mgmt",
+    "dd724199-8830-44cd-8371-64907e9a37af": "Tech Comm",
+    "5f2bcd1c-bbf6-4735-bac0-175e84e9baf7": "Code Standards",
+    "b088af39-6957-4b2d-a3fd-350f560a2ab4": "Commit Quality",
+    "cefa7ae0-3623-41dd-940f-623fccf16f84": "Arch Compliance",
+    "b9c8ad2e-5fb2-4478-964b-5d6ec20fe8d8": "Meeting Attendance",
+    "6580670e-edb7-4541-bdd3-3b060794b4a2": "Req Understanding",
+    "be9c36e4-8642-4858-83ed-b2e17b700c4e": "Feedback Analysis",
+    "c16b6d4a-e5d4-4858-ad7a-f21dc1a6a033": "Tech Proposals",
+    "12ba046c-e307-4479-a84f-132b5de3ea0f": "Mentoring",
+    "6d33bef7-0b6c-4348-9cd7-a26eac20827d": "Proposal Strength",
+    "b95a8a55-40fb-4d08-8867-235a00acc3e6": "Goal Rate",
+    "4a398680-0f39-485e-87f0-b5c992fc6af6": "Leadership",
+    "e45bd2c0-1cb3-4f6d-bdbb-9526f19d2d7d": "Plan Quality",
+    "79126a18-05d3-452d-bd89-d1ce64d1add5": "Prioritization",
+    "444d2390-12bb-4083-b445-58b50c4b819e": "Project Mgmt",
+    "66b05ffb-0165-432e-bde8-6d3d6cb94c6a": "Task Delegation",
+    "a505002f-5fa8-40e4-9beb-db3bf4ade751": "History Mgmt",
+    "677cac32-33fd-4236-89e3-e385333cdb0a": "Compliance",
+    "27f95d3a-160d-48d9-86bd-f28d3b08e656": "Coordination",
+    "c383b90b-a41c-473e-bf1f-3d8c7cc460ab": "Resolution Speed",
+    "f09907ee-3bed-493d-a1b7-e8be9f0a321a": "Work Orders",
+    "b7aa62cc-a687-4790-a487-c5bf681c3100": "Domain Know-how",
+    "2ed25967-3f03-4f31-b7ce-b158308bf153": "Tool Literacy",
+    "0dc99a15-e1ca-472d-8283-2dc7b2a2ac45": "Accuracy", 
+    "976ea4d7-35c8-4ab7-aff3-fad4fbd82935": "Doc Clarity",  
+    "eefa33b9-c9b5-466c-85b2-d78223b87605": "Test Speed",  
+    "6d73a72c-bdae-4ac0-9f4a-14b307825d85": "Coverage",  
+    "ee5046b8-d221-4e28-a42a-cf8eb36551d8": "Writing Speed",  
+    "715eb419-8197-415d-a272-bb5a3ffdd9a2": "Report Clarity",  
+    "6906cffb-1517-45bf-a567-b6e56b56b6a9": "Process Mgmt",  
+    "814633bf-92c5-4f72-b011-558940a59e4a": "Reporting Time",  
+    "29d69872-08c3-4069-9c95-12f8157108f0": "Issue Comm",
+    "f618001c-c790-4d87-ad5c-e17e8dfb4c7e": "Feedback Analysis", 
+    "503cbe1e-92c8-49f8-89a6-da066cd7d5f4": "Framework Skill", 
+    "34dad790-065a-494f-9a10-6374bded3bb3": "Code Clarity",
+    "31a45a9e-142d-4383-90ba-cdab2a9f66df": "Proposal Clarity",
+    "4977734e-64ec-4388-8d12-a8828fd9f88f": "Proposal Depth",
+    "53d26eb0-4f55-466a-a118-e0a698ac3856": "User Persona",
+    "18bc7a62-1d26-46f1-b92a-26641a1644d2": "Req Definition",
+    "10b04c64-ceb5-434f-a95e-0c1ca5dd424f": "UX Logic",
+    "9d4a08a2-c7aa-430f-98f5-367a662cfd8d": "Feature Accuracy",
+    "f63a5163-9381-41b5-be98-28d88e191317": "Policy Accuracy",
+    "8fbd4d3d-dc71-4782-846f-5ad38c7c449b": "IA Proficiency",
+    "292853ae-762c-45df-8d5f-6af619308a62": "Version Control",
+    "820fba48-a70e-4ad8-bf49-fbbe91d6250e": "Plan Comm",
+    "a106d326-7875-4436-9bd9-59e2360e0710": "Coordination",
+    "b43eaa2e-6140-4a07-8f50-7d4261deab76": "Feedback Analysis",
+    "6cf218b4-a5ff-4fed-b3ab-d6c9cd6423d4": "Domain Knowledge",
+    "df894fff-3a67-45b7-ab0f-a26654a16163": "Doc Tool Skill",
+    "786b8c46-d001-42b4-bd30-a7007006bb8b": "Strategy Definition",
+    "b0d145e5-abfd-44e9-ba54-c0421a4df8b9": "Design Process",
+    "ff26bf69-4f87-48ea-b8b2-c09eed7f7dfe": "User Research",
+    "a097386a-411c-442a-84fd-a5417bb825cb": "Benchmarking",
+    "5fc82dab-0c67-4ac3-aa69-4233789a89ec": "Concept Definition",
+    "1f7b5168-792f-4695-b95f-396428e2a9f7": "System Design",
+    "34d44d6d-761f-4561-b16f-f1c3a2eab6b3": "UI Completeness",
+    "2d3a8a1f-713a-4d69-9eb2-5b8f95cde33a": "UX Completeness",
+    "e99b518b-f89a-44ab-bbe0-bd4780462b6c": "Prototyping",
+    "18887fef-b8f2-40c9-a7f2-5e9ea5495903": "Version Control",
+    "c1f1f8d8-c06b-469c-b5bf-b3982b7de6a2": "Intent Comm",
+    "c226c748-9762-486f-9001-5c88bc6f4b41": "Feedback Analysis",	
+    "4cf09a47-48f0-4e2a-9fa2-c14bb2dc952f": "Domain Knowledge",	
+    "d202e601-94d3-4e93-9837-b31780ba7f9b": "Trend Awareness",
+    "b788d4f5-c2c9-49b0-9de5-0e36888c4a77": "Tool Proficiency",
+    "39c8f1de-b220-4d0c-b5ef-c39512f441a1": "Meeting Attendance",
+    "46219e8b-574c-42d8-9762-df318d8bb478": "Req Understanding",
+    "feedback_times": "Feedback",
+    "rate_requirements": "Requirements",
+    "rate_time_schedule": "Schedule",
+    "good_team_player": "Teamwork",
+    "rate_contributions": "Contributions",
+    "Knowledge": "Knowledge",
+    "Communication": "Communication",
+    "Technical Proficiency": "Technical Proficiency",
+    "Project achievements": "Project achievements",
+    "propensity": "Propensity",
+    "Situation": "Situation",
+    "Work Orientation": "Work Orientation",
+    "General Tendency": "General Tendency",
+    "situation": "Situation",
+    "work orientation": "Work Orientation",
+    "general tendency": "General Tendency",
+    "communication": "Communication"
+  },
+  "validation": {
+    "onboard": {
+      "username": {
+        "already_use": "The username is already in use. Please use a different username.",
+        "require": "Enter your username.",
+        "min": "Please use 2-20 characters with no spaces.",
+        "max": "Please use 2-20 characters with no spaces.",
+        "regex": "Please use 2-20 characters with no spaces."
+      },
+      "email": {
+        "already_use": "The email is already in use. Please use a different email.",
+        "require": "Enter your email.",
+        "email": "Please enter a valid email address."
+      }
+    }
   }
 }

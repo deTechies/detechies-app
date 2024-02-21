@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Badge } from "../ui/badge";
 import { Switch } from "../ui/switch";
+import AchievementChips from "../extra/achievement-chips";
 
 interface NftListItemProps {
   showSelect?: boolean;
@@ -26,8 +27,9 @@ export default function NftListItem({
 
   const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
 
-  
-  const isSelected = item.avatar_type ? searchParams.get(item?.avatar_type) === item.avatar : false;
+  const isSelected = item.avatar_type
+    ? searchParams.get(item?.avatar_type) === item.avatar
+    : false;
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -43,7 +45,6 @@ export default function NftListItem({
       ? url.substring(DEFAULT_IPFS_URL.length)
       : url;
   }
-
 
   return (
     <section className="w-full p-0 border rounded-md shadow-custom bg-background-layer-1">
@@ -62,6 +63,7 @@ export default function NftListItem({
                   )
               );
             }}
+            onClick={(event) => event.stopPropagation()}
           />
         )}
         <Image
@@ -71,7 +73,7 @@ export default function NftListItem({
               : DEFAULT_IPFS_URL + item.avatar
           }
           alt="nft_list_item"
-          className="object-contain rounded-t-sm bg-gradient-to-b from-blue-500 to-green-300"
+          className="object-contain rounded-t-sm bg-[url('/images/bg-nft.png')] bg-[length:232px_232px]"
           fill={true}
           priority={true}
         />
@@ -87,19 +89,11 @@ export default function NftListItem({
           {item?.name || "undefined"}
         </Link> */}
 
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="info" shape="category">
-            {lang && item.nft_type
-              ? lang.interface.nft_type[item.nft_type]
-              : "No Type"}
-          </Badge>
-
-          {item?.avatar && (
-            <Badge variant="warning" shape="category">
-              {lang.interface.nft_image_type.avatar}
-            </Badge>
-          )}
-        </div>
+        <AchievementChips
+          achievements={item}
+          limit={2}
+          truncate={true}
+        />
       </div>
     </section>
   );

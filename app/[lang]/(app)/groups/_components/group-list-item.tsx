@@ -23,7 +23,7 @@ const GroupListItem = React.memo(
     const renderCardContent = () => (
       <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] h-full pb-6 px-6 gap-0">
         <section className="flex flex-col items-center justify-center w-full max-w-full text-center">
-          <Avatar className="w-24 h-24 mb-2 aspect-square bg-state-info-secondary">
+          <Avatar className="w-24 h-24 mb-2">
             <AvatarImage
               src={`https://ipfs.io/ipfs/${details.image}`}
               alt={details.name}
@@ -53,18 +53,18 @@ const GroupListItem = React.memo(
             </Badge>
           ) : (
             <div className="text-title_m mb-[46px] flex items-center gap-1">
-              {/* {details.type != "community" && (
+              {details.type != "community" && (
                 <Image
                   height={20}
                   width={20}
                   alt="certified"
                   src={`/icons/certified_${details.type}.png`}
                 ></Image>
-              )} */}
+              )}
 
-              {/* {lang.group.list[details.type]} */}
+              {lang.group.list[details.type]}
 
-              {lang.interface.group_type[details.type] || details.type}
+              {/* {lang.interface.group_type[details.type] || details.type} */}
             </div>
           )}
 

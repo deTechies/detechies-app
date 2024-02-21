@@ -52,22 +52,30 @@ export default function ManageNft({
                 key={index}
                 manage={true}
                 lang={lang}
+                dateFormat="beginEndDates"
               >
-                <div className="flex gap-2">
-                  <QuitMission
-                    campaignId={details.campaignId}
-                    lang={lang}
-                  ></QuitMission>
+                {new Date(item.end_date).getTime() - new Date().getTime() <
+                0 ? (
+                  <Button disabled={true}>
+                    {lang.mission.card.before_end}
+                  </Button>
+                ) : (
+                  <div className="flex gap-2">
+                    <QuitMission
+                      campaignId={details.campaignId}
+                      lang={lang}
+                    />
 
-                  <Link
-                    href={`/groups/${details.id}/mission/manage/${item.campaignId}`}
-                    className="z-10 grow"
-                  >
-                    <Button size="lg" className="w-full">
-                      {lang.group.details.manage.mission.eval}
-                    </Button>
-                  </Link>
-                </div>
+                    <Link
+                      href={`/groups/${details.id}/mission/manage/${item.campaignId}`}
+                      className="z-10 grow"
+                    >
+                      <Button size="lg" className="w-full">
+                        {lang.group.details.manage.mission.eval}
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </MissionCard>
             ))}
         </div>

@@ -55,11 +55,11 @@ export default async function ProfileAccounts({lang}: {lang: Locale}) {
   ];
 
   return (
-    <Card className="my-8 w-full">
-      <h1 className="text-subhead_m font-medium mb-6 text-primary ">
+    <Card className="w-full my-8">
+      <h1 className="mb-6 text-subhead_m text-primary">
         {dictionary.mypage.edit_profile.identity_authentication}
       </h1>
-      <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 flex-wrap gap-2">
+      <div className="grid flex-wrap gap-2 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1">
         {logos.map((logo, i) => {
 
           let verified = false;

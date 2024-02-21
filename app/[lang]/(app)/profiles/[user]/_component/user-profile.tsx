@@ -11,7 +11,7 @@ export default function UserProfile({
   text: any;
 }) {
   return (
-    <Card className="flex flex-col gap-5 w-[328px]">
+    <Card className="flex flex-col gap-5">
       <div className="flex flex-col gap-4">
         <div className="relative w-full rounded-md aspect-square bg-background-layer-2">
           <IPFSImageLayer
@@ -43,7 +43,7 @@ export default function UserProfile({
       </div>
 
       <div className="grid border rounded-sm border-border-div">
-        <div className="flex items-center justify-between p-5">
+        <div className="flex flex-wrap items-center justify-between p-5">
           <div className="flex items-center mr-4 text-nowrap">
             {text?.address}
           </div>
@@ -51,6 +51,7 @@ export default function UserProfile({
             href={`https://polygonscan.com/address/${profile.wallet}`}
             target="_blank"
             rel="noopener noreferrer"
+            className="ml-auto"
           >
             <Badge>
               {profile.wallet?.slice(0, 5) + "..." + profile.wallet.slice(-4)}

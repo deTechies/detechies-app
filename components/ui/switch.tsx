@@ -9,20 +9,22 @@ const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
 >(({ className, ...props }, ref) => (
-  <SwitchPrimitives.Root
-    className={cn(
-      "peer inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-green-300 data-[state=unchecked]:bg-input",
-      className
-    )}
-    {...props}
-    ref={ref}
-  >
-    <SwitchPrimitives.Thumb
+  <div className="flex items-center justify-center w-10 h-5">
+    <SwitchPrimitives.Root
       className={cn(
-        "pointer-events-none block h-5 w-5 rounded-full bg-accent-primary shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:bg-accent-primary"
+        "flex items-center h-3.5 w-[34px] shrink-0 cursor-pointer rounded-full transition-all disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-accent-secondary data-[state=unchecked]:bg-border-input",
+        className
       )}
-    />
-  </SwitchPrimitives.Root>
+      {...props}
+      ref={ref}
+    >
+      <SwitchPrimitives.Thumb
+        className={cn(
+          "pointer-events-none block h-5 w-5 shadow-switch rounded-full ring-0 transition-all data-[state=checked]:bg-accent-primary data-[state=checked]:translate-x-[17px] data-[state=unchecked]:translate-x-[-3px] data-[state=unchecked]:bg-button-secondary"
+        )}
+      />
+    </SwitchPrimitives.Root>
+  </div>
 ))
 Switch.displayName = SwitchPrimitives.Root.displayName
 

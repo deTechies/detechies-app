@@ -16,17 +16,34 @@ function TotalProjectItem({
   lang: any;
   selected: boolean;
 }) {
-const router = useRouter();
-const pathName = usePathname();
-  
+  const router = useRouter();
+  const pathName = usePathname();
+
   function selectAll() {
     //settings searchParams for this
-    
+
     //remove if there is a project query
-    router.push(
-      pathName
-    ); 
+    router.push(pathName);
   }
+
+  const totalEvaluationCount = projects.reduce(
+    (acc, project) => acc + project.evaluationCount,
+    0
+  );
+
+  const oldestDate = projects.reduce((oldest, current) => {
+    if (!oldest.begin_date || !current.begin_date) return undefined;
+    return new Date(oldest.begin_date) < new Date(current.begin_date)
+      ? oldest
+      : current;
+  }, projects[0])?.begin_date;
+
+  const latestDate = projects.reduce((oldest, current) => {
+    if (!oldest?.end_date || !current?.end_date) return undefined;
+    return new Date(oldest.end_date) < new Date(current.end_date)
+      ? oldest
+      : current;
+  }, projects[0])?.end_date;
 
   return (
     <div
@@ -40,13 +57,17 @@ const pathName = usePathname();
       </h4>
 
       <div className="mb-2 text-label_m text-text-secondary">
-        {lang.profile.statistics.total_career}:
+        {lang.profile.statistics.total_career}:{" "}
+        {beginEndDates(oldestDate, latestDate)}
       </div>
 
       <div className="flex items-center gap-2">
-        <span>{lang.profile.statistics.total_evaluation} (어쩌구):</span>
+        <span>
+          {lang.profile.statistics.total_evaluation} ({totalEvaluationCount})
+        </span>
 
-        <div className="flex flex-wrap gap-2">
+        {/* <div className="flex flex-wrap gap-2">
+          
           <Badge variant="purple" shape="sm">
             {lang.profile.statistics.admin_evaluation} {3}
           </Badge>
@@ -58,7 +79,7 @@ const pathName = usePathname();
           <Badge variant="info" shape="sm">
             {lang.profile.statistics.client_evaluation} {2}
           </Badge>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -77,16 +98,16 @@ function CommonProjectItem({
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
-  
+
   const onShowMore = (_event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     _event.stopPropagation();
     setShowMore(!showMore);
   };
 
   function onSelectProject() {
-    const params = createQueryString("project", project.project.id)
-    
-    console.log("params", params)
+    const params = createQueryString("project", project.project.id);
+
+    // console.log("params", params);
 
     router.push(pathName + "?" + params);
   }
@@ -123,10 +144,7 @@ function CommonProjectItem({
 
           <div className="mb-2 text-label_m text-text-secondary">
             {lang.profile.statistics.work_period}:{" "}
-            {beginEndDates(
-              project.project?.begin_date,
-              project.project?.end_date
-            )}
+            {beginEndDates(project?.begin_date, project?.end_date)}
           </div>
 
           <div className="mb-2 text-label_m text-text-secondary">
@@ -139,7 +157,7 @@ function CommonProjectItem({
               project.tags.map((tag: string) => {
                 return (
                   <Badge shape="outline" variant="placeholder" key={tag}>
-                    <div className="truncate">{tag}</div>
+                    {tag}
                   </Badge>
                 );
               })}
@@ -169,7 +187,6 @@ function CommonProjectItem({
         <div className={`pt-4 transition-all`}>
           <div className="p-5 break-words border rounded-md border-border-div">
             {project.description && project.description}
-
           </div>
         </div>
       )}
