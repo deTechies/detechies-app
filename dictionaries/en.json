@@ -520,14 +520,14 @@
       "go_to_project": "Yes, all correct"
     },
     "private": {
-      "title": "Private Project",
-      "desc": "This project is set to private, you can see the details when you become a member of the project, do you want to join this project?",
+      "title": "Restricted Access",
+      "desc": "This project's details are exclusive to project members. Become a project member to gain access.",
       "back": "Back",
       "waiting": "Waiting for acceptance."
     },
     "group": {
-      "title": "Group public project",
-      "desc": "This project is set to group public, which means you can see the details if you become a group member, why not join this group?",
+      "title": "Restricted Access",
+      "desc": "This project's details are exclusive to${GroupName} group members. Become a group member to gain access.",
       "back": "Back",
       "waiting": "Waiting for acceptance",
       "not_set_group": "No groups are set."
