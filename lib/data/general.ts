@@ -19,14 +19,8 @@ export async function serverApi(endpoint:string, searchParams?: any) {
   
     if (searchParams) {
       const params = new URLSearchParams(searchParams);
-
       url.search = params.toString();
-      // Add your parameters
-    
-    }
-    // Add your parameters
-
-    
+    }  
   
     const options = {
       method: method,
