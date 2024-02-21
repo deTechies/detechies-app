@@ -91,9 +91,9 @@ export default function ProjectEditForm({
   const [present, setPresent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
-  
+
   const [createObjectURL, setCreateObjectURL] = useState(null);
-  
+
   const [selectGroupDialog, setSelectGroupDialog] = useState<boolean>(false);
   const [myGroups, setMyGroups] = useState<Club[]>([]);
   const [myGroupsLoading, setMyGroupsLoading] = useState<boolean>(false);
@@ -354,6 +354,11 @@ export default function ProjectEditForm({
           </FormInlineLabel>
 
           <MediaUploader
+            defaultImage={
+              defaultValues?.image
+                ? `https://ipfs.io/ipfs/${defaultValues?.image}`
+                : ""
+            }
             key="image"
             onFileSelected={selectFile}
             width={140}
