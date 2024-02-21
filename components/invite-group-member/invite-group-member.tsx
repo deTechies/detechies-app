@@ -15,7 +15,7 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
 import SelectedGroupMember from "./selected-group-member";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { serverApi } from "@/lib/data/general";
 
 export default function InviteGroupMember({
@@ -30,6 +30,7 @@ export default function InviteGroupMember({
   const router = useRouter();
   const searchParams = useSearchParams();
   const text = searchParams.get("search") || "";
+  const params = useParams();
 
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
@@ -64,9 +65,9 @@ export default function InviteGroupMember({
   }, [text]);
 
   const onClickGoManage = () => {
-    router.push(`/groups/${groupId}/manage?tab=members`);
-    setSelected(null);
-    setCompleteInviting(false);
+    setTimeout(() => {
+      router.push(`/${params.lang}/groups/${groupId}/manage?tab=members`);
+    }, 500)
   };
 
   const onOpenChange = (open: boolean) => {

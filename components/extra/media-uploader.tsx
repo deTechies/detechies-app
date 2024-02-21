@@ -1,7 +1,8 @@
 // MediaUploader.tsx
 import { fileToBase64 } from "@/lib/utils";
 import { ImagePlus } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 import React, { useState, useRef } from "react";
 import { Button } from "../ui/button";
 import { useDictionary } from "@/lib/dictionaryProvider";
@@ -12,10 +13,12 @@ interface MediaUploaderProps {
   height: number;
   deleteFile?: boolean;
   children?: React.ReactNode;
+  defaultImage?: string;
 }
 
 const MediaUploader: React.FC<MediaUploaderProps> = ({
   onFileSelected,
+  defaultImage,
   deleteFile,
   width,
   height,
@@ -86,7 +89,7 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               alt="Uploaded Content"
               width={width}
               height={height}
-              className={`block object-scale-down`}
+              className="block object-contain"
             />
           )}
           {mediaType === "video" && mediaSource && (
@@ -101,7 +104,16 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               Your browser does not support the video tag.
             </video>
           )}
-          {!mediaSource && (
+          {defaultImage && !mediaSource && (
+            <Image
+              src={defaultImage}
+              alt="default-image"
+              width={width}
+              height={height}
+              className="block object-contain"
+            />
+          )}
+          {!defaultImage && !mediaSource && (
             <div
               className={`flex flex-col gap-2 text-text-secondary py-3 px-4 text-center text-xs justify-center items-center w-full`}
             >

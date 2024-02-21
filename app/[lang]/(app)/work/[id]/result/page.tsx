@@ -38,6 +38,7 @@ export default async function EvaluationResult({
           lang={dictionary}
         />
         <ProjectMemberInline
+          title={dictionary.project.work.evaluatee}
           projectMember={details.projectWork.projectMember}
           projectWork={details.projectWork}
           lang={dictionary}

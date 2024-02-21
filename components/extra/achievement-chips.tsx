@@ -95,13 +95,13 @@ export default function AchievementChips({
               setOpen(false);
             }}
           >
-            <div className="bg-background-layer-2 py-1.5 px-2.5 rounded-[5px] text-text-primary text-title_s">
+            <div className="bg-background-layer-2 py-1.5 px-2.5 rounded-[5px] text-text-placeholder text-title_s">
               +{chips.length - limit}
             </div>
           </PopoverTrigger>
 
           <PopoverContent className="max-w-full p-0" side="top">
-            <Card className="max-w-[500px] bg-background-tooltip rounded-sm p-4 flex-row gap-2">
+            <Card className="max-w-[500px] bg-text-placeholder rounded-sm p-4 flex-row gap-2">
               {chips.slice(limit)}
             </Card>
           </PopoverContent>

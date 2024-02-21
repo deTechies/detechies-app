@@ -153,9 +153,17 @@ export function SurveyForm({
                 {!result &&
                   Object.keys(questionsByCategory).length - 1 == index && (
                     <div className="flex flex-row justify-between mt-3">
-                      <Button type="button" size="lg" variant={"secondary"}>
+                      <Button
+                        type="button"
+                        size="lg"
+                        variant={"secondary"}
+                        onClick={() => {
+                          router.back();
+                        }}
+                      >
                         {lang.project.evaluate.go_back}
                       </Button>
+
                       <Button
                         type="submit"
                         size="lg"
