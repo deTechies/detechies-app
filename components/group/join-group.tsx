@@ -31,6 +31,7 @@ import { joinGroup } from "@/lib/data/groups";
 import Image from "next/image";
 import { Card } from "../ui/card";
 import { Textarea } from "../ui/textarea";
+import e from "express";
 
 export default function JoinGroup({
   groupId,
@@ -57,6 +58,10 @@ export default function JoinGroup({
   const [loading, setLoading] = useState<boolean>(false);
   const { data: session } = useSession();
 
+  // --- Text & Labels --- 
+  const joinGroupRequestFailTitle = lang.validation.request_failed;
+  const joinGroupRequestFailDescription = lang.validation.group.details.join_group.request_already_sent;
+
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     //@ts-ignore
     setLoading(true);
@@ -73,10 +78,19 @@ export default function JoinGroup({
       });
       setOpenDialog(false);
     } else {
-      toast({
-        title: result.status,
-        description: result.messageCode,
-      });
+        if(result.messageCode === "user_already_invited"){
+          toast({
+            title: joinGroupRequestFailTitle,
+            description: joinGroupRequestFailDescription
+          });
+        }
+        else{
+          toast({
+            title: result.status,
+            description: result.messageCode,
+          });
+        }
+
     }
 
     setLoading(false);
