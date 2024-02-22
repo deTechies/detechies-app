@@ -24,10 +24,10 @@ interface INftTypeChipProps {
 interface DefaultAvatar {
   clothes: string;
   face: string;
-  head: string;
+  eye: string;
   hair: string;
-  avatar4: string;
-  avatar5: string;
+  mouth: string;
+  accessory: string;
   background: string;
 }
 
@@ -66,10 +66,10 @@ export default function ListAvatarItemTrigger({
   const defaultAvatar: DefaultAvatar = {
     clothes: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
     face: "bafkreidlzc4pnszwiyx73yqlbwgkchyuendxkfq63sp54vhnky3ruti5xu",
-    head: "bafkreihdqgem6jwebjyiahy6e4mgf5xdrqam3yaxq2ki2ew4hw6tjxq7du",
+    eye: "bafkreihdqgem6jwebjyiahy6e4mgf5xdrqam3yaxq2ki2ew4hw6tjxq7du",
     hair: "bafkreigjctpasi7b2ytsn7mx47wjobnqkvioi4vllg7dqwzzvw7u2lijme",
-    avatar4: "bafkreif6oi5pwrjzey5q4pmyd3zck6a53uoefozxydapiipgq2flsbldsi",
-    avatar5: "bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose",
+    mouth: "bafkreif6oi5pwrjzey5q4pmyd3zck6a53uoefozxydapiipgq2flsbldsi",
+    accessory: "bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose",
     background: "bafkreibgvactjvhexsx54qcxo32msz6vsimbwimp64sbvlawjol5e27kg4",
   };
 

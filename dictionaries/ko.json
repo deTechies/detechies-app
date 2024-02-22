@@ -1040,7 +1040,9 @@
       "background": "배경",
       "accessory": "액세서리",
       "hair": "머리모양",
-      "face": "얼굴모양"
+      "face": "얼굴형",
+      "eye": "눈모양",
+      "mouth": "입모양"
     }
   },
   "footer": {
