@@ -580,13 +580,29 @@
       "address": "Wallet Address"
     },
     "edit_avatar":{
-        "tab_all": "All",
-        "tab_career": "Career NFT",
-        "tab_limited": "Limited NFT",
-        "not_approved": "Not Approved",
-        "reset": "Reset",
-        "save": "Save",
-        "no_avatar": "No avatar"
+      "tab_all": "All",
+      "tab_career": "Career NFT",
+      "tab_limited": "Limited NFT",
+      "not_approved": "Not Approved",
+      "reset": "Reset",
+      "save": "Save",
+      "no_avatar": "No avatar",
+      "default_avatar": {
+        "clothes": "Thick Quilt",
+        "clothes_description": "Looks like you've just rolled out of bed, wrapped in a light blue quilt. It's comfy, but clearly not ready for an adventure yet.",
+        "hair": "Tousled Blue Hair",
+        "hair_description": "Hair that looks like you've just woken up. Combing it seems like a must before starting the day.",
+        "face": "Round Face",
+        "face_description": "A friendly round face, though it seems a bit expressionless. It's up to you to decide what expression it will wear.",
+        "eyes": "Half-closed Eyes",
+        "eyes_description": "Still not fully awake, with eyes half-closed. If you're looking for a more lively look, you might want to change that.",
+        "mouth": "Clenched Mouth",
+        "mouth_description": "A mouth that says nothing, firmly closed. How you express today's mood is up to your choice.",
+        "background": "Empty Background",
+        "background_description": "Just an empty background. A space you can fill with your own story.",
+        "accessory": "Sleep Mask",
+        "accessory_description": "Wearing a sleep mask as if to not be disturbed from deep slumber. But it's time to wake up now, what shall we start with?"
+      }
     },
     "edit_profile": {
       "edit_profile": "edit profile",
