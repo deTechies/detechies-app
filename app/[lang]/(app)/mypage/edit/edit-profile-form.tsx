@@ -26,7 +26,7 @@ import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@radix-ui/react-select";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -75,11 +75,17 @@ export default function EditProfileForm({
     mode: "onChange",
   });
   const router = useRouter();
+  const params = useParams();
 
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
-  const lang = useDictionary();
+  // const lang = useDictionary();
 
+  // --- Text & Labels ---
+  const updateSuccessfulTitle = lang.validation.mypage.edit_profile.saved_edits;
+  const updateSuccessfulDescription = lang.validation.redirect;
+  const updateFailedTitle = lang.validation.mypage.edit_profile.edit_fail_title;
+  const updateFailedDescription = lang.validation.mypage.edit_profile.edit_fail_desc;
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
       e.preventDefault();
@@ -106,16 +112,23 @@ export default function EditProfileForm({
   };
 
   async function onSubmit(data: ProfileFormValues) {
-    setLoading(true);
-    await updateUserProfile(data);
+    setLoading(true);  
+    
+    const result = await updateUserProfile(data);
+    
+    if(result.status == "success") {
+      toast({
+        title: updateSuccessfulTitle,
+        description: updateSuccessfulDescription,
+      });
+    } else {
+      toast({
+        title: updateFailedTitle,
+        description: updateFailedDescription,
+      })
+    }
 
-    toast({
-      description: lang.validation.mypage.edit_profile.saved_edits
-    });
-
-    router.refresh();
-    router.push("/mypage?updated=true", { scroll: true });
-
+    router.push(`/${params.lang}/mypage?updated=true`, { scroll: true });
     setLoading(false);
   }
 

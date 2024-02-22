@@ -3,12 +3,17 @@
 import { polygonMumbai } from "@/helpers/mumbai";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 
-
 import { defaultAvatar } from "@/lib/constants";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
-import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useNetwork,
+  useSignMessage,
+} from "wagmi";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
@@ -30,12 +35,12 @@ export default function Login({ lang }: ILoginProps) {
     isReconnecting,
     isDisconnected,
   } = useAccount();
+  const { disconnect } = useDisconnect();
   const { chain, chains } = useNetwork();
   const [showModal, setShowModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
-
 
   // Eager connection
   useEffect(() => {
@@ -60,7 +65,11 @@ export default function Login({ lang }: ILoginProps) {
   if (isConnecting || isReconnecting) {
     return (
       <Avatar
-      className="animate-pulse bg-accent-primary"
+        className="animate-pulse bg-accent-primary"
+        onClick={() => {
+          disconnect();
+          signOut();
+        }}
       >
         <AvatarFallback />
       </Avatar>
@@ -72,11 +81,7 @@ export default function Login({ lang }: ILoginProps) {
 
     return (
       <div className="flex items-center gap-2 rounded-md">
-        <Button
-          size="sm"
-          variant={"primary"}
-          onClick={() => signOut()}
-        >
+        <Button size="sm" variant={"primary"} onClick={() => signOut()}>
           {lang.sign_in}
         </Button>
         {showModal && (
@@ -87,7 +92,6 @@ export default function Login({ lang }: ILoginProps) {
   }
 
   if (!isConnecting && address && address == session?.web3?.address) {
-    
     return (
       <div className="flex items-center gap-2 rounded-md">
         <Avatar
@@ -95,7 +99,11 @@ export default function Login({ lang }: ILoginProps) {
           onClick={() => setShowModal(!showModal)}
         >
           <IPFSImageLayer
-            hashes={session?.web3?.user?.avatar ? session.web3.user.avatar : defaultAvatar}
+            hashes={
+              session?.web3?.user?.avatar
+                ? session.web3.user.avatar
+                : defaultAvatar
+            }
           />
         </Avatar>
 

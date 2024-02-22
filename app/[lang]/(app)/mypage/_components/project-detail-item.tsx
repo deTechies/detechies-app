@@ -1,7 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { beginEndDates, formatDate } from "@/lib/utils";
-import Image from "next/image";
+// import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 
 interface ProjectDetailItemData {
@@ -38,6 +39,7 @@ export default function ProjectDetailItem({
               alt="Project Image"
               width={80}
               height={80}
+              className="block object-contain"
             />
           </figure>
 
@@ -56,7 +58,7 @@ export default function ProjectDetailItem({
                     <div className="divide-x shrink-0 text-label_m">
                       <span className="pr-2 capitalize">
                         {" "}
-                        {(data?.role &&
+                        {(data?.type &&
                           lang?.interface?.project_type[data?.type]) ||
                           "Unknown"}
                       </span>

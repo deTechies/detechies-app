@@ -1161,6 +1161,7 @@
     "invalid_format": "입력 형식이 잘못되었습니다.",
     "request_sent": "요청이 성공적으로 전송되었습니다.",
     "request_failed": "요청이 실패했습니다.",
+    "redirect":"곧 리디렉션됩니다.",
     "onboard": {
       "username": {
         "already_use": "이미 사용중인 닉네임입니다. 다른 닉네임을 이용해주세요.",
@@ -1178,7 +1179,9 @@
     },
     "mypage":{
       "edit_profile":{
-          "saved_edits": "내 프로필 정보가 성공적으로 수정되었어요."
+          "saved_edits": "내 프로필 정보가 성공적으로 수정되었어요.",
+          "edit_fail_title": "업데이트 실패했습니다.",
+          "edit_fail_desc": "나중에 다시 시도해 주세요."
       }
     },
     "project":{

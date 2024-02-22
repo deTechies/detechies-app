@@ -35,6 +35,10 @@ const AvatarUpdate = ({ profile, lang }: any) => {
     background,
   ];
 
+  const urlReset = () => {
+    router.push(pathName);
+  }
+
   const handleUpdateAvatar = async () => {
     setRefresh(true);
 
@@ -79,7 +83,10 @@ const AvatarUpdate = ({ profile, lang }: any) => {
         <Button
           size="lg"
           variant="secondary"
-          onClick={() => setAvatar(profile.avatar)}
+          onClick={() => {
+            urlReset();
+            setAvatar(profile.avatar);
+          }}
         >
           {lang.mypage.edit_avatar.reset}
         </Button>

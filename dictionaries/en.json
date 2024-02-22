@@ -1163,6 +1163,7 @@
     "invalid_format": "Input's format is invalid.",
     "request_sent": "Request sent successfully.",
     "request_failed": "Request failed.",
+    "redirect":"You will be redirected shortly.",
     "onboard": {
       "username": {
         "already_use": "The username is already in use. Please use a different username.",
@@ -1180,7 +1181,9 @@
     },
     "mypage":{
       "edit_profile":{
-        "saved_edits": "Your changes have been saved successfully!"
+        "saved_edits": "Your changes have been saved successfully!",
+        "edit_fail_title": "Update failed.",
+        "edit_fail_desc": "Please try again later."
       }
     },
     "project":{
