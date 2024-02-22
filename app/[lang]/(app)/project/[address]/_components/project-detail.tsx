@@ -46,7 +46,7 @@ export default function ProjectDetail({
 
   return (
     <Card className="w-full gap-8 px-8 pt-8 pb-5">
-      <header className="flex items-start gap-9">
+      <header className="flex flex-wrap items-start gap-9 sm:flex-nowrap">
       <figure className="overflow-hidden shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex justify-center items-center">
       {/* <figure className="shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex items-center justify-center"> */}
         <Image
