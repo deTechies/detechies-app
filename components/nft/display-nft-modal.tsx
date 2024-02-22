@@ -132,7 +132,9 @@ export default function DisplayNFTModal({
 
             <div className="flex items-center gap-2 overflow-auto text-right">
               <span className="text-title_m">
-                {lang.interface.nft_type[details.nft_type]}
+                {details.nft_type
+                  ? lang.interface.nft_type[details.nft_type]
+                  : "Not NFT"}
               </span>
 
               {details.nft_type == "sbt" && (

@@ -13,6 +13,7 @@ interface IListAvatarItemTriggerProps {
   selected?: boolean;
   item: Achievement;
   lang?: any;
+  userAvatar?: string[];
 }
 
 interface INftTypeChipProps {
@@ -35,13 +36,16 @@ export default function ListAvatarItemTrigger({
   selected,
   item,
   lang,
+  userAvatar,
 }: IListAvatarItemTriggerProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   const isSelected = item.avatar_type
-    ? searchParams.get(item?.avatar_type) === item.avatar
+    ? searchParams.get(item?.avatar_type) === item.avatar ||
+      (!searchParams.get(item?.avatar_type) &&
+        userAvatar?.includes(item.avatar))
     : false;
 
   const createQueryString = useCallback(
@@ -105,11 +109,12 @@ export default function ListAvatarItemTrigger({
             />
           </div>
         )}
+
         <Image
           src={
-            item.image
-              ? DEFAULT_IPFS_URL + item.image
-              : DEFAULT_IPFS_URL + item.avatar
+            item.avatar
+              ? DEFAULT_IPFS_URL + item.avatar
+              : DEFAULT_IPFS_URL + item.image
           }
           alt="nft_list_item"
           className="object-contain rounded-t-xl !bg-background-layer-2"
@@ -129,14 +134,16 @@ export default function ListAvatarItemTrigger({
         </Link> */}
 
         <div className="flex flex-wrap gap-2 bg-background-layer-1">
-          <NftTypeChip
-            label={
-              lang && item.nft_type
-                ? lang.interface.nft_type[item.nft_type]
-                : "No Type"
-            }
-            theme="info"
-          />
+          {item.nft_type && (
+            <NftTypeChip
+              label={
+                lang && item.nft_type
+                  ? lang.interface.nft_type[item.nft_type]
+                  : "No Type"
+              }
+              theme="info"
+            />
+          )}
 
           {item?.avatar && (
             <NftTypeChip

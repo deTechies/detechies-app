@@ -6,6 +6,7 @@ import ListAvatarItem from "./list-avatars-item";
 export default function ListAvatars({
   rewards,
   status,
+  userAvatar,
   lang,
   nft_type,
 }: {
@@ -13,6 +14,7 @@ export default function ListAvatars({
   status: string;
   lang: any;
   nft_type?: NFT_TYPE;
+  userAvatar?: string[]
 }) {
   const filteredAchievements = useMemo(() => {
     let pending = rewards.filter(
@@ -55,6 +57,7 @@ export default function ListAvatars({
                   lang={lang}
                   showMintButton={true}
                   blockRequest={true}
+                  userAvatar={userAvatar}
                 />
               </div>
             )
