@@ -1160,6 +1160,7 @@
     "only_letters": "입력에는 문자만 허용됩니다.",
     "invalid_format": "입력 형식이 잘못되었습니다.",
     "request_sent": "요청이 성공적으로 전송되었습니다.",
+    "request_failed": "요청이 실패했습니다.",
     "onboard": {
       "username": {
         "already_use": "이미 사용중인 닉네임입니다. 다른 닉네임을 이용해주세요.",
@@ -1208,6 +1209,27 @@
           }
         },
         "email": "이메일 주소를 다시 확인해주세요."
+      }
+    },
+    "group":{
+      "details":{
+        "join_group":{
+          "request_already_sent": "회원님의 가입 요청메시지는 이미 그룹 운영자에게 전달되었어요."
+        }
+      },
+      "new_group":{
+        "group_name_taken":"이미 존재하는 그룹 이름이에요. 다른 이름을 입력해주세요."
+      }
+    },
+    "nft":{
+      "request":{
+        "success":{
+          "request_sent":  "그룹 관리자에게 귀하의 요청이 알려졌습니다. 승인을 기다려 주세요."
+        },
+        "fail":{
+          "already_requested": "회원님은 이미 이 디지털 증명서(NFT)를 요청한 상태 입니다.",
+          "already_owned": "회원님은 이미 이 디지털 증명서를 소유하고 있어요."
+        } 
       }
     }
   }

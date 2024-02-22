@@ -1162,6 +1162,7 @@
     "only_letters": "Only letters are allowed in the input.",
     "invalid_format": "Input's format is invalid.",
     "request_sent": "Request sent successfully.",
+    "request_failed": "Request failed.",
     "onboard": {
       "username": {
         "already_use": "The username is already in use. Please use a different username.",
@@ -1213,6 +1214,28 @@
             "too_long_last_name": ""
           }
         }
+      }
+    },
+    "group":{
+      "details":{
+        "join_group":{
+          "request_already_sent": "You have already sent a request to join this group."
+        }
+      },
+      "new_group":{
+        "group_name_taken": "The group name is already in use. Please use a different group name."
+      }
+    },
+    "nft":{
+      "request":{
+        "success":{
+          "request_sent": "The group administrator has been notified of your request. Please wait for approval."
+        },
+        "fail":{
+          "already_requested": "You have already sent a request for this NFT.",
+          "already_owned":"You already own this NFT."
+        }
+
       }
     }
   }
