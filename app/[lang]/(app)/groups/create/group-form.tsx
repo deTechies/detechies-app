@@ -33,6 +33,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const GroupForm = () => {
+  const lang = useDictionary();
+  // --- Text & Labels ---
+  const groupNameTakenDescription = lang.validation.group.new_group.group_name_taken;
+
   type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
   // This can come from your database or API.
@@ -79,7 +83,7 @@ export const GroupForm = () => {
   // Dialog
   const [requestedCreate, onRequestedCreate] = useState(false);
 
-  const lang = useDictionary();
+ 
   /*   const { fields, append } = useFieldArray({
     control: form.control,
     name: "urls",
@@ -168,9 +172,17 @@ export const GroupForm = () => {
       onRequestedCreate(true);
     } else {
       if (!result.ok) {
-        toast({
-          description: result.message,
-        });
+        console.log("Message code: ",result.messageCode);
+        if(result.messageCode === "group_name_already_exists"){
+          toast({
+            description: groupNameTakenDescription
+          })
+        } else{
+          toast({
+            description: result.message,
+          })
+        }
+
 
         setIsLoading(false);
         return;

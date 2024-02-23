@@ -128,6 +128,7 @@ export default function InviteProjectMember({
               onSelectValue={() => setSelected(null)}
               lang={lang}
               onInvite={() => setDialogOpen(false)}
+              projectMembers= {projectMembers}
             />
           )}
           {byEmail && (

@@ -43,13 +43,15 @@ export default function EmailVerification({
     }
     setIsLoading(true);
 
-    const result = await postServer(`/users/verify?token=${code}`, '');
+    const result = await postServer(`/users/verify?token=${code}`, '', lang);
 
     if (result.status == 'success') {
-      toast({
-        title: "Email verified",
-        description: "Email verified",
-      });
+
+      // NOTE: Document explicitly mentions not showing any message on verification success.
+      // toast({
+      //   title: "Email verified",
+      //   description: "Email verified",
+      // });
 
       router.refresh();
     }

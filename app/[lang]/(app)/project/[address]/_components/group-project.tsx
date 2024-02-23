@@ -18,12 +18,35 @@ export default function GroupProject({
 }) {
   const router = useRouter();
 
+
+  // --- Text & Labels ---
+  const formatGroupNames = (groups: Club[]) => {
+    if(!groups || groups.length == 0){return ""} 
+    else{
+      let namesString = '';
+
+      if (groups.length > 1) {
+        const names = groups.map(obj => obj.name);
+        const lastTwoNames = names.slice(-2).join(' and ');
+        namesString = [...names.slice(0, -2), lastTwoNames].join(', ');
+      } else if (groups.length === 1) {
+        namesString = groups[0].name;
+      }
+      namesString = " " + namesString;
+
+      return(namesString);
+    }
+  }
+
+  const accessRestrictedToGroupTitle = lang.project.group.title
+  const accessRestrictedToGroupDescription = lang.project.group.desc.replace("${GroupName}",()=>{
+    return formatGroupNames(groups);
+  })
+
   return (
     <Card className="max-w-xl gap-0 mx-auto my-auto">
-      <h1 className="mb-4 text-subhead_s">{lang.project.group.title}</h1>
-
-      <p className="mb-6 text-body_m">{lang.project.group.desc}</p>
-
+      <h1 className="mb-4 text-subhead_s">{accessRestrictedToGroupTitle}</h1>
+      <p className="mb-6 text-body_m">{accessRestrictedToGroupDescription}</p>
       <div className="flex flex-col gap-3 mb-6">
         {groups &&
           groups.map((group, index) => {

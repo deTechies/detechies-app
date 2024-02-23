@@ -40,6 +40,12 @@ export default function DisplayNFTModal({
     functionName: "achievementContract",
   });
 
+  // --- Text & Labels ---
+  const nftRequestSuccessTitle = lang.validation.request_sent;
+  const nftRequestSuccessDescription = lang.validation.nft.request.success.request_sent;
+  const nftRequestFailedTitle = lang.validation.request_failed;
+  const nftRequestFailedAlreadyRequested = lang.validation.nft.request.fail.already_requested;
+
   useEffect(() => {
     details.image
       ? setShowingImage(details.image)
@@ -72,11 +78,26 @@ export default function DisplayNFTModal({
 
     const result = await requestAchievement(details.id);
 
-    toast({
-      title: "Congratulations!",
-      description:
-        "Please wait for the administrator to accept your nft request!",
-    });
+    if(result.status === "success"){
+      toast({
+        title: nftRequestSuccessTitle,
+        description: nftRequestSuccessDescription
+      });
+    } else{
+        if(result.messageCode === "achievement_already_requested"){
+          toast({
+            title: nftRequestFailedTitle,
+            description: nftRequestFailedAlreadyRequested
+          });
+        }
+        else{
+          toast({
+            title: result.status,
+            description: result.messageCode,
+          });
+        }
+    }
+
 
     setRequesting(false);
   };

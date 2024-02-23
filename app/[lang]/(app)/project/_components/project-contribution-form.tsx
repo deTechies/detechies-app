@@ -37,20 +37,7 @@ import { useRef, useState } from "react";
 import ProfessionTagType from "@/components/extra/profession-tag-type";
 import { X } from "lucide-react";
 
-const contributionFormSchema = z.object({
-  begin_date: z.string(),
-  end_date: z.string().optional(),
-  description: z.string().max(5000).min(4),
-  percentage: z.array(z.number().min(0).max(100)),
-  role: z.nativeEnum(PROFESSION_TYPE, {
-    required_error: "You need to select a type.",
-  }),
-  present: z.boolean().default(false),
-  valid: z.boolean().optional(),
-  tags: z.array(z.string()),
-});
 
-export type ContributionFormData = z.infer<typeof contributionFormSchema>;
 
 export default function ProjectContributionForm({
   project,
@@ -63,6 +50,27 @@ export default function ProjectContributionForm({
   workDetails?: any;
   workId?: string;
 }) {
+
+  // --- Text & Labels ---
+  const descriptionTooLongText = lang.validation.project.details.members.add_works.too_long_description;
+  const descriptionTooShortText = lang.validation.project.details.members.add_works.too_short_description;
+
+  const contributionFormSchema = z.object({
+    begin_date: z.string(),
+    end_date: z.string().optional(),
+    description: z.string().max(5000, descriptionTooLongText).min(4, descriptionTooShortText),
+    percentage: z.array(z.number().max(100)),
+    role: z.nativeEnum(PROFESSION_TYPE, {
+      required_error: "You need to select a type.",
+    }),
+    present: z.boolean().default(false),
+    valid: z.boolean().optional(),
+    tags: z.array(z.string()),
+  });
+  
+  type ContributionFormData = z.infer<typeof contributionFormSchema>;
+
+
   const form = useForm<ContributionFormData>({
     resolver: zodResolver(contributionFormSchema),
     defaultValues: workDetails
@@ -77,7 +85,7 @@ export default function ProjectContributionForm({
         }
       : {
           role: PROFESSION_TYPE.DEVELOPMENT,
-          percentage: [0],
+          percentage: [-1],
           present: false,
           valid: false,
           tags: [],
@@ -87,11 +95,17 @@ export default function ProjectContributionForm({
   const messageValue = form.watch("description", "");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const currentPercentage = form.watch("percentage", [0]);
+  // contributionPercentage is used for validation
+  // It makes sure user doesn't submit 0% contribution
+  // It's set to -1 initially so it doesn't trigger the 
+  // error message
+  // It's confirmed that the slider still goes up to 10 then 20
+  // and so on.
+  let contributionPercentage = form.watch("percentage", [-1]);
+  
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
-
   const [loading, setLoading] = useState(false);
-
+  
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
       e.preventDefault();
@@ -337,7 +351,9 @@ export default function ProjectContributionForm({
                 </FormItem>
               )}
             />
-
+            {contributionPercentage[0] == 0 ? (
+              <p className="text-sm font-medium text-state-error mt-2 w-full">{lang.validation.project.details.members.add_works.no_0_contribution}</p>): ""
+            }
             <FormField
               control={form.control}
               name="description"
@@ -378,7 +394,7 @@ export default function ProjectContributionForm({
 
           <Button
             type="submit"
-            disabled={loading || !form.formState.isValid}
+            disabled={loading || !form.formState.isValid || contributionPercentage[0] < 1}
             loading={loading}
             variant="default"
             size="lg"

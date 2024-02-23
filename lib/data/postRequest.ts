@@ -2,7 +2,7 @@ import { toast } from "@/components/ui/use-toast";
 import { getSession } from "next-auth/react";
 import { API_URL } from "../constants";
 
-export async function postServer(endpoint: string, body?: string) {
+export async function postServer(endpoint: string, body?: string, lang?: any) {
   const session = await getSession();
 
   if (!session || !session.web3 || !session.web3.accessToken) {
@@ -27,17 +27,24 @@ export async function postServer(endpoint: string, body?: string) {
 
   if (!response.ok) {
     const result = await response.json();
-    toast({
-      description: result.message,
-      variant: "destructive"
-    });
-    
+
+    if(result.messageCode == "invalid_verification_code" && lang){
+      toast({
+        description: lang.validation.onboard.email.invalid_verification_code,
+        variant: "destructive"
+      });
+    } else{
+      toast({
+        description: result.message,
+        variant: "destructive"
+      });
+    }
     console.log(result);
     return;
   } else {
     toast({
       title: "Success",
-      description: `You will be redirected to the shortly page`,
+      description: `You will be redirected to the page shortly.`,
     });
   }
 
