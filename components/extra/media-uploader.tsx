@@ -58,6 +58,37 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
     }
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      const fileType = file.type.split("/")[0];
+
+      if (fileType === "image" || fileType === "video") {
+        const src = URL.createObjectURL(file);
+        setMediaSource(src);
+        setMediaType(fileType);
+
+        try {
+          const base64String = await fileToBase64(file);
+          if (onFileSelected) {
+            onFileSelected(file, base64String);
+          }
+        } catch (error) {
+          console.error("Error converting file to base64:", error);
+        }
+      } else {
+        window.alert("Please upload an image or video format.");
+      }
+    }
+  };
+
   const content = children || (
     <>
       <p className="text-sm text-text-secondary">
@@ -74,6 +105,8 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
       <div
         className="relative flex items-center justify-center overflow-hidden border-2 border-dashed rounded-sm cursor-pointer border-border-input media-uploader bg-background-layer-2 hover:bg-background-layer-1"
         onClick={() => document.getElementById(random.toString())?.click()}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
       >
         <div
           className={`flex items-center justify-center`}

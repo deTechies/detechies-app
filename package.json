@@ -3,7 +3,7 @@
   "version": "0.1.5",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--max-http-header-size=12800000' next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
