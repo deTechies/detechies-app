@@ -118,7 +118,8 @@ export default function ListAvatarItemTrigger({
           }
           alt="nft_list_item"
           className="object-contain rounded-t-xl !bg-background-layer-2"
-          fill={true}
+          width="200"
+          height="200"
           priority={true}
         />
       </div>
