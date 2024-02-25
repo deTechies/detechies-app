@@ -20,7 +20,7 @@ const ABI = {
     profile: profile as any,
 }
 
-export const API_URL = process.env.NEXT_PUBLIC_API || 'https://staging.careerbadge.online'
+export const API_URL = process.env.NEXT_PUBLIC_API || 'https://api.careerbadge.online' || 'https://staging.careerbadge.online'
 // export const API_URL = process.env.NEXT_PUBLIC_API || 'http://192.168.0.3:4000'
 
 
