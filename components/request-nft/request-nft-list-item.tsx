@@ -1,12 +1,10 @@
 "use client";
 
-import React from "react"; // 추가된 부분
-import Image from "next/image";
-import { Badge } from "../ui/badge";
-import { ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDictionary } from "@/lib/dictionaryProvider";
-import { NFT_TYPE, SBT_TYPE } from "@/lib/interfaces";
+import { ChevronRight } from "lucide-react";
+import Image from "next/image";
+import React from "react"; // 추가된 부분
 import AchievementChips from "../extra/achievement-chips";
 
 const RequestNftListItem = React.memo(
@@ -40,7 +38,7 @@ const RequestNftListItem = React.memo(
 
           <AvatarFallback className="relative">
             <Image
-              src="/images/careerzen.png"
+              src="/images/connectfast.png"
               alt="no-item"
               fill={true}
               className="object-contain bg-no-repeat"

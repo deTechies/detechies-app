@@ -5,15 +5,15 @@ export default function OnboardLoading() {
     <div className="h-[100vh] w-[100vw] absolute top-0 left-0">
       <div className="flex flex-col items-center justify-center w-full h-full">
         <Image
-          src="/images/careerzen.png"
-          alt="Careerzen"
+          src="/images/connectfast.png"
+          alt="ConnectFast"
           width={300}
           height={50}
           className="block object-contain h-12 mx-auto dark:hidden animate-pulse"
         />
         <Image
           src="/images/logo-invert.png"
-          alt="Careerzen"
+          alt="ConnectFast"
           width={300}
           height={50}
           className="hidden object-contain h-12 mx-auto dark:block animate-pulse"

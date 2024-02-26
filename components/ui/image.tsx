@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { ImageProps } from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface NewImageProps extends Omit<ImageProps, "src"> {
   src?: string;
@@ -12,8 +12,8 @@ interface NewImageProps extends Omit<ImageProps, "src"> {
 const NewImage: React.FC<NewImageProps> = ({
   src,
   alt,
-  placeholderSrc = "/images/careerzen.png",
-  defaultSrc = "/images/careerzen.png",
+  placeholderSrc = "/images/connectfast.png",
+  defaultSrc = "/images/connectfast.png",
   ...props
 }) => {
   const [currentSrc, setCurrentSrc] = useState<string>(src || defaultSrc);

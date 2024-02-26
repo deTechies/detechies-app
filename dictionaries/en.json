@@ -50,7 +50,7 @@
 
   "profile": {
     "list": {
-      "banner": "When you invite a professional to Careerzen",
+      "banner": "When you invite a professional to Connect Fast",
       "banner2": "You can look up the career of an expert!",
       "banner3": "Invite an expert"
     },
@@ -137,8 +137,8 @@
   },
   "onboard": {
     "welcome": {
-      "title": "Professional career certifications are different!",
-      "body": "If you already have an account, log in to Careerzen using your existing account.",
+      "title": "Connect with your technology stacks and projects",
+      "body": "You can use it to manage your career and projects.",
       "web3": "Social Wallet",
       "browser": "Browser Wallet",
       "sign_out": "Sign out",
@@ -232,7 +232,7 @@
         "type_dsc": "Select a type",
         "describe_dsc": "Tell more about your project",
         "category_dsc": "Type and press enter",
-        "tooltip_public": "All users on Careerzen can view the project",
+        "tooltip_public": "All users on Connect Fast can view the project",
         "tooltip_private": "Only project members can view the project",
         "tooltip_group": "Only project and group members can view the project",
         "select_group": {
@@ -540,7 +540,7 @@
       "success_message": "Your payment was successful.", 
       "input_amount_label": "Enter the amount you charge", 
       "top_up_title": "Recharge points", 
-      "top_up_desc": "Use your points to view the reputation reports of experts on CareerZen.",
+      "top_up_desc": "Use your points to view the reputation reports of experts on Connect Fast.",
       "amount": "Amount", 
       "current_balance": "Current Balance",
       "total": "total", 
@@ -714,9 +714,9 @@
         "cancel": "Cancel",
         "create_group": "Create",
         "dialog_title": "Group creation request successful!",
-        "dialog_desc": "The Careerzen Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
+        "dialog_desc": "The Connect Fast Support Team will send an email to the email address below within 1 business day to complete the group creation verification process.",
         "dialog_email": "Email to receive authentication process instructions",
-        "dialog_information": "If you have any questions, please contact the Careerzen Support Team.",
+        "dialog_information": "If you have any questions, please contact the Connect Fast Support Team.",
         "ok": "I understand",
         "wait_for_auth": "Waiting for auth..",
         "contact": "Contact Us"
@@ -792,7 +792,7 @@
       },
       "invited_to_group": {
         "title": "You've been asked to join a group!",
-        "desc": "Join the group and become an influencer on Careerzen!",
+        "desc": "Join the group and become an influencer on Connect Fast!",
         "reject": "Reject",
         "accept": "Accept",
         "popup_title": "Do you want to reject joining the group?",
@@ -1046,7 +1046,7 @@
     }
   },
   "footer": {
-    "copywrite": "© 2024 Careerzen. All rights reserved.",
+    "copywrite": "© 2024 Connect Fast. All rights reserved.",
     "terms_and_conditions": "Terms of Service",
     "privacy_policy": "Privacy Policy",
     "whitepaper": "Whitepaper",

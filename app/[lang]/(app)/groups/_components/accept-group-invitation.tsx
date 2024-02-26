@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 
 import { postServer } from "@/lib/data/postRequest";
@@ -69,7 +69,7 @@ export default function AcceptGroupInvitation({
 
         <AvatarFallback className="relative">
           <Image
-            src="/images/careerzen.png"
+            src="/images/connectfast.png"
             alt="no-item"
             fill={true}
             className="object-contain bg-no-repeat"

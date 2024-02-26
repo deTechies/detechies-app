@@ -27,7 +27,7 @@ export default async function OnboardPage({
         <div className="relative w-[300px] h-[50px] mx-auto">
           <Image
             className="block object-contain h-12 dark:hidden"
-            src="/images/careerzen.png"
+            src="/images/connectfast.png"
             alt="Careerzen"
             fill={true}
             priority={true}

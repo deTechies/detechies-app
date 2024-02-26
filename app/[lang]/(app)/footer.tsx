@@ -7,7 +7,7 @@ export default async function Footer({ lang }: { lang: any }) {
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-full py-[52px] gap-8 px-4 border-t border-border-input">
       <Image
-        src={`/images/careerzen.png`}
+        src={`/images/connectfast.png`}
         className="dark:hidden max-w-[360px] w-full"
         width={360}
         height={60}

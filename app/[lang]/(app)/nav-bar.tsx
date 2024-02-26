@@ -2,7 +2,7 @@
 
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-import { BellRing, Globe, Menu, Send, X } from "lucide-react";
+import { Globe, Menu, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -53,8 +53,8 @@ export default function Navbar({ lang }: { lang: any }) {
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
                   <Image
                     className="block object-contain dark:hidden"
-                    src="/images/careerzen.png"
-                    alt="Careerzen"
+                    src="/images/connectfast.png"
+                    alt="Connectfast"
                     width={174}
                     height={20}
                     onClick={() => {
@@ -64,8 +64,8 @@ export default function Navbar({ lang }: { lang: any }) {
                   />
                   <Image
                     className="hidden object-contain h-12 dark:block"
-                    src="/images/logo-invert.png"
-                    alt="Careerzen"
+                    src="/images/connect-fast.png"
+                    alt="ConnectFast"
                     width={150}
                     height={48}
                     onClick={() => {

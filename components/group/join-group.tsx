@@ -1,9 +1,9 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -119,7 +119,7 @@ export default function JoinGroup({
 
             <AvatarFallback className="relative">
               <Image
-                src="/images/careerzen.png"
+                src="/images/connectfast.png"
                 alt="no-item"
                 fill={true}
                 className="object-contain bg-no-repeat"

@@ -35,7 +35,7 @@ export default function GroupListItem({
           />
           <AvatarFallback className="relative">
             <Image 
-                src="/images/careerzen.png"
+                src="/images/connectfast.png"
                 alt="no-item"
                 fill={true}
             />

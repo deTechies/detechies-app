@@ -1,12 +1,12 @@
-import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { BadgeCheck, Loader } from "lucide-react";
+import { Club } from "@/lib/interfaces";
+import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Club } from "@/lib/interfaces";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import React from "react";
 
 const GroupListItem = React.memo(
   ({
@@ -32,7 +32,7 @@ const GroupListItem = React.memo(
 
             <AvatarFallback className="relative">
               <Image
-                src="/images/careerzen.png"
+                src="/images/connectfast.png"
                 alt="no-item"
                 fill={true}
                 className="object-contain bg-no-repeat"

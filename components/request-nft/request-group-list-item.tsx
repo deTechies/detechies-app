@@ -1,9 +1,9 @@
-import React from "react";
-import { ChevronRight } from "lucide-react";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDictionary } from "@/lib/dictionaryProvider";
 import { Club } from "@/lib/interfaces";
+import { ChevronRight } from "lucide-react";
+import Image from "next/image";
+import React from "react";
 
 const RequestGroupListItem = React.memo(
   ({
@@ -37,7 +37,7 @@ const RequestGroupListItem = React.memo(
 
             <AvatarFallback className="relative">
               <Image
-                src="/images/careerzen.png"
+                src="/images/connectfast.png"
                 alt="no-item"
                 fill={true}
                 className="object-contain bg-no-repeat"
