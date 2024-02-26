@@ -24,7 +24,8 @@ export async function getUserProfile(address?: string) {
     });
     if (!user.ok) {
       // This will activate the closest `error.js` Error Boundary
-      throw new Error("Failed to fetch data");
+      const result = await user.json();
+      throw new Error(result.message);
     }
     
     const result = await user.json();

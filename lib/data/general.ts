@@ -26,6 +26,7 @@ export async function serverApi(endpoint:string, searchParams?: any) {
       method: method,
       headers: {
         "Content-Type": "application/json",
+        "x-api-key": "API_KEY",
         Authorization: `Bearer ${session.web3.accessToken}`,
       },
     } as any;
