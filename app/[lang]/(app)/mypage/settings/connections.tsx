@@ -103,7 +103,7 @@ export default async function ConnectionsList({
   
   return (
     <>
-      <section className={`grid grid-cols-4  gap-2 2xl:gap-5`}>
+      <section className={`grid grid-cols-3 2xl:gap-5`}>
         {connected.map((item: any, key: number) => (
           <ConnectCard
             key={key}
@@ -114,7 +114,7 @@ export default async function ConnectionsList({
           />
         ))}
       </section>
-      <pre className="overflow-auto w-[400px]">
+      <pre className="overflow-auto w-[400px] hidden">
         {JSON.stringify(session, null, 2)}
       </pre>
     </>

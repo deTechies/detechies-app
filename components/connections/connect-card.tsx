@@ -58,9 +58,9 @@ export default function ConnectCard({
   }
   return (
     <div
-      className={`flex border border-border-div rounded-sm p-4 pb-5 gap-4 bg-background-layer-1 w-full`}
+      className={`flex flex-col text-center p-2 pb-4 gap-2 bg-background-layer-1 w-full`}
     >
-      <div className="flex justify-center relative aspect-square w-[48px] h-[48px] rounded-full ">
+      <div className="flex flex-col justify-center relative aspect-square w-[32px] h-[32px] rounded-full mx-auto ">
         <Image
           src={item.image}
           fill={true}

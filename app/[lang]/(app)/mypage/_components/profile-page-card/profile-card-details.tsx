@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function ProfileCardDetails({
+export default async function ProfileCardDetails({
   profile,
   dictionary,
 }: {

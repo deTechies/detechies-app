@@ -80,10 +80,9 @@ export default function App({ children }: { children: any }) {
   return (
     <WagmiConfig config={config}>
       <SessionProvider>
-        <PushProvider>
           {children}
           <Toaster />
-        </PushProvider>
+
       </SessionProvider>
       <Analytics />
     </WagmiConfig>
