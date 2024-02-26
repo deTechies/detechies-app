@@ -1,9 +1,14 @@
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { defaultAvatar } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { postServer } from "@/lib/data/postRequest";
+
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
 import IPFSImageLayer from "../ui/layer";
 
 export default function InvitingMemberListItem({
@@ -16,12 +21,22 @@ export default function InvitingMemberListItem({
   lang: any;
 }) {
   const router = useRouter();
+  const [sendLoading, setSendLoading] = useState(false);
 
   // need data for invitation status
   const invitationStatus = "waiting"; // temp
 
-  const sendInvitationNotif = () => {
-    //
+  const sendInvitationNotif = async () => {
+    setSendLoading(true);
+
+    const result = await postServer(`/members/remind/${profile.id}`, "");
+
+    setSendLoading(false);
+
+    toast({
+      title: result.status,
+      description: result.message,
+    });
   };
 
   const deleteInvitingMember = () => {
@@ -34,7 +49,7 @@ export default function InvitingMemberListItem({
       // onClick={() => router.push(`/profiles/${profile.user.wallet}`)}
     >
       <div className="flex items-center gap-3">
-        <div className="relative w-20 h-20 rounded-sm aspect-square bg-accent-secondary">
+        <div className="relative w-20 h-20 rounded-sm aspect-square bg-background-layer-2">
           <IPFSImageLayer
             hashes={profile.user.avatar ? profile.user.avatar : defaultAvatar}
           />
@@ -52,9 +67,7 @@ export default function InvitingMemberListItem({
       </div>
 
       <div className="text-center">
-        <span className="text-label_m">
-          {formatDate(profile.created_at)}
-        </span>
+        <span className="text-label_m">{formatDate(profile.created_at)}</span>
       </div>
 
       <div className="flex flex-col items-center justify-center gap-3">
@@ -65,7 +78,13 @@ export default function InvitingMemberListItem({
         </span>
 
         {invitationStatus === "waiting" ? (
-          <Button variant="primary" size="sm" onClick={sendInvitationNotif}>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={sendInvitationNotif}
+            loading={sendLoading}
+            disabled={sendLoading}
+          >
             {lang.group.details.manage.member.announce_invite}
           </Button>
         ) : (

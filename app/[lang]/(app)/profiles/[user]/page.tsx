@@ -10,7 +10,7 @@ import ProfileProjects from "../../mypage/_components/profile-projects";
 import { serverApi } from "@/lib/data/general";
 import NoProfileFound from "./_component/no-profile-found";
 import UserProfile from "./_component/user-profile";
-import UserReport from "./_component/user-report";
+// import UserReport from "./_component/user-report";
 
 
 export default async function Dashboard({
@@ -23,24 +23,27 @@ export default async function Dashboard({
   const {data: hasAccess }  = await serverApi(`/survey-access/hasReportAccess/${params.user}`);
   const dictionary = (await getDictionary(params.lang)) as any;
 
+  const { data: projects } = await serverApi(
+    `/project-work/${params.user}/finished`
+  );
+
   //TODO: Create a profile not found page.
   if (!profile.id) return <NoProfileFound />;
 
   return (
-    <div className="flex flex-col gap-20 m-8 sm:flex-row">
+    <main className="flex flex-col gap-5 sm:gap-20 sm:flex-row">
       {/* LeftSide */}
       <div className="min-w-[330px] flex flex-col gap-8">
         <UserProfile profile={profile} text={dictionary.mypage.profile} />
 
-        <UserReport profile={profile} text={dictionary} />
+        {/* <UserReport profile={profile} text={dictionary} projects={projects}/> */}
 
-        
-        {hasAccess}
-        {
+        {/* {hasAccess} */}
+        {/* {
           hasAccess === 'accepted' && <span> You have access to the report </span> ||
           hasAccess === 'pending' && <span>pending </span> ||
           hasAccess === 'no_access' && <UserReport profile={profile} text={dictionary} />
-        }
+        } */}
 
       </div>
       {/* main */}
@@ -65,6 +68,6 @@ export default async function Dashboard({
 
         {/* <EditProfile /> */}
       </div>
-    </div>
+    </main>
   );
 }

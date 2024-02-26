@@ -1,18 +1,24 @@
-import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useDictionary } from "@/lib/dictionaryProvider";
+import { Club } from "@/lib/interfaces";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import React from "react";
 
 const RequestGroupListItem = React.memo(
   ({
     _group,
     onClick,
     type,
+    useChevron = true
   }: {
-    _group: any;
+    _group: Club;
     onClick?: Function;
     type?: string;
+    useChevron?: boolean;
   }) => {
+    const lang = useDictionary();
+
     return (
       <div
         className={`flex items-center py-4 truncate ${
@@ -23,7 +29,7 @@ const RequestGroupListItem = React.memo(
         onClick={() => (onClick ? onClick() : {})}
       >
         <div className="shrink-0">
-          <Avatar className="w-[52px] h-[52px] mr-4 overflow-hidden rounded-full shrink-0 aspect-square bg-state-info-secondary">
+          <Avatar className="w-[52px] h-[52px] mr-4">
             <AvatarImage
               src={`https://ipfs.io/ipfs/${_group.image}`}
               alt={_group.name}
@@ -31,7 +37,7 @@ const RequestGroupListItem = React.memo(
 
             <AvatarFallback className="relative">
               <Image
-                src="/images/careerzen.png"
+                src="/images/connectfast.png"
                 alt="no-item"
                 fill={true}
                 className="object-contain bg-no-repeat"
@@ -42,14 +48,16 @@ const RequestGroupListItem = React.memo(
 
         <div className="truncate">
           <div className="mb-2 truncate text-title_m">{_group.name}</div>
-          <div className="text-label_m text-text-secondary">{_group.type}</div>
+          <div className="text-label_m text-text-secondary">
+            {lang.interface.group_type[_group.type]}
+          </div>
         </div>
 
         <div className="grow" />
 
-        {type === "click" && (
+        {useChevron && (
           <div>
-            <ChevronRight className="text-icon-secondary"></ChevronRight>
+            <ChevronRight className="text-icon-secondary" />
           </div>
         )}
       </div>

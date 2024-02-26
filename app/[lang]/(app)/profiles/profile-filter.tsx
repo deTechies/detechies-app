@@ -14,6 +14,7 @@ import { PROFESSION_TYPE } from "@/lib/interfaces";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
+import InviteExperts from "./invite-experts";
 
 export default function ProfileFilter({ lang }: { lang: any }) {
   const router = useRouter();
@@ -80,21 +81,6 @@ export default function ProfileFilter({ lang }: { lang: any }) {
             </SelectContent>
           </Select>
 
-          {/* <Select onValueChange={selectLimit}>
-            <SelectTrigger className="w-[100px] px-3 py-3">
-              <SelectValue
-                placeholder="25"
-                className={`${loading && "animate-pulse"}`}
-              />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem value={"25"}>25</SelectItem>
-              <SelectItem value={"50"}>50</SelectItem>
-              <SelectItem value={"100"}>100</SelectItem>
-            </SelectContent>
-          </Select> */}
-
           <div className="max-w-[335px] w-full">
             <Search
               placeholder={lang.profile_filter.search}
@@ -104,10 +90,12 @@ export default function ProfileFilter({ lang }: { lang: any }) {
           </div>
         </div>
 
-        <div className="flex items-end">
-          <div className="underline text-border-input">
-            {lang.profile_filter.info_text}
-          </div>
+        <div className="flex items-end ml-auto">
+          <InviteExperts lang={lang}>
+            <div className="underline text-border-input">
+              {lang.profile_filter.info_text}
+            </div>
+          </InviteExperts>
         </div>
       </div>
     </Card>

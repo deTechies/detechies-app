@@ -27,9 +27,9 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
     if (!event || event == "all") {
-      current.delete("project");
+      current.delete("type");
     } else {
-      current.set("project", event);
+      current.set("type", event);
     }
 
     const search = current.toString();
@@ -38,13 +38,14 @@ export default function ProjectFilter({ lang }: { lang: any }) {
     router.replace(`${pathname}${query}`);
   };
 
-  const onSelectPrivacy = (_type: PRIVACY_TYPE) => {
+  const onSelectPrivacy = (_type: PRIVACY_TYPE | "all") => {
+
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
-    if (!_type || _type == PRIVACY_TYPE.PUBLIC) {
-      current.delete("privacy");
+    if (!_type || _type == "all") {
+      current.delete("scope");
     } else {
-      current.set("privacy", _type);
+      current.set("scope", _type);
     }
 
     const search = current.toString();
@@ -100,9 +101,13 @@ export default function ProjectFilter({ lang }: { lang: any }) {
             </SelectTrigger>
 
             <SelectContent>
+              <SelectItem value="all">
+                {lang.interface.privacy_type.all}
+              </SelectItem>
+
               {Object.values(PRIVACY_TYPE).map((type) => (
                 <SelectItem key={type} value={type}>
-                  {lang.project.list.privacy_type[type]}
+                  {lang.interface.privacy_type[type]}
                 </SelectItem>
               ))}
             </SelectContent>

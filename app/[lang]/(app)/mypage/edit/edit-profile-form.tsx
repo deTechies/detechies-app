@@ -1,22 +1,23 @@
 "use client";
 
+import ProfessionTagType from "@/components/extra/profession-tag-type";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
@@ -24,8 +25,8 @@ import { updateUserProfile } from "@/lib/data/profile";
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@radix-ui/react-select";
-import { XIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
+import { useRouter, useParams } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -35,7 +36,7 @@ const profileFormSchema = z.object({
   first_name: z
     .string()
     .min(1, {
-      message: "Your first name must be at least 2 characters.",
+      message: "Your first name must be at least 1 characters.",
     })
     .optional(),
   last_name: z
@@ -55,16 +56,16 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 const defaultValues: Partial<ProfileFormValues> = {};
 
 interface EditProfileProps {
-  text: any;
+  lang: any;
   currentValues: Partial<any>;
   email: string;
   username: string;
 }
 
 export default function EditProfileForm({
-  text,
+  lang,
   username,
-  email, 
+  email,
   currentValues,
 }: EditProfileProps) {
   const form = useForm<ProfileFormValues>({
@@ -73,21 +74,53 @@ export default function EditProfileForm({
     mode: "onChange",
   });
   const router = useRouter();
+  const params = useParams();
 
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
 
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter" && newTag.trim() !== "") {
+      e.preventDefault();
+      const currentTags = form.getValues("skills") || [];
+      !currentTags.includes(newTag.trim()) &&
+        form.setValue("skills", [...currentTags, newTag.trim()], {
+          shouldValidate: true,
+        });
+      setNewTag(""); // Clear the input field for new tag
+    }
+  };
+
+  const handleNewTagChange = (e: any) => {
+    setNewTag(e.target.value);
+  };
+
+  const clickTagsBadge = (_job_item: string) => {
+    const currentTags = form.getValues("skills") || [];
+    !currentTags.includes(_job_item.trim()) &&
+      form.setValue("skills", [...currentTags, _job_item.trim()], {
+        shouldValidate: true,
+      });
+    setNewTag(""); // Clear the input field for new tag
+  };
+
   async function onSubmit(data: ProfileFormValues) {
     setLoading(true);
-    await updateUserProfile(data);
-    toast({
-      title: "Updated your profile",
-      description: "You will be redirected shortly.",
-    });
+    const result = await updateUserProfile(data);
     
-    router.refresh();
-    router.push("/mypage?updated=true", { scroll: true });
+    if(result.status == "success") {
+      toast({
+        title: "Updated your profile",
+        description: "You will be redirected shortly.",
+      });
+    } else {
+      toast({
+        title: "Failed to update your profile",
+        description: "Please try again later.",
+      })
+    }
 
+    router.push(`/${params.lang}/mypage?updated=true`, { scroll: true });
     setLoading(false);
   }
 
@@ -100,21 +133,6 @@ export default function EditProfileForm({
     }
   }, [currentValues?.full_name, form]);
 
-  const handleKeyDown = (e: any) => {
-    if (e.key === "Enter" && newTag.trim() !== "") {
-      e.preventDefault();
-      const currentTags = form.getValues("skills") || [];
-      form.setValue("skills", [...currentTags, newTag.trim()], {
-        shouldValidate: true,
-      });
-      setNewTag(""); // Clear the input field for new tag
-    }
-  };
-
-  const handleNewTagChange = (e: any) => {
-    setNewTag(e.target.value);
-  };
-
   return (
     <>
       <Card className="">
@@ -122,14 +140,14 @@ export default function EditProfileForm({
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <section className="mb-8">
               <h1 className="capitalize text-text-primary text-subhead_s">
-                {text.edit_profile}
+                {lang.mypage.edit_profile.edit_profile}
               </h1>
             </section>
             <section className="my-2">
               <div className="flex flex-col gap-10">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="w-full">
-                    <Label className="">{text?.full_name}</Label>
+                    <Label className="">{lang.mypage.edit_profile?.full_name}</Label>
                     <div className="flex items-center gap-2 mt-2">
                       <FormField
                         control={form.control}
@@ -138,7 +156,7 @@ export default function EditProfileForm({
                           <FormItem>
                             <FormControl>
                               <Input
-                                placeholder={text?.first_name}
+                                placeholder={lang.mypage.edit_profile?.first_name}
                                 {...field}
                               />
                             </FormControl>
@@ -151,7 +169,7 @@ export default function EditProfileForm({
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
-                              <Input placeholder={text?.last_name} {...field} />
+                              <Input placeholder={lang.mypage.edit_profile?.last_name} {...field} />
                             </FormControl>
                           </FormItem>
                         )}
@@ -165,7 +183,7 @@ export default function EditProfileForm({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="capitalize">
-                            {text?.profession}
+                            {lang.mypage.edit_profile?.profession}
                           </FormLabel>
                           <Select
                             onValueChange={field.onChange}
@@ -179,7 +197,7 @@ export default function EditProfileForm({
                             <SelectContent>
                               {Object.values(PROFESSION_TYPE).map((type) => (
                                 <SelectItem key={type} value={type}>
-                                  {type}
+                                  {lang.interface.profession_type[type] || type}
                                 </SelectItem>
                               ))}
                             </SelectContent>
@@ -192,7 +210,7 @@ export default function EditProfileForm({
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="">
-                    <Label className="mb-2 capitalize">{text?.username}</Label>
+                    <Label className="mb-2 capitalize">{lang.mypage.edit_profile?.username}</Label>
                     <Input
                       placeholder={username}
                       value={username}
@@ -201,7 +219,7 @@ export default function EditProfileForm({
                     />
                   </div>
                   <div className="">
-                    <Label className="mb-2 capitalize">{text?.email}</Label>
+                    <Label className="mb-2 capitalize">{lang.mypage.edit_profile?.email}</Label>
                     <Input
                       placeholder={email}
                       value={email}
@@ -212,41 +230,64 @@ export default function EditProfileForm({
                 </div>
               </div>
             </section>
-            
+
             <section className="my-10">
-              <div>
-                <FormItem>
-                  <FormLabel>{text?.skills ? text.skills : "Skills"}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Type and press enter"
-                      value={newTag}
-                      onChange={handleNewTagChange}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </FormControl>
-                  <div>
-                    {form.watch("skills")?.map((tag, index) => (
+              <FormItem className="space-y-">
+                <FormLabel>
+                  <div className="mb-2">
+                    {lang.mypage.edit_profile?.skills}
+                  </div>
+                </FormLabel>
+                
+                <FormControl>
+                  <Input
+                    placeholder={lang.mypage.edit_profile?.skills_placeholder}
+                    value={newTag}
+                    onChange={handleNewTagChange}
+                    onKeyDown={handleKeyDown}
+                  />
+                </FormControl>
+
+                {newTag && (
+                  <ProfessionTagType
+                    newTag={newTag}
+                    onClickJobBadge={clickTagsBadge}
+                    category="skill"
+                  ></ProfessionTagType>
+                )}
+
+                <div className="flex flex-wrap items-start gap-2 mt-3">
+                  {form.getValues("skills") &&
+                    form.getValues("skills")?.map((tag, index) => (
                       <Badge
                         key={index}
-                        className="px-3 py-2 mr-2 text-xs border rounded-full cursor-pointer text-accent-primary bg-accent-secondary border-accent-primary hover:border-state-error hover:text-state-error hover:bg-state-error-secondary"
-                        onClick={() => {
-                          const currentTags = form.getValues("skills") || [];
-                          const newTags = currentTags.filter((t) => t !== tag);
-                          form.setValue("skills", newTags, {
-                            shouldValidate: true,
-                          });
-                        }}
+                        variant="secondary"
+                        shape="md"
+                        className="flex items-center gap-1.5 max-w-[200px]"
                       >
-                        {tag}
+                        <div className="flex">
+                          <div className="w-full truncate">{tag}</div>
 
-                        <XIcon className="ml-1" size={16} />
+                          <X
+                            className="w-5 h-5 cursor-pointer"
+                            onClick={() => {
+                              const currentTags =
+                                form.getValues("skills") || [];
+                              const newTags = currentTags.filter(
+                                (t) => t !== tag
+                              );
+                              form.setValue("skills", newTags, {
+                                shouldValidate: true,
+                              });
+                            }}
+                          ></X>
+                        </div>
                       </Badge>
                     ))}
-                  </div>
-                </FormItem>
-              </div>
+                </div>
+              </FormItem>
             </section>
+
             <section className="my-10">
               <div>
                 <FormField
@@ -255,11 +296,11 @@ export default function EditProfileForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="capitalize">
-                        {text?.profile_description}
+                        {lang.mypage.edit_profile?.profile_description}
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder={text?.profile_description.label}
+                          placeholder={lang.mypage.edit_profile?.profile_description_label}
                           style={{ height: "200px" }}
                           {...field}
                         />
@@ -277,7 +318,7 @@ export default function EditProfileForm({
                 disabled={loading}
                 loading={loading}
               >
-                {text?.save_changes}
+                {lang.mypage.edit_profile?.save_changes}
               </Button>
             </div>
           </form>

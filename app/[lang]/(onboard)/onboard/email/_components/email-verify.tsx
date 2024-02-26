@@ -97,7 +97,7 @@ export default function EmailVerification({
           <Input
             value={code}
             onChange={(e) => router.push(pathName + "?code=" + e.target.value)}
-            className="border p-2 text-center tracking-widest"
+            className="p-2 tracking-widest text-center border"
             placeholder={lang.onboard.verify_email.email_verify.code_placeholder}
           />
         </div>
@@ -107,7 +107,7 @@ export default function EmailVerification({
           variant="secondary"
           className="py-3 rounded-sm"
         >
-          Sign out
+          {lang.onboard.verify_email.email_verify.sign_out}
         </Button>
         <Button
           onClick={verifyEmail}

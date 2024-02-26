@@ -16,9 +16,8 @@ export default function SelectedGroupMember({
   lang,
   onSelectValue,
   onClickBack,
-  onCompleteInvite
-}: 
-{
+  onCompleteInvite,
+}: {
   user: User;
   id: string;
   lang: any;
@@ -33,21 +32,18 @@ export default function SelectedGroupMember({
 
   async function inviteMember() {
     setLoading(true);
-    const result = await inviteGroupMember(
-      user.id, 
-      message,
-      id,
-    );
-    
+    const result = await inviteGroupMember(user.id, message, id);
 
-    setLoading(false);
-    onCompleteInvite();
-    router.refresh();
-    
+    if (result.status == "success") {
+      onCompleteInvite();
+      router.refresh();
+    } else {
+      setLoading(false);
+    }
     toast({
-      title: "invited team member",
-      description: "Your team members has received an email with your invitiation"
-    })
+      title: `invited team member ${result.status}`,
+      description: result.message,
+    });
   }
 
   return (
@@ -61,11 +57,11 @@ export default function SelectedGroupMember({
       </div>
 
       <div className="mb-3 text-title_s text-state-">
-        {lang.details.profile_card.invite.message}
+        {lang.group.details.profile_card.invite.message}
       </div>
 
       <Textarea
-        placeholder={lang.details.profile_card.invite.message_placeholder}
+        placeholder={lang.group.details.profile_card.invite.message_placeholder}
         className="resize-none"
         onChange={(e) => {
           if (setMessage) {
@@ -82,14 +78,14 @@ export default function SelectedGroupMember({
 
       <div className="flex justify-center w-full gap-2">
         {/* <DialogClose asChild> */}
-          <Button
-            variant={"secondary"}
-            size="lg"
-            className="max-w-[212px] grow px-0"
-            onClick={onClickBack}
-          >
-            {lang.details.profile_card.invite.back}
-          </Button>
+        <Button
+          variant={"secondary"}
+          size="lg"
+          className="max-w-[212px] grow px-0"
+          onClick={onClickBack}
+        >
+          {lang.group.details.profile_card.invite.back}
+        </Button>
         {/* </DialogClose> */}
 
         <Button
@@ -98,7 +94,7 @@ export default function SelectedGroupMember({
           className="max-w-[212px] grow px-0"
           disabled={message.length > 100 || loading}
         >
-          {lang.details.profile_card.invite.invite}
+          {lang.group.details.profile_card.invite.invite}
         </Button>
       </div>
     </section>

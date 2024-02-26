@@ -54,12 +54,6 @@ export default function UserStatistics({
     if (statistics.surveyReports?.averageResponses) {
       const surveyCategoryData = statistics.surveyReports.averageResponses.map(
         (averageResponse: any) => {
-          if (selectedLang == "en") {
-            return {
-              dataKey: averageResponse.category,
-              dataValue: averageResponse.categoryAverage,
-            };
-          }
           return {
             dataKey: averageResponse.category,
             dataValue: averageResponse.categoryAverage,
@@ -160,7 +154,7 @@ export default function UserStatistics({
       {matchingData.length > 0 && (
         <Card className="col-span-3 gap-8">
           <CardHeader className="justify-center text-subhead_m">
-            프로젝트 성과
+            {lang.survey.project_achievements}
           </CardHeader>
 
           <div className="flex gap-8">
@@ -208,7 +202,7 @@ export default function UserStatistics({
           return (
             <Card className="col-span-3 gap-8" key={index}>
               <CardHeader className="justify-center text-subhead_m">
-                {averageResponse.category}
+                {lang.survey[averageResponse.category] || averageResponse.category}
               </CardHeader>
               <div className="flex flex-wrap gap-8 md:flex-nowrap">
                 <ScoreCard
@@ -309,7 +303,7 @@ export default function UserStatistics({
       {statistics.assessments && statistics.assessments.byCategory && (
         <Card className="col-span-3 gap-8">
           <CardHeader className="justify-center text-subhead_m">
-            Propensity
+            {lang.survey.propensity}
           </CardHeader>
 
           <div className="grid gap-8 sm:grid-cols-2">
@@ -317,14 +311,8 @@ export default function UserStatistics({
               (byCategory: any, index: number) => {
                 const chartData = byCategory.averageRanks.map(
                   (averageRank: any) => ({
-                    minText:
-                      params.lang === "en"
-                        ? averageRank.en.minValue
-                        : averageRank.ko?.minValue, // Category name for the Y-axis
-                    maxText:
-                      params.lang === "en"
-                        ? averageRank.en.maxValue
-                        : averageRank.ko?.maxValue, // Additional information, not directly used for the bar
+                    minText: averageRank[params.lang as string].minValue,
+                    maxText: averageRank[params.lang as string].maxValue,
                     value: rankToScore(5, averageRank.averageRank), // The actual value for the bar
                     value2: 0, // If not used, ensure it's set to a default or omitted
                   })
@@ -332,8 +320,9 @@ export default function UserStatistics({
                 return (
                   <div key={index}>
                     <h3 className="mb-5 text-center capitalize text-subhead_s">
-                      {byCategory.category}
+                      {lang.survey[byCategory.category.trim().toLowerCase()] || byCategory.category}
                     </h3>
+
                     <div className=" h-[300px] overflow-auto">
                       <SimplePosNagChart
                         data={chartData}

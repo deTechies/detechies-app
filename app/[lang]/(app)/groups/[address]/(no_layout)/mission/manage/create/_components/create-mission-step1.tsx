@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 
-export const StepOne = ({
+const CreateMissionStep1 = ({
   onInputChange,
   formData,
   lang,
@@ -117,3 +117,6 @@ export const StepOne = ({
     </div>
   );
 };
+
+
+export default CreateMissionStep1;

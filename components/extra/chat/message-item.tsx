@@ -43,7 +43,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
       })}
     >
 
-      <Avatar className="inline-block relative border-2 border-accent-secondary h-12 w-12 rounded-full z-10 bg-background-layer-1 ">
+      <Avatar className="z-10 inline-block w-12 h-12 border-2 rounded-full border-accent-secondary">
         <IPFSImageLayer hashes={defaultAvatar} />
       </Avatar>
       <span
@@ -57,7 +57,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
       >
         {message.content}
         <Popover>
-          <PopoverTrigger className="ml-4 cursor-pointer absolute  leading-3 tracking-wider  text-xs italic font-light text-text-secondary left-0 bottom-2">
+          <PopoverTrigger className="absolute left-0 ml-4 text-xs italic font-light leading-3 tracking-wider cursor-pointer text-text-secondary bottom-2">
             {message.sent.toLocaleTimeString()}
           </PopoverTrigger>
           <PopoverContent className=" max-w-[50vw] max-h-[30vh] flex flex-col gap-2 overflow-auto">

@@ -1,8 +1,8 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
+import { serverApi } from "@/lib/data/general";
 import { getClub } from "@/lib/data/groups";
-import { getMissionDetails } from "@/lib/data/mission";
 import MissionDetail from "./_components/mission-detail";
 import SearchMember from "./_components/search-member";
 
@@ -13,7 +13,9 @@ export default async function MissionDetailPage({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
 
-  const {data: missionDetails} = await getMissionDetails(params.id);
+ // const {data: missionDetails} = await getMissionDetails(params.id);
+  
+  const {data: missionDetails} = await serverApi(`/mission/${params.id}`);
   const {data: club} = await getClub(params.address);
 
   return (
@@ -25,7 +27,6 @@ export default async function MissionDetailPage({
         {missionDetails && (
           <MissionDetail
             details={missionDetails}
-            club={club}
             lang={dictionary}
           />
         )}

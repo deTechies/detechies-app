@@ -83,27 +83,20 @@ export default function RecommendedScore({
 }
 
 const RecommendItem = (role: string, score: number, total: number) => {
-  const [recommendScore, setRecommendScore] = useState(0);
-  const [recommendTotal, setRecommendTotal] = useState(0);
-
-  useEffect(() => {
-    setRecommendScore((score * 20) / total);
-    setRecommendTotal(total);
-  }, [score, total]);
-
   const lang = useDictionary();
 
   return (
     <div className="flex flex-wrap items-center mb-4">
       <div className="text-title_m min-w-[100px] text-left">{role}</div>
       <div className="flex flex-wrap items-center justify-between gap-2 grow">
-        <div className="text-title_m">{recommendScore.toFixed(1)}%</div>
+        <div className="text-title_m">{((score * 20) / total).toFixed(1)}%</div>
         <div className="text-label_s text-text-placeholder">
-          ({lang.profile.statistics.total_review_1} {recommendTotal} {" "}
+          ({lang.profile.statistics.total_review_1} {total} {" "}
           {lang.profile.statistics.total_review_2})
         </div>
-        <StarRating score={recommendScore} />
+        <StarRating score={(score * 20) / total} />
       </div>
     </div>
   );
 };
+

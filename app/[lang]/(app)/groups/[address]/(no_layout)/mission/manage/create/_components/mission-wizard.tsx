@@ -1,14 +1,14 @@
 "use client";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { createMissionCampaign } from "@/lib/data/mission";
 import { Achievement } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
-import { StepOne } from "./campaign-form";
-import { StepTwo } from "./mission-form";
-import RewardForm from "./reward-form";
+import CreateMissionStep1 from "./create-mission-step1";
+import CreateMissionStep2 from "./create-mission-step2";
+import CreateMissionStep3 from "./create-mission-step3";
 import { CheckSquare, ChevronRight, Gift, Pencil } from "lucide-react";
 
 interface Mission {
@@ -221,14 +221,14 @@ export const Wizard = ({
 
         <CardContent className="flex flex-col gap-10">
           {currentStep === 1 && (
-            <StepOne
+            <CreateMissionStep1
               onInputChange={onInputChange}
               formData={formData}
               lang={lang}
             />
           )}
           {currentStep === 2 && (
-            <StepTwo
+            <CreateMissionStep2
               updateMission={updateMission}
               removeMission={removeMission}
               missions={formData.missions}
@@ -236,7 +236,7 @@ export const Wizard = ({
             />
           )}
           {currentStep === 3 && (
-            <RewardForm
+            <CreateMissionStep3
               achievements={achievements}
               selectedAchievements={formData.selectedAchievements}
               onSelectAchievement={handleSelectAchievement}

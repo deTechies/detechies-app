@@ -14,11 +14,12 @@ export default async function MyPageLayout({
 }) {
   return (
     <div>
-      <div className="flex flex-col gap-20 m-8 md:flex-row">
+      <div className="flex flex-col gap-8 md:gap-20 md:flex-row">
         <div className="md:w-[376px] shrink-0 flex flex-col gap-8">
           <Suspense fallback={<LoadingProfileCard />}>
-            <ProfilePageCard lang={params.lang}  />
+            <ProfilePageCard lang={params.lang} />
           </Suspense>
+
           <Suspense
             fallback={
               <Skeleton className="animate-pulse bg-background-layer-1" />
@@ -27,9 +28,10 @@ export default async function MyPageLayout({
             <MyPageMenu />
           </Suspense>
         </div>
+        
         <Suspense
           fallback={
-            <Skeleton className="grow shrink h-24 animate-pulse bg-background-layer-1" />
+            <Skeleton className="h-24 grow shrink animate-pulse bg-background-layer-1" />
           }
         >
           <div className="grow shrink">{children}</div>

@@ -241,9 +241,7 @@ export const GroupForm = () => {
                           className="flex flex-wrap items-center space-y-0"
                         >
                           <FormControl>
-                            <RadioGroupItem
-                              value={type}
-                            />
+                            <RadioGroupItem value={type} />
                           </FormControl>
 
                           <FormLabel className="font-normal capitalize">
@@ -558,25 +556,32 @@ export const GroupForm = () => {
           </div>
         </form>
       </Form>
+
       <Dialog open={requestedCreate} onOpenChange={onRequestedCreate}>
         <DialogContent>
-          <header className="flex flex-col gap-4">
-            <h3 className="text-subhead_s">
+          <header>
+            <h3 className="mb-4 text-subhead_s">
               {lang.group.create.form.dialog_title}
             </h3>
-            <div className="flex flex-col gap-6">
-              <h6 className="text-body_m">
-                {lang.group.create.form.dialog_desc}
-              </h6>
 
-              <div className="text-center text-title_s">
-                {lang.group.create.form.dialog_email}
-              </div>
+            <h6 className="mb-6 text-body_m">
+              {lang.group.create.form.dialog_desc}
+            </h6>
 
-              <div className="text-center text-title_s text-text-secondary">
-                <div>{lang.group.create.form.dialog_information}</div>
-              </div>
+            <div className="mb-3 text-center text-title_s">
+              {lang.group.create.form.dialog_email}
+            </div>
 
+            <div className="px-4 py-5 mb-6 text-center rounded-sm bg-border-div text-title_m opacity-40">
+              {form.getValues("owner_email")}
+            </div>
+
+            <div className="mb-6 text-center text-label_m text-text-secondary">
+              <div>{lang.group.create.form.dialog_information}</div>
+              <div>{"robin582@careerzen.org"}</div>
+            </div>
+
+            <div className="text-center">
               <Button
                 size="lg"
                 className="mx-auto"

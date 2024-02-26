@@ -2,24 +2,18 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Project } from "@/lib/interfaces";
-import ProjectContributionForm, {
-  ContributionFormData,
-} from "./project-contribution-form";
+import ProjectContributionForm from "./project-contribution-form";
 import ProjectSwitcher from "./project-switcher";
-const newContribution = {
-  valid: false,
-} as ContributionFormData;
 
-type ProjectContributionProps = {
-  project: Project;
-  lang: any;
-  defaultValues?: any;
-};
 export default function ProjectContribution({
   project,
   lang,
   defaultValues,
-}: ProjectContributionProps) {
+}: {
+  project: Project;
+  lang: any;
+  defaultValues?: any;
+}) {
 
   return (
     <Dialog>
@@ -45,15 +39,18 @@ export default function ProjectContribution({
           </h6>
         </header>
 
-        <section className="flex flex-col gap-5">
-          <h4 className="text-subhead_s">
+        <section>
+          <h4 className="mb-5 text-subhead_s">
             {lang.project.details.members.add_works.project}
           </h4>
+
           <ProjectSwitcher project={project} lang={lang} />
         </section>
 
         <section>
-          <h4 className="mb-5 text-subhead_s">Contribution</h4>
+          <h4 className="mb-5 text-subhead_s">
+            {lang.project.details.members.add_works.my_work}
+          </h4>
 
           {project?.id && (
             <ProjectContributionForm

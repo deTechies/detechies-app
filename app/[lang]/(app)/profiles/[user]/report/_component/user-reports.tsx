@@ -8,16 +8,25 @@ export default async function UserReports({
   lang,
   address,
   selectedLang,
-  selectedProject,
+  project,
 }: {
   lang: any;
   address: string;
   selectedLang: any;
-  selectedProject: any;
+  project: string;
 }) {
   const report = await serverApi(
-    `/survey-report/getUserReport?address=${address}&projectId=${selectedProject?.project?.id}`
+    `/survey-report/getUserReport?address=${address}&projectId=${project}`
   );
+
+  if (!report.data.surveyReports || !report.data.assessments) {
+    return (
+      <div className="py-20 text-center text-state-error">
+        {" "}
+        No Evaludated Report
+      </div>
+    );
+  }
 
   const totalRecommendationsSum = Object.values(
     report.data.swotReports.recommendScoresByRole
@@ -28,10 +37,10 @@ export default async function UserReports({
   return (
     <div>
       <h3 className="mt-[60px] mb-4 text-heading_s text-center">
-        {selectedProject
-          ? selectedProject.project.name
+        {report.data.project && report.data.project[0]?.name
+          ? report.data.project[0]?.name
           : lang.profile.statistics.total}
-        {selectedProject && <br />}
+        {report.data.project && report.data.project[0]?.name && <br />}
         {lang.profile.statistics.reputation_report}
       </h3>
 

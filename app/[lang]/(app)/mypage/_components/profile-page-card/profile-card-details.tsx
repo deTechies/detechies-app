@@ -11,23 +11,23 @@ export default function ProfileCardDetails({
     
     const text = dictionary.mypage.profile;
   return (
-    <div className="flex flex-col justify-between basis-auto mt-1">
+    <div className="flex flex-col justify-between basis-auto mt-1 mx-auto text-center">
       <div className="flex flex-col gap-3">
         <p className="text-title_l">#{profile.display_name}</p>
-        <div className="text-title_m mb-4">
-          <span className="capitalize">{text.name}: </span>
-          <span className="ml-">
-            {profile.profile_details?.full_name
-              ? profile.profile_details?.full_name
-              : "Not Set"}
-          </span>
-        </div>
-      </div>
-      <Link href="/mypage/avatar" passHref>
-        <Button variant={"secondary"} size="sm">
-          {text?.avatar_settings}
+        <p className="text-label_l text-text-secondary">{profile.profile_details?.profession}</p>
+        <div className="text-label_s mb-4">
+        <Link
+        href={`https://mumbai.polygonscan.com/address/${profile.wallet}`}
+        target="_blank"
+        passHref
+      >
+        <Button variant={"secondary"} size="ts">
+          {profile.wallet.slice(0, 5) + "..." + profile.wallet.slice(-4)}
         </Button>
       </Link>
+        </div>
+      </div>
+
     </div>
   );
 }

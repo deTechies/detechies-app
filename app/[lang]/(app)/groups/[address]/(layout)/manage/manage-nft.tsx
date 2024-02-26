@@ -65,7 +65,7 @@ export default async function ManageNft({
       </h3>
 
       <div className="overflow-auto max-w-[90vw]">
-        <div className="grid items-stretch gap-4 grid-cols:2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {details.achievements &&
             details.achievements.map((item: Achievement, index: number) => (
               <DisplayNFT details={item} key={index} lang={lang} showMintButton={false}/>

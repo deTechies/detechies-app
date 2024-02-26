@@ -14,12 +14,12 @@ export default function ProfileCard({ profile, lang }: ProfileProps) {
   return (
     <Link href={`/profiles/${profile.wallet}`} passHref>
       <section className="flex flex-row h-full gap-6 truncate rounded-sm cursor-pointer p-7 bg-background-layer-1 hover:shadow-lg">
-        <div className="relative w-[100px] h-[100px] aspect-square  rounded-sm bg-[#FFE590] mx-auto">
+        <div className="relative w-[100px] h-[100px] aspect-square rounded-sm bg-background-layer-2 mx-auto">
           <IPFSImageLayer
             hashes={profile.avatar ? profile.avatar : defaultAvatar}
           />
         </div>
-        
+
         <div className="flex flex-col w-full gap-4 truncate">
           <h5 className="truncate text-title_m ">
             {profile.display_name ? profile.display_name : `&nbsp`}{" "}

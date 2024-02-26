@@ -43,14 +43,14 @@ export default function ProfileProjects({
               data={{
                 link: `/project/${project.project.id}`,
                 image: project.project.image,
-                description: project.project.description,
+                description: project.works[0]?.description,
                 role: project.works[0]?.role,
                 type: project.project.type,
                 contribution: project.works[0]?.percentage,
                 tags: project.project.tags,
                 title: project.project.name,
-                begin_date: project.project.begin_date,
-                end_date: project.project.end_date,
+                begin_date: project.works[0]?.begin_date,
+                end_date: project.works[0]?.end_date,
                 work_name: project.project.work_name,
               }}
               lang={lang}

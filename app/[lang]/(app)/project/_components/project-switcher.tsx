@@ -37,8 +37,24 @@ const ProjectDisplay = ({
 }) => {
   return (
     <div className="p-5 border rounded-md bg-background-layer-1 border-border-div">
-      {title && <div className="mb-5 text-subhead_s">{title}</div>}
-      
+      {title && (
+        <div className="flex justify-between mb-4">
+          <span className="text-subhead_s">{title}</span>
+
+          <div className="ml-auto">
+            {project.scope === "private" ? (
+              <Badge shape="sm" variant="purple">
+                {lang.interface.privacy_type.private}
+              </Badge>
+            ) : project.scope === "group" ? (
+              <Badge shape="sm" variant="info">
+                {lang.interface.privacy_type.group}
+              </Badge>
+            ) : null}
+          </div>
+        </div>
+      )}
+
       <div className="flex items-start gap-6">
         <figure className="flex items-center justify-center w-[80px] h-[80px] shrink-0 overflow-hidden rounded-sm bg-background-layer-2">
           {project?.image ? (
@@ -69,17 +85,19 @@ const ProjectDisplay = ({
           </section>
         </div>
 
-        <div>
-          {project.scope === "private" ? (
-            <Badge shape="sm" variant="purple">
-              {lang.project.list.privacy_type.private}
-            </Badge>
-          ) : project.scope === "group" ? (
-            <Badge shape="sm" variant="info">
-              {lang.project.list.privacy_type.group}
-            </Badge>
-          ) : null}
-        </div>
+        {!title && (
+          <div className="ml-auto">
+            {project.scope === "private" ? (
+              <Badge shape="sm" variant="purple">
+                {lang.interface.privacy_type.private}
+              </Badge>
+            ) : project.scope === "group" ? (
+              <Badge shape="sm" variant="info">
+                {lang.interface.privacy_type.group}
+              </Badge>
+            ) : null}
+          </div>
+        )}
       </div>
     </div>
   );

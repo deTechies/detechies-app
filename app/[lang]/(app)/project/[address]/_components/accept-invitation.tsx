@@ -1,12 +1,19 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { toast } from "@/components/ui/use-toast";
-import { acceptProjectInvitation } from "@/lib/data/project";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger
+} from "@/components/ui/dialog";
+import { toast } from "@/components/ui/use-toast";
+
+import { acceptProjectInvitation } from "@/lib/data/project";
 
 export default function AcceptInvitation({
   name,
@@ -21,6 +28,7 @@ export default function AcceptInvitation({
 }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const acceptInvitation = async () => {
     setLoading(true);
     const result = await acceptProjectInvitation(projectId);
@@ -40,20 +48,19 @@ export default function AcceptInvitation({
   };
 
   const rejectInvitation = async () => {
-    router.push("/projects");
+    router.push("/project");
   };
   return (
-    <Card className="flex flex-col max-w-md gap-6 m-8 mx-auto">
-      <Avatar className="rounded-sm mx-auto w-[200px] h-[200px] mb-2 aspect-square bg-state-info-secondary">
+    <Card className="flex flex-col max-w-[500px] gap-0 px-8 mx-auto text-center py-7">
+      <Avatar className="rounded-sm mx-auto w-[200px] h-[200px] mb-6">
         <AvatarImage
           src={"https://ipfs.io/ipfs/" + image}
           alt="project_image"
-          className=""
         />
 
         <AvatarFallback className="relative">
           <Image
-            src="/images/careerzen.png"
+            src="/images/connectfast.png"
             alt="no-item"
             fill={true}
             className="object-contain bg-no-repeat"
@@ -61,35 +68,62 @@ export default function AcceptInvitation({
         </AvatarFallback>
       </Avatar>
 
-      <h1 className="text-center">
-        <div className="mb-3 text-title_l">
-          {lang.project.details.invited_to_project.title}
-        </div>
-        <div className="text-subhead_s">{name}</div>
-      </h1>
+      <div className="text-heading_s">{name}</div>
 
-      <div className="flex flex-col gap-8 text-center">
+      <div className="mb-4 text-heading_s">
+        {lang.project.details.invited_to_project.title}
+      </div>
+
+      <div className="mb-6 text-text-secondary">
         {lang.project.details.invited_to_project.desc}
+      </div>
 
-        <div className="flex items-center justify-center gap-4">
-          <Button
-            variant="destructive"
-            size="lg"
-            onClick={rejectInvitation}
-            disabled={loading}
-          >
-            {lang.project.details.invited_to_project.reject}
-          </Button>
+      <div className="flex items-center justify-center gap-2">
+        <Dialog>
+          <DialogTrigger className="max-w-[212px] grow w-full">
+            <Button variant="secondary" size="lg">
+              {lang.project.details.invited_to_project.reject}
+            </Button>
+          </DialogTrigger>
 
-          <Button
-            size="lg"
-            onClick={acceptInvitation}
-            loading={loading}
-            disabled={loading}
-          >
-            {lang.project.details.invited_to_project.accept}
-          </Button>
-        </div>
+          <DialogContent className="gap-0">
+            <h3 className="mb-4 text-subhead_s">
+              {lang.project.details.invited_to_project.popup_title}
+            </h3>
+
+            <div className="mb-6 text-body_m">
+              {lang.project.details.invited_to_project.popup_content}
+            </div>
+
+            <div className="flex justify-center gap-2">
+              <Button
+                size="lg"
+                variant="secondary"
+                onClick={rejectInvitation}
+                disabled={loading}
+              >
+                {lang.project.details.invited_to_project.reject}
+              </Button>
+
+              <Button
+                size="lg"
+                onClick={rejectInvitation}
+                disabled={loading}
+              >
+                {lang.project.details.invited_to_project.later}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        <Button
+          size="lg"
+          onClick={acceptInvitation}
+          loading={loading}
+          disabled={loading}
+        >
+          {lang.project.details.invited_to_project.accept}
+        </Button>
       </div>
     </Card>
   );

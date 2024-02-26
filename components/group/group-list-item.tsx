@@ -27,7 +27,7 @@ export default function GroupListItem({
   return (
     <Link href={`/groups/${details.id}`}>
       <Card className="flex flex-row gap-4">
-        <Avatar className="w-16 h-16 aspect-square">
+        <Avatar className="w-16 h-16">
           <AvatarImage
             src={`https://ipfs.io/ipfs/${details.image}`}
             alt={details.name}
@@ -35,14 +35,14 @@ export default function GroupListItem({
           />
           <AvatarFallback className="relative">
             <Image 
-                src="/images/careerzen.png"
+                src="/images/connectfast.png"
                 alt="no-item"
                 fill={true}
             />
         </AvatarFallback>
         </Avatar>
-        <section className="flex flex-col gap-2 w-full prose">
-          <header className="flex justify-between items-center prose">
+        <section className="flex flex-col w-full gap-2 prose">
+          <header className="flex items-center justify-between prose">
             <h5>{details.name}</h5>
           </header>
           <div className="flex gap-2">

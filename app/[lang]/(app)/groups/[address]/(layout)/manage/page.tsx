@@ -19,10 +19,14 @@ export default async function GroupDetailManageLayout({
   const {data:missions} = await getClubMissions(club.id);
   const dictionary = (await getDictionary(params.lang)) as any;
 
+  const tabs = ["nft", "members", "missions", "info"];
+  const searchParamsTab = searchParams.tab as string;
+  const paramsTab = tabs.includes(searchParamsTab) ? searchParamsTab : "nft";
+
   return (
     <div>
       {/* 공통 탭 UI */}
-      <Tabs defaultValue="nft">
+      <Tabs defaultValue={paramsTab}>
         <TabsList className="mb-4" variant="button1">
           <TabsTrigger value="nft" variant="button1">
             NFT

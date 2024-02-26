@@ -22,13 +22,13 @@ export default function ProjectItem({
       href={`/project/${details.id}`}
       className="flex flex-row items-start w-full gap-5 pb-8 truncate rounded-md bg-background-layer-1 pt-7 px-7 hover:shadow-lg "
     >
-      <figure className="shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square bg-accent-secondary">
+      <figure className="overflow-hidden shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex justify-center items-center">
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}
           alt={`Project ${details.name}`}
           width={100}
           height={100}
-          className="rounded-sm"
+          className="object-contain"
         />
       </figure>
 
@@ -46,11 +46,11 @@ export default function ProjectItem({
 
           {details.scope === "private" ? (
             <Badge shape="sm" variant="purple">
-              {lang.project.list.privacy_type.private}
+              {lang.interface.privacy_type.private}
             </Badge>
           ) : details.scope === "group" ? (
             <Badge shape="sm" variant="info">
-              {lang.project.list.privacy_type.group}
+              {lang.interface.privacy_type.group}
             </Badge>
           ) : null}
         </header>
