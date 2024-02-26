@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
-import { getCsrfToken, signIn, useSession, signOut } from "next-auth/react";
+import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -82,16 +82,16 @@ export default function LoginButtons({ text }: { text?: any }) {
         {!address ? (
           <>
             <div
-              key={connectors[2].id}
+              key={connectors[1].id}
               className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-accent-secondary text-accent-primary hover:outline hover:outline-accent-primary"
-              onClick={() => handleConnect(connectors[2])}
+              onClick={() => handleConnect(connectors[1])}
             >
               <Image
                 src={`/icons/google.png`}
                 height={24}
                 width={24}
-                alt={connectors[2].name}
-                quality={2}
+                alt={connectors[1].name}
+                quality={1}
               />
               <span className="w-full text-center text-title_m">
                 {text?.web3 ? text.web3 : "Social Wallet"}
@@ -114,21 +114,6 @@ export default function LoginButtons({ text }: { text?: any }) {
               </span>
             </div>
 
-            <div
-              key={connectors[1].id}
-              className="flex items-center gap-6 px-6 py-4 font-medium border rounded-sm cursor-pointer bg-background-layer-2 border-border-div hover:border-orange-500"
-              onClick={() => handleConnect(connectors[1])}
-            >
-              <Image
-                src={`/icons/web3auth.png`}
-                height={24}
-                width={24}
-                alt={connectors[1].name}
-              />
-              <span className="w-full text-center text-title_m">
-                Web3auth (기존 소셜 계정 회원)
-              </span>
-            </div>
           </>
         ) : (
           <div className="flex w-full">
