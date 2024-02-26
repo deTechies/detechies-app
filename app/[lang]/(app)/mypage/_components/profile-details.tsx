@@ -1,12 +1,11 @@
 "use client";
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Edit } from "lucide-react";
-import Connections from "./connections";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 interface ProfileDetailsProps {
   profile: any;
@@ -73,8 +72,6 @@ export default function ProfileDetails({
       </div>
 
       {/* Contact info & Intro */}
-
-      <Connections github={profile?.github} address={profile?.id} />
 
       {profile?.profile_details?.description && (
         <section className="flex flex-col gap-4 p-4 border rounded-sm border-border-div">

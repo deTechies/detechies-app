@@ -130,7 +130,7 @@ export default function LoginButtons({ text }: { text?: any }) {
               variant={"destructive"}
               className="rounded-none rounded-r-sm"
               onClick={() => {
-                signOut();
+                signOut()
                 disconnect()
               }}
             >
