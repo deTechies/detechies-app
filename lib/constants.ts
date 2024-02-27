@@ -20,12 +20,8 @@ const ABI = {
     profile: profile as any,
 }
 
-<<<<<<< HEAD
 export const API_URL = process.env.NEXT_PUBLIC_API || 'https://staging.careerbadge.online' || 'https://api.careerbadge.online'
 // export const API_URL = process.env.NEXT_PUBLIC_API || 'http://192.168.0.3:4000'
-=======
-export const API_URL = process.env.NEXT_PUBLIC_API || 'https://api.careerbadge.online' || 'https://staging.careerbadge.online'
->>>>>>> staging
 
 
 export const defaultAvatar = [
