@@ -4,6 +4,7 @@ import ProfessionTagType from "@/components/extra/profession-tag-type";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+
 import {
   Form,
   FormControl,
@@ -22,7 +23,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { updateUserProfile } from "@/lib/data/profile";
-import { PROFESSION_TYPE } from "@/lib/interfaces";
+import { timezoneInt } from "@/lib/helpers/timezone";
+import { AVAILABILITY_TYPE, PROFESSION_TYPE } from "@/lib/interfaces";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@radix-ui/react-select";
 import { X } from "lucide-react";
@@ -47,7 +50,7 @@ const profileFormSchema = z.object({
     .optional(),
   profession: z.string().optional(),
   description: z.string().optional(),
-  hourly_rate: z.string().optional(),
+  hourly_rate: z.number().optional(),
   timezone: z.string().optional(),
   availability: z.string().optional(),
   skills: z.array(z.string().optional()).optional(),
@@ -276,7 +279,7 @@ export default function EditProfileForm({
                     newTag={newTag}
                     onClickJobBadge={clickTagsBadge}
                     category="skill"
-                  ></ProfessionTagType>
+                  />
                 )}
 
                 <div className="flex flex-wrap items-start gap-2 mt-3">
@@ -313,17 +316,23 @@ export default function EditProfileForm({
 
             <section>
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="">
-                  <FormField
-                    control={form.control}
-                    name="hourly_rate"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input placeholder={"hourly_rate"} {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
+                <div className="flex flex-col gap-2">
+                  <Label className="">Hourly rate (€) </Label>
+                  <Input
+                    type="number"
+                    placeholder={"hourly_rate"}
+                    {...form.register("hourly_rate", {
+                      valueAsNumber: true, // Ensures the value is always treated as a number
+                      required: "Hourly rate is required", // Basic validation to make the field required
+                      min: {
+                        value: 0,
+                        message: "Hourly rate must be 0 or more",
+                      }, // Minimum value validation
+                      max: {
+                        value: 1000,
+                        message: "Hourly rate must be less than 1000",
+                      }, // Maximum value validation (adjust according to your needs)
+                    })}
                   />
                 </div>
                 <div className="">
@@ -332,58 +341,90 @@ export default function EditProfileForm({
                     name="availability"
                     render={({ field }) => (
                       <FormItem>
-                        <FormControl>
-                          <Input placeholder={"availability"} {...field} />
-                        </FormControl>
+                        <FormLabel className="capitalize">
+                          Availability
+                        </FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Object.values(AVAILABILITY_TYPE).map((type) => (
+                              <SelectItem key={type} value={type}>
+                                {lang.interface.profession_type[type] || type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </FormItem>
                     )}
                   />
                 </div>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="">
+                <div className="flex flex-col gap-2">
                   <FormField
                     control={form.control}
                     name="timezone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormControl>
-                          <Input placeholder={"timezone"} {...field} />
-                        </FormControl>
+                        <FormLabel className="capitalize">Timezone</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="max-h-[200px] overflow-scroll w-fit">
+                            {timezoneInt.map(({ label, value }) => (
+                              <SelectItem key={value} value={value}>
+                                {label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </FormItem>
                     )}
                   />
                 </div>
                 <div className="">
-                <div className="flex flex-wrap items-start gap-2 mt-3">
-                  {form.getValues("languages") &&
-                    form.getValues("languages")?.map((tag, index) => (
-                      <Badge
-                        key={index}
-                        variant="secondary"
-                        shape="md"
-                        className="flex items-center gap-1.5 max-w-[200px]"
-                      >
-                        <div className="flex">
-                          <div className="w-full truncate">{tag}</div>
+                  <div className="flex flex-wrap items-start gap-2 mt-3">
+                    {form.getValues("languages") &&
+                      form.getValues("languages")?.map((tag, index) => (
+                        <Badge
+                          key={index}
+                          variant="secondary"
+                          shape="md"
+                          className="flex items-center gap-1.5 max-w-[200px]"
+                        >
+                          <div className="flex">
+                            <div className="w-full truncate">{tag}</div>
 
-                          <X
-                            className="w-5 h-5 cursor-pointer"
-                            onClick={() => {
-                              const currentTags =
-                                form.getValues("languages") || [];
-                              const newTags = currentTags.filter(
-                                (t) => t !== tag
-                              );
-                              form.setValue("languages", newTags, {
-                                shouldValidate: true,
-                              });
-                            }}
-                          ></X>
-                        </div>
-                      </Badge>
-                    ))}
-                </div>
+                            <X
+                              className="w-5 h-5 cursor-pointer"
+                              onClick={() => {
+                                const currentTags =
+                                  form.getValues("languages") || [];
+                                const newTags = currentTags.filter(
+                                  (t) => t !== tag
+                                );
+                                form.setValue("languages", newTags, {
+                                  shouldValidate: true,
+                                });
+                              }}
+                            ></X>
+                          </div>
+                        </Badge>
+                      ))}
+                  </div>
                 </div>
               </div>
             </section>

@@ -32,7 +32,7 @@ const fetchWithAuthorization = async (
   return response.json();
 };
 
-const GithubSignIn = () => {
+const GithubDependencies = () => {
   const { data: sessionData } = useSession() as any;
   const pathName = usePathname();
   const [repos, setRepos] = useState<any[]>([]);
@@ -128,4 +128,4 @@ const GithubSignIn = () => {
 
 
 
-export default GithubSignIn;
+export default GithubDependencies;

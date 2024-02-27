@@ -55,7 +55,7 @@ export const authOptions = {
         const res = await fetch(`${API_URL}/users/auth`, {
           method: "POST",
           body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "x-api-key": "API_KEY" },
         });
 
         const user = await res.json();

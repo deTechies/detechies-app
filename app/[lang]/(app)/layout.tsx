@@ -39,9 +39,9 @@ const pretendard = localFont({
 
 
 export const metadata: Metadata = {
-  title: "Careerzen - Build you career profile and grow with valuable insights",
+  title: "Connect Fast | Developers Profiles",
   description:
-    "We help you build your career profile and grow your personal career and network",
+    "We help developers distinquish themselves and flourish the future with the latest tech",
 };
 
 export default async function RootLayout({

@@ -1,3 +1,4 @@
+import GithubDependencies from "@/components/connections/github/github-dependencies"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
 export default function ProjectDependencies({
@@ -13,7 +14,7 @@ export default function ProjectDependencies({
         <h5 className="text-subhead_s">Dependencies</h5>
       </CardHeader>
       <CardContent>
-        No dependencies selected.
+        <GithubDependencies />
       </CardContent>
     </Card>
   )
