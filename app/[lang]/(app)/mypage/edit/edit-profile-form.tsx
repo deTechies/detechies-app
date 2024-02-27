@@ -26,12 +26,11 @@ import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@radix-ui/react-select";
 import { X } from "lucide-react";
-import { useRouter, useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useDictionary } from "@/lib/dictionaryProvider";
 
 const profileFormSchema = z.object({
   first_name: z
@@ -48,7 +47,11 @@ const profileFormSchema = z.object({
     .optional(),
   profession: z.string().optional(),
   description: z.string().optional(),
+  hourly_rate: z.string().optional(),
+  timezone: z.string().optional(),
+  availability: z.string().optional(),
   skills: z.array(z.string().optional()).optional(),
+  languages: z.array(z.string().optional()).optional(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -85,7 +88,8 @@ export default function EditProfileForm({
   const updateSuccessfulTitle = lang.validation.mypage.edit_profile.saved_edits;
   const updateSuccessfulDescription = lang.validation.redirect;
   const updateFailedTitle = lang.validation.mypage.edit_profile.edit_fail_title;
-  const updateFailedDescription = lang.validation.mypage.edit_profile.edit_fail_desc;
+  const updateFailedDescription =
+    lang.validation.mypage.edit_profile.edit_fail_desc;
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
       e.preventDefault();
@@ -112,11 +116,11 @@ export default function EditProfileForm({
   };
 
   async function onSubmit(data: ProfileFormValues) {
-    setLoading(true);  
-    
+    setLoading(true);
+
     const result = await updateUserProfile(data);
-    
-    if(result.status == "success") {
+
+    if (result.status == "success") {
       toast({
         title: updateSuccessfulTitle,
         description: updateSuccessfulDescription,
@@ -125,7 +129,7 @@ export default function EditProfileForm({
       toast({
         title: updateFailedTitle,
         description: updateFailedDescription,
-      })
+      });
     }
 
     router.push(`/${params.lang}/mypage?updated=true`, { scroll: true });
@@ -155,7 +159,9 @@ export default function EditProfileForm({
               <div className="flex flex-col gap-10">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="w-full">
-                    <Label className="">{lang.mypage.edit_profile?.full_name}</Label>
+                    <Label className="">
+                      {lang.mypage.edit_profile?.full_name}
+                    </Label>
                     <div className="flex items-center gap-2 mt-2">
                       <FormField
                         control={form.control}
@@ -164,7 +170,9 @@ export default function EditProfileForm({
                           <FormItem>
                             <FormControl>
                               <Input
-                                placeholder={lang.mypage.edit_profile?.first_name}
+                                placeholder={
+                                  lang.mypage.edit_profile?.first_name
+                                }
                                 {...field}
                               />
                             </FormControl>
@@ -177,7 +185,12 @@ export default function EditProfileForm({
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
-                              <Input placeholder={lang.mypage.edit_profile?.last_name} {...field} />
+                              <Input
+                                placeholder={
+                                  lang.mypage.edit_profile?.last_name
+                                }
+                                {...field}
+                              />
                             </FormControl>
                           </FormItem>
                         )}
@@ -218,7 +231,9 @@ export default function EditProfileForm({
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="">
-                    <Label className="mb-2 capitalize">{lang.mypage.edit_profile?.username}</Label>
+                    <Label className="mb-2 capitalize">
+                      {lang.mypage.edit_profile?.username}
+                    </Label>
                     <Input
                       placeholder={username}
                       value={username}
@@ -227,7 +242,9 @@ export default function EditProfileForm({
                     />
                   </div>
                   <div className="">
-                    <Label className="mb-2 capitalize">{lang.mypage.edit_profile?.email}</Label>
+                    <Label className="mb-2 capitalize">
+                      {lang.mypage.edit_profile?.email}
+                    </Label>
                     <Input
                       placeholder={email}
                       value={email}
@@ -242,11 +259,9 @@ export default function EditProfileForm({
             <section className="my-10">
               <FormItem className="space-y-">
                 <FormLabel>
-                  <div className="mb-2">
-                    {lang.mypage.edit_profile?.skills}
-                  </div>
+                  <div className="mb-2">{lang.mypage.edit_profile?.skills}</div>
                 </FormLabel>
-                
+
                 <FormControl>
                   <Input
                     placeholder={lang.mypage.edit_profile?.skills_placeholder}
@@ -296,6 +311,83 @@ export default function EditProfileForm({
               </FormItem>
             </section>
 
+            <section>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="">
+                  <FormField
+                    control={form.control}
+                    name="hourly_rate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder={"hourly_rate"} {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="">
+                  <FormField
+                    control={form.control}
+                    name="availability"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder={"availability"} {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="">
+                  <FormField
+                    control={form.control}
+                    name="timezone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder={"timezone"} {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="">
+                <div className="flex flex-wrap items-start gap-2 mt-3">
+                  {form.getValues("languages") &&
+                    form.getValues("languages")?.map((tag, index) => (
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        shape="md"
+                        className="flex items-center gap-1.5 max-w-[200px]"
+                      >
+                        <div className="flex">
+                          <div className="w-full truncate">{tag}</div>
+
+                          <X
+                            className="w-5 h-5 cursor-pointer"
+                            onClick={() => {
+                              const currentTags =
+                                form.getValues("languages") || [];
+                              const newTags = currentTags.filter(
+                                (t) => t !== tag
+                              );
+                              form.setValue("languages", newTags, {
+                                shouldValidate: true,
+                              });
+                            }}
+                          ></X>
+                        </div>
+                      </Badge>
+                    ))}
+                </div>
+                </div>
+              </div>
+            </section>
+
             <section className="my-10">
               <div>
                 <FormField
@@ -308,7 +400,9 @@ export default function EditProfileForm({
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder={lang.mypage.edit_profile?.profile_description_label}
+                          placeholder={
+                            lang.mypage.edit_profile?.profile_description_label
+                          }
                           style={{ height: "200px" }}
                           {...field}
                         />

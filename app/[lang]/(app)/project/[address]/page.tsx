@@ -9,8 +9,8 @@ import PendingMemberList from "./_components/pending-members-list";
 import { serverApi } from "@/lib/data/general";
 import GroupProject from "./_components/group-project";
 import PrivateProject from "./_components/private-project";
+import ProjectDependencies from "./_components/project-dependencies";
 import ProjectDetail from "./_components/project-detail";
-import ProjectEvaluation from "./_components/project-evaluation-by-groups";
 import ProjectLinks from "./_components/project-links";
 import ProjectMembers from "./_components/project-members";
 
@@ -91,7 +91,8 @@ export default async function ProjectDetailPage({
 
       <section className="flex flex-col gap-5 truncate">
         <ProjectLinks details={data} lang={dictionary} />
-        <ProjectEvaluation details={data} lang={dictionary} />
+        <ProjectDependencies id={params.address} />
+        {/* <ProjectEvaluation details={data} lang={dictionary} /> */}
         {data?.userRole === "admin" && (
           <PendingMemberList projectId={params.address} lang={dictionary} />
         )}

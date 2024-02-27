@@ -149,7 +149,7 @@ export default function RequestNFTModal({
             </div>
 
             <div className="h-[50vh] overflow-y-auto mb-6">
-              {filteredData.length > 0 &&
+              {filteredData && filteredData.length > 0 &&
                 filteredData.map((_group: any, _index: number) => {
                   return (
                     <RequestGroupListItem
@@ -161,7 +161,7 @@ export default function RequestNFTModal({
                   );
                 })}
 
-              {filteredData.length < 1 && (
+              {!filteredData && filteredData?.length < 1 && (
                 <div>{lang.project.details.evalu.no_search_result}</div>
               )}
             </div>
