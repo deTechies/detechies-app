@@ -25,19 +25,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "../ui/use-toast";
 
-const FormSchema = z.object({
-  role: z.nativeEnum(ROLE_TYPE, {
-    required_error: "You need to select an role",
-  }),
-  message: z
-    .string()
-    .min(10, {
-      message: "Message must be at least 10 characters.",
-    })
-    .max(200, {
-      message: "Message must not be longer than 200 characters.",
-    }),
-});
+
 interface JoinGroupProps {
   address: string;
   lang: any;
@@ -47,14 +35,35 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const joinProjectFormSchema = z.object({
+  // --- Text & Labels ---
+  const messageTooShortText = lang.validation.no_shorter_than_x.replace("${X}","10");
+  const messageTooLongText = lang.validation.no_longer_than_x.replace("${X}","200");
+  const messageRequiredText = lang.validation.this_field_is_required;
+  const requestSentText = lang.validation.request_sent;
+
+  const FormSchema = z.object({
+    role: z.nativeEnum(ROLE_TYPE, {
+      //  This is a radio button, it's impossible to not have a value
+      required_error: "", 
+    }),
     message: z
-      .string()
+      .string({required_error: messageRequiredText})
       .min(10, {
-        message: "Please send a message that is at least 10 characters.",
+        message: messageTooShortText,
       })
       .max(200, {
-        message: "The message must not be longer than 200 characters.",
+        message: messageTooLongText
+      }),
+  });
+
+  const joinProjectFormSchema = z.object({
+    message: z
+      .string({required_error: messageRequiredText})
+      .min(10, {
+        message: messageTooShortText,
+      })
+      .max(200, {
+        message: messageTooLongText
       }),
     role: z.nativeEnum(ROLE_TYPE),
   });
@@ -95,8 +104,7 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
 
     if (result) {
       toast({
-        title: "Successfully requested to join project",
-        description: "The project leader will review your request",
+        title: requestSentText
       });
       router.refresh()
       closeButtonRef.current?.click();

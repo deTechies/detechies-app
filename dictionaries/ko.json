@@ -585,7 +585,23 @@
       "not_approved": "발행 대기중",
       "reset": "초기화",
       "save": "저장하기",
-      "no_avatar": "아바타가 없어요."
+      "no_avatar": "아바타가 없어요.",
+      "default_avatar": {
+        "clothes": "두꺼운 솜이불",
+        "clothes_description": "아직 침대에서 막 나온 듯, 연하늘색 솜이불을 몸에 둘러맸습니다. 편안함을 주긴 하지만, 분명 모험을 떠날 준비는 아직 안 된 모습이죠.",
+        "hair": "부스스한 파란머리",
+        "hair_description": "자다 막 일어난 듯한 머리입니다. 하루를 시작하기 전 빗질은 필수일 것 같네요.",
+        "face": "동그란 얼굴",
+        "face_description": "친근감을 주는 동그란 얼굴이지만, 조금은 표정이 없어 보입니다. 어떤 표정을 지을지는 당신에게 달렸어요.",
+        "eyes": "반쯤 감긴 눈",
+        "eyes_description": "아직 잠에서 깨어나지 못한 듯, 눈을 반쯤 감고 있습니다. 좀 더 생기 있는 눈빛을 원하신다면 바꿔보세요.",
+        "mouth": "앙다문 입",
+        "mouth_description": "아무 말도 하지 않는, 앙다문 입. 오늘의 기분을 어떻게 표현할지는 선택에 달려 있습니다.",
+        "background": "빈 배경",
+        "background_description": "아무것도 없는 빈 배경입니다. 여러분만의 이야기로 채워볼 수 있는 공간이죠.",
+        "accessory": "수면안대",
+        "accessory_description": "깊은 잠을 방해받지 않으려는 듯, 수면안대를 착용하고 있네요. 하지만 이제 일어날 시간입니다, 뭐라도 시작해볼까요?"
+      }
     },
     "edit_profile": {
       "edit_profile": "프로필 수정",
@@ -1040,7 +1056,9 @@
       "background": "배경",
       "accessory": "액세서리",
       "hair": "머리모양",
-      "face": "얼굴모양"
+      "face": "얼굴형",
+      "eye": "눈모양",
+      "mouth": "입모양"
     }
   },
   "footer": {
@@ -1154,6 +1172,14 @@
     "communication": "협업 및 커뮤니케이션"
   },
   "validation": {
+    "this_field_is_required": "이 필드는 필수입니다.",
+    "no_longer_than_x":"입력은 ${X}자를 초과할 수 없습니다.",
+    "no_shorter_than_x":"입력은 ${X}자보다 짧을 수 없습니다",
+    "only_letters": "입력에는 문자만 허용됩니다.",
+    "invalid_format": "입력 형식이 잘못되었습니다.",
+    "request_sent": "요청이 성공적으로 전송되었습니다.",
+    "request_failed": "요청이 실패했습니다.",
+    "redirect":"곧 리디렉션됩니다.",
     "onboard": {
       "username": {
         "already_use": "이미 사용중인 닉네임입니다. 다른 닉네임을 이용해주세요.",
@@ -1165,7 +1191,66 @@
       "email": {
         "already_use": "이미 사용중인 이메일입니다. 다른 이메일을 이용해주세요.",
         "require": "이메일을 입력해주세요.",
+        "email": "이메일 주소를 다시 확인해주세요. (이메일 아이디@서비스 도메인)",
+        "invalid_verification_code": "인증번호가 일치 하지 않습니다. 다시 입력해주세요."
+      }
+    },
+    "mypage":{
+      "edit_profile":{
+          "saved_edits": "내 프로필 정보가 성공적으로 수정되었어요.",
+          "edit_fail_title": "업데이트 실패했습니다.",
+          "edit_fail_desc": "나중에 다시 시도해 주세요."
+      }
+    },
+    "project":{
+      "new_project":{
+        "missing_name": "프로젝트명을 입력해주세요.",
+        "too_short_name": "프로젝트 이름은 2자 이상이어야 합니다.",
+        "too_long_name": "프로젝트 이름은 30자를 넘지 않아야 합니다.",
+        "consecutive_spaces": "프로젝트 이름은 2~30자로 작성해주세요.",
+        "missing_type": "프로젝트 종류를 선택해주세요.",
+        "missing_category": "카테고리를 선택해주세요.",
+        "too_many_categories":"카테고리는 5개까지만 추가할 수 있어요.",
+        "missing_start_date": "프로젝트 시작 날짜를 지정하세요.",
+        "missing_end_date":"프로젝트 종료 날짜를 지정하세요.",
+        "missing_description": "프로젝트 설명을 입력해주세요.",
+        "too_short_description":"프로젝트 설명은 10자 이상 작성해주세요.",
+        "too_long_description":"프로젝트 설명은 1000자 까지 작성 가능해요."
+      },
+      "details":{
+        "members":{
+          "add_works":{
+            "no_0_contribution": "기여도 백분율은 0%일 수 없습니다.",
+            "too_short_description": "기여 설명은 최소 5자 이상이어야 합니다.",
+            "too_long_description": "기여 설명은 5000자를 초과할 수 없습니다."
+          },
+          "invite":{
+            "admin_invite_warning": "상대방을 관리자로 초대할 경우, 나의 관리자 권한은 소멸됩니다. 초대를 진행할까요?",
+            "only_1_client_warning": "이 프로젝트에는 이미 클라이언트가 있어요. 한 프로젝트에 클라이언트 한명만 등록될 수 있어요."
+          }
+        },
         "email": "이메일 주소를 다시 확인해주세요."
+      }
+    },
+    "group":{
+      "details":{
+        "join_group":{
+          "request_already_sent": "회원님의 가입 요청메시지는 이미 그룹 운영자에게 전달되었어요."
+        }
+      },
+      "new_group":{
+        "group_name_taken":"이미 존재하는 그룹 이름이에요. 다른 이름을 입력해주세요."
+      }
+    },
+    "nft":{
+      "request":{
+        "success":{
+          "request_sent":  "그룹 관리자에게 귀하의 요청이 알려졌습니다. 승인을 기다려 주세요."
+        },
+        "fail":{
+          "already_requested": "회원님은 이미 이 디지털 증명서(NFT)를 요청한 상태 입니다.",
+          "already_owned": "회원님은 이미 이 디지털 증명서를 소유하고 있어요."
+        } 
       }
     }
   }

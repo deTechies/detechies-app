@@ -520,14 +520,14 @@
       "go_to_project": "Yes, all correct"
     },
     "private": {
-      "title": "Private Project",
-      "desc": "This project is set to private, you can see the details when you become a member of the project, do you want to join this project?",
+      "title": "Restricted Access",
+      "desc": "This project's details are exclusive to project members. Become a project member to gain access.",
       "back": "Back",
       "waiting": "Waiting for acceptance."
     },
     "group": {
-      "title": "Group public project",
-      "desc": "This project is set to group public, which means you can see the details if you become a group member, why not join this group?",
+      "title": "Restricted Access",
+      "desc": "This project's details are exclusive to${GroupName} group members. Become a group member to gain access.",
       "back": "Back",
       "waiting": "Waiting for acceptance",
       "not_set_group": "No groups are set."
@@ -580,13 +580,29 @@
       "address": "Wallet Address"
     },
     "edit_avatar":{
-        "tab_all": "All",
-        "tab_career": "Career NFT",
-        "tab_limited": "Limited NFT",
-        "not_approved": "Not Approved",
-        "reset": "Reset",
-        "save": "Save",
-        "no_avatar": "No avatar"
+      "tab_all": "All",
+      "tab_career": "Career NFT",
+      "tab_limited": "Limited NFT",
+      "not_approved": "Not Approved",
+      "reset": "Reset",
+      "save": "Save",
+      "no_avatar": "No avatar",
+      "default_avatar": {
+        "clothes": "Thick Quilt",
+        "clothes_description": "Looks like you've just rolled out of bed, wrapped in a light blue quilt. It's comfy, but clearly not ready for an adventure yet.",
+        "hair": "Tousled Blue Hair",
+        "hair_description": "Hair that looks like you've just woken up. Combing it seems like a must before starting the day.",
+        "face": "Round Face",
+        "face_description": "A friendly round face, though it seems a bit expressionless. It's up to you to decide what expression it will wear.",
+        "eyes": "Half-closed Eyes",
+        "eyes_description": "Still not fully awake, with eyes half-closed. If you're looking for a more lively look, you might want to change that.",
+        "mouth": "Clenched Mouth",
+        "mouth_description": "A mouth that says nothing, firmly closed. How you express today's mood is up to your choice.",
+        "background": "Empty Background",
+        "background_description": "Just an empty background. A space you can fill with your own story.",
+        "accessory": "Sleep Mask",
+        "accessory_description": "Wearing a sleep mask as if to not be disturbed from deep slumber. But it's time to wake up now, what shall we start with?"
+      }
     },
     "edit_profile": {
       "edit_profile": "edit profile",
@@ -1042,7 +1058,9 @@
       "background": "background",
       "accessory": "accessory",
       "hair": "hair",
-      "face": "face"
+      "face": "face",
+      "eye": "eye",
+      "mouth": "mouth"
     }
   },
   "footer": {
@@ -1156,6 +1174,14 @@
     "communication": "Communication"
   },
   "validation": {
+    "this_field_is_required": "This field is required.",
+    "no_longer_than_x": "Input must not be longer than ${X} characters.",
+    "no_shorter_than_x": "Input must not be shorter than ${X} characters.",
+    "only_letters": "Only letters are allowed in the input.",
+    "invalid_format": "Input's format is invalid.",
+    "request_sent": "Request sent successfully.",
+    "request_failed": "Request failed.",
+    "redirect":"You will be redirected shortly.",
     "onboard": {
       "username": {
         "already_use": "The username is already in use. Please use a different username.",
@@ -1167,7 +1193,70 @@
       "email": {
         "already_use": "The email is already in use. Please use a different email.",
         "require": "Enter your email.",
-        "email": "Please enter a valid email address."
+        "email": "Please enter a valid email address.",
+        "invalid_verification_code": "The verification code you entered was invalid."
+      }
+    },
+    "mypage":{
+      "edit_profile":{
+        "saved_edits": "Your changes have been saved successfully!",
+        "edit_fail_title": "Update failed.",
+        "edit_fail_desc": "Please try again later."
+      }
+    },
+    "project":{
+      "new_project":{
+        "missing_name": "Enter project name.",
+        "too_short_name": "Project name must be at least 2 characters long.",
+        "too_long_name": "Project name must not be longer than 30 characters.",
+        "consecutive_spaces": "Project name must be between 2 and 30 characters, consecutive spaces are counted as one.",
+        "missing_type": "Select a project type.",
+        "missing_category": "Add a project category.",
+        "too_many_categories":"No more than 5 categories can be added.",
+        "missing_start_date": "Specify project start date.",
+        "missing_end_date":"Specify project end date.",
+        "missing_description": "Add a project description.",
+        "too_short_description": "Project description must be at least 10 characters long.",
+        "too_long_description": "Project description must not be longer than 1000 characters."
+      },
+      "details":{
+        "members":{
+          "add_works":{
+            "no_0_contribution": "Contribution percentage cannot be 0%.",
+            "too_short_description": "Contribution description must be at least 5 characters long.",
+            "too_long_description": "Contribution description must not be longer than 5000 characters."
+          },
+          "invite":{
+            "admin_invite_warning": "Your admin privileges will be revoked if you assign someone else to be the admin. Would you like to proceed?",
+            "only_1_client_warning": "This project already has a client. Only one client per project is allowed."
+          },
+          "invite_by_email":{
+            "too_long_first_name": "",
+            "too_long_last_name": ""
+          }
+        }
+      }
+    },
+    "group":{
+      "details":{
+        "join_group":{
+          "request_already_sent": "You have already sent a request to join this group."
+        }
+      },
+      "new_group":{
+        "group_name_taken": "The group name is already in use. Please use a different group name."
+      }
+    },
+    "nft":{
+      "request":{
+        "success":{
+          "request_sent": "The group administrator has been notified of your request. Please wait for approval."
+        },
+        "fail":{
+          "already_requested": "You have already sent a request for this NFT.",
+          "already_owned":"You already own this NFT."
+        }
+
       }
     }
   }

@@ -160,6 +160,8 @@ export enum GROUP_TYPE {
     ACCESSORY = 'accessory',
     HAIR = 'hair',
     FACE = 'face',
+    EYE = 'eye',
+    MOUTH = 'mouth'
   }
   
   export enum SBT_TYPE{

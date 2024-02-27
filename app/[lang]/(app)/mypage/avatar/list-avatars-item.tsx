@@ -17,12 +17,14 @@ interface IListAvatarItem {
   lang: any;
   showMintButton: boolean;
   blockRequest: boolean;
+  userAvatar?: string[];
 }
 
 export default function ListAvatarItem({
   details,
   showSelect,
   blockRequest,
+  userAvatar,
 }: IListAvatarItem) {
   const dictionary = useDictionary();
 
@@ -33,6 +35,7 @@ export default function ListAvatarItem({
           showSelect={showSelect}
           item={details}
           lang={dictionary}
+          userAvatar={userAvatar}
         />
       </DialogTrigger>
 

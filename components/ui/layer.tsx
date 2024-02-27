@@ -37,9 +37,7 @@ const IPFSImageLayer: React.FC<IPFSImageLayerProps> = ({
           height: "100%",
         }}
         className={`${
-          className === "rounded-full"
-            ? `rounded-full`
-            : `${className}`
+          className === "rounded-full" ? `rounded-full` : `${className}`
         }`}
         width={300}
         height={300}
@@ -48,28 +46,34 @@ const IPFSImageLayer: React.FC<IPFSImageLayerProps> = ({
     ));
   }
 
-  return hashes.map((url, index) => (
-    <Image
-      key={index}
-      src={`https://ipfs.io/ipfs/${hashes[index]}`}
-      alt={`Layer ${url}`}
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-      }}
-      className={`${
-        className === "rounded-full"
-          ? `rounded-full`
-          : `rounded-sm   ${className}`
-      }`}
-      width={300}
-      height={300}
-      priority={true}
-    />
-  ));
+  return hashes.map((url, index) => {
+    if (!hashes[index]) {
+      return;
+    }
+
+    return (
+      <Image
+        key={index}
+        src={`https://ipfs.io/ipfs/${hashes[index]}`}
+        alt={`Layer ${url}`}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
+        className={`${
+          className === "rounded-full"
+            ? `rounded-full`
+            : `rounded-sm   ${className}`
+        }`}
+        width={300}
+        height={300}
+        priority={true}
+      />
+    );
+  });
 };
 
 export default IPFSImageLayer;

@@ -13,6 +13,7 @@ interface IListAvatarItemTriggerProps {
   selected?: boolean;
   item: Achievement;
   lang?: any;
+  userAvatar?: string[];
 }
 
 interface INftTypeChipProps {
@@ -23,10 +24,10 @@ interface INftTypeChipProps {
 interface DefaultAvatar {
   clothes: string;
   face: string;
-  head: string;
+  eye: string;
   hair: string;
-  avatar4: string;
-  avatar5: string;
+  mouth: string;
+  accessory: string;
   background: string;
 }
 
@@ -35,13 +36,16 @@ export default function ListAvatarItemTrigger({
   selected,
   item,
   lang,
+  userAvatar,
 }: IListAvatarItemTriggerProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   const isSelected = item.avatar_type
-    ? searchParams.get(item?.avatar_type) === item.avatar
+    ? searchParams.get(item?.avatar_type) === item.avatar ||
+      (!searchParams.get(item?.avatar_type) &&
+        userAvatar?.includes(item.avatar))
     : false;
 
   const createQueryString = useCallback(
@@ -62,10 +66,10 @@ export default function ListAvatarItemTrigger({
   const defaultAvatar: DefaultAvatar = {
     clothes: "bafkreidutepul5by5atjpebnchfscmd7s5r4pzaiezxnazuq5kdveu2fgq",
     face: "bafkreidlzc4pnszwiyx73yqlbwgkchyuendxkfq63sp54vhnky3ruti5xu",
-    head: "bafkreihdqgem6jwebjyiahy6e4mgf5xdrqam3yaxq2ki2ew4hw6tjxq7du",
+    eye: "bafkreihdqgem6jwebjyiahy6e4mgf5xdrqam3yaxq2ki2ew4hw6tjxq7du",
     hair: "bafkreigjctpasi7b2ytsn7mx47wjobnqkvioi4vllg7dqwzzvw7u2lijme",
-    avatar4: "bafkreif6oi5pwrjzey5q4pmyd3zck6a53uoefozxydapiipgq2flsbldsi",
-    avatar5: "bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose",
+    mouth: "bafkreif6oi5pwrjzey5q4pmyd3zck6a53uoefozxydapiipgq2flsbldsi",
+    accessory: "bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose",
     background: "bafkreibgvactjvhexsx54qcxo32msz6vsimbwimp64sbvlawjol5e27kg4",
   };
 
@@ -105,15 +109,17 @@ export default function ListAvatarItemTrigger({
             />
           </div>
         )}
+
         <Image
           src={
-            item.image
-              ? DEFAULT_IPFS_URL + item.image
-              : DEFAULT_IPFS_URL + item.avatar
+            item.avatar
+              ? DEFAULT_IPFS_URL + item.avatar
+              : DEFAULT_IPFS_URL + item.image
           }
           alt="nft_list_item"
           className="object-contain rounded-t-xl !bg-background-layer-2"
-          fill={true}
+          width="200"
+          height="200"
           priority={true}
         />
       </div>
@@ -129,14 +135,16 @@ export default function ListAvatarItemTrigger({
         </Link> */}
 
         <div className="flex flex-wrap gap-2 bg-background-layer-1">
-          <NftTypeChip
-            label={
-              lang && item.nft_type
-                ? lang.interface.nft_type[item.nft_type]
-                : "No Type"
-            }
-            theme="info"
-          />
+          {item.nft_type && (
+            <NftTypeChip
+              label={
+                lang && item.nft_type
+                  ? lang.interface.nft_type[item.nft_type]
+                  : "No Type"
+              }
+              theme="info"
+            />
+          )}
 
           {item?.avatar && (
             <NftTypeChip

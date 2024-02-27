@@ -31,6 +31,7 @@ import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useDictionary } from "@/lib/dictionaryProvider";
 
 const profileFormSchema = z.object({
   first_name: z
@@ -78,7 +79,13 @@ export default function EditProfileForm({
 
   const [loading, setLoading] = useState(false);
   const [newTag, setNewTag] = useState(""); // New state for handling the input of new tag
+  // const lang = useDictionary();
 
+  // --- Text & Labels ---
+  const updateSuccessfulTitle = lang.validation.mypage.edit_profile.saved_edits;
+  const updateSuccessfulDescription = lang.validation.redirect;
+  const updateFailedTitle = lang.validation.mypage.edit_profile.edit_fail_title;
+  const updateFailedDescription = lang.validation.mypage.edit_profile.edit_fail_desc;
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && newTag.trim() !== "") {
       e.preventDefault();
@@ -105,18 +112,19 @@ export default function EditProfileForm({
   };
 
   async function onSubmit(data: ProfileFormValues) {
-    setLoading(true);
+    setLoading(true);  
+    
     const result = await updateUserProfile(data);
     
     if(result.status == "success") {
       toast({
-        title: "Updated your profile",
-        description: "You will be redirected shortly.",
+        title: updateSuccessfulTitle,
+        description: updateSuccessfulDescription,
       });
     } else {
       toast({
-        title: "Failed to update your profile",
-        description: "Please try again later.",
+        title: updateFailedTitle,
+        description: updateFailedDescription,
       })
     }
 
