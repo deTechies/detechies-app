@@ -3,10 +3,9 @@ import { clsx, type ClassValue } from "clsx";
 import { getWalletClient } from '@wagmi/core';
 import { providers } from "ethers";
 import * as React from 'react';
-import { twMerge, extendTailwindMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
 import { WalletClient } from "viem";
 import { useWalletClient } from 'wagmi';
-import { useDictionary } from "@/lib/dictionaryProvider";
 
 
 const customTwMerge = extendTailwindMerge({

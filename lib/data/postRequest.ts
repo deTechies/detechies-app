@@ -15,6 +15,7 @@ export async function postServer(endpoint: string, body?: string, lang?: any) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-api-key": "API_KEY",
       Authorization: `Bearer ${session.web3.accessToken}`,
     },
   } as any;

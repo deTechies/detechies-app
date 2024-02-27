@@ -7,16 +7,12 @@ import AcceptInvitation from "./_components/accept-invitation";
 import PendingMemberList from "./_components/pending-members-list";
 
 import { serverApi } from "@/lib/data/general";
+import GroupProject from "./_components/group-project";
+import PrivateProject from "./_components/private-project";
 import ProjectDetail from "./_components/project-detail";
 import ProjectEvaluation from "./_components/project-evaluation-by-groups";
 import ProjectLinks from "./_components/project-links";
 import ProjectMembers from "./_components/project-members";
-import { Card } from "@/components/ui/card";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import PrivateProject from "./_components/private-project";
-import GroupProject from "./_components/group-project";
 
 export default async function ProjectDetailPage({
   params,

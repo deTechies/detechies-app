@@ -13,6 +13,7 @@ export async function updateUserProfile(data: any) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-api-key": "API_KEY",
       "Authorization": `Bearer ${session?.web3?.accessToken}`,
     },
     body: JSON.stringify({

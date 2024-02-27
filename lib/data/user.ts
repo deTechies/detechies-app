@@ -7,18 +7,19 @@ import { API_URL } from "../constants";
 import { auth, authOptions } from "../helpers/authOptions";
 
 export async function getUserProfile(address?: string) {
-  const session = await auth() as Session;
+  const session = (await auth()) as Session;
   if (!address) {
     if (!session) {
       redirect("/onboard");
     }
-    if(!session?.web3?.address) {
+    if (!session?.web3?.address) {
       redirect("/onboard");
     }
     const user = await fetch(`${API_URL}/users/${session?.web3?.address}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "x-api-key": "API_KEY",
         Authorization: `Bearer ${session?.web3.accessToken}`,
       },
     });
@@ -27,9 +28,8 @@ export async function getUserProfile(address?: string) {
       const result = await user.json();
       throw new Error(result.message);
     }
-    
+
     const result = await user.json();
-    
 
     return result;
   }
@@ -38,6 +38,7 @@ export async function getUserProfile(address?: string) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "x-api-key": "API_KEY",
       Authorization: `Bearer ${session?.web3.accessToken}`,
     },
   });
@@ -59,7 +60,8 @@ export async function getUsers() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3.accessToken}`,
     },
-    cache: "no-store" });
+    cache: "no-store",
+  });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -76,7 +78,7 @@ export async function sendVerifyEmail(code: string) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
-  })
+  });
 
   if (!res.ok) {
     return null;
@@ -106,14 +108,14 @@ export async function getUserById(id: string) {
       },
     }
   );
-  
+
   const result = await res.json();
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
-  return result
+  return result;
 }
 
 export async function getUserConnections(address: string) {
@@ -182,20 +184,17 @@ export async function updateTBA(tba: any): Promise<any> {
   return result;
 }
 
-export async function updateUserAvatar (avatar: string[]) {
-
+export async function updateUserAvatar(avatar: string[]) {
   const session = await auth();
 
-  const result = 
-    await fetch(`${API_URL}/users/save-avatar`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.web3?.accessToken}`,
-      },
-      body: JSON.stringify({avatar: avatar}),
-    });
-    
-    return result.json();
-};
+  const result = await fetch(`${API_URL}/users/save-avatar`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.web3?.accessToken}`,
+    },
+    body: JSON.stringify({ avatar: avatar }),
+  });
 
+  return result.json();
+}
