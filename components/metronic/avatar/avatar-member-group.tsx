@@ -23,7 +23,7 @@ export default function AvatarMemberGroup({
     <div className="flex  -space-x-2">
       {visibleMembers.map((member, index:number) => (
         <div key={member.id} className={`hover:z-20`} onClick={() =>{ router.push(`/profiles/${member.id}`)}}>
-          <Avatar src={member.src} size={size} className={`rounded-full`} 
+          <Avatar src={member.src} size={size} shape={`rounded`} 
           />
         </div>
       ))}
