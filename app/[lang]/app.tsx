@@ -3,6 +3,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { polygonMumbai } from "@/helpers/mumbai";
 import SessionProvider from "@/lib/SessionProvider";
+import PushProvider from "@/lib/usePushProtocol";
 import { Analytics } from "@vercel/analytics/react";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
@@ -14,7 +15,6 @@ import {
 } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
-
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
@@ -52,7 +52,6 @@ export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
 // const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키
 // const testAppId = 'app_id_eg12sf3491azgs520' // 테스트용 앱 ID
 
-
 const config = createConfig({
   autoConnect: true,
   connectors: [
@@ -79,11 +78,12 @@ const config = createConfig({
 export default function App({ children }: { children: any }) {
   return (
     <WagmiConfig config={config}>
-      <SessionProvider>
+      <PushProvider>
+        <SessionProvider>
           {children}
           <Toaster />
-
-      </SessionProvider>
+        </SessionProvider>
+      </PushProvider>
       <Analytics />
     </WagmiConfig>
   );

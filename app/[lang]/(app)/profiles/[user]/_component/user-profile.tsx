@@ -61,7 +61,7 @@ export default function UserProfile({
           </a>
         </div>
       </div>
-      <UserChat to={profile.address as Address} />
+      <UserChat to={profile.wallet as Address} />
     </Card>
   );
 }

@@ -44,11 +44,11 @@ export default function Navbar({ lang }: { lang: any }) {
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
 
   return (
-    <Disclosure as="nav" className="z-10 mx-auto">
+    <Disclosure as="nav" className="z-10 mx-auto bg-background-layer-1">
       {({ open }) => (
         <>
           <div className="px-6 lg:px-8 max-w-[1920px] mx-auto border-b border-border-on-base relative">
-            <div className="flex justify-between h-[92px]">
+            <div className="flex justify-between h-[64px]">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
                   <Image

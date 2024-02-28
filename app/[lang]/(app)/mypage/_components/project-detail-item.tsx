@@ -31,8 +31,8 @@ export default function ProjectDetailItem({
 }: ProjectDetailItemProps) {
 
   return (
-    <Link href={`/project/${data.id}`}>
-      <Card>
+    <Link href={`/project/${data.id}`} >
+      <Card className="hover:outline hover:outline-state-info">
         <div className="flex flex-col w-full gap-5">
           <div className="flex justify-between">
           <figure className="relative bg-background-layer-2 w-14 h-14 aspect-square overflow-hidden shrink-0 rounded-[6px] flex justify-center items-center">
@@ -55,7 +55,7 @@ export default function ProjectDetailItem({
             <div className="flex flex-col gap-2 grow shrink">
               <header className="flex flex-wrap items-center justify-between gap-3">
                 <h5 className="text-title_m">{data.name}</h5>
-                <div className="break-all text-label_m whitespace-break-spaces\">
+                <div className="break-all text-label_m whitespace-break-spaces h-10 text-ellipse overflow-hidden">
                   <span>{data.description}</span>
                 </div>
 

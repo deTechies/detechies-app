@@ -639,7 +639,7 @@
     },
     "project": {
       "projects": "Projects",
-      "new_project": "New project",
+      "new_project": "Add project",
       "evaluation": "evaluation",
       "present": "present",
       "view_project": "view project"

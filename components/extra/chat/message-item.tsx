@@ -43,8 +43,8 @@ const MessageItem: React.FC<MessageItemProps> = ({
       })}
     >
 
-      <Avatar className="z-10 inline-block w-12 h-12 border-2 rounded-full border-accent-secondary">
-        <IPFSImageLayer hashes={defaultAvatar} />
+      <Avatar className="z-10 relative inline-block w-12 h-12 border-2 rounded-full border-accent-secondary bg-background-layer-2">
+        <IPFSImageLayer hashes={defaultAvatar} className="rounded-full"/>
       </Avatar>
       <span
         className={clsx(

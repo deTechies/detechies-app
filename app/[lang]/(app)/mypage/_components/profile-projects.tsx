@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { PlusIcon } from "lucide-react";
 // import Image from "next/image";
 
+import { Button } from "@/components/ui/button";
 import { serverApi } from "@/lib/data/general";
 import Link from "next/link";
 import ProjectDetailItem from "./project-detail-item";
@@ -23,17 +24,18 @@ export default async function ProfileProjects({
   console.log(projects);
   return (
     <div className="flex flex-col gap-3">
-      <Card className="flex flex-row items-center justify-between">
-        <h5 className="text-subhead_s">{text?.projects}</h5>
+      <Card className="flex flex-row items-center justify-between py-4">
+        <h5 className="text-subhead_s">{text?.projects} ({projects.totalCount})</h5>
         {!visiting && (
-          <Link href="/project/create">
-            {text?.new_project}{" "}
-            <PlusIcon size="16" className="ml-2 text-text-secondary" />
+          <Link href="/project/create" className="flex flex-row">
+            <Button variant={"secondary"} size="sm">
+              <PlusIcon size="16" className="text-text-secondary" /> <span>{text?.new_project} </span>
+            </Button>
           </Link>
         )}
       </Card>
       
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
       {projects.data &&
         projects.data.map((project: any, index: number) => (
             <ProjectDetailItem

@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva("inline-flex items-center whitespace-nowrap max-w-[200px]", {
+const badgeVariants = cva("flex flex-row items-center whitespace-normal", {
   variants: {
     variant: {
       default: "bg-background-layer-2 text-text-primary text-label_m",
@@ -35,7 +35,7 @@ const badgeVariants = cva("inline-flex items-center whitespace-nowrap max-w-[200
       category:
         "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",
       outline:
-        "truncate py-[8px] px-[10px] border rounded-md bg-background-transparent text-title_s",
+        "py-[8px] px-[10px] border rounded-md bg-background-transparent text-title_s",
       outline_sm: "h-[22px] px-2.5 border rounded-full text-label_s",
       icon: "py-1.5 px-[10px] rounded-md text-label_m flex items-center justify-center",
       skill: "text-label_s bg-background-layer-2 rounded-[5px] px-2 py-1",
