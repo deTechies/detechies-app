@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { postServer } from "@/lib/data/postRequest";
 import { formatDate } from "@/lib/utils";
+import { Replace, ShieldCheck } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -58,9 +59,9 @@ export default function ConnectCard({
   }
   return (
     <div
-      className={`flex flex-col text-center p-2 pb-4 gap-2 bg-background-layer-1 w-full`}
+      className={`flex border  rounded-sm p-2 pb-4 gap-6 px-4 py-2 bg-background-layer-1 w-full items-center justify-evenly`}
     >
-      <div className="flex flex-col justify-center relative aspect-square w-[32px] h-[32px] rounded-full mx-auto ">
+      <div className="flex flex-col justify-start relative aspect-square w-[32px] h-[32px] rounded-full ">
         <Image
           src={item.image}
           fill={true}
@@ -69,41 +70,39 @@ export default function ConnectCard({
           className="aspect-square"
         />
       </div>
-      <div className="flex flex-col justify-center gap-2">
+      <div className="flex flex-row items-center gap-2">
         {verified ? (
-          <>
-            <p className="text-title_s">{verified.display_name}</p>
+          <div className="flex flex-col gap-1">
+            <p className="text-title_s capitalize">{verified.display_name}</p>
             <p className="text-label_s">{formatDate(verified.last_updated)}</p>
-          </>
+          </div>
         ) : 
         connected ? (
           <>
-          <p className="text-title_s">{user.display_name}</p>
           <div className="flex gap-2">
             
           <Button
             className="text-label_s text-text-primary"
-            size="sm"
+            size="icon"
             variant="secondary"
             onClick={verifyMe}
           >
-            Verify
+            <ShieldCheck />
           </Button>
-          <Button size="sm" variant="secondary" 
+          <Button size="icon" variant="secondary" 
            onClick={() =>
             signIn(item.connection, {
               callbackUrl: `http://localhost:3000/${pathName}`,
             })
           }
           >
-            Change
+            <Replace />
           </Button>  
           </div>
           
           </>
         ) : (
           <>
-          <p className="text-title_s">{item.name}</p>
           <Button
             className="text-label_s text-text-secondary"
             variant={"secondary"}

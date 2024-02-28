@@ -8,6 +8,11 @@ import { WalletClient } from "viem";
 import { useWalletClient } from 'wagmi';
 
 
+export function addURL(link:string){
+  return link.includes('http') ? link : `https://ipfs.io/ipfs/${link}`
+
+}
+
 const customTwMerge = extendTailwindMerge({
   classGroups: {
     // FontSize group
