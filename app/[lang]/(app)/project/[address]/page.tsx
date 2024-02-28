@@ -10,9 +10,10 @@ import { serverApi } from "@/lib/data/general";
 import GroupProject from "./_components/group-project";
 import PrivateProject from "./_components/private-project";
 import ProjectDependencies from "./_components/project-dependencies";
-import ProjectDetail from "./_components/project-detail";
+import ProjectLanguages from "./_components/project-languages";
 import ProjectLinks from "./_components/project-links";
 import ProjectMembers from "./_components/project-members";
+import ProjectPackages from "./_components/project-packages";
 
 export default async function ProjectDetailPage({
   params,
@@ -81,7 +82,6 @@ export default async function ProjectDetailPage({
   return (
     <main className="grid w-full gap-6 px-4 md:grid-cols-3">
       <section className="flex flex-col gap-5 truncate md:col-span-2">
-        <ProjectDetail details={data} lang={dictionary} />
         <ProjectMembers
           details={data}
           projectId={params.address}
@@ -90,6 +90,16 @@ export default async function ProjectDetailPage({
       </section>
 
       <section className="flex flex-col gap-5 truncate">
+        {
+          data.languages && (
+            <ProjectLanguages languages={data.languages} />
+          )
+        }
+        {
+          data.packages && (
+            <ProjectPackages packages={data.packages}/>
+          )
+        }
         <ProjectLinks details={data} lang={dictionary} />
         <ProjectDependencies id={params.address} />
         {/* <ProjectEvaluation details={data} lang={dictionary} /> */}

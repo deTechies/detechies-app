@@ -320,11 +320,11 @@
         }
       },
       "links": {
-        "title": "Works",
+        "title": "Documents",
         "upload": "Upload",
         "no_links": "There are no registered tasks.",
         "dialog": {
-          "title": "Upload works",
+          "title": "Upload document",
           "name": "Name",
           "name_placeholder": "name of link",
           "type": "Type",
@@ -332,7 +332,7 @@
           "link": "Link",
           "upload_file": "Upload file",
           "close": "Close",
-          "upload_works": "Upload works"
+          "upload_works": "Upload document"
         }
       },
       "request": {

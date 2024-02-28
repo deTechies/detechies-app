@@ -8,5 +8,11 @@ export interface Repository {
   }
   export interface Dependency {
     name: string;
+    version: string;
   }
   
+  
+  export interface LanguagePercentage {
+    name: string;
+    percentage: number;
+  }

@@ -1,13 +1,13 @@
-import { getSingleProject } from "@/lib/data/project";
+import { Card } from "@/components/ui/card";
+import { getDictionary } from "@/get-dictionary";
+import { serverApi } from "@/lib/data/general";
 import DeleteProject from "./delete-project";
 import ProjectEditForm from "./project-edit-form";
-import { getDictionary } from "@/get-dictionary";
-import { Card } from "@/components/ui/card";
 export default async function ProjectEditPage({ params }: { params: any }) {
   //first get the whole project form.
 
   const dictionary = (await getDictionary(params.lang)) as any;
-  const projectData = await getSingleProject(params.address);
+  const {data: projectData} = await serverApi(`/projects/${params.address}`);
 
   return (
     <main className="w-full max-w-[60rem] mx-auto">

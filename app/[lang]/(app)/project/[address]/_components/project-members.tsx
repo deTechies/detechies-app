@@ -24,6 +24,8 @@ export default async function ProjectMembers({
             {lang.project.details.members.title} ({details.members.length})
           </h5>
 
+         
+
           {details.userRole == "none" && (
             <JoinProject lang={lang} address={projectId} />
           )}

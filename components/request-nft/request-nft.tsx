@@ -149,7 +149,8 @@ export default function RequestNFTModal({
             </div>
 
             <div className="h-[50vh] overflow-y-auto mb-6">
-              {filteredData && filteredData.length > 0 &&
+              {filteredData &&
+                filteredData.length > 0 &&
                 filteredData.map((_group: any, _index: number) => {
                   return (
                     <RequestGroupListItem
@@ -161,7 +162,7 @@ export default function RequestNFTModal({
                   );
                 })}
 
-              {!filteredData && filteredData?.length < 1 && (
+              {!filteredData || filteredData.length < 1 && (
                 <div>{lang.project.details.evalu.no_search_result}</div>
               )}
             </div>
@@ -187,10 +188,7 @@ export default function RequestNFTModal({
             </div>
 
             <div className="mb-5">
-              <RequestGroupListItem
-                _group={selectedGroup}
-                useChevron={false}
-              />
+              <RequestGroupListItem _group={selectedGroup} useChevron={false} />
             </div>
 
             <div className="mb-3 text-title_s">
@@ -246,10 +244,7 @@ export default function RequestNFTModal({
             </div>
 
             <div className="mb-5">
-              <RequestGroupListItem
-                _group={selectedGroup}
-                useChevron={false}
-              />
+              <RequestGroupListItem _group={selectedGroup} useChevron={false} />
             </div>
 
             <div className="mb-3 text-title_s">

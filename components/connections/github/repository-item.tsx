@@ -15,11 +15,11 @@ export const RepositoryItem: React.FC<RepositoryItemProps> = ({ repo, onImport }
     return (
       <CommandItem
       onClick={() => window.alert("launch")}
-      className="my-2 w-full hover:text-accent-secondary hover:bg-accent-secondary"
+      className="my-2 w-full hover:bg-accent-secondary"
       onSelect={handleClick}
     >
       <Github className="mr-2 h-4 w-4 hover:animate-pulse" />
-      <span className="my-2 hover:text-accent-secondary">{repo.name}</span>
+      <span className="my-2">{repo.name}</span>
     </CommandItem>
     );
   };

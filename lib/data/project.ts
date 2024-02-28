@@ -32,6 +32,7 @@ export async function updateProject(data: any) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
+      'x-api-key': 'API_KEY'
     },
     body: JSON.stringify({ ...data, owner: session?.web3?.address }),
   });

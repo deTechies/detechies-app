@@ -1,22 +1,23 @@
 import { Command, CommandInput, CommandList } from "@/components/ui/command";
 import { DependenciesList } from "./dependencies-list";
+import { LanguageList } from "./language-list";
 import { RepositoryItem } from "./repository-item";
-import { Dependency, Repository } from "./types";
+import { Dependency, LanguagePercentage, Repository } from "./types";
 RepositoryItem;
 
 interface RepositoriesListProps {
   repos: Repository[];
   onImport: (owner: string, repoName: string) => void;
-  dependencies: Dependency[];
+  data: {languages: LanguagePercentage[], packages:Dependency[]};
 }
 
 export const RepositoriesList = ({
   repos,
   onImport,
-  dependencies,
+  data,
 }: RepositoriesListProps) => (
   <div className="max-w-xl p-2">
-    {dependencies.length == 0  && (
+    {data && data.packages?.length == 0  && (
       <Command className="rounded-lg border shadow-md">
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
@@ -26,7 +27,13 @@ export const RepositoriesList = ({
         </CommandList>
       </Command>
     )}
-    
-    <DependenciesList dependencies={dependencies} />
+    {
+      data?.packages?.length > 0 && (
+        <>
+        <DependenciesList dependencies={data.packages} />
+        <LanguageList languages={data.languages}/>
+        </>
+      )
+    }
   </div>
 );

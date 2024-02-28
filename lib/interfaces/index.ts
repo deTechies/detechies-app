@@ -212,7 +212,7 @@ export enum PROFESSION_TYPE {
 
 export enum AVAILABILITY_TYPE {
   AVAILABLE = "available",
-  SOON_AVAILABLE = "soon avialable",
+  SOON_AVAILABLE = "soon available",
   NOT_AVAILABLE = "not available",
 }
 
