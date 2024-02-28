@@ -1,6 +1,5 @@
 //we want to create a group with all the members of th project.
 "use client";
-import Loading from "@/components/loading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
@@ -43,7 +42,8 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
 
   useEffect(() => {
     const fetchChat = async (newChat: string) => {
-      if ( !newChat) return;
+      
+      console.log("chatter");
       if(!chatter.user) {
         chatter.initializeUser();
         return;
@@ -112,7 +112,9 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
   return (
     <div className="m-4">
     <section className="h-[60vh] overflow-auto ">
-      {loading ? <Loading /> : <MessageList chats={chats} />}
+      {loading ? <div>
+        Loading chat... 
+      </div> : <MessageList chats={chats} />}
     </section>
     <MessageInput
       inputValue={inputValue}

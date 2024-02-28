@@ -103,7 +103,7 @@ export default async function ConnectionsList({
   
   return (
     <>
-      <section className={`grid grid-cols-3 2xl:gap-5`}>
+      <section className={`grid grid-cols-3 gap-2  2xl:gap-5`}>
         {connected.map((item: any, key: number) => (
           <ConnectCard
             key={key}

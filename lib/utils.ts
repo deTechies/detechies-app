@@ -6,7 +6,22 @@ import * as React from 'react';
 import { extendTailwindMerge } from "tailwind-merge";
 import { WalletClient } from "viem";
 import { useWalletClient } from 'wagmi';
+import { timezoneInt } from "./helpers/timezone";
 
+
+export function addURL(link:string){
+  return link.includes('http') ? link : `https://ipfs.io/ipfs/${link}`
+
+}
+
+export function getTimezone(current:number){
+  const timezone = timezoneInt.find((timezone) => {
+    if(timezone.value === current.toString()){
+      return timezone.label
+    }
+  });
+  return timezone?.label
+}
 
 const customTwMerge = extendTailwindMerge({
   classGroups: {
