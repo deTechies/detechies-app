@@ -10,8 +10,8 @@ import { uploadContent } from "@/lib/upload";
 import { Club, PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
 import MediaUploader from "@/components/extra/media-uploader";
-import NoticeGroupSelect from "./notice-group-select";
 import ProfessionTagType from "@/components/extra/profession-tag-type";
+import NoticeGroupSelect from "./notice-group-select";
 import SelectGroupInScope from "./select-group-in-scope";
 
 import { Badge } from "@/components/ui/badge";
@@ -48,9 +48,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { useDictionary } from "@/lib/dictionaryProvider";
 import { AlertCircle, X } from "lucide-react";
+import * as z from "zod";
 
 
 

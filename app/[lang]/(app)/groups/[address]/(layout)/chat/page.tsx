@@ -1,7 +1,7 @@
 import CreatePushGroup from '@/components/extra/chat/create-push-group';
 import PushGroupChat from '@/components/extra/chat/push-group-chat';
 import { getClub } from '@/lib/data/groups';
-import { Address } from 'wagmi';
+import { Address } from 'viem';
 
 export default async function GroupChat({params}: {params: {address: string}}) {
     const groupDetails = await getClub(params.address);

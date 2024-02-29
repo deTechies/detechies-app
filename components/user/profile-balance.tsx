@@ -1,15 +1,15 @@
 "use client"
 
-import { useSwitchNetwork } from "wagmi"
+import { useSwitchChain } from "wagmi"
 
 export default function ProfileBalance({ loading, balance, token, active}: { loading: boolean, balance: string, token: any, active: boolean }) {
-  const { switchNetwork } =
-  useSwitchNetwork()
+  const { switchChain } =
+  useSwitchChain()
 
     return (
       <div className={`bg-background-layer-1 w-full flex flex-row items-center justify-between gap-4 py-[20px] px-8 rounded-sm outline outline-border-div 
       ${active && 'outline-accent-primary'} ${!active && 'cursor-pointer'}`} 
-      onClick={() => {if(!active){ switchNetwork?.(token.id)}}}>
+      onClick={() => {if(!active){ switchChain?.(token.id)}}}>
         <div className="flex flex-col">
           <span className="text-primary font-medium capitalize text-[14px]">{token.name}</span>
           <span className={`text-text-secondary tracking-wider font-light text-[12px]`}>{loading ? "loading" : Math.floor(Number(balance) * 1000000)/1000000}</span>

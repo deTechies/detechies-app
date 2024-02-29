@@ -8,7 +8,7 @@ import { Club } from "@/lib/interfaces";
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useContractWrite, useWaitForTransaction } from "wagmi";
+import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 
 export default function CreateGroupContract({
   group,
@@ -17,13 +17,12 @@ export default function CreateGroupContract({
   group: Club;
   lang: any;
 }) {
-  const { write, data, isLoading } = useContractWrite({
-    address: MUMBAI.groupRegistry,
-    abi: ABI.groupRegistry,
-    functionName: "createGroup",
-  });
+  const { writeContract, data } = useWriteContract({});
   const [loading, setLoading] = useState(false);
-  const { isFetched } = useWaitForTransaction(data);
+  const { isFetched } = useWaitForTransactionReceipt({
+    hash: data,
+
+  });
 
   const { refresh } = useRouter();
 
@@ -31,7 +30,7 @@ export default function CreateGroupContract({
     const submitGroup = async () => {
       //const result = await createGroupContract(group.id, "something");
       const result = await postServer(`/clubs/add-contract/${group.id}`, "");
-      if(result.status == "success") {
+      if (result.status == "success") {
         toast({
           title: "Group Contract",
           description: "Group contract created successfully",
@@ -56,8 +55,19 @@ export default function CreateGroupContract({
     try {
       setLoading(true);
       const groupDetails = await uploadContent(JSON.stringify(group));
-
-      await write({
+      if(!groupDetails || !group.id || !group.name) {
+        toast({
+          title: "Error",
+          description: "Failed to create group contract",
+        });
+        setLoading(false);
+        return;
+      }
+        
+      await writeContract({
+        address: MUMBAI.groupRegistry,
+        abi: ABI.groupRegistry,
+        functionName: "createGroup",
         args: [group.id, group.name, groupDetails],
       });
     } catch (e) {
@@ -81,7 +91,7 @@ export default function CreateGroupContract({
         </CardHeader>
 
         <CardContent className="text-center">
-          {data && data.hash}
+          {data}
 
           <p className="mb-8">
             {lang.group.details.profile_card.group_contract.desc}
@@ -98,8 +108,8 @@ export default function CreateGroupContract({
           <Button
             size="lg"
             onClick={createGroup}
-            loading={loading || isLoading}
-            disabled={loading || isLoading}
+            loading={loading}
+            disabled={loading}
           >
             {lang.group.details.profile_card.group_contract.button}
           </Button>

@@ -4,7 +4,6 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getClub } from "@/lib/data/groups";
 import { ClubMember } from "@/lib/interfaces";
-import { Address } from "wagmi";
 interface Profile {
   id: string;
   name: string;

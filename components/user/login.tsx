@@ -1,74 +1,41 @@
 "use client";
 
-import { polygonMumbai } from "@/helpers/mumbai";
-import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import { defaultAvatar } from "@/lib/constants";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { SiweMessage } from "siwe";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   useAccount,
-  useConnect,
-  useDisconnect,
-  useNetwork,
-  useSignMessage,
+  useDisconnect
 } from "wagmi";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import IPFSImageLayer from "../ui/layer";
 import AccountSettings from "./account-settings";
-import ModalLayout from "./modal-layout";
-import { useRouter } from "next/navigation";
 
 interface ILoginProps {
   lang: any;
 }
 
 export default function Login({ lang }: ILoginProps) {
-  const { connect, connectors } = useConnect();
   const {
     address,
-    status,
-    isConnected,
-    isConnecting,
-    isReconnecting,
-    isDisconnected,
+    status
+
   } = useAccount();
   const { disconnect } = useDisconnect();
-  const { chain, chains } = useNetwork();
   const [showModal, setShowModal] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
 
-  // Eager connection
-  useEffect(() => {
-    if (!isDisconnected) return;
-    const wagmiConnected = localStorage.getItem("wagmi.connected");
-    const isWagmiConnected = wagmiConnected
-      ? JSON.parse(wagmiConnected)
-      : false;
-
-    if (!isWagmiConnected) return;
-
-    const str_wallet = localStorage.getItem("wagmi.wallet");
-    const wallet_name = str_wallet && str_wallet.replace(/^"|"$/g, "");
-    connect({
-      connector: connectors.find((connector) => connector.id === wallet_name),
-    });
-
-    // console.log(connectors);
-    // connect({ connector: connectors as any });
-  }, [connect, connectors, isDisconnected]);
-
-  if (isConnecting || isReconnecting) {
+  if (status == 'connecting' || status == 'reconnecting') {
     return (
       <Avatar
         className="animate-pulse bg-accent-primary"
         onClick={() => {
-          disconnect();
           signOut();
+          disconnect();
         }}
       >
         <AvatarFallback />
@@ -76,13 +43,13 @@ export default function Login({ lang }: ILoginProps) {
     );
   }
 
-  if (session?.web3?.address != address && isConnected) {
+  if (status === 'connected' && session?.web3?.address != address) {
     //sign message
 
     return (
       <div className="flex items-center gap-2 rounded-md">
-        <Button size="sm" variant={"primary"} onClick={() => signOut()}>
-          {lang.sign_in}
+        <Button size="sm" variant={"primary"} onClick={() => {disconnect(); signOut(); }}>
+          signOut
         </Button>
         {showModal && (
           <AccountSettings showModal={showModal} text_my_account={lang} />
@@ -91,7 +58,7 @@ export default function Login({ lang }: ILoginProps) {
     );
   }
 
-  if (!isConnecting && address && address == session?.web3?.address) {
+  if (address && address == session?.web3?.address) {
     return (
       <div className="flex items-center gap-2 rounded-md">
         <Avatar
@@ -111,15 +78,6 @@ export default function Login({ lang }: ILoginProps) {
           <AccountSettings showModal={showModal} text_my_account={lang} />
         )}
 
-        {chain?.id != 314159 && chain?.id != 80001 && (
-          <Button
-            variant={"destructive"}
-            size="sm"
-            onClick={() => setShowModal(!showModal)}
-          >
-            Change Chain
-          </Button>
-        )}
       </div>
     );
   }

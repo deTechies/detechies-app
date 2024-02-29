@@ -4,7 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Address, createPublicClient, formatEther, http } from "viem";
-import { useAccount, useDisconnect, useNetwork } from "wagmi";
+import { useAccount, useConfig, useDisconnect } from "wagmi";
 import { ThemeToggle } from "../extra/theme-toggle";
 import { Button } from "../ui/button";
 import {
@@ -52,12 +52,13 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
   const { disconnect } = useDisconnect();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { chain, chains } = useNetwork();
+  const { chains } = useConfig();
+
   const [balances, setBalances] = useState<any>([]);
   const pathName = usePathname();
   const params = pathName.split("/")[1];
 
-  const { address: account, isConnected } = useAccount();
+  const { address: account, isConnected, chain } = useAccount();
 
   const { data: session } = useSession();
 

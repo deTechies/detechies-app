@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
-import { Address } from "wagmi";
+import { Address } from "viem";
 
 export default function UserProfile({
   profile,

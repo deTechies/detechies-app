@@ -34,7 +34,8 @@ import {
 import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Address, useContractWrite } from "wagmi";
+import { Address } from "viem";
+import { useWriteContract } from "wagmi";
 import CompletedSuccess from "./completed-success";
 
 const profileFormSchema = z.object({
@@ -424,11 +425,7 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
   const [isLoading, setIsLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
 
-  const { write, error } = useContractWrite({
-    address: group.contract as Address,
-    abi: ABI.group,
-    functionName: "addAchievement",
-  });
+  const { writeContract, error } = useWriteContract();
 
   async function onSubmit(data: ProfileFormValues) {
     setIsLoading(true);
@@ -512,7 +509,10 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
       return;
     }
 
-    await write({
+    await writeContract({
+      address: group.contract as Address,
+      abi: ABI.group,
+      functionName: "addAchievement",
       args: [metadata, tradeable],
     });
 

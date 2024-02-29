@@ -1,31 +1,26 @@
 // hooks/useMint.js
-import { toast } from "@/components/ui/use-toast";
 import { ABI, MUMBAI } from "@/lib/constants";
 import { useState } from "react";
-import { useContractWrite, useWaitForTransaction } from "wagmi";
+import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 
 export function useMint() {
   const [minting, setMinting] = useState(false);
   const [finished, setFinished] = useState(false);
-  const { write, isLoading, data: mintingStatus } = useContractWrite({
-    address: MUMBAI.profile,
-    abi: ABI.profile,
-    functionName: "mint",
-  });
+  const { writeContract, data: mintingStatus } = useWriteContract();
 
-  const waitForTransaction = useWaitForTransaction({
-    hash: mintingStatus?.hash,
-    onSuccess() {
-      toast({ title: "Successfully minted all the items" });
-      setMinting(false);
-      setFinished(true);
-    },
+  const waitForTransaction = useWaitForTransactionReceipt({
+    hash: mintingStatus,
   });
 
   const mint = () => {
-    write();
+    writeContract({
+      address: MUMBAI.profile,
+      abi: ABI.profile,
+      functionName: "mint",
+      args: [],
+    });
     setMinting(true);
   };
 
-  return { minting, mint, isLoading, mintingStatus, finished };
+  return { minting, mint, mintingStatus, finished };
 }

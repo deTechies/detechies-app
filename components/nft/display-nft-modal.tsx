@@ -8,7 +8,8 @@ import { Achievement } from "@/lib/interfaces";
 import { truncateMiddle } from "@/lib/utils";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Address, useContractRead } from "wagmi";
+import { Address } from "viem";
+import { useReadContract } from "wagmi";
 import NftListItem from "../card/nft-list-item";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -34,7 +35,7 @@ export default function DisplayNFTModal({
   const [requesting, setRequesting] = useState<boolean>(false);
   const [showFull, setShowFull] = useState(false);
   const [showingImage, setShowingImage] = useState("");
-  const { data, error } = useContractRead({
+  const { data, error } = useReadContract({
     address: contract as Address,
     abi: ABI.group,
     functionName: "achievementContract",
