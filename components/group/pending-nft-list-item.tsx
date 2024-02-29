@@ -9,11 +9,11 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Address } from "viem";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
-import AchievementChips from "../extra/achievement-chips";
+import { Address, useContractWrite, useWaitForTransaction } from "wagmi";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
+import AchievementChips from "../extra/achievement-chips";
 
 export default function PendingMemberListItem({
   nft,
@@ -28,28 +28,36 @@ export default function PendingMemberListItem({
 
   const {
     data,
+    isLoading,
     isError,
-    writeContract: distributeAchievement,
-  } = useWriteContract();
+    write: distributeAchievement,
+  } = useContractWrite({
+    address: contract as Address,
+    abi: ABI.group,
+    functionName: "distributeAchievement",
+  });
 
   const {
     data: projectData,
+    isLoading: projectLoading,
     isError: projectError,
-    writeContract: rewardProject,
-  } = useWriteContract({
-
+    write: rewardProject,
+  } = useContractWrite({
+    address: contract as Address,
+    abi: ABI.group,
+    functionName: "rewardProject",
   });
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
-  const { isFetched: projectFinished } = useWaitForTransactionReceipt({hash: projectData});
-  const { isFetched } = useWaitForTransactionReceipt({hash: data});
+  const { isFetched: projectFinished } = useWaitForTransaction(projectData);
+  const { isFetched } = useWaitForTransaction(data);
 
   useEffect(() => {
     const submitNFT = async () => {
       const submitData = JSON.stringify({
         achievementId: nft.id,
         status: "accepted",
-        data: data,
+        data: data?.hash,
       });
 
       const result = await postServer(
@@ -120,16 +128,10 @@ export default function PendingMemberListItem({
       );
 
       await rewardProject({
-        address: contract as Address,
-        abi: ABI.group,
-        functionName: "rewardProject",
         args: [nft.achievement.tokenId, userWallets],
       });
     } else {
       await distributeAchievement({
-        address: contract as Address,
-        abi: ABI.group,
-        functionName: "distributeAchievement",
         args: [nft.achievement.tokenId, nft.user.wallet, 1],
       });
     }
@@ -241,7 +243,7 @@ export default function PendingMemberListItem({
           className="p-2 rounded-md w-14 h-14"
           variant="secondary"
           size="icon"
-          disabled={ loading}
+          disabled={isLoading || projectLoading || loading}
         >
           <X className="w-6 h-6 text-icon-secondary"/>
         </Button>
@@ -250,7 +252,7 @@ export default function PendingMemberListItem({
           onClick={acceptNFT}
           className="p-2 rounded-md w-14 h-14"
           size="icon"
-          disabled={loading}
+          disabled={isLoading || projectLoading || loading}
         >
           <Check className="w-6 h-6"/>
         </Button>

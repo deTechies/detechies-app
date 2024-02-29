@@ -6,8 +6,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { PushContext } from "@/lib/usePushProtocol";
 import { useContext, useEffect, useState } from "react";
-import { Address } from "viem";
-import { useAccount } from "wagmi";
+import { Address, useAccount } from "wagmi";
 import { MessageInput, MessageList } from "./push-chat";
 
 type Chat = {

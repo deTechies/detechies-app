@@ -9,8 +9,7 @@ import { getUserById } from "@/lib/data/user";
 import { Mission, MissionDetails } from "@/lib/interfaces";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { Address } from "viem";
-import { useWriteContract } from "wagmi";
+import { Address, useContractWrite } from "wagmi";
 import ManageMissionReward from "./manage-mission-reward";
 import MissionList from "./mission-list";
 
@@ -33,8 +32,10 @@ export default function MissionDetail({
     totalPoints: 0,
   });
 
-  const { writeContract: distributeAchievement, data } = useWriteContract({
-
+  const { write: distributeAchievement, data } = useContractWrite({
+    address: details.club.contract as Address,
+    abi: ABI.group,
+    functionName: "distributeAchievement",
   });
   const searchParams = useSearchParams();
   const selectedMember = searchParams.get("memberId");
@@ -149,9 +150,6 @@ export default function MissionDetail({
           });
 
           await distributeAchievement({
-            address: details.club.contract as Address,
-            abi: ABI.group,
-            functionName: "distributeAchievement",
             args: [achievement.achievement.tokenId, getUser.wallet, 1],
           });
         }

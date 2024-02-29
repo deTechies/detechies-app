@@ -1,24 +1,25 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
-import { usePrivy } from "@privy-io/react-auth";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
-import { polygonMumbai } from "viem/chains";
-import { useAccount, useDisconnect, useSignMessage } from "wagmi";
+import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
 
-export default function LoginButtons({ text }: { text: any }) {
-  const { ready, authenticated, login, logout } = usePrivy();
-  // Disable login when Privy is not ready or the user is already authenticated
-  const disableLogin = !ready || (ready && authenticated);
-  const {address} = useAccount();
+export default function LoginButtons({ text }: { text?: any }) {
+  const { connect, connectors } = useConnect();
+  const { address } = useAccount();
   const { data: session } = useSession();
   const { signMessageAsync } = useSignMessage();
   const [signing, setSigning] = useState(false);
   const { disconnect } = useDisconnect();
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (session && session.web3?.accessToken) {
@@ -30,6 +31,10 @@ export default function LoginButtons({ text }: { text: any }) {
       }
     }
   }, [address, session]);
+
+  const handleConnect = (connector: any) => {
+    connect({ connector });
+  };
 
   const handleSign = async () => {
     setSigning(true);
@@ -71,45 +76,69 @@ export default function LoginButtons({ text }: { text: any }) {
     setSigning(false);
   };
 
-  if (address && authenticated) {
-    return (
-      <div className="flex w-full">
-        <Button
-          variant={"secondary"}
-          onClick={handleSign}
-          className="flex-grow rounded-none rounded-l-sm"
-          loading={signing}
-        >
-          {text.sign_in_as ? text.sign_in_as : "Sign is as "}{" "}
-          {address && truncateMiddle(address, 13)}
-        </Button>
-        <Button
-          variant={"destructive"}
-          className="rounded-none rounded-r-sm"
-          onClick={() => {
-            signOut();
-            disconnect();
-          }}
-        >
-          {text.sign_out ? text.sign_out : "Sign Out"}
-        </Button>
-      </div>
-    );
-  }
-  
-  if(!address && authenticated) {
-    return (
-      <Button
-        variant={"secondary"}
-        onClick={logout}
-      >
-        {text.sign_out ? text.sign_out : "Sign Out"}
-      </Button>
-    );
-  }
   return (
-    <Button disabled={disableLogin} onClick={login}>
-      Log in
-    </Button>
+    <main>
+      <div className="flex flex-col gap-4 space-y-1">
+        {!address ? (
+          <>
+            <div
+              key={connectors[1].id}
+              className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-accent-secondary text-accent-primary hover:outline hover:outline-accent-primary"
+              onClick={() => handleConnect(connectors[1])}
+            >
+              <Image
+                src={`/icons/google.png`}
+                height={24}
+                width={24}
+                alt={connectors[1].name}
+                quality={1}
+              />
+              <span className="w-full text-center text-title_m">
+                {text?.web3 ? text.web3 : "Social Wallet"}
+              </span>
+            </div>
+
+            <div
+              key={connectors[0].id}
+              className="flex items-center gap-6 px-6 py-4 font-medium border rounded-sm cursor-pointer bg-background-layer-2 border-border-div hover:border-orange-500"
+              onClick={() => handleConnect(connectors[0])}
+            >
+              <Image
+                src={`/icons/browser.png`}
+                height={24}
+                width={24}
+                alt={connectors[0].name}
+              />
+              <span className="w-full text-center text-title_m ">
+                {text?.browser ? text.browser : "Browser Wallet"}
+              </span>
+            </div>
+
+          </>
+        ) : (
+          <div className="flex w-full">
+            <Button
+              variant={"secondary"}
+              onClick={handleSign}
+              className="flex-grow rounded-none rounded-l-sm"
+              loading={signing}
+            >
+              {text.sign_in_as ? text.sign_in_as : "Sign is as "}{" "}
+              {address && truncateMiddle(address, 13)}
+            </Button>
+            <Button
+              variant={"destructive"}
+              className="rounded-none rounded-r-sm"
+              onClick={() => {
+                signOut()
+                disconnect()
+              }}
+            >
+              {text.sign_out ? text.sign_out : "Sign Out"}
+            </Button>
+          </div>
+        )}
+      </div>
+    </main>
   );
 }

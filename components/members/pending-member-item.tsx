@@ -142,5 +142,10 @@ export default function PendingMemberItem({
         </div>
       </div>
     </div>
+    // </DialogTrigger>
+    //       <DialogContent>
+    //         We will show more details about this later on...
+    //       </DialogContent>
+    // </Dialog>
   );
 }
