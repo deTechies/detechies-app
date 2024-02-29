@@ -1,18 +1,17 @@
 "use client";
-import { ABI, defaultAvatar } from "@/lib/constants";
+import { defaultAvatar } from "@/lib/constants";
 import { acceptClubMember } from "@/lib/data/groups";
+import { postServer } from "@/lib/data/postRequest";
 import { formatDate } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Address, useContractWrite } from "wagmi";
+import { useState } from "react";
+import { useWriteContract } from "wagmi";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";
 import { toast } from "../ui/use-toast";
-import { useState } from "react";
-import { postServer } from "@/lib/data/postRequest";
-
 export default function PendingMemberListItem({
   profile,
   contract,
@@ -33,11 +32,7 @@ export default function PendingMemberListItem({
 
   // if (!data) return <div>no data</div>;
 
-  const { write, isLoading, error, data } = useContractWrite({
-    address: contract as Address,
-    abi: ABI.group,
-    functionName: "createMember",
-  });
+  const { writeContract, error, data } = useWriteContract();
 
   const acceptEmployee = async () => {
     //in here we want to have the profile.id
@@ -65,8 +60,11 @@ export default function PendingMemberListItem({
       description: result.message,
     });
 
-    //await write();
-  };
+/*     //await writeContract({address: contract as Address,
+    abi: ABI.group,
+    functionName: "createMember"});
+  }; */
+}
 
   const rejectEmployee = async () => {
     setRejectLoading(true);

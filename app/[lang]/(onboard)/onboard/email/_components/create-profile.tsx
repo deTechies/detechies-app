@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { getSession, signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   Form,
@@ -18,21 +18,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
 
-import { testAppId, web3AuthInstance } from "@/app/[lang]/app";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Label } from "@radix-ui/react-label";
-import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAccount, useDisconnect } from "wagmi";
 import * as z from "zod";
 import PrivacyPolicy from "./privacy-policy";
-import TermsOfService from "./terms-of-service";
 import RewardNotification from "./reward-notification";
+import TermsOfService from "./terms-of-service";
 
-const wepin_app = process.env.NEXT_PUBLIC_WEPIN_APP_ID;
-const wepin_prod_app = process.env.WEPIN_PROD_APP_ID;
 
 export default function CreateProfile({ lang }: { lang: any }) {
   const profileFormSchema = z.object({
@@ -74,44 +69,12 @@ export default function CreateProfile({ lang }: { lang: any }) {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const { refresh, push } = useRouter();
+  const { refresh } = useRouter();
   const { connector } = useAccount();
-  const { disconnect } = useDisconnect({
-    onSuccess: () => {
-      push("/onboard");
-    },
-    onError: (error) => {
-      setIsLoading(false);
-      console.error("Error disconnecting:", error);
-    },
-  });
+  const { disconnect } = useDisconnect();
 
-  const [blockPopupOpen, setBlockPopupOpen] = useState(false);
 
-  if (connector?.id == "web3auth" && !blockPopupOpen) {
-    setBlockPopupOpen(true);
-    const getInfo = async () => {
-      const result = await web3AuthInstance?.getUserInfo();
-      if (result?.email) {
-        form.setValue("email", result.email);
-        form.setValue("verified", true);
-      }
-    };
-    getInfo();
-  }
 
-  useEffect(() => {
-    if (localStorage.getItem("wagmi.wallet") === `"wepin"`) {
-      const storageWepinData = localStorage.getItem(
-        `wepin:widget:${wepin_app || wepin_prod_app || testAppId}`
-      );
-      if (storageWepinData !== null) {
-        const obj_wepin = JSON.parse(storageWepinData);
-        form.setValue("email", obj_wepin.user_info.email);
-        form.setValue("verified", true);
-      }
-    }
-  }, [form]);
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
@@ -177,11 +140,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
     setIsLoading(false);
   }
 
-  const onClickDisconnect = async () => {
-    setIsLoading(true);
-    signOut();
-    disconnect();
-  };
 
   return (
     <>
@@ -387,7 +345,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
               size="lg"
               disabled={
                 isLoading ||
-                blockPopupOpen ||
                 !form.watch("display_name") ||
                 !form.watch("email") ||
                 !form.watch("terms_of_service") ||
@@ -401,27 +358,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
         </form>
       </Form>
 
-      <Dialog open={blockPopupOpen}>
-        <DialogContent className="max-w-[500px] gap-0">
-          <h3 className="mb-4 text-subhead_s">
-            {lang.onboard.verify_email.block_web3auth.title}
-          </h3>
-
-          <div className="mb-6 text-body_m">
-            {lang.onboard.verify_email.block_web3auth.desc}
-          </div>
-
-          <Button
-            size="lg"
-            className="max-w-full"
-            onClick={onClickDisconnect}
-            loading={isLoading}
-            disabled={isLoading}
-          >
-            {lang.onboard.verify_email.block_web3auth.button}
-          </Button>
-        </DialogContent>
-      </Dialog>
     </>
   );
 }

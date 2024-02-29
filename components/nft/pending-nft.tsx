@@ -1,14 +1,14 @@
 
 "use client";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { getAddress } from "viem";
+import { Address, getAddress } from "viem";
 
 import { ABI, API_URL } from "@/lib/constants";
 import { truncateMiddle } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Address, useContractWrite } from "wagmi";
+import { useWriteContract } from "wagmi";
 
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
@@ -16,14 +16,9 @@ import { toast } from "../ui/use-toast";
 export default function PendingNFT({ details }: any) {
   const {
     data,
-    isLoading,
     isSuccess,
-    write: distributeAchievement,
-  } = useContractWrite({
-    address: details.contract as Address,
-    abi: ABI.group,
-    functionName: "distributeAchievement",
-  });
+    writeContract: distributeAchievement,
+  } = useWriteContract();
 
   const [minting, setMinting] = useState(false);
 
@@ -55,21 +50,30 @@ export default function PendingNFT({ details }: any) {
       
       for(let i = 0; i < workersAddresses.length; i++){
         await distributeAchievement({
+          address: details.contract as Address,
+          abi: ABI.group,
+          functionName: "distributeAchievement",
           args: [details.nft.tokenId, workersAddresses[i], 1],
         });
       }
       
       await distributeAchievement({
+        address: details.contract as Address,
+        abi: ABI.group,
+        functionName: "distributeAchievement",
         args: [details.nft.tokenId, details.requester, 1],
       })
     } else {
       await distributeAchievement({
+        address: details.contract as Address,
+        abi: ABI.group,
+        functionName: "distributeAchievement",
         args: [details.nft.tokenId, details.requester, 1],
       });
     }
 
     
-    if(data && data.hash){
+    if(data){
       await fetch(`${API_URL}/achievement/update`, {
         method: "POST",
         headers: {
@@ -159,7 +163,7 @@ export default function PendingNFT({ details }: any) {
         <div className="grid grid-cols-2 gap-8">
           <Button variant={"secondary"}>Reject</Button>
           <Button onClick={() => mintNFT()}
-            loading={minting || isLoading}
+            loading={minting}
           >Confirm</Button>
         </div>
       </DialogContent>

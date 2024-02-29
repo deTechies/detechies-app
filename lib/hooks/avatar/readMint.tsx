@@ -1,6 +1,6 @@
-import { ABI, MUMBAI } from "@/lib/constants";
+/* import { ABI, MUMBAI } from "@/lib/constants";
 import { useEffect, useState } from "react";
-import { useAccount, useContractRead } from "wagmi";
+import { useAccount, useContractRead, useReadContract } from "wagmi";
 import { AvatarData } from "./avatar-types";
 
 // Define a type for the return value of useAvatarData
@@ -15,7 +15,8 @@ export function useAvatarData(): UseAvatarDataReturnType {
   const [data, setData] = useState<AvatarData | any>(null);
   const [tba, setTba] = useState<unknown | null>(null);  // Replace 'unknown' with the actual type of 'tba'
 
-  const { data: balanceData, refetch: refetchBalanceData } = useContractRead({
+  if(!address) return { data, tba, refetch: () => {} };
+  const { data: balanceData, refetch: refetchBalanceData } = useReadContract({
     address: MUMBAI.profile,
     abi: ABI.profile,
     functionName: "balanceOf",
@@ -41,3 +42,4 @@ export function useAvatarData(): UseAvatarDataReturnType {
 
   return { data, tba, refetch };
 }
+ */

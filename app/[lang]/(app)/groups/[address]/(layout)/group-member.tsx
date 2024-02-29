@@ -1,10 +1,9 @@
 "use client";
 import MemberCard from "@/components/card/member-card";
-import { Address } from "wagmi";
 import { Button } from "@/components/ui/button";
+import { ClubMember } from "@/lib/interfaces";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ClubMember } from "@/lib/interfaces";
 
 export default function GroupMember({
   address,
