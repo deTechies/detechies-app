@@ -7,7 +7,7 @@ import { PushContext } from "@/lib/usePushProtocol";
 import { didToAddress } from "@/lib/utils";
 import { SendHorizonal } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { Address } from "viem";
+import { Address } from "wagmi";
 import MessageItem from "./message-item";
 
 type Chat = {

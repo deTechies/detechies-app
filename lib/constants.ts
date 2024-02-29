@@ -1,6 +1,6 @@
 // we want to add in the abis and the contracts in here to make sure that we can build the contracts
 
-import { Address } from "viem";
+import { Address } from "wagmi";
 import group from "./abi/group.abi.json";
 import groupRegistry from "./abi/groupRegistry.abi.json";
 import profile from "./abi/profile.abi.json";

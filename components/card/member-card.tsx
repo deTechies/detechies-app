@@ -3,7 +3,7 @@ import { defaultAvatar } from "@/lib/constants";
 // import useFetchData from "@/lib/useFetchData";
 import { User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
-import { Address } from "viem";
+import { Address } from "wagmi";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import IPFSImageLayer from "../ui/layer";

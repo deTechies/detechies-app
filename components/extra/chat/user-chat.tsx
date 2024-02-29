@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import { MessagesSquare } from "lucide-react";
-import { Address } from "viem";
+import { Address } from "wagmi";
 import PushChat from "./push-chat";
 
 export default function UserChat({ to }: { to: Address }) {

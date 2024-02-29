@@ -90,7 +90,7 @@ export async function sendVerifyEmail(code: string) {
 export async function getUserSession() {
   const session = (await getServerSession(authOptions)) as Session;
   if (!session?.web3?.user) {
-   // redirect("/onboard");
+    redirect("/onboard");
   }
   return session.web3;
 }

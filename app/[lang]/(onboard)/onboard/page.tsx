@@ -13,9 +13,10 @@ export default async function OnboardPage({
   params: { lang: Locale };
 }) {
   const dictionary = await getDictionary(lang);
+
   const session = await auth();
 
-  if (session?.web3?.user?.verified ) {
+  if (session?.web3?.user?.verified) {
     redirect("/mypage");
   }
   

@@ -1,126 +1,118 @@
-
 import { clsx, type ClassValue } from "clsx";
 
-import { getWalletClient } from "@wagmi/core";
+import { getWalletClient } from '@wagmi/core';
 import { providers } from "ethers";
-import { useMemo } from "react";
+import * as React from 'react';
 import { extendTailwindMerge } from "tailwind-merge";
-import type { Account, Chain, Client, Transport } from "viem";
 import { WalletClient } from "viem";
-import { Config, useConnectorClient } from "wagmi";
+import { useWalletClient } from 'wagmi';
 import { timezoneInt } from "./helpers/timezone";
-import { wagmiConfig } from "./privy/wagmiConfig";
 
-export function addURL(link: string) {
-  return link.includes("http") ? link : `https://ipfs.io/ipfs/${link}`;
+
+export function addURL(link:string){
+  return link.includes('http') ? link : `https://ipfs.io/ipfs/${link}`
+
 }
 
-export function getTimezone(current: number) {
+export function getTimezone(current:number){
   const timezone = timezoneInt.find((timezone) => {
-    if (timezone.value === current.toString()) {
-      return timezone.label;
+    if(timezone.value === current.toString()){
+      return timezone.label
     }
   });
-  return timezone?.label;
+  return timezone?.label
 }
 
 const customTwMerge = extendTailwindMerge({
   classGroups: {
     // FontSize group
-    "font-size": [
-      "text-heading_l",
-      "text-heading_m",
-      "text-heading_s",
-      "text-subhead_l",
-      "text-subhead_m",
-      "text-subhead_s",
-      "text-title_l",
-      "text-title_m",
-      "text-title_s",
-      "text-label_l",
-      "text-label_m",
-      "text-label_s",
-      "text-body_l",
-      "text-body_m",
-      "text-body_s",
+    'font-size': [
+      'text-heading_l',
+      'text-heading_m',
+      'text-heading_s',
+      'text-subhead_l',
+      'text-subhead_m',
+      'text-subhead_s',
+      'text-title_l',
+      'text-title_m',
+      'text-title_s',
+      'text-label_l',
+      'text-label_m',
+      'text-label_s',
+      'text-body_l',
+      'text-body_m',
+      'text-body_s',
     ],
     // Color group
-    "text-color": [
-      "text-accent-primary",
-      "text-accent-secondary",
-      "text-accent-on-primary",
-      "text-accent-on-secondary",
-      "text-text-primary",
-      "text-text-secondary",
-      "text-text-placeholder",
-      "text-icon-primary",
-      "text-icon-secondary",
-      "text-state-error",
-      "text-state-success",
-      "text-state-warning",
-      "text-state-info",
-    ],
+    'text-color': [
+      'text-accent-primary',
+      'text-accent-secondary',
+      'text-accent-on-primary',
+      'text-accent-on-secondary',
+      'text-text-primary',
+      'text-text-secondary',
+      'text-text-placeholder',
+      'text-icon-primary',
+      'text-icon-secondary',
+      'text-state-error',
+      'text-state-success',
+      'text-state-warning',
+      'text-state-info',
+      ],
   },
 });
 
 export function cn(...inputs: ClassValue[]) {
-  return customTwMerge(clsx(inputs));
+  return customTwMerge(clsx(inputs))
   // return twMerge(clsx(inputs))
 }
 
 export const formatBalance = (rawBalance: string) => {
-  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
-  return balance;
-};
+  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
+  return balance
+}
 
 export const formatChainAsNum = (chainIdHex: string) => {
-  const chainIdNum = parseInt(chainIdHex);
-  return chainIdNum;
-};
+  const chainIdNum = parseInt(chainIdHex)
+  return chainIdNum
+}
 
 export const formatAddress = (addr: string) => {
-  return `${addr.substring(0, 8)}...`;
-};
+  return `${addr.substring(0, 8)}...`
+}
 
 export function truncateMiddle(input: string, maxLength: number): string {
   // If the input string is shorter than or equal to the maxLength, return the original string
   if (input.length <= maxLength) {
-    return input;
+      return input;
   }
 
   const charsToShow = maxLength - 3; // 3 for the ellipsis
   const frontChars = Math.ceil(charsToShow / 2);
   const backChars = Math.floor(charsToShow / 2);
 
-  return (
-    input.substr(0, frontChars) + "..." + input.substr(input.length - backChars)
-  );
+  return input.substr(0, frontChars) + '...' + input.substr(input.length - backChars);
 }
 
-//convert a date into a format of 01.01.2023 for me
+//convert a date into a format of 01.01.2023 for me 
 
-export function formatDate(stringDate: string | Date): string {
+export function formatDate(stringDate: string | Date):string {
   const date = new Date(stringDate);
 
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return `${year}.${month}.${day}`;
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+  return `${year}.${month}.${day}`
 }
 
-export function beginEndDates(
-  beginDate: string | Date,
-  endDate?: string | Date
-): string {
+export function beginEndDates(beginDate: string | Date, endDate?: string | Date):string {
   // const lang = useDictionary();
   // lang.beginEndDates.ongoing
-  if (!beginDate) {
+  if(!beginDate) {
     return "Not Set Date";
   }
 
-  return endDate
-    ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}`
-    : `${formatDate(beginDate)} ~ 진행중`;
+  return endDate ? `${formatDate(beginDate)} ~ ${formatDate(endDate)}` : `${formatDate(beginDate)} ~ 진행중`
 }
 
 /* export function walletClientToSigner(walletClient: any) {
@@ -143,54 +135,62 @@ export function beginEndDates(
 } */
 
 
-export function clientToSigner(client: Client<Transport, Chain, Account>) {
-  const { account, chain, transport } = client;
+
+
+export function walletToSigner(walletClient: WalletClient) {
+  const { account, chain, transport } = walletClient
   const network = {
     chainId: chain?.id,
     name: chain?.name,
     ensAddress: chain?.contracts?.ensRegistry?.address,
-  };
-  const provider = new providers.Web3Provider(transport, network);
-  const signer = provider.getSigner(account.address);
-  return signer;
+  }
+  //@ts-ignore
+  const provider = new providers.Web3Provider(transport, network)
+  //@ts-ignore
+  const signer = provider.getSigner(account.address)
+  return signer
 }
 
-/** Action to convert a Viem Client to an ethers.js Signer. */
-export async function useEthersSigner({ chainId }: { chainId?: number } = {}) {
-  const { data: client } = useConnectorClient<Config>({ chainId });
-  return useMemo(() => (client ? clientToSigner(client) : undefined), [client]);
+/** Hook to convert a viem Wallet Client to an ethers.js Signer. */
+export function useEthersSigner({ chainId }: { chainId?: number } = {}) {
+  const { data: walletClient } = useWalletClient({ chainId })
+  return React.useMemo(
+    () => (walletClient ? walletToSigner(walletClient) : undefined),
+    [walletClient],
+  )
 }
-export async function walletClientToSigner(walletClient: WalletClient) {
-  const { account, chain, transport } = walletClient;
 
-  if (!account) return undefined;
-  if (!chain) return undefined;
+export function walletClientToSigner(walletClient: WalletClient) {
+  const { account, chain, transport } = walletClient
+  
+  if(!account) return undefined
+  if(!chain) return undefined
   const network = {
     chainId: chain.id,
     name: chain.name,
     ensAddress: chain.contracts?.ensRegistry?.address,
-  };
-  const provider = new providers.Web3Provider(transport, network);
-  const signer = await provider.getSigner(account.address);
-  return signer;
+  }
+  const provider = new providers.Web3Provider(transport, network)
+  const signer = provider.getSigner(account.address)
+  return signer
 }
-
+ 
 /** Action to convert a viem Wallet Client to an ethers.js Signer. */
 export async function getEthersSigner({ chainId }: { chainId?: number } = {}) {
-  const walletClient = await getWalletClient(wagmiConfig);
-  if (!walletClient) return undefined;
-  return walletClientToSigner(walletClient);
+  const walletClient = await getWalletClient({ chainId })
+  if (!walletClient) return undefined
+  return walletClientToSigner(walletClient)
 }
+
 
 export function didToAddress(did: string) {
-  return did.split(":")[1];
+  return did.split(":")[1]
 }
 
-const URL_REGEX =
-  /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+const URL_REGEX = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 
 export function isValidLink(s: string): boolean {
-  return URL_REGEX.test(s);
+    return URL_REGEX.test(s);
 }
 
 export const fileToBase64 = (file: File): Promise<string> =>
@@ -200,6 +200,7 @@ export const fileToBase64 = (file: File): Promise<string> =>
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+
 
 type Job = {
   id: number;
