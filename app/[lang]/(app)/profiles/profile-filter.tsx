@@ -2,25 +2,20 @@
 
 import Search from "@/components/extra/search";
 import { Card } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
-import InviteExperts from "./invite-experts";
 
 export default function ProfileFilter({ lang }: { lang: any }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const onSelectType = (event: PROFESSION_TYPE | "all") => {
     setLoading(true);
@@ -57,47 +52,48 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   );
 
   return (
-    <Card className="flex justify-between gap-5 px-8 pb-8 pt-7">
-      <h1 className="text-subhead_s">{lang.profile_filter.profiles}</h1>
+    <Card className="flex flex-col justify-between gap-5 sm:p-[30px] p-5">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-5 grow">
-          <Select onValueChange={onSelectType}>
-            <SelectTrigger className="w-[138px] px-3 py-3">
-              <SelectValue
-                placeholder={lang.profile_filter.filter}
-                className={`${loading && "animate-pulse"}`}
-              />
-            </SelectTrigger>
+        <div className="flex md:flex-row flex-col items-center gap-5 grow">
 
-            <SelectContent>
-              <SelectItem key="all" value="all">
-                {lang.interface.profession_type["all"]}
-              </SelectItem>
-              {Object.values(PROFESSION_TYPE).map((type) => (
-                <SelectItem key={type} value={type}>
-                  {lang.interface.profession_type[type]}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <div className="max-w-[335px] w-full">
+          <div className="md:max-w-[335px] w-full">
             <Search
               placeholder={lang.profile_filter.search}
               size="md"
               className="w-full"
             />
           </div>
-        </div>
-
-        <div className="flex items-end ml-auto">
-          <InviteExperts lang={lang}>
-            <div className="underline text-border-input">
-              {lang.profile_filter.info_text}
-            </div>
-          </InviteExperts>
+          <Button variant={"ghost"} onClick={() => setShowAdvanced(!showAdvanced)}>
+            Advanced Search
+          </Button>
         </div>
       </div>
+      {
+        showAdvanced && (
+          <div>
+          <Select onValueChange={onSelectType}>
+                <SelectTrigger className="w-[138px] px-3 py-3">
+                  <SelectValue
+                    placeholder={lang.profile_filter.filter}
+                    className={`${loading && "animate-pulse"}`}
+                  />
+                </SelectTrigger>
+    
+                <SelectContent>
+                  <SelectItem key="all" value="all">
+                    {lang.interface.profession_type["all"]}
+                  </SelectItem>
+                  {Object.values(PROFESSION_TYPE).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {lang.interface.profession_type[type]}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+          </div>
+        )
+      }
+     
     </Card>
   );
 }

@@ -49,7 +49,7 @@ export default function Navbar({ lang }: { lang: any }) {
         <>
           <div className="px-6 lg:px-8 max-w-[1920px] mx-auto border-b border-border-on-base relative">
             <div className="flex justify-between h-[64px]">
-              <div className="flex">
+              <div className="flex items-center gap-2">
                 <div className="flex flex-shrink-0 items-center h-[32px] w-[32px] relative flex-wrap cursor-pointer my-auto">
                   <Image
                     className="block object-contain dark:hidden"
@@ -74,9 +74,9 @@ export default function Navbar({ lang }: { lang: any }) {
                     priority={true}
                   />
                 </div>
-                <span>
+                <h1 className="ml-2 text-accent-primary font-semibold	 tracking-tighter	 text-title_l ">
                   deTechies
-                </span>
+                </h1>
               </div>
 
               <div className="absolute hidden h-full -translate-x-1/2 sm:flex sm:gap-4 md:gap-8 text-title_m left-1/2">
