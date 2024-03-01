@@ -1,8 +1,10 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
+import { Suspense } from "react";
 import ListProfiles from "./list-profiles";
 import ProfileFilter from "./profile-filter";
+import ProfilesLoading from "./profiles-loading";
 
 export default async function ProfilePage({
   params,
@@ -15,8 +17,9 @@ export default async function ProfilePage({
   return (
     <main className="flex flex-col w-full gap-6">
       <ProfileFilter lang={dictionary} />
-
-      <ListProfiles lang={dictionary} searchParams={searchParams} />
+      <Suspense fallback={<ProfilesLoading />}>
+        <ListProfiles lang={dictionary} searchParams={searchParams} />
+      </Suspense>
     </main>
   );
 }

@@ -32,15 +32,15 @@
     --ring: 222.2 84% 4.9%;
     
     
-    --light-accent-primary: #00D41D;
-    --light-accent-secondary: #DEFFD9;
+    --light-accent-primary: #1B84FF;
+    --light-accent-secondary: #EEF6FF;
     
     --light-border-input: #BEC3CA;
     --light-text-secondary: #6B7684;
     
-    --accent-primary: #00D41D;
-    --accent-on-primary: #F4F4F4;
-    --accent-secondary: #DEFFD9;
+    --accent-primary: #1B84FF;
+    --accent-on-primary: #EEF6FF;
+    --accent-secondary: #EEF6FF;
     --accent-tertiary: #F1FFF6;
     --accent-on-secondary: #00D41D;
 
