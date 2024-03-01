@@ -21,7 +21,7 @@ export default async function ListProfiles({
   const { data: users } = await serverApi(`/users`, newUrl.toString());
 
   return (
-    <div>
+    <div className="flex flex-reverse flex-col gap-4">
       <div className="w-full   grid grid-cols-1 md:grid-cols-2 gap-4 ">
         {users?.data.length > 0 &&
           users.data.map((profile: User, index: number) => (

@@ -50,13 +50,13 @@ export default function Navbar({ lang }: { lang: any }) {
           <div className="px-6 lg:px-8 max-w-[1920px] mx-auto border-b border-border-on-base relative">
             <div className="flex justify-between h-[64px]">
               <div className="flex">
-                <div className="flex flex-shrink-0 items-center h-[48px] w-[48px] relative flex-wrap cursor-pointer my-auto">
+                <div className="flex flex-shrink-0 items-center h-[32px] w-[32px] relative flex-wrap cursor-pointer my-auto">
                   <Image
                     className="block object-contain dark:hidden"
                     src="/images/detechies.png"
                     alt="Connectfast"
-                    width={50}
-                    height={50}
+                    width={32}
+                    height={32}
                     onClick={() => {
                       window.location.href = "/";
                     }}
@@ -74,6 +74,9 @@ export default function Navbar({ lang }: { lang: any }) {
                     priority={true}
                   />
                 </div>
+                <span>
+                  deTechies
+                </span>
               </div>
 
               <div className="absolute hidden h-full -translate-x-1/2 sm:flex sm:gap-4 md:gap-8 text-title_m left-1/2">

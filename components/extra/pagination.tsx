@@ -2,13 +2,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 
 export default function Pagination({
   total,
@@ -56,30 +49,11 @@ export default function Pagination({
   );
 
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className="flex flex-col-reverse sm:flex-row items-center justify-between px-2 gap-2">
       <div className="flex-1 text-sm text-muted-foreground">
         Showing {limit} of {total} items.
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
-        <div className="flex items-center space-x-2">
-          <Select
-            value={`${limit}`}
-            onValueChange={(value) => {
-              changeLimit(value);
-            }}
-          >
-            <SelectTrigger className="h-8 w-[70px] bg-white">
-              <SelectValue placeholder={limit} />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[1, 5, 10, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
         <div className="flex items-center space-x-2">
           <PaginationPage
             page={page}
