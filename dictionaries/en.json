@@ -170,8 +170,8 @@
       "next": "Create Profile",
       "email_verify": {
         "title": "verify email",
-        "desc": "We have send you an email to",
-        "desc2": "with a 6-digit code. You can use this code to verify your email address.",
+        "desc": "Enter the verification code send to",
+        "desc2": "with a 6-digit code. To verify you account.",
         "resend": "resend",
         "sign_out": "Sign out",
         "code": "Verification code",

@@ -133,7 +133,7 @@ export default function JoinGroup({
 
             <AvatarFallback className="relative">
               <Image
-                src="/images/connectfast.png"
+                src="/images/detechies.png"
                 alt="no-item"
                 fill={true}
                 className="object-contain bg-no-repeat"

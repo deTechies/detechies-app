@@ -12,8 +12,8 @@ interface NewImageProps extends Omit<ImageProps, "src"> {
 const NewImage: React.FC<NewImageProps> = ({
   src,
   alt,
-  placeholderSrc = "/images/connectfast.png",
-  defaultSrc = "/images/connectfast.png",
+  placeholderSrc = "/images/detechies.png",
+  defaultSrc = "/images/detechies.png",
   ...props
 }) => {
   const [currentSrc, setCurrentSrc] = useState<string>(src || defaultSrc);

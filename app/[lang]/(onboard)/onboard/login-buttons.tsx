@@ -94,7 +94,7 @@ export default function LoginButtons({ text }: { text?: any }) {
                 quality={1}
               />
               <span className="w-full text-center text-title_m">
-                {text?.web3 ? text.web3 : "Social Wallet"}
+                {text?.web3 ? text.web3 : "Social Login"}
               </span>
             </div>
 

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { getSession, signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   Form,
@@ -15,24 +15,12 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Checkbox } from "@/components/ui/checkbox";
 import { API_URL } from "@/lib/constants";
 
-import { testAppId, web3AuthInstance } from "@/app/[lang]/app";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Label } from "@radix-ui/react-label";
-import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAccount, useDisconnect } from "wagmi";
 import * as z from "zod";
-import PrivacyPolicy from "./privacy-policy";
-import TermsOfService from "./terms-of-service";
-import RewardNotification from "./reward-notification";
-
-const wepin_app = process.env.NEXT_PUBLIC_WEPIN_APP_ID;
-const wepin_prod_app = process.env.WEPIN_PROD_APP_ID;
 
 export default function CreateProfile({ lang }: { lang: any }) {
   const profileFormSchema = z.object({
@@ -51,14 +39,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
     email: z.string().email({
       message: lang.validation.onboard.email.email,
     }),
-    agree_with_all: z.boolean().optional(),
-    terms_of_service: z.boolean().refine((val) => val === true, {
-      message: "You must agree to the terms of service.",
-    }),
-    privacy_policy: z.boolean().refine((val) => val === true, {
-      message: "You must agree to the privacy policy.",
-    }),
-    email_policy: z.boolean().optional(),
     verified: z.boolean().default(false),
   });
 
@@ -85,33 +65,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
       console.error("Error disconnecting:", error);
     },
   });
-
-  const [blockPopupOpen, setBlockPopupOpen] = useState(false);
-
-  if (connector?.id == "web3auth" && !blockPopupOpen) {
-    setBlockPopupOpen(true);
-    const getInfo = async () => {
-      const result = await web3AuthInstance?.getUserInfo();
-      if (result?.email) {
-        form.setValue("email", result.email);
-        form.setValue("verified", true);
-      }
-    };
-    getInfo();
-  }
-
-  useEffect(() => {
-    if (localStorage.getItem("wagmi.wallet") === `"wepin"`) {
-      const storageWepinData = localStorage.getItem(
-        `wepin:widget:${wepin_app || wepin_prod_app || testAppId}`
-      );
-      if (storageWepinData !== null) {
-        const obj_wepin = JSON.parse(storageWepinData);
-        form.setValue("email", obj_wepin.user_info.email);
-        form.setValue("verified", true);
-      }
-    }
-  }, [form]);
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
@@ -141,6 +94,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-api-key": "API_KEY",
         Authorization: `Bearer ${session.web3.accessToken}`,
       },
     });
@@ -176,12 +130,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
     refresh();
     setIsLoading(false);
   }
-
-  const onClickDisconnect = async () => {
-    setIsLoading(true);
-    signOut();
-    disconnect();
-  };
 
   return (
     <>
@@ -225,10 +173,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
                   <Input
                     placeholder={lang.onboard.verify_email.email_placeholder}
                     {...field}
-                    disabled={
-                      connector?.id == "web3auth" ||
-                      localStorage.getItem("wagmi.wallet") === `"wepin"`
-                    }
                   />
                 </FormControl>
                 {/* <FormDescription className="font-light">
@@ -238,134 +182,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
               </FormItem>
             )}
           />
-
-          <Alert variant="info">
-            <AlertTitle className="text-state-info">
-              {lang.onboard.verify_email.alert_title}
-            </AlertTitle>
-
-            <AlertDescription>
-              {lang.onboard.verify_email.alert_body}
-            </AlertDescription>
-          </Alert>
-
-          <section className="flex flex-col">
-            <FormField
-              control={form.control}
-              name="agree_with_all"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center py-3 space-y-0 border-b border-border-div ">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={(value) => {
-                        field.onChange(value);
-
-                        if (value) {
-                          form.setValue("terms_of_service", true);
-                          form.setValue("privacy_policy", true);
-                          form.setValue("email_policy", true);
-                        } else {
-                          form.setValue("terms_of_service", false);
-                          form.setValue("privacy_policy", false);
-                          form.setValue("email_policy", false);
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <div className="w-full ml-3 space-y-1 leading-none">
-                    <Label className="text-title_m">
-                      {lang.onboard.verify_email.accordion.agree_with_all}
-                    </Label>
-                  </div>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="terms_of_service"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center py-3 space-y-0 border-b border-border-div ">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className="w-full ml-3 space-y-1 leading-none">
-                    <Label className="text-title_m">
-                      {lang.onboard.verify_email.accordion.terms_of_services}
-                    </Label>
-                  </div>
-                  <TermsOfService
-                    onClickAgree={() => form.setValue("terms_of_service", true)}
-                    lang={lang}
-                  />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="privacy_policy"
-              render={({ field }) => (
-                <FormItem className="flex flex-row py-3 space-y-0 border-b items-cente border-border-div">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="my-auto"
-                    />
-                  </FormControl>
-                  <div className="w-full ml-3 space-y-1 leading-none">
-                    <Label className="text-title_m flex-stretch">
-                      {lang.onboard.verify_email.accordion.privacy_policy}
-                    </Label>
-                  </div>
-
-                  <PrivacyPolicy
-                    onClickAgree={() => form.setValue("privacy_policy", true)}
-                    lang={lang}
-                  />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email_policy"
-              render={({ field }) => (
-                <FormItem className="flex flex-row py-3 space-y-0 border-b items-cente border-border-div">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="my-auto"
-                    />
-                  </FormControl>
-                  <div className="w-full ml-3 space-y-1 leading-none flex-stretch">
-                    <FormLabel>
-                      <div className="text-title_m mb-1.5">
-                        {
-                          lang.onboard.verify_email.accordion
-                            .reward_notification
-                        }
-                      </div>
-                      <div className="text-text-secondary text-label_m">
-                        {
-                          lang.onboard.verify_email.accordion
-                            .reward_notification_description
-                        }
-                      </div>
-                    </FormLabel>
-                  </div>
-
-                  <RewardNotification
-                    onClickAgree={() => form.setValue("email_policy", true)}
-                    lang={lang}
-                  />
-                </FormItem>
-              )}
-            />
-          </section>
 
           <div className="flex items-center w-full gap-2">
             <Button
@@ -386,12 +202,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
               className="w-full"
               size="lg"
               disabled={
-                isLoading ||
-                blockPopupOpen ||
-                !form.watch("display_name") ||
-                !form.watch("email") ||
-                !form.watch("terms_of_service") ||
-                !form.watch("privacy_policy")
+                isLoading || !form.watch("display_name") || !form.watch("email")
               }
               loading={isLoading}
             >
@@ -400,28 +211,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
           </div>
         </form>
       </Form>
-
-      <Dialog open={blockPopupOpen}>
-        <DialogContent className="max-w-[500px] gap-0">
-          <h3 className="mb-4 text-subhead_s">
-            {lang.onboard.verify_email.block_web3auth.title}
-          </h3>
-
-          <div className="mb-6 text-body_m">
-            {lang.onboard.verify_email.block_web3auth.desc}
-          </div>
-
-          <Button
-            size="lg"
-            className="max-w-full"
-            onClick={onClickDisconnect}
-            loading={isLoading}
-            disabled={isLoading}
-          >
-            {lang.onboard.verify_email.block_web3auth.button}
-          </Button>
-        </DialogContent>
-      </Dialog>
     </>
   );
 }

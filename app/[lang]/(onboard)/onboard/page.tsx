@@ -19,36 +19,33 @@ export default async function OnboardPage({
   if (session?.web3?.user?.verified) {
     redirect("/mypage");
   }
-  
 
   return (
     <main className="flex flex-col gap-12 items-center w-full max-w-[400px] mx-auto">
       <div className="flex flex-col gap-8">
-        <div className="relative w-[300px] h-[50px] mx-auto">
-          <Image
-            className="block object-contain h-12 dark:hidden"
-            src="/images/connectfast.png"
-            alt="Careerzen"
-            fill={true}
-            priority={true}
-          />
-          <Image
-            className="hidden object-contain h-12 dark:block"
-            src="/images/logo-invert.png"
-            alt="Careerzen"
-            fill={true}
-            priority={true}
-          />
+        <div className="flex flex-row gap-4 items-center mx-auto">
+          <div className="relative h-24 w-24">
+            <Image
+              className="block object-contain h-24 animate-pulse "
+              src="/images/detechies.png"
+              alt="deTechies"
+              fill={true}
+              priority={true}
+            />
+          </div>
         </div>
-        <h1 className="text-center text-subhead_s">
-          {dictionary.onboard.welcome.title}
+        <div>
+          
+        <h1 className="text-left flex flex-col gap-1 text-subhead_s">
+          Hello stranger, welcome to detechies!
         </h1>
+        <p>
+          Please select your preferred method to sign in or sign up to continue.
+        </p>
+        </div>
       </div>
 
       <div className="flex flex-col w-full gap-4 space-y-1">
-        <h5 className="text-center text-body_s text-text-secondary">
-          {dictionary.onboard.welcome.body}
-        </h5>
         <Suspense fallback={<p>Loading buttons...</p>}>
           <LoginButtons text={dictionary.onboard.welcome} />
         </Suspense>

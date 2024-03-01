@@ -2,7 +2,7 @@
 
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-import { Globe, Menu, X } from "lucide-react";
+import { BellRing, Menu, Send, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -50,13 +50,13 @@ export default function Navbar({ lang }: { lang: any }) {
           <div className="px-6 lg:px-8 max-w-[1920px] mx-auto border-b border-border-on-base relative">
             <div className="flex justify-between h-[64px]">
               <div className="flex">
-                <div className="flex flex-shrink-0 items-center w-[150px] relative flex-wrap cursor-pointer">
+                <div className="flex flex-shrink-0 items-center h-[48px] w-[48px] relative flex-wrap cursor-pointer my-auto">
                   <Image
                     className="block object-contain dark:hidden"
-                    src="/images/connectfast.png"
+                    src="/images/detechies.png"
                     alt="Connectfast"
-                    width={174}
-                    height={20}
+                    width={50}
+                    height={50}
                     onClick={() => {
                       window.location.href = "/";
                     }}
@@ -97,18 +97,12 @@ export default function Navbar({ lang }: { lang: any }) {
               </div>
               <div className="hidden sm:ml-8 sm:flex sm:items-center">
                 {/* Profile dropdown */}
-                {/* <div className="mx-3">
+                 <div className="mx-3">
                   <Send className="w-5 h-5 text-text-secondary" />
                 </div>
                 <div className="mx-3">
                   <BellRing className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
-                </div> */}
-                <div className="mx-3">
-                  <Globe
-                    className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary"
-                    onClick={changeLanguage}
-                  />
-                </div>
+                </div> 
                 <div className="relative ml-3 cursor-pointer text-text-secondary hover:text-text-primary">
                   <Login lang={lang.my_account} />
                 </div>

@@ -157,8 +157,8 @@ module.exports = {
         heading_s: [ // 28px 1.3 0 700
           "1.75rem",  
           { 
-            lineHeight: 1.3,
-            fontWeight: "700",
+            lineHeight: 1,
+            fontWeight: "600",
             letterSpacing: "0px" 
           },
         ],

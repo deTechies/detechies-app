@@ -8,12 +8,14 @@ import type { Metadata } from "next";
 
 import DictionaryProvider from "@/lib/dictionaryProvider";
 import { signOut } from "next-auth/react";
+import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import { redirect } from "next/navigation";
 import App from "../app";
 import "../globals.css";
 import Footer from "./footer";
 import Navbar from "./nav-bar";
+const inter = Inter({ subsets: ['latin'] })
 
 // Font files can be colocated inside of `app`
 const pretendard = localFont({
@@ -66,7 +68,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body
-        className={`${pretendard.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
+        className={`${inter.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >
         <ThemeProvider
           attribute="class"

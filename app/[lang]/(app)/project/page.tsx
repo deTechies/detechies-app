@@ -19,7 +19,7 @@ export default async function ProjectListPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
-    <main className="flex flex-col w-full gap-6 mx-auto">
+    <main className="flex flex-col gap-6 m-10">
       <ProjectFilter lang={dictionary}></ProjectFilter>
 
       <Suspense fallback={<ProfilesLoading />}>

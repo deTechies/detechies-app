@@ -18,7 +18,7 @@ export default function ProjectItem({
   return (
     <Link
       href={`/project/${details.id}`}
-      className="flex flex-row items-start w-full gap-5 pb-8 truncate rounded-md bg-background-layer-1 pt-7 px-7 hover:outline m-1 outline-state-info "
+      className="flex flex-row items-start w-full gap-5 pb-8 truncate rounded-md bg-background-layer-1 pt-7 px-7 border border-background-layer-1 hover:border-state-info "
     >
       <figure className="overflow-hidden shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex justify-center items-center">
         <Image

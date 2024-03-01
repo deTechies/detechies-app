@@ -60,7 +60,7 @@ export default async function ProjectEvaluationByGroups({
 
                     <AvatarFallback className="relative rounded-sm">
                       <Image
-                        src="/images/connectfast.png"
+                        src="/images/detechies.png"
                         alt="no-item"
                         fill={true}
                         className="object-contain bg-no-repeat rounded-sm"

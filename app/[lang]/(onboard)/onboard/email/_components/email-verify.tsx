@@ -1,10 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { postServer } from "@/lib/data/postRequest";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -32,95 +31,118 @@ export default function EmailVerification({
     }
   }, [code]);
 
-  async function verifyEmail() {
-    if (!isValid || parseInt(code) < 100000 || parseInt(code) > 999999) {
-      toast({
-        title: "Invalid code",
-        description: "Invalid code",
-      });
-
-      return;
-    }
-    setIsLoading(true);
-
-    const result = await postServer(`/users/verify?token=${code}`, '', lang);
-
-    if (result.status == 'success') {
-
-      // NOTE: Document explicitly mentions not showing any message on verification success.
-      // toast({
-      //   title: "Email verified",
-      //   description: "Email verified",
-      // });
-
-      router.refresh();
-    }
-  }
-
-  async function resendEmail() {
-    toast({
-      title: "Not yet implemented",
-      description:
-        "This is currently not possible, please contact our telegram group to help you sort it out! ",
-    });
-  }
 
   return (
-    <main className="flex flex-col gap-4 max-w-[400px]">
-      <h2 className="text-heading_s">
-        {lang.onboard.verify_email.email_verify.title}
-      </h2>
-      <h5 className="text-body_s text-text-secondary">
-        {lang.onboard.verify_email.email_verify.desc}
-        <b>{user.email}</b>
-        {lang.onboard.verify_email.email_verify.desc2}
-      </h5>
-      <div className="flex flex-col gap-6">
-        <div className="">
-          <Label> {lang.onboard.verify_email.email}</Label>
-          <div className="flex flex-row items-center gap-2">
-            <Input
-              value={user.email}
-              className="tracking-widest"
-              placeholder="Your email"
-              disabled
-            />
-            <Button
-              size={"sm"}
-              onClick={() => resendEmail()}
-              className="rounded-sm"
-            >
-              {lang.onboard.verify_email.email_verify.resend}
-            </Button>
-          </div>
-        </div>
-        <div className="flex flex-col gap-3">
-          <Label>{lang.onboard.verify_email.email_verify.code}</Label>
-          <Input
-            value={code}
-            onChange={(e) => router.push(pathName + "?code=" + e.target.value)}
-            className="p-2 tracking-widest text-center border"
-            placeholder={lang.onboard.verify_email.email_verify.code_placeholder}
-          />
-        </div>
-        <div className="flex gap-2">
-        <Button
-          onClick={() => signOut()}
-          variant="secondary"
-          className="py-3 rounded-sm"
-        >
-          {lang.onboard.verify_email.email_verify.sign_out}
-        </Button>
-        <Button
-          onClick={verifyEmail}
-          disabled={!isValid}
-          className="py-3 rounded-sm"
-        >
+    <main className="flex flex-col gap-[30px] border text-center rounded-sm max-w-[600px] p-10">
+      <Image
+        src="/images/email-send.png"
+        alt="verify email"
+        width={180}
+        height={180}
+        quality={100}
+        className="mx-auto"
+      />
+      <div className="flex flex-col gap-2">
+        <h2 className="text-title_l capitalize">
           {lang.onboard.verify_email.email_verify.title}
-        </Button>
+        </h2>
+        <h5 className="text-body_s text-text-secondary">
+          {lang.onboard.verify_email.email_verify.desc}
+        </h5>
+          <span className="text-label_S">{user.email}</span>
+      </div>
+      <div className="flex flex-col gap-6">
+        <CodeInput />
+        <div className="grid sm:grid-cols-2 gap-2 hidden">
+          <Button
+            onClick={() => signOut()}
+            variant="secondary"
+            className="py-3 rounded-sm"
+          >
+            {lang.onboard.verify_email.email_verify.sign_out}
+          </Button>
         </div>
-       
       </div>
     </main>
   );
 }
+
+
+export const CodeInput = () => {
+  const [code, setCode] = useState(new Array(6).fill(''));
+  const {refresh} = useRouter();
+
+  const handleChange = (value: string, index: number) => {
+    const newCode = [...code];
+    newCode[index] = value;
+    setCode(newCode);
+
+    // Focus next input
+    if (value) {
+      if (index < 5) {
+       
+        const inputElement = document.getElementById(`input-${index + 1}`);
+        if (inputElement) {
+          inputElement.focus();
+        }
+      } else {
+        // Last input filled, trigger the API call
+        validateCode(newCode.join(''));
+      }
+    }
+  };
+  
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === 'Backspace' && !code[index]) {
+      // If the current input is empty and backspace is pressed, focus the previous one
+      if (index > 0) {
+        document.getElementById(`input-${index - 1}`)?.focus();
+      }
+    }
+  };
+
+  const validateCode = async (fullCode: string) => {
+    try {
+      toast({
+        title: "Invalid code",
+        description: "Invalid code",
+      })
+      const result = await postServer(`/users/verify?token=${fullCode}`, "" );
+      
+      if(result){
+        toast({
+          title: "Email verified",
+          description: "Email verified",
+        })
+        refresh();
+        return;
+      }
+
+    } catch (error) {
+      console.error('Error submitting code:', error);
+    }
+  };
+
+  return (
+    <div className="flex justify-center space-x-2">
+      {code.map((digit, index) => (
+        <input
+          key={index}
+          id={`input-${index}`}
+          type="text"
+          inputMode="numeric"
+          maxLength={1}
+          value={digit}
+          onChange={(e) => handleChange(e.target.value, index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
+          className={`w-10 h-10 border-2 rounded-[6px] border-gray-300 text-center text-title_m focus:outline-none focus:border-4 focus:border-accent-secondary`}
+          style={{ transition: 'border-color 0.3s' }}
+          autoFocus={index === 0}
+        />
+      ))}
+    </div>
+  );
+};
+
+
+

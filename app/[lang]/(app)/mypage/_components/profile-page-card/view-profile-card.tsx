@@ -23,44 +23,42 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
             <h1 className="text-subhead_m">{profile.display_name}</h1>
             <Badge
               variant={
-                profile.profile_details.availability === "available"
+                profile.profile_details?.availability === "available"
                   ? "accent"
-                  : profile.profile_details.availability === "soon available"
+                  : profile.profile_details?.availability === "soon available"
                   ? "info"
                   : "secondary"
               }
             >
-              {profile.profile_details.profession}
+              {profile.profile_details?.profession ? profile.profile_details?.profession : "not role yet"}
             </Badge>
           </div>
 
-          <p>{profile.profile_details.description}</p>
+          <p>{profile.profile_details?.description ? profile.profile_details?.description : "No profile description has been set by the user."}</p>
           <div>
             <div className="flex gap-4 divide-x">
-              {profile.profile_details.hourly_rate && (
+             
                 <div className="flex gap-2 justify-center items-center">
                   <Euro />
                   <span className="text-label_m">
-                    {profile.profile_details.hourly_rate}
+                    {profile.profile_details?.hourly_rate ? profile.profile_details?.hourly_rate : "not set"}
                   </span>
                 </div>
-              )}
-              {profile.profile_details.timezone && (
+
                 <div className="flex gap-2 justify-center items-center pl-3">
                   <MapPin />
                   <span className="text-label_m">
-                    {getTimezone(profile.profile_details.timezone)}
+                    {profile.profile_details?.timezone ?  getTimezone(profile.profile_details?.timezone ): "world wide"}
                   </span>
                 </div>
-              )}
-              {profile.profile_details.availability && (
+
+
                 <div className="flex gap-2 justify-center items-center pl-3">
                   <Briefcase />
                   <span className="text-label_m">
-                    {profile.profile_details.availability}
+                    {profile.profile_details?.availability ? profile.profile_details?.availability : "not available"}
                   </span>
                 </div>
-              )}
             </div>
           </div>
         </div>
