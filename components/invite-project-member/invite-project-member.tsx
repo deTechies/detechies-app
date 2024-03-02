@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 
 import { ProjectMember, User } from "@/lib/interfaces";
-import useFetchData from "@/lib/useFetchData";
 import { Plus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import PersonItem from "../extra/add-member-item";
@@ -15,7 +14,6 @@ import {
   DialogContent,
   DialogTrigger,
 } from "../ui/dialog";
-import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
 import SelectedProjectMember from "./selected-project-member";
 
@@ -23,22 +21,21 @@ export default function InviteProjectMember({
   projectId,
   lang,
   projectMembers,
+  members,
 }: {
   projectId: string;
   lang: any;
   projectMembers: ProjectMember[];
+  members: User[];
 }) {
   const searchParams = useSearchParams()!;
   const text = searchParams.get("search") || "";
 
   const [selected, setSelected] = useState<User | null>();
   const [byEmail, setByEmail] = useState<boolean>(false);
-  const { data: members, loading, error } = useFetchData<any[]>("/users?limit=1000");
-
+  
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  if (loading) return <Skeleton className="w-10 h-3 animate-pulse" />;
-  if (error) return <div>{JSON.stringify(error)}</div>;
   if (!members)
     return <div>{lang.project.details.invite_member.no_members_found}</div>;
 

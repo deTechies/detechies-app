@@ -16,9 +16,6 @@ export default function Pagination({
   const pathName = usePathname();
   const router = useRouter();
 
-  const changeLimit = (value: string) => {
-    router.push(pathName + "?" + createQueryString("limit", value));
-  };
   const nextPage = () => {
     const page = searchParams.get("page")
       ? parseInt(searchParams.get("page") as string) + 1

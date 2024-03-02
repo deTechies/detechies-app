@@ -230,6 +230,7 @@ export async function addMembersWork(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-api-key": "API_KEY", // TODO: replace with "x-api-key"
       Authorization: `Bearer ${session.web3.accessToken}`,
     },
     body: JSON.stringify({

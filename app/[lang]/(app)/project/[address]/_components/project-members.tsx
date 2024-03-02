@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 
 import JoinProject from "@/components/project/join-project";
+import { serverApi } from "@/lib/data/general";
 import ProjectMemberItem from "./project-member-item";
 
 export default async function ProjectMembers({
@@ -15,6 +16,7 @@ export default async function ProjectMembers({
   lang: any;
 }) {
 
+  const profiles = await serverApi(`/users?limit=1000`);
 
   return (
     <section className="flex flex-col gap-4">
@@ -29,9 +31,10 @@ export default async function ProjectMembers({
           {details.userRole == "none" && (
             <JoinProject lang={lang} address={projectId} />
           )}
-          {details.userRole == "admin" && (
+          {details.userRole == "admin" && profiles.data && (
             <InviteProjectMember
               lang={lang}
+              members={profiles.data.data}
               projectId={projectId}
               projectMembers={details.members}
             />

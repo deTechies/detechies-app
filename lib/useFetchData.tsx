@@ -22,6 +22,7 @@ function useFetchData<T>(path: string) {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "API_KEY",
             Authorization: `Bearer ${session?.web3.accessToken}`,
           },
         }).then((res) => res.json());

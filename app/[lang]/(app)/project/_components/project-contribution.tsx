@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Project } from "@/lib/interfaces";
 import ProjectContributionForm from "./project-contribution-form";
-import ProjectSwitcher from "./project-switcher";
 
 export default function ProjectContribution({
   project,
@@ -40,18 +39,6 @@ export default function ProjectContribution({
         </header>
 
         <section>
-          <h4 className="mb-5 text-subhead_s">
-            {lang.project.details.members.add_works.project}
-          </h4>
-
-          <ProjectSwitcher project={project} lang={lang} />
-        </section>
-
-        <section>
-          <h4 className="mb-5 text-subhead_s">
-            {lang.project.details.members.add_works.my_work}
-          </h4>
-
           {project?.id && (
             <ProjectContributionForm
               project={project}
