@@ -2,7 +2,7 @@
   "nav": {
     "find_expert": "Techies",
     "project": "Projects",
-    "groups": "Community",
+    "groups": "Partners",
     "my_profile": "My Profile",
     "my_account": {
       "my_account_title": "My Account",
@@ -184,14 +184,9 @@
         "expert": "Expert",
         "expert_desc": "Certify My Career",
         "client": "Client",
-        "client_desc": "Find experts for our project",
-        "admin": "Enterprise, Institution, Community Operator",
-        "admin_desc": "Create unique NFTs for our organization"
-      },
-      "block_web3auth": {
-        "title": "Please use Wiffin to sign up for new social accounts.",
-        "desc": "If you are a new member, please click “Social Wallet” on the welcome screen. Web3auth accounts are only available to existing members.",
-        "button": "Sign up with a social wallet"
+        "client_desc": "Find techies for your project",
+        "admin": "Partners Admin",
+        "admin_desc": "Create unique achievements for our communities"
       }
     }
   },
@@ -1064,7 +1059,7 @@
     }
   },
   "footer": {
-    "copywrite": "© 2024 Connect Fast. All rights reserved.",
+    "copywrite": "DeTechies © 2024. All rights reserved.",
     "terms_and_conditions": "Terms of Service",
     "privacy_policy": "Privacy Policy",
     "whitepaper": "Whitepaper",
