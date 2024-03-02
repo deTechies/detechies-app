@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 
-import { acceptProjectInvitation } from "@/lib/data/project";
+import { postServer } from "@/lib/data/postRequest";
 
 export default function AcceptInvitation({
   name,
@@ -31,7 +31,7 @@ export default function AcceptInvitation({
 
   const acceptInvitation = async () => {
     setLoading(true);
-    const result = await acceptProjectInvitation(projectId);
+    const result = await postServer(`/project-member/accept/invite/${projectId}`, '');
 
     if (result.status === "success") {
       toast({

@@ -166,21 +166,6 @@ export async function acceptProjectMember(projectMemberId: string){
 }
 
 
-export async function acceptProjectInvitation(projectMemberId: string){
-  const session = await getSession();
-
-  const response = await fetch(`${API_URL}/project-member/accept/invite/${projectMemberId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${session?.web3?.accessToken}`,
-    },
-  });
-
-  
-  return response.json();
-}
-
 export async function joinProject(data: JoinProject) {
   const session = await getSession();
 
