@@ -38,6 +38,7 @@ export async function submitFeedback(data:any, workId:string){
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      "x-api-key": "API_KEY",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
     body: JSON.stringify({

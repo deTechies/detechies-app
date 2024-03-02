@@ -2,8 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { getProjectWork } from "@/lib/data/project";
-import { getEvaluationSurvey } from "@/lib/data/survey";
+import { serverApi } from "@/lib/data/general";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import ProjectMemberInline from "../../../project/_components/project-member-inline";
@@ -20,9 +19,9 @@ export default async function EvaluationResult({
 }: {
   params: { lang: Locale; id: string };
 }) {
-  const { data: details } = await getProjectWork(params.id);
+  const { data: details } = await serverApi(`/survey-response/surveyByWork/${params.id}`);
   const dictionary = await getDictionary(params.lang);
-  const { data: surveyData } = await getEvaluationSurvey(params.id);
+  const { data: surveyData } = await serverApi(`/survey/match/${params.id}`);
   
 
   if (!details) redirect(`/work/${params.id}`);

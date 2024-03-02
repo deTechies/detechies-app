@@ -1,9 +1,8 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
-import { getProjectWork } from "@/lib/data/project";
-import { getEvaluationSurvey } from "@/lib/data/survey";
 
+import { serverApi } from "@/lib/data/general";
 import { redirect } from "next/navigation";
 import { SurveyForm } from "./surveyform";
 
@@ -15,8 +14,8 @@ export default async function EvaluateAsTeamLead({
     id: string;
   };
 }) {
-  const { data: surveyData } = await getEvaluationSurvey(params.id);
-  const { data: details } = await getProjectWork(params.id);
+  const { data: surveyData } = await serverApi(`/survey/match/${params.id}`);
+  const { data: details } = await serverApi(`/survey-response/surveyByWork/${params.id}`);
   const dictionary = await getDictionary(params.lang);
 
   if(!details) redirect(`/work/${params.id}`)

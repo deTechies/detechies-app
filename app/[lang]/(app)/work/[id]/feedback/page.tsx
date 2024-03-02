@@ -1,6 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { getProjectWork } from "@/lib/data/project";
+import { serverApi } from "@/lib/data/general";
 import EvaluateTeamForm from "./evaluate-team-form";
 
 export default async function EvaluateTeamMember({
@@ -8,7 +8,7 @@ export default async function EvaluateTeamMember({
 }: {
   params: { lang: Locale; app: string; id: string; member: string };
 }) {
-  const { data: details } = await getProjectWork(id);
+  const { data: details } = await serverApi(`/survey-response/surveyByWork/${id}`);
   const dictionary = await getDictionary(lang);
 
   return (

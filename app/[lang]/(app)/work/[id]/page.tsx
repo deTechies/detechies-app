@@ -14,11 +14,13 @@ export default async function ProjectMemberEvaluation({
   params: { lang: Locale; id: string };
 }) {
   //const details = await getProjectWork(params.id);
-  const {data: details} = await serverApi(`/survey-response/surveyByWork/${params.id}`);
+  const result = await serverApi(`/survey-response/surveyByWork/${params.id}`);
   const dictionary = await getDictionary(params.lang);
 
+  console.log(result)
+  const details = result.data;
   
-  if (!details) {
+  if (!result) {
     return <InvalidWorkAccess details={details} />;
   }
   
