@@ -47,7 +47,7 @@ export default function Navbar({ lang }: { lang: any }) {
     <Disclosure as="nav" className="z-10 mx-auto bg-background-layer-1">
       {({ open }) => (
         <>
-          <div className="px-6 lg:px-8 max-w-[1920px] mx-auto border-b border-border-on-base relative">
+          <div className="px-6 lg:px-8 max-w-[1920px] mx-auto relative">
             <div className="flex justify-between items-center py-5  px-2 md:px-4 lg:px-10">
               <div className="flex gap-4">
               <div className="flex items-center gap-2">
