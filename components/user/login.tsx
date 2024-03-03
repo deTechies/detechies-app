@@ -1,25 +1,21 @@
 "use client";
 
-import { polygonMumbai } from "@/helpers/mumbai";
-import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
-import { defaultAvatar } from "@/lib/constants";
+import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
+import { addURL, truncateMiddle } from "@/lib/utils";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { SiweMessage } from "siwe";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   useAccount,
   useConnect,
   useDisconnect,
-  useNetwork,
-  useSignMessage,
+  useNetwork
 } from "wagmi";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
-import IPFSImageLayer from "../ui/layer";
 import AccountSettings from "./account-settings";
-import ModalLayout from "./modal-layout";
-import { useRouter } from "next/navigation";
 
 interface ILoginProps {
   lang: any;
@@ -94,18 +90,30 @@ export default function Login({ lang }: ILoginProps) {
   if (!isConnecting && address && address == session?.web3?.address) {
     return (
       <div className="flex items-center gap-2 rounded-md">
-        <Avatar
-          className="bg-background-layer-2 hover:outline hover:outline-accent-primary"
-          onClick={() => setShowModal(!showModal)}
+        <section className="flex flex-col gap-1 text-right text-xs font-semibold  my-1">
+          <span className="text-text-secondary">
+            {session.web3.user.display_name}
+          </span>
+          <span className="text-text-primary">
+             {truncateMiddle(session.web3.user.wallet, 10)}
+          </span>
+        </section>
+        <button onClick={
+          () => {
+            setShowModal(!showModal);
+          }
+        }
         >
-          <IPFSImageLayer
-            hashes={
-              session?.web3?.user?.avatar
-                ? session.web3.user.avatar
-                : defaultAvatar
-            }
+
+        <div className="relative w-[40px] h-[40px]" >
+          <Image 
+            src={session.web3.user.avatar_link ? addURL(session.web3.user.avatar_link) :  DEFAULT_AVATAR_LINK}
+            alt="user"
+            fill
+            className="rounded-[6px] bg-background-layer-2"
           />
-        </Avatar>
+          </div>
+          </button>
 
         {showModal && (
           <AccountSettings showModal={showModal} text_my_account={lang} />
