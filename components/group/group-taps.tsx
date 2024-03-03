@@ -58,7 +58,7 @@ export default function GroupTaps({
             <Link
               href={`/${params.lang}/groups/${details.id}/${link.href}`}
               aria-disabled={link?.disabled}
-              className={`inline-flex items-center truncate border-b-[3px] capitalize pb-3 
+              className={`inline-flex items-center truncate border-b-[3px] capitalize pb-5
             ${
               (link.href === "" &&
                 !pathname.includes(`/groups/${details.id}/`)) ||

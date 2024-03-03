@@ -87,7 +87,7 @@ export default async function GroupProfileCard({
             <div className="flex gap-2 justify-center items-center pl-3 text-text-secondary">
               <Briefcase />
               <span className="text-label_m">
-                0 members
+                {groupDetail.members.length} members
               </span>
             </div>
 
