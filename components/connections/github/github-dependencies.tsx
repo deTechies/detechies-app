@@ -34,11 +34,13 @@ const fetchWithAuthorization = async (
 const GithubDependencies = ({projectId}: {projectId:string}) => {
   const { data: sessionData } = useSession() as any;
   const pathName = usePathname();
+  //need to collect the full current url 
   const [repos, setRepos] = useState<any[]>([]);
   const [dependencies, setDependencies] = useState({
     packages: [],
     languages: [],
   });
+  
   const githubAccessToken = sessionData?.github?.accessToken;
 
   const fetchDependencies = async (owner: string, repoName: string) => {
@@ -138,12 +140,14 @@ const GithubDependencies = ({projectId}: {projectId:string}) => {
       </Button>
     );
   }
+  const fullURL = window.location.href;
+
 
   return (
     <Button
       className="w-full bg-black text-white flex gap-8"
       onClick={() =>
-        signIn("github", { callbackUrl: `http://localhost:3000/${pathName}` })
+        signIn("github", { callbackUrl: `${fullURL}` })
       }
     >
       <LucideGithub />

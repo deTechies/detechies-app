@@ -55,6 +55,7 @@ export async function createGroup(formData: CreateClub) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-api-key": "API_KEY",
       Authorization: `Bearer ${session?.web3?.accessToken}`,
     },
     body: JSON.stringify({ ...formData, owner: session?.web3?.address }),

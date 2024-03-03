@@ -899,10 +899,10 @@
     },
     "tabs": {
       "about": "About",
-      "nft": "NFT certificate",
+      "nft": "Certificates",
       "members": "Members",
       "mission": "Missions",
-      "manage": "Manage Group"
+      "manage": "Manage "
     },
     "member": {
       "leader": "Leader"

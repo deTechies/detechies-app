@@ -1,7 +1,6 @@
 import { getUserAchievements } from "@/lib/data/achievements";
 import GroupDetails from "./group-details";
 import GroupMember from "./group-member";
-import GroupNft from "./group-nft";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
@@ -37,13 +36,13 @@ export default async function GroupProfile({
       <hr className="my-8 solid h-[1px] bg-border-div"></hr>
 
       {/* <GroupAchievements address={params.address.toString()} isCreator={data.isCreator}/> */}
-      <GroupNft
+ {/*      <GroupNft
         contract={clubInfo.contract}
         address={params.address.toString()}
         achievements={clubInfo.achievements}
         userAchievements={userAchievements.data}
         lang={dictionary}
-      ></GroupNft>
+      /> */}
 
       <hr className="my-8 solid h-[1px] bg-border-div"></hr>
 

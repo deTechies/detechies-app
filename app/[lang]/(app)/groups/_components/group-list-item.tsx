@@ -1,33 +1,37 @@
+import AvatarMemberGroup from "@/components/metronic/avatar/avatar-member-group";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Club } from "@/lib/interfaces";
-import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
-const GroupListItem = React.memo(
-  ({
-    details,
-    lang,
-    isPending,
-  }: {
-    details: Club;
-    lang: any;
-    isPending?: boolean;
-    // The group on Pending is only visiable for owner (not implemented yet)
-  }) => {
-    
-    const renderCardContent = () => (
-      <Card className="flex flex-col items-center bg-black-700 text-accent-on-primary pt-[46px] h-full pb-6 px-6 gap-0">
-        <section className="flex flex-col items-center justify-center w-full max-w-full text-center">
-          <Avatar className="w-24 h-24 mb-2">
+export default function GroupListItem({
+  details,
+  lang,
+  isPending,
+}: {
+  details: Club;
+  lang: any;
+  isPending?: boolean;
+  // The group on Pending is only visiable for owner (not implemented yet)
+}) {
+  //conevert hte members to avatar members
+  const avatarMembers = details?.members.map((member: any) => {
+    return {
+      id: member.id,
+      name: member.name,
+      image: member.image,
+    };
+  });
+  return (
+    <Link href={`/groups/${details.id}`} passHref>
+      <Card className="flex flex-col items-center pt-[46px] h-full px-[20px] gap-[30px] border border-white hover:border-accent-primary">
+        <section className="flex flex-col items-center justify-center gap-4 text-center">
+          <Avatar className="w-[50x] h-[50px] mx-auto ">
             <AvatarImage
               src={`https://ipfs.io/ipfs/${details.image}`}
               alt={details.name}
-              className="rounded-full"
+              className="rounded-full bg-none"
             />
 
             <AvatarFallback className="relative">
@@ -39,76 +43,31 @@ const GroupListItem = React.memo(
               />
             </AvatarFallback>
           </Avatar>
-
-          <h5 className="max-w-full mb-1 truncate text-heading_s">
-            {details.name}
-          </h5>
-
-          {isPending ? (
-            <Badge shape="loading" variant="opacity" className="mb-4">
-              <div className="flex items-center gap-2">
-                <Loader className="w-5 h-5 animate-[spin_5s_linear_infinite]"></Loader>
-                <span>{lang.group.create.form.wait_for_auth}</span>
-              </div>
-            </Badge>
-          ) : (
-            <div className="text-title_m mb-[46px] flex items-center gap-1">
-              {details.type != "community" && (
-                <Image
-                  height={20}
-                  width={20}
-                  alt="certified"
-                  src={`/icons/certified_${details.type}.png`}
-                ></Image>
-              )}
-
-              {lang.group.list[details.type]}
-
-              {/* {lang.interface.group_type[details.type] || details.type} */}
-            </div>
-          )}
-
-          {isPending ? (
-            <Link
-              href="https://t.me/Careerzen_org"
-              target="_blank"
-              passHref
-              className="max-w-[212px] w-full"
-            >
-              <Button size="lg">{lang.group.create.form.contact}</Button>
-            </Link>
-          ) : (
-            <div className="flex divide-x">
-              <div className="px-4">
-                <div className="mb-1 text-label_s">
-                  {lang.group.list.members}
-                </div>
-                <div className="text-title_m">{details.members?.length}</div>
-              </div>
-
-              <div className="px-4 text-center">
-                <div className="mb-1 text-label_s">{lang.group.list.nfts}</div>
-
-                <div className="text-title_m">
-                  {details.achievements?.length}
-                </div>
-              </div>
-            </div>
-          )}
+          <div>
+            <h5 className="trunctate font-semibold text-md">{details.name}</h5>
+            <p>{details.description}</p>
+          </div>
         </section>
+
+
+          <section className="flex flex-col gap-1.5">
+            <h5 className="text-gray-500 text-xs uppercase font-medium">Team</h5>
+            <AvatarMemberGroup group={avatarMembers} size={8} />
+          </section>
+
+        <div className="flex divide-x">
+          <div className="px-4">
+            <div className="text-title_m">{details.members?.length}</div>
+            <div className="mb-1 text-label_s">{lang.group.list.members}</div>
+          </div>
+
+          <div className="px-4 text-center">
+            <div className="text-title_m">{details.achievements?.length}</div>
+            <div className="mb-1 text-label_s">{lang.group.list.nfts}</div>
+
+          </div>
+        </div>
       </Card>
-    );
-
-    return isPending ? (
-      <div className="truncate">{renderCardContent()}</div>
-    ) : (
-      <Link href={`groups/${details.id}`} className="truncate">
-        {renderCardContent()}
-      </Link>
-    );
-  }
-);
-
-GroupListItem.displayName = "GroupListItem";
-
-export default GroupListItem;
+    </Link>
+  );
+}

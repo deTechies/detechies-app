@@ -14,7 +14,7 @@ export default async function GroupAchievements({
     `/achievement/club/${params.address}`
   );
 
-  const user_achievements = userAchievements.map(
+  const user_achievements = userAchievements?.map(
     (item: any) => item.achievement.id
   );
   const dictionary = (await getDictionary(params.lang)) as any;

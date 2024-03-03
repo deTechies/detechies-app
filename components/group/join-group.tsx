@@ -98,7 +98,7 @@ export default function JoinGroup({
 
   const defaultTrigger = children || (
     <DialogTrigger className="max-w-[212px] w-full">
-      <Button size="lg" variant="primary">
+      <Button size="sm" variant="primary">
         {lang.group.details.profile_card.join_group.title}
       </Button>
     </DialogTrigger>
@@ -186,7 +186,7 @@ export default function JoinGroup({
               <DialogClose asChild>
                 <Button
                   variant="secondary"
-                  size="lg"
+                  size="sm"
                   className="max-w-[212px] grow px-0"
                 >
                   {lang.group.details.profile_card.join_group.back}

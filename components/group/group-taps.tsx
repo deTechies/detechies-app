@@ -1,9 +1,11 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import { ROLE_TYPE } from "@/lib/interfaces";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import InviteGroupMember from "../invite-group-member/invite-group-member";
+import { Button } from "../ui/button";
+import JoinGroup from "./join-group";
 
 export default function GroupTaps({
   details,
@@ -17,34 +19,35 @@ export default function GroupTaps({
 
   const links = [
     {
-      name: lang.tabs.about,
+      name: lang.group.tabs.about,
       href: "",
       isAdmin: false,
     },
     {
-      name: lang.tabs.nft,
+      name: lang.group.tabs.nft,
       href: "nft",
       isAdmin: false,
     },
     {
-      name: lang.tabs.members,
+      name: lang.group.tabs.members,
       href: "members",
       isAdmin: false,
     },
     {
-      name: lang.tabs.mission,
+      name: lang.group.tabs.mission,
       href: "missions",
       isAdmin: false,
     },
     {
-      name: lang.tabs.manage,
+      name: lang.group.tabs.manage,
       href: "manage",
       isAdmin: true,
     },
   ] as any;
 
   return (
-    <Card className="flex flex-row gap-0 px-10 pt-10 pb-0 overflow-x-auto border-b rounded-none">
+    <div className="flex bg-background-layer-1 flex-row items-center justify-between  px-10 pt-10 pb-0 overflow-x-auto border-b rounded-none">
+      <div className="flex flex-row gap-0">
       {links.map((link: any, index: number) => {
         if (link.isAdmin && details.userRole != ROLE_TYPE.ADMIN)  {
           return;
@@ -55,13 +58,13 @@ export default function GroupTaps({
             <Link
               href={`/${params.lang}/groups/${details.id}/${link.href}`}
               aria-disabled={link?.disabled}
-              className={`inline-flex items-center truncate border-b-[3px] capitalize pb-3 text-subhead_m
+              className={`inline-flex items-center truncate border-b-[3px] capitalize pb-3 
             ${
               (link.href === "" &&
                 !pathname.includes(`/groups/${details.id}/`)) ||
               (link.href !== "" &&
                 pathname.includes(`/groups/${details.id}/${link.href}`))
-                ? "border-accent-primary text-text-primary"
+                ? "border-accent-primary text-accent-primary"
                 : "border-transparent text-text-placeholder hover:text-text-primary"
             }`}
             >
@@ -70,6 +73,37 @@ export default function GroupTaps({
           </div>
         );
       })}
-    </Card>
+      </div>
+      <div>
+      {details.userRole == "admin" && (
+          <div className="flex items-start gap-3 grow">
+            <Link
+              href={`/groups/${details.id}/create/nft`}
+              className="max-w-[212px] grow rounded-full"
+            >
+              <Button size="sm" variant="primary" className="w-full">
+                Create Achievement
+              </Button>
+            </Link>
+
+            <InviteGroupMember
+              groupId={details.id}
+              lang={lang}
+              groupMembers={details.members}
+            />
+          </div>
+        )}
+
+        {details.userRole == "none" && (
+          <div className="flex gap-3 grow">
+            <JoinGroup
+              groupId={details.id}
+              details={details}
+              lang={lang}
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

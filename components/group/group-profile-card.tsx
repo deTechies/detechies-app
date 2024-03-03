@@ -1,12 +1,13 @@
 // import Image from "next/image";
 import Image from "@/components/ui/image";
 
-import { getClub } from "@/lib/data/groups";
+import { serverApi } from "@/lib/data/general";
 import Link from "next/link";
-import InviteGroupMember from "../invite-group-member/invite-group-member";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import JoinGroup from "./join-group";
+import { CardContent } from "../ui/card";
+
+import { addURL } from "@/lib/utils";
+import { Briefcase, Folder, MapPin } from "lucide-react";
+import Avatar from "../metronic/avatar/avatar";
 
 export default async function GroupProfileCard({
   id,
@@ -15,7 +16,7 @@ export default async function GroupProfileCard({
   id: string;
   lang: any;
 }) {
-  const { data: groupDetail } = await getClub(id);
+  const { data: groupDetail } = await serverApi(`/clubs/${id}`);
 
   const snsLogos = {
     youtube: "/icons/youtube.png",
@@ -50,35 +51,50 @@ export default async function GroupProfileCard({
   ];
 
   return (
-    <Card className="w-full top-10 bg-[url(/images/bg-group-header.png)] bg-center rounded-b-none pt-[72px]">
-      <CardHeader className="flex items-center justify-start">
-        <div className="rounded-full w-[93px] h-[93px] flex justify-center items-center mr-6 shrink-0 overflow-hidden">
-          <Image
-            src={
-              groupDetail.image
-                ? `https://ipfs.io/ipfs/${groupDetail.image}`
-                : "/icons/group_default.png"
-            }
-            alt={`Layer company image`}
-            className="object-scale-down aspect-square"
-            width={93}
-            height={93}
+    <div className="px-32 -m-10 bg-background-layer-1">
+          <header className=" w-full gap-2 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
+      <div className="flex flex-col gap-2 mx-auto py-10 ">
+        <div className="mx-auto">
+          <Avatar
+            src={addURL(groupDetail.image)}
+            shape="rounded"
+            className="border-2 border-accent-primary"
+            size={32}
           />
         </div>
 
-        <div className="flex gap-0.5 items-center truncate">
-          <h3 className="truncate text-heading_m text-accent-on-primary">
-            {groupDetail?.name ? groupDetail?.name : "Name not found"}
-          </h3>
-
-          {/* <Image
-            src="/icons/certified.png"
-            alt="certified"
-            width={20}
-            height={20}
-          /> */}
+        <div>
+          <h1 className="text-subhead_m text-text-primary">
+            {groupDetail.name}
+          </h1>
         </div>
-      </CardHeader>
+        <div className="flex gap-4 divide-x  text-text-secondary mx-auto">
+            <div className="flex gap-2 justify-center items-center">
+              <Folder
+               />
+              <span className="text-label_m">
+                0 Project
+              </span>
+            </div>
+
+            <div className="flex gap-2 justify-center items-center pl-3">
+              <MapPin />
+              <span className="text-label_m">
+                Location
+              </span>
+            </div>
+
+            <div className="flex gap-2 justify-center items-center pl-3 text-text-secondary">
+              <Briefcase />
+              <span className="text-label_m">
+                0 members
+              </span>
+            </div>
+
+        </div>
+      </div>
+    </header>
+
 
       <CardContent className="flex flex-wrap items-end justify-between">
         <div className="flex flex-col flex-wrap mb-9 max-h-[110px] gap-x-2">
@@ -113,36 +129,9 @@ export default async function GroupProfileCard({
             })}
         </div>
 
-        {groupDetail.userRole == "admin" && (
-          <div className="flex justify-end gap-3 grow">
-            <Link
-              href={`/groups/${id}/create/nft`}
-              className="max-w-[212px] grow rounded-full"
-            >
-              <Button size="lg" variant="primary" className="w-full">
-                {lang.group.details.profile_card.create_nft.create_nft}
-              </Button>
-            </Link>
-
-            <InviteGroupMember
-              groupId={id}
-              lang={lang}
-              groupMembers={groupDetail.members}
-            />
-          </div>
-        )}
-
-        {groupDetail.userRole == "none" && (
-          <div className="flex justify-end gap-3 grow">
-            <JoinGroup
-              groupId={groupDetail.id}
-              details={groupDetail}
-              lang={lang}
-            />
-          </div>
-        )}
+      
       </CardContent>
-    </Card>
+    </div>
   );
 }
 

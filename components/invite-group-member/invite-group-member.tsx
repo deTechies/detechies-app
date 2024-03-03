@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
+import { serverApi } from "@/lib/data/general";
 import { User } from "@/lib/interfaces";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import PersonItem from "../extra/add-member-item";
 import Search from "../extra/search";
 import {
@@ -12,11 +14,8 @@ import {
   DialogContent,
   DialogTrigger,
 } from "../ui/dialog";
-import { Skeleton } from "../ui/skeleton";
 import InviteByEmail from "./invite-by-email";
 import SelectedGroupMember from "./selected-group-member";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { serverApi } from "@/lib/data/general";
 
 export default function InviteGroupMember({
   groupId,
@@ -80,7 +79,7 @@ export default function InviteGroupMember({
   return (
     <Dialog onOpenChange={onOpenChange}>
       <DialogTrigger className="max-w-[212px] grow rounded-full">
-        <Button size="lg" variant="primary" className="w-full">
+        <Button size="sm" variant="primary" className="w-full">
           {lang.group.details.profile_card.invite.invite_member}
         </Button>
       </DialogTrigger>
@@ -114,8 +113,7 @@ export default function InviteGroupMember({
           {!byEmail && selected == null && !completeInviting && (
             <>
               <Search
-                placeholder={
-                  lang.group.details.profile_card.invite.search_placeholder
+                placeholder={"Search "
                 }
               />
 
@@ -140,7 +138,7 @@ export default function InviteGroupMember({
 
                 {!loading && userList.length < 1 && (
                   <div className="pt-2 pb-5 text-center text-label_m text-text-secondary">
-                    {lang.group.details.profile_card.invite.no_members_found}
+                    No members gound
                   </div>
                 )}
               </div>
