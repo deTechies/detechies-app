@@ -27,6 +27,7 @@ export default async function Dashboard({
             text={dictionary.mypage.project}
             visiting={true}
             lang={dictionary}
+            user={params.user}
           />
         </main>
 

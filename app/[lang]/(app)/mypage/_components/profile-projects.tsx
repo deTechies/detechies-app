@@ -8,10 +8,12 @@ import Link from "next/link";
 import ProjectDetailItem from "./project-detail-item";
 
 export default async function ProfileProjects({
+  user,
   text,
   lang,
   visiting = false,
 }: {
+  user?: string
   text: any;
   lang: any;
   visiting?: boolean;
@@ -19,6 +21,11 @@ export default async function ProfileProjects({
 }) {
   const newUrl = new URLSearchParams();
   newUrl.set("me", "true");
+  
+  if(user) {
+    newUrl.set("wallet", user);
+    newUrl.delete("me");
+  }
   const { data: projects } = await serverApi(`/projects`, newUrl.toString());
   
   console.log(projects);

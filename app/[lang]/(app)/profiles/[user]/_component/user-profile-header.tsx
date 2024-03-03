@@ -3,6 +3,7 @@ import Avatar from "@/components/metronic/avatar/avatar";
 import { serverApi } from "@/lib/data/general";
 import { addURL, getTimezone } from "@/lib/utils";
 import { Briefcase, Euro, MapPin } from "lucide-react";
+import Link from "next/link";
 import { Address } from "viem";
 
 export default async function UserProfileHeader({
@@ -59,9 +60,10 @@ export default async function UserProfileHeader({
         </div>
       </div>
     </header>
-    <div className="w-full border-b pb-2 flex justify-between">
-      <div>
-        <h5 className="">Projects</h5>
+    <div className="w-full border-b pb-2 items-end gap-4 flex justify-between px-10">
+      <div className="flex flex-row gap-8 ">
+        <Link className="hover:text-accent-primary" href={`/profiles/${userWallet}`}>Projects</Link>
+        <Link className="hover:text-accent-primary" href={`/profiles/${userWallet}/report`}>Report</Link>
       </div>
       <UserChat to={userWallet as Address} />
     </div>
