@@ -1,8 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { getClub } from "@/lib/data/groups";
-import { getClubMissions } from "@/lib/data/mission";
+import { serverApi } from "@/lib/data/general";
 import ManageMember from "./manage-member";
 import ManageMission from "./manage-mission";
 import ManageNft from "./manage-nft";
@@ -15,8 +14,8 @@ export default async function GroupDetailManageLayout({
   params: { address: string; lang: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const {data:club} = await getClub(params.address);
-  const {data:missions} = await getClubMissions(club.id);
+  const {data:club} = await serverApi(`/clubs/${params.address}`);
+  const {data:missions} = await serverApi(`/mission/campaign/${club.id}`);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   const tabs = ["nft", "members", "missions", "info"];

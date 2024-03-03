@@ -3,7 +3,7 @@
 import PendingNftListItem from "@/components/group/pending-nft-list-item";
 import DisplayNFT from "@/components/nft/display-nft";
 import { Button } from "@/components/ui/button";
-import { getPendingAchievements } from "@/lib/data/achievements";
+import { serverApi } from "@/lib/data/general";
 import { Achievement, AchievementReward } from "@/lib/interfaces";
 
 export default async function ManageNft({
@@ -16,7 +16,7 @@ export default async function ManageNft({
   // const dictionary = await getDictionary(params.lang);
 
 
-  const {data: pendingAchievements} = await getPendingAchievements(details.id);
+  const {data: pendingAchievements} = await serverApi(`/achievement-rewards/${details.id}/pending`);
   
   return (
     <div className="overflow-auto max-w-[90vw]">

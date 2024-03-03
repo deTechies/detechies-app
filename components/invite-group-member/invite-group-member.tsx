@@ -49,7 +49,7 @@ export default function InviteGroupMember({
       newUrl.set("display_name", paramValue);
 
       const { data: users } = await serverApi(`/users`, newUrl.toString());
-      const filteredUsers = users.filter((userItem: any) => {
+      const filteredUsers = users.data.filter((userItem: any) => {
         return (
           !array_member_id.includes(userItem.id) &&
           userItem.display_name.toLowerCase().includes(text.toLowerCase() || "")

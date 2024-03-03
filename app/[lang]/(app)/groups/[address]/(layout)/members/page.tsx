@@ -2,9 +2,8 @@ import MemberCard from "@/components/card/member-card";
 import Search from "@/components/extra/search";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { getClub } from "@/lib/data/groups";
+import { serverApi } from "@/lib/data/general";
 import { ClubMember } from "@/lib/interfaces";
-import { Address } from "wagmi";
 interface Profile {
   id: string;
   name: string;
@@ -24,7 +23,8 @@ export default async function GroupMember({
   params: { address: string; lang: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const { data } = await getClub(params.address);
+  //need to fix by getting only the members directly 
+  const { data } = await serverApi(`/clubs/${params.address}`);
 
   const searchItem = searchParams.search as string;
 
