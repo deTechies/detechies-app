@@ -16,11 +16,14 @@ export default function GroupListItem({
   // The group on Pending is only visiable for owner (not implemented yet)
 }) {
   //conevert hte members to avatar members
+  if(!details.members){
+    details.members = []
+  }
   const avatarMembers = details?.members.map((member: any) => {
     return {
       id: member.id,
       name: member.name,
-      image: member.image,
+      src: member.image,
     };
   });
   return (
