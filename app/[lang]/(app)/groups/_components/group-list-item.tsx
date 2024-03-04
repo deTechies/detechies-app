@@ -1,6 +1,7 @@
 import AvatarMemberGroup from "@/components/metronic/avatar/avatar-member-group";
+import { Card } from "@/components/metronic/card/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card } from "@/components/ui/card";
+
 import { Club } from "@/lib/interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +29,7 @@ export default function GroupListItem({
   });
   return (
     <Link href={`/groups/${details.id}`} passHref>
-      <Card className="flex flex-col items-center pt-[46px] h-full px-[20px] gap-[30px] border border-white hover:border-accent-primary">
+      <Card className="flex flex-col items-center pt-[46px] h-full p-[20px] gap-[30px] border border-white hover:border-accent-primary">
         <section className="flex flex-col items-center justify-center gap-4 text-center">
           <Avatar className="w-[50x] h-[50px] mx-auto ">
             <AvatarImage
@@ -46,9 +47,9 @@ export default function GroupListItem({
               />
             </AvatarFallback>
           </Avatar>
-          <div>
-            <h5 className="trunctate font-semibold text-md">{details.name}</h5>
-            <p>{details.description}</p>
+          <div className="max-w-[250px]">
+            <h5 className="trunctate font-semibold text-md mb-2">{details.name}</h5>
+            <p className="text-xs">{details.description}</p>
           </div>
         </section>
 
@@ -60,13 +61,13 @@ export default function GroupListItem({
 
         <div className="flex divide-x">
           <div className="px-4">
-            <div className="text-title_m">{details.members?.length}</div>
-            <div className="mb-1 text-label_s">{lang.group.list.members}</div>
+            <div className="text-xs">{details.members?.length}</div>
+            <div className="mb-1 text-xs">{lang.group.list.members}</div>
           </div>
 
           <div className="px-4 text-center">
-            <div className="text-title_m">{details.achievements?.length}</div>
-            <div className="mb-1 text-label_s">{lang.group.list.nfts}</div>
+            <div className="text-xs">{details.achievements?.length}</div>
+            <div className="mb-1 text-xs">{lang.group.list.nfts}</div>
 
           </div>
         </div>

@@ -1,4 +1,6 @@
+"use client"
 import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
+import { Input } from "@/components/ui/input";
 
 export default function GroupApi() {
   return (
@@ -9,7 +11,12 @@ export default function GroupApi() {
             </h1>
         </CardHeader>
         <CardContent>
-            blablabla
+          <div className="flex gap-4 items-center">
+            <label className="w-[100px]">API Key</label>
+            <Input type="text" 
+            className="max-w-[300px]"
+            />
+          </div>
         </CardContent>
     </Card>
   )

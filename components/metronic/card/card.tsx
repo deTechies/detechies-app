@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import * as React from "react";
+//box-shadow: 0px 3px 4px 0px #00000008;
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -7,7 +8,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("rounded-[12px] bg-background-layer-1 border flex flex-col",
+    className={cn("rounded-[12px] bg-background-layer-1 border flex flex-col shadow-card",
     className
   )}
     {...props}

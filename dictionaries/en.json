@@ -812,9 +812,9 @@
       },
       "about": {
         "all": "View All",
-        "latest_nft": "Recently Created NFT",
+        "latest_nft": "Newest NFT",
         "no_latest_nft": "No NFT",
-        "latest_member": "Recently Joined Member"
+        "latest_member": "Newest Members"
       },
       "nft": {
         "all": "All",

@@ -9,12 +9,14 @@ const inputVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-background-layer-2 placeholder:text-text-placeholder file:border-0 file:bg-transparent",
+          "bg-background-layer-2 placeholder:text-text-placeholder file:border-0 file:bg-transparent rounded-[6px]",
       },
       size: {
         default:
-          "rounded-sm text-title_m px-4 py-5 min-h-[60px] placeholder:text-title_m file:text-sm", // lg
-        md: "rounded-[8px] text-title_m px-4 py-3 h-12 placeholder:text-title_m file:text-sm",
+          "text-sm px-[12px] py-[13px]  placeholder:text-title_m file:text-sm", // lg
+        md: "text-sm px-[12px] py-[13px]  placeholder:text-title_m file:text-sm",
+        sm: "p-10 text-xs", 
+        lg: "py-[17px] px-[16px]"
       },
     },
     defaultVariants: {

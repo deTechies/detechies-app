@@ -122,6 +122,7 @@ module.exports = {
       },
       boxShadow: {
         custom: "2px 2px 10px 0px rgba(0, 0, 0, 0.05)",
+        card: "0px 3px 4px 0px #00000008",
         switch: "0px 1px 1px 0px rgba(0, 0, 0, 0.16), 0px 3px 8px 0px rgba(0, 0, 0, 0.15)",
       },
       animation: {
@@ -134,8 +135,7 @@ module.exports = {
           "1rem",
           { 
             lineHeight: "1rem",
-            fontWeight: "600",
-            letterSpacing: "0.5px" 
+            letterSpacing: "" 
           },
         ],
         heading_l: [
@@ -260,7 +260,7 @@ module.exports = {
         ],
       },
       fontFamily: {
-        sans: ["var(--font-pretendard)", "sans-serif"],
+        //sans: ["var(--font-pretendard)", "sans-serif"],
       },
     },
   },

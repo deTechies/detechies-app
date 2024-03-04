@@ -1,7 +1,6 @@
 "use client";
 
 import Search from "@/components/extra/search";
-import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
@@ -14,14 +13,17 @@ import {
 
 import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
+import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function ProjectFilter({ lang }: { lang: any }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const [advancedSearch, setAdvancedSearch] = useState(false);
 
   const onSelectType = (event: ProjectType | "all") => {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
@@ -39,7 +41,6 @@ export default function ProjectFilter({ lang }: { lang: any }) {
   };
 
   const onSelectPrivacy = (_type: PRIVACY_TYPE | "all") => {
-
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
     if (!_type || _type == "all") {
@@ -71,68 +72,73 @@ export default function ProjectFilter({ lang }: { lang: any }) {
 
   return (
     <Card className="flex justify-between gap-5 px-8 pb-8 pt-7">
-      <h1 className="text-subhead_s">{lang.project.list.projects}</h1>
-      
-      <div className="flex flex-wrap gap-4">
-        <div className="flex flex-wrap items-center gap-5 grow">
-          <Select onValueChange={onSelectType}>
-            <SelectTrigger className="w-[180px] px-3 py-3">
-              <SelectValue placeholder={lang.project.list.all_project} />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem key="all" value="all">
-                {lang.interface.project_type["all"]}
-              </SelectItem>
-
-              {Object.values(ProjectType).map((type) => (
-                <SelectItem key={type} value={type}>
-                  {lang.interface.project_type[type]}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select onValueChange={onSelectPrivacy}>
-            <SelectTrigger className="w-[180px] px-3 py-3">
-              <SelectValue
-                placeholder={lang.project.list.scope_of_disclosure}
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-4">
+          <div className="flex flex-wrap items-center gap-5 grow">
+            <div className="max-w-[335px] w-full">
+              <Search
+                placeholder={lang.project.list.search}
+                size="md"
+                className="w-full"
               />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem value="all">
-                {lang.interface.privacy_type.all}
-              </SelectItem>
-
-              {Object.values(PRIVACY_TYPE).map((type) => (
-                <SelectItem key={type} value={type}>
-                  {lang.interface.privacy_type[type]}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <div className="max-w-[335px] w-full">
-            <Search
-              placeholder={lang.project.list.search}
+            </div>
+            <Button
               size="md"
-              className="w-full"
-            />
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Checkbox onCheckedChange={onChangeMyProject} />
-
-            <Label className="text-title_m">
-              {lang.project.list.my_project}
-            </Label>
+              variant="ghost"
+              onClick={() => setAdvancedSearch(!advancedSearch)}
+            >
+              {advancedSearch ? "Hide Advanced Search" : "Advanced Search"}
+            </Button>
           </div>
         </div>
+        {advancedSearch && (
+          <div className="flex gap-4 flex-wrap">
+            <Select onValueChange={onSelectType}>
+              <SelectTrigger className="w-[180px] px-3 py-3">
+                <SelectValue placeholder={lang.project.list.all_project} />
+              </SelectTrigger>
 
-        <Link href="/project/create" role="link" className="ml-auto">
-          <Button size="lg">{lang.project.list.create_project.create}</Button>
-        </Link>
+              <SelectContent>
+                <SelectItem key="all" value="all">
+                  {lang.interface.project_type["all"]}
+                </SelectItem>
+
+                {Object.values(ProjectType).map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {lang.interface.project_type[type]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select onValueChange={onSelectPrivacy}>
+              <SelectTrigger className="w-[180px] px-3 py-3">
+                <SelectValue
+                  placeholder={lang.project.list.scope_of_disclosure}
+                />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="all">
+                  {lang.interface.privacy_type.all}
+                </SelectItem>
+
+                {Object.values(PRIVACY_TYPE).map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {lang.interface.privacy_type[type]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <div className="flex items-center gap-3">
+              <Checkbox onCheckedChange={onChangeMyProject} />
+
+              <Label className="text-title_m">
+                {lang.project.list.my_project}
+              </Label>
+            </div>
+          </div>
+        )}
       </div>
     </Card>
   );

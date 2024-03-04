@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 
 export default function GroupDetails({ details }: { details: any }) {
   return (
-    <Card className="mb-20">
+    <Card className="">
      <CardHeader>
         <h1>Group Details</h1>
      </CardHeader>

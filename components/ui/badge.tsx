@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const badgeVariants = cva("flex flex-row items-center whitespace-normal", {
   variants: {
     variant: {
-      default: "bg-background-layer-2 text-text-primary text-label_m",
+      default: "bg-background-layer-2 text-text-primary text-sm",
       info: "border-state-info bg-state-info-secondary text-state-info hover:bg-info/80",
       accent:
         "border-accent-primary bg-accent-secondary text-accent-primary hover:bg-accent/80",
@@ -29,7 +29,7 @@ const badgeVariants = cva("flex flex-row items-center whitespace-normal", {
     },
     shape: {
       default:
-        "text-label_s rounded-md px-3 py-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+        "rounded-[6px] p-2 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
       md: "py-2 px-2.5 rounded-md text-title_s",
       sm: "py-2 px-2.5 rounded-md text-label_s",
       category:
