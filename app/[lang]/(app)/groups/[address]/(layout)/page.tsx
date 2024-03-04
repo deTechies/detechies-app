@@ -30,10 +30,18 @@ export default async function GroupProfile({
 
 
   return (
-    <div className="flex flex-col">
-      <GroupDetails details={clubInfo} />
+    <div className="grid grid-cols-3 gap-3">
+      <div className="col-span-1">
+        <GroupDetails details={clubInfo} />
+      </div>
+      <div className="col-span-2">
+      <GroupMember
+        address={params.address.toString()}
+        members={clubInfo.members}
+        lang={dictionary}
+      />
+      </div>
 
-      <hr className="my-8 solid h-[1px] bg-border-div"></hr>
 
       {/* <GroupAchievements address={params.address.toString()} isCreator={data.isCreator}/> */}
  {/*      <GroupNft
@@ -44,13 +52,7 @@ export default async function GroupProfile({
         lang={dictionary}
       /> */}
 
-      <hr className="my-8 solid h-[1px] bg-border-div"></hr>
 
-      <GroupMember
-        address={params.address.toString()}
-        members={clubInfo.members}
-        lang={dictionary}
-      />
     </div>
   );
 }

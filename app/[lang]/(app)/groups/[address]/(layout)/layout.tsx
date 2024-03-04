@@ -1,7 +1,5 @@
 import GroupProfileCard from "@/components/group/group-profile-card";
-import GroupTabs from "@/components/group/group-taps";
 
-import { Card } from "@/components/ui/card";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { serverApi } from "@/lib/data/general";
@@ -30,13 +28,10 @@ export default async function GroupDetailLayout({
     );
 
   return (
-    <main className="w-full">
+    <main className="w-full flex flex-col gap-5">
       <GroupProfileCard id={params.address} lang={dictionary} />
-      <GroupTabs details={data} lang={dictionary}></GroupTabs>
-
-      <Card className="px-10 pt-8 rounded-t-none m-8">
-        <div className="flex flex-col">{children}</div>
-      </Card>
+      
+      <div className="flex flex-col m-10">{children}</div>
     </main>
   );
 }

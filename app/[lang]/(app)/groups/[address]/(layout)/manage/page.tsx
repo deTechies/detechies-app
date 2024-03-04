@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { serverApi } from "@/lib/data/general";
+import GroupSettings from "./_components/group-settings";
 import ManageMember from "./manage-member";
 import ManageMission from "./manage-mission";
 import ManageNft from "./manage-nft";
@@ -36,7 +37,7 @@ export default async function GroupDetailManageLayout({
           <TabsTrigger value="missions" variant="button1">
             {dictionary.group.details.manage.tab.mission}
           </TabsTrigger>
-          <TabsTrigger value="info" variant="button1">
+          <TabsTrigger value="settings" variant="button1">
             {dictionary.group.details.manage.tab.info}
           </TabsTrigger>
         </TabsList>
@@ -46,14 +47,14 @@ export default async function GroupDetailManageLayout({
             details={club}
             searchParams={searchParams}
             lang={dictionary}
-          ></ManageMember>
+            />
         </TabsContent>
 
         <TabsContent value="nft">
           <ManageNft
             details={club}
             lang={dictionary}
-          ></ManageNft>
+            />
         </TabsContent>
 
         <TabsContent value="missions">
@@ -61,10 +62,12 @@ export default async function GroupDetailManageLayout({
             details={club}
             missions={missions}
             lang={dictionary}
-          ></ManageMission>
+         />
         </TabsContent>
 
-        <TabsContent value="info">info</TabsContent>
+        <TabsContent value="settings">
+          <GroupSettings />
+        </TabsContent>
         
         <TabsContent value="blockchain">
           <ManageContracts />

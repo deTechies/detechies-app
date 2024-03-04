@@ -1,13 +1,11 @@
 // import Image from "next/image";
-import Image from "@/components/ui/image";
 
 import { serverApi } from "@/lib/data/general";
-import Link from "next/link";
-import { CardContent } from "../ui/card";
 
 import { addURL } from "@/lib/utils";
 import { Briefcase, Folder, MapPin } from "lucide-react";
 import Avatar from "../metronic/avatar/avatar";
+import GroupTaps from "./group-taps";
 
 export default async function GroupProfileCard({
   id,
@@ -94,43 +92,8 @@ export default async function GroupProfileCard({
         </div>
       </div>
     </header>
+    <GroupTaps details={groupDetail} lang={lang} />
 
-
-      <CardContent className="flex flex-wrap items-end justify-between">
-        <div className="flex flex-col flex-wrap mb-9 max-h-[110px] gap-x-2">
-          {groupDetail.links &&
-            groupDetail.links.length &&
-            groupDetail.links.map((url: string, index: number) => {
-              if (index > 5) {
-                return;
-              }
-
-              return (
-                <Link
-                  href={url}
-                  className="flex items-center gap-3 rounded-md px-1.5 py-1.5"
-                  target="_blank"
-                  key={index}
-                >
-                  <Image
-                    src={getSnsLogo(url)}
-                    alt={`sns logo image`}
-                    className="object-scale-down aspect-square"
-                    width={24}
-                    height={24}
-                  ></Image>
-                  {/* {url && truncateMiddle(url, 12)} */}
-
-                  <span className="text-label_s text-accent-on-primary">
-                    {url}
-                  </span>
-                </Link>
-              );
-            })}
-        </div>
-
-      
-      </CardContent>
     </div>
   );
 }

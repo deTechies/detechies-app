@@ -133,8 +133,8 @@ module.exports = {
         md: [
           "1rem",
           { 
-            lineHeight: "2.125rem",
-            fontWeight: "700",
+            lineHeight: "1rem",
+            fontWeight: "600",
             letterSpacing: "0.5px" 
           },
         ],
