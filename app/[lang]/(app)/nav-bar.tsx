@@ -64,7 +64,7 @@ export default function Navbar({ lang }: { lang: any }) {
                       key={index}
                       href={link.href}
                       aria-disabled={link?.disabled}
-                      className={`flex items-center  font-medium py-3 content-center px-5
+                      className={`flex items-center text-md  font-medium py-3 content-center px-5
                       ${
                         pathname.includes(link.href)
                           ? "bg-background-layer-2 rounded-[6px]"

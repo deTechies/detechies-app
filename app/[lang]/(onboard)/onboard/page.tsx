@@ -21,8 +21,8 @@ export default async function OnboardPage({
   }
 
   return (
-    <main className="flex flex-col gap-12 items-center w-full max-w-[400px] mx-auto">
-      <div className="flex flex-col gap-8">
+    <main className="flex flex-col gap-12 items-center w-full md:w-[1/2] mx-auto">
+      <div className="flex flex-col gap-8 w-full text-center">
         <div className="flex flex-row gap-4 items-center mx-auto">
           <div className="relative h-24 w-24">
             <Image
@@ -36,11 +36,11 @@ export default async function OnboardPage({
         </div>
         <div>
           
-        <h1 className="text-left flex flex-col gap-1 text-subhead_s">
-          Hello stranger, welcome to detechies!
+        <h1 className="flex flex-col gap-1 mb-2 text-xl font-medium">
+          Welcome Techie 
         </h1>
         <p>
-          Please select your preferred method to sign in or sign up to continue.
+          Choose your preferred way of signing in. 
         </p>
         </div>
       </div>

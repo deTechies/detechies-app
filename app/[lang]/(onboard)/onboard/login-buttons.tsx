@@ -83,7 +83,7 @@ export default function LoginButtons({ text }: { text?: any }) {
           <>
             <div
               key={connectors[1].id}
-              className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-accent-secondary text-accent-primary hover:outline hover:outline-accent-primary"
+              className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-accent-secondary  hover:outline hover:outline-accent-primary"
               onClick={() => handleConnect(connectors[1])}
             >
               <Image
