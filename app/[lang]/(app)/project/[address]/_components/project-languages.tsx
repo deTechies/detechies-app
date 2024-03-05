@@ -1,7 +1,8 @@
 
 import { LanguagePercentage } from '@/components/connections/github/types'
+import { Card, CardContent, CardHeader } from '@/components/metronic/card/card'
 import CustomPieChart from '@/components/metronic/charts/recharts/custom-pie-chart'
-import { Card, CardHeader } from '@/components/ui/card'
+
 
 export default function ProjectLanguages({languages}: {
     languages: LanguagePercentage[]
@@ -11,7 +12,9 @@ export default function ProjectLanguages({languages}: {
         <CardHeader>
             Languages
         </CardHeader>
+        <CardContent>
         <CustomPieChart data={languages} />
+        </CardContent>
     </Card>
   )
 }

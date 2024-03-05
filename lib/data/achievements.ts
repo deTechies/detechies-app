@@ -12,6 +12,7 @@ export async function getUserAchievements(address?: string) {
   const response = await fetch(`${API_URL}/achievement-rewards/wallet/${address}`, {
     method: "GET",
     headers: {
+      "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "API_KEY",
       Authorization: `Bearer ${session?.web3.accessToken}`,
     },
   });

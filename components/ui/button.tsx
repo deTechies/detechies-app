@@ -29,6 +29,7 @@ const buttonVariants = cva(
         icon_circle: "h-12 w-12 shrink-0 rounded-full p-2 truncate",
         image: "h-fit w-fit p-0 bg-transparent hover:shadow-none truncate",
         ts: "pt-1 pb-[6px] px-[10px] text-title_s rounded-[14px] truncate",
+        square: " p-2 rounded-[6px]",
       },
     },
     defaultVariants: {

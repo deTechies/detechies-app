@@ -5,7 +5,7 @@ import { Locale } from "@/i18n.config";
 import { Suspense } from "react";
 import ProfileProjects from "../_components/profile-projects";
 
-export default async function Dashboard({
+export default async function UserProjects({
   params,
 }: {
   params: { lang: Locale };

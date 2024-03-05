@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { ROLE_TYPE } from "@/lib/interfaces";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
@@ -39,13 +40,13 @@ export default function ProfileTabs({
     {
       name: "analysis",
       href: "analysis",
-      isAdmin: false,
+      isAdmin: true,
     },
   ] as any;
 
   return (
-    <div className="flex flex-row items-center justify-between  px-10 pt-10 pb-0 overflow-x-auto border-b rounded-none">
-      <div className="flex flex-row gap-0">
+    <div className="flex flex-row  justify-between  px-10 lg:px-20  overflow-x-auto items-center">
+      <div className="flex flex-row gap-0 ">
       {links.map((link: any, index: number) => {
         if (link.isAdmin && details.userRole != ROLE_TYPE.ADMIN)  {
           return;
@@ -55,11 +56,11 @@ export default function ProfileTabs({
           <div className="mr-8" key={index}>
             <Link
               href={`/mypage//${link.href}`}
-              aria-disabled={link?.disabled}
-              className={`inline-flex items-center truncate border-b-[3px] capitalize pb-3
+              aria-disabled={link?.isAdmin}
+              className={`flex items-center truncate border-b-[3px] capitalize py-3
             ${
               (link.href === "" &&
-                !pathname.includes(`/mypage/${details.id}/`)) ||
+                !pathname.includes(`/mypage/${details.id}`)) ||
               (link.href !== "" &&
                 pathname.includes(`/mypage/${link.href}`))
                 ? "border-accent-primary text-accent-primary"
@@ -72,13 +73,12 @@ export default function ProfileTabs({
         );
       })}
       </div>
-      <div>
+
         <Link href="/mypage/edit"  passHref>
-            <button>
-                Edit
-            </button>
+            <Button size="sm">
+                Edit Profile
+            </Button>
         </Link>
-      </div>
     </div>
   );
 }

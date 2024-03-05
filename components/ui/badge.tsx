@@ -37,9 +37,9 @@ const badgeVariants = cva("flex flex-row items-center whitespace-normal", {
       outline:
         "py-[8px] px-[10px] border rounded-md bg-background-transparent text-title_s",
       outline_sm: "h-[22px] px-2.5 border rounded-full text-label_s",
-      icon: "py-1.5 px-[10px] rounded-md text-label_m flex items-center justify-center",
-      skill: "text-label_s bg-background-layer-2 rounded-[5px] px-2 py-1",
-      loading: "text-title_m rounded-md px-1.5 py-1",
+      icon: "py-[10px] px-[10px] rounded-md text-label_m flex items-center justify-center",
+      skill: "hexagon text-label_s h-[24px] w-[24px] aspect-square flex justify-center items-center rounded-[3px]",
+      loading: "text-title_m rounded-md px-4 py-4",
     },
   },
   defaultVariants: {
@@ -58,7 +58,7 @@ function Badge({ className, variant, shape, children, ...props }: BadgeProps) {
       className={cn(badgeVariants({ variant, shape }), className)}
       {...props}
     >
-      <div className="truncate">{children}</div>
+      <div className="">{children}</div>
     </div>
   );
 }

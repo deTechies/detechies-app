@@ -3,9 +3,9 @@ import { Locale } from "@/i18n.config";
 // import { serverApi } from "@/lib/data/general";
 
 import { Suspense } from "react";
-import ProfileProjects from "./_components/profile-projects";
+import UserDashboard from "./_components/dashboard/dashboard";
 
-export default async function Dashboard({
+export default async function MyDashboard({
   params,
 }: {
   params: { lang: Locale };
@@ -16,9 +16,9 @@ export default async function Dashboard({
   // const {data: myProfile} = await serverApi(`/users/me`);
 
   return (
-    <main className="flex flex-col gap-6">
+    <main className="flex flex-col gap-6 m-10">
       <Suspense fallback={"loading projects"}>
-        <ProfileProjects text={dictionary.mypage.project} lang={dictionary} />
+        <UserDashboard />
       </Suspense>
     </main>
   );

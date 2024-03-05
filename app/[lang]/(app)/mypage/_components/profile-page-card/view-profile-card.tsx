@@ -6,7 +6,7 @@ import ProfileTabs from "./profile-tabs";
 
 export default function ViewProfileCard({ dictionary, profile }: any) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4 bg-white pt-10 -mt-10">
     <header className=" w-full gap-2 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
       <div className="flex flex-col gap-2 mx-auto ">
         <div className="mx-auto">

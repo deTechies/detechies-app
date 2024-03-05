@@ -49,8 +49,7 @@ export default function Navbar({ lang }: { lang: any }) {
         <>
           <div className="px-6 lg:px-8 max-w-[1920px] mx-auto relative">
             <div className="flex justify-between items-center py-5  px-2 md:px-4 lg:px-10">
-              <div className="flex gap-4">
-              <div className="flex items-center gap-2">
+              <div className="flex gap-4 items-center">
                 <div className="flex flex-shrink-0 items-center h-[32px] w-[32px] relative flex-wrap cursor-pointer my-auto">
                   <Image
                     className="block object-contain "
@@ -64,41 +63,40 @@ export default function Navbar({ lang }: { lang: any }) {
                     priority={true}
                   />
                 </div>
-              </div>
-              <div className="gap-2 absolute hidden ml-10 sm:flex sm:gap-4 md:gap-2 ">
-                {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                {links.map((link: any, index: number) => (
-                  <Link
-                    key={index}
-                    href={link.href}
-                    aria-disabled={link?.disabled}
-                    className={`flex items-center text-sm font-medium py-3 content-center px-5
+
+                <div className="gap-2 absolute hidden ml-10 sm:flex sm:gap-4 md:gap-2 ">
+                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+                  {links.map((link: any, index: number) => (
+                    <Link
+                      key={index}
+                      href={link.href}
+                      aria-disabled={link?.disabled}
+                      className={`flex items-center text-sm font-medium py-3 content-center px-5
                       ${
                         pathname.includes(link.href)
                           ? "bg-background-layer-2 rounded-[6px]"
                           : "text-text-secondary hover:text-text-primary"
                       }  
                       `}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
               <section className="flex gap-10">
-              <div className="hidden sm:ml-8 sm:flex sm:items-center sm:gap-[14px]">
-                {/* Profile dropdown */}
-                 <div className="mx-3">
-                  <MessageCircle className="w-5 h-5 text-text-secondary" />
+                <div className="hidden sm:ml-8 sm:flex sm:items-center sm:gap-[14px]">
+                  {/* Profile dropdown */}
+                  <div className="mx-3">
+                    <MessageCircle className="w-5 h-5 text-text-secondary" />
+                  </div>
+                  <div className="mx-3">
+                    <BellRing className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
+                  </div>
                 </div>
-                <div className="mx-3">
-                  <BellRing className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
-                </div> 
-                
-              </div>
-              <div className="relative ml-3 cursor-pointer">
+                <div className="relative ml-3 cursor-pointer">
                   <Login lang={lang.my_account} />
-              </div>
+                </div>
               </section>
               <div className="flex items-center -mr-2 sm:hidden">
                 {/* Mobile menu button */}
