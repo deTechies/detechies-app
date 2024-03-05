@@ -13,9 +13,9 @@ export default async function UserDashboard({ address }: { address?: any }) {
     <div>
       <div className="grid grid-cols-3 gap-md">
         <div className="col-span-1 flex flex-col gap-md">
-            <MyConnections connections={user?.connections} />
-            <MyTagsCard tags={user?.profile_details.skills} />
             <MyLanguagesCard address={user?.wallet} />
+            <MyTagsCard tags={user?.profile_details.skills} />
+            <MyConnections connections={user?.socials} />
         </div>
         <div className="col-span-2 flex flex-col gap-md">
             <MyUsedPackages user={user?.wallet} />

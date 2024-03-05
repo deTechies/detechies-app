@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva("flex flex-row items-center whitespace-normal", {
+const badgeVariants = cva("flex flex-row items-center", {
   variants: {
     variant: {
       default: "bg-background-layer-2 text-text-primary text-sm",

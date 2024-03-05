@@ -31,18 +31,18 @@ export default function ProfileCard({ profile, lang }: ProfileProps) {
               profile.tags.map((item, index) =>
                 index > 2 ? (
                   index == 3 && (
-                    <Badge shape={"skill"} variant="outline" key={index}>
+                    <Badge shape={"sm"} variant="outline" key={index}>
                       그외 기술+{profile.tags?.length - 3}
                     </Badge>
                   )
                 ) : (
-                  <Badge shape={"skill"} variant="outline" key={index}>
+                  <Badge shape={"sm"} variant="outline" key={index}>
                     {item}
                   </Badge>
                 )
               )
             ) : (
-              <Badge shape={"skill"} variant={"outline"}>
+              <Badge shape={"sm"} variant={"outline"}>
                 No role
               </Badge>
             )}
