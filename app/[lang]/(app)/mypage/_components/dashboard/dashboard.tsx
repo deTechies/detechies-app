@@ -1,8 +1,8 @@
 import { getUserProfile } from "@/lib/data/user";
+import MyAbout from "./my-about";
 import MyConnections from "./my-connections-card";
 import MyLanguagesCard from "./my-languages-card";
 import MyProjectsCard from "./my-projects-card";
-import MyRolesCard from "./my-roles-card";
 import MyTagsCard from "./my-tags-card";
 import MyUsedPackages from "./my-used-packages";
 
@@ -11,18 +11,19 @@ export default async function UserDashboard({ address }: { address?: any }) {
   const { data: user } = await getUserProfile(address);
   return (
     <div>
-      <div className="grid grid-cols-3 gap-md">
-        <div className="col-span-1 flex flex-col gap-md">
+      <div className="flex flex-col md:flex-row gap-md">
+        <div className="md:w-[350px] md:shrink-0 w-full flex flex-col gap-md">
+            <MyAbout userData={user}/>
             <MyLanguagesCard address={user?.wallet} />
-            <MyTagsCard tags={user?.profile_details.skills} />
+            <MyTagsCard tags={user?.profile_details?.skills} />
             <MyConnections connections={user?.socials} />
         </div>
-        <div className="col-span-2 flex flex-col gap-md">
-            <MyUsedPackages user={user?.wallet} />
-            <div className="grid grid-cols-2 gap-md">    
+        <div className="flex flex-col gap-md grow">
+        <div className="grid grid-cols-2 gap-md">    
                 <MyProjectsCard user={user?.wallet} />
-                <MyRolesCard user={user?.wallet} />
             </div>
+            <MyUsedPackages user={user?.wallet} />
+        
         </div>
       </div>
     </div>

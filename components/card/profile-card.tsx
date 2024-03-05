@@ -32,7 +32,7 @@ export default function ProfileCard({ profile, lang }: ProfileProps) {
                 index > 2 ? (
                   index == 3 && (
                     <Badge shape={"sm"} variant="outline" key={index}>
-                      그외 기술+{profile.tags?.length - 3}
+                      More+{profile.tags?.length - 3}
                     </Badge>
                   )
                 ) : (

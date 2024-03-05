@@ -60,7 +60,7 @@
     --icon-secondary: #96A6B4;
     
     --border-div: #EFF0F2;
-    --border-input: #BEC3CA;
+    --border-input: #DBDFE9;
     --border-input-focus: #00D41D;
     --border-input-error: #FF0000;
     --border-input-disabled: #EFF0F2;
@@ -129,9 +129,9 @@
     --accent-on-secondary: #00C71B;
     --accent-tertiary: #909993;
     
-    --background-base: #000000;
-    --background-layer-1: #1F212A;
-    --background-layer-2: #1F2226;
+    --background-base: #1E2129;
+    --background-layer-1: #1E2129;
+    --background-layer-2: #111318;
     --background-input-inactive: #A2A9B3;
     --background-tooltip: #101A28;
     
@@ -145,7 +145,7 @@
     --icon-secondary: #96A6B4;
     
     --border-div: #2E3339;
-    --border-input: #5C6571;
+    --border-input: #363843;
     --border-input-focus: #00D41D;
     --border-input-error: #FF0000;
     --border-input-disabled: 1F2226;

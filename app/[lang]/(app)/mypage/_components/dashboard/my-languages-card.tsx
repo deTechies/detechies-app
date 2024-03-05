@@ -11,6 +11,9 @@ export default async function MyLanguagesCard({
 }) {
     
     const {data: languages} = await serverApi(`/users/${address}/languages`)
+    
+    const randomColors = ['info', 'default', 'tertiary', 'warning', "accent"]
+    
   return (
     <Card>
         <CardHeader>
@@ -21,11 +24,11 @@ export default async function MyLanguagesCard({
                 languages?.length > 0 ? (
                     <div className="flex flex-row gap-2 flex-wrap">
                         {languages?.map((language: any, index: number) => (
-                            <Badge key={index} className="flex flex-col gap-2 content-center items-center " shape="icon">
+                            <Badge key={index} className="flex flex-col gap-2 p-3 content-center items-center" variant="accent" shape="icon">
                                 <Image 
-                                    src={`/images/metronic/icons/js.png`}
-                                    width={18}
-                                    height={18}
+                                    src={`/images/metronic/icons/${language.name}.png`}
+                                    width={24}
+                                    height={24}
                                     className='my-auto'
                                     alt={language.language + ' count' + language.count} 
                                 />

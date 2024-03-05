@@ -19,6 +19,7 @@ type Chat = {
 
 type MessageProps = {
   chats: Chat[];
+  chatTo: any;
 };
 
 type MessageInputProps = {
@@ -89,13 +90,14 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
         });
         setInputValue("");
         setChats([
-          ...chats,
           {
             cid: response.cid,
             messageContent: inputValue,
             fromDID: response.fromDID,
             timestamp: response.timestamp,
           },
+          ...chats
+         
         ]);
       })
       .catch((error) => {
@@ -114,7 +116,7 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
     <section className="h-[60vh] overflow-auto ">
       {loading ? <div>
         Loading chat... 
-      </div> : <MessageList chats={chats} />}
+      </div> : <MessageList chats={chats} chatTo={chatTo}/>}
     </section>
     <MessageInput
       inputValue={inputValue}
@@ -127,13 +129,13 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
   );
 }
 
-export function MessageList({ chats }: MessageProps) {
+export function MessageList({ chats, chatTo }: MessageProps) {
   return (
-    <ul className="flex flex-col gap-10">
+    <ul className="flex flex-col gap-6 mb-10 w-full">
       {chats &&
         chats.length > 0 &&
-        chats.map((chat, index) => (
-          <div key={index} className="p3 ">
+        [...chats].reverse().map((chat:any, index) => (
+          <div key={index} className="w-full">
             <MessageItem
               message={{
                 id: chat.cid,
@@ -143,7 +145,7 @@ export function MessageList({ chats }: MessageProps) {
                 timestamp: chat.timestamp,
               }}
               push={chat}
-              clientAddress={didToAddress(chat.fromDID) as Address}
+              clientAddress={chatTo}
             />
           </div>
         ))}

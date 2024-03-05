@@ -185,7 +185,7 @@ export default function PushGroupChat({
       </CardHeader>
       {isMember && (
       <CardContent className="h-[60vh] overflow-auto ">       
-              <MessageList chats={chats} />
+              <MessageList chats={chats} chatTo={contract} />
       </CardContent>
               )}
       <div className="flex gap-2">

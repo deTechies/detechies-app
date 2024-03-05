@@ -1,10 +1,11 @@
 "use client";
 
 import Search from "@/components/extra/search";
-import { Card } from "@/components/ui/card";
+
 
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 
+import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Link from "next/link";

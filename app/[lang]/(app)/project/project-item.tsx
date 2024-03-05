@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Project } from "@/lib/interfaces";
 // import Image from "next/image";
+import { Card } from "@/components/metronic/card/card";
 import Image from "@/components/ui/image";
 import Link from "next/link";
 export default function ProjectItem({
@@ -18,8 +19,9 @@ export default function ProjectItem({
   return (
     <Link
       href={`/project/${details.id}`}
-      className="flex flex-row items-start w-full gap-5 pb-8 truncate rounded-md bg-background-layer-1 pt-7 px-7 border border-background-layer-1 hover:border-state-info "
+      className="hover:border-state-info "
     >
+      <Card className="flex flex-row items-start w-full p-5 gap-5">
       <figure className="overflow-hidden shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex justify-center items-center">
         <Image
           src={`https://ipfs.io/ipfs/${details.image}`}
@@ -88,6 +90,7 @@ export default function ProjectItem({
           )}
         </div>
       </section>
+      </Card>
     </Link>
   );
 }

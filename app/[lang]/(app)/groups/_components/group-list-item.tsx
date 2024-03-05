@@ -29,7 +29,7 @@ export default function GroupListItem({
   });
   return (
     <Link href={`/groups/${details.id}`} passHref>
-      <Card className="flex flex-col items-center pt-[46px] h-full p-[20px] gap-[30px] border border-white hover:border-accent-primary">
+      <Card className="flex flex-col items-center  h-full p-[30px] gap-[30px] border hover:border-accent-primary">
         <section className="flex flex-col items-center justify-center gap-4 text-center">
           <Avatar className="w-[50x] h-[50px] mx-auto ">
             <AvatarImage

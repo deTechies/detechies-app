@@ -6,6 +6,9 @@ export default function MyTagsCard({
     }: {
     tags: any
 }) {
+    if(!tags) {
+        return
+    }
   return (
     <Card>
         <CardHeader>

@@ -15,9 +15,9 @@ export default async function UserProfileHeader({
 
   console.log(user);
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-10 -mt-10 bg-background-layer-1 relative left-0 -ml-4">
     <header className=" w-full gap-2 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
-      <div className="flex flex-col gap-2 mx-auto ">
+      <div className="flex flex-col gap-2 mx-auto  pt-10">
         <div className="mx-auto">
           <Avatar
             src={addURL(user.avatar_link)}

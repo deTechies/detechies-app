@@ -12,7 +12,7 @@ export default async function MyPageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-4 md:gap-8 ">
+    <div className="flex flex-col gap-4 md:gap-10 ">
       <Suspense fallback={<LoadingProfileCard />}>
         <ProfilePageCard lang={params.lang} />
       </Suspense>

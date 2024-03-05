@@ -33,13 +33,6 @@ export default function Navbar({ lang }: { lang: any }) {
     },
   ];
 
-  function changeLanguage() {
-    const value = params.lang === "en" ? "ko" : "en";
-    //change the value in the path name
-    const segments = pathname.split("/").filter(Boolean);
-    const newPath = "/" + value + "/" + segments.slice(1).join("/");
-    router.replace(newPath);
-  }
 
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
 
@@ -71,7 +64,7 @@ export default function Navbar({ lang }: { lang: any }) {
                       key={index}
                       href={link.href}
                       aria-disabled={link?.disabled}
-                      className={`flex items-center text-sm font-medium py-3 content-center px-5
+                      className={`flex items-center  font-medium py-3 content-center px-5
                       ${
                         pathname.includes(link.href)
                           ? "bg-background-layer-2 rounded-[6px]"
