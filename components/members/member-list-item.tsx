@@ -1,8 +1,7 @@
 import { defaultAvatar } from "@/lib/constants";
 import { getUserProfile } from "@/lib/data/user";
-
 import { ClubMember } from "@/lib/interfaces";
-import Avatar from "../metronic/avatar/avatar";
+import { Avatar } from "../ui/avatar";
 import { Badge } from "../ui/badge";
 import IPFSImageLayer from "../ui/layer";
 
@@ -13,10 +12,9 @@ export default async function MemberListItem({details, userAddress}: {details:Cl
     
     if(!data) return (
         <div className="flex items-center">
-            <Avatar 
-              shape="rounded"
-             src={details.user.avatar_link} 
-            />
+            <Avatar className="h-9 w-9">
+                <IPFSImageLayer hashes={details.user.avatar ? details.user.avatar : defaultAvatar} />
+            </Avatar>
             <div className="ml-4 space-y-1">
               <p className="text-sm font-medium leading-none">Unknown</p>
               <p className="text-sm text-muted-foreground">
@@ -39,7 +37,7 @@ export default async function MemberListItem({details, userAddress}: {details:Cl
     <div className="ml-4 space-y-1">
       <p className="text-sm font-medium leading-none">{data?.display_name}</p>
       <p className="text-sm text-muted-foreground">
-        {details?.created_at}
+        {data?.profile_details?.profession ? data.profile_details.profession : "member"}
       </p>
     </div>
     <div className="ml-auto font-medium">

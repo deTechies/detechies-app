@@ -15,7 +15,9 @@ export default function GroupApi() {
             <label className="w-[100px]">API Key</label>
             <Input type="text" 
             className="max-w-[300px]"
-            />
+            >
+              test
+              </Input>
           </div>
         </CardContent>
     </Card>
