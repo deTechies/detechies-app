@@ -41,25 +41,25 @@ export default async function GroupProfile({
           <CardContent>
             <div className="flex flex-col text-md gap-4 text-sm font-medium">
               <div className="flex">
-                <span className="text-sm font-medium w-[100px] text-gray-500">
+                <span className="text-sm font-medium w-[100px] text-text-secondary">
                   Address
                 </span>
                 <span>{clubInfo.contract}</span>
               </div>
               <div className="flex">
-                <span className="text-sm font-medium w-[100px] text-gray-500">
+                <span className="text-sm font-medium w-[100px] text-text-secondary">
                   Members
                 </span>
-                <span className="text-gray-800">{clubInfo.members.length}</span>
+                <span>{clubInfo.members.length}</span>
               </div>
               <div className="flex w-full">
-                <span className=" w-[100px] text-gray-500">Created</span>
-                <span className="text-gray-800">
+                <span className=" w-[100px] text-text-secondary">Created</span>
+                <span >
                   {formatDate(clubInfo.created_at)}
                 </span>
               </div>
               <div className="flex">
-                <span className="text-sm font-medium w-[100px] text-gray-500">
+                <span className="text-sm font-medium w-[100px] text-text-secondary">
                   Owner
                 </span>
                 <span className="text-blue-500 hover:text-blue-800">
@@ -96,7 +96,7 @@ export default async function GroupProfile({
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-gray-800 font-medium text-sm"
+                    className="font-medium text-sm"
                   >
                     {link}
                   </Link>

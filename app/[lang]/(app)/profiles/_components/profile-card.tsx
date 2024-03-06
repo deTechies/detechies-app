@@ -3,8 +3,8 @@ import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
 import { User } from "@/lib/interfaces";
 import Link from "next/link";
 
-import { Card } from "../metronic/card/card";
-import { Badge } from "../ui/badge";
+import { Card } from "../../../../../components/metronic/card/card";
+import { Badge } from "../../../../../components/ui/badge";
 
 import { addURL } from "@/lib/utils";
 import Image from "next/image";

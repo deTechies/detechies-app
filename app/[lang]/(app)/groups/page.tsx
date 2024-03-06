@@ -17,9 +17,11 @@ export default async function GroupsPage({
     <main className="flex flex-col w-full max-w-[97rem] gap-6 mx-auto">
       <GroupListFilter lang={dictionary} />
 
-      <Suspense fallback={<span>Loading... </span>}>
-        <GroupList lang={dictionary} />
-      </Suspense>
+      <div className="mx-10">
+        <Suspense fallback={<span>Loading... </span>}>
+          <GroupList lang={dictionary} />
+        </Suspense>
+      </div>
     </main>
   );
 }

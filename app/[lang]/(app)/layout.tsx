@@ -13,8 +13,8 @@ import localFont from 'next/font/local';
 import { redirect } from "next/navigation";
 import App from "../app";
 import "../globals.css";
-import Footer from "./footer";
-import Navbar from "./nav-bar";
+import Footer from "./_components/footer";
+import Navbar from "./_components/nav-bar";
 const inter = Inter({ subsets: ['latin'] })
 
 // Font files can be colocated inside of `app`

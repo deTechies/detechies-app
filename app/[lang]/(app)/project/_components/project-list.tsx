@@ -24,7 +24,7 @@ export default async function ProjectList({
 
 
   return (
-    <>
+    <div className="flex flex-col gap-10">
       <section className="grid w-full gap-4 truncate md:grid-cols-2">
         {projects.data.length > 0 &&
           projects.data.map((item: Project) => (
@@ -37,6 +37,6 @@ export default async function ProjectList({
         limit={searchParams.limit ? parseInt(searchParams.limit) : 20}
         page={searchParams.page ? parseInt(searchParams.page) : 1}
       />
-    </>
+    </div>
   );
 }

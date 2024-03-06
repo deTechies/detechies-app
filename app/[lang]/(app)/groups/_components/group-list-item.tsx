@@ -28,7 +28,7 @@ export default function GroupListItem({
   });
   return (
     <Link href={`/groups/${details.id}`} passHref>
-      <Card className="flex flex-col items-center  h-full p-[20px] gap-[30px] border hover:border-accent-primary">
+      <Card className="flex flex-col p-[30px] gap-[30px] border hover:border-accent-primary">
         <section className="flex flex-col items-center justify-center gap-4 text-center">
           <Avatar className="w-[60x] h-[60px] p-4 mx-auto ">
             <AvatarImage
@@ -51,19 +51,6 @@ export default function GroupListItem({
             <p className="text-sm text-text-secondary">{details.description}</p>
           </div>
         </section>
-
-        <div className="flex divide-x">
-          <div className="px-4">
-            <div className="text-xs">{details.members?.length}</div>
-            <div className="mb-1 text-xs">{lang.group.list.members}</div>
-          </div>
-
-          <div className="px-4 text-center">
-            <div className="text-xs">{details.achievements?.length}</div>
-            <div className="mb-1 text-xs">{lang.group.list.nfts}</div>
-
-          </div>
-        </div>
       </Card>
     </Link>
   );

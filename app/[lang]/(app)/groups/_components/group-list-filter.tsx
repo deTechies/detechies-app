@@ -4,7 +4,6 @@ import Search from "@/components/extra/search";
 
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 
-import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -59,7 +58,7 @@ export default function GroupListFilter({ lang }: { lang: any }) {
   );
 
   return (
-    <Card className="p-5 flex flex-col gap-5">
+    <div className="p-10 flex flex-col gap-10 bg-background-layer-1">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex md:flex-row flex-col items-center gap-5 grow">
           <div className="md:max-w-[335px] w-full">
@@ -105,6 +104,6 @@ export default function GroupListFilter({ lang }: { lang: any }) {
           </Select>
         </div>
       )}
-    </Card>
+    </div>
   );
 }

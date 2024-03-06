@@ -19,10 +19,10 @@ export default async function UserDashboard({ address }: { address?: any }) {
             <MyConnections connections={user?.socials} />
         </div>
         <div className="flex flex-col gap-md grow">
-        <div className="grid grid-cols-2 gap-md">    
+        <div className="grid  lg:grid-cols-2 gap-md">    
                 <MyProjectsCard user={user?.wallet} />
-            </div>
             <MyUsedPackages user={user?.wallet} />
+            </div>
         
         </div>
       </div>

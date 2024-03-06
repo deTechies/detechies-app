@@ -13,8 +13,8 @@ import {
 
 import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
-import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -71,11 +71,11 @@ export default function ProjectFilter({ lang }: { lang: any }) {
   };
 
   return (
-    <Card className="flex justify-between gap-5 px-8 pb-8 pt-7">
+    <div className="bg-background-layer-1 flex justify-between gap-5 px-8 pb-8 pt-7">
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
           <div className="flex flex-wrap items-center gap-5 grow">
-            <div className="max-w-[335px] w-full">
+            <div className="max-w-[60vw] min-w-[350px] ">
               <Search
                 placeholder={lang.project.list.search}
                 size="md"
@@ -140,6 +140,9 @@ export default function ProjectFilter({ lang }: { lang: any }) {
           </div>
         )}
       </div>
-    </Card>
+      <Link href="/project/create">
+          <Button variant="primary" size="sm">Add project</Button>
+        </Link>
+    </div>
   );
 }

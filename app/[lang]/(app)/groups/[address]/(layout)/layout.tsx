@@ -1,9 +1,9 @@
-import GroupProfileCard from "@/components/group/group-profile-card";
+import GroupProfileCard from "@/app/[lang]/(app)/groups/[address]/_components/group-profile-card";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { serverApi } from "@/lib/data/general";
-import AcceptGroupInvitation from "../../_components/accept-group-invitation";
+import AcceptGroupInvitation from "../_components/accept-group-invitation";
 
 export default async function GroupDetailLayout({
   params,

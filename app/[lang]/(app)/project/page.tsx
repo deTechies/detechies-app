@@ -4,12 +4,9 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
 
-import PageHeader from "@/components/metronic/header/page-header";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import ProfilesLoading from "../profiles/profiles-loading";
-import ProjectFilter from "./project-filter";
-import ProjectList from "./project-list";
+import ProfilesLoading from "../profiles/_components/profiles-loading";
+import ProjectFilter from "./_components/project-filter";
+import ProjectList from "./_components/project-list";
 
 export default async function ProjectListPage({
   searchParams,
@@ -22,16 +19,13 @@ export default async function ProjectListPage({
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (
-    <main className="flex flex-col gap-6 m-10">
-      <PageHeader title={"Projects"} subtitle="Testing">
-        <Link href="/project/create">
-          <Button variant="primary" size="sm">Add project</Button>
-        </Link>
-      </PageHeader>
+    <main className="flex flex-col gap-10">
       <ProjectFilter lang={dictionary}></ProjectFilter>
+      <div className="mx-10">  
       <Suspense fallback={<ProfilesLoading />}>
          <ProjectList dictionary={dictionary} searchParams={searchParams}/>
       </Suspense>
+      </div>
     </main>
   );
 }

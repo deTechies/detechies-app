@@ -1,7 +1,8 @@
-import ProfileCard from "@/components/card/profile-card";
+
 import Pagination from "@/components/extra/pagination";
 import { serverApi } from "@/lib/data/general";
 import { User } from "@/lib/interfaces";
+import ProfileCard from "./profile-card";
 export default async function ListProfiles({
   lang,
   searchParams,

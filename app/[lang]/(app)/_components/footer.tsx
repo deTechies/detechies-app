@@ -1,10 +1,10 @@
 import Link from "next/link";
-import PrivacyPolicy from "../(onboard)/onboard/email/_components/privacy-policy";
+import PrivacyPolicy from "../../(onboard)/onboard/email/_components/privacy-policy";
 
 export default async function Footer({ lang }: { lang: any }) {
   //const dictionary = (await getDictionary(params.lang)) as any;
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center mx-auto w-full gap-8 md:px-10 ">
+    <div className="flex flex-col md:flex-row justify-between items-center mx-auto w-full gap-8 md:px-10 mt-20 ">
        <p className="text-center text-text-secondary text-body_s">
         {lang.footer.copywrite}
       </p>

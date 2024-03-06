@@ -1,6 +1,6 @@
 import AvatarMemberGroup from "@/components/metronic/avatar/avatar-member-group";
+import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { serverApi } from "@/lib/data/general";
 import { AsteriskIcon, PenSquare, TimerIcon } from "lucide-react";
 
@@ -23,10 +23,10 @@ export default async function LayoutProjectDetail({
   });
 
   return (
-    <Card className="m-4">
+    <Card className="p-10 border-none rounded-t-none">
       <div className="flex gap-8 px-10">
-        <div className="w-[150px] aspect-square rounded-[6px] bg-background-layer-2 flex items-center">
-          <div className="md:w-[50px] lg:w-[75px] mx-auto my-auto">
+        <div className="w-[100px] h-[100px] rounded-[6px] bg-background-layer-2 flex items-center">
+          <div className="md:w-[50px] aspect-square lg:w-[75px] mx-auto my-auto">
             <Image
               src={`https://ipfs.io/ipfs/${project.image}`}
               alt={project.name}
@@ -38,6 +38,10 @@ export default async function LayoutProjectDetail({
         <div className="flex justify-between w-full">
           <section className="flex flex-col gap-2 mt-2">
             <h2 className="text-subhead_m">{project.name}</h2>
+           
+            <span className=" text-text-secondary max-w-[400px] max-h-[200px]">
+              {project.description}
+            </span>
             <dl className="flex gap-4 text-text-secondary text-label_m">
               <div className="flex gap-1 items-center">
                 <AsteriskIcon />
@@ -50,9 +54,6 @@ export default async function LayoutProjectDetail({
                 </dd>
               </div>
             </dl>
-            <span className="text-label_l text-text-secondary max-w-[400px] max-h-[200px]">
-              {project.description}
-            </span>
           </section>
           <section className="flex justify-end">
             <div className="flex flex-col justify-between">

@@ -5,7 +5,6 @@ import Search from "@/components/extra/search";
 
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 
-import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -53,7 +52,7 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   );
 
   return (
-    <Card className="flex flex-col justify-between gap-5 sm:p-[30px] p-5">
+    <div className="flex flex-col justify-between gap-5 sm:p-[30px] p-5 bg-background-layer-1">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex md:flex-row flex-col items-center gap-5 grow">
 
@@ -95,6 +94,6 @@ export default function ProfileFilter({ lang }: { lang: any }) {
         )
       }
      
-    </Card>
+    </div>
   );
 }

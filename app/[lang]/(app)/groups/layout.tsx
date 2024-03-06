@@ -9,7 +9,7 @@ export default function GroupLayout({
 
   return (
     <div>
-      <main className="flex  justify-center items-center m-10">
+      <main className="flex  justify-center items-center ">
         {children}
         </main>
     </div>

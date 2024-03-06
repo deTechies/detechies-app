@@ -11,7 +11,7 @@ export default function ProjectDetailLayout({
 }) {
   //make sure to get the data into a good component
   return (
-    <div>
+    <div className="flex flex-col gap-10">
       <Suspense fallback={<LayoutProjectDetailLoading />}>
         <LayoutProjectDetail projectId={params.address} />
       </Suspense>

@@ -16,7 +16,7 @@ export default async function GroupList({
     <div>
 
 
-      <div className="grid items-stretch w-full gap-5 mb-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid  w-full gap-5 mb-10 md:grid-cols-2  lg:grid-cols-4">
         {groups.map((group: any) => (
           <GroupListItem
             key={group.id}
