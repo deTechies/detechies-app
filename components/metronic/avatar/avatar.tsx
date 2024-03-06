@@ -10,7 +10,7 @@ interface AvatarProps {
 
 // Wrap the component function with React.forwardRef
 const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(({ src, size = 16, className = '', shape= 'rounded' }, ref) => {
-  const wrapperClass = `rounded-full bg-background-layer-2 border relative aspect-square hover:border-accent-primary ${className} w-${size} h-${size}`;
+  const wrapperClass = `rounded-full bg-background-layer-2 border-3 relative aspect-square hover:border-accent-primary ${className} w-${size} h-${size}`;
   
   const avatarClass = `rounded-full`
   //check if rounded or square and make it a dynamic class for rounded
