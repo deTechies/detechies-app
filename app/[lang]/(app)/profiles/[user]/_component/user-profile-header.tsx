@@ -17,32 +17,17 @@ export default async function UserProfileHeader({
       isAdmin: false,
     },
     {
-      name: "projects",
-      href: "projects",
+      name: "report",
+      href: "report",
       isAdmin: false,
-    },
-    {
-        name: "evaluation",
-        href: "evaluation",
-        isAdmin: false,
-      },
-      {
-        name: "avatar",
-        href: "avatar",
-        isAdmin: false,
-      },
-    {
-      name: "analysis",
-      href: "analysis",
-      isAdmin: true,
-    },
+    }
   ] as any;
   
 
   return (
     <div className="flex flex-col">
     <ViewProfileCard profile={user} dictionary={""} />
-    <ProfileTabs links={links}>
+    <ProfileTabs prelink={`/profiles/${userWallet}/`} links={links}>
       <UserChat to={userWallet as Address} />
     </ProfileTabs>
     </div>

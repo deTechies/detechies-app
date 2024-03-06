@@ -39,6 +39,7 @@ export default async function ProfilePageCard({ lang }: { lang: any}) {
     <div className="flex flex-col">
       <ViewProfileCard  profile={profile} dictionary={dictionary} />
       <ProfileTabs
+        prelink="/mypage"
         links={links}
       >
          <Link href="/mypage/edit"  passHref>

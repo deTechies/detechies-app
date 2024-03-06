@@ -28,7 +28,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
         <div className="flex gap-4 divide-x  text-text-secondary mx-auto">
           {profile.profile_details?.hourly_rate && (
             <div className="flex gap-2 justify-center items-center">
-                <Clock fontSize={24} color="#000" />
+                <Clock fontSize={24} color="#6B7684" />
                 <span className="text-label_m">
                 {profile.profile_details?.hourly_rate}
               </span>
@@ -36,7 +36,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
           )}
           {profile.profile_details?.timezone && (
             <div className="flex gap-2 justify-center items-center pl-3">
-              <Home2 fontSize={24} color="#000 "/>
+              <Home2 fontSize={24} color="#6B7684 "/>
               <span className="text-label_m">
                 {getTimezone(profile.profile_details.timezone)}
               </span>
@@ -44,7 +44,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
           )}
           {profile.profile_details?.availability && (
             <div className="flex gap-2 justify-center items-center pl-3 text-text-secondary">
-              <Briefcase />
+              <Briefcase color="#6B7684" />
               <span className="text-label_m">
                 {profile.profile_details?.availability}
               </span>

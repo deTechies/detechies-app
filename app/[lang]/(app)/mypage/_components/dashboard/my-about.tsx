@@ -7,7 +7,7 @@ export default function MyAbout({ userData }: { userData: User }) {
     <Card>
       <CardHeader>About me</CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <span>
+        <span className="text-sm tracking-wide leading-6">
             {userData.profile_details?.description}
         </span>
       </CardContent>

@@ -1,4 +1,3 @@
-import AvatarMemberGroup from "@/components/metronic/avatar/avatar-member-group";
 import { Card } from "@/components/metronic/card/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -29,9 +28,9 @@ export default function GroupListItem({
   });
   return (
     <Link href={`/groups/${details.id}`} passHref>
-      <Card className="flex flex-col items-center  h-full p-[30px] gap-[30px] border hover:border-accent-primary">
+      <Card className="flex flex-col items-center  h-full p-[20px] gap-[30px] border hover:border-accent-primary">
         <section className="flex flex-col items-center justify-center gap-4 text-center">
-          <Avatar className="w-[50x] h-[50px] mx-auto ">
+          <Avatar className="w-[60x] h-[60px] p-4 mx-auto ">
             <AvatarImage
               src={`https://ipfs.io/ipfs/${details.image}`}
               alt={details.name}
@@ -48,16 +47,10 @@ export default function GroupListItem({
             </AvatarFallback>
           </Avatar>
           <div className="max-w-[250px]">
-            <h5 className="trunctate font-semibold text-md mb-2">{details.name}</h5>
-            <p className="text-xs">{details.description}</p>
+            <h5 className="text-md mb-2">{details.name}</h5>
+            <p className="text-sm text-text-secondary">{details.description}</p>
           </div>
         </section>
-
-
-          <section className="flex flex-col gap-1.5">
-            <h5 className="text-gray-500 text-xs uppercase font-medium">Team</h5>
-            <AvatarMemberGroup group={avatarMembers} size={8} />
-          </section>
 
         <div className="flex divide-x">
           <div className="px-4">
