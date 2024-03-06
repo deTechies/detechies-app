@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 
 import LoadingProfileCard from "./mypage/_components/loading/loading-profile-card";
-import ProfilePageCard from "./mypage/profile-page-card";
+import ProfilePageCard from "./mypage/_components/profile-page-card";
 
 export default async function ProfileDashboard({
   params,

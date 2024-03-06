@@ -15,7 +15,7 @@ export default async function ProfilePage({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
   return (
-    <main className="flex flex-col w-full gap-6">
+    <main className="flex flex-col gap-10 m-10">
       <ProfileFilter lang={dictionary} />
       <Suspense fallback={<ProfilesLoading />}>
         <ListProfiles lang={dictionary} searchParams={searchParams} />

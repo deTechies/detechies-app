@@ -31,7 +31,7 @@ export default async function ProfileProjects({
   
   console.log(projects);
   return (
-    <div className="flex flex-col gap-3 m-10">
+    <div className="flex flex-col gap-3">
       <PageHeader title={`${text?.projects} (${projects.totalCount})`}>
         {!visiting && (
           <Link href="/project/create" className="flex flex-row">

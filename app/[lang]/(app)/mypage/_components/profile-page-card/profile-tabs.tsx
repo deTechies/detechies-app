@@ -1,55 +1,25 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ROLE_TYPE } from "@/lib/interfaces";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 ;
 
 export default function ProfileTabs({
-  details,
-  lang,
+  children,
+  links,
 }: {
-  details: any;
-  lang: any;
+  links:any;
+  children?: React.ReactNode;
 }) {
   const pathname = usePathname();
 
-  const links = [
-    {
-      name: "dashboard",
-      href: "",
-      isAdmin: false,
-    },
-    {
-      name: "projects",
-      href: "projects",
-      isAdmin: false,
-    },
-    {
-        name: "evaluation",
-        href: "evaluation",
-        isAdmin: false,
-      },
-      {
-        name: "avatar",
-        href: "avatar",
-        isAdmin: false,
-      },
-    {
-      name: "analysis",
-      href: "analysis",
-      isAdmin: true,
-    },
-  ] as any;
+  
 
   return (
     <div className="flex flex-row  justify-between  px-10 lg:px-20  overflow-x-auto items-center">
       <div className="flex flex-row gap-0 ">
       {links.map((link: any, index: number) => {
-        if (link.isAdmin && details.userRole != ROLE_TYPE.ADMIN)  {
-          return;
-        }
+
 
         return (
           <div className="mr-8" key={index}>
@@ -72,12 +42,9 @@ export default function ProfileTabs({
         );
       })}
       </div>
-
-        <Link href="/mypage/edit"  passHref>
-            <Button size="sm">
-                Edit Profile
-            </Button>
-        </Link>
+      <div>
+        {children}
+      </div>
     </div>
   );
 }

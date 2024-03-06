@@ -41,9 +41,10 @@ const pretendard = localFont({
 
 
 export const metadata: Metadata = {
-  title: "Connect Fast | Developers Profiles",
+  title: "deTechies | Developers Freelancers Profiles",
   description:
     "We help developers distinquish themselves and flourish the future with the latest tech",
+  keywords: "developers, freelancers, profiles, tech, software, web, mobile, blockchain, projects, achievements, edutech",
 };
 
 export default async function RootLayout({

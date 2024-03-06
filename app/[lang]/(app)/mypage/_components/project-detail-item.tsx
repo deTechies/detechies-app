@@ -1,7 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+
 import { addURL, beginEndDates } from "@/lib/utils";
 // import Image from "next/image";
+import { Card } from "@/components/metronic/card/card";
 import Image from "@/components/ui/image";
 import { Project } from "@/lib/interfaces";
 import Link from "next/link";
@@ -32,7 +33,7 @@ export default function ProjectDetailItem({
 
   return (
     <Link href={`/project/${data.id}`} >
-      <Card className="hover:outline hover:outline-state-info">
+      <Card className="hover:outline hover:outline-state-info p-8">
         <div className="flex flex-col w-full gap-5">
           <div className="flex justify-between">
           <figure className="relative bg-background-layer-2 w-14 h-14 aspect-square overflow-hidden shrink-0 rounded-[6px] flex justify-center items-center">

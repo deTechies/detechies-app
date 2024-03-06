@@ -14,7 +14,7 @@ export default function UserProfileLayout({
             <UserProfileHeader userWallet={params.user} />
         </Suspense>
       <div className="flex flex-col gap-4 md:gap-8 ">
-        <div className="flex flex-col gap-4 md:gap-8 ">{children}</div>
+        <div className="flex flex-col gap-4 md:gap-8 mx-10 ">{children}</div>
       </div>
     </div>
   );

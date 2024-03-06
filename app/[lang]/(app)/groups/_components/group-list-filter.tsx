@@ -2,12 +2,17 @@
 
 import Search from "@/components/extra/search";
 
-
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 
 import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
@@ -54,10 +59,9 @@ export default function GroupListFilter({ lang }: { lang: any }) {
   );
 
   return (
-    <Card className="flex flex-col justify-between gap-5 sm:p-[30px] p-5">
+    <Card className="p-5 flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex md:flex-row flex-col items-center gap-5 grow">
-
           <div className="md:max-w-[335px] w-full">
             <Search
               placeholder={lang.profile_filter.search}
@@ -65,43 +69,42 @@ export default function GroupListFilter({ lang }: { lang: any }) {
               className="w-full"
             />
           </div>
-          <Button variant={"ghost"} onClick={() => setShowAdvanced(!showAdvanced)}>
+          <Button
+            variant={"ghost"}
+            onClick={() => setShowAdvanced(!showAdvanced)}
+          >
             Advanced Search
           </Button>
         </div>
         <div>
           <Link href="/groups/create">
-              <Button variant="primary">Become partner</Button>
-              </Link>
-
+            <Button>Become partner</Button>
+          </Link>
         </div>
       </div>
-      {
-        showAdvanced && (
-          <div>
+      {showAdvanced && (
+        <div>
           <Select onValueChange={onSelectType}>
-                <SelectTrigger className="w-[138px] px-3 py-3">
-                  <SelectValue
-                    placeholder={lang.profile_filter.filter}
-                    className={`${loading && "animate-pulse"}`}
-                  />
-                </SelectTrigger>
-    
-                <SelectContent>
-                  <SelectItem key="all" value="all">
-                    {lang.interface.profession_type["all"]}
-                  </SelectItem>
-                  {Object.values(PROFESSION_TYPE).map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {lang.interface.profession_type[type]}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-          </div>
-        )
-      }
-     
+            <SelectTrigger className="w-[138px] px-3 py-3">
+              <SelectValue
+                placeholder={lang.profile_filter.filter}
+                className={`${loading && "animate-pulse"}`}
+              />
+            </SelectTrigger>
+
+            <SelectContent>
+              <SelectItem key="all" value="all">
+                {lang.interface.profession_type["all"]}
+              </SelectItem>
+              {Object.values(PROFESSION_TYPE).map((type) => (
+                <SelectItem key={type} value={type}>
+                  {lang.interface.profession_type[type]}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
     </Card>
   );
 }

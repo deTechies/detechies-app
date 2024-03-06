@@ -1,9 +1,13 @@
 "use client";
-import { defaultAvatar } from "@/lib/constants";
+import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
 import { User } from "@/lib/interfaces";
 import Link from "next/link";
+
+import { Card } from "../metronic/card/card";
 import { Badge } from "../ui/badge";
-import IPFSImageLayer from "../ui/layer";
+
+import { addURL } from "@/lib/utils";
+import Image from "next/image";
 
 interface ProfileProps {
   profile: User;
@@ -13,14 +17,16 @@ interface ProfileProps {
 export default function ProfileCard({ profile, lang }: ProfileProps) {
   return (
     <Link href={`/profiles/${profile.wallet}`} passHref>
-      <section className="flex flex-row h-full gap-6 truncate rounded-sm cursor-pointer p-7 bg-background-layer-1 hover:shadow-lg">
-        <div className="relative w-[100px] h-[100px] aspect-square rounded-sm bg-background-layer-2 mx-auto">
-          <IPFSImageLayer
-            hashes={profile.avatar ? profile.avatar : defaultAvatar}
+      <Card className="flex flex-row h-full gap-4 truncate cursor-pointer p-6">
+        <div className="relative w-[80px] h-[80px] aspect-square rounded-sm bg-background-layer-2 mx-auto">
+          <Image
+            src={addURL(profile.avatar_link) || DEFAULT_AVATAR_LINK}
+            alt="avatar"
+            fill={true}
           />
         </div>
 
-        <div className="flex flex-col w-full gap-4 truncate">
+        <div className="flex flex-col w-full gap-2 truncate">
           <h5 className="truncate text-title_m ">
             {profile.display_name ? profile.display_name : `&nbsp`}{" "}
             {profile.role && "| " + profile.role}
@@ -62,7 +68,7 @@ export default function ProfileCard({ profile, lang }: ProfileProps) {
             </div>
           </div>
         </div>
-      </section>
+      </Card>
     </Link>
   );
 }

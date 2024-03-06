@@ -3,9 +3,10 @@ import Avatar from "@/components/metronic/avatar/avatar";
 import { addURL, getTimezone } from "@/lib/utils";
 import { Home2 } from "detechies-icons";
 import { Briefcase, Clock } from "lucide-react";
-import ProfileTabs from "./profile-tabs";
 
 export default function ViewProfileCard({ dictionary, profile }: any) {
+ 
+  
   return (
     <div className="flex flex-col gap-10 bg-background-layer-1 ">
     <header className=" w-full gap-2 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
@@ -52,7 +53,6 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
         </div>
       </div>
     </header>
-    <ProfileTabs details={profile} lang={dictionary} />
     </div>
   );
 }

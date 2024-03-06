@@ -15,6 +15,7 @@ export default function UserChat({ to }: { to: Address }) {
           className="w-full py-2 text-label_m text-center justify-center rounded-[6px] "
         >
           <MessageCircle size="16" className="inline-block" />
+          <span className="ml-2">Start Chatting</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:w-[60vw]">
