@@ -19,7 +19,7 @@ export default function MintAvatar() {
                 height={24}
                 alt="twitter_icon"
               />
-              <Link href="https://x.com/careerzen" target="_blank">
+              <Link href="https://x.com/detechies" target="_blank">
                 Twitter
               </Link>
             </div>
@@ -41,7 +41,7 @@ export default function MintAvatar() {
                 height={24}
                 alt="twitter_icon"
               />
-              <Link href="https://t.me/Careerzen_org/1" target="_blank">
+              <Link href="https://t.me/detechies/1" target="_blank">
                 Telegram
               </Link>
             </div>

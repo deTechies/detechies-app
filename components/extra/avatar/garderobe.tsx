@@ -18,7 +18,7 @@ const launchImage = {
       description:
         "Life if not going as planned! We all been there, but you know what? It's time for a new start!",
       tokenId: 7,
-      owner: "Careerzen",
+      owner: "deTechies",
       rarity: 1,
     },
     {
@@ -27,7 +27,7 @@ const launchImage = {
         "https://nftstorage.link/ipfs/bafybeidkj6f22dtcbpao3hmi73igad6rhiqmqhybsasozerymshqgdvzk4/face/1.png",
       description: "Basic face it is!",
       tokenId: 1,
-      owner: "Careerzen",
+      owner: "deTechies",
       rarity: 1,
     },
     {
@@ -36,7 +36,7 @@ const launchImage = {
         "https://nftstorage.link/ipfs/bafybeidkj6f22dtcbpao3hmi73igad6rhiqmqhybsasozerymshqgdvzk4/eyes/2.png",
       description: "Sad eyes, but you are still a winner for us",
       tokenId: 2,
-      owner: "Careerzen",
+      owner: "deTechies",
       rarity: 1,
     },
     {
@@ -45,7 +45,7 @@ const launchImage = {
         "https://nftstorage.link/ipfs/bafybeidkj6f22dtcbpao3hmi73igad6rhiqmqhybsasozerymshqgdvzk4/mouth/2.png",
       description: "Happier than ever!",
       tokenId: 1,
-      owner: "Careerzen",
+      owner: "deTechies",
       rarity: 1,
     },
     {
@@ -54,7 +54,7 @@ const launchImage = {
         "https://nftstorage.link/ipfs/bafybeidkj6f22dtcbpao3hmi73igad6rhiqmqhybsasozerymshqgdvzk4/hair/4.png",
       description: "Basic hair, but it's blue!",
       tokenId: 4,
-      owner: "Careerzen",
+      owner: "deTechies",
       rarity: 1,
     },
     {
@@ -64,7 +64,7 @@ const launchImage = {
       description:
         "Don't forget to drink enough water, are you feeling thristy or dizzy",
       tokenId: 1,
-      owner: "Careerzen",
+      owner: "deTechies",
       rarity: 1,
     },
   ],

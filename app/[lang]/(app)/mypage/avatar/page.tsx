@@ -2,10 +2,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import { getUserAchievements } from "@/lib/data/achievements";
-import ListAvatars from "./list-avatars";
-import { NFT_TYPE } from "@/lib/interfaces";
-import { getSession } from "next-auth/react";
 import { auth } from "@/lib/helpers/authOptions";
+import { NFT_TYPE } from "@/lib/interfaces";
+import ListAvatars from "./list-avatars";
 
 export default async function Avatars({
   params,
@@ -68,7 +67,7 @@ export default async function Avatars({
         avatar: avatar.avatar,
         avatar_type: avatar.avatar_type,
         club: {
-          name: "Careerzen",
+          name: "deTechies",
         },
       },
     };

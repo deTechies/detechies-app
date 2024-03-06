@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CustomNotFound({ lang }: { lang: any }) {
   const router = useRouter();
@@ -32,7 +32,7 @@ export default function CustomNotFound({ lang }: { lang: any }) {
         </Button>
 
         <Link
-          href="https://t.me/Careerzen_org"
+          href="https://t.me/detechies/1"
           passHref
           className="max-w-[212px] w-full"
           target="_blank"

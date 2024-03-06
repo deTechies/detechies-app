@@ -15,7 +15,7 @@ export default function Error() {
       </p>
 
       <Link
-        href="https://t.me/Careerzen_org"
+        href="https://t.me/detechies/1"
         passHref
         className="mx-auto max-w-[212px] w-full mt-4"
       >

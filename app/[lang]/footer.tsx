@@ -27,7 +27,7 @@ export default function Footer({links}: {links: any}) {
 
           </div>
         <span className="text-text-secondary text-center">
-          Copyright © 2023. Careerzen. All rights reserved.
+          Copyright © 2024. deTechies. All rights reserved.
         </span>
       </div>
       </div>

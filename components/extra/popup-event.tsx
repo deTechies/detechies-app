@@ -13,7 +13,7 @@ import Garderobe from "./avatar/garderobe";
 export async function PopoverEvent() {
   const { data: user } = await getUserProfile();
 
-  //check if user is member of club named Careerzen
+  //check if user is member of club named deTechies
   //if yes, return null
   //if no, return the following
 
@@ -33,7 +33,7 @@ export async function PopoverEvent() {
           <div className="flex flex-col gap-4">
             <h3 className="text-heading_s">Community Channels</h3>
             <p className="text-text-secondary text-body_s">
-              Follow us on social media to get the latest updates on Careerzen
+              Follow us on social media to get the latest updates on deTecheis
               and be rewarded with a unique NFT!
             </p>
           </div>
@@ -41,7 +41,7 @@ export async function PopoverEvent() {
             <Garderobe />
 
             <div className="grid grid-cols-3 gap-4">
-              <Link href="https://x.com/careerzen" target="_blank" passHref>
+              <Link href="https://x.com/detechies" target="_blank" passHref>
                 <div className="flex flex-col items-center justify-center gap-2 border border-text-primary hover:bg-[#afafb2] p-3 rounded-sm">
                   <Image
                     src="/images/socials/color/twitter.png"
@@ -52,21 +52,7 @@ export async function PopoverEvent() {
                 </div>
               </Link>
               <Link
-                href="https://open.kakao.com/o/gGdZ76If"
-                target="_blank"
-                passHref
-              >
-                <div className="flex flex-col items-center justify-center gap-2 border border-[#fbe948] p-3 rounded-sm hover:bg-[#fbe948]">
-                  <Image
-                    src="/images/socials/color/kakao.png"
-                    width={32}
-                    height={32}
-                    alt="twitter_icon"
-                  />
-                </div>
-              </Link>
-              <Link
-                href="https://t.me/Careerzen_org/1"
+                href="https://t.me/detechies/1"
                 target="_blank"
                 passHref
               >

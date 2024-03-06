@@ -206,7 +206,7 @@ export default function Login({ lang }: ILoginProps) {
 //   return (
 //     <ModalLayout title="Sign Up" showModal={showModal}>
 //       <span>
-//         By connecting a wallet, you agree to Careerzen’s Terms of Service
+//         By connecting a wallet, you agree to deTechies Terms of Service
 //       </span>
 //       <div className="flex flex-col gap-2 my-4">
 //         {!isConnected && (

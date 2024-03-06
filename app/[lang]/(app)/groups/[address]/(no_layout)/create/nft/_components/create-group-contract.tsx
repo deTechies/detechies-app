@@ -87,7 +87,7 @@ export default function CreateGroupContract({
             {lang.group.details.profile_card.group_contract.desc}
             <a
               className="text-accent-primary "
-              href="https://t.me/Careerzen_org"
+              href="https://t.me/detechies/1"
               target="_blank"
             >
               {lang.group.details.profile_card.group_contract.anchor}

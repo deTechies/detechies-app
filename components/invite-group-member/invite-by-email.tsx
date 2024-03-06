@@ -60,7 +60,7 @@ export default function InviteByEmail({
     setLoading(true);
     const submitData = JSON.stringify({
       name: data.name + " " + data.last_name,
-      message: "You have been invited to join a club on Careerzen",
+      message: "You have been invited to join a club on detechies",
       email: data.email,
       entity_type: "club",
       entity_id: id,

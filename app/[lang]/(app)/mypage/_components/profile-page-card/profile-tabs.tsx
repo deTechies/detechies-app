@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ROLE_TYPE } from "@/lib/interfaces";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 ;
 
 export default function ProfileTabs({
@@ -14,7 +14,6 @@ export default function ProfileTabs({
   lang: any;
 }) {
   const pathname = usePathname();
-  const params = useParams();
 
   const links = [
     {
@@ -60,9 +59,9 @@ export default function ProfileTabs({
               className={`flex items-center truncate border-b-[3px] capitalize py-3
             ${
               (link.href === "" &&
-                !pathname.includes(`/mypage/${details.id}`)) ||
+                pathname.endsWith(`/mypage`)) ||
               (link.href !== "" &&
-                pathname.includes(`/mypage/${link.href}`))
+                pathname.endsWith(`/mypage/${link.href}`))
                 ? "border-accent-primary text-accent-primary"
                 : "border-transparent text-text-placeholder hover:text-text-primary"
             }`}

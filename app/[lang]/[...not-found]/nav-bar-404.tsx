@@ -12,8 +12,8 @@ export default function NavBar404() {
       <div className="flex items-center">
         <Image
           className="block object-contain cursor-pointer"
-          src="/images/careerzen_no_icon.png"
-          alt="Careerzen"
+          src="/images/detechies.png"
+          alt="deTechies"
           width={208}
           height={24}
           onClick={() => {

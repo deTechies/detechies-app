@@ -57,7 +57,7 @@ export default function InviteExperts({ children, lang }: { children: React.Reac
       name: data.name,
       email: data.email,
       message:
-        "I would like to invite you to join careerzen, so we can join projects together.",
+        "I would like to invite you to join deTecheis, so we can join projects together.",
       entity_type: "users",
       entity_id: 0,
     });

@@ -84,7 +84,7 @@ const [groupChatName, setGroupChatName] = useState(`Group chat of ${address}`)
         `Group chat of ${truncateMiddle(address.toString(), 8)}`,
         {
           description:
-            "This group is created by one of the members of this contract group at careerzen.org. ",
+            "This group is created by one of the members of this contract group at detechies.com. ",
           members: [],
           //@ts-ignore
           image: null,

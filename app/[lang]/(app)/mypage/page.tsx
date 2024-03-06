@@ -16,7 +16,7 @@ export default async function MyDashboard({
   // const {data: myProfile} = await serverApi(`/users/me`);
 
   return (
-    <main className="flex flex-col gap-6 m-10">
+    <main className="flex flex-col gap-6 mx-10">
       <Suspense fallback={"loading projects"}>
         <UserDashboard />
       </Suspense>
