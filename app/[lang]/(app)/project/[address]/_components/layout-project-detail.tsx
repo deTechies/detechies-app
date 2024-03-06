@@ -6,6 +6,7 @@ import { AsteriskIcon, PenSquare, TimerIcon } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
+import ProfileTabs from "../../../mypage/_components/profile-page-card/profile-tabs";
 
 export default async function LayoutProjectDetail({
   projectId,
@@ -21,9 +22,22 @@ export default async function LayoutProjectDetail({
       id: member.user.wallet,
     };
   });
+  
+  const links = [
+    {
+      name: "dashboard",
+      href: "",
+      isAdmin: false,
+    },
+    {
+      name: "edit",
+      href: "edit",
+      isAdmin: false,
+    }
+  ] as any;
 
   return (
-    <Card className="p-10 border-none rounded-t-none">
+    <Card className="px-10 pt-10 border-none rounded-t-none flex flex-col gap-10">
       <div className="flex gap-8 px-10">
         <div className="w-[100px] h-[100px] rounded-[6px] bg-background-layer-2 flex items-center">
           <div className="md:w-[50px] aspect-square lg:w-[75px] mx-auto my-auto">
@@ -77,6 +91,9 @@ export default async function LayoutProjectDetail({
           </section>
         </div>
       </div>
+      <ProfileTabs links={links}
+        prelink={`project/${projectId}`}
+      ></ProfileTabs>
     </Card>
   );
 }
