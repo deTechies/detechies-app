@@ -147,10 +147,10 @@
       "sign_in_body": "sign_in_body"
     },
     "verify_email": {
-      "title": "Sign up!",
-      "body": "Professional personal members, please make sure to verify your personal email, work emails make it harder to find your account if you leave..",
-      "username": "Username",
-      "username_placeholder": "Enter username.",
+      "title": "Almost a techie",
+      "body": "Thank you so much, for connecting with us. Please choose your techie name and verify your email.",
+      "username": "Techie name",
+      "username_placeholder": "Enter technie name.",
       "email": "email",
       "email_placeholder": "Enter email",
       "email_desc": "Enter username.",
@@ -167,7 +167,7 @@
         "agree": "I agree"
       },
       "cancel": "Cancel",
-      "next": "Create Profile",
+      "next": "Create Techie",
       "email_verify": {
         "title": "verify email",
         "desc": "Enter the verification code send to",

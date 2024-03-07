@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/use-toast";
 import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
@@ -35,6 +36,14 @@ export default function LoginButtons({ text }: { text?: any }) {
   const handleConnect = (connector: any) => {
     connect({ connector });
   };
+
+  if (!mounted) {
+    return (
+      <div className="h-[100px]">
+        <Skeleton className="h-24 grow shrink animate-pulse bg-background-layer-1" />
+      </div>
+    );
+  }
 
   const handleSign = async () => {
     setSigning(true);
@@ -113,7 +122,6 @@ export default function LoginButtons({ text }: { text?: any }) {
                 {text?.browser ? text.browser : "Browser Wallet"}
               </span>
             </div>
-
           </>
         ) : (
           <div className="flex w-full">
@@ -130,8 +138,8 @@ export default function LoginButtons({ text }: { text?: any }) {
               variant={"destructive"}
               className="rounded-none rounded-r-sm"
               onClick={() => {
-                signOut()
-                disconnect()
+                signOut();
+                disconnect();
               }}
             >
               {text?.sign_out ? text.sign_out : "Sign Out"}
