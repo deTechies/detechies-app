@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import GroupDetails from "./group-details";
-import GroupMember from "./group-member";
+import GroupDetails from "../_components/group-details";
+import GroupMember from "../_components/group-member";
 
 import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
 

@@ -47,9 +47,9 @@ export default async function GroupProfileCard({
     },
   ] as any;
   return (
-    <div className="px-32 -m-10 bg-background-layer-1">
-      <header className=" w-full gap-2 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
-        <div className="flex flex-col gap-2 mx-auto py-10 ">
+    <div className="">
+      <header className=" w-full gap-10 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
+      <div className="flex flex-col gap-3.5 mx-auto  py-10">
           <div className="mx-auto">
             <Avatar
               src={addURL(groupDetail.image)}
@@ -64,19 +64,19 @@ export default async function GroupProfileCard({
               {groupDetail.name}
             </h1>
           </div>
-          <div className="flex gap-4 divide-x  text-text-secondary mx-auto">
-            <div className="flex gap-2 justify-center items-center">
-              <Folder />
+          <div className="flex gap-[18px] text-text-secondary mx-auto">
+            <div className="flex gap-[5px] justify-center items-center">
+              <Folder size={16}/>
               <span className="text-label_m">0 Project</span>
             </div>
 
-            <div className="flex gap-2 justify-center items-center pl-3">
-              <MapPin />
+            <div className="flex gap-[5px]justify-center items-center">
+              <MapPin size={16}/>
               <span className="text-label_m">Location</span>
             </div>
 
-            <div className="flex gap-2 justify-center items-center pl-3 text-text-secondary">
-              <Briefcase />
+            <div className="flex gap-[5px] justify-center items-center text-text-secondary">
+              <Briefcase size={16}/>
               <span className="text-label_m">
                 {groupDetail.members.length} members
               </span>
@@ -84,6 +84,7 @@ export default async function GroupProfileCard({
           </div>
         </div>
       </header>
+      <div className="sticky top-0">
       <ProfileTabs links={links} prelink={`/groups/${groupDetail.id}`}>
         {groupDetail.userRole == "admin" && (
           <div className="flex items-start gap-3 grow">
@@ -114,6 +115,7 @@ export default async function GroupProfileCard({
           </div>
         )}
       </ProfileTabs>
+      </div>
     </div>
   );
 }

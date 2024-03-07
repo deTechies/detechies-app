@@ -67,7 +67,7 @@ export default function Navbar({ lang }: { lang: any }) {
                       className={`flex items-center text-md  font-medium py-3 content-center px-5
                       ${
                         pathname.includes(link.href)
-                          ? "bg-background-layer-2 rounded-[6px] text-text-primary"
+                          ? "bg-accent-secondary rounded-[6px] text-text-primary"
                           : "text-text-secondary hover:text-text-primary"
                       }  
                       `}
