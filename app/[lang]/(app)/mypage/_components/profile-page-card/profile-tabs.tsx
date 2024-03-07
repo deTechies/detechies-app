@@ -18,17 +18,17 @@ export default function ProfileTabs({
   
 
   return (
-    <div className="flex flex-row  justify-between  px-10 lg:px-20  overflow-x-auto items-center bg-background-layer-1">
-      <div className="flex flex-row gap-0 ">
+    <div className="flex flex-row  justify-between  mx-10 lg:mx-20  overflow-x-auto items-start border-b border-b-border-div">
+      <div className="flex flex-row gap-2.5 ">
       {links.map((link: any, index: number) => {
 
 
         return (
-          <div className="mr-8" key={index}>
+          <div key={index}>
             <Link
               href={`${prelink}/${link.href}`}
               aria-disabled={link?.isAdmin}
-              className={`flex items-center truncate border-b-[3px] capitalize py-3
+              className={`flex items-center truncate border-b-[2px] capitalize pb-5
             ${
               (link.href === "" &&
                 pathname.endsWith(prelink)) ||
@@ -38,7 +38,9 @@ export default function ProfileTabs({
                 : "border-transparent text-text-placeholder hover:text-text-primary"
             }`}
             >
-              {link.name}
+              <span className="px-2.5">
+                {link.name}
+              </span>
             </Link>
           </div>
         );
