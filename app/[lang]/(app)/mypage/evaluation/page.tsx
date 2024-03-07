@@ -16,15 +16,15 @@ export default async function Evaluation({
   const text = dictionary.mypage?.evaluations?.menu;
   return (
     <main className="">
-      <Tabs defaultValue="requested" className="flex flex-col w-full">
-        <TabsList>
-          <TabsTrigger value="requested">
+      <Tabs defaultValue="requested"  className="flex flex-col w-full">
+        <TabsList variant="button1">
+          <TabsTrigger variant="button1" value="requested">
             {text?.evaluation_requested}
           </TabsTrigger>
-          <TabsTrigger value="received">
+          <TabsTrigger variant="button1" value="received">
             {text?.evaluation_received}
           </TabsTrigger>
-          <TabsTrigger value="evaluations">
+          <TabsTrigger variant="button1" value="evaluations">
             {text?.evaluation_wrote}
           </TabsTrigger>
         </TabsList>
