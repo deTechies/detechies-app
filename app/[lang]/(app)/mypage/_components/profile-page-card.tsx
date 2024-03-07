@@ -27,11 +27,6 @@ export default async function ProfilePageCard({ lang }: { lang: any}) {
         href: "evaluation",
         isAdmin: false,
       },
-      {
-        name: "avatar",
-        href: "avatar",
-        isAdmin: false,
-      },
   ] as any;
 
     
