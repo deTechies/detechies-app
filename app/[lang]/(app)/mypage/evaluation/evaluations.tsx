@@ -6,7 +6,7 @@ export default async function Evaluations({ queries, lang }: { queries: any, lan
   const filters = new URLSearchParams(queries).toString();
   const { data } = await serverApi(`/survey-response/filtered?${filters}`);
 
-  if (data.length < 1) return <div>평가 요청이 없습니다.</div>;
+  if (data.length < 1) return <div className="my-10 text-xl" >No evaluation found.</div>;
 
   return (
     <div className="flex flex-col gap-4">
