@@ -92,7 +92,7 @@ export default async function LayoutProjectDetail({
         </div>
       </div>
       <ProfileTabs links={links}
-        prelink={`project/${projectId}`}
+        prelink={`/project/${projectId}`}
       ></ProfileTabs>
     </Card>
   );
