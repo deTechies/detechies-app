@@ -37,7 +37,7 @@ export default function Navbar({ lang }: { lang: any }) {
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
 
   return (
-    <Disclosure as="nav" className="z-10 mx-auto bg-background-layer-1">
+    <Disclosure as="nav" className="z-10 mx-auto">
       {({ open }) => (
         <>
           <div className="px-6 lg:px-8 max-w-[1920px] mx-auto relative">
@@ -67,7 +67,7 @@ export default function Navbar({ lang }: { lang: any }) {
                       className={`flex items-center text-md  font-medium py-3 content-center px-5
                       ${
                         pathname.includes(link.href)
-                          ? "bg-background-layer-2 rounded-[6px] text-text-primary"
+                          ? "bg-accent-secondary rounded-[6px] text-text-primary"
                           : "text-text-secondary hover:text-text-primary"
                       }  
                       `}

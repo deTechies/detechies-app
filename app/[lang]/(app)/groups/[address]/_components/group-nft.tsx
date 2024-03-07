@@ -1,11 +1,10 @@
+//FIXME: old version of the application fix this 
 "use client";
-import DisplayNFT from "@/components/nft/display-nft";
-
 import { Button } from "@/components/ui/button";
 import { Achievement } from "@/lib/interfaces";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import NftList from "./nft/nft-list";
+import NftList from "../(layout)/nft/nft-list";
 
 export default function GroupNFT({
   address,

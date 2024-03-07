@@ -12,7 +12,7 @@ export default function GroupDetails({ details }: { details: any }) {
       <div className="flex flex-col">
         <Label>About</Label>
         <p
-        className="text-sm text-gray-700 "
+        className=" "
         dangerouslySetInnerHTML={{
           __html: details.description ? details.description : "No description",
         }}
