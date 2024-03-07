@@ -61,6 +61,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "recharts": "^2.10.4",
+    "sharp": "^0.33.2",
     "siwe": "^2.1.4",
     "stripe": "^14.14.0",
     "tailwind-merge": "^1.14.0",
