@@ -1,10 +1,10 @@
 
 
-import { Card } from "@/components/ui/card";
 
+import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import ConnectionCard from "../_components/connections-card";
+import ConnectionCard from "../../_components/connections-card";
 
 
 
@@ -55,11 +55,11 @@ export default async function ProfileAccounts({lang}: {lang: Locale}) {
   ];
 
   return (
-    <Card className="w-full my-8">
-      <h1 className="mb-6 text-subhead_m text-primary">
+    <Card className="w-full" id="socials">
+      <CardHeader>
         {dictionary.mypage.edit_profile.identity_authentication}
-      </h1>
-      <div className="grid flex-wrap gap-2 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1">
+      </CardHeader>
+      <CardContent className="grid flex-wrap gap-2 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1">
         {logos.map((logo, i) => {
 
           let verified = false;
@@ -74,7 +74,7 @@ export default async function ProfileAccounts({lang}: {lang: Locale}) {
             />
           )
       })}
-      </div>
+      </CardContent>
   </Card>
   )
 }

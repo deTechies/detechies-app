@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-accent-secondary",
+        default: "bg-accent-primary text-white",
         primary: "bg-accent-secondary",
         success: "bg-accent-primary ",
         error: "bg-state-error-secondary text-state-error",
@@ -21,7 +21,7 @@ const buttonVariants = cva(
         inactive: "text-text-secondary bg-background-layer-1",
       },
       size: {
-        default: "px-6 py-[17px] rounded-full truncate text-sm ",
+        default: "px-6 py-[17px] rounded-sm truncate text-sm ",
         sm: "rounded-[6px] px-3 py-[10px] text-sm",
         md: "rounded-[6px] px-4 py-[13px] truncate",
         lg: "py-[15.5px] px-4 rounded-full max-w-[212px] w-full grow truncate",
