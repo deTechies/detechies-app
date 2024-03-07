@@ -104,8 +104,8 @@ module.exports = {
       borderRadius: {
         lg: "var(--radius)",
         md: "20px",
-        sm: "12px",
-        xs: "8px",
+        sm: "6px",
+        xs: "4px",
       },
       gap: {
         md: "24px",
