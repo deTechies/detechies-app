@@ -1,9 +1,6 @@
-import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
-import { auth } from "@/lib/helpers/authOptions";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import LoginButtons from "./login-buttons";
 
@@ -12,13 +9,7 @@ export default async function OnboardPage({
 }: {
   params: { lang: Locale };
 }) {
-  const dictionary = await getDictionary(lang);
 
-  const session = await auth();
-
-  if (session?.web3?.user?.verified) {
-    redirect("/mypage");
-  }
 
   return (
     <main className="flex flex-col gap-12 items-center w-full md:w-[1/2] mx-auto">
@@ -47,7 +38,7 @@ export default async function OnboardPage({
 
       <div className="flex flex-col w-full gap-4 space-y-1">
         <Suspense fallback={<p>Loading buttons...</p>}>
-          <LoginButtons text={dictionary.onboard.welcome} />
+          <LoginButtons  />
         </Suspense>
       </div>
     </main>
