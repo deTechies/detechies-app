@@ -134,7 +134,7 @@ module.exports = {
           "0.875rem",
           { lineHeight: "1.4", fontWeight: "500", letterSpacing: "0.15px" },
         ],
-        sm: ["0.875rem", { lineHeight: "0.875rem" }, { fontWeight: "400" }],
+        sm: ["0.875rem", { lineHeight: "1.1rem" }, { fontWeight: "400" }],
         md: [
           "1rem",
           { 

@@ -19,7 +19,6 @@ import ProjectContribution from "../../_components/project-contribution";
 import DeleteMember from "./modals/delete-member";
 import DeleteWorks from "./modals/delete-works";
 import RequestEvaluation from "./modals/request-evaluation";
-import { Button } from "@/components/ui/button";
 
 export default async function ProjectMemberItem({
   details,
@@ -84,7 +83,7 @@ export default async function ProjectMemberItem({
                       {userRole != "client" && details.works.length < 1 && (
                         // Add works
                         <ProjectContribution
-                          project={details.project}
+                          projectId={details.project.id}
                           lang={lang}
                         />
                       )}
@@ -92,7 +91,7 @@ export default async function ProjectMemberItem({
                         <div className="flex gap-3">
                           {/* edit */}
                           <ProjectContribution
-                            project={details.project}
+                            projectId={details.project.id}
                             lang={lang}
                             defaultValues={details.works[0]}
                           />
