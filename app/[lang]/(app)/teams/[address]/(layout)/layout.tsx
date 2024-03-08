@@ -1,4 +1,4 @@
-import GroupProfileCard from "@/app/[lang]/(app)/groups/[address]/_components/group-profile-card";
+import GroupProfileCard from "@/app/[lang]/(app)/teams/[address]/_components/group-profile-card";
 
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";

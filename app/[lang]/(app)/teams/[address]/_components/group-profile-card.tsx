@@ -18,7 +18,7 @@ export default async function GroupProfileCard({
   id: string;
   lang: any;
 }) {
-  const { data: groupDetail } = await serverApi(`/clubs/${id}`);
+  const { data: teamDetails } = await serverApi(`/clubs/${id}`);
   const links = [
     {
       name: lang.group.tabs.about,
@@ -52,7 +52,7 @@ export default async function GroupProfileCard({
       <div className="flex flex-col gap-3.5 mx-auto  py-10">
           <div className="mx-auto">
             <Avatar
-              src={addURL(groupDetail.image)}
+              src={addURL(teamDetails.image)}
               shape="rounded"
               className="border-2 border-accent-primary"
               size={32}
@@ -61,7 +61,7 @@ export default async function GroupProfileCard({
 
           <div>
             <h1 className="text-subhead_m text-text-primary">
-              {groupDetail.name}
+              {teamDetails.name}
             </h1>
           </div>
           <div className="flex gap-[18px] text-text-secondary mx-auto">
@@ -78,18 +78,18 @@ export default async function GroupProfileCard({
             <div className="flex gap-[5px] justify-center items-center text-text-secondary">
               <Briefcase size={16}/>
               <span className="text-label_m">
-                {groupDetail.members.length} members
+                {teamDetails.members.length} members
               </span>
             </div>
           </div>
         </div>
       </header>
       <div className="sticky top-0">
-      <ProfileTabs links={links} prelink={`/groups/${groupDetail.id}`}>
-        {groupDetail.userRole == "admin" && (
+      <ProfileTabs links={links} prelink={`/teams/${teamDetails.id}`}>
+        {teamDetails.userRole == "admin" && (
           <div className="flex items-start gap-3 grow">
             <Link
-              href={`/groups/${groupDetail.id}/create/nft`}
+              href={`/teams/${teamDetails.id}/create/nft`}
               className="max-w-[212px] grow rounded-full"
             >
               <Button size="sm" variant="primary" className="w-full">
@@ -98,18 +98,18 @@ export default async function GroupProfileCard({
             </Link>
 
             <InviteGroupMember
-              groupId={groupDetail.id}
+              groupId={teamDetails.id}
               lang={lang}
-              groupMembers={groupDetail.members}
+              groupMembers={teamDetails.members}
             />
           </div>
         )}
 
-        {groupDetail.userRole == "none" && (
+        {teamDetails.userRole == "none" && (
           <div className="flex gap-3 grow">
             <JoinGroup
-              groupId={groupDetail.id}
-              details={groupDetail}
+              groupId={teamDetails.id}
+              details={teamDetails}
               lang={lang}
             />
           </div>
