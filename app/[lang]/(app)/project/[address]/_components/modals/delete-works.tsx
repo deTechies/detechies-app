@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { removeProjectWork } from "@/lib/data/project";
-import {} from "@radix-ui/react-dialog";
+import { } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -43,7 +43,7 @@ export default function DeleteWorks({
   return (
     <Dialog>
       <DialogTrigger className="text-left">
-        <Button size="sm" variant="secondary">
+        <Button size="sm" variant="secondary" className="text-state-error-secondary">
           {lang.project.details.members.delete_works.button}
         </Button>
       </DialogTrigger>

@@ -1,13 +1,18 @@
 "use client";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { ProjectMember } from "@/lib/interfaces";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import ProjectMemberInline from "./project-member-inline";
-import ProjectSwitcher from "./project-switcher";
 
 type ProjectContributionProps = {
   projectMember: ProjectMember;
@@ -21,40 +26,23 @@ export default function ProjectMemberEvaluate({
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button size="sm" variant="primary">
+      <DialogTrigger >
+        <Button size="sm" variant={"primary"} >
           {lang.project.details.members.evalu.button}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="flex flex-col gap-8 ">
         <div className="inline-flex flex-col self-stretch gap-6">
-          <div className="flex flex-col gap-4 ">
-            <h1 className="text-xl font-semibold leading-7">
+          <DialogHeader>
+            <DialogTitle>
               {lang.project.details.members.evalu.title}
-            </h1>
+            </DialogTitle>
 
-            <h5 className="text-body_m">
+            <DialogDescription>
               {lang.project.details.members.evalu.desc}
-            </h5>
-          </div>
-
-          <Alert variant="info">
-            <AlertTitle className="text-state-info">
-              {lang.project.details.members.evalu.eval_admin}
-            </AlertTitle>
-
-            <AlertDescription>
-              {lang.project.details.members.evalu.eval_admin_desc}
-            </AlertDescription>
-          </Alert>
-
-          <div className="flex flex-col self-stretch gap-4">
-            <h3 className="text-title_m">
-              {lang.project.details.members.evalu.project}
-            </h3>
-            <ProjectSwitcher project={projectMember.project} lang={lang} />
-          </div>
+            </DialogDescription>
+          </DialogHeader>
 
           <div className="flex flex-col self-stretch gap-4">
             <h3 className="text-title_m">
@@ -62,39 +50,35 @@ export default function ProjectMemberEvaluate({
             </h3>
             <ProjectMemberInline projectMember={projectMember} lang={lang} />
           </div>
-          <div className="flex flex-col self-stretch gap-4">
-            <div className="text-base font-semibold leading-tight tracking-tight text-neutral-900">
-              {lang.project.details.members.evalu.job_desc}
-            </div>
-          </div>
-
+         
           {projectMember.works.length > 0 && (
-            <div
-              className="p-5 border rounded-md border-border-div"
-            >
+            <>
+              <div className="text-body_m">
+              {projectMember.works[0].description}
+            </div>
               <div className="flex flex-wrap gap-2 mb-5">
                 {projectMember.works[0].tags.length > 0 &&
-                  projectMember.works[0].tags.map((tag: string, index: number) => (
-                    <Badge shape="outline" variant="accent" key={index}>
-                      {tag}
-                    </Badge>
-                  ))}
+                  projectMember.works[0].tags.map(
+                    (tag: string, index: number) => (
+                      <Badge variant="accent" key={index}>
+                        {tag}
+                      </Badge>
+                    )
+                  )}
               </div>
-
-              <div className="text-body_m">{projectMember.works[0].description}</div>
-            </div>
+              </>
+              
           )}
         </div>
         <div className="flex justify-center gap-2">
           <DialogClose className="max-w-[212px] grow w-full">
-            <Button variant="secondary" size="lg" className="w-full">
+            <Button variant="secondary" className="w-full">
               {lang.project.details.members.evalu.later}
             </Button>
           </DialogClose>
 
           <Button
             variant={"primary"}
-            size="lg"
             onClick={() => {
               router.push(`/work/${projectMember.works[0].workId}`);
             }}

@@ -15,7 +15,7 @@ export default function ProjectMemberInline({
   title?: string;
 }) {
   return (
-    <div className="self-stretch p-5 border rounded-md bg-background-layer-1 border-border-div">
+    <div className="self-stretch p-5 border rounded-sm bg-background-layer-1 border-border-div">
       {title && <div className="mb-5 text-subhead_s">{title}</div>}
 
       <div className="inline-flex gap-5 ">
@@ -36,7 +36,7 @@ export default function ProjectMemberInline({
           </h5>
           <div className="flex flex-col gap-2">
             <div className="inline-flex self-stretch gap-2">
-              <span className="text-text-secondary text-label_m">
+              <span className="text-text-secondary ">
                 {
                   lang.interface.profession_type[
                     projectWork?.role || projectMember?.works[0]?.role
@@ -44,7 +44,7 @@ export default function ProjectMemberInline({
                 }
               </span>
 
-              <span className="text-text-secondary text-label_m">
+              <span className="text-text-secondary ">
                 | {lang.project.details.members.evalu.contribution}{" "}
                 {projectWork?.percentage || projectMember?.works[0]?.percentage}
                 %
@@ -55,7 +55,7 @@ export default function ProjectMemberInline({
                 {lang.project.details.members.evalu.job_period}:
               </div>
 
-              <div className="tracking-wide text-text-secondary text-label_m">
+              <div className="tracking-wide text-text-secondary">
                 {projectWork
                   ? beginEndDates(projectWork.begin_date, projectWork.end_date)
                   : beginEndDates(
