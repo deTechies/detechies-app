@@ -57,7 +57,7 @@ const openloginAdapter = new OpenloginAdapter({
       logoLight: "https://web3auth.io/images/web3auth-logo.svg",
       logoDark: "https://web3auth.io/images/web3auth-logo---Dark.svg",
       defaultLanguage: "en", // en, de, ja, ko, zh, es, fr, pt, nl
-      mode: "dark", // whether to enable dark, light or auto mode. defaultValue: auto [ system theme]
+      mode: "auto", // whether to enable dark, light or auto mode. defaultValue: auto [ system theme]
     },
     mfaSettings: {
       deviceShareFactor: {
