@@ -31,7 +31,7 @@ export const web3AuthInstance =
   typeof window !== "undefined"
     ? new Web3Auth({
         clientId:
-          "BDlUlpSomDUSEzG9ZfwlbTUuhSnNPHqQuciI7suaSc4xMwQV_B3xHwXEFmDml2Rh96GnXuNFw4pfQ5CPX6B0A7o",
+          "BMVJzQ7suBtQms7E3cVQ0iUfzwXgBZ9Arnd-82ZG4Pka1qcz6IWqQ8yIUY0szBMNDMdBB_xvfnqBP0G5-ibAUHo",
         web3AuthNetwork: "testnet",
         chainConfig: {
           chainNamespace: "eip155",
@@ -47,7 +47,6 @@ export const web3AuthInstance =
 
 // Wepin
 
-const testAppKey = "ak_test_YwTTMVZ0M6PXZQxEqdpeJ9kMGVuZUPLVZJxxfqEFDj1";
 export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
 // const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키
 // const testAppId = 'app_id_eg12sf3491azgs520' // 테스트용 앱 ID

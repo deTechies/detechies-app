@@ -1,19 +1,25 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Project } from "@/lib/interfaces";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog";
+
 import ProjectContributionForm from "./project-contribution-form";
 
 export default function ProjectContribution({
-  project,
+  projectId,
   lang,
   defaultValues,
 }: {
-  project: Project;
-  lang: any;
+  projectId: string;
+  lang?: any;
   defaultValues?: any;
 }) {
-
   return (
     <Dialog>
       <DialogTrigger>
@@ -22,26 +28,26 @@ export default function ProjectContribution({
             {lang.mypage.main.edit}
           </Button>
         ) : (
-          <Button variant={"primary"} size={"lg"} className={"px-6"}>
+          <Button variant={"primary"} className={"px-6"}>
             {lang.project.details.members.add_works.button}
           </Button>
         )}
       </DialogTrigger>
 
       <DialogContent className="flex flex-col gap-6 px-8">
-        <header className="flex flex-col gap-4">
-          <h3 className="text-subhead_s">
+        <DialogHeader className="flex flex-col gap-1">
+          <DialogTitle>
             {lang.project.details.members.add_works.title}
-          </h3>
-          <h6 className="text-body_m">
+          </DialogTitle>
+          <DialogDescription>
             {lang.project.details.members.add_works.desc}
-          </h6>
-        </header>
+          </DialogDescription>
+        </DialogHeader>
 
         <section>
-          {project?.id && (
+          {projectId && (
             <ProjectContributionForm
-              project={project}
+              projectId={projectId}
               lang={lang}
               workDetails={defaultValues}
               workId={defaultValues?.workId}
