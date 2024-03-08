@@ -31,7 +31,7 @@ export const web3AuthInstance =
   typeof window !== "undefined"
     ? new Web3Auth({
         clientId:
-          "BMVJzQ7suBtQms7E3cVQ0iUfzwXgBZ9Arnd-82ZG4Pka1qcz6IWqQ8yIUY0szBMNDMdBB_xvfnqBP0G5-ibAUHo",
+          "BJKpsKLTGGib-v-OPsIrirs0kUhbWsES2V0kakHS0fJI8MGTG2pZboFM0Fe6I7nCHlKphqZLXpZOMiWPEqTkPJA",
         web3AuthNetwork: "testnet",
         chainConfig: {
           chainNamespace: "eip155",
