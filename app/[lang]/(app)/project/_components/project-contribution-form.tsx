@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import ProfessionTagType from "@/components/extra/profession-tag-type";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DialogClose } from "@/components/ui/dialog";
@@ -32,20 +33,19 @@ import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/use-toast";
 import { postServer } from "@/lib/data/postRequest";
 import { addMembersWork } from "@/lib/data/project";
-import { PROFESSION_TYPE, Project } from "@/lib/interfaces";
-import { useRef, useState } from "react";
-import ProfessionTagType from "@/components/extra/profession-tag-type";
+import { PROFESSION_TYPE } from "@/lib/interfaces";
 import { X } from "lucide-react";
+import { useRef, useState } from "react";
 
 
 
 export default function ProjectContributionForm({
-  project,
+  projectId,
   lang,
   workDetails,
   workId,
 }: {
-  project: Project;
+  projectId: string;
   lang: any;
   workDetails?: any;
   workId?: string;
@@ -147,7 +147,7 @@ export default function ProjectContributionForm({
         });
       }
     } else {
-      const result = await addMembersWork(values, project.id);
+      const result = await addMembersWork(values, projectId);
 
       if (result.status === "success") {
         toast({
@@ -170,16 +170,15 @@ export default function ProjectContributionForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="spaxe-y-8 ">
-        <main className="p-5 mb-6 space-y-8 border rounded-md border-border-div">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="m-2">
           <section className="flex flex-col gap-5">
             <div className="grid grid-cols-1 gap-4">
               <FormField
                 control={form.control}
                 name="role"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
+                  <FormItem className="flex flex-row gap-4 items-center">
+                    <FormLabel className="w-[200px]">
                       {lang.project.details.members.add_works.position}
                     </FormLabel>
 
@@ -201,17 +200,13 @@ export default function ProjectContributionForm({
                         ))}
                       </SelectContent>
                     </Select>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
 
-            <div className="flex flex-col w-full gap-3">
-              <div className="flex justify-between">
-                <Label>{lang.project.details.members.add_works.date}</Label>
-
-                <div className="flex items-center gap-1">
+            <div className="flex flex-col">
+            <div className="flex items-center gap-1 justify-end mb-1">
                   <Checkbox
                     id="present"
                     name="present"
@@ -226,6 +221,11 @@ export default function ProjectContributionForm({
                     {lang.project.details.members.add_works.in_progress}
                   </Label>
                 </div>
+            <div className="flex flex-row items-center gap-3">
+              <div className="w-[200px]">
+                <Label>{lang.project.details.members.add_works.date}</Label>
+
+               
               </div>
 
               <div className="flex flex-row items-center w-full gap-2">
@@ -237,8 +237,6 @@ export default function ProjectContributionForm({
                       <Input
                         type="date"
                         {...field}
-                        min={project.begin_date}
-                        max={project.end_date}
                       />
                       <FormMessage />
                     </FormItem>
@@ -256,8 +254,6 @@ export default function ProjectContributionForm({
                     >
                       <Input
                         type="date"
-                        min={project.begin_date}
-                        max={project.end_date}
                         disabled={form.watch("present", false)}
                         {...field}
                       />
@@ -272,14 +268,15 @@ export default function ProjectContributionForm({
                 />
               </div>
             </div>
+            </div>
 
-            <FormItem className="space-y-">
+            <FormItem className="">
               <FormLabel>
                 <div className="mb-2">
                   {lang.project.details.members.add_works.detail_work}
                 </div>
               </FormLabel>
-
+              <div className="flex flex-col gap-1">
               <FormControl>
                 <Input
                   placeholder={lang.project.details.members.add_works.type}
@@ -327,6 +324,7 @@ export default function ProjectContributionForm({
                       </div>
                     </Badge>
                   ))}
+                  </div>
               </div>
             </FormItem>
 
@@ -383,7 +381,6 @@ export default function ProjectContributionForm({
               )}
             />
           </section>
-        </main>
 
         <div className="flex items-center justify-center gap-2">
           <DialogClose asChild>

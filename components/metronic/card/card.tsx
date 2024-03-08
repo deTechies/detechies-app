@@ -38,7 +38,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex rounded-t-[12px] border-b border-border-div py-5 px-[30px] justify-between items-center w-full text-md font-medium",
+    className={cn("flex rounded-t-[12px] border-b border-border-div py-5 px-[30px] justify-between items-center w-full text-md font-medium self-end",
     className
   )}
     {...props}
@@ -47,6 +47,21 @@ const CardHeader = React.forwardRef<
 
 CardHeader.displayName = "CardHeader"
 
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex rounded-b-[12px] border-t border-border-div py-5 px-[30px] justify-between items-center w-full text-md font-medium",
+    className
+  )}
+    {...props}
+  />
+))
 
-export { Card, CardContent, CardHeader };
+CardFooter.displayName = "CardFooter"
+
+
+export { Card, CardContent, CardFooter, CardHeader };
 

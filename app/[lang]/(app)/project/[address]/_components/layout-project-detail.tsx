@@ -1,5 +1,4 @@
 import AvatarMemberGroup from "@/components/metronic/avatar/avatar-member-group";
-import { Card } from "@/components/metronic/card/card";
 import { Button } from "@/components/ui/button";
 import { serverApi } from "@/lib/data/general";
 import { AsteriskIcon, PenSquare, TimerIcon } from "lucide-react";
@@ -30,6 +29,11 @@ export default async function LayoutProjectDetail({
       isAdmin: false,
     },
     {
+      name: "members",
+      href: `members`,
+      isAdmin: false,
+    },
+    {
       name: "edit",
       href: "edit",
       isAdmin: false,
@@ -37,9 +41,9 @@ export default async function LayoutProjectDetail({
   ] as any;
 
   return (
-    <Card className="px-10 pt-10 border-none rounded-t-none flex flex-col gap-10">
-      <div className="flex gap-8 px-10">
-        <div className="w-[100px] h-[100px] rounded-[6px] bg-background-layer-2 flex items-center">
+    <header className=" border-none rounded-t-none flex flex-col gap-10">
+      <div className="flex gap-md px-10 mx-10 lg:mx-20">
+        <div className="w-[100px] h-[100px] rounded-[6px] flex items-center">
           <div className="md:w-[50px] aspect-square lg:w-[75px] mx-auto my-auto">
             <Image
               src={`https://ipfs.io/ipfs/${project.image}`}
@@ -94,6 +98,6 @@ export default async function LayoutProjectDetail({
       <ProfileTabs links={links}
         prelink={`/project/${projectId}`}
       ></ProfileTabs>
-    </Card>
+    </header>
   );
 }
