@@ -55,9 +55,9 @@ export default async function LayoutProjectDetail({
         </div>
         <div className="flex justify-between w-full">
           <section className="flex flex-col gap-2 mt-2">
-            <h2 className="text-subhead_m">{project.name}</h2>
+            <h2 className="text-lg font-medium">{project.name}</h2>
            
-            <span className=" text-text-secondary max-w-[400px] max-h-[200px]">
+            <span className="text-sm text-text-secondary max-w-[400px] max-h-[200px]">
               {project.description}
             </span>
             <dl className="flex gap-4 text-text-secondary text-label_m">

@@ -22,9 +22,9 @@ export default async function ProjectMemberList({
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-md">
-      {members.map((member: any) => (
+      {members.map((member: any, index: number) => (
         <ProjectMemberListItem
-          key={member.id}
+          key={index}
           details={member}
           isMember={isMember}
           lang={lang}
