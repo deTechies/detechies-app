@@ -2,9 +2,9 @@
 
 
 import { serverApi } from "@/lib/data/general";
-import GroupListItem from "./group-list-item";
+import TeamListItem from "./team-list-item";
 
-export default async function GroupList({
+export default async function TeamList({
   lang,
 }: {
   lang: any;
@@ -18,7 +18,7 @@ export default async function GroupList({
 
       <div className="grid  w-full gap-5 mb-10 md:grid-cols-2  lg:grid-cols-4">
         {groups.map((group: any) => (
-          <GroupListItem
+          <TeamListItem
             key={group.id}
             details={group}
             lang={lang}

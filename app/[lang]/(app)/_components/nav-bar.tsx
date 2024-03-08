@@ -20,16 +20,17 @@ export default function Navbar({ lang }: { lang: any }) {
       href: `/${params.lang}/mypage`,
     },
     {
-      name: lang.project,
-      href: `/${params.lang}/project`,
-    },
-    {
-      name: lang.groups,
-      href: `/${params.lang}/groups`,
-    },
-    {
       name: lang.find_expert,
       href: `/${params.lang}/profiles`,
+    },
+    {
+      name: lang.teams,
+      href: `/${params.lang}/teams`,
+    },
+    
+    {
+      name: lang.project,
+      href: `/${params.lang}/project`,
     },
   ];
 

@@ -5,7 +5,7 @@ import { Club } from "@/lib/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function GroupListItem({
+export default function TeamListItem({
   details,
   lang,
   isPending,
@@ -27,7 +27,7 @@ export default function GroupListItem({
     };
   });
   return (
-    <Link href={`/groups/${details.id}`} passHref>
+    <Link href={`/teams/${details.id}`} passHref>
       <Card className="flex flex-col p-[30px] gap-[30px] border hover:border-accent-primary">
         <section className="flex flex-col items-center justify-center gap-4 text-center">
           <Avatar className="w-[60x] h-[60px] p-4 mx-auto ">

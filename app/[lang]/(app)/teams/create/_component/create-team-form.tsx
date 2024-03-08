@@ -32,7 +32,7 @@ import { uploadContent } from "@/lib/upload";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const GroupForm = () => {
+export const CreateTeamForm = () => {
   const lang = useDictionary();
   // --- Text & Labels ---
   const groupNameTakenDescription =

@@ -16,7 +16,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
-export default function GroupListFilter({ lang }: { lang: any }) {
+export default function TeamListFilter({ lang }: { lang: any }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

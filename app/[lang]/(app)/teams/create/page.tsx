@@ -1,9 +1,10 @@
-import { Card } from "@/components/ui/card";
+
+import { Card } from "@/components/metronic/card/card";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { GroupForm } from "./group-form";
+import { CreateTeamForm } from "./_component/create-team-form";
 
-export default async function CreateGroup({
+export default async function CreateTeamPage({
   params,
 }: {
   params: { lang: Locale };
@@ -29,7 +30,7 @@ export default async function CreateGroup({
           </span>
         </header>
 
-        <GroupForm />
+        <CreateTeamForm />
       </Card>
     </main>
   );

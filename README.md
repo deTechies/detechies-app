@@ -4,7 +4,7 @@ Overview
 In today's rapidly digitizing world, proving one's achievements, memberships, and milestones is crucial. Our solution allows users to represent these achievements as NFTs. By requesting the minting of NFTs, users can have their accomplishments authenticated and, upon approval, can collect these digital representations. We have also created a way for community groups to issue these NFTs, thereby nurturing a robust Web3 business networking ecosystem.
 
 Key Features
-Group Contracts
+Team Contracts
 Community groups can gather authenticated members and issue NFTs. This fosters trust and verification within a community, ensuring that members' achievements are genuine.
 
 Project Contracts

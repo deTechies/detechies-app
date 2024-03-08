@@ -2,7 +2,8 @@
   "nav": {
     "find_expert": "Techies",
     "project": "Projects",
-    "groups": "Partners",
+    "groups": "Teams",
+    "teams": "Teams",
     "my_profile": "My Profile",
     "my_account": {
       "my_account_title": "My Account",
@@ -185,7 +186,7 @@
         "expert_desc": "Certify My Career",
         "client": "Client",
         "client_desc": "Find techies for your project",
-        "admin": "Partners Admin",
+        "admin": "Team Admin",
         "admin_desc": "Create unique achievements for our communities"
       }
     }
