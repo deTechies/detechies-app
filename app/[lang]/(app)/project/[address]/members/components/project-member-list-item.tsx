@@ -1,10 +1,10 @@
 import { Card, CardContent, CardFooter } from "@/components/metronic/card/card";
-import { Button } from "@/components/ui/button";
 import { ProjectMember } from "@/lib/interfaces";
 import { addURL } from "@/lib/utils";
 import { Briefcase, PercentDiamond } from "lucide-react";
 import Image from "next/image";
 import ProjectContribution from "../../../_components/project-contribution";
+import ProjectMemberEvaluate from "../../../_components/project-evaluate";
 import DeleteWorks from "../../_components/modals/delete-works";
 
 export interface detailsProps {
@@ -12,14 +12,14 @@ export interface detailsProps {
   isMember: boolean;
   viewer: string;
   lang: any;
-  projectId: string
+  projectId: string;
 }
 export default async function ProjectMemberListItem({
   lang,
   details,
   viewer,
   isMember,
-  projectId
+  projectId,
 }: detailsProps) {
   return (
     <Card>
@@ -32,7 +32,9 @@ export default async function ProjectMemberListItem({
             className="rounded-full bg-accent-secondary mx-auto border border-accent-primary"
             alt="profile_image_project_member "
           />
-          <h3 className="text-center font-medium">{details.user.display_name}</h3>
+          <h3 className="text-center font-medium">
+            {details.user.display_name}
+          </h3>
           {details.works[0] ? (
             <div className="flex flex-row flex-wrap gap-4 text-sm text-text-secondary">
               <div className="flex flex-row gap-2 items-center justify-center">
@@ -65,28 +67,38 @@ export default async function ProjectMemberListItem({
         <div className="flex flex-row gap-4 justify-center">
           {isMember ? (
             viewer === details.user.wallet ? (
-              <>
-                <ProjectContribution
-                  projectId={projectId}
-                  lang={lang}
-                  defaultValues={details.works[0]}
-                />
+              details.works[0] ? (
+                <>
+                  <ProjectContribution
+                    projectId={projectId}
+                    lang={lang}
+                    defaultValues={details.works[0]}
+                  />
 
-                {/* delete */}
-                <DeleteWorks projectId={details.works[0].workId} lang={lang} />
-              </>
+                  {/* delete */}
+                  <DeleteWorks
+                    projectId={details.works[0].workId}
+                    lang={lang}
+                  />
+                </>
+              ) : (
+                <div className="flex flex-row gap-4">
+                  <ProjectContribution projectId={projectId} lang={lang} />
+                </div>
+              )
             ) : (
-              <>
-                <Button size="sm" variant={"secondary"}>
-                  Remove
-                </Button>
-                <Button size="sm" variant={"secondary"}>
-                  Promote
-                </Button>
-              </>
+              details.works[0] ? (
+                  <ProjectMemberEvaluate
+                            projectMember={details}
+                            lang={lang}
+                          />
+              ) : (
+                <span>No contributions added</span>
+              )
+              
             )
           ) : (
-            <Button>{viewer === details.user.id ? "View" : "Invite"}</Button>
+            <span>You are not a member</span>
           )}
         </div>
       </CardFooter>
