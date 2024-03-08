@@ -6,7 +6,9 @@ import SessionProvider from "@/lib/SessionProvider";
 import PushProvider from "@/lib/usePushProtocol";
 import { Analytics } from "@vercel/analytics/react";
 import { Web3Auth } from "@web3auth/modal";
+import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
+
 import {
   WagmiConfig,
   WindowProvider,
@@ -45,11 +47,43 @@ export const web3AuthInstance =
       })
     : null;
 
-// Wepin
-
-export const testAppId = "ff3163da820c8058bd1ed9f7a67c2133";
-// const testAppKey = 'ak_test_ghq1D5s1sfG234sbnhdsw24mnovk313' // 테스트용 앱 키
-// const testAppId = 'app_id_eg12sf3491azgs520' // 테스트용 앱 ID
+const openloginAdapter = new OpenloginAdapter({
+  loginSettings: {
+    mfaLevel: "optional",
+  },
+  adapterSettings: {
+    uxMode: "redirect", // "redirect" | "popup"
+    whiteLabel: {
+      logoLight: "https://web3auth.io/images/web3auth-logo.svg",
+      logoDark: "https://web3auth.io/images/web3auth-logo---Dark.svg",
+      defaultLanguage: "en", // en, de, ja, ko, zh, es, fr, pt, nl
+      mode: "dark", // whether to enable dark, light or auto mode. defaultValue: auto [ system theme]
+    },
+    mfaSettings: {
+      deviceShareFactor: {
+        enable: true,
+        priority: 1,
+        mandatory: true,
+      },
+      backUpShareFactor: {
+        enable: true,
+        priority: 2,
+        mandatory: false,
+      },
+      socialBackupFactor: {
+        enable: true,
+        priority: 3,
+        mandatory: false,
+      },
+      passwordFactor: {
+        enable: true,
+        priority: 4,
+        mandatory: false,
+      },
+    },
+  },
+}) as any;
+web3AuthInstance?.configureAdapter(openloginAdapter);
 
 const config = createConfig({
   autoConnect: true,
