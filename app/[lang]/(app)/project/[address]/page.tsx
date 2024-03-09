@@ -48,12 +48,7 @@ export default async function ProjectDetailPage({
     data.scope === "group" &&
     (data.userRole === "none" || data.userRole === "joined")
   ) {
-    return (
-      <GroupProject
-        lang={dictionary}
-        groups={data.club}
-      />
-    );
+    return <GroupProject lang={dictionary} groups={data.club} />;
   }
 
   if (
@@ -90,16 +85,8 @@ export default async function ProjectDetailPage({
       </section>
 
       <section className="flex flex-col gap-5 truncate">
-        {
-          data.languages && (
-            <ProjectLanguages languages={data.languages} />
-          )
-        }
-        {
-          data.packages && (
-            <ProjectPackages packages={data.packages}/>
-          )
-        }
+        {data.languages && <ProjectLanguages languages={data.languages} />}
+        {data.packages && <ProjectPackages packages={data.packages} />}
         <ProjectLinks details={data} lang={dictionary} />
         <ProjectDependencies id={params.address} />
         {/* <ProjectEvaluation details={data} lang={dictionary} /> */}
