@@ -98,6 +98,8 @@ export default function CreateProfile({ lang }: { lang: any }) {
         Authorization: `Bearer ${session.web3.accessToken}`,
       },
     });
+    
+    console.log(response);
 
     if (!response.ok) {
       const errorData = await response.json();
