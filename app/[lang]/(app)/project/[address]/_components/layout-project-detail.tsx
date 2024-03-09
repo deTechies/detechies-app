@@ -1,10 +1,11 @@
 import AvatarMemberGroup from "@/components/metronic/avatar/avatar-member-group";
-import { Button } from "@/components/ui/button";
 import { serverApi } from "@/lib/data/general";
-import { AsteriskIcon, PenSquare, TimerIcon } from "lucide-react";
+import { AsteriskIcon, TimerIcon } from "lucide-react";
 
+import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
+import JoinProject from "@/components/project/join-project";
+import { getDictionary } from "@/get-dictionary";
 import Image from "next/image";
-import Link from "next/link";
 import ProfileTabs from "../../../mypage/_components/profile-page-card/profile-tabs";
 
 export default async function LayoutProjectDetail({
@@ -13,6 +14,7 @@ export default async function LayoutProjectDetail({
   projectId: string;
 }) {
   const { data: project } = await serverApi(`/projects/${projectId}`);
+  const lang = await getDictionary("en");
 
   const groupList = project.members.map((member: any) => {
     return {
@@ -21,7 +23,7 @@ export default async function LayoutProjectDetail({
       id: member.user.wallet,
     };
   });
-  
+
   const links = [
     {
       name: "dashboard",
@@ -34,10 +36,10 @@ export default async function LayoutProjectDetail({
       isAdmin: false,
     },
     {
-      name: "edit",
+      name: "Settings",
       href: "edit",
       isAdmin: false,
-    }
+    },
   ] as any;
 
   return (
@@ -56,7 +58,7 @@ export default async function LayoutProjectDetail({
         <div className="flex justify-between w-full">
           <section className="flex flex-col gap-2 mt-2">
             <h2 className="text-lg font-medium">{project.name}</h2>
-           
+
             <span className="text-sm text-text-secondary max-w-[400px] max-h-[200px]">
               {project.description}
             </span>
@@ -75,17 +77,6 @@ export default async function LayoutProjectDetail({
           </section>
           <section className="flex justify-end">
             <div className="flex flex-col justify-between">
-              {project.userRole == "admin" && (
-                <Link
-                  href={`/project/${project.id}/edit`}
-                  className="ml-auto shrink-0"
-                >
-                  <Button variant="secondary" size="sm">
-                    <span className="mr-2">Edit</span>
-                    <PenSquare size={16} className="inline-block " />
-                  </Button>
-                </Link>
-              )}
               <div>
                 <AvatarMemberGroup
                   group={[...groupList, ...groupList, ...groupList]}
@@ -95,9 +86,19 @@ export default async function LayoutProjectDetail({
           </section>
         </div>
       </div>
-      <ProfileTabs links={links}
-        prelink={`/project/${projectId}`}
-      ></ProfileTabs>
+      <ProfileTabs links={links} prelink={`/project/${projectId}`}>
+        {project.userRole == "none" && (
+          <JoinProject lang={lang} address={projectId} />
+        )}
+        {project.userRole == "admin" && (
+          <InviteProjectMember
+            lang={lang}
+            members={[]}
+            projectId={projectId}
+            projectMembers={project.members}
+          />
+        )}
+      </ProfileTabs>
     </header>
   );
 }
