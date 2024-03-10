@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { getSession, signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 import {
@@ -19,7 +19,7 @@ import { API_URL } from "@/lib/constants";
 
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount } from "wagmi";
 import * as z from "zod";
 
 export default function CreateProfile({ lang }: { lang: any }) {
@@ -54,25 +54,16 @@ export default function CreateProfile({ lang }: { lang: any }) {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const { refresh, push } = useRouter();
+  const { refresh } = useRouter();
   const { connector } = useAccount();
-  const { disconnect } = useDisconnect({
-    onSuccess: () => {
-      push("/onboard");
-    },
-    onError: (error) => {
-      setIsLoading(false);
-      console.error("Error disconnecting:", error);
-    },
-  });
+  const {data: session} = useSession();
+
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
-    const session = await getSession();
-    console.log("session")
     console.log(session)  
 
-    if (!session?.web3.user.wallet) {
+    if (!session?.web3?.user?.wallet) {
       toast({
         title: "Error",
         description: "Please login to your account account. ",
