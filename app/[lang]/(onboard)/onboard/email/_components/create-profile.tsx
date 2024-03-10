@@ -15,9 +15,9 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { API_URL } from "@/lib/constants";
 
 import { web3AuthInstance } from "@/app/[lang]/app";
+import { postServer } from "@/lib/data/postRequest";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAccount } from "wagmi";
@@ -57,28 +57,27 @@ export default function CreateProfile({ lang }: { lang: any }) {
   const [isLoading, setIsLoading] = useState(false);
   const { refresh } = useRouter();
   const { connector } = useAccount();
-  const {data: session} = useSession();
-  
+  const { data: session } = useSession();
+
   useEffect(() => {
     if (connector?.id == "web3auth") {
       const getInfo = async () => {
         const result = await web3AuthInstance?.getUserInfo();
         console.log(result);
-  
+
         if (result?.email) {
           form.setValue("email", result.email);
           form.setValue("verified", true);
         }
       };
-  
+
       getInfo();
     }
   }, [connector?.id, form]);
 
-
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
-    console.log(session)  
+    console.log(session);
     if (!session?.web3?.user?.wallet) {
       toast({
         title: "Error",
@@ -89,8 +88,8 @@ export default function CreateProfile({ lang }: { lang: any }) {
 
       return;
     }
-    
-    if(!session?.web3?.accessToken) {
+
+    if (!session?.web3?.accessToken) {
       toast({
         title: "Error",
         description: "Please login to your account account. ",
@@ -107,37 +106,13 @@ export default function CreateProfile({ lang }: { lang: any }) {
       login_method: connector?.id == "web3auth" ? "web3auth" : "metamask",
     };
 
-    const response = await fetch(`${API_URL}/users`, {
-      body: JSON.stringify(credentials),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "API_KEY",
-        Authorization: `Bearer ${session.web3.accessToken}`,
-      },
-    });
-    
-    console.log(response);
+    const result = await postServer("/users", JSON.stringify(credentials));
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      if (errorData.messageCode === "username_already_exists") {
-        form.setError("display_name", {
-          type: "manual",
-          message: lang.validation.onboard.username.already_use,
-        });
-      } else if (errorData.messageCode === "email_already_exists") {
-        form.setError("email", {
-          type: "manual",
-          message: lang.validation.onboard.email.already_use,
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: errorData.message,
-        });
-      }
-
+    if (!result) {
+      toast({
+        title: "something went wrong",
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
