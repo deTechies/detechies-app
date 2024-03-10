@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
+import EmptyState from "@/components/metronic/custom/empty-state";
 import { getUserProfile } from "@/lib/data/user";
 import MyAbout from "./my-about";
 import MyConnections from "./my-connections-card";
@@ -11,15 +11,9 @@ export default async function UserDashboard({ address }: { address?: any }) {
   const { data: user } = await getUserProfile(address);
 
   if (!user.profile_details?.skills && user.projects.length < 1) {
-    return(
-      <Card className="mx-auto w-[50vw]">
-        <CardHeader>
-          Oops no profile
-        </CardHeader>
-      <CardContent>User has not set up his profile yet..</CardContent>
-    </Card>
-    )
-    
+    return (
+      <EmptyState title="No Profile for this User" subtitle="Please message the user to update his profile"/>
+    );
   }
   return (
     <div>
