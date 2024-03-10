@@ -27,7 +27,7 @@ import {
 import { useSession } from "next-auth/react";
 import { toast } from "../ui/use-toast";
 
-import { joinGroup } from "@/lib/data/groups";
+import { postServer } from "@/lib/data/postRequest";
 import Image from "next/image";
 import { Card } from "../ui/card";
 import { Textarea } from "../ui/textarea";
@@ -66,15 +66,16 @@ export default function JoinGroup({
     //@ts-ignore
     setLoading(true);
     //implement the logic for joina project here..
-    const result = await joinGroup({
+    const submittingData = JSON.stringify({
       clubId: groupId,
       message: data.message,
-    });
+    })
+    const result = await postServer(`/members/join`, submittingData);
 
     if (result.status === "success") {
       toast({
-        title: "Successfully requested to join project",
-        description: "The project leader will review your request",
+        title: "Successfully requested to join the team",
+        description: "Please wait for the team to access your request. ",
       });
       setOpenDialog(false);
     } else {

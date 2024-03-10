@@ -79,7 +79,6 @@ export default function CreateProfile({ lang }: { lang: any }) {
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
     console.log(session)  
-
     if (!session?.web3?.user?.wallet) {
       toast({
         title: "Error",
@@ -89,6 +88,15 @@ export default function CreateProfile({ lang }: { lang: any }) {
       setIsLoading(false);
 
       return;
+    }
+    
+    if(!session?.web3?.accessToken) {
+      toast({
+        title: "Error",
+        description: "Please login to your account account. ",
+        variant: "destructive",
+      });
+      setIsLoading(false);
     }
 
     const credentials = {
