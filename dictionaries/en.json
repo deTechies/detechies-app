@@ -776,10 +776,10 @@
           "go_nft": "Go to NFT certificate"
         },
         "join_group": {
-          "title": "Join Group",
-          "desc": "Send a request message to the group leader. If the leader approves, you can become a group member.",
-          "message": "Request Message",
-          "message_placeholder": "Hello, I am Hong Gil-dong, a front-end developer.",
+          "title": "Join Team",
+          "desc": "Send a request message to the team. Wait for the approval of the team to be accepted.",
+          "message": "Message",
+          "message_placeholder": "Hello, I am .... , I want to join as a front-end developer to your team. .",
           "back": "Go Back",
           "send": "Request to Join"
         },

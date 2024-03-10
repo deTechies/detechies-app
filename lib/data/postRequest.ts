@@ -6,7 +6,12 @@ export async function postServer(endpoint: string, body?: string, lang?: any) {
   const session = await getSession();
 
   if (!session || !session.web3 || !session.web3.accessToken) {
-    throw new Error("Invalid session or missing access token");
+    toast({
+      title: "You are not logged in",
+      description: "Please log in to continue, if not possible. Please try again.",
+      variant: "destructive"
+    })
+    return;
   }
 
   const url = `${API_URL}${endpoint}`;

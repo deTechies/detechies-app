@@ -84,9 +84,7 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
   const messageValue = form.watch("message", "");
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    //@ts-ignore
     setLoading(true);
-    //implement the logic for joina project here..
     if (!data.role) {
       toast({
         title: "Error",
