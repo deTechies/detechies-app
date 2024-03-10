@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { signOut, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   Form,
@@ -59,15 +59,19 @@ export default function CreateProfile({ lang }: { lang: any }) {
   const { connector } = useAccount();
   const { data: session } = useSession();
 
-  useEffect(() => {
-    const setweb3Email = async () => {
-      const user = await web3AuthInstance.getUserInfo();
-      form.setValue("email", user.email);
+  if (connector?.id == "web3auth") {
+    const getInfo = async () => {
+      const result = await web3AuthInstance?.getUserInfo();
+      console.log(result);
+
+      if (result?.email) {
+        form.setValue("email", result.email);
+        form.setValue("verified", true);
+      }
     };
-    if (connector?.id == "web3auth") {
-      setweb3Email();
-    }
-  }, [connector, form]);
+
+    getInfo();
+  }
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
@@ -91,7 +95,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
       login_method: connector?.id == "web3auth" ? "web3auth" : "metamask",
     };
 
-    if(!session.web3.accessToken){
+    if (!session.web3.accessToken) {
       toast({
         title: "Error",
         description: "Please login to your account account. ",
@@ -101,7 +105,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
 
       return;
     }
-    
+
     const response = await fetch(`${API_URL}/users`, {
       body: JSON.stringify(credentials),
       method: "POST",
