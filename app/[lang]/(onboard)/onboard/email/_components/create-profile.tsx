@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Form,
@@ -57,24 +57,28 @@ export default function CreateProfile({ lang }: { lang: any }) {
   const [isLoading, setIsLoading] = useState(false);
   const { refresh } = useRouter();
   const { connector } = useAccount();
-  const { data: session } = useSession();
+  const {data: session} = useSession();
+  
+  useEffect(() => {
+    if (connector?.id == "web3auth") {
+      const getInfo = async () => {
+        const result = await web3AuthInstance?.getUserInfo();
+        console.log(result);
+  
+        if (result?.email) {
+          form.setValue("email", result.email);
+          form.setValue("verified", true);
+        }
+      };
+  
+      getInfo();
+    }
+  }, [connector?.id, form]);
 
-  if (connector?.id == "web3auth") {
-    const getInfo = async () => {
-      const result = await web3AuthInstance?.getUserInfo();
-      console.log(result);
-
-      if (result?.email) {
-        form.setValue("email", result.email);
-        form.setValue("verified", true);
-      }
-    };
-
-    getInfo();
-  }
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
+    console.log(session)  
 
     if (!session?.web3?.user?.wallet) {
       toast({
@@ -91,20 +95,9 @@ export default function CreateProfile({ lang }: { lang: any }) {
       email: data.email,
       display_name: data.display_name,
       verified: data.verified,
-      wallet: session.web3?.user?.wallet,
+      wallet: session.web3.user.wallet,
       login_method: connector?.id == "web3auth" ? "web3auth" : "metamask",
     };
-
-    if (!session.web3.accessToken) {
-      toast({
-        title: "Error",
-        description: "Please login to your account account. ",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-
-      return;
-    }
 
     const response = await fetch(`${API_URL}/users`, {
       body: JSON.stringify(credentials),
@@ -115,6 +108,8 @@ export default function CreateProfile({ lang }: { lang: any }) {
         Authorization: `Bearer ${session.web3.accessToken}`,
       },
     });
+    
+    console.log(response);
 
     if (!response.ok) {
       const errorData = await response.json();
