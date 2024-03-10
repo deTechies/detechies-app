@@ -69,8 +69,10 @@ export default function CreateProfile({ lang }: { lang: any }) {
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
     const session = await getSession();
+    console.log("session")
+    console.log(session)  
 
-    if (!session) {
+    if (!session?.web3.user.wallet) {
       toast({
         title: "Error",
         description: "Please login to your account account. ",
@@ -85,7 +87,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
       email: data.email,
       display_name: data.display_name,
       verified: data.verified,
-      wallet: session.web3.address,
+      wallet: session.web3.user.wallet,
       login_method: connector?.id == "web3auth" ? "web3auth" : "metamask",
     };
 
