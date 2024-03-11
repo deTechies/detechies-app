@@ -2,7 +2,7 @@
 import Pagination from "@/components/extra/pagination";
 import { serverApi } from "@/lib/data/general";
 import { User } from "@/lib/interfaces";
-import ProfileCard from "./profile-card";
+import ProfileListItem from "./profile-list-item";
 export default async function ListProfiles({
   lang,
   searchParams,
@@ -23,10 +23,10 @@ export default async function ListProfiles({
 
   return (
     <div className="flex  flex-col gap-4">
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
         {users?.data.length > 0 &&
           users.data.map((profile: User, index: number) => (
-            <ProfileCard key={index} profile={profile} lang={lang} />
+            <ProfileListItem key={index} profile={profile} lang={lang} />
           ))}
       </div>
       <Pagination

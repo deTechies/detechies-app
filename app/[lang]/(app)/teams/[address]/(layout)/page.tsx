@@ -34,7 +34,7 @@ export default async function GroupProfile({
   const { data: clubInfo } = await serverApi(`/clubs/${params.address}`);
 
   return (
-    <div className="grid grid-cols-3 gap-md">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
       <div className="col-span-1 flex flex-col gap-md">
         <Card>
           <CardHeader>Information section</CardHeader>
@@ -54,9 +54,7 @@ export default async function GroupProfile({
               </div>
               <div className="flex w-full">
                 <span className=" w-[100px] text-text-secondary">Created</span>
-                <span >
-                  {formatDate(clubInfo.created_at)}
-                </span>
+                <span>{formatDate(clubInfo.created_at)}</span>
               </div>
               <div className="flex">
                 <span className="text-sm font-medium w-[100px] text-text-secondary">
@@ -76,9 +74,7 @@ export default async function GroupProfile({
         </Card>
         <Card>
           <CardHeader>Open positions.</CardHeader>
-          <CardContent>
-            Coming soon
-          </CardContent>
+          <CardContent>Coming soon</CardContent>
         </Card>
         <Card>
           <CardHeader>Network</CardHeader>
@@ -123,7 +119,10 @@ export default async function GroupProfile({
         <GroupDetails details={clubInfo} />
         <div className="grid grid-cols-2">
           <Suspense fallback={"card loading"}>
-          <GroupMember address={params.address.toString()} lang={dictionary} />
+            <GroupMember
+              address={params.address.toString()}
+              lang={dictionary}
+            />
           </Suspense>
         </div>
       </div>
