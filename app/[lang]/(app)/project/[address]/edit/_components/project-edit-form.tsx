@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -48,7 +47,7 @@ import { serverApi } from "@/lib/data/general";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, X } from "lucide-react";
 import * as z from "zod";
-import SelectGroupInScope from "../../create/select-group-in-scope";
+import SelectGroupInScope from "../../../create/select-group-in-scope";
 
 const projectFormSchema = z.object({
   name: z
@@ -571,17 +570,8 @@ export default function ProjectEditForm({
         />
 
         <div className="flex items-center justify-end gap-2">
-          <Link
-            href={`/project/${defaultValues?.id}`}
-            className="w-full max-w-[212px]"
-          >
-            <Button variant="secondary" type="reset" size="lg">
-              {lang.project.list.create_project.back}
-            </Button>
-          </Link>
           <Button
             type="submit"
-            size="lg"
             disabled={loading || !form.formState.isValid}
             loading={loading}
           >
