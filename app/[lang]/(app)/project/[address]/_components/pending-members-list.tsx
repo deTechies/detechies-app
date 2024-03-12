@@ -1,5 +1,6 @@
 import PendingMemberItem from "@/components/members/pending-member-item";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
+
 import { serverApi } from "@/lib/data/general";
 import React from 'react';
 
@@ -17,7 +18,7 @@ async function PendingMemberListComponent({
         <h4 className="text-subhead_s">{lang.project.details.waiting.title}</h4>
       </CardHeader>
 
-      <div className="flex flex-col gap-3">
+      <CardContent className="flex flex-col gap-3">
         {!!pendingMembers?.length &&
           pendingMembers.map((member: any, index: number) => (
             <PendingMemberItem
@@ -32,7 +33,7 @@ async function PendingMemberListComponent({
             {lang.project.details.waiting.no_people}
           </p>
         )}
-      </div>
+      </CardContent>
     </Card>
   );
 }

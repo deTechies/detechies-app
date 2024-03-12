@@ -42,8 +42,6 @@ export async function updateProject(data: any) {
     throw new Error("Failed to update project");
   }
 
-
-
   return response.json();
 }
 

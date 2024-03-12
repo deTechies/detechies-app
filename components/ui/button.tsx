@@ -21,7 +21,7 @@ const buttonVariants = cva(
         inactive: "text-text-secondary bg-background-layer-1",
       },
       size: {
-        default: "px-6 py-[17px] rounded-sm truncate text-sm ",
+        default: "px-4 py-[10px] rounded-sm truncate text-sm ",
         sm: "rounded-[6px] px-3 py-[10px] text-sm",
         md: "rounded-[6px] px-4 py-[13px] truncate",
         lg: "py-[17px] px-[24px] rounded-sm max-w-[212px] runcate",

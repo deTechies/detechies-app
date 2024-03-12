@@ -13,13 +13,14 @@ export default async function ProjectEditLayout({ children ,params: {lang} }: { 
       href: "#edit-profile",
     },
     {
+      name: "Sources",
+      href: "#sources",
+    },
+    {
       name: "Project Delete",
       href: "#freelance",
     },
-    {
-      name: "Social Connections",
-      href: "#socials",
-    },
+  
 
   ]
   return (
