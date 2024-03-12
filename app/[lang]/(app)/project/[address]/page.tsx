@@ -7,12 +7,11 @@ import AcceptInvitation from "./_components/accept-invitation";
 import PendingMemberList from "./_components/pending-members-list";
 
 import { serverApi } from "@/lib/data/general";
+import ContributorsCard from "./_components/dashboard/contributors-card";
 import GroupProject from "./_components/group-project";
 import PrivateProject from "./_components/private-project";
-import ProjectDependencies from "./_components/project-dependencies";
 import ProjectLanguages from "./_components/project-languages";
 import ProjectLinks from "./_components/project-links";
-import ProjectMembers from "./_components/project-members";
 import ProjectPackages from "./_components/project-packages";
 
 export default async function ProjectDetailPage({
@@ -76,24 +75,15 @@ export default async function ProjectDetailPage({
 
   return (
     <main className="grid w-full gap-6 px-4 md:grid-cols-3">
-      <section className="flex flex-col gap-5 truncate md:col-span-2">
-        <ProjectMembers
-          details={data}
-          projectId={params.address}
-          lang={dictionary}
-        />
-      </section>
 
-      <section className="flex flex-col gap-5 truncate">
         {data.languages && <ProjectLanguages languages={data.languages} />}
+        <ContributorsCard projectId={params.address} />
         {data.packages && <ProjectPackages packages={data.packages} />}
         <ProjectLinks details={data} lang={dictionary} />
-        <ProjectDependencies id={params.address} />
         {/* <ProjectEvaluation details={data} lang={dictionary} /> */}
         {data?.userRole === "admin" && (
           <PendingMemberList projectId={params.address} lang={dictionary} />
         )}
-      </section>
     </main>
   );
 }

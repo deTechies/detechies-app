@@ -13,7 +13,7 @@ export default async function ProjectMembers({
   const lang = await getDictionary(params.lang);
   const { data: details } = await serverApi(`/projects/${params.address}`);
   return (
-    <div className="flex flex-col gap-md mx-10 lg:mx-20">
+    <div className="flex flex-col gap-md">
       <PageHeader
         title="Project Members"
         subtitle={`These project members have contributed to the project .`}

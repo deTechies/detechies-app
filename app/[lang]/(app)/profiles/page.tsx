@@ -20,7 +20,6 @@ export default async function ProfilePage({
       <Suspense fallback={<ProfilesLoading />}>
         <div className="mx-10">
           <ListProfiles lang={dictionary} searchParams={searchParams} />
-          
         </div>
       </Suspense>
     </main>

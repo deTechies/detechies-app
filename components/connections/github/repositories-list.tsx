@@ -16,7 +16,7 @@ export const RepositoriesList = ({
   onImport,
   data,
 }: RepositoriesListProps) => (
-  <div className="max-w-xl p-2">
+  <div className=" p-2">
     {data && data.packages?.length == 0  && (
       <Command className="rounded-lg border shadow-md">
         <CommandInput placeholder="Type a command or search..." />

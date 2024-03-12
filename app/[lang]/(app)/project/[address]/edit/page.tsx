@@ -1,8 +1,10 @@
-import { Card } from "@/components/ui/card";
+
+import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
 import { getDictionary } from "@/get-dictionary";
 import { serverApi } from "@/lib/data/general";
-import DeleteProject from "./delete-project";
-import ProjectEditForm from "./project-edit-form";
+import DeleteProject from "./_components/delete-project";
+import EditProjectSource from "./_components/edit-project-source";
+import ProjectEditForm from "./_components/project-edit-form";
 export default async function ProjectEditPage({ params }: { params: any }) {
   //first get the whole project form.
 
@@ -10,22 +12,29 @@ export default async function ProjectEditPage({ params }: { params: any }) {
   const {data: projectData} = await serverApi(`/projects/${params.address}`);
 
   return (
-    <main className="w-full max-w-[60rem] mx-auto">
-      <Card className="gap-0 py-10 px-14">
-        <header className="flex flex-col mb-10">
-          <h4 className="mb-3 text-heading_s">
+    <main className="w-full mx-auto flex flex-col gap-md">
+      <Card id="project-settings">
+        <CardHeader>
+          <h4>
             {dictionary.project.list.edit_project}
           </h4>
-
-          <span className="mb-1 text-body_s text-state-error">
-            {dictionary.group.create.required_text}
-          </span>
-        </header>
-
+        </CardHeader>
+        <CardContent>
         <ProjectEditForm defaultValues={projectData} lang={dictionary} />
+        </CardContent>
       </Card>
-
-      <DeleteProject projectData={projectData} lang={dictionary} />
+    
+      <EditProjectSource projectId={params.address}/>
+      <Card>
+        <CardHeader>
+          <h4>
+            Project Deletion
+          </h4>
+        </CardHeader>
+        <CardContent>
+          <DeleteProject projectData={projectData} lang={dictionary} />
+        </CardContent>
+      </Card>
     </main>
   );
 }

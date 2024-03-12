@@ -21,10 +21,10 @@ const buttonVariants = cva(
         inactive: "text-text-secondary bg-background-layer-1",
       },
       size: {
-        default: "px-6 py-[17px] rounded-sm truncate text-sm ",
+        default: "px-4 py-[10px] rounded-sm truncate text-sm ",
         sm: "rounded-[6px] px-3 py-[10px] text-sm",
         md: "rounded-[6px] px-4 py-[13px] truncate",
-        lg: "py-[15.5px] px-4 rounded-full max-w-[212px] w-full grow truncate",
+        lg: "py-[17px] px-[24px] rounded-sm max-w-[212px] runcate",
         icon: "h-12 w-12 shrink-0 rounded-md p-2 truncate",
         icon_circle: "h-12 w-12 shrink-0 rounded-full p-2 truncate",
         image: "h-fit w-fit p-0 bg-transparent hover:shadow-none truncate",

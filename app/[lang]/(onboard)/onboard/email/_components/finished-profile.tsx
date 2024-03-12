@@ -2,7 +2,7 @@
 import IPFSImageLayer from "@/components/ui/layer";
 import { defaultAvatar } from "@/lib/constants";
 import { getUserProfile } from "@/lib/data/user";
-import { Building2, ChevronRight, SearchCheck, UserCircle } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,7 +55,7 @@ export default function FinishedProfile({ lang }: { lang: any }) {
       ),
       title: lang.onboard.verify_email.finished_profile.admin,
       description: lang.onboard.verify_email.finished_profile.admin_desc,
-      link: "/groups",
+      link: "/teams",
     },
   ];
 

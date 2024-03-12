@@ -17,6 +17,7 @@ export interface User {
   clubs: ClubMember[];
   projectsCount: number;
   clubsCount: number;
+  created_at: Date;
   achievementsCount: number;
   achievement_rewards: AchievementReward[];
   login_method: "metamask" | "web3auth";

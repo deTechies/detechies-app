@@ -6,23 +6,20 @@ export default async function MyUsedPackages({ user }: { user: any }) {
 
   packages.sort((a: any, b: any) => b.count - a.count);
   return (
-    <Card>
+    <Card className="max-h-[400px]">
       <CardHeader>Packages used</CardHeader>
-      <CardContent className="max-h-[300px] overflow-auto">
+      <CardContent className=" overflow-auto p-0">
         {packages.length > 0 ? (
-          <div className="flex flex-row gap-4 flex-wrap">
+          <div className="flex flex-col flex-wrap">
             {packages.map((pkg: any, index: number) => (
               <div
+                className="flex flex-row gap-1 py-4 px-8 border-b border-border-div w-full justify-between"
                 key={index}
-                className="flex flex-row items-center justify-evenly w-fit rounded-[6px] py-2 gap-2 bg-background-layer-2 px-4 p"
               >
-                <div className="flex flex-col gap-1">
-                  <span className="sm">{pkg.name}</span>
-                  <span className="text-blue-500 text-sm">
-                    {pkg.version}
-                  </span>
-                </div>
-              
+                <span className="sm">{pkg.name}</span>
+                <span className="text-blue-500 text-sm text-end">
+                  {pkg.version}
+                </span>
               </div>
             ))}
           </div>

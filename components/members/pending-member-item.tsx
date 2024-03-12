@@ -1,5 +1,6 @@
 "use client";
 import { postServer } from "@/lib/data/postRequest";
+import { formatDateToTimeAgo } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../ui/button";
@@ -52,38 +53,7 @@ export default function PendingMemberItem({
     //TODO: make sure that the data is only reloaded.
   }
 
-  //TODO: move this in a global util file do it can be used anywhere.
-  function formatInviteTime(inviteTimeStr: string, status: string) {
-    const inviteTime = new Date(inviteTimeStr);
-    const now = new Date();
-    const timeDiff = Number(now) - Number(inviteTime);
-
-    const minutes = Math.floor(timeDiff / 60000);
-    const hours = Math.floor(timeDiff / 3600000);
-    const days = Math.floor(timeDiff / 86400000);
-
-    if (status === "joined") {
-      if (minutes < 1) {
-        return lang.project.details.waiting.just_now_joined;
-      } else if (minutes < 60) {
-        return `${minutes} ${lang.project.details.waiting.min_ago_joined}`;
-      } else if (hours < 24) {
-        return `${hours} ${lang.project.details.waiting.hour_ago_joined}`;
-      } else {
-        return `${days} ${lang.project.details.waiting.day_aog_joined}`;
-      }
-    } else {
-      if (minutes < 1) {
-        return lang.project.details.waiting.just_now_invited;
-      } else if (minutes < 60) {
-        return `${minutes} ${lang.project.details.waiting.min_ago_invited}`;
-      } else if (hours < 24) {
-        return `${hours} ${lang.project.details.waiting.hour_ago_invited}`;
-      } else {
-        return `${days} ${lang.project.details.waiting.day_aog_invited}`;
-      }
-    }
-  }
+ 
 
   return (
     // <Dialog>
@@ -105,7 +75,7 @@ export default function PendingMemberItem({
               </div>
 
               <div className="text-text-secondary text-label_m">
-                {formatInviteTime(member.created_at, member.status)}
+                {formatDateToTimeAgo(member.created_at)}
               </div>
             </div>
 
