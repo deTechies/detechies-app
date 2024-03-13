@@ -4,7 +4,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { polygonMumbai } from "@/helpers/mumbai";
 import SessionProvider from "@/lib/SessionProvider";
 import PushProvider from "@/lib/usePushProtocol";
-import { Analytics } from "@vercel/analytics/react";
 import { Web3Auth } from "@web3auth/modal";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
@@ -117,7 +116,6 @@ export default function App({ children }: { children: any }) {
           <Toaster />
         </SessionProvider>
       </PushProvider>
-      <Analytics />
     </WagmiConfig>
   );
 }

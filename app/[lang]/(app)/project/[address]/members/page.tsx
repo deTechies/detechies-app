@@ -17,9 +17,7 @@ export default async function ProjectMembers({
       <PageHeader
         title="Project Members"
         subtitle={`These project members have contributed to the project .`}
-      >
-     
-      </PageHeader>
+      ></PageHeader>
       <ProjectMemberList projectId={params.address} lang={lang} />
     </div>
   );

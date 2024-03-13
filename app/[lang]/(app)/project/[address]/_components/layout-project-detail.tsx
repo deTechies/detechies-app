@@ -43,7 +43,7 @@ export default async function LayoutProjectDetail({
   ] as any;
 
   return (
-    <header className=" border-none rounded-t-none flex flex-col gap-10">
+    <header className=" border-none rounded-t-none flex flex-col gap-10 py-10">
       <div className="flex gap-md px-10 mx-10 lg:mx-20">
         <div className="w-[100px] h-[100px] rounded-[6px] flex items-center">
           <div className="md:w-[50px] aspect-square lg:w-[75px] mx-auto my-auto">
@@ -58,10 +58,6 @@ export default async function LayoutProjectDetail({
         <div className="flex justify-between w-full">
           <section className="flex flex-col gap-2 mt-2">
             <h2 className="text-lg font-medium">{project.name}</h2>
-
-            <span className="text-sm text-text-secondary max-w-[400px] max-h-[200px]">
-              {project.description}
-            </span>
             <dl className="flex gap-4 text-text-secondary text-label_m">
               <div className="flex gap-1 items-center">
                 <AsteriskIcon />
