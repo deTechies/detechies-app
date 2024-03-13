@@ -25,7 +25,9 @@ export const authOptions = {
       clientId: process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID ?? "",
       clientSecret:
         process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET ?? "bxJ6QsCRtBApPGcj",
-      authorization: { params: { scope: "profile email openid w_member_social" } },
+      authorization: {
+        params: { scope: "profile email openid w_member_social" },
+      },
       issuer: "https://www.linkedin.com",
       jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
       async profile(profile) {
@@ -55,7 +57,10 @@ export const authOptions = {
         const res = await fetch(`${API_URL}/users/auth`, {
           method: "POST",
           body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json", "x-api-key": "API_KEY" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": "API_KEY",
+          },
         });
 
         const user = await res.json();
@@ -119,23 +124,60 @@ export const authOptions = {
               expires: expirationTime,
               account: account,
               user: {
-                ...user, 
+                ...user,
                 name: user.firstname + " " + user.lastname,
-              }
+                display_name: user.name,
+              },
             };
             token.web3 = sessionData;
           case "github":
+            console.log(account.provider, account, user);
+            const userProfile = await fetch("https://api.github.com/user", {
+              headers: {
+                Authorization: `token ${account.access_token}`,
+              },
+            });
+
+            const userData = await userProfile.json();
+            console.log(userData);
             token[account.provider] = {
               id: account.providerAccountId,
               accessToken: account.access_token,
               expires: expirationTime,
               account: account,
-              user: user
+              user: {
+                ...user,
+                display_name: userData.login,
+                name: userData.login,
+                id: userData.login,
+              },
             };
             token.web3 = sessionData;
             break;
           case "twitter":
-            token.twitter = { user, account };
+            const response = await fetch(
+              `https://api.twitter.com/2/users/me`,
+              {
+                headers: {
+                  Authorization: `Bearer ${account.access_token}`,
+                },
+              }
+            );
+
+            const data = await response.json();
+            console.log(data)
+            const username = data?.data?.username ? data.data.username : "not gound"; // The user's username (handle)
+            console.log(user, account, token);
+            token[account.provider] = {
+              id: account.providerAccountId,
+              accessToken: account.access_token,
+              expires: expirationTime,
+              account: account,
+              user: {
+                ...user,
+                id: username,
+              },
+            };
             token.web3 = sessionData;
             break;
         }

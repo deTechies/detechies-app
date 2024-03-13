@@ -22,7 +22,7 @@ export default async function UserDashboard({ address }: { address?: any }) {
           <MyAbout userData={user} />
           <MyLanguagesCard address={user?.wallet} />
           <MyTagsCard tags={user?.profile_details?.skills} />
-          <MyConnections connections={user?.socials} />
+          <MyConnections address={user.wallet} />
         </div>
         <div className="flex flex-col gap-md grow">
           <div className="grid  lg:grid-cols-2 gap-md">

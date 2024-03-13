@@ -1,12 +1,13 @@
+import { Card, CardHeader } from "@/components/metronic/card/card";
 import { serverApi } from "@/lib/data/general";
 import ConnectionsList from "./connections";
 
-export default async function UsersSettings() {
+export default async function AddConnections() {
   const result = await serverApi("/socials/user/me");
   return (
-    <main>
-      <pre>{JSON.stringify(result, null, 2)}</pre>
+    <Card>
+      <CardHeader>Socials</CardHeader>
       <ConnectionsList connections={result.data} />
-    </main>
+    </Card>
   );
 }

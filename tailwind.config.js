@@ -139,7 +139,7 @@ module.exports = {
           "1rem",
           { 
             lineHeight: "1rem",
-            letterSpacing: "" 
+            letterSpacing: "0.15pxrem" 
           },
         ],
         heading_l: [

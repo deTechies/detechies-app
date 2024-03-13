@@ -3,9 +3,9 @@ import { Locale } from "@/i18n.config";
 
 import SideMenu from "@/components/metronic/menu/side-menu";
 import { getUserProfile } from "@/lib/data/user";
+import AddConnections from "./_components/add-connection";
 import EditProfileForm from "./_components/edit-profile-form";
 import FreelanceForm from "./_components/freelance-form";
-import ProfileAccounts from "./_components/profile-accounts";
 
 export default async function EditProfile({ params: {lang} }: { params: {lang: Locale }}) {
   const dictionary = await getDictionary(lang);
@@ -39,7 +39,7 @@ export default async function EditProfile({ params: {lang} }: { params: {lang: L
           lang={dictionary}
         />
         <FreelanceForm lang={dictionary} currentValues={profile.profile_details}/>
-        <ProfileAccounts lang={lang}/>
+        <AddConnections />
       </div>
     </div>
   );

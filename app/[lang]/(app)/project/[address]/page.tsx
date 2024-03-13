@@ -8,6 +8,7 @@ import PendingMemberList from "./_components/pending-members-list";
 
 import { serverApi } from "@/lib/data/general";
 import ContributorsCard from "./_components/dashboard/contributors-card";
+import ProjectDescription from "./_components/dashboard/project-description";
 import GroupProject from "./_components/group-project";
 import PrivateProject from "./_components/private-project";
 import ProjectLanguages from "./_components/project-languages";
@@ -75,7 +76,7 @@ export default async function ProjectDetailPage({
 
   return (
     <main className="grid w-full gap-6 px-4 md:grid-cols-3">
-
+        <div className="flex flex-col gap-md">
         {data.languages && <ProjectLanguages languages={data.languages} />}
         <ContributorsCard projectId={params.address} />
         {data.packages && <ProjectPackages packages={data.packages} />}
@@ -84,6 +85,12 @@ export default async function ProjectDetailPage({
         {data?.userRole === "admin" && (
           <PendingMemberList projectId={params.address} lang={dictionary} />
         )}
+        </div>
+        
+          <div className="col-span-2"> 
+        
+        <ProjectDescription description={data.description}  />
+        </div>
     </main>
   );
 }
