@@ -75,24 +75,22 @@ export default async function ProjectDetailPage({
     );
 
   return (
-    <main className="grid w-full gap-6 px-4 md:grid-cols-3">
+    <main className="grid w-full gap-6 px-4 grid-cols-1 md:grid-cols-3">
       <div className="flex flex-col gap-md">
         <ProjectLinks details={data} lang={dictionary} />
 
         <ContributorsCard projectId={params.address} />
-
+        <ProjectPackages projectId={params.address} />
         {/* <ProjectEvaluation details={data} lang={dictionary} /> */}
         {data?.userRole === "admin" && (
           <PendingMemberList projectId={params.address} lang={dictionary} />
         )}
       </div>
 
-      <div className="col-span-2 flex flex-col gap-md">
+      <div className="md:col-span-2 flex flex-col gap-md">
         <ProjectDescription description={data.description} />
-        <div className="flex gap-md flex-wrap">
-          <ProjectLanguages projectId={params.address} />
-          <ProjectPackages projectId={params.address} />
-        </div>
+
+        <ProjectLanguages projectId={params.address} />
       </div>
     </main>
   );

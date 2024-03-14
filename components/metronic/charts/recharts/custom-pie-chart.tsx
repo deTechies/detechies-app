@@ -24,7 +24,7 @@ const CustomPieChart = ({
   }));
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex flex-col md:flex-row gap-4 items-center">
       <ResponsiveContainer width="100%" height={200}>
         <PieChart>
           <Pie
