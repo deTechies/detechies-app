@@ -160,7 +160,7 @@ export const createUser = async (formData: FormData) => {
       body: JSON.stringify(formData),
     });
   } catch (err) {
-    console.log(err);
+    return;
   }
 };
 

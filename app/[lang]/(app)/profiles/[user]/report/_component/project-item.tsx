@@ -107,7 +107,6 @@ function CommonProjectItem({
   function onSelectProject() {
     const params = createQueryString("project", project.project.id);
 
-    // console.log("params", params);
 
     router.push(pathName + "?" + params);
   }

@@ -116,8 +116,7 @@ export const authOptions = {
         const sessionData = await getUserSession(); // Moved outside to avoid repetition
         switch (account.provider) {
           case "linkedin":
-            console.log(user);
-            console.log(account);
+
             token[account.provider] = {
               id: account.providerAccountId,
               accessToken: account.access_token,
@@ -131,7 +130,7 @@ export const authOptions = {
             };
             token.web3 = sessionData;
           case "github":
-            console.log(account.provider, account, user);
+
             const userProfile = await fetch("https://api.github.com/user", {
               headers: {
                 Authorization: `token ${account.access_token}`,
@@ -139,7 +138,6 @@ export const authOptions = {
             });
 
             const userData = await userProfile.json();
-            console.log(userData);
             token[account.provider] = {
               id: account.providerAccountId,
               accessToken: account.access_token,
@@ -165,9 +163,8 @@ export const authOptions = {
             );
 
             const data = await response.json();
-            console.log(data)
             const username = data?.data?.username ? data.data.username : "not gound"; // The user's username (handle)
-            console.log(user, account, token);
+
             token[account.provider] = {
               id: account.providerAccountId,
               accessToken: account.access_token,

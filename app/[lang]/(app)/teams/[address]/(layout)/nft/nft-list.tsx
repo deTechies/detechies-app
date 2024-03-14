@@ -15,7 +15,7 @@ export default function NftList({
   achievements: Achievement[];
   userAchievements?: string[];
   useTab?: boolean;
-  limit?: number,
+  limit?: number;
   lang: any;
 }) {
   const TAB_BUTTONS = {
@@ -31,15 +31,15 @@ export default function NftList({
   useEffect(() => {
     let filtered = achievements;
 
-    if (currentTab === TAB_BUTTONS.CAREER) {
+    if (currentTab === "career") {
       filtered = filtered.filter(
         (achievement) => achievement.nft_type == NFT_TYPE.SBT
       );
-    } else if (currentTab === TAB_BUTTONS.LIMITED) {
+    } else if (currentTab === "limited") {
       filtered = filtered.filter(
         (achievement) => achievement.nft_type == NFT_TYPE.ERC721
       );
-    } else if (currentTab === TAB_BUTTONS.AVATAR) {
+    } else if (currentTab === "avatar") {
       filtered = filtered.filter((achievement) => achievement.avatar);
     }
 
@@ -49,7 +49,7 @@ export default function NftList({
     );
 
     setNftList(sorted);
-  }, [achievements, userAchievements, currentTab]);
+  }, [achievements, userAchievements, currentTab, lang]);
 
   return (
     <>
@@ -71,15 +71,17 @@ export default function NftList({
 
       <div className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {nftList &&
-          nftList.slice(0, limit).map((achievement: Achievement, index: number) => (
-            <DisplayNFT
-              details={achievement}
-              key={index}
-              lang={lang}
-              showMintButton={true}
-              blockRequest={userAchievements?.includes(achievement.id)}
-            />
-          ))}
+          nftList
+            .slice(0, limit)
+            .map((achievement: Achievement, index: number) => (
+              <DisplayNFT
+                details={achievement}
+                key={index}
+                lang={lang}
+                showMintButton={true}
+                blockRequest={userAchievements?.includes(achievement.id)}
+              />
+            ))}
       </div>
 
       {nftList.length < 1 && (

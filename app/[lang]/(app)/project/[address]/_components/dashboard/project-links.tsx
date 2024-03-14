@@ -3,7 +3,9 @@ import UploadWorks from "@/components/modal/upload-works";
 import { serverApi } from "@/lib/data/general";
 import { Project } from "@/lib/interfaces";
 
+import ImportGithubData from "@/components/connections/github/import-github-data";
 import { Github } from "detechies-icons";
+import { VerifiedIcon } from "lucide-react";
 import Link from "next/link";
 import Links from "../links";
 
@@ -45,9 +47,19 @@ export default async function ProjectLinks({
               <div className="rounded-full h-8 w-8 bg-background-layer-2 flex items-center justify-center">
                 <Github color="#FFF" fontSize={24} />
               </div>
-              <Link href={`https://github.com/${source.platform_id}`} className="text-sm" target="_blank">
+              <Link
+                href={`https://github.com/${source.platform_id}`}
+                className="text-sm"
+                target="_blank"
+              >
                 {source.platform_id}
               </Link>
+
+              {source.contributors && source.contributors?.length > 0 ? (
+                <VerifiedIcon className="text-state-success" size="24" />
+              ) : (
+                <ImportGithubData sourceId={source.id} repoName={source.platform_id} />
+              )}
             </div>
           ))}
       </CardContent>

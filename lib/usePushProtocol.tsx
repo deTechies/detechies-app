@@ -21,7 +21,7 @@ export default function PushProvider({ children }: { children: any }) {
 
 
   const initializeUser = useCallback(async () => {
-    console.log("initializing user");
+
     if(!signer) return;
     try {
 
@@ -31,7 +31,7 @@ export default function PushProvider({ children }: { children: any }) {
 
       setUser(initializedUser);
     } catch(err) {
-      console.log(err);
+      return;
     }
   }, [signer]);
 

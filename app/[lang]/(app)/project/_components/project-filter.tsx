@@ -69,6 +69,21 @@ export default function ProjectFilter({ lang }: { lang: any }) {
 
     router.replace(`${pathname}${query}`);
   };
+  
+  const onChangeSource = (_has_source: boolean) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+
+    if (_has_source) {
+      current.set("sources", "true");
+    } else {
+      current.delete("sources");
+    }
+
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+
+    router.replace(`${pathname}${query}`);
+  };
 
   return (
     <div className="bg-background-layer-1 flex justify-between gap-5 px-8 pb-8 pt-7">
@@ -135,6 +150,13 @@ export default function ProjectFilter({ lang }: { lang: any }) {
 
               <Label className="text-title_m">
                 {lang.project.list.my_project}
+              </Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <Checkbox onCheckedChange={onChangeSource} />
+
+              <Label className="text-title_m">
+                Source Code
               </Label>
             </div>
           </div>

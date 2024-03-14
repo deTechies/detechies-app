@@ -61,7 +61,7 @@ export default function InviteGroupMember({
     };
 
     fetchData();
-  }, [text]);
+  }, [text, searchParams, groupMembers, array_member_id]);
 
   const onClickGoManage = () => {
     setTimeout(() => {

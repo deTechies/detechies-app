@@ -14,7 +14,7 @@ export default function PendingReputation({ item }: any) {
             status: "accepted"
         })
         const result = await postServer(`/survey-access/grantReportAccess`, body);
-        console.log(result);
+
         toast({
             description: "You have accepted the request",
         })

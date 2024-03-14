@@ -83,10 +83,8 @@ export function PreviewSurvey({ selected, setSelected }: any) {
                       } */
 
                   if (existingTranslation && existingTranslation.messages) {
-                    console.log(existingTranslation.messages)
                     //defaultValues.messages = existingTranslation.messages[0].split(",");
                     //defaultValues.messages = existingTranslation.messages[0];
-                    //console.log(defaultValues.messages)
                   }
 
 

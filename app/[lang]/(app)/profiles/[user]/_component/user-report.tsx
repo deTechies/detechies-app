@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -11,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { postServer } from "@/lib/data/postRequest";
-import { Project } from "@/lib/interfaces";
 import { beginEndDates } from "@/lib/utils";
 import { ScrollText } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -39,7 +37,6 @@ export default function UserReport({
       ""
     );
 
-    console.log(result);
 
     toast({
       description: text.profile.report_popup.toast

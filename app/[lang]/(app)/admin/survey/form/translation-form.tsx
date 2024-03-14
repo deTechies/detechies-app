@@ -23,7 +23,6 @@ const TranslationForm = ({
   });
 
   const onFormSubmit = (data: any) => {
-    console.log("Form Data:", data); // Log the raw form data
     const formattedData = {
       content: data.content,
       category: data.category,

@@ -35,7 +35,7 @@ export default function ConnectCard({
   const [isPublic, setIsPublic] = useState(verified ? verified.public : false);
 
   async function verifyMe() {
-    console.log("verifyMe");
+
 
     const postData = JSON.stringify({
       social: item.connection,

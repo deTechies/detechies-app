@@ -26,7 +26,7 @@ export default function ProfileDetails({
     if (searchParams.get("updated") === "true") {
       router.refresh();
     }
-  }, []);
+  }, [router, searchParams]);
 
   return (
     <Card className="pt-[28px] px-9 pb-[36px] gap-[20px]">

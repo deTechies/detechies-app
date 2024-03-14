@@ -17,7 +17,6 @@ export default async function ProjectMemberEvaluation({
   const result = await serverApi(`/survey-response/surveyByWork/${params.id}`);
   const dictionary = await getDictionary(params.lang);
 
-  console.log(result)
   const details = result.data;
   
   if (!result) {

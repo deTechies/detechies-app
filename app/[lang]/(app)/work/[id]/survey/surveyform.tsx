@@ -54,7 +54,7 @@ export function SurveyForm({
     form.trigger().then((isValid) => {
       setIsValid(isValid);
     });
-  }, [JSON.stringify(allFields)]);
+  }, [allFields, form]);
 
   //setting default values
 

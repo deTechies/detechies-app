@@ -28,7 +28,6 @@ export default async function ProjectEvaluationByGroups({
   );
 
 
-  console.log(rewardedAchievements);
 
   return (
     <Card className="flex flex-col px-6 pt-6 gap-7 pb-7">

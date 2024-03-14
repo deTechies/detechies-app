@@ -3,10 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
@@ -28,6 +28,11 @@ export default function ImportGithubData({
   const [repoData, setRepoData] = useState<any>();
 
   const fetchDependencies = async () => {
+    if(repoName.startsWith("/" )){
+      //then remove the first character from the string
+      
+      repoName = repoName.substring(1);
+    }
     const owner = repoName.split("/")[0];
     const repo = repoName.split("/")[1];
     try {
@@ -48,7 +53,7 @@ export default function ImportGithubData({
         toast({ title: "Error", description: "No dependencies found" });
         return;
       }
-      console.log(repoDetails);
+
 
       setRepoData(repoDetails.data);
     } catch (error: any) {
