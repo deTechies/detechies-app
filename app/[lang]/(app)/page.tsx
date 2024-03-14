@@ -13,7 +13,7 @@ export default async function ProfileDashboard({
   params: { lang: Locale };
 }) {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 mx-2 md:mx-10 lg:mx-20">
       <div>
       <Suspense fallback={<LoadingProfileCard />}>
           <ProfilePageCard lang={params.lang} />

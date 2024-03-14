@@ -9,8 +9,8 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
   
   return (
     <div className="flex flex-col gap-10">
-    <header className=" w-full gap-2 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
-      <div className="flex flex-col gap-3.5 mx-auto  py-10">
+    <header className="w-full py-10 gap-2 justify-center text-center bg-center bg-[url('/images/header-hex.png')]  ">
+      <div className="flex flex-col gap-3.5 mx-auto">
         <div className="mx-auto">
           <Avatar
             src={addURL(profile.avatar_link)}

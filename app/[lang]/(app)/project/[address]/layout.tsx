@@ -15,7 +15,7 @@ export default function ProjectDetailLayout({
       <Suspense fallback={<LayoutProjectDetailLoading />}>
         <LayoutProjectDetail projectId={params.address} />
       </Suspense>
-      <div className="mx-10 lg:mx-20">
+      <div className="mx-2 sm:mx-5 md:mx-10 lg:mx-20">
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
       </div>
     </div>

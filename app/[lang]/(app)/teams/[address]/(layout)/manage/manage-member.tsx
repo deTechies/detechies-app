@@ -4,7 +4,7 @@ import PendingMemberListItem from "@/components/group/pending-member-list-item";
 
 import MemberCard from "@/components/card/member-card";
 import Search from "@/components/extra/search";
-import { getPendingMembers } from "@/lib/data/groups";
+import { serverApi } from "@/lib/data/general";
 import { ClubMember } from "@/lib/interfaces";
 
 export default async function ManageMember({
@@ -16,7 +16,7 @@ export default async function ManageMember({
   searchParams: { [key: string]: string | string[] | undefined };
   lang: any;
 }) {
-  const { data: pendingData } = await getPendingMembers(details.id);
+  const { data: pendingData } = await serverApi(`members/invites/${details.id}`);
 
   const searchItem = searchParams.search as string;
 
@@ -62,7 +62,7 @@ export default async function ManageMember({
                 key={index}
                 contract={details.id}
                 lang={lang}
-              ></PendingMemberListItem>
+                />
             );
           })
         ) : (
@@ -95,7 +95,7 @@ export default async function ManageMember({
                 key={index}
                 contract={details.id}
                 lang={lang}
-              ></InvitingMemberListItem>
+                />
             );
           })
         ) : (

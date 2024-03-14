@@ -11,7 +11,7 @@ export default async function MyDashboard({
 }) {
 
   return (
-    <main className="flex flex-col gap-6 ">
+    <main className="flex flex-col ">
       <Suspense fallback={"loading projects"}>
         <UserDashboard />
       </Suspense>
