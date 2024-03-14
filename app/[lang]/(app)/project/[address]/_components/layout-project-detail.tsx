@@ -5,6 +5,7 @@ import { AsteriskIcon, TimerIcon } from "lucide-react";
 import InviteProjectMember from "@/components/invite-project-member/invite-project-member";
 import JoinProject from "@/components/project/join-project";
 import { getDictionary } from "@/get-dictionary";
+import { auth } from "@/lib/helpers/authOptions";
 import Image from "next/image";
 import ProfileTabs from "../../../mypage/_components/profile-page-card/profile-tabs";
 
@@ -15,6 +16,7 @@ export default async function LayoutProjectDetail({
 }) {
   const { data: project } = await serverApi(`/projects/${projectId}`);
   const lang = await getDictionary("en");
+  const session = await auth();
 
   const groupList = project.members.map((member: any) => {
     return {
@@ -35,12 +37,15 @@ export default async function LayoutProjectDetail({
       href: `members`,
       isAdmin: false,
     },
-    {
-      name: "Settings",
-      href: "edit",
-      isAdmin: false,
-    },
   ] as any;
+  
+  if(project.owner === session?.web3.address) {
+    links.push({
+      name: "settings",
+      href: `settings`,
+      isAdmin: true,
+    });
+  }
 
   return (
     <header className=" border-none rounded-t-none flex flex-col gap-10 py-10">
