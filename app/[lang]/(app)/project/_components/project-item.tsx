@@ -20,7 +20,7 @@ export default function ProjectItem({
     <Link href={`/project/${details.id}`} className="hover:border-state-info ">
       <Card className="flex flex-row items-start w-full p-5 gap-5">
         <div className="flex flex-col gap-3 ">
-          <figure className="overflow-hidden shrink-0 relative object-scale-down w-[100px] h-[100px] rounded-sm aspect-square flex justify-center items-center">
+          <figure className="overflow-hidden shrink-0 relative object-scale-down w-[90px] h-[90px] rounded-sm aspect-square flex justify-center items-center">
             <Image
               src={`https://ipfs.io/ipfs/${details.image}`}
               alt={`Project ${details.name}`}
@@ -38,7 +38,7 @@ export default function ProjectItem({
               {lang.interface.privacy_type.group}
             </Badge>
           ) : (
-            <Badge className="text-center bg-state-success mx-auto">Public</Badge>
+            <Badge className="text-label_s  bg-state-success mx-auto">Public</Badge>
           )}
         </div>
 
@@ -60,14 +60,14 @@ export default function ProjectItem({
             ></span>
           </div>
 
-          <div className="flex flex-wrap gap-3 justify-self-end">
+          <div className="flex overflow-scroll gap-3 justify-self-end">
             {details.tags &&
               details.tags?.map((tag) => (
                 <Badge
                   key={tag}
                   shape="outline"
                   variant="placeholder"
-                  className="text-label_s"
+                  className="text-label_s rounded-sm"
                 >
                   {tag}
                 </Badge>
@@ -77,7 +77,7 @@ export default function ProjectItem({
               <Badge
                 shape="outline"
                 variant="placeholder"
-                className="text-label_s"
+                className="text-label_s rounded-sm"
               >
                 No Category
               </Badge>

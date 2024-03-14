@@ -86,7 +86,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
   };
 
   return (
-    <div className="bg-background-layer-1 flex justify-between gap-5 px-8 pb-8 pt-7">
+    <div className="bg-background-layer-1 flex flex-wrap justify-between gap-5 px-8 pb-8 pt-7">
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
           <div className="flex flex-wrap items-center gap-5 grow">
@@ -163,7 +163,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
         )}
       </div>
       <Link href="/project/create">
-          <Button variant="primary" size="sm">Add project</Button>
+          <Button size="sm">Add project</Button>
         </Link>
     </div>
   );

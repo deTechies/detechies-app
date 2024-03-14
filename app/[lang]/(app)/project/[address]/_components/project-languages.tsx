@@ -11,7 +11,7 @@ export default async function ProjectLanguages({projectId}: {
   const {data: projectLanguages} = await serverApi(`/project-sources/${projectId}/languages`)
 
   return (
-    <Card className="min-w-[400px]">
+    <Card className="">
         <CardHeader>
             Languages
         </CardHeader>
