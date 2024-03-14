@@ -14,7 +14,7 @@ export default function ProfileTabs({
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-row bg-background-layer-2  justify-between  mx-10 lg:mx-20  overflow-x-auto items-start border-b border-b-border-div ">
+    <div className="flex flex-row bg-background-layer-2  justify-between md:px-10 px-2 overflow-x-auto items-start border-b border-b-border-div ">
       <div className="flex flex-row gap-2.5 pt-[14px] ">
         {links.map((link: any, index: number) => {
           return (

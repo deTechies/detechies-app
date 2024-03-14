@@ -4,10 +4,10 @@ import { serverApi } from "@/lib/data/general";
 
 import JoinGroup from "@/components/group/join-group";
 import InviteGroupMember from "@/components/invite-group-member/invite-group-member";
-import Avatar from "@/components/metronic/avatar/avatar";
 import { Button } from "@/components/ui/button";
 import { addURL } from "@/lib/utils";
 import { Briefcase, Folder, MapPin } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import ProfileTabs from "../../../mypage/_components/profile-page-card/profile-tabs";
 
@@ -50,12 +50,14 @@ export default async function GroupProfileCard({
     <div className="">
       <header className=" w-full gap-10 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
       <div className="flex flex-col gap-3.5 mx-auto  py-10">
-          <div className="mx-auto">
-            <Avatar
+
+          <div className="mx-auto h-[100px] w-[100px] rounded-full relative border-2 border-accent-primary  bg-background-layer-2">
+            <Image
               src={addURL(teamDetails.image)}
-              shape="rounded"
-              className="border-2 border-accent-primary"
-              size={32}
+              sizes={"32"}
+              alt="teams_picture"
+              className="p-4 rounded-full"
+              fill
             />
           </div>
 

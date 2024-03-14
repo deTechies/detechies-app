@@ -75,7 +75,7 @@ export default async function ProjectDetailPage({
     );
 
   return (
-    <main className="grid w-full gap-6 px-4 grid-cols-1 md:grid-cols-3">
+    <main className="grid w-full gap-6 grid-cols-1 md:grid-cols-3">
       <div className="flex flex-col gap-md">
         <ProjectLinks details={data} lang={dictionary} />
 

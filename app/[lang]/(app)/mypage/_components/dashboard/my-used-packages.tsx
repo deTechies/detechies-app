@@ -1,10 +1,12 @@
 import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
+import EmptyState from "@/components/metronic/custom/empty-state";
 import { serverApi } from "@/lib/data/general";
 
 export default async function MyUsedPackages({ user }: { user: any }) {
   const { data: packages } = await serverApi(`/users/${user}/packages`);
 
   packages.sort((a: any, b: any) => b.count - a.count);
+
   return (
     <Card className="max-h-[400px]">
       <CardHeader>Packages used</CardHeader>
@@ -24,7 +26,9 @@ export default async function MyUsedPackages({ user }: { user: any }) {
             ))}
           </div>
         ) : (
-          <p>No packages</p>
+          <div className="m-4">
+            <EmptyState title="No Packages" subtitle="No packages were found" />
+          </div>
         )}
       </CardContent>
     </Card>
