@@ -21,8 +21,8 @@ export default async function ContributorsCard({
           projectSources.map((contributor: any, index: number) => {
             return (
               <div key={index} className="flex flex-row items-center border-b border-border-div first:border-t justify-between py-4 px-8">
-                <p>{contributor.username}</p>
-                <span className="text-text-secondary">{contributor.totalCommits}</span>
+                <p>{contributor?.username}</p>
+                <span className="text-text-secondary">{contributor?.commits}</span>
               </div>
             );
           })}
