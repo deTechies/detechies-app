@@ -9,10 +9,10 @@ import PendingMemberList from "./_components/pending-members-list";
 import { serverApi } from "@/lib/data/general";
 import ContributorsCard from "./_components/dashboard/contributors-card";
 import ProjectDescription from "./_components/dashboard/project-description";
+import ProjectLinks from "./_components/dashboard/project-links";
 import GroupProject from "./_components/group-project";
 import PrivateProject from "./_components/private-project";
 import ProjectLanguages from "./_components/project-languages";
-import ProjectLinks from "./_components/project-links";
 import ProjectPackages from "./_components/project-packages";
 
 export default async function ProjectDetailPage({

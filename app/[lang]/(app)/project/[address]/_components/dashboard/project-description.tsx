@@ -10,7 +10,7 @@ export default function ProjectDescription({
         <CardHeader>
             Project Description
         </CardHeader>
-        <CardContent>
+        <CardContent className="text-sm flex-wrap leading-6">
             {description ? description : "No description available"}
         </CardContent>
     </Card>
