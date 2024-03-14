@@ -88,7 +88,6 @@ export default function UploadWorks({
 
     const result = await postServer(`/projects/${projectId}/add-link`, body);
 
-    console.log(result);
 
     if (!result) {
       toast({

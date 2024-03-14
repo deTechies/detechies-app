@@ -107,7 +107,6 @@ export const CreateTeamForm = () => {
       onRequestedCreate(true);
     } else {
       if (!result.ok) {
-        console.log("Message code: ", result.messageCode);
         if (result.messageCode === "group_name_already_exists") {
           toast({
             description: groupNameTakenDescription,

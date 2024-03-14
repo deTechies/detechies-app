@@ -29,7 +29,6 @@ export default async function ProfileProjects({
   }
   const { data: projects } = await serverApi(`/projects`, newUrl.toString());
   
-  console.log(projects);
   return (
     <div className="flex flex-col gap-3">
       <PageHeader title={`${text?.projects} (${projects.totalCount})`}>

@@ -44,7 +44,6 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
   useEffect(() => {
     const fetchChat = async (newChat: string) => {
       
-      console.log("chatter");
       if(!chatter.user) {
         chatter.initializeUser();
         return;

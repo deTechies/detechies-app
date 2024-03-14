@@ -10,7 +10,6 @@ import { PreviewSurvey } from "./preview-survey";
 export default function ListSurveys({ survey }: { survey: Survey[] }) {
   const [selected, setSelected] = useState<any>(null);
   
-  console.log(survey)
 
   if (selected)
     return <PreviewSurvey selected={selected} setSelected={setSelected} />;

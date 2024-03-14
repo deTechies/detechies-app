@@ -15,7 +15,6 @@ export default async function EvaluationProvided({
 
   const { data } = await serverApi(`/survey-response/filtered?${filters}`);
 
-  // console.log(data);
   const stats = [
     {
       title: lang.mypage.evaluations.stats.total_reviews,

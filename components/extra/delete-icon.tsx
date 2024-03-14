@@ -24,7 +24,7 @@ export default function DeleteIcon({ url }: { url: string }) {
       return;
     }
     
-    console.log(result);
+
     
     
     

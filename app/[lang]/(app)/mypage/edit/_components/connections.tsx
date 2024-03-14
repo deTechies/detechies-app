@@ -32,7 +32,6 @@ export default async function ConnectionsList({
 
   const session = (await auth()) as Session;
 
-  console.log(connections);
 
   // we want to check if the session contains web3.[network] and if it does, we want to set the connected and verified to true
   // we also want to check if the session contains github or twitter and if it does, we want to set the connected and verified to true
@@ -42,7 +41,6 @@ export default async function ConnectionsList({
       (conn: any) =>
         conn.social === network && conn.display_name === display_name
     );
-    console.log(connection);
     return connection;
   };
 

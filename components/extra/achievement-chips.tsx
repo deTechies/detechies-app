@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { Achievement, NFT_TYPE, SBT_TYPE } from "@/lib/interfaces";
 import { useDictionary } from "@/lib/dictionaryProvider";
+import { Achievement, NFT_TYPE, SBT_TYPE } from "@/lib/interfaces";
 
 import { Badge } from "@/components/ui/badge";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Card } from "@/components/ui/card";
 
 export default function AchievementChips({
   achievements,
@@ -79,7 +73,7 @@ export default function AchievementChips({
     });
 
     setChips(chipsArray);
-  }, [achievements]);
+  }, [achievements, lang, limit, truncate]);
 
   return (
     <div className="flex gap-2">

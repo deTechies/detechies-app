@@ -63,7 +63,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
     if (connector?.id == "web3auth") {
       const getInfo = async () => {
         const result = await web3AuthInstance?.getUserInfo();
-        console.log(result);
+
 
         if (result?.email) {
           form.setValue("email", result.email);
@@ -77,7 +77,7 @@ export default function CreateProfile({ lang }: { lang: any }) {
 
   async function sendVerification(data: ProfileFormValues) {
     setIsLoading(true);
-    console.log(session);
+
     if (!session?.web3?.user?.wallet) {
       toast({
         title: "Error",

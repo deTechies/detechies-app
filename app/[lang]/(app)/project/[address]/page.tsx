@@ -10,10 +10,10 @@ import { serverApi } from "@/lib/data/general";
 import ContributorsCard from "./_components/dashboard/contributors-card";
 import ProjectDescription from "./_components/dashboard/project-description";
 import ProjectLinks from "./_components/dashboard/project-links";
+import ProjectPackages from "./_components/dashboard/project-packages";
 import GroupProject from "./_components/group-project";
 import PrivateProject from "./_components/private-project";
 import ProjectLanguages from "./_components/project-languages";
-import ProjectPackages from "./_components/project-packages";
 
 export default async function ProjectDetailPage({
   params,
@@ -76,21 +76,24 @@ export default async function ProjectDetailPage({
 
   return (
     <main className="grid w-full gap-6 px-4 md:grid-cols-3">
-        <div className="flex flex-col gap-md">
-        {data.languages && <ProjectLanguages languages={data.languages} />}
-        <ContributorsCard projectId={params.address} />
-        {data.packages && <ProjectPackages packages={data.packages} />}
+      <div className="flex flex-col gap-md">
         <ProjectLinks details={data} lang={dictionary} />
+
+        <ContributorsCard projectId={params.address} />
+
         {/* <ProjectEvaluation details={data} lang={dictionary} /> */}
         {data?.userRole === "admin" && (
           <PendingMemberList projectId={params.address} lang={dictionary} />
         )}
+      </div>
+
+      <div className="col-span-2 flex flex-col gap-md">
+        <ProjectDescription description={data.description} />
+        <div className="flex gap-md flex-wrap">
+          <ProjectLanguages projectId={params.address} />
+          <ProjectPackages projectId={params.address} />
         </div>
-        
-          <div className="col-span-2"> 
-        
-        <ProjectDescription description={data.description}  />
-        </div>
+      </div>
     </main>
   );
 }

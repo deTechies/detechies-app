@@ -52,7 +52,6 @@ export async function postServer(endpoint: string, body?: string, lang?: any) {
       variant: "destructive",
     });
 
-    console.log(result);
     return;
   } else {
     toast({
@@ -113,7 +112,6 @@ export async function patchServer(endpoint: string, body?: string, lang?: any) {
       variant: "destructive",
     });
 
-    console.log(result);
     return;
   } else {
     toast({
@@ -169,7 +167,6 @@ export async function deleteServer(endpoint: string) {
       variant: "destructive",
     });
 
-    console.log(result);
     return;
   } else {
     toast({

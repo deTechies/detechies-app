@@ -62,7 +62,7 @@ const GithubDependencies = ({projectId}: {projectId:string}) => {
         toast({ title: "Error", description: "No dependencies found" });
         return;
       }
-      console.log(repoDetails);
+
 
       setDependencies(repoDetails.data);
     } catch (error: any) {
