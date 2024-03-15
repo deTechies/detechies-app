@@ -189,7 +189,7 @@ export default function AccountSettings({ showModal, text_my_account }: IAccount
               </SelectContent>
             </Select>
 
-            <ThemeToggle text={text_my_account.theme}/>
+            <ThemeToggle/>
           </div>
           {/* Buttons at the bottom  */}
           <div className="grid grid-cols-2 gap-4 mt-[12px]">
