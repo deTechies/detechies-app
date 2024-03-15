@@ -27,7 +27,7 @@ export default async function EditProfile({ params: {lang} }: { params: {lang: L
 
   ]
   return (
-    <div className="flex flex-row gap-5">
+    <div className="flex flex-col md:flex-row gap-5">
       <div className="w-[320px] shrink-0 ">
         <SideMenu links={sidelinks} />
       </div>

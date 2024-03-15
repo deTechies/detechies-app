@@ -27,13 +27,12 @@ export default function Navbar({ lang }: { lang: any }) {
       name: lang.teams,
       href: `/${params.lang}/teams`,
     },
-    
+
     {
       name: lang.project,
       href: `/${params.lang}/project`,
     },
   ];
-
 
   //here we can check if the user is onboarded or not if not, we redirect it to the onboarding page.
 
@@ -41,14 +40,13 @@ export default function Navbar({ lang }: { lang: any }) {
     <Disclosure as="nav" className="z-10 mx-auto">
       {({ open }) => (
         <>
-          <div className="px-6 lg:px-8 max-w-[1920px] mx-auto relative">
-            <div className="flex justify-between items-center py-5  px-2 md:px-4 lg:px-10">
-              <div className="flex gap-4 items-center">
-                <div className="flex flex-shrink-0 items-center h-[32px] w-[32px] relative flex-wrap cursor-pointer my-auto mr-6">
+          <div className="px-6 lg:px-8 max-w-[1920px] mx-auto relative ">
+            <div className="flex flex-row justify-between items-center py-5  px-2 md:px-4 lg:px-10">
+              <div className="flex flex-row gap-4 items-center">
+                <div className="flex flex-shrink-0 items-center h-[32px] w-[32px] relative flex-wrap cursor-pointer my-auto">
                   <Image
-                    className="block object-contain "
                     src="/images/detechies.png"
-                    alt="Connectfast"
+                    alt="detechies_logo"
                     width={32}
                     height={32}
                     onClick={() => {
@@ -58,7 +56,7 @@ export default function Navbar({ lang }: { lang: any }) {
                   />
                 </div>
 
-                <div className="gap-2 absolute hidden ml-16 sm:flex sm:gap-4 md:gap-2 ">
+                <div className="gap-2 hidden sm:flex sm:gap-4 md:gap-2 ">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   {links.map((link: any, index: number) => (
                     <Link

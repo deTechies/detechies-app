@@ -30,7 +30,7 @@ const badgeVariants = cva("flex flex-row items-center", {
     shape: {
       default:
         "rounded-[6px] p-2 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-      md: "py-2 px-2.5 rounded-md text-title_s",
+      md: "py-2 px-2.5 rounded-md text-sm",
       sm: "py-2 px-2.5 rounded-md text-label_s",
       category:
         "py-1.5 px-2.5 rounded-[5px] bg-background-layer-2 text-title_s",

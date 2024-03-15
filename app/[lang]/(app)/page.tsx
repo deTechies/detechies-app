@@ -1,11 +1,9 @@
 import { Locale } from "@/i18n.config";
-import Dashboard from "./mypage/page";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 
-import LoadingProfileCard from "./mypage/_components/loading/loading-profile-card";
-import ProfilePageCard from "./mypage/_components/profile-page-card";
+import Searchbar from "@/components/extra/search-bar";
 
 export default async function ProfileDashboard({
   params,
@@ -13,22 +11,15 @@ export default async function ProfileDashboard({
   params: { lang: Locale };
 }) {
   return (
-    <div className="flex flex-col gap-10 mx-2 md:mx-10 lg:mx-20">
-      <div>
-      <Suspense fallback={<LoadingProfileCard />}>
-          <ProfilePageCard lang={params.lang} />
-        </Suspense>
-      </div>
-      <div className="flex flex-col sm:flex-row gap-10" >
+    <div className="flex flex-col gap-10 m-2 md:m-10 lg:m-20">
       <Suspense
         fallback={
           <Skeleton className="h-24 grow shrink animate-pulse bg-background-layer-1" />
         }
       >
-          <Dashboard params={params} />
+        <Searchbar placeholder="Start search for projects, profile or users" className="rounded-full bg-background-layer-1 "/>
 
       </Suspense>
-      </div>
     </div>
   );
 }

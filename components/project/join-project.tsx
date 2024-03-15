@@ -114,7 +114,7 @@ export default function JoinProject({ address, lang }: JoinGroupProps) {
   return (
     <Dialog>
       <DialogTrigger className="max-w-[212px] w-full">
-        <Button variant="primary" size="md" className="px-5">
+        <Button variant="primary" className="px-5">
           {lang.project.details.join_project.button}
         </Button>
       </DialogTrigger>

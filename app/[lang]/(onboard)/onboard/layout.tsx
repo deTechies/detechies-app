@@ -9,9 +9,10 @@ import Loading from "../../(app)/loading";
 import App from "../../app";
 
 export const metadata: Metadata = {
-  title: "deTechies - Build you career profile and grow with valuable insights",
+  title: "deTechies | Developers Profiles",
   description:
-    "We help you build your career profile and grow your personal career and network",
+    "We help developers distinquish themselves and flourish the future with the latest tech",
+  keywords: "developers, freelancers, profiles, tech, software, web, mobile, blockchain, projects, achievements, edutech",
 };
 
 export default async function RootLayout({
