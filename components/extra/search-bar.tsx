@@ -29,7 +29,6 @@ export default function Searchbar({
 
   async function performSearch() {
 
-    // params 객체를 인덱스 시그니처를 가진 형태로 정의합니다.
     const params: { [key: string]: string } = {};
     searchParams.forEach((value, key) => {
       if (key !== "search" && key !== "limit") {
@@ -46,10 +45,9 @@ export default function Searchbar({
   }
 
   return (
-    <div className="flex flex-row rounded-full flex-grow items-center gap-4 px-8 bg-background-layer-1 justify-between min-w-full max-w-2xl mx-auto">
+    <div className="flex flex-row rounded-sm flex-grow items-center gap-4 pr-8 bg-background-layer-1 justify-between min-w-full max-w-2xl mx-auto my-auto">
       <div className="flex items-center gap-2 grow">
-        <SearchIcon className="text-text-placeholder"></SearchIcon>
-
+        <SearchIcon className="text-text-placeholder" />
         <Input
           value={text}
           size={size || "default"}
@@ -60,8 +58,7 @@ export default function Searchbar({
           }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              // Call your search function here
-              performSearch(); // Replace `performSearch` with your actual search function
+              performSearch(); 
             }
           }}
           className={`px-4 py-3.5 focus:none border-none bg-background-layer-1 text-text-input ${className}`}

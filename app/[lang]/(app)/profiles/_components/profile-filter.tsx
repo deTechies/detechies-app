@@ -12,9 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Badge } from "@/components/ui/badge";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function ProfileFilter({ lang }: { lang: any }) {
   const router = useRouter();
@@ -22,6 +21,13 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
+
+  //check if there are searchParams and if there are, set the text to the searchParams
+  useEffect(() => {
+    if (searchParams.has("search")) {
+      setShowAdvanced(true);
+    }
+  }, [searchParams]);
 
   const onSelectType = (event: PROFESSION_TYPE | "all") => {
     setLoading(true);
@@ -58,54 +64,44 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   );
 
   return (
-    <div className="flex flex-col justify-between gap-4 mx-auto w-full">
-      <div className="flex flex-col md:flex-row w-full items-start gap-4 ">
-        <div className="grow flex flex-col gap-2 ">
-          <Searchbar placeholder={lang.profile_filter.search} size="md" />
-          {showAdvanced ? (
-            <div className="flex justify-start px-8">
-              <Select onValueChange={onSelectType}>
-                <SelectTrigger className="w-[138px] px-3 py-3 bg-background-layer-1 border-none">
-                  <SelectValue
-                    placeholder={lang.profile_filter.filter}
-                    className={`${loading && "animate-pulse"}`}
-                  />
-                </SelectTrigger>
+    <div className="flex flex-col justify-between gap-4 py-2 mx-auto w-full rounded-md bg-background-layer-1 items-center">
+      <div className="flex flex-col  w-full">
+        <div className="flex flex-col md:flex-row w-full items-center gap-4 px-8">
+          <div className="grow">
+            <Searchbar placeholder={lang.profile_filter.search} size="md" />
+          </div>
 
-                <SelectContent>
-                  <SelectItem key="all" value="all">
-                    {lang.interface.profession_type["all"]}
+          <Button
+            variant="ghost"
+            className="text-accent-primary"
+            onClick={() => setShowAdvanced(!showAdvanced)}
+          >
+            More Filters
+          </Button>
+        </div>
+        {showAdvanced && (
+          <div className="flex justify-start px-8 py-2">
+            <Select onValueChange={onSelectType}>
+              <SelectTrigger className="w-[138px] px-3 py-3 bg-background-layer-1 border-none">
+                <SelectValue
+                  placeholder={lang.profile_filter.filter}
+                  className={`${loading && "animate-pulse"}`}
+                />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem key="all" value="all">
+                  {lang.interface.profession_type["all"]}
+                </SelectItem>
+                {Object.values(PROFESSION_TYPE).map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {lang.interface.profession_type[type]}
                   </SelectItem>
-                  {Object.values(PROFESSION_TYPE).map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {lang.interface.profession_type[type]}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          ) : (
-            <div className="flex px-8 justify-end">
-              {searchParams.get("role") && (
-                <div>
-                  <Badge variant={"accent"}>
-                    {
-                      lang.interface.profession_type[
-                        searchParams.get("role") as PROFESSION_TYPE
-                      ]
-                    }
-                  </Badge>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-        <div className="mt-2">
-        <Button onClick={() => setShowAdvanced(!showAdvanced)}>
-          More Filters
-        </Button>
-          
-        </div>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
     </div>
   );

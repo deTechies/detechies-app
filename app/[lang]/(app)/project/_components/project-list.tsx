@@ -25,7 +25,7 @@ export default async function ProjectList({
 
   return (
     <div className="flex flex-col gap-10">
-      <section className="grid w-full gap-md truncate md:grid-cols-2">
+      <section className="grid w-full gap-md truncate sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {projects.data.length > 0 &&
           projects.data.map((item: Project) => (
             <ProjectItem key={item.id} details={item} lang={dictionary} />
