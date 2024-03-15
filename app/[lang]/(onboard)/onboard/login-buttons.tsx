@@ -28,7 +28,7 @@ export default function LoginButtons({ text }: { text?: any }) {
         if (session.web3.user?.verified) {
           redirect("/mypage");
         }
-        redirect("/onboard/email");
+        //redirect("/onboard/email");
       }
     }
   }, [address, session]);

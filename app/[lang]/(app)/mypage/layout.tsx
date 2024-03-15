@@ -22,7 +22,7 @@ export default async function MyPageLayout({
           <Skeleton className="h-24 grow shrink animate-pulse bg-background-layer-1" />
         }
       >
-        <div className="mx-10 lg:mx-20">{children}</div>
+        <div className="mx-2 md:mx-10 ">{children}</div>
       </Suspense>
     </div>
   );

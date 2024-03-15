@@ -42,14 +42,14 @@ export default async function LayoutProjectDetail({
   if(project.owner === session?.web3.address) {
     links.push({
       name: "settings",
-      href: `settings`,
+      href: `edit`,
       isAdmin: true,
     });
   }
 
   return (
-    <header className=" border-none rounded-t-none flex flex-col gap-10 py-10">
-      <div className="flex gap-md px-10 mx-10 lg:mx-20">
+    <header className="border-none rounded-t-none flex flex-col  bg-background-layer-1 rounded-sm ">
+      <div className="flex gap-md py-10 mx-2 md:mx-10 ">
         <div className="w-[100px] h-[100px] rounded-[6px] flex items-center">
           <div className="md:w-[50px] aspect-square lg:w-[75px] mx-auto my-auto">
             <Image

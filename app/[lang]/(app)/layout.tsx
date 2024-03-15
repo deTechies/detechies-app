@@ -1,16 +1,13 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { auth } from "@/lib/helpers/authOptions";
 import type { Metadata } from "next";
 
 
 
 import DictionaryProvider from "@/lib/dictionaryProvider";
-import { signOut } from "next-auth/react";
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
-import { redirect } from "next/navigation";
 import App from "../app";
 import "../globals.css";
 import Footer from "./_components/footer";
@@ -41,7 +38,7 @@ const pretendard = localFont({
 
 
 export const metadata: Metadata = {
-  title: "deTechies | Developers Freelancers Profiles",
+  title: "deTechies | Developers Profiles",
   description:
     "We help developers distinquish themselves and flourish the future with the latest tech",
   keywords: "developers, freelancers, profiles, tech, software, web, mobile, blockchain, projects, achievements, edutech",
@@ -55,16 +52,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
-  
-  const session = await auth();
-  
-  if(!session){
-    redirect("/onboard");
-  }
-  if(!session?.web3?.user?.verified) {
-    signOut();
-    redirect("/onboard");
-  }
+
 
   return (
     <html lang={params.lang} suppressHydrationWarning>

@@ -11,7 +11,7 @@ export default function EmptyState({
 }) {
   return (
     <div className="flex flex-col gap-2.5 justify-center mx-auto ">
-      <div className="relative w-[20vw] mx-auto aspect-square m-10">
+      <div className="relative max-w-[20vw] min-w-[100px] mx-auto aspect-square m-10">
         <Image src="/images/empty-state.png" alt="Empty State" fill />
       </div>
       <div className="mx-auto flex flex-col text-center">

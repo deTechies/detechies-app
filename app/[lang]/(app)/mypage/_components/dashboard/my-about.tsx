@@ -10,10 +10,7 @@ export default function MyAbout({ userData }: { userData: User }) {
         <span className="text-sm tracking-wide leading-6">
             {userData.profile_details?.description}
         </span>
-        
-        <span>
-          Credits: {userData.credits}
-        </span>
+
       </CardContent>
     </Card>
   );

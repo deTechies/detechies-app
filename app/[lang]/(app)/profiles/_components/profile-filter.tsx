@@ -1,12 +1,18 @@
 "use client";
 
-import Search from "@/components/extra/search";
-
-
 import { PROFESSION_TYPE } from "@/lib/interfaces";
 
+import Searchbar from "@/components/extra/search-bar";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { Badge } from "@/components/ui/badge";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
@@ -52,33 +58,20 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   );
 
   return (
-    <div className="flex flex-col justify-between gap-5 sm:p-[30px] p-5 bg-background-layer-1">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex md:flex-row flex-col items-center gap-5 grow">
-
-          <div className="md:max-w-[335px] w-full">
-            <Search
-              placeholder={lang.profile_filter.search}
-              size="md"
-              className="w-full"
-            />
-          </div>
-          <Button variant={"ghost"} onClick={() => setShowAdvanced(!showAdvanced)}>
-            Advanced Search
-          </Button>
-        </div>
-      </div>
-      {
-        showAdvanced && (
-          <div>
-          <Select onValueChange={onSelectType}>
-                <SelectTrigger className="w-[138px] px-3 py-3">
+    <div className="flex flex-col justify-between gap-4 mx-auto w-full">
+      <div className="flex flex-col md:flex-row w-full items-start gap-4 ">
+        <div className="grow flex flex-col gap-2 ">
+          <Searchbar placeholder={lang.profile_filter.search} size="md" />
+          {showAdvanced ? (
+            <div className="flex justify-start px-8">
+              <Select onValueChange={onSelectType}>
+                <SelectTrigger className="w-[138px] px-3 py-3 bg-background-layer-1 border-none">
                   <SelectValue
                     placeholder={lang.profile_filter.filter}
                     className={`${loading && "animate-pulse"}`}
                   />
                 </SelectTrigger>
-    
+
                 <SelectContent>
                   <SelectItem key="all" value="all">
                     {lang.interface.profession_type["all"]}
@@ -90,10 +83,30 @@ export default function ProfileFilter({ lang }: { lang: any }) {
                   ))}
                 </SelectContent>
               </Select>
-          </div>
-        )
-      }
-     
+            </div>
+          ) : (
+            <div className="flex px-8 justify-end">
+              {searchParams.get("role") && (
+                <div>
+                  <Badge variant={"accent"}>
+                    {
+                      lang.interface.profession_type[
+                        searchParams.get("role") as PROFESSION_TYPE
+                      ]
+                    }
+                  </Badge>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <div className="mt-2">
+        <Button onClick={() => setShowAdvanced(!showAdvanced)}>
+          More Filters
+        </Button>
+          
+        </div>
+      </div>
     </div>
   );
 }
