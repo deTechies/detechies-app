@@ -164,19 +164,6 @@ export default function Login({ lang }: ILoginProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-[250px]">
           <DropdownMenuGroup>
-            <DropdownMenuItem
-              className="group"
-              onClick={(event) => {
-                event.preventDefault();
-                copyAddress();
-              }}
-            >
-              <Wallet className="mr-2 h-4 w-4 " />
-              <span className="text-sm">{truncateMiddle(session.web3.user.wallet, 18)}</span>
-              <DropdownMenuShortcut>
-                <Copy className="h-4 w-4 group-hover:text-accent-primary" />
-              </DropdownMenuShortcut>
-            </DropdownMenuItem>
             <Link href={`/profiles/${session.web3.user.wallet}`} passHref>
               <DropdownMenuItem className="group">
                 <User className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
@@ -193,7 +180,6 @@ export default function Login({ lang }: ILoginProps) {
               <DropdownMenuItem className="group">
                 <Settings className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
                 <span>Settings</span>
-                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
               </DropdownMenuItem>
             </Link>
           </DropdownMenuGroup>
@@ -228,6 +214,19 @@ export default function Login({ lang }: ILoginProps) {
             </DropdownMenuSub>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
+          <DropdownMenuItem
+              className="group"
+              onClick={(event) => {
+                event.preventDefault();
+                copyAddress();
+              }}
+            >
+              <Wallet className="mr-2 h-4 w-4 " />
+              <span className="text-sm">{truncateMiddle(session.web3.user.wallet, 18)}</span>
+              <DropdownMenuShortcut>
+                <Copy className="h-4 w-4 group-hover:text-accent-primary" />
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
           <DropdownMenuItem className="group">
             <Github className="mr-2 h-4 w-4 group-hover:text-black-900" />
             {session.web3?.github ? (
@@ -236,6 +235,7 @@ export default function Login({ lang }: ILoginProps) {
               <span>GitHub</span>
             )}
           </DropdownMenuItem>
+          
           <DropdownMenuItem className="group">
             <LifeBuoy className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
             <span>Support</span>
@@ -263,7 +263,6 @@ export default function Login({ lang }: ILoginProps) {
           >
             <LogOut className="mr-2 h-4 w-4 group-hover:text-state-error" />
             <span>Log out</span>
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
