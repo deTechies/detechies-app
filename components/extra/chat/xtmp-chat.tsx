@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -85,3 +85,4 @@ function Chat({
 }
 
 export default Chat;
+ */

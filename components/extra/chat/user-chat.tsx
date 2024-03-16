@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 import { Address } from "wagmi";
-import ChatStream from "./chat-stream";
+import PushChat from "./push-chat";
 export default function UserChat({ to }: { to: Address }) {
   return (
     <Dialog>
@@ -18,7 +18,7 @@ export default function UserChat({ to }: { to: Address }) {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:w-[60vw]">
-        <ChatStream chatTo={to} />
+        <PushChat chatTo={to} />
       </DialogContent>
     </Dialog>
   );
