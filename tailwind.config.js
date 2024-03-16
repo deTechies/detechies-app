@@ -23,7 +23,7 @@ module.exports = {
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        border: "hsl(var(--border))",
+        border: "hsl(var(--border-div))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -265,9 +265,6 @@ module.exports = {
             letterSpacing: "0.5px" 
           },
         ],
-      },
-      fontFamily: {
-        //sans: ["var(--font-pretendard)", "sans-serif"],
       },
     },
   },

@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 
 import { getWalletClient } from "@wagmi/core";
-import { providers } from "ethers";
+import { Signer, providers } from "ethers";
 import * as React from "react";
 import { extendTailwindMerge } from "tailwind-merge";
 import { WalletClient } from "viem";
@@ -193,7 +193,7 @@ export function walletClientToSigner(walletClient: WalletClient) {
     ensAddress: chain.contracts?.ensRegistry?.address,
   };
   const provider = new providers.Web3Provider(transport, network);
-  const signer = provider.getSigner(account.address);
+  const signer = provider.getSigner(account.address) as Signer;
   return signer;
 }
 

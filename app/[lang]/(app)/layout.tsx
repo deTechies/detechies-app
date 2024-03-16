@@ -60,6 +60,7 @@ export default async function RootLayout({
         className={`${inter.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >
         
+        
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

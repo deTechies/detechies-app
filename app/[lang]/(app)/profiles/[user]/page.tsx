@@ -21,6 +21,7 @@ export default async function Dashboard({
   return (
     <main className="flex flex-col gap-5 sm:gap-20 sm:flex-row">
       <UserDashboard address={params.user} />
+
     </main>
   );
 }
