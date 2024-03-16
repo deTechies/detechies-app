@@ -47,14 +47,14 @@ export default function ChatStream({
       const messages = await conversation.messages();
       setMessages(messages);
     } else {
-      console.log("cant message because is not on the network.");
+      console.log("Cannot message because is not on the network.");
       //cant message because is not on the network.
       setNotRegistered(true);
     }
   };
 
   // Function to initialize the XMTP client
-  const initXmtp = async function () {
+  const initXmtp = async function () { 
     // Create the XMTP client
     if (!walletClient) return;
     const signer = walletClientToSigner(walletClient);
