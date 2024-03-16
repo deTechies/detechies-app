@@ -16,7 +16,7 @@ export default async function TeamList({
     <div>
 
 
-      <div className="grid  w-full items-stretch gap-5 mb-10 md:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid  w-full items-stretch gap-md mb-10 sm:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-4">
         {groups.map((group: any) => (
           <TeamListItem
             key={group.id}

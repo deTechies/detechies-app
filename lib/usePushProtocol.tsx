@@ -21,7 +21,6 @@ export default function PushProvider({ children }: { children: any }) {
 
 
   const initializeUser = useCallback(async () => {
-
     if(!signer) return;
     try {
 

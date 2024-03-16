@@ -1,7 +1,8 @@
 //we want to create a group with all the members of th project.
 "use client";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { PushContext } from "@/lib/usePushProtocol";
 import { didToAddress } from "@/lib/utils";
@@ -48,6 +49,7 @@ export default function PushChat({ chatTo }: { chatTo?: Address }) {
         chatter.initializeUser();
         return;
       }
+      
       
       await chatter.user.chat.history(newChat).then((chatFeed) => {
         setChats(chatFeed);
@@ -154,14 +156,18 @@ export function MessageList({ chats, chatTo }: MessageProps) {
 
 export function MessageInput({ inputValue, onInputChange, onSend, isDisabled, isLoading }: MessageInputProps) {
   return (
-    <div className="flex gap-2">
-      <Input
-        type="text"
-        onKeyPress={onInputChange}
-        onChange={onInputChange}
+    <div className="flex gap-2 border border-border-div rounded-sm px-2 py-2.5 items-center ">
+      <Avatar>
+        <AvatarFallback>
+          ME
+        </AvatarFallback>
+      </Avatar>
+      <Textarea
         value={inputValue}
         placeholder="Type your text here "
-        className="col-span-5 bg-secondary flex w-full flex-wrap py-4 text-sm"
+        rows={1}
+        aria-hidden="true"
+        className="bg-transparent border-none focus:none flex w-full flex-wrap text-sm"
       />
       <Button
         onClick={onSend}
