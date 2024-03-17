@@ -1,8 +1,8 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
 import { serverApi } from "@/lib/data/general";
@@ -35,7 +35,8 @@ export default function NotificationPopover() {
           {notifications?.length > 0 &&
             notifications?.map((notification: any, key: string) => {
               return (
-              <div key={key}
+                <div
+                  key={key}
                   className="border-b border-border-div p-5 flex flex-row gap-5 last:border-none"
                 >
                   <Avatar>
@@ -48,13 +49,13 @@ export default function NotificationPopover() {
                 </div>
               );
             })}
-
-          {notifications?.length === 0 && (
-            <div className="flex justify-center items-center h-[60vh]">
-              <span className="text-text-secondary">No notifications</span>
-            </div>
-          )}
         </div>
+
+        {notifications?.length === 0 && (
+          <div className="flex justify-center items-center h-[60vh]">
+            <span className="text-text-secondary">No notifications</span>
+          </div>
+        )}
       </PopoverContent>
     </Popover>
   );
