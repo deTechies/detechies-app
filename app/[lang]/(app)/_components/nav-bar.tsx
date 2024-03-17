@@ -1,8 +1,9 @@
 "use client";
 
+import NotificationPopover from "@/components/metronic/notification/notification-popover";
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-import { BellRing, Menu, MessageCircle, X } from "lucide-react";
+import { Menu, MessageCircle, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -83,7 +84,8 @@ export default function Navbar({ lang }: { lang: any }) {
                     <MessageCircle className="w-5 h-5 text-text-secondary" />
                   </div>
                   <div className="mx-3">
-                    <BellRing className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
+                    <NotificationPopover />
+                   
                   </div>
                 </div>
                 <div className="relative ml-3 cursor-pointer">
