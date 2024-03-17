@@ -24,7 +24,7 @@ export default async function ProjectLinks({
   return (
     <Card className="">
       <CardHeader className="flex items-center justify-between">
-        <h3>Extra Information</h3>
+        <h3>Links</h3>
         {(details.userRole === "member" ||
           details.userRole === "admin" ||
           details.userRole === "client") && (
@@ -43,7 +43,7 @@ export default async function ProjectLinks({
         {projectSources &&
           projectSources.length > 0 &&
           projectSources.map((source: any, index: number) => (
-            <div key={index} className="flex gap-4 items-center py-2">
+            <div key={index} className="flex flex-wrap gap-4 items-center py-2">
               <div className="rounded-full h-8 w-8 bg-background-layer-2 flex items-center justify-center">
                 <Github color="#FFF" fontSize={24} />
               </div>

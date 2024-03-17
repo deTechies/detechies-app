@@ -13,6 +13,7 @@ import { toast } from "@/components/ui/use-toast";
 import { API_URL } from "@/lib/constants";
 import { patchServer } from "@/lib/data/postRequest";
 import { fetchWithAuthorization } from "@/lib/utils";
+import { Import } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
@@ -28,9 +29,9 @@ export default function ImportGithubData({
   const [repoData, setRepoData] = useState<any>();
 
   const fetchDependencies = async () => {
-    if(repoName.startsWith("/" )){
+    if (repoName.startsWith("/")) {
       //then remove the first character from the string
-      
+
       repoName = repoName.substring(1);
     }
     const owner = repoName.split("/")[0];
@@ -54,7 +55,6 @@ export default function ImportGithubData({
         return;
       }
 
-
       setRepoData(repoDetails.data);
     } catch (error: any) {
       toast({ title: "Error", description: error.message });
@@ -73,7 +73,9 @@ export default function ImportGithubData({
   return (
     <Dialog>
       <DialogTrigger>
-        <Button>Import Data</Button>
+        <Button size="sm">
+          <Import className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
 
       <DialogContent>

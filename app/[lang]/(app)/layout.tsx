@@ -7,34 +7,12 @@ import type { Metadata } from "next";
 
 import DictionaryProvider from "@/lib/dictionaryProvider";
 import { Inter } from 'next/font/google';
-import localFont from 'next/font/local';
 import App from "../app";
 import "../globals.css";
 import Footer from "./_components/footer";
 import Navbar from "./_components/nav-bar";
 const inter = Inter({ subsets: ['latin'] })
 
-// Font files can be colocated inside of `app`
-const pretendard = localFont({
-  src: [
-    {
-      path: '../pretendard-regular.woff2',
-      weight: '400', // Regular
-      style: 'normal',
-    },
-    {
-      path: '../pretendard-semibold.woff2',
-      weight: '600', // SemiBold
-      style: 'normal',
-    },
-    {
-      path: '../pretendard-bold.woff2',
-      weight: '700', // Bold
-      style: 'normal',
-    }
-  ],
-  display: 'swap',
-});
 
 
 export const metadata: Metadata = {

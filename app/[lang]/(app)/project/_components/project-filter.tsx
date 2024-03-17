@@ -1,6 +1,5 @@
 "use client";
 
-import Search from "@/components/extra/search";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
@@ -13,8 +12,8 @@ import {
 
 import { PRIVACY_TYPE, ProjectType } from "@/lib/interfaces";
 
+import Searchbar from "@/components/extra/search-bar";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -23,7 +22,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [advancedSearch, setAdvancedSearch] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const onSelectType = (event: ProjectType | "all") => {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
@@ -69,7 +68,7 @@ export default function ProjectFilter({ lang }: { lang: any }) {
 
     router.replace(`${pathname}${query}`);
   };
-  
+
   const onChangeSource = (_has_source: boolean) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
 
@@ -86,29 +85,24 @@ export default function ProjectFilter({ lang }: { lang: any }) {
   };
 
   return (
-    <div className="bg-background-layer-1 flex flex-wrap justify-between gap-5 px-8 pb-8 pt-7">
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-4">
-          <div className="flex flex-wrap items-center gap-5 grow">
-            <div className="max-w-[60vw] min-w-[350px] ">
-              <Search
-                placeholder={lang.project.list.search}
-                size="md"
-                className="w-full"
-              />
-            </div>
-            <Button
-              size="md"
-              variant="ghost"
-              onClick={() => setAdvancedSearch(!advancedSearch)}
-            >
-              {advancedSearch ? "Hide Advanced Search" : "Advanced Search"}
-            </Button>
+    <div className="flex flex-col justify-between gap-4 py-2 mx-auto w-full rounded-md bg-background-layer-1 items-center">
+      <div className="flex flex-col  w-full">
+        <div className="flex flex-col md:flex-row w-full items-center gap-4 px-8">
+          <div className="grow">
+            <Searchbar placeholder={lang.project.list.search} size="md" />
           </div>
+
+          <Button
+            variant="ghost"
+            className="text-accent-primary"
+            onClick={() => setShowAdvanced(!showAdvanced)}
+          >
+            More Filters
+          </Button>
         </div>
-        {advancedSearch && (
-          <div className="flex gap-4 flex-wrap">
-            <Select onValueChange={onSelectType}>
+        {showAdvanced && (
+          <div className="flex flex-wrap gap-4 justify-start px-8 py-2">
+          <Select onValueChange={onSelectType}>
               <SelectTrigger className="w-[180px] px-3 py-3">
                 <SelectValue placeholder={lang.project.list.all_project} />
               </SelectTrigger>
@@ -155,16 +149,11 @@ export default function ProjectFilter({ lang }: { lang: any }) {
             <div className="flex items-center gap-3">
               <Checkbox onCheckedChange={onChangeSource} />
 
-              <Label className="text-title_m">
-                Source Code
-              </Label>
+              <Label className="text-title_m">Source Code</Label>
             </div>
           </div>
         )}
       </div>
-      <Link href="/project/create">
-          <Button size="sm">Add project</Button>
-        </Link>
     </div>
   );
 }

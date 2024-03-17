@@ -23,7 +23,7 @@ import { toast } from "@/components/ui/use-toast";
 
 import MediaUploader from "@/components/extra/media-uploader";
 import { ABI } from "@/lib/constants";
-import { uploadAchievement } from "@/lib/data/achievements";
+import { postServer } from "@/lib/data/postRequest";
 import {
   AVATAR_TYPE,
   Club,
@@ -118,8 +118,8 @@ export function CreateNFTForm({ group, lang }: { group: Club; lang: any }) {
                   {lang.group.details.profile_card.create_nft.title}
                 </h2>
 
-                <span className="mb-1 text-body_s text-state-error">
-                  {lang.group.details.profile_card.create_nft.required_text}
+                <span className="mb-1 text-body_s">
+                 {group.contract}
                 </span>
               </div>
             </CardHeader>
@@ -516,7 +516,9 @@ const useCreateNFTForm = (groupId: string, group: Club) => {
       args: [metadata, tradeable],
     });
 
-    const result = await uploadAchievement(uploadData);
+    const submitData = JSON.stringify(uploadData);
+    
+    const result = await postServer('/achievement', submitData);
 
     toast({
       title: "Congratulations on your first nft!",

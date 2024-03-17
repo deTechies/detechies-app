@@ -121,16 +121,16 @@ export function PaginationPage({
         disabled={page === 1}
         onClick={prevPage}
       >
-        <span className="sr-only">Go to previous page</span>
+        <span className="sr-only h-[30px] w-[30px] py-auto px-auto">Go to previous page</span>
         <ChevronLeftIcon />
       </button>
 
-      <div className="rounded-md p-1 flex items-center gap-2 text-gray-600">
+      <div className="rounded-md p-1 flex items-center gap-2">
         {filteredPageNumbers.map((pageNum: any, index: number) =>
           pageNum === "..." ? (
             <span
               key={index}
-              className="h-8 w-8 rounded-[6px] flex items-center justify-center"
+              className="px-2.5 py-2 h-[30px] w-[30px] rounded-[8px] flex items-center justify-center"
             >
               ...
             </span>
@@ -138,8 +138,8 @@ export function PaginationPage({
             <button
               key={index}
               onClick={() => goToPage(pageNum)}
-              className={`h-8 w-8 rounded-[6px] ${
-                page === pageNum ? "bg-blue-500 text-white" : ""
+              className={`py-auto px-auto h-[30px] w-[30px] rounded-[8px] ${
+                page === pageNum ? "bg-border-div" : ""
               }`}
             >
               {pageNum}
@@ -149,7 +149,7 @@ export function PaginationPage({
       </div>
 
       <button
-        className="h-8 w-8 p-0 text-gray-400"
+        className="px-2.5 py-2 h-[30px] w-[30px] rounded-[8px] "
         disabled={page >= numPages}
         onClick={nextPage}
       >

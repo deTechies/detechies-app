@@ -1,6 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
-import { getClub } from "@/lib/data/groups";
+import { serverApi } from "@/lib/data/general";
 import CreateGroupContract from "./_components/create-group-contract";
 import { CreateNFTForm } from "./create-nft-form";
 
@@ -11,7 +11,7 @@ export default async function CreateNFT({
 }) {
   const dictionary = await getDictionary(params.lang);
   
-  const {data: group} = await getClub(params.address);
+  const {data: group} = await serverApi(`/clubs/${params.address}`);
   
   if(!group.contract){
     return (

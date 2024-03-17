@@ -3,7 +3,6 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 import DictionaryProvider from "@/lib/dictionaryProvider";
 import { Metadata } from "next";
-import localFont from "next/font/local";
 import App from "../app";
 import "../globals.css";
 import NavBar404 from "./nav-bar-404";
@@ -14,26 +13,7 @@ export const metadata: Metadata = {
     "We help you build your career profile and grow your personal career and network",
 };
 
-const pretendard = localFont({
-  src: [
-    {
-      path: "../pretendard-regular.woff2",
-      weight: "400", // Regular
-      style: "normal",
-    },
-    {
-      path: "../pretendard-semibold.woff2",
-      weight: "600", // SemiBold
-      style: "normal",
-    },
-    {
-      path: "../pretendard-bold.woff2",
-      weight: "700", // Bold
-      style: "normal",
-    },
-  ],
-  display: "swap",
-});
+
 
 export default async function RootLayout({
   params,
@@ -47,7 +27,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body
-        className={`${pretendard.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
+        className={`font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
       >
         <ThemeProvider
           attribute="class"
