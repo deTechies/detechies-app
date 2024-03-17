@@ -60,7 +60,6 @@ export default async function ManageMember({
               <PendingMemberListItem
                 profile={item}
                 key={index}
-                contract={details.id}
                 lang={lang}
                 />
             );

@@ -8,7 +8,6 @@ export default async function ManageMember({
   params,
   searchParams,
 }: {
-  details: any;
   params: any;
   searchParams: { [key: string]: string | string[] | undefined };
 
