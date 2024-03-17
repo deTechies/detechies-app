@@ -1,109 +1,29 @@
 "use client";
 
-import Search from "@/components/extra/search";
 
-import { PROFESSION_TYPE } from "@/lib/interfaces";
 
+import Searchbar from "@/components/extra/search-bar";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
 
 export default function TeamListFilter({ lang }: { lang: any }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(false);
-  const [showAdvanced, setShowAdvanced] = useState(false);
 
-  const onSelectType = (event: PROFESSION_TYPE | "all") => {
-    setLoading(true);
-
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.delete("limit");
-
-    if (event === "all") {
-      searchParams.set("role", "");
-    } else {
-      searchParams.set("role", event);
-    }
-
-    router.push(`${pathname}?${searchParams.toString()}`);
-    setLoading(false);
-  };
-
-  // const selectLimit = (limit: string) => {
-  //   setLoading(true);
-
-  //   router.push(pathname + "?" + createQueryString("limit", limit));
-
-  //   setLoading(false);
-  // };
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
 
   return (
-    <div className="p-10 flex flex-col gap-10 bg-background-layer-1">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex md:flex-row flex-col items-center gap-5 grow">
-          <div className="md:max-w-[335px] w-full">
-            <Search
-              placeholder={lang.profile_filter.search}
-              size="md"
-              className="w-full"
-            />
+    <div className="flex flex-col justify-between gap-4 py-2 mx-auto w-full rounded-md bg-background-layer-1 items-center">
+      <div className="flex flex-col  w-full">
+        <div className="flex flex-col md:flex-row w-full items-center gap-4 px-8">
+          <div className="grow">
+            <Searchbar placeholder={lang.project.list.search} size="md" />
           </div>
+
           <Button
-            variant={"ghost"}
-            onClick={() => setShowAdvanced(!showAdvanced)}
+            variant="ghost"
+            className="text-accent-primary"
           >
-            Advanced Search
+            Joined (soon)
           </Button>
         </div>
-        <div>
-          <Link href="/groups/create">
-            <Button>Become partner</Button>
-          </Link>
-        </div>
       </div>
-      {showAdvanced && (
-        <div>
-          <Select onValueChange={onSelectType}>
-            <SelectTrigger className="w-[138px] px-3 py-3">
-              <SelectValue
-                placeholder={lang.profile_filter.filter}
-                className={`${loading && "animate-pulse"}`}
-              />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem key="all" value="all">
-                {lang.interface.profession_type["all"]}
-              </SelectItem>
-              {Object.values(PROFESSION_TYPE).map((type) => (
-                <SelectItem key={type} value={type}>
-                  {lang.interface.profession_type[type]}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      )}
     </div>
   );
 }

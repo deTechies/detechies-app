@@ -48,9 +48,8 @@ export default async function GroupProfileCard({
   ] as any;
   return (
     <div className="">
-      <header className=" w-full gap-10 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
-      <div className="flex flex-col gap-3.5 mx-auto  py-10">
-
+      <header className=" gap-10 justify-center text-center bg-center	 bg-[url('/images/header-hex.png')]  ">
+        <div className="flex flex-col gap-3.5 mx-auto  py-10">
           <div className="mx-auto h-[100px] w-[100px] rounded-full relative border-2 border-accent-primary  bg-background-layer-2">
             <Image
               src={addURL(teamDetails.image)}
@@ -68,17 +67,17 @@ export default async function GroupProfileCard({
           </div>
           <div className="flex gap-[18px] text-text-secondary mx-auto">
             <div className="flex gap-[5px] justify-center items-center">
-              <Folder size={16}/>
+              <Folder size={16} />
               <span className="text-label_m">0 Project</span>
             </div>
 
             <div className="flex gap-[5px]justify-center items-center">
-              <MapPin size={16}/>
+              <MapPin size={16} />
               <span className="text-label_m">Location</span>
             </div>
 
             <div className="flex gap-[5px] justify-center items-center text-text-secondary">
-              <Briefcase size={16}/>
+              <Briefcase size={16} />
               <span className="text-label_m">
                 {teamDetails.members.length} members
               </span>
@@ -87,36 +86,36 @@ export default async function GroupProfileCard({
         </div>
       </header>
       <div className="sticky top-0">
-      <ProfileTabs links={links} prelink={`/teams/${teamDetails.id}`}>
-        {teamDetails.userRole == "admin" && (
-          <div className="flex items-start gap-3 grow">
-            <Link
-              href={`/teams/${teamDetails.id}/create/nft`}
-              className="max-w-[212px] grow rounded-full"
-            >
-              <Button size="sm" variant="primary" className="w-full">
-                Create Achievement
-              </Button>
-            </Link>
+        <ProfileTabs links={links} prelink={`/teams/${teamDetails.id}`}>
+          {teamDetails.userRole == "admin" && (
+            <div className="flex items-start gap-3 grow">
+              <Link
+                href={`/teams/${teamDetails.id}/create/nft`}
+                className="max-w-[212px] grow rounded-full"
+              >
+                <Button size="sm" variant="primary" className="w-full">
+                  Create Achievement
+                </Button>
+              </Link>
 
-            <InviteGroupMember
-              groupId={teamDetails.id}
-              lang={lang}
-              groupMembers={teamDetails.members}
-            />
-          </div>
-        )}
+              <InviteGroupMember
+                groupId={teamDetails.id}
+                lang={lang}
+                groupMembers={teamDetails.members}
+              />
+            </div>
+          )}
 
-        {teamDetails.userRole == "none" && (
-          <div className="flex gap-3 grow">
-            <JoinGroup
-              groupId={teamDetails.id}
-              details={teamDetails}
-              lang={lang}
-            />
-          </div>
-        )}
-      </ProfileTabs>
+          {teamDetails.userRole == "none" && (
+            <div className="flex gap-3 grow">
+              <JoinGroup
+                groupId={teamDetails.id}
+                details={teamDetails}
+                lang={lang}
+              />
+            </div>
+          )}
+        </ProfileTabs>
       </div>
     </div>
   );

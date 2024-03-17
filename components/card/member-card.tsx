@@ -20,15 +20,6 @@ export default function MemberCard({
   isOwner?: boolean;
 }) {
   const router = useRouter();
-  // const { data, loading, error } = useFetchData<any>(`/polybase/${address}`);
-
-  // if (error) return <div>{JSON.stringify(error)}</div>;
-
-  // if (loading)
-  //   return <Skeleton className="h-[200px] w-[100px] animate-pulse" />;
-
-  // if (!data) return <div>no data</div>;
-
   return (
     <Card
       className="gap-1 rounded-sm shadow-md border border-border-div bg-background-layer-1 p-0 min-w-[100px] hover:shadow-lg cursor-pointer"

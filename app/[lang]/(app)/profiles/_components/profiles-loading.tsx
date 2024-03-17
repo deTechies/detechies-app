@@ -2,8 +2,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProfilesLoading() {
   return (
-    <div className="grid grid-cols-2 gap-4 ">
-      {/* <loop through profile */}
+    <div className="grid  w-full items-stretch gap-md mb-10 sm:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-4">
+    {/* <loop through profile */}
       {Array(10)
         .fill(0)
         .map((profile: any, index) => (

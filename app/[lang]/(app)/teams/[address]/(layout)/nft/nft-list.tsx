@@ -1,21 +1,12 @@
-"use client";
-
 import DisplayNFT from "@/components/nft/display-nft";
-import { Button } from "@/components/ui/button";
-import { Achievement, NFT_TYPE } from "@/lib/interfaces";
-import { useEffect, useState } from "react";
+import { serverApi } from "@/lib/data/general";
+import { Achievement } from "@/lib/interfaces";
 
-export default function NftList({
-  achievements,
-  userAchievements,
-  useTab = true,
-  limit,
-  lang,
+export default async function NftList({
+  address,
+  lang
 }: {
-  achievements: Achievement[];
-  userAchievements?: string[];
-  useTab?: boolean;
-  limit?: number;
+  address?: string;
   lang: any;
 }) {
   const TAB_BUTTONS = {
@@ -25,50 +16,18 @@ export default function NftList({
     AVATAR: "avatar",
   };
 
-  const [currentTab, setCurrentTab] = useState(TAB_BUTTONS.ALL);
-  const [nftList, setNftList] = useState<Achievement[]>([]);
-
-  useEffect(() => {
-    let filtered = achievements;
-
-    if (currentTab === "career") {
-      filtered = filtered.filter(
-        (achievement) => achievement.nft_type == NFT_TYPE.SBT
-      );
-    } else if (currentTab === "limited") {
-      filtered = filtered.filter(
-        (achievement) => achievement.nft_type == NFT_TYPE.ERC721
-      );
-    } else if (currentTab === "avatar") {
-      filtered = filtered.filter((achievement) => achievement.avatar);
-    }
+  const { data: achievements } = await serverApi(
+    `/achievement/club/${address}`
+  );
 
 
-    setNftList(filtered);
-  }, [achievements, currentTab, lang]);
-
+ 
   return (
-    <>
-      {useTab && (
-        <div className="flex flex-wrap justify-start gap-2 mb-5">
-          {Object.values(TAB_BUTTONS).map((tab) => (
-            <Button
-              key={tab}
-              size="sm"
-              variant={currentTab === tab ? "secondary" : "inactive"}
-              className="py-3 "
-              onClick={() => setCurrentTab(tab)}
-            >
-              {lang.group.details.nft[tab]}
-            </Button>
-          ))}
-        </div>
-      )}
+    <div>
 
       <div className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {nftList &&
-          nftList
-            .slice(0, limit)
+        {achievements &&
+          achievements
             .map((achievement: Achievement, index: number) => (
               <DisplayNFT
                 details={achievement}
@@ -79,11 +38,11 @@ export default function NftList({
             ))}
       </div>
 
-      {nftList.length < 1 && (
+      {achievements.length < 1 && (
         <div className="pt-5 pb-10 text-center text-subhead_s text-text-secondary">
           {lang.group.details.nft.no_nft}
         </div>
       )}
-    </>
+    </div>
   );
 }

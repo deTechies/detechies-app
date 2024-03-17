@@ -28,7 +28,7 @@ export default async function Footer({ lang }: { lang: any }) {
         <Link
           href="https://t.me/+ortpABZX8vYwM2Fk"
           target="_blank"
-          className="px-4 my-5 hover:text-accent-primary"
+          className="px-4 my-5 hover:text-accent-primary text-accent-primary"
         >
           {lang.footer.contact_us}
         </Link>

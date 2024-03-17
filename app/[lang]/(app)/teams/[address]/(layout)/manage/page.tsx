@@ -73,7 +73,6 @@ export default async function GroupDetailManageLayout({
           <ManageContracts />
         </TabsContent>
       </Tabs>
-      {/* 현재 탭에 해당하는 컴포넌트 */}
     </div>
   );
 }

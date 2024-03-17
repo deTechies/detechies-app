@@ -28,9 +28,9 @@ export default async function GroupDetailLayout({
     );
 
   return (
-    <main className="w-full flex flex-col gap-md">
+    <main className="flex flex-col gap-md mx-2 sm:mx-10 lg:mx-20">
       <GroupProfileCard id={params.address} lang={dictionary} />
-      <div className="flex flex-col mx-2 sm:mx-10 lg:mx-20">{children}</div>
+      <div className="">{children}</div>
     </main>
   );
 }
