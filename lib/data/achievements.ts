@@ -70,6 +70,7 @@ export async function uploadAchievement(data: any) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session.web3.accessToken}`,
+      
     },
     body: JSON.stringify(data),
   });

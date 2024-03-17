@@ -18,7 +18,7 @@ export default function ProjectItem({
 
   return (
     <Link href={`/project/${details.id}`} >
-      <Card className="flex flex-col items-start w-full p-[30px] gap-md hover:scale-[1.02] transition-transform duration-200">
+      <Card className="flex flex-col items-start w-full p-[30px] gap-md hover:scale-[0.98] transition-transform duration-200">
         <div className="flex flex-row justify-between items-center gap-3 w-full ">
           <figure className="overflow-hidden shrink-0 relative object-scale-down w-[50px] h-[50px] rounded-sm aspect-square flex justify-center items-center bg-background-layer-2">
             <Image

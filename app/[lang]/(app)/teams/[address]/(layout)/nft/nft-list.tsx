@@ -43,13 +43,9 @@ export default function NftList({
       filtered = filtered.filter((achievement) => achievement.avatar);
     }
 
-    const sorted = filtered.sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
 
-    setNftList(sorted);
-  }, [achievements, userAchievements, currentTab, lang]);
+    setNftList(filtered);
+  }, [achievements, currentTab, lang]);
 
   return (
     <>
@@ -79,7 +75,6 @@ export default function NftList({
                 key={index}
                 lang={lang}
                 showMintButton={true}
-                blockRequest={userAchievements?.includes(achievement.id)}
               />
             ))}
       </div>

@@ -204,8 +204,8 @@ module.exports = {
         title_m: [ // 16 1.3 0.15px 600
           "1rem",
           { 
-            lineHeight: "18px",
-            fontWeight: "600",
+            lineHeight: "16px",
+            fontWeight: "400",
             letterSpacing: "-0.1px" 
           },
         ],
