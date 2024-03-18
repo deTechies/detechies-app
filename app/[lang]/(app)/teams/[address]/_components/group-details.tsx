@@ -1,18 +1,16 @@
 import { Card, CardContent, CardHeader } from "@/components/metronic/card/card";
-import { Label } from "@/components/ui/label";
 
 
 export default function GroupDetails({ details }: { details: any }) {
   return (
     <Card className="">
      <CardHeader>
-        <h1>Group Details</h1>
+        <h1>About us</h1>
      </CardHeader>
      <CardContent>
       <div className="flex flex-col">
-        <Label>About</Label>
         <p
-        className=" "
+        className="text-text-secondary text-sm"
         dangerouslySetInnerHTML={{
           __html: details.description ? details.description : "No description",
         }}

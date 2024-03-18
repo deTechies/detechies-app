@@ -97,7 +97,7 @@ export default function PendingMemberListItem({
           <Badge variant="info" shape="outline">
             {profile.user.profile_details?.profession
               ? profile.user.profile_details.profession
-              : "미설정"}
+              : "no set"}
           </Badge>
         </div>
       </div>

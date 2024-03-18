@@ -25,7 +25,6 @@ export default function ProjectCreatePage({ params }: { params: any }) {
     const findGithubDetails = async (github: string) => {
       const response = await fetch(`https://api.github.com/repos${github}`);
       const data = await response.json();
-      console.log(data);
       setPreFilled({
         ...prefilled,
         name: data.name,

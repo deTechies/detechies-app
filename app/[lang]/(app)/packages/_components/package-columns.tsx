@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { formatDate } from "@/lib/utils";
+import { formatDateToTimeAgo } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 // This type is used to define the shape of our data.
@@ -65,7 +65,7 @@ export const packageColumns: ColumnDef<any>[] = [
     },
   },
   {
-    accessorKey: "created_at",
+    accessorKey: "last_updated",
     header: ({ column }: { column: any }) => {
       return (
         <Button
@@ -80,7 +80,7 @@ export const packageColumns: ColumnDef<any>[] = [
       );
     },
     cell: ({ row }: { row: any }) => {
-      const formatted = formatDate(row.getValue("created_at"));
+      const formatted = formatDateToTimeAgo(row.getValue("last_updated"));
 
       return <div className="font-medium">{formatted}</div>;
     },

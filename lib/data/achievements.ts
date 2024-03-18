@@ -91,6 +91,7 @@ export async function requestAchievement(achievementId: string, projectId?: stri
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session.web3.accessToken}`,
+      "x-api-key": "API_KEY",
     },
     body: JSON.stringify({
       achievementId: achievementId,

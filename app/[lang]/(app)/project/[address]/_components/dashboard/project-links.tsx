@@ -33,19 +33,15 @@ export default async function ProjectLinks({
       </CardHeader>
 
       <CardContent>
-        {details.links.length > 0 ? (
+        {details.links.length > 0 && (
           <Links works={details.links} />
-        ) : (
-          <p className="text-center truncate text-label_m text-text-secondary">
-            {lang.project.details.links.no_links}
-          </p>
         )}
         {projectSources &&
           projectSources.length > 0 &&
           projectSources.map((source: any, index: number) => (
             <div key={index} className="flex flex-wrap gap-4 items-center py-2">
               <div className="rounded-full h-8 w-8 bg-background-layer-2 flex items-center justify-center">
-                <Github color="#FFF" fontSize={24} />
+                <Github  fontSize={24} />
               </div>
               <Link
                 href={`https://github.com/${source.platform_id}`}

@@ -78,8 +78,8 @@ export default function InviteGroupMember({
 
   return (
     <Dialog onOpenChange={onOpenChange}>
-      <DialogTrigger className="max-w-[212px] grow rounded-full">
-        <Button size="sm" variant="primary" className="w-full">
+      <DialogTrigger className="max-w-[212px] rounded-full">
+        <Button size="sm" variant="primary" className="">
           {lang.group.details.profile_card.invite.invite_member}
         </Button>
       </DialogTrigger>

@@ -112,14 +112,14 @@ export function PackageTable<TData, TValue, hideColumn>({
           </DropdownMenu>
         )}
       </div>
-      <div className="rounded-md border bg-background-layer-1">
+      <div className="rounded-md border border-border-div bg-background-layer-1">
         <Table className="table">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-gray-800">
+                    <TableHead key={header.id} className="">
                       {header.isPlaceholder
                         ? null
                         : flexRender(

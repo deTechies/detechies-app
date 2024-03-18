@@ -1,7 +1,7 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n.config";
 
-import { getGroupAchievements } from "@/lib/data/achievements";
+import { serverApi } from "@/lib/data/general";
 import { Wizard } from "./_components/mission-wizard";
 
 interface Mission {
@@ -27,7 +27,7 @@ export default async function CreateMissionPage({
     lang: Locale;
   };
 }) {
-  const achievements = await getGroupAchievements(params.address);
+  const achievements = await serverApi(`/achievement/club/${params.address}`);
   const dictionary = (await getDictionary(params.lang)) as any;
 
   return (

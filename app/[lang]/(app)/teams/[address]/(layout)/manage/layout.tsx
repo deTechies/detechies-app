@@ -5,21 +5,21 @@ import { Suspense } from "react";
 export default function ManageTeamLayout({children, params}: {children: any, params: any}) {
   return (
     <div className="flex flex-col gap-md">
-        <div className="flex flex-row gap-md">
+        <div className="flex flex-row gap-md justify-end">
             <Link href={`/teams/${params.address}/manage`}
                 className=""
             >
-                <Button variant="secondary" size="sm">
+                <Button variant="primary" size="sm">
                     NFTs
                 </Button>
             </Link>
             <Link href={`/teams/${params.address}/manage/members`}>
-                <Button variant="secondary" size="sm">
+                <Button variant="primary" size="sm">
                     Members
                 </Button>
             </Link>
             <Link href={`/teams/${params.address}/manage/missions`}>
-                <Button variant="secondary" size="sm">
+                <Button variant="primary" size="sm">
                     Missions
                 </Button>
             </Link>

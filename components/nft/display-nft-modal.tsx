@@ -42,9 +42,11 @@ export default function DisplayNFTModal({
 
   // --- Text & Labels ---
   const nftRequestSuccessTitle = lang.validation.request_sent;
-  const nftRequestSuccessDescription = lang.validation.nft.request.success.request_sent;
+  const nftRequestSuccessDescription =
+    lang.validation.nft.request.success.request_sent;
   const nftRequestFailedTitle = lang.validation.request_failed;
-  const nftRequestFailedAlreadyRequested = lang.validation.nft.request.fail.already_requested;
+  const nftRequestFailedAlreadyRequested =
+    lang.validation.nft.request.fail.already_requested;
 
   useEffect(() => {
     details.image
@@ -78,26 +80,24 @@ export default function DisplayNFTModal({
 
     const result = await requestAchievement(details.id);
 
-    if(result.status === "success"){
+    if (result.status === "success") {
       toast({
         title: nftRequestSuccessTitle,
-        description: nftRequestSuccessDescription
+        description: nftRequestSuccessDescription,
       });
-    } else{
-        if(result.messageCode === "achievement_already_requested"){
-          toast({
-            title: nftRequestFailedTitle,
-            description: nftRequestFailedAlreadyRequested
-          });
-        }
-        else{
-          toast({
-            title: result.status,
-            description: result.messageCode,
-          });
-        }
+    } else {
+      if (result.messageCode === "achievement_already_requested") {
+        toast({
+          title: nftRequestFailedTitle,
+          description: nftRequestFailedAlreadyRequested,
+        });
+      } else {
+        toast({
+          title: result.status,
+          description: result.messageCode,
+        });
+      }
     }
-
 
     setRequesting(false);
   };
@@ -107,7 +107,7 @@ export default function DisplayNFTModal({
   }
 
   return (
-    <DialogContent className="flex flex-col gap-6 max-w-[504px] pt-6">
+    <DialogContent className="flex flex-col gap-6 max-w-[640px] pt-6">
       <div className="flex items-center justify-between gap-2">
         <span className="text-subhead_s">{details.name}</span>
 
@@ -115,84 +115,84 @@ export default function DisplayNFTModal({
           {contract ? truncateMiddle(contract, 13) : "no contract"}
         </Button>
       </div>
+      <div className="flex flex-col gap-[6px]">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex-1	 relative object-scale w-full rounded-sm aspect-square bg-background-layer-2 flex">
+            <Image
+              src={DEFAULT_IPFS_URL + showingImage}
+              alt={details.name}
+              fill={true}
+              className="rounded-sm"
+            />
 
-      <div className="flex flex-col gap-4">
-        <div className="relative object-scale-down w-full rounded-sm aspect-square bg-background-layer-2">
-          <Image
-            src={DEFAULT_IPFS_URL + showingImage}
-            alt={details.name}
-            fill={true}
-            className="rounded-sm"
-          />
+            {details.avatar && details.image && (
+              <Button
+                className="absolute w-12 h-12 bottom-2 right-2"
+                onClick={onClickChangeImage}
+                size="image"
+              >
+                <Image
+                  src={
+                    showingImage == details.avatar
+                      ? "/icons/certificate.png"
+                      : "/icons/avatar.png"
+                  }
+                  alt="avatar"
+                  width="48"
+                  height="48"
+                  className="bg-transparent"
+                ></Image>
+              </Button>
+            )}
+          </div>
+          <div className="flex flex-1	 p-0  rounded-sm  flex-col gap-sm">
+            <div className="flex flex-col gap-2 justify-between px-4 py-3  ">
+              <div className="text-label_m text-text-secondary ">
+                {lang.achievement.display_nft.nft_type}
+              </div>
 
-          {details.avatar && details.image && (
-            <Button
-              className="absolute w-12 h-12 bottom-2 right-2"
-              onClick={onClickChangeImage}
-              size="image"
-            >
-              <Image
-                src={
-                  showingImage == details.avatar
-                    ? "/icons/certificate.png"
-                    : "/icons/avatar.png"
-                }
-                alt="avatar"
-                width="48"
-                height="48"
-                className="bg-transparent"
-              ></Image>
-            </Button>
-          )}
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">
+                  {details.nft_type
+                    ? lang.interface.nft_type[details.nft_type]
+                    : "Not NFT"}
+                </span>
+
+                {details.nft_type == "sbt" && (
+                  <Badge variant="info" shape="category">
+                    {lang.interface.sbt_type[details.type]}
+                  </Badge>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2  justify-between px-4 py-3  ">
+              <div className="text-label_m text-text-secondary ">
+                {lang.achievement.display_nft.nft_prop}
+              </div>
+
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">
+                  {details.avatar && details.image
+                    ? lang.interface.nft_image_type["avatar+image"]
+                    : details.avatar
+                    ? lang.interface.nft_image_type.avatar
+                    : lang.interface.nft_image_type.image}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2  justify-between px-4 py-3">
+              <div className="text-label_m text-text-secondary ">
+                {lang.achievement.display_nft.publisher}
+              </div>
+
+              <div className="flex items-center gap-2 overflow-auto text-right">
+                <span className="text-title_m">{details.club?.name}</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="max-w-md p-0 border rounded-sm border-border-div">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
-            <div className="text-label_m text-text-secondary ">
-              {lang.achievement.display_nft.nft_type}
-            </div>
-
-            <div className="flex items-center gap-2 overflow-auto text-right">
-              <span className="text-title_m">
-                {details.nft_type
-                  ? lang.interface.nft_type[details.nft_type]
-                  : "Not NFT"}
-              </span>
-
-              {details.nft_type == "sbt" && (
-                <Badge variant="info" shape="category">
-                  {lang.interface.sbt_type[details.type]}
-                </Badge>
-              )}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between px-4 py-3 border-b border-border-div">
-            <div className="text-label_m text-text-secondary ">
-              {lang.achievement.display_nft.nft_prop}
-            </div>
-
-            <div className="flex items-center gap-2 overflow-auto text-right">
-              <span className="text-title_m">
-                {details.avatar && details.image
-                  ? lang.interface.nft_image_type["avatar+image"]
-                  : details.avatar
-                  ? lang.interface.nft_image_type.avatar
-                  : lang.interface.nft_image_type.image}
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between px-4 py-3">
-            <div className="text-label_m text-text-secondary ">
-              {lang.achievement.display_nft.publisher}
-            </div>
-
-            <div className="flex items-center gap-2 overflow-auto text-right">
-              <span className="text-title_m">{details.club?.name}</span>
-            </div>
-          </div>
-        </div>
-
         <div className="p-4 rounded-sm bg-background-layer-2">
           <div className="flex justify-between">
             <span className="mb-4 text-title_m">
@@ -218,7 +218,6 @@ export default function DisplayNFTModal({
           </p>
         </div>
       </div>
-
       <div
         className={`grid ${
           showMintButton ? "grid-cols-2" : "grid-cols-1"

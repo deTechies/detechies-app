@@ -870,9 +870,10 @@
           "all_accept": "Accept All"
         },
         "member": {
+          "title": "Pending Memberslist",
           "waiting_join": "Waiting for Group Joining",
           "no_waiting_join": "No Waiting for Group Joining",
-          "waiting_invite": "Waiting for Invitation Approval",
+          "waiting_invite": "Waiting for approval",
           "no_waiting_invite": "No Waiting for Invitation Approval",
           "all_members": "All Members",
           "user_info": "Info",

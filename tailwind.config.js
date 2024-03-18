@@ -173,16 +173,14 @@ module.exports = {
           "1.625rem",
           { 
             lineHeight: 1.3,
-            fontWeight: "600",
-            letterSpacing: "0px" 
+            fontWeight: "500",
           },
         ],
         subhead_m: [ // 24px 1.3 0 600
           "1.5rem",
           { 
             lineHeight: 1.3,
-            fontWeight: "600",
-            letterSpacing: "0px" 
+            fontWeight: "500",
           },
         ],
         subhead_s: [ // 20px 1.3 0 600

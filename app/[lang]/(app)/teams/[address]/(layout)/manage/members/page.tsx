@@ -1,6 +1,7 @@
 // import PendingProfileCard from "@/components/card/pending-profile-card";
 import PendingMemberListItem from "@/components/group/pending-member-list-item";
 import InviteGroupMember from "@/components/invite-group-member/invite-group-member";
+import PageHeader from "@/components/metronic/header/page-header";
 
 import { getDictionary } from "@/get-dictionary";
 import { serverApi } from "@/lib/data/general";
@@ -11,23 +12,25 @@ export default async function ManageMember({
 }: {
   params: any;
   searchParams: { [key: string]: string | string[] | undefined };
-
 }) {
-  const { data: pendingData } = await serverApi(`/members/invites/${params.address}`);
-    const lang = await getDictionary(params.lang);
-  const searchItem = searchParams.search as string;
+  const { data: pendingData } = await serverApi(
+    `/members/invites/${params.address}`
+  );
+  const lang = await getDictionary(params.lang);
+
 
   return (
-    <div className="overflow-auto max-w-[90vw]">
-      <h3 className="mb-4 text-subhead_s">
-        {lang.group.details.manage.member.waiting_join} ({pendingData?.length})
-        
+    <div className="overflow-auto max-w-[90vw] flex flex-col gap-md">
+      <PageHeader
+        title={"Manage Members"}
+        subtitle={`Currently you have ${pendingData.length} members pending`}
+      >
         <InviteGroupMember
-                groupId={params.address}
-                lang={lang}
-                groupMembers={[]}
-              />
-      </h3>
+          groupId={params.address}
+          lang={lang}
+          groupMembers={[]}
+        />
+      </PageHeader>
 
       <div className="flex flex-col gap-3 mb-8">
         <div className="grid grid-cols-[282px_1fr_90px_144px] gap-4 text-text-placeholder text-title_s">
@@ -44,11 +47,7 @@ export default async function ManageMember({
         {pendingData.length > 0 ? (
           pendingData.map((item: any, index: number) => {
             return (
-              <PendingMemberListItem
-                profile={item}
-                key={index}
-                lang={lang}
-                />
+              <PendingMemberListItem profile={item} key={index} lang={lang} />
             );
           })
         ) : (
@@ -57,8 +56,6 @@ export default async function ManageMember({
           </div>
         )}
       </div>
-
-
     </div>
   );
 }
