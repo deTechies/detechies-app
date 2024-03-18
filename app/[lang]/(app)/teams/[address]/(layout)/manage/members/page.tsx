@@ -1,5 +1,6 @@
 // import PendingProfileCard from "@/components/card/pending-profile-card";
 import PendingMemberListItem from "@/components/group/pending-member-list-item";
+import InviteGroupMember from "@/components/invite-group-member/invite-group-member";
 
 import { getDictionary } from "@/get-dictionary";
 import { serverApi } from "@/lib/data/general";
@@ -20,6 +21,12 @@ export default async function ManageMember({
     <div className="overflow-auto max-w-[90vw]">
       <h3 className="mb-4 text-subhead_s">
         {lang.group.details.manage.member.waiting_join} ({pendingData?.length})
+        
+        <InviteGroupMember
+                groupId={params.address}
+                lang={lang}
+                groupMembers={[]}
+              />
       </h3>
 
       <div className="flex flex-col gap-3 mb-8">

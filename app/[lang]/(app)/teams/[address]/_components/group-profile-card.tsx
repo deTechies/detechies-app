@@ -3,12 +3,9 @@
 import { serverApi } from "@/lib/data/general";
 
 import JoinGroup from "@/components/group/join-group";
-import InviteGroupMember from "@/components/invite-group-member/invite-group-member";
-import { Button } from "@/components/ui/button";
 import { addURL } from "@/lib/utils";
 import { Briefcase, Folder, MapPin } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import ProfileTabs from "../../../mypage/_components/profile-page-card/profile-tabs";
 
 export default async function GroupProfileCard({
@@ -87,24 +84,7 @@ export default async function GroupProfileCard({
       </header>
       <div className="sticky top-0">
         <ProfileTabs links={links} prelink={`/teams/${teamDetails.id}`}>
-          {teamDetails.userRole == "admin" && (
-            <div className="flex items-start gap-3 grow">
-              <Link
-                href={`/teams/${teamDetails.id}/create/nft`}
-                className="max-w-[212px] grow rounded-full"
-              >
-                <Button size="sm" variant="primary" className="w-full">
-                  Create Achievement
-                </Button>
-              </Link>
 
-              <InviteGroupMember
-                groupId={teamDetails.id}
-                lang={lang}
-                groupMembers={teamDetails.members}
-              />
-            </div>
-          )}
 
           {teamDetails.userRole == "none" && (
             <div className="flex gap-3 grow">

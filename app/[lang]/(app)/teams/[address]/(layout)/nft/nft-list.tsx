@@ -4,38 +4,27 @@ import { Achievement } from "@/lib/interfaces";
 
 export default async function NftList({
   address,
-  lang
+  lang,
 }: {
   address?: string;
   lang: any;
 }) {
-  const TAB_BUTTONS = {
-    ALL: "all",
-    CAREER: "career",
-    LIMITED: "limited",
-    AVATAR: "avatar",
-  };
-
   const { data: achievements } = await serverApi(
     `/achievement/club/${address}`
   );
 
-
- 
   return (
     <div>
-
       <div className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {achievements &&
-          achievements
-            .map((achievement: Achievement, index: number) => (
-              <DisplayNFT
-                details={achievement}
-                key={index}
-                lang={lang}
-                showMintButton={true}
-              />
-            ))}
+          achievements.map((achievement: Achievement, index: number) => (
+            <DisplayNFT
+              details={achievement}
+              key={index}
+              lang={lang}
+              showMintButton={true}
+            />
+          ))}
       </div>
 
       {achievements.length < 1 && (
