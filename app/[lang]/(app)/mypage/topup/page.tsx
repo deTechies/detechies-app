@@ -13,7 +13,7 @@ const stripePromise = loadStripe(
 export default function Home() {
   return (
     <Elements stripe={stripePromise}>
-      <PaymentForm dictionary={""} onClose={() => console.log("close")} />
+      <PaymentForm onClose={() => console.log("close")} />
     </Elements>
   );
 }

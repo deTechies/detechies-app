@@ -16,7 +16,7 @@ export default function MyCredits({
 
         <div className="flex gap-2 items-center">
           <span className="text-title_m">{credits.toLocaleString()} P</span>
-         <TopUpTrigger dictionary={dictionary} credits={credits}/>
+          <TopUpTrigger credits={credits} />
         </div>
       </div>
     </div>
