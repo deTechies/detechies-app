@@ -6,6 +6,8 @@ export async function POST(req: Request) {
     const URL = "https://api.stripe.com/v1/checkout/sessions";
     // 1. Destructure the price and quantity from the POST body
     const { price, quantity = 1, metadata = {} } = await req.json();
+    
+    const subscription_id = "price_1OvrKwGgWTlsnC777h81M1JN"
 
     try {
       // 2. Get the user from Supabase auth
@@ -38,11 +40,10 @@ export async function POST(req: Request) {
         },
         line_items: [
           {
-            price: price.id,
-            quantity,
+            price: subscription_id,
           },
         ],
-        mode: "payment",
+        mode: "subscription",
         allow_promotion_codes: true,
         success_url: `${URL}/account`,
         cancel_url: `${URL}/`,

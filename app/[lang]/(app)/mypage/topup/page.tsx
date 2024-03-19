@@ -1,6 +1,6 @@
 "use client";
 
-import PaymentForm from "@/components/stipre/payment-form";
+import PaymentForm from "@/components/stripe/payment-form";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 

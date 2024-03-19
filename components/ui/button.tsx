@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-accent-primary text-white",
-        primary: "bg-accent-secondary",
+        primary: "bg-accent-primary text-white",
         success: "bg-accent-primary ",
         error: "bg-state-error-secondary text-state-error",
         destructive: "bg-state-error-secondary text-state-error hover:bg-destructive/20",

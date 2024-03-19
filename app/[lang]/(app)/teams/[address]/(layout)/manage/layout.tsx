@@ -23,6 +23,11 @@ export default function ManageTeamLayout({children, params}: {children: any, par
                     Missions
                 </Button>
             </Link>
+            <Link href={`/teams/${params.address}/manage/settings`}>
+                <Button variant="primary" size="sm">
+                    Settings
+                </Button>
+            </Link>
         </div>
         <Suspense fallback={<span>Loading...</span>}>
             {children}

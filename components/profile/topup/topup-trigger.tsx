@@ -1,4 +1,5 @@
-import PaymentForm from "@/components/stipre/payment-form";
+"use client"
+import PaymentForm from "@/components/stripe/payment-form";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Elements } from "@stripe/react-stripe-js";
@@ -14,10 +15,8 @@ const stripePromise = loadStripe(
 
 export default function TopUpTrigger({
     credits, 
-    dictionary,
 }: {
     credits?: number;
-    dictionary: any;
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const triggerClose = () => {
@@ -27,12 +26,12 @@ export default function TopUpTrigger({
     <Dialog open={isOpen} onOpenChange={(value) => setIsOpen(value)}>
       <DialogTrigger>
         <Button variant={"secondary"} size="ts" >
-          {dictionary.mypage.topup.charge}
+          Renew
         </Button>
       </DialogTrigger>
       <DialogContent>
         <Elements stripe={stripePromise}>
-          <PaymentForm  onClose={triggerClose} credits={credits} dictionary={dictionary}/>
+          <PaymentForm  onClose={triggerClose} credits={credits} />
         </Elements>
       </DialogContent>
     </Dialog>

@@ -58,6 +58,7 @@ module.exports = {
           secondary: "var(--border-secondary)",
           div: "var(--border-div)",
           "on-base": "var(--border-on-base)",
+          base: "var(--border-div)",
         },
         button: {
           secondary: "var(--button-secondary)",
@@ -133,6 +134,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontSize: {
+        base: ['14px', '24px'],
         "b-14-14-500": [
           "0.875rem",
           { lineHeight: "1.4", fontWeight: "500", letterSpacing: "0.15px" },
