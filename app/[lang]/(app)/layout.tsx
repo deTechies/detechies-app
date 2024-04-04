@@ -6,7 +6,9 @@ import type { Metadata } from "next";
 
 
 import DictionaryProvider from "@/lib/dictionaryProvider";
+import { auth } from "@/lib/helpers/authOptions";
 import { Inter } from 'next/font/google';
+import { redirect } from "next/navigation";
 import App from "../app";
 import "../globals.css";
 import Footer from "./_components/footer";
@@ -30,6 +32,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
+  const session = await auth();
+  
+  if(!session){
+    redirect('/onboard')
+  }
 
 
   return (

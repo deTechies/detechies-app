@@ -7,7 +7,7 @@ export default async function AddConnections() {
   return (
     <Card>
       <CardHeader>Socials</CardHeader>
-      <ConnectionsList connections={result.data} />
+      <ConnectionsList connections={[]} />
     </Card>
   );
 }

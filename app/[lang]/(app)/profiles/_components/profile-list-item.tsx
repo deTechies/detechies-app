@@ -1,6 +1,5 @@
 "use client";
 import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
-import { User } from "@/lib/interfaces";
 import Link from "next/link";
 
 import { Card, CardFooter } from "@/components/metronic/card/card";
@@ -10,32 +9,32 @@ import { addURL, formatDate } from "@/lib/utils";
 import Image from "next/image";
 
 interface ProfileProps {
-  profile: User;
+  profile: any;
   lang: any;
 }
 
 export default function ProfileListItem({ profile, lang }: ProfileProps) {
   return (
-    <Link href={`/profiles/${profile.wallet}`} passHref>
+    <Link href={profile.wallet ? `/profiles/${profile.wallet}` : `https://github.com/${profile.name}`} passHref>
       <Card className="flex border hover:scale-[0.98] transition-transform duration-200">
         <section className="flex flex-col items-center justify-center gap-4 text-center p-4">
           <Avatar className="w-[60x] h-[60px] mx-auto ">
             <AvatarImage
-              src={addURL(profile.avatar_link) || DEFAULT_AVATAR_LINK}
+              src={profile.avatar_link ? addURL(profile.avatar_link) : DEFAULT_AVATAR_LINK}
               alt={profile.display_name}
               className="rounded-full bg-none"
             />
 
             <AvatarFallback className="relative">
               <Image
-                src={addURL(profile.avatar_link) || DEFAULT_AVATAR_LINK}
+                src={profile.avatar_link ? addURL(profile.avatar_link) : DEFAULT_AVATAR_LINK}
                 alt="avatar"
                 fill={true}
               />
             </AvatarFallback>
           </Avatar>
           <div className="max-w-[250px]">
-            <h5 className="text-md mb-2"> {profile.display_name}</h5>
+            <h5 className="text-md mb-2"> {profile.display_name ? profile.display_name : profile.name}</h5>
           </div>
 
           <div className="w-full flex-col">
@@ -45,7 +44,7 @@ export default function ProfileListItem({ profile, lang }: ProfileProps) {
             />
             <TeamListItemStat
               label="Projects"
-              value={profile.projectsCount.toString()}
+              value={profile.projectsCount?.toString()}
             />
             <TeamListItemStat
               label="Created"

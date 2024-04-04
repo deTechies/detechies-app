@@ -34,5 +34,5 @@ export const defaultAvatar = [
   ];
 
 export const DEFAULT_IPFS_URL = "https://ipfs.io/ipfs/";
-export const DEFAULT_AVATAR_LINK = "https://ipfs.io/ipfs/bafkreiabd3cfto7a7tjwgr5zikce476jxeeekmeif357t7v3g64uolgose";
+export const DEFAULT_AVATAR_LINK = "/images/developer.png";
 export { ABI, MUMBAI };

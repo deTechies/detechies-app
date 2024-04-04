@@ -37,7 +37,7 @@ export default async function ConnectionsList({
   // we also want to check if the session contains github or twitter and if it does, we want to set the connected and verified to true
   const isConnectionSaved = (network: string, display_name?: string) => {
     // Check if the connection is saved in the database
-    const connection = connections.find(
+    const connection = connections?.find(
       (conn: any) =>
         conn.social === network && conn.display_name === display_name
     );
