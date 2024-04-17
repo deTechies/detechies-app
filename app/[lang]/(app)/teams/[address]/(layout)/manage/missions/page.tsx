@@ -36,7 +36,7 @@ export default async function ManageNft({
               <Plus className="w-10 h-10"></Plus>
             </div>
 
-            <div className="text-center text-text-secondary text-subhead_m">
+            <div className="text-center text-gray-600 text-md">
               {lang.group.details.manage.mission.create}
             </div>
           </Card>

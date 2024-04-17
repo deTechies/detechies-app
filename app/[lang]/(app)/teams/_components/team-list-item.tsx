@@ -50,9 +50,6 @@ export default function TeamListItem({
           </Avatar>
           <div className="max-w-[250px]">
             <h5 className="text-md mb-2">{details.name}</h5>
-            <p className="text-sm text-text-secondary h-[100px] overflow-scroll">
-              {details.description}
-            </p>
           </div>
           <div className="w-full flex-col">
             <TeamListItemStat

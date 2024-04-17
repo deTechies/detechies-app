@@ -1,7 +1,7 @@
 import Pagination from "@/components/extra/pagination";
 import { serverApi } from "@/lib/data/general";
 import { Project } from "@/lib/interfaces";
-import ProjectItem from "./project-item";
+import ProjectListItem from "./project-list-item";
 
 export default async function ProjectList({
   dictionary,
@@ -25,10 +25,10 @@ export default async function ProjectList({
 
   return (
     <div className="flex flex-col gap-10">
-      <section className="grid w-full gap-md truncate sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <section className="grid w-full gap-10 truncate sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {projects.data.length > 0 &&
           projects.data.map((item: Project) => (
-            <ProjectItem key={item.id} details={item} lang={dictionary} />
+            <ProjectListItem key={item.id} details={item} lang={dictionary} />
           ))}
       </section>
 

@@ -2,34 +2,30 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import * as React from "react"
 
-import { Loader2 } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { ArrowsCircle } from "detechies-icons"
 
 const buttonVariants = cva(
-  "inline-flex hover:opacity-90 active:scale-95 transition-all items-center justify-center ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-2sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-accent-primary text-white",
-        primary: "bg-accent-primary text-white",
-        success: "bg-accent-primary ",
-        error: "bg-state-error-secondary text-state-error",
-        destructive: "bg-state-error-secondary text-state-error hover:bg-destructive/20",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-button-secondary",
+        default: "bg-light-active bg-text-gray-800 hover:bg-primary/90 border border-gray-300",
+        primary: "bg-primary text-light hover:bg-primary-active",
+        destructive:
+          "bg-danger text-light hover:bg-danger-active",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        inactive: "text-text-secondary bg-background-layer-1",
       },
       size: {
-        default: "px-4 py-[10px] rounded-sm truncate text-sm ",
-        sm: "rounded-[6px] px-3 py-[10px] text-xs",
-        md: "rounded-[6px] px-4 py-[13px] truncate",
-        lg: "py-[17px] px-[24px] rounded-sm max-w-[212px] runcate",
-        icon: "h-12 w-12 shrink-0 rounded-md p-2 truncate",
-        icon_circle: "h-12 w-12 shrink-0 rounded-full p-2 truncate",
-        image: "h-fit w-fit p-0 bg-transparent hover:shadow-none truncate",
-        ts: "pt-1 pb-[6px] px-[10px] text-title_s rounded-[14px] truncate",
-        square: " p-2 rounded-[6px]",
+        default: "h-10 px-4 py-2",
+        sm: "h-8 py-2.5 rounded-md px-3",
+        lg: "h-12 rounded-md px-8",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
@@ -47,27 +43,23 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, loading = false, ...props }, ref) => {
+  ({ className, variant, size, loading =false,  asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const content = loading ? (
       <button className="flex items-center gap-4 " disabled>
         {/* Replace with your spinning icon component */}
-        <Loader2 size={16} className="animate-spin" />
+        <ArrowsCircle fontSize={16} className="animate-spin" />
         {size !== "icon" && "Loading..."}
       </button>
     ) : (
       props.children
     );
-
     return (
       <Comp
-        // className={cn(buttonVariants({ variant, size, className }))}
-        className={buttonVariants({ variant, size, className })}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      >
-        {content}
-      </Comp>
+      />
     )
   }
 )

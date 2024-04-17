@@ -23,7 +23,7 @@ export default function ProfileCardWallet({
         target="_blank"
         passHref
       >
-        <Button variant={"secondary"} size="ts">
+        <Button variant={"secondary"} size="sm">
           {wallet.slice(0, 5) + "..." + wallet.slice(-4)}
         </Button>
       </Link>

@@ -4,7 +4,8 @@ import { serverApi } from "@/lib/data/general";
 
 import JoinGroup from "@/components/group/join-group";
 import { addURL } from "@/lib/utils";
-import { Briefcase, Folder, MapPin } from "lucide-react";
+
+import { Folder, Geolocation, User } from "detechies-icons";
 import Image from "next/image";
 import ProfileTabs from "../../../mypage/_components/profile-page-card/profile-tabs";
 
@@ -38,6 +39,10 @@ export default async function GroupProfileCard({
       isAdmin: false,
     },
     {
+      name: 'Funds',
+      href: "funds",
+    },
+    {
       name: lang.group.tabs.manage,
       href: "manage",
       isAdmin: true,
@@ -58,24 +63,24 @@ export default async function GroupProfileCard({
           </div>
 
           <div>
-            <h1 className="text-subhead_m text-text-primary">
+            <h1 className="text-1.5xl tracking-wider">
               {teamDetails.name}
             </h1>
           </div>
-          <div className="flex gap-[18px] text-text-secondary mx-auto">
+          <div className="flex gap-[18px] text-gray-600 mx-auto">
             <div className="flex gap-[5px] justify-center items-center">
-              <Folder size={16} />
-              <span className="text-label_m">0 Project</span>
+              <Folder fontSize={16} />
+              <span className="text-md">0 Project</span>
             </div>
 
-            <div className="flex gap-[5px]justify-center items-center">
-              <MapPin size={16} />
-              <span className="text-label_m">Location</span>
+            <div className="flex gap-[5px] first-letter:justify-center items-center">
+              <Geolocation fontSize={16} />
+              <span className="text-md">Location</span>
             </div>
 
-            <div className="flex gap-[5px] justify-center items-center text-text-secondary">
-              <Briefcase size={16} />
-              <span className="text-label_m">
+            <div className="flex gap-[5px] justify-center items-center text-gray-600">
+              <User fontSize={16} />
+              <span className="text-md">
                 {teamDetails.members.length} members
               </span>
             </div>

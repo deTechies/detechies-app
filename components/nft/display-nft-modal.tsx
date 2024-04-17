@@ -129,7 +129,6 @@ export default function DisplayNFTModal({
               <Button
                 className="absolute w-12 h-12 bottom-2 right-2"
                 onClick={onClickChangeImage}
-                size="image"
               >
                 <Image
                   src={

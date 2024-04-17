@@ -50,7 +50,7 @@ export default function EmailVerification({
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-[30px] bg-background-layer-1 border text-center max-w-[600px] p-10">
+      <Card className="flex flex-col gap-[30px] bg-light border text-center max-w-[600px] p-10">
         <Image
           src="/images/email-send.png"
           alt="verify email"

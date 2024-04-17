@@ -22,7 +22,7 @@ export async function PopoverEvent() {
       <PopoverTrigger asChild className="z-10 fixed right-5 bottom-5">
         <Button
           variant="primary"
-          size={"icon_circle"}
+          size={"sm"}
           className="outline outline-accent-primary"
         >
           <MailQuestion size={24} />

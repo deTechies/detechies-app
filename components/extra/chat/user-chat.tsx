@@ -10,7 +10,7 @@ export default function UserChat({ to }: { to: Address }) {
       <DialogTrigger>
         <Button
           variant={"primary"}
-          size={"square"}
+          size={"sm"}
           className="w-full py-2 text-label_m text-center justify-center rounded-[6px] "
         >
           <MessageCircle size="16" className="inline-block" />

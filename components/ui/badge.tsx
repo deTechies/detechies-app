@@ -3,19 +3,19 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva("flex flex-row items-center", {
+const badgeVariants = cva("flex flex-row gap-2 items-center text-2xs", {
   variants: {
     variant: {
-      default: "bg-background-layer-2 text-text-primary text-sm",
-      info: "border-state-info bg-state-info-secondary text-state-info hover:bg-info/80",
+      default: "bg-light text-2xs font-medium",
+      info: "border-info-clarity bg-info-light text-info hover:bg-info/80",
       accent:
-        "border-accent-primary bg-accent-secondary text-accent-primary hover:bg-accent/80",
+        "border-primary bg-secondary text-primary hover:bg-accent/80",
       success:
-        "border-state-success bg-state-success-secondary text-state-success",
+        "border border-success-clarity bg-success-light text-success",
       warning:
         "border-state-warning bg-state-warning-secondary text-state-warning",
       placeholder: "border-border-input text-text-placeholder",
-      secondary: "bg-button-secondary",
+      secondary: "bg-gray-200 text-gray-700",
       tertiary:
         "text-type-purple-primary bg-type-purple-secondary hover:bg-type-purple-secondary/80",
       purple:
@@ -29,7 +29,7 @@ const badgeVariants = cva("flex flex-row items-center", {
     },
     shape: {
       default:
-        "rounded-[6px] p-2 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+        "rounded-[6px] p-2 transition-colors ",
       md: "py-2 px-2.5 rounded-md text-sm",
       sm: "py-2 px-2.5 rounded-md text-label_s",
       category:

@@ -1,9 +1,9 @@
 "use client";
-
 import NotificationPopover from "@/components/metronic/notification/notification-popover";
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-import { Menu, MessageCircle, X } from "lucide-react";
+import { Messages } from 'detechies-icons';
+import { Menu, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -43,7 +43,7 @@ export default function Navbar({ lang }: { lang: any }) {
         <>
           <div className="px-6 lg:px-8 max-w-[1920px] mx-auto relative ">
             <div className="flex flex-row justify-between items-center py-5  px-2 md:px-4 lg:px-10">
-              <div className="flex flex-row gap-4 items-center">
+              <div className="flex flex-row gap-10 items-center">
                 <div className="flex flex-shrink-0 items-center h-[32px] w-[32px] relative flex-wrap cursor-pointer my-auto">
                   <Image
                     src="/images/detechies.png"
@@ -57,18 +57,19 @@ export default function Navbar({ lang }: { lang: any }) {
                   />
                 </div>
 
-                <div className="gap-2 hidden sm:flex sm:gap-4 md:gap-2 ">
+              
+                <div className="gap-2.5 hidden sm:flex sm:gap-4 md:gap-2 ">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   {links.map((link: any, index: number) => (
                     <Link
                       key={index}
                       href={link.href}
                       aria-disabled={link?.disabled}
-                      className={`flex items-center text-md  font-medium py-3 content-center px-5
+                      className={`flex items-center text-sm  py-3 content-center px-5
                       ${
-                        pathname.includes(link.href)
-                          ? "bg-accent-secondary rounded-[6px] text-text-primary"
-                          : "text-text-secondary hover:text-text-primary"
+                        pathname.endsWith(link.href)
+                          ? "text-gray-800 font-medium"
+                          : "text-gray-700 hover:text-primary"
                       }  
                       `}
                     >
@@ -80,10 +81,10 @@ export default function Navbar({ lang }: { lang: any }) {
               <section className="flex gap-10">
                 <div className="hidden sm:ml-8 sm:flex sm:items-center sm:gap-[14px]">
                   {/* Profile dropdown */}
-                  <div className="mx-3">
-                    <MessageCircle className="w-5 h-5 text-text-secondary" />
+                  <div className="mx-3 text-blue-600">
+                    <Messages className="w-5 h-5" fontSize="16" />
                   </div>
-                  <div className="mx-3">
+                  <div className="mx-3 text-gray-500 hover:text-gray-900 cursor-pointer" >
                     <NotificationPopover />
                    
                   </div>

@@ -45,7 +45,8 @@ export default function ProjectCreatePage({ params }: { params: any }) {
         findGithubDetails(github);
         //setPreFilled({ ...prefilled, github: search });
       }else{
-        setPreFilled({ ...prefilled, github: "" });
+        //if it is not a github link then set the addManual to true
+        setPreFilled({ ...prefilled, github: search });
       }
     }
   }, [searchParams]);

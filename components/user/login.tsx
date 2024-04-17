@@ -19,7 +19,7 @@ import {
   User,
   UserPlus,
   Users,
-  Wallet
+  Wallet,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -29,6 +29,7 @@ import { ThemeToggle } from "../extra/theme-toggle";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 
+import { ArrowMix } from "detechies-icons";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -43,7 +44,6 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { toast } from "../ui/use-toast";
-import AccountSettings from "./account-settings";
 
 interface ILoginProps {
   lang: any;
@@ -108,31 +108,25 @@ export default function Login({ lang }: ILoginProps) {
         <Button size="sm" variant={"primary"} onClick={() => signOut()}>
           {lang.sign_in}
         </Button>
-        {showModal && (
-          <AccountSettings showModal={showModal} text_my_account={lang} />
-        )}
       </div>
     );
   }
 
   if (!isConnecting && address && address == session?.web3?.address) {
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <div className="flex items-center gap-2 rounded-md hover:scale-105	">
-            <section className="flex flex-col gap-1 text-right text-xs font-semibold  my-1">
-              <span className="text-text-secondary">
-                {session.web3.user.display_name}
-              </span>
-              <span className="text-text-primary">
-                {truncateMiddle(session.web3.user.wallet, 10)}
-              </span>
-            </section>
-            <button
-              onClick={() => {
-                setShowModal(!showModal);
-              }}
-            >
+      <div className="flex gap-2 items-center">
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <div className="flex items-center gap-2 rounded-md hover:scale-105	">
+              <section className="flex flex-col gap-1 text-right text-xs font-semibold  my-1">
+                <span className="text-text-secondary">
+                  {session.web3.user.display_name}
+                </span>
+                <span className="text-text-primary">
+                  {truncateMiddle(session.web3.user.wallet, 10)}
+                </span>
+              </section>
+
               <div className="relative w-[40px] h-[40px]">
                 <Image
                   src={
@@ -145,76 +139,61 @@ export default function Login({ lang }: ILoginProps) {
                   className="rounded-[6px] bg-background-layer-2"
                 />
               </div>
-            </button>
-
-            {showModal && (
-              <AccountSettings showModal={showModal} text_my_account={lang} />
-            )}
-
-            {chain?.id != 314159 && chain?.id != 80001 && (
-              <Button
-                variant={"destructive"}
-                size="sm"
-                onClick={() => setShowModal(!showModal)}
-              >
-                Change Chain
-              </Button>
-            )}
-          </div>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-[250px]">
-          <DropdownMenuGroup>
-            <Link href={`/profiles/${session.web3.user.wallet}`} passHref>
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-[250px]">
+            <DropdownMenuGroup>
+              <Link href={`/profiles/${session.web3.user.wallet}`} passHref>
+                <DropdownMenuItem className="group">
+                  <User className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                  <span>Public Profile</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link href="/mypage" passHref>
+                <DropdownMenuItem className="group">
+                  <LayoutDashboard className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                  <span>My Page</span>
+                </DropdownMenuItem>
+              </Link>
+              <Link href="/mypage/edit" passHref>
+                <DropdownMenuItem className="group">
+                  <Settings className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                  <span>Settings</span>
+                </DropdownMenuItem>
+              </Link>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
               <DropdownMenuItem className="group">
-                <User className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-                <span>Public Profile</span>
+                <Users className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                <span>Profiles</span>
               </DropdownMenuItem>
-            </Link>
-            <Link href="/mypage" passHref>
-              <DropdownMenuItem className="group">
-                <LayoutDashboard className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-                <span>My Page</span>
-              </DropdownMenuItem>
-            </Link>
-            <Link href="/mypage/edit" passHref>
-              <DropdownMenuItem className="group">
-                <Settings className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-                <span>Settings</span>
-              </DropdownMenuItem>
-            </Link>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem className="group">
-              <Users className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-              <span>Profiles</span>
-            </DropdownMenuItem>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
-                <UserPlus className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-                <span>Invite users</span>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent>
-                  <DropdownMenuItem className="group">
-                    <Mail className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-                    <span>Email</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="group">
-                    <MessageSquare className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-                    <span>Message</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="group">
-                    <PlusCircle className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-                    <span>More...</span>
-                  </DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <UserPlus className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                  <span>Invite users</span>
+                </DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem className="group">
+                      <Mail className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                      <span>Email</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="group">
+                      <MessageSquare className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                      <span>Message</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="group">
+                      <PlusCircle className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+                      <span>More...</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
               className="group"
               onClick={(event) => {
                 event.preventDefault();
@@ -222,58 +201,68 @@ export default function Login({ lang }: ILoginProps) {
               }}
             >
               <Wallet className="mr-2 h-4 w-4 " />
-              <span className="text-sm">{truncateMiddle(session.web3.user.wallet, 18)}</span>
+              <span className="text-sm">
+                {truncateMiddle(session.web3.user.wallet, 18)}
+              </span>
               <DropdownMenuShortcut>
                 <Copy className="h-4 w-4 group-hover:text-accent-primary" />
               </DropdownMenuShortcut>
             </DropdownMenuItem>
-          <DropdownMenuItem className="group">
-            <Github className="mr-2 h-4 w-4 group-hover:text-black-900" />
-            {session.web3?.github ? (
-              <span>{session.web3.github.user.display_name}</span>
-            ) : (
-              <span>GitHub</span>
-            )}
-          </DropdownMenuItem>
-          
-          <DropdownMenuItem className="group">
-            <LifeBuoy className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
-            <span>Support</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="group"
-            onClick={(event) => {
-              event.preventDefault();
-            }}
+            <DropdownMenuItem className="group">
+              <Github className="mr-2 h-4 w-4 group-hover:text-black-900" />
+              {session.web3?.github ? (
+                <span>{session.web3.github.user.display_name}</span>
+              ) : (
+                <span>GitHub</span>
+              )}
+            </DropdownMenuItem>
+
+            <DropdownMenuItem className="group">
+              <LifeBuoy className="mr-2 h-4 w-4 group-hover:text-accent-primary" />
+              <span>Support</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="group"
+              onClick={(event) => {
+                event.preventDefault();
+              }}
+            >
+              <Moon className="mr-2 h-4 w-4" />
+              <span>Dark mode</span>
+              <DropdownMenuShortcut>
+                <ThemeToggle />
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              className="group"
+              onClick={() => {
+                disconnect();
+                signOut();
+                router.push("/onboard");
+              }}
+            >
+              <LogOut className="mr-2 h-4 w-4 group-hover:text-state-error" />
+              <span>Log out</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        {chain?.id != 314159 && chain?.id != 80001 && (
+          <Button
+            variant={"destructive"}
+            size="sm"
+            onClick={() => setShowModal(!showModal)}
           >
-            <Moon className="mr-2 h-4 w-4" />
-            <span>Dark mode</span>
-            <DropdownMenuShortcut>
-              <ThemeToggle />
-            </DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            className="group"
-            onClick={() => {
-              disconnect();
-              signOut();
-              router.push("/onboard");
-            }}
-          >
-            <LogOut className="mr-2 h-4 w-4 group-hover:text-state-error" />
-            <span>Log out</span>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+            <ArrowMix />
+          </Button>
+        )}
+      </div>
     );
   }
 
   return (
     <div className="flex items-center gap-4">
       <Button
-        size="md"
-        variant="success"
         onClick={() => {
           router.push("/onboard");
         }}

@@ -45,15 +45,14 @@ export const MissionItem: React.FC<MissionItemProps> = ({
 
         {isActive ? (
           <Button
-            size="icon_circle"
-            variant={"success"}
+            variant={"primary"}
             className="rounded-full"
           >
             <Check />
           </Button>
         ) : (
           <Button
-            size="icon_circle"
+          size="sm"
             variant={"secondary"}
             className=" rounded-full text-[#BEC3CA]"
           >

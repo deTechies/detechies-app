@@ -11,12 +11,12 @@ const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   ProgressProps
 >(
-  ({ className, value, color = "bg-accent-primary", ...props }, ref) => {
+  ({ className, value, color = "bg-primary", ...props }, ref) => {
     return (
       <ProgressPrimitive.Root
         ref={ref}
         className={cn(
-          "relative h-[14px] w-full overflow-hidden rounded-full bg-background-layer-2",
+          "relative h-[12px] w-full overflow-hidden rounded-full bg-gray-300",
           className
         )}
         {...props}
@@ -25,7 +25,7 @@ const Progress = React.forwardRef<
         {Array.from({ length: 10 }).map((_, index) => (
           <div
             key={index}
-            className="absolute h-full bg-background-layer-2 z-10"
+            className="absolute h-full bg-gray-300 z-10"
             style={{
               left: `${index * 10}%`,
               width: index === 9 ? '0' : '1px', // Adjust width for the last line

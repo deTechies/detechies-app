@@ -59,7 +59,7 @@ export default function MissionList({
               <Button
                 key={tab}
                 size="sm"
-                variant={currentTab === tab ? "secondary" : "inactive"}
+                variant={currentTab === tab ? "secondary" : "ghost"}
                 className="py-3"
                 onClick={() => setCurrentTab(tab)}
               >

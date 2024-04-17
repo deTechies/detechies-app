@@ -25,7 +25,7 @@ export default function TopUpTrigger({
   return (
     <Dialog open={isOpen} onOpenChange={(value) => setIsOpen(value)}>
       <DialogTrigger>
-        <Button variant={"secondary"} size="ts" >
+        <Button variant={"secondary"} size="sm" >
           Renew
         </Button>
       </DialogTrigger>

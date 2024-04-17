@@ -71,7 +71,7 @@ export default function QuitMission({
 
           <Button
             size="lg"
-            variant="error"
+            variant="destructive"
             className="grow max-w-[212px]"
             onClick={onClickQuit}
             loading={loading}

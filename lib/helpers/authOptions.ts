@@ -68,6 +68,7 @@ export const authOptions = {
         if (res.ok && user.data) {
           return Promise.resolve(user.data);
         } else {
+          console.log(res.json());
           return Promise.reject(new Error("Invalid SIWE credentials"));
         }
       },

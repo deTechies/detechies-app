@@ -1,12 +1,12 @@
 "use client";
 
 import { Toaster } from "@/components/ui/toaster";
-import { polygonMumbai } from "@/helpers/mumbai";
 import SessionProvider from "@/lib/SessionProvider";
 import PushProvider from "@/lib/usePushProtocol";
 import { Web3Auth } from "@web3auth/modal";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
+import { arbitrumSepolia } from "viem/chains";
 
 import {
   WagmiConfig,
@@ -18,7 +18,7 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [polygonMumbai],
+  [arbitrumSepolia],
   [publicProvider()]
 );
 

@@ -6,7 +6,8 @@ import {
 } from "@/components/ui/popover";
 import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
 import { serverApi } from "@/lib/data/general";
-import { BellRing, RefreshCcw } from "lucide-react";
+import { NotificationStatu } from "detechies-icons";
+import { RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 import NotificationItem from "./notification-type";
 
@@ -24,7 +25,7 @@ export default function NotificationPopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <BellRing className="w-5 h-5 cursor-pointer text-text-secondary hover:text-text-primary" />
+        <NotificationStatu className="w-5 h-5 cursor-pointer text-gray-600 hover:text-gray-900" />
       </PopoverTrigger>
       <PopoverContent className="w-[460px]  border border-border-div mt-2 shadow p-0 rounded-md">
         <header className="flex justify-between border-b border-border-div p-5 items-center">

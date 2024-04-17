@@ -34,27 +34,27 @@ export default async function GroupProfile({
   const { data: clubInfo } = await serverApi(`/clubs/${params.address}`);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
-      <div className="col-span-1 flex flex-col gap-md w-full">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="col-span-1 flex flex-col gap-10 w-full">
         <Card>
           <CardHeader>Information section</CardHeader>
           <CardContent>
-            <div className="flex flex-col text-md gap-4 text-sm font-medium">
+            <div className="flex flex-col text-md gap-4 font-medium">
               <div className="flex">
-                <span className="text-sm font-medium w-[100px] text-text-secondary">
+                <span className="text-sm font-medium w-[100px] text-gray-600">
                   Members
                 </span>
                 <span>{clubInfo.members.length}</span>
               </div>
               <div className="flex w-full">
-                <span className=" w-[100px] text-text-secondary">Created</span>
+                <span className=" w-[100px] text-gray-600">Created</span>
                 <span>{formatDate(clubInfo.created_at)}</span>
               </div>
               <div className="flex">
-                <span className="text-sm font-medium w-[100px] text-text-secondary">
+                <span className="text-sm font-medium w-[100px] text-gray-600">
                   Creator
                 </span>
-                <span className="text-accent-primary">
+                <span className="text-primary">
                   <Link
                     href={`/profiles/${clubInfo.owner}`}
                     className="text-sm"
@@ -92,7 +92,7 @@ export default async function GroupProfile({
           </CardContent>
         </Card>
       </div>
-      <div className="md:col-span-2 flex flex-col gap-md">
+      <div className="md:col-span-2 flex flex-col gap-10">
         <GroupDetails details={clubInfo} />
 
         <Suspense fallback={"card loading"}>

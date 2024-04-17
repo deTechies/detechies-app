@@ -49,7 +49,7 @@ export default function CreateProjectForm({
   prefilled,
 }: {
   lang: any;
-  prefilled: any;
+  prefilled?: any;
 }) {
   const projectFormSchema = z.object({
     name: z
@@ -253,7 +253,7 @@ export default function CreateProjectForm({
       form.setValue("end_date", end_date);
       form.setValue("tags", prefilled.tags);
     }
-  }, [prefilled]);
+  }, [prefilled, form]);
 
   return (
     <Form {...form}>

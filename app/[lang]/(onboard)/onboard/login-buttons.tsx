@@ -102,7 +102,7 @@ export default function LoginButtons({ text }: { text?: any }) {
                 alt={connectors[1].name}
                 quality={1}
               />
-              <span className="w-full text-center text-title_m">
+              <span className="w-full text-center text-1.5xl">
                 {text?.web3 ? text.web3 : "Social Login"}
               </span>
             </div>
@@ -118,7 +118,7 @@ export default function LoginButtons({ text }: { text?: any }) {
                 width={24}
                 alt={connectors[0].name}
               />
-              <span className="w-full text-center text-title_m ">
+              <span className="w-full text-center text-1.5xl ">
                 {text?.browser ? text.browser : "Browser Wallet"}
               </span>
             </div>
@@ -128,7 +128,7 @@ export default function LoginButtons({ text }: { text?: any }) {
             <Button
               variant="secondary"
               onClick={handleSign}
-              className="flex-grow rounded-r-none rounded-l-sm text-md"
+              className="flex-grow rounded-r-none rounded-l-sm "
 
             >
               {text?.sign_in_as ? text.sign_in_as : "Sign is as "}{" "}
@@ -136,7 +136,7 @@ export default function LoginButtons({ text }: { text?: any }) {
             </Button>
             <Button
               variant={"destructive"}
-              className="rounded-l-none rounded-r-sm text-md"
+              className="rounded-l-none rounded-r-sm"
               onClick={() => {
                 signOut();
                 disconnect();

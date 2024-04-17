@@ -9,8 +9,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, children }) =>
         <header>
             <div className="flex justify-between items-center gap-10">
                 <div className="flex flex-col gap-2">
-                    <h3 className="text-xl font-semibold">{title}</h3>
-                    <div className="text-text-secondary text-sm font-medium">{subtitle}</div>
+                    <h3 className="text-lg font-semibold">{title}</h3>
+                    <div className="text-gray-600 text-md font-medium">{subtitle}</div>
                 </div>
                 {children}
             </div>

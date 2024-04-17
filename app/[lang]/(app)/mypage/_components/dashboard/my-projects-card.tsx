@@ -47,7 +47,7 @@ export const ProjectItem = ({ details, lang }: { details: any; lang: any }) => {
         </div>
       </div>
       <Link href={`/project/${details.id}`}>
-        <Button className="text-primary" size="square">
+        <Button className="text-primary" size="sm">
           <ArrowRight size={16} />
         </Button>
       </Link>

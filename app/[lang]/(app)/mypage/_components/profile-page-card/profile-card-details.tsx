@@ -21,7 +21,7 @@ export default async function ProfileCardDetails({
         target="_blank"
         passHref
       >
-        <Button variant={"secondary"} size="ts">
+        <Button variant={"secondary"} size="sm">
           {profile.wallet.slice(0, 5) + "..." + profile.wallet.slice(-4)}
         </Button>
       </Link>

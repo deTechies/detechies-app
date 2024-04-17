@@ -1,184 +1,275 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+/*
+  Add in the metronic CUSTOM CSS 
+  This is the custom CSS that is used in the Metronic theme
+*/
+
+/* Metronic Custom CSS */
+
+
 @layer base {
   :root {
-    --foreground: 222.2 84% 4.9%;
+    /* Grays */
+    --tw-gray-100: #f9f9f9;
+    --tw-gray-200: #f1f1f4;
+    --tw-gray-300: #dbdfe9;
+    --tw-gray-400: #c4cada;
+    --tw-gray-500: #99a1b7;
+    --tw-gray-600: #78829d;
+    --tw-gray-700: #4b5675;
+    --tw-gray-800: #252f4a;
+    --tw-gray-900: #071437;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
- 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
- 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Primary */
+    --tw-primary: #1b84ff;
+    --tw-primary-active: #056ee9;
+    --tw-primary-light: #e9f3ff;
+    --tw-primary-clarity: rgba(27, 132, 255, 0.2);
+    --tw-primary-inverse: #ffffff;
 
-    --border: #EFF0F2;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    
-    
-    --light-accent-primary: #1B84FF;
-    --light-accent-secondary: #172331;
-    
-    --light-border-input: #BEC3CA;
-    --light-text-secondary: #6B7684;
-    
-    --accent-primary: #1B84FF;
-    --accent-on-primary: #EEF6FF;
-    --accent-secondary: #EEF6FF;
-    --accent-tertiary: #F1FFF6;
-    --accent-on-secondary: #172331;
+    /* Success */
+    --tw-success: #17c653;
+    --tw-success-active: #04b440;
+    --tw-success-light: #eafff1;
+    --tw-success-clarity: "rgba(23, 198, 83, 0.20)";
+    --tw-success-inverse: #ffffff;
 
-    --background-base: #F2F3F5;
-    --background-layer-1: #FCFCFC;
-    --background-layer-2: #F6F7F8;
-    --background-input-inactive: #DBDFE9;
-    --background-tooltip: #101A28;
+    /* Warning */
+    --tw-warning: #f6c000;
+    --tw-warning-active: #dead00;
+    --tw-warning-light: #fff8dd;
+    --tw-warning-clarity: rgba(246, 192, 0, 0.2);
+    --tw-warning-inverse: #ffffff;
 
-    --text-primary: #4B5675;
-    --text-secondary: #78829D;
-    --text-placeholder: #A2A9B3;
-    --text-disabled: #A2A9B3;
-    --text-fixed: #101113;
+    /* Danger */
+    --tw-danger: #f8285a;
+    --tw-danger-active: #d81a48;
+    --tw-danger-light: #ffeef3;
+    --tw-danger-clarity: rgba(248, 40, 90, 0.2);
+    --tw-danger-inverse: #fff;
 
-    --icon-primary: #101113;
-    --icon-secondary: #96A6B4;
-    
-    --border-div: #EFF0F2;
-    --border-input: #DBDFE9;
-    --border-input-focus: #00D41D;
-    --border-input-error: #FF0000;
-    --border-input-disabled: #EFF0F2;
-    --border-on-base: #E1E3E7;
-    
-    --button-secondary: #EFF0F2;
-    --button-secondary-hover: #BEC3CA;
-    --button-secondary-disabled: #F6F7F8;
-    --button-secondary-pressed: #A2A9B3;
-    
-    --state-error-primary: #FF3939;
-    --state-error-secondary: #FFF4F4;
-    --state-success-primary: #0FDB8B;
-    --state-success-secondary: #DBFDF0;
-    --state-warning-primary: #F59754;
-    --state-warning-secondary: #FDEFE5;
-    --state-info-primary: #2E94FF;
-    --state-info-secondary: #E9F4FF;
-    
-    --state-status-primary: #FFEB39;
-    --state-status-secondary: #FFFBDC;
-    
-    --type-purple-primary: #A454F5;
-    --type-purple-secondary: #F8F4FF;
-    --type-yellow-primary: #FFEB39;
-    --type-yellow-secondary: #FFFBDC;
- 
-    --radius: 0.5rem;
+    /* Info */
+    --tw-info: #7239ea;
+    --tw-info-active: #5014d0;
+    --tw-info-light: #f8f5ff;
+    --tw-info-clarity: rgba(114, 57, 234, 0.2);
+    --tw-info-inverse: #ffffff;
+
+    /* Dark */
+    --tw-dark: #1e2129;
+    --tw-dark-active: #111318;
+    --tw-dark-light: #f9f9f9;
+    --tw-dark-clarity: rgba(30, 33, 41, 0.2);
+    --tw-dark-inverse: #ffffff;
+
+    /* Secondary */
+    --tw-secondary: #f9f9f9;
+    --tw-secondary-active: #f9f9f9;
+    --tw-secondary-light: #f9f9f9;
+    --tw-secondary-clarity: rgba(249, 249, 249, 0.2);
+    --tw-secondary-inverse: #4b5675;
+
+    /* Light - LIGHT THEME */
+    --tw-light: #FFFFFF;
+    --tw-light-active: #FCFCFC;
+    --tw-light-light: #FFFFFF;
+    --tw-light-clarity: #FFFFFF;
+    --tw-light-inverse: #FFFFFF;
+
+    /* Brand */
+    --tw-brand: #5a67d8;
+    --tw-brand-active: #4c51bf;
+    --tw-brand-light: #ebf4ff;
+    --tw-brand-clarity: #c3dafe;
+    --tw-brand-inverse: #434190;
+
+    /* Coal */
+    --tw-coal-100: #15171c;
+    --tw-coal-200: #13141a;
+    --tw-coal-300: #111217;
+    --tw-coal-400: #0f1014;
+    --tw-coal-500: #0d0e12;
+    --tw-coal-600: #0b0c10;
+    --tw-coal-black: #000000;
+    --tw-coal-clarity: rgba(24, 25, 31, 0.5);
+
+    /* Light-Dark */
+    --tw-dark-light: #4a5568;
+    --tw-dark-active-light: #2d3748;
+    --tw-dark-light-light: #718096;
+    --tw-dark-clarity-light: #a0aec0;
+    --tw-dark-inverse-light: #cbd5e0;
+
+    /* Dark-Dark */
+    --tw-dark-dark: #1a202c;
+    --tw-dark-active-dark: #171923;
+    --tw-dark-light-dark: #2d3748;
+    --tw-dark-clarity-dark: #4a5568;
+    --tw-dark-inverse-dark: #718096;
+
+    /* Box Shadows */
+    --tw-card-box-shadow:0px 3px 4px rgba(0, 0, 0, 0.03);
+    --tw-box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.03),
+    --tw-primary-box-shadow: 0 4px 14px 0 rgba(66, 153, 225, 0.39);
+    --tw-success-box-shadow: 0 4px 14px 0 rgba(72, 187, 120, 0.39);
+    --tw-danger-box-shadow: 0px 4px 12px 0px rgba(241, 65, 108, 0.35);
+    --tw-info-box-shadow: 0px 4px 12px 0px rgba(114, 57, 234, 0.35);
+    --tw-warning-box-shadow: 0px 4px 12px 0px rgba(246, 192, 0, 0.35);
+    --tw-dark-box-shadow: 00px 4px 12px 0px rgba(37, 47, 74, 0.35);
+
+    /* Border Radius */
+    --radius: 0.5rem; /* Example: 8px */
+
+    /* Accordion Height */
+    --radix-accordion-content-height: 200px; /* Adjust as necessary */
+
+    /* Other Variables */
+    /* Adjust these spacings, font sizes, line heights, and zIndex as needed based on your design system */
+    --spacing-0-75: 0.1875rem; /* Example: 3px */
+    --spacing-5-5: 1.375rem; /* Example: 22px */
+    --spacing-6-5: 1.625rem; /* Example: 26px */
+    --spacing-7-5: 1.875rem; /* Example: 30px */
+    --spacing-1-75: 0.4375rem; /* Example: 7px */
+
+    --font-size-4xs: 0.563rem; /* Example: 9px */
+    --font-size-3xs: 0.6rem; /* Example: 10px */
+    --font-size-2xs: 0.6875rem; /* Example: 11px */
+    --font-size-2sm: 0.8125rem; /* Example: 13px */
+    --font-size-md: 0.9375rem; /* Example: 15px */
+    --font-size-1-5xl: 1.375rem; /* Example: 22px */
+    --font-size-2-5xl: 1.625rem; /* Example: 26px */
+
+    --line-height-5-5: 1.375rem; /* Example: 22px */
+
+    --z-index-1: 1;
+    --z-index-5: 5;
+    --z-index-15: 15;
+    --z-index-25: 25;
+
+    /* Border Widths */
+    --border-width-3: 3px;
   }
- 
-  .dark {
-    --background: 222.2 64% 4.9%;
-    --foreground: 210 40% 98%;
- 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: #FFF;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: #2E3339;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    
-    
-    
-    --accent-primary: #006AE6;
-    --accent-on-primary: #FEFEFE;
-    --accent-secondary: #172331;
-    --accent-on-secondary: #648ebe;
-    --accent-tertiary: #909993;
-    
-    --background-base: #1E2129;
-    --background-layer-1: #1E2129;
-    --background-layer-2: #111318;
-    --background-input-inactive: #A2A9B3;
-    --background-tooltip: #101A28;
-    
-    --text-primary: #FEFEFE;
-    --text-secondary: #6B7684;
-    --text-disabled: #8C8E92;
-    --text-placeholder: #8C8E92;
-    --text-fixed: #101113;
-    
-    --icon-primary: #101113;
-    --icon-secondary: #96A6B4;
-    
-    --border-div: #2E3339;
-    --border-input: #363843;
-    --border-input-focus: #00D41D;
-    --border-input-error: #FF0000;
-    --border-input-disabled: 1F2226;
-    --border-on-base: #2E3339;
-    
-    --button-secondary: #454C55;
-    --button-secondary-hover: #5C6571;
-    --button-secondary-disabled: #1F2226;
-    --button-secondary-pressed: #2E3339;
-    
-    --state-error-primary: #F44336;
-    --state-error-secondary: #390000;
-    --state-success-primary: #0DBB77;
-    --state-success-secondary: #032C1C;
-    --state-warning-primary: #F38334;
-    --state-warning-secondary: #361803;
-    --state-info-primary: #0061C7;
-    --state-info-secondary: #00162E;
-    
-    --state-status-primary: #FFEB39;
-    --state-status-secondary: #d6c205;
 
-    --type-purple-primary: #A454F5;
-    --type-purple-secondary: #F8F4FF;
-    --type-yellow-primary: #FFEB39;
-    --type-yellow-secondary: #FFFBDC;
+  .dark {
+    /* Grays */
+    --tw-gray-100: #1B1C22;
+    --tw-gray-200: #26272F;
+    --tw-gray-300: #363843;
+    --tw-gray-400: #464852;
+    --tw-gray-500: #636674;
+    --tw-gray-600: #808290;
+    --tw-gray-700: #9A9CAE;
+    --tw-gray-800: #B5B7C8;
+    --tw-gray-900: #F5F5F5;
+
+    /* Primary */
+    --tw-primary: #006AE6;
+    --tw-primary-active: #107EFF;
+    --tw-primary-light: #172331;
+    --tw-primary-clarity: rgba(0, 106, 230, 0.20);
+    --tw-primary-inverse: #ffffff;
+
+    /* Success */
+    --tw-success: #00A261;
+    --tw-success-active: #01BF73;
+    --tw-success-light: #1F2623;
+    --tw-success-clarity: rgba(0, 162, 97, 0.20);
+    --tw-success-inverse: #ffffff;
+
+    /* Warning */
+    --tw-warning: #C59A00;
+    --tw-warning-active: #D9AA00;
+    --tw-warning-light: #242320;
+    --tw-warning-clarity: rgba(197, 154, 0, 0.20);
+    --tw-warning-inverse: #ffffff;
+
+    /* Danger */
+    --tw-danger: #E42855;
+    --tw-danger-active: #FF3767;
+    --tw-danger-light: #302024;
+    --tw-danger-clarity: rgba(288, 40, 85, 0.2);
+    --tw-danger-inverse: #ffffff;
+
+    /* Info */
+    --tw-info: #883FFF;
+    --tw-info-active: #9E63FF;
+    --tw-info-light: #272134;
+    --tw-info-clarity: rgba(136, 63, 255, 0.20);
+    --tw-info-inverse: #ffffff;
+
+    /* Dark */
+    --tw-dark: #272A34;
+    --tw-dark-active: #2D2F39;
+    --tw-dark-light: #1E2027;
+    --tw-dark-clarity: rrgba(39, 42, 52, 0.20);
+    --tw-dark-inverse: #ffffff;
+
+    /* Secondary */
+    --tw-secondary: #f9f9f9;
+    --tw-secondary-active: #f9f9f9;
+    --tw-secondary-light: #f9f9f9;
+    --tw-secondary-clarity: rgba(249, 249, 249, 0.2);
+    --tw-secondary-inverse: #4b5675;
+
+    /* Light - DARK THEME */
+    --tw-light: #1F212A;
+    --tw-light-active: #1F212A;
+    --tw-light-light: #1E2027;
+    --tw-light-clarity: #1F212A;
+    --tw-light-inverse: #a0aec0;
+
+    /* Brand */
+    --tw-brand: #5a67d8;
+    --tw-brand-active: #4c51bf;
+    --tw-brand-light: #ebf4ff;
+    --tw-brand-clarity: #c3dafe;
+    --tw-brand-inverse: #434190;
+
+    /* Coal */
+    --tw-coal-100: #15171c;
+    --tw-coal-200: #13141a;
+    --tw-coal-300: #111217;
+    --tw-coal-400: #0f1014;
+    --tw-coal-500: #0d0e12;
+    --tw-coal-600: #0b0c10;
+    --tw-coal-black: #000000;
+    --tw-coal-clarity: rgba(24, 25, 31, 0.5);
+
+    /* Light-Dark */
+    --tw-dark-light: #1F212A;
+    --tw-dark-active-light: #1F212A;
+    --tw-dark-light-light: #1E2027;
+    --tw-dark-clarity-light: #1F212A;
+    --tw-dark-inverse-light: #cbd5e0;
+
+    /* Dark-Dark */
+    --tw-dark-dark: #1a202c;
+    --tw-dark-active-dark: #171923;
+    --tw-dark-light-dark: #2d3748;
+    --tw-dark-clarity-dark: #4a5568;
+    --tw-dark-inverse-dark: #718096;
+
+    /* Box Shadows */
+    --tw-card-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --tw-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --tw-primary-box-shadow: 0 4px 14px 0 rgba(66, 153, 225, 0.39);
+    --tw-success-box-shadow: 0 4px 14px 0 rgba(72, 187, 120, 0.39);
+    --tw-danger-box-shadow: 0 4px 14px 0 rgba(245, 101, 101, 0.39);
+    --tw-info-box-shadow: 0 4px 14px 0 rgba(99, 179, 237, 0.39);
+    --tw-warning-box-shadow: 0 4px 14px 0 rgba(237, 137, 54, 0.39);
+    --tw-dark-box-shadow: 0 4px 14px 0 rgba(45, 55, 72, 0.39);
   }
   
-  /* Hide scrollbar for Chrome, Safari and Opera */
-::-webkit-scrollbar {
-  display: none;
+  /* Remove scrollbar */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
-
 /* Hide scrollbar for IE, Edge and Firefox */
 html {
   scrollbar-width: none; /* For Firefox */
@@ -197,8 +288,6 @@ html {
 
 .animate-popper {
   animation: popper 1.5s forwards;
-}
-
 }
  
 @keyframes fadeIn {
