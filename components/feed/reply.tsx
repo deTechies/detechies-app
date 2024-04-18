@@ -1,4 +1,4 @@
-import { DEFAULT_AVATAR } from "@/lib/constants";
+import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
 import { formatTimestampToTimeAgo } from "@/lib/utils";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
@@ -6,7 +6,7 @@ export default function Reply({details}: {details: any}) {
   return (
     <div className="flex gap-2.5">
         <Avatar className="bg-success-clarity">
-            <AvatarImage src={DEFAULT_AVATAR} alt="avatar" />
+            <AvatarImage src={DEFAULT_AVATAR_LINK} alt="avatar" />
         </Avatar>
         <div className="flex flex-col gap-2.5">
         <div className="flex items-center gap-1">

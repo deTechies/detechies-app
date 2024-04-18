@@ -1,13 +1,13 @@
 import { PProjectFeed } from "@/lib/interfaces/waku-types";
 import { useFilterMessages, useStoreMessages } from "@waku/react";
-import { LightNode, createDecoder } from "@waku/sdk";
+import { createDecoder } from "@waku/sdk";
 import { useEffect, useState } from "react";
 
 export default function RetrieveMessages({
   node,
   contentTopic,
 }: {
-  node: LightNode;
+  node: any;
   contentTopic: string;
 }) {
   const decoder = createDecoder('/light-guide/1/message/proto');
