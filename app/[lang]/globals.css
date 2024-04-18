@@ -208,11 +208,11 @@
     --tw-dark-inverse: #ffffff;
 
     /* Secondary */
-    --tw-secondary: #f9f9f9;
-    --tw-secondary-active: #f9f9f9;
-    --tw-secondary-light: #f9f9f9;
+    --tw-secondary: #363843;
+    --tw-secondary-active: #464852;
+    --tw-secondary-light: #363843;
     --tw-secondary-clarity: rgba(249, 249, 249, 0.2);
-    --tw-secondary-inverse: #4b5675;
+    --tw-secondary-inverse: #363843;
 
     /* Light - DARK THEME */
     --tw-light: #1F212A;

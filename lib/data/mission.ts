@@ -150,7 +150,6 @@ export async function uploadMissionChanges(addedMissions: string[], removedMissi
     const data = await response.json();
     return({ title: "Successfully updated missions", description: data.message });
   } catch (error: any) {
-    console.error('Failed to update user progress', error);
     return({ title: "Error updating missions", description: error.message });
   }
 };

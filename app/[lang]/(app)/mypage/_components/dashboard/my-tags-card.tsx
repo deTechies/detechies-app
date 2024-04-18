@@ -22,7 +22,7 @@ export default function MyTagsCard({
                     <div className="inline-flex flex-row gap-2.5 flex-wrap ">
                 
                         {tags.map((tag: any, index: number) => (
-                            <Badge key={index}>
+                            <Badge key={index} variant="secondary">
                                 {tag}
                             </Badge>
                         ))}

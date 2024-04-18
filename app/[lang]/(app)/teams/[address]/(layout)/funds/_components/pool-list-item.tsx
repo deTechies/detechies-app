@@ -21,7 +21,6 @@ export default function PoolListItem({
 }: {
   details: PoolListItemProps;
 }) {
-  console.log(details)
   return (
     <Link href={`funds/${details.poolID}`} passHref legacyBehavior>
     <Card className="hover:scale-[1.01] cursor-pointer hover:border-b-primary hover:border-b-2"          >

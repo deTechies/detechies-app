@@ -15,7 +15,7 @@ export const DependenciesList = ({ dependencies }: DependenciesListProps) => (
 );
 
 export const DependencyItem = ({ dependency }: { dependency: Dependency }) => (
-  <div className="flex gap-2 bg-background-layer-1 py-2 rounded-[6px] m-1 hover:outline hover:outline-accent-primary hover:bg-accent-secondary px-2">
+  <div className="flex gap-2 items-center py-2 rounded-[6px] m-1 hover:outline hover:outline-primary-active hover:bg-primary-clarity px-2">
     <div>
       <Image
         src={`/icons/github.png`}
@@ -25,8 +25,8 @@ export const DependencyItem = ({ dependency }: { dependency: Dependency }) => (
       />
     </div>
     <div className="flex flex-col gap-1">
-      <span className="text-label_m">{dependency.name}</span>
-      <span className="text-text-secondary text-label_s">
+      <span className="text-md">{dependency.name}</span>
+      <span className="text-gray-600 text-sm ">
         {dependency.version && `version ${dependency.version}`}
       </span>
     </div>

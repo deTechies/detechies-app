@@ -2,7 +2,6 @@
 import NotificationPopover from "@/components/metronic/notification/notification-popover";
 import Login from "@/components/user/login";
 import { Disclosure } from "@headlessui/react";
-import { Messages } from 'detechies-icons';
 import { Menu, X } from "lucide-react";
 
 import Image from "next/image";
@@ -81,12 +80,8 @@ export default function Navbar({ lang }: { lang: any }) {
               <section className="flex gap-10">
                 <div className="hidden sm:ml-8 sm:flex sm:items-center sm:gap-[14px]">
                   {/* Profile dropdown */}
-                  <div className="mx-3 text-blue-600">
-                    <Messages className="w-5 h-5" fontSize="16" />
-                  </div>
-                  <div className="mx-3 text-gray-500 hover:text-gray-900 cursor-pointer" >
+                  <div className="mx-3" >
                     <NotificationPopover />
-                   
                   </div>
                 </div>
                 <div className="relative ml-3 cursor-pointer">

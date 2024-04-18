@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 const badgeVariants = cva("flex flex-row gap-2 items-center text-2xs", {
   variants: {
     variant: {
-      default: "bg-light text-2xs font-medium",
+      default: "bg-gray-200 text-2xs font-medium",
       info: "border-info-clarity bg-info-light text-info hover:bg-info/80",
       accent:
-        "border-primary bg-secondary text-primary hover:bg-accent/80",
+        "border-primary bg-primary-clarity text-primary hover:bg-accent/80",
       success:
         "border border-success-clarity bg-success-light text-success",
       warning:

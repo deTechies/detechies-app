@@ -40,7 +40,7 @@ const AuthenticateButton = () => {
         callbackUrl: "/onboard",
       });
     } catch (error) {
-      console.log("Error Occured", error);
+      return;
     }
   };
   return (

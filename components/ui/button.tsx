@@ -17,7 +17,7 @@ const buttonVariants = cva(
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-secondary border-gray-300 text-gray-900 hover:bg-secondary-active",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -45,6 +45,7 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, loading =false,  asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    
     const content = loading ? (
       <button className="flex items-center gap-4 " disabled>
         {/* Replace with your spinning icon component */}

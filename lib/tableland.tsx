@@ -11,7 +11,6 @@ export const getTableland = async (queryString:string) => {
     const result = await fetch(getAllSchemasQuery);
     return result.json();
   } catch (err) {
-    console.error(err);
     return null;
   }
 };

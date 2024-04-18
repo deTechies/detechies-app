@@ -332,3 +332,23 @@ export function smallDate(inputDate: string): string {
 
   return `${day} ${month} ${year}`;
 }
+
+
+export function formatTimestampToTimeAgo(timestamp: number) {
+  const now = Date.now();
+  const timeDiff = now  - timestamp /  1000000;
+  
+  const minutes = Math.floor(timeDiff / 60000);
+  const hours = Math.floor(timeDiff / 3600000);
+  const days = Math.floor(timeDiff / 86400000);
+
+  if (minutes < 1) {
+    return "now";
+  } else if (minutes < 60) {
+    return `${minutes} minutes ago`;
+  } else if (hours < 24) {
+    return `${hours} hours ago`;
+  } else {
+    return `${days} days ago`;
+  }
+}

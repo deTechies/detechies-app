@@ -8,13 +8,13 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
   
   return (
     <div className="flex flex-col gap-10">
-    <header className="w-full py-10 gap-2 justify-center text-center bg-center bg-[url('/images/header-hex.png')]  ">
+    <header className="w-full py-10 gap-2 justify-center text-center bg-[url('/images/hexagon-header.png')] bg-auto bg-no-repeat bg-center  ">
       <div className="flex flex-col gap-3.5 mx-auto">
-        <div className="mx-auto">
+        <div className="mx-auto ">
           <Avatar
             src={addURL(profile.avatar_link)}
             shape="rounded"
-            className="border-[3px] border-accent-primary"
+            className="border-[3px] border-accent-primary bg-slate-500"
             size={32}
           />
         </div>
@@ -28,7 +28,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
           {profile.profile_details?.hourly_rate && (
             <div className="flex gap-[5px] justify-center items-center">
               <Tag fontSize={18} />
-                <span className="text-md">
+                <span className="text-sm">
                 {profile.profile_details?.hourly_rate}
               </span>
             </div>
@@ -36,7 +36,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
           {profile.profile_details?.timezone && (
             <div className="flex gap-[5px] justify-center items-center pl-3">
               <Geolocation fontSize={18}/>
-              <span className="text-md">
+              <span className="text-sm">
                 {getTimezone(profile.profile_details.timezone)}
               </span>
             </div>
@@ -44,7 +44,7 @@ export default function ViewProfileCard({ dictionary, profile }: any) {
           {profile.profile_details?.availability && (
             <div className="flex gap-[5px] justify-center items-center pl-3 text-text-secondary">
               <BrifecaseTimer fontSize={18}  />
-              <span className="text-md">
+              <span className="text-sm">
                 {profile.profile_details?.availability}
               </span>
             </div>

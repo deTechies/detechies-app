@@ -118,12 +118,11 @@ function ProfileForm({profileID }:{profileID: string}) {
           });
     
           if (!walletClient) {
-            console.log("Wallet client not found");
             return;
           }
           // @ts-ignore
           const hash = await walletClient.writeContract(data.request);
-          console.log("Transaction Sent");
+
           const transaction = await publicClient.waitForTransactionReceipt({
             hash: hash,
           });
@@ -131,9 +130,9 @@ function ProfileForm({profileID }:{profileID: string}) {
             title: "Pool Created",
             description: "Created pool  created successfully",
           });
-          console.log(transaction);
+
         } catch (error) {
-          console.log(error);
+            return;
         }
       }
     

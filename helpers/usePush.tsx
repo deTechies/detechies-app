@@ -21,7 +21,7 @@ function usePushProtocol(signer:any) {
             setChatter(resp);
             localStorage.setItem('push', JSON.stringify(resp));
           }).catch(err => {
-            console.error("Initialization error:", err);
+            return;
           });
       }
     }

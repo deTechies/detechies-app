@@ -49,7 +49,7 @@ export default function CreateProjectForm({
   prefilled,
 }: {
   lang: any;
-  prefilled?: any;
+  prefilled: any;
 }) {
   const projectFormSchema = z.object({
     name: z
@@ -231,8 +231,7 @@ export default function CreateProjectForm({
     if (prefilled) {
       form.setValue("name", prefilled.name);
       form.setValue("description", prefilled.description);
-      //need to conver the prefilled.begin_date to 2024-01-01
-      console.log(prefilled.begin_date);
+
       const begin_date = new Date(prefilled.begin_date).toLocaleString(
         "sv-SE",
         {
@@ -242,7 +241,6 @@ export default function CreateProjectForm({
         }
       );
 
-      console.log(prefilled.end_date);
 
       const end_date = new Date(prefilled.end_date).toLocaleString("sv-SE", {
         year: "numeric",

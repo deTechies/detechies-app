@@ -25,12 +25,15 @@ export default function NotificationPopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
+        <button>
+          
         <NotificationStatu className="w-5 h-5 cursor-pointer text-gray-600 hover:text-gray-900" />
+        </button>
       </PopoverTrigger>
       <PopoverContent className="w-[460px]  border border-border-div mt-2 shadow p-0 rounded-md">
         <header className="flex justify-between border-b border-border-div p-5 items-center">
           <span className="text-title_m">Notifications</span>
-          <RefreshCcw className="w-4 h-4 cursor-pointer text-text-secondary hover:text-accent-primary" />
+          <RefreshCcw className="w-4 h-4 cursor-pointer text-text-secondary hover:text-primary" />
         </header>
         <div className="h-[60vh] overflow-scroll">
           {notifications?.length > 0 &&

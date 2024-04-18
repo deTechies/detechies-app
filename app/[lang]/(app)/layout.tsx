@@ -42,7 +42,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body
-        className={`${inter.className} font-sans bg-background-layer-2 text-text-primary min-h-[100vh] `}
+        className={`${inter.className} font-sans bg-light-light text-text-primary min-h-[100vh] `}
       >
         
         
