@@ -1,7 +1,5 @@
-import { PProjectFeed } from "@/lib/interfaces/waku-types";
-import { useFilterMessages, useStoreMessages } from "@waku/react";
 import { createDecoder } from "@waku/sdk";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function RetrieveMessages({
   node,
@@ -12,21 +10,8 @@ export default function RetrieveMessages({
 }) {
   const decoder = createDecoder(contentTopic);
   const [messages, setMessages] = useState([]);
-  const { messages: storeMessages } = useStoreMessages({
-    node,
-    decoder,
-    options: { pageSize: 10 },
-  });
-  const { messages: filterMessages } = useFilterMessages({ node, decoder });
-  useEffect(() => {
-    const allMessages = storeMessages.concat(filterMessages) as any;
-    setMessages(
-      allMessages.map((wakuMessage: any) => {
-        if (!wakuMessage.payload) return;
-        return PProjectFeed.decode(wakuMessage.payload);
-      })
-    );
-  }, [filterMessages, storeMessages]);
+
+
   return (
     <>
       {messages.map((message: any, index: number) => {

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 
 import { DEFAULT_AVATAR_LINK } from "@/lib/constants";
 import { PProjectFeed } from "@/lib/interfaces/waku-types";
-import { useLightPush } from "@waku/react";
 import { createEncoder } from "@waku/sdk";
 import { useState } from "react";
 import { Avatar, AvatarImage } from "../ui/avatar";
@@ -34,11 +33,10 @@ export default function CreateFeed({
   //use the con
   const encoder = createEncoder({contentTopic: contentTopic})
 
-  const { push } = useLightPush({ node, encoder });
   const [message, setMessage] = useState("");
 
   const sendMessage = async () => {
-    if (!push || message.length === 0) {
+    if (message.length === 0) {
       return;
     }
     const protoMessage = PProjectFeed.create({
@@ -61,14 +59,12 @@ export default function CreateFeed({
     });
 
     console.log(sendLight);
-    const result = await push({ payload: payload });
 
-    console.log(result);
     // Check for errors{
-    if (result?.failures && result.failures.length > 0) {
+    if (sendLight?.failures && sendLight.failures.length > 0) {
       toast({
         title: `Write to ${contentTopic} failed`,
-        description: result.failures[0].error,
+        description: sendLight.failures[0].error,
       });
       return;
     }
