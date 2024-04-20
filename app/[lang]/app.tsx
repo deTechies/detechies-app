@@ -39,12 +39,13 @@ const chainConfig = {
   tickerName: "AETH"
 };
 const mainchainConfig = {
-  chainNamespace: "eip155",
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: "0xA4B1", // hex of 42161
   rpcTarget: "https://rpc.ankr.com/arbitrum",
   // Avoid using public rpcTarget in production.
   // Use services like Infura, Quicknode etc
   displayName: "Arbitrum Mainnet",
+
   ticker: "AETH",
   tickerName: "AETH",
 };

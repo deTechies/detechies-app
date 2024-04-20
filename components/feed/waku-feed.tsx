@@ -18,7 +18,7 @@ export default async function WakuFeed({ topic, id }: { topic: string; id: strin
   return (
     <div className="py-5">
       {node && <CreateFeed contentTopic={topic} node={node} />}
-      {node && <RetrieveMessages messages={messages} />}
+      {node && <RetrieveMessages contentTopic={topic} node={node} />}
     </div>
   );
 }
