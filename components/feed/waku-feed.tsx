@@ -1,22 +1,24 @@
-import { ContentPairProvider, useWaku } from "@waku/react";
+
+import { createLightNode } from "@waku/sdk";
 import CreateFeed from "./create-feed";
 import RetrieveMessages from "./retrieve-messages";
 
-export default function WakuFeed({ topic, id }: { topic: string; id: string }) {
+export default async function WakuFeed({ topic, id }: { topic: string; id: string }) {
   // Create and start a Light Node
-  const { node, error, isLoading } = useWaku();
-  // Create a message encoder and decoder
-  //change the topic
+  const node = await createLightNode({
+    defaultBootstrap: true,
+    shardInfo: {
+      contentTopics: [topic],
+    }
+  });
+  //what if we add in the messages here to see if towrks 
+  
+  const messages = [] as any[];
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {JSON.stringify(error)}</div>;
   return (
-    <ContentPairProvider contentTopic={topic} >
-      <div className="py-5">
-        {node && <CreateFeed contentTopic={topic} node={node} />}
-        {node && <RetrieveMessages contentTopic={topic} node={node} />}
-      </div>
-      {/* <Post key={index} details={message} /> */}
-    </ContentPairProvider>
+    <div className="py-5">
+      {node && <CreateFeed contentTopic={topic} node={node} />}
+      {node && <RetrieveMessages messages={messages} />}
+    </div>
   );
 }

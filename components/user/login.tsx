@@ -23,14 +23,21 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useAccount, useConnect, useDisconnect, useNetwork } from "wagmi";
+import { useEffect } from "react";
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useNetwork,
+  useSwitchNetwork,
+} from "wagmi";
 import { ThemeToggle } from "../extra/theme-toggle";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 
 import { ArrowMix } from "detechies-icons";
 import Link from "next/link";
+import { arbitrumSepolia } from "viem/chains";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -61,7 +68,7 @@ export default function Login({ lang }: ILoginProps) {
   } = useAccount();
   const { disconnect } = useDisconnect();
   const { chain, chains } = useNetwork();
-  const [showModal, setShowModal] = useState(false);
+  const { switchNetwork } = useSwitchNetwork();
   const { data: session } = useSession() as any;
   const router = useRouter();
 
@@ -247,15 +254,16 @@ export default function Login({ lang }: ILoginProps) {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        {chain?.id != 314159 && chain?.id != 80001 && (
-          <Button
-            variant={"destructive"}
-            size="sm"
-            onClick={() => setShowModal(!showModal)}
-          >
-            <ArrowMix />
-          </Button>
-        )}
+        {chain?.id != arbitrumSepolia.id && switchNetwork && (
+            <Button
+              variant={"ghost"}
+              size="sm"
+              className="text-danger animate-pulse"
+              onClick={() => switchNetwork(arbitrumSepolia.id)}
+            >
+              <ArrowMix />
+            </Button>
+          )}
       </div>
     );
   }

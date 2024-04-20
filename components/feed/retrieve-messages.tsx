@@ -10,7 +10,7 @@ export default function RetrieveMessages({
   node: any;
   contentTopic: string;
 }) {
-  const decoder = createDecoder('/light-guide/1/message/proto');
+  const decoder = createDecoder(contentTopic);
   const [messages, setMessages] = useState([]);
   const { messages: storeMessages } = useStoreMessages({
     node,

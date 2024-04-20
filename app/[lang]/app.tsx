@@ -3,6 +3,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import SessionProvider from "@/lib/SessionProvider";
 import PushProvider from "@/lib/usePushProtocol";
+import { CHAIN_NAMESPACES } from "@web3auth/base";
 import { Web3Auth } from "@web3auth/modal";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
@@ -27,22 +28,33 @@ declare global {
     ethereum?: WindowProvider;
   }
 }
-
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0x66EEB", // hex of 421611
+  rpcTarget: "https://rpc.ankr.com/arbitrum",
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura, Quicknode etc
+  displayName: "Arbitrum Testnet",
+  ticker: "AETH",
+  tickerName: "AETH"
+};
+const mainchainConfig = {
+  chainNamespace: "eip155",
+  chainId: "0xA4B1", // hex of 42161
+  rpcTarget: "https://rpc.ankr.com/arbitrum",
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura, Quicknode etc
+  displayName: "Arbitrum Mainnet",
+  ticker: "AETH",
+  tickerName: "AETH",
+};
 export const web3AuthInstance =
   typeof window !== "undefined"
     ? new Web3Auth({
         clientId:
           "BJKpsKLTGGib-v-OPsIrirs0kUhbWsES2V0kakHS0fJI8MGTG2pZboFM0Fe6I7nCHlKphqZLXpZOMiWPEqTkPJA",
         web3AuthNetwork: "testnet",
-        chainConfig: {
-          chainNamespace: "eip155",
-          chainId: "0x13881",
-          rpcTarget: "https://rpc.ankr.com/polygon_mumbai",
-          displayName: "Polygon Mumbai Testnet",
-          blockExplorer: "https://mumbai.polygonscan.com/",
-          ticker: "MATIC",
-          tickerName: "Matic",
-        },
+        chainConfig: mainchainConfig
       })
     : null;
 

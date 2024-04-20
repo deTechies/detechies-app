@@ -22,35 +22,45 @@ export interface ProjectMatch {
 
 export default function CreateFeed({
   contentTopic,
-  node,
   projectMatch,
+  node,
 }: {
-  contentTopic: string;
   node: any;
+  contentTopic: string;
   projectMatch?: ProjectMatch;
 }) {
-  
   const { toast } = useToast();
 
-  const encoder = createEncoder({ contentTopic });
+  //use the con
+  const encoder = createEncoder({contentTopic: contentTopic})
+
   const { push } = useLightPush({ node, encoder });
   const [message, setMessage] = useState("");
 
-  
   const sendMessage = async () => {
     if (!push || message.length === 0) {
       return;
     }
-      const protoMessage = PProjectFeed.create({
+    const protoMessage = PProjectFeed.create({
       id: crypto.randomUUID(),
       message: message,
       comments: [],
       likes: 0,
-    }); 
+    });
     const payload = PProjectFeed.encode(protoMessage).finish();
 
+    if(!node || !node.lightPush || !encoder) {
+      toast({
+        title: "Error",
+        description: "Node or encoder not found",
+      })
+      return;
+    }
+    const sendLight = await node.lightPush.send(encoder, {
+      payload: payload,
+    });
 
-
+    console.log(sendLight);
     const result = await push({ payload: payload });
 
     console.log(result);
