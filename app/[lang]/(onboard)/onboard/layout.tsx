@@ -25,9 +25,8 @@ export default async function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`bg-background-layer-1 text-text-primary `}
+        className={`bg-light  text-gray-900 `}
       >
-        <script data-host="https://app.microanalytics.io" data-dnt="false" src="https://app.microanalytics.io/js/script.js" id="ZwSg9rf6GA" async defer></script>
 
         <ThemeProvider
           attribute="class"

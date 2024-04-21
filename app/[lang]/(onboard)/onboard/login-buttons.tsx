@@ -92,7 +92,7 @@ export default function LoginButtons({ text }: { text?: any }) {
           <>
             <div
               key={connectors[1].id}
-              className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-accent-secondary  hover:outline hover:outline-accent-primary"
+              className="flex items-center gap-6 px-6 py-4 rounded-sm cursor-pointer bg-primary-clarity  hover:outline hover:outline-primary"
               onClick={() => handleConnect(connectors[1])}
             >
               <Image
@@ -102,14 +102,14 @@ export default function LoginButtons({ text }: { text?: any }) {
                 alt={connectors[1].name}
                 quality={1}
               />
-              <span className="w-full text-center text-1.5xl">
+              <span className="w-full text-center text-1.5lg">
                 {text?.web3 ? text.web3 : "Social Login"}
               </span>
             </div>
 
             <div
               key={connectors[0].id}
-              className="flex items-center gap-6 px-6 py-4 font-medium border rounded-sm cursor-pointer bg-background-layer-2 border-border-div hover:border-orange-500"
+              className="flex items-center gap-6 px-6 py-4 font-medium border rounded-sm cursor-pointer bg-light border-border-div hover:border-orange-500"
               onClick={() => handleConnect(connectors[0])}
             >
               <Image
@@ -118,7 +118,7 @@ export default function LoginButtons({ text }: { text?: any }) {
                 width={24}
                 alt={connectors[0].name}
               />
-              <span className="w-full text-center text-1.5xl ">
+              <span className="w-full text-center text-1.5lg ">
                 {text?.browser ? text.browser : "Browser Wallet"}
               </span>
             </div>
