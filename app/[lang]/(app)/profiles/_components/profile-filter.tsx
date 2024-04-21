@@ -64,7 +64,7 @@ export default function ProfileFilter({ lang }: { lang: any }) {
   );
 
   return (
-    <div className="flex flex-col justify-between gap-4 py-2 mx-auto w-full rounded-md bg-background-layer-1 items-center">
+    <div className="flex flex-col justify-between gap-4 py-2 mx-auto w-full rounded-md bg-gray-300 items-center">
       <div className="flex flex-col  w-full">
         <div className="flex flex-col md:flex-row w-full items-center gap-4 px-8">
           <div className="grow">
@@ -82,7 +82,7 @@ export default function ProfileFilter({ lang }: { lang: any }) {
         {showAdvanced && (
           <div className="flex justify-start px-8 py-2">
             <Select onValueChange={onSelectType}>
-              <SelectTrigger className="w-[138px] px-3 py-3 bg-background-layer-1 border-none">
+              <SelectTrigger className="w-[138px] px-3 py-3 bg-gray-300 border-none">
                 <SelectValue
                   placeholder={lang.profile_filter.filter}
                   className={`${loading && "animate-pulse"}`}

@@ -1,5 +1,6 @@
 "use client";
-import { CornerDownLeft, SearchIcon } from "lucide-react";
+import { MouseSquare } from "detechies-icons";
+import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
@@ -45,7 +46,7 @@ export default function Searchbar({
   }
 
   return (
-    <div className="flex flex-row rounded-sm flex-grow items-center gap-4 pr-8 bg-background-layer-1 justify-between min-w-full max-w-2xl mx-auto my-auto">
+    <div className="flex flex-row rounded-sm flex-grow items-center gap-4 pr-8 bg-gray-300 justify-between min-w-full max-w-2xl mx-auto my-auto">
       <div className="flex items-center gap-2 grow">
         <SearchIcon className="text-text-placeholder" />
         <Input
@@ -61,12 +62,12 @@ export default function Searchbar({
               performSearch(); 
             }
           }}
-          className={`px-4 py-3.5 focus:none border-none bg-background-layer-1 text-text-input ${className}`}
+          className={`px-4 py-1.5 focus:none border-none bg-gray-300 text-text-input ${className}`}
         />
       </div>
       {text && (
         <div>
-          <CornerDownLeft className="text-accent-primary animate-pulse " />
+          <MouseSquare className="text-accent-primary animate-pulse " />
         </div>
       )}
     </div>

@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { Left, Right } from "detechies-icons";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
@@ -122,7 +122,7 @@ export function PaginationPage({
         onClick={prevPage}
       >
         <span className="sr-only h-[30px] w-[30px] py-auto px-auto">Go to previous page</span>
-        <ChevronLeftIcon />
+        <Left />
       </button>
 
       <div className="rounded-md p-1 flex items-center gap-2">
@@ -139,7 +139,7 @@ export function PaginationPage({
               key={index}
               onClick={() => goToPage(pageNum)}
               className={`py-auto px-auto h-[30px] w-[30px] rounded-[8px] ${
-                page === pageNum ? "bg-border-div" : ""
+                page === pageNum ? "text-primary" : ""
               }`}
             >
               {pageNum}
@@ -149,12 +149,12 @@ export function PaginationPage({
       </div>
 
       <button
-        className="px-2.5 py-2 h-[30px] w-[30px] rounded-[8px] "
+        className="h-8 w-8 p-0 text-text-secondary"
         disabled={page >= numPages}
         onClick={nextPage}
       >
         <span className="sr-only">Go to next page</span>
-        <ChevronRightIcon />
+        <Right />
       </button>
     </div>
   );
