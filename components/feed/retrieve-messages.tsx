@@ -1,5 +1,5 @@
 import { createDecoder } from "@waku/sdk";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RetrieveMessages({
   node,
@@ -9,10 +9,29 @@ export default function RetrieveMessages({
   contentTopic: string;
 }) {
   const decoder = createDecoder(contentTopic);
-  const [messages, setMessages] = useState([]);
+// Create the callback function
+const [messages, setMessages] = useState([]);
+useEffect(() => {
+    // Retrieve the first page of messages
+    // This retrieves all the messages if "return true" is not present
+    
+    const callback = (wakuMessage:any) => {
+      setMessages(wakuMessage);
+      // Return "true" to stop retrieving pages
+      // Here, it retrieves only the first page
+      return true;
+  };
 
-
-  return (
+    async() =>{
+      await node.store.queryWithOrderedCallback(
+          [decoder],
+          callback,
+      );
+      
+    }
+    
+}, [node, decoder, messages]);
+return (
     <>
       {messages.map((message: any, index: number) => {
         return (

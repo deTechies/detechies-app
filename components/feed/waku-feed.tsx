@@ -13,7 +13,6 @@ export default async function WakuFeed({ topic, id }: { topic: string; id: strin
   });
   //what if we add in the messages here to see if towrks 
   
-  const messages = [] as any[];
 
   return (
     <div className="py-5">
