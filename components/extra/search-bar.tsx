@@ -66,7 +66,7 @@ export default function Searchbar({
         />
       </div>
       {text && (
-        <div>
+        <div> 
           <MouseSquare className="text-accent-primary animate-pulse " />
         </div>
       )}
