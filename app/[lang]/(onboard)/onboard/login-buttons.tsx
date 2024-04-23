@@ -2,13 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/use-toast";
-import { polygonMumbai } from "@/helpers/mumbai";
 import { truncateMiddle } from "@/lib/utils";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SiweMessage } from "siwe";
+import { arbitrumSepolia } from "viem/chains";
 import { useAccount, useConnect, useDisconnect, useSignMessage } from "wagmi";
 
 export default function LoginButtons({ text }: { text?: any }) {
@@ -55,7 +55,7 @@ export default function LoginButtons({ text }: { text?: any }) {
         address: address,
         statement: process.env.NEXT_PUBLIC_SIGNIN_MESSAGE,
         nonce: await getCsrfToken(),
-        chainId: polygonMumbai.id,
+        chainId: arbitrumSepolia.id,
       });
 
       const signedMessage = await signMessageAsync({

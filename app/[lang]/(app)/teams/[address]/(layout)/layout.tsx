@@ -14,6 +14,8 @@ export default async function GroupDetailLayout({
 }) {
   const dictionary = (await getDictionary(params.lang)) as any;
   const { data } = await serverApi(`/clubs/${params.address}`);
+  
+  //need to establish if the teams are invited or not
 
   if (data.userRole === "invited")
     return (

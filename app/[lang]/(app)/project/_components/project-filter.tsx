@@ -85,9 +85,9 @@ export default function ProjectFilter({ lang }: { lang: any }) {
   };
 
   return (
-    <div className="flex flex-col justify-between gap-4 py-2 mx-auto w-full rounded-md bg-background-layer-1 items-center">
+    <div className="flex flex-col justify-between gap-4 p-4 mx-auto w-full rounded-md bg-light  items-center">
       <div className="flex flex-col  w-full">
-        <div className="flex flex-col md:flex-row w-full items-center gap-4 px-8">
+        <div className="flex flex-col md:flex-row w-full items-center gap-4 px-8 py-4">
           <div className="grow">
             <Searchbar placeholder={lang.project.list.search} size="md" />
           </div>
