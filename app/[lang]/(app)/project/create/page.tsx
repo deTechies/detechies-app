@@ -51,13 +51,13 @@ export default function ProjectCreatePage({ params }: { params: any }) {
     }
   }, [searchParams]);
   return (
-    <main className="w-full max-w-[60rem] mx-auto m-10 flex flex-col gap-md ">
+    <main className="w-full max-w-[60rem] mx-auto m-10 flex flex-col gap-10 ">
       <PageHeader
         title="Create Project"
         subtitle="If you have public github link you can easily share it by copy pasting the link"
       />
 
-      <div className="min-w-full max-w-2xl">
+      <div className="min-w-full max-w-2xl rounded-[30px] bg-gray-300 px-4 py-1">
         <Searchbar placeholder="enter github link" className="w-full" />
       </div>
 
